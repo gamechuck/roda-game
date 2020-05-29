@@ -4,6 +4,9 @@ stages:
   - export
   - deploy
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 before_script:
   - mkdir -v -p build/windows
   - mkdir -v -p build/web
