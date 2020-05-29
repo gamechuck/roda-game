@@ -1,0 +1,4 @@
+[submodule "GodotProject/roda-assets"]
+	path = GodotProject/roda-assets
+	url = https://gitlab.com/gamechuck/roda/roda-assets.git
+	branch = master

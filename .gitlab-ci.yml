@@ -1,0 +1,51 @@
+image: barichello/godot-ci:3.2.1
+
+stages:
+  - export
+  - deploy
+
+before_script:
+  - mkdir -v -p build/windows
+  - mkdir -v -p build/web
+
+windows:
+  stage: export
+  script:
+    - cd GodotProject
+    - godot -v --export-debug "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+    - test -e ../build/windows/$EXPORT_NAME.exe
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/windows
+  only:
+      - master
+
+web:
+  stage: export
+  script:
+    - cd GodotProject
+    - godot -v --export-debug "HTML5" ../build/web/index.html
+    - test -e ../build/web/index.html
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/web
+  only:
+      - master
+
+# GitLab Pages Deploy
+pages:
+  stage: deploy
+  dependencies:
+    - web
+  script:
+    - git fetch
+    - git checkout pages
+    - rm -f *.md
+    - mv build/web/** ./public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
