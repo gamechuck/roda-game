@@ -5,32 +5,37 @@
 [ext_resource path="res://src/GameCanvas.gd" type="Script" id=3]
 [ext_resource path="res://src/Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Character.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Character.gd" type="Script" id=6]
-[ext_resource path="res://roda-assets/Props/Tree.png" type="Texture" id=7]
+[ext_resource path="res://src/Props/Tree.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Props/Bench.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 329.09, -188.738, 322.775, 253.361, -157.133, 29.0831, -159.651, 23.5303, -363.531, 247.045, -160.188, 31.4593, -166.201, 33.0111, -172.312, 31.7987, -175.221, 30.0044, -362.575, -188.067, -172.466, 23.6727 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArray( 6, 5, 4 ), PoolIntArray( 7, 6, 4 ), PoolIntArray( 8, 7, 4 ), PoolIntArray( 8, 4, 9, 10 ), PoolIntArray( 10, 9, 0, 3 ) ]
-outlines = [ PoolVector2Array( -363.531, 247.045, 322.775, 253.361, 329.09, -188.738, -362.575, -188.067 ), PoolVector2Array( -172.466, 23.6727, -175.221, 30.0044, -172.312, 31.7987, -166.201, 33.0111, -160.188, 31.4593, -157.133, 29.0831, -159.651, 23.5303 ) ]
+vertices = PoolVector2Array( -362.575, -188.067, 329.09, -188.738, 322.775, 253.361, -363.531, 247.045 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -363.531, 247.045, 322.775, 253.361, 329.09, -188.738, -362.575, -188.067 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Park" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Tree" type="Sprite" parent="YSort"]
-position = Vector2( -164.57, 27.6465 )
-texture = ExtResource( 7 )
-offset = Vector2( 25, -60 )
+[node name="Props" type="YSort" parent="YSort"]
+
+[node name="Tree" parent="YSort/Props" instance=ExtResource( 7 )]
+position = Vector2( -166.873, -27.9257 )
+
+[node name="Bench" parent="YSort/Props" instance=ExtResource( 8 )]
+position = Vector2( -49.7557, -58.5362 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 
 [node name="Character" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 100, -100 )
-script = ExtResource( 6 )
 
 [node name="Street" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -0.127469, 112.222 )

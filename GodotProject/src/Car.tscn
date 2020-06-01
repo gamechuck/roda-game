@@ -8,6 +8,8 @@ extents = Vector2( 70, 30 )
 
 [node name="Car" type="Area2D"]
 position = Vector2( -3776, 0 )
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

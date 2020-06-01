@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://roda-assets/Characters/Solid_snake_portrait_transparent.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/DialogueUI.gd" type="Script" id=2]
+
+[node name="DialogueUI" type="Control"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 43.0064
+margin_top = 181.764
+margin_right = 445.006
+margin_bottom = 255.764
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 29.0
+margin_right = 395.0
+margin_bottom = 43.0
+text = "Bok, moj ime je Solid Snek"
+align = 1
+autowrap = true
+
+[node name="Sprite" type="TextureRect" parent="."]
+margin_left = 261.198
+margin_top = -2.06053
+margin_right = 497.198
+margin_bottom = 220.939
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

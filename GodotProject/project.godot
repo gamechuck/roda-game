@@ -14,15 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Car.gd"
 }, {
-"base": "Area2D",
+"base": "StaticBody2D",
 "class": "class_character",
 "language": "GDScript",
 "path": "res://src/Character.gd"
 }, {
-"base": "Area2D",
+"base": "KinematicBody2D",
 "class": "class_player",
 "language": "GDScript",
 "path": "res://src/Player.gd"
+}, {
+"base": "StaticBody2D",
+"class": "class_prop",
+"language": "GDScript",
+"path": "res://src/Prop.gd"
 }, {
 "base": "Area2D",
 "class": "class_street",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "class_car": "",
 "class_character": "",
 "class_player": "",
+"class_prop": "",
 "class_street": ""
 }
 
@@ -80,7 +86,7 @@ texture={
 
 move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
 move_down={
@@ -90,7 +96,7 @@ move_down={
 }
 move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
 move_right={
@@ -133,6 +139,15 @@ left_mouse_button={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_4="interact"
 
 [rendering]
 

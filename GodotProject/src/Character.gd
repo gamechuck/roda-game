@@ -1,5 +1,4 @@
-extends Area2D
+extends StaticBody2D
 class_name class_character
 
-func _ready():
-	pass # Replace with function body.
+onready var _interact_area := $InteractArea

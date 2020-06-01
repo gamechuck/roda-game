@@ -10,6 +10,8 @@ var show_version := true
 
 onready var _options_loader := $OptionsLoader
 
+var dialogue_UI : Control = null
+
 func _ready():
 	var _error : int = _options_loader.load_optionsCFG()
 
