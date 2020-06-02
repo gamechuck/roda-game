@@ -7,7 +7,6 @@ onready var _cars_container := $Cars
 onready var _timer := $Timer
 onready var _collision_shape_2D := $CollisionShape2D
 
-var is_player_inside := false setget set_is_player_inside
 var is_in_panic_mode := false setget set_is_in_panic_mode
 var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
 
@@ -53,10 +52,10 @@ func spawn_car():
 
 	car.init_car(direction)
 
-func set_is_player_inside(value : bool):
-	is_player_inside = value
-
 func set_is_in_panic_mode(value : bool):
+	if Engine.editor_hint:
+		return
+
 	if is_in_panic_mode != value:
 		if value:
 			_timer.start(_timer.time_left/Flow.PANIC_MODIFIER)
