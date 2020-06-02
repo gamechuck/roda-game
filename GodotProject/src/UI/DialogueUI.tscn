@@ -20,9 +20,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="PanelContainer"]
 margin_left = 7.0
-margin_top = 29.0
+margin_top = 30.0
 margin_right = 395.0
-margin_bottom = 43.0
+margin_bottom = 44.0
 text = "Bok, moj ime je Solid Snek"
 align = 1
 autowrap = true

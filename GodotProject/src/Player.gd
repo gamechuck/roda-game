@@ -8,6 +8,9 @@ var nav_path : PoolVector2Array = []
 var is_in_dialogue := false
 
 var _overlapping_character : class_character = null
+var _overlapping_street : class_street = null
+var _overlapping_zebra_crossing : class_zebra_crossing = null
+var _overlapping_item : class_item = null
 
 onready var _interact_area := $InteractArea
 
@@ -51,23 +54,69 @@ func _input(event):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 		elif _overlapping_character != null:
-			Flow.dialogue_UI.start_dialogue(_overlapping_character)
-			is_in_dialogue = true
+			is_in_dialogue = Flow.dialogue_UI.start_dialogue(_overlapping_character)
+		elif _overlapping_item != null:
+			_overlapping_item.queue_free()
+			_overlapping_item = null
+	if event.is_action_pressed("toggle_inventory"):
+		Flow.inventory_UI.visible = not Flow.inventory_UI.visible
 
 func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
+	if not is_instance_valid(area) or area == null:
+		return
+
 	if area is class_street:
 		#respawn_position = position
 		print("Player entered the street!")
+		_overlapping_street = area
+		_check_panic_condition()
 	if area is class_car:
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
+	if area is class_zebra_crossing:
+		print("Player entered the zebra crossing!")
+		_overlapping_zebra_crossing = area
 	if area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
+	if area is class_item:
+		#respawn_position = position
+		print("Player entered the item!")
+		_overlapping_item = area
 
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
+	if not is_instance_valid(area) or area == null:
+		return
+
+	if area is class_street:
+		print("Player exited the street!")
+		if _overlapping_street == area:
+			_overlapping_street = null
+		area.is_in_panic_mode = false
+	if area is class_car:
+		pass
+	if area is class_zebra_crossing:
+		print("Player exited the zebra crossing!")
+		_check_panic_condition()
+		if _overlapping_zebra_crossing == area:
+			_overlapping_zebra_crossing = null
+			_check_panic_condition()
 	if area.get_parent() is class_character:
 		print("Player exited a character's interact area!")
 		if _overlapping_character == area.get_parent():
 			_overlapping_character = null
+	if area is class_item:
+		#respawn_position = position
+		print("Player exited the item!")
+		if _overlapping_item == area:
+			_overlapping_item = null
+
+func _check_panic_condition() -> void:
+	if _overlapping_street != null:
+		var panic_condition : bool = _overlapping_street.light_color != Flow.LIGHT_COLOR.GREEN
+		panic_condition = panic_condition or _overlapping_zebra_crossing == null
+		if panic_condition:
+			_overlapping_street.is_in_panic_mode = true
+		else:
+			_overlapping_street.is_in_panic_mode = false

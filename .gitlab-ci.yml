@@ -16,7 +16,10 @@ windows:
   script:
     - cd GodotProject
     - godot -v --export-debug "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+    - godot -s ./CopyAssetFolders.gd "--build-path build/windows"
     - test -e ../build/windows/$EXPORT_NAME.exe
+    - test -e ../build/windows/options.cfg
+    - test -e ../build/windows/default_controls.json
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:

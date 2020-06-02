@@ -9,11 +9,13 @@ var _dialogue_array := []
 func _ready():
 	Flow.dialogue_UI = self
 
-func start_dialogue(character : class_character):
+func start_dialogue(character : class_character) -> bool:
 	visible = true
-	_dialogue_array.push_back("Bok, moj ime je Solid Snek.")
-	_dialogue_array.push_back("Ja volim burek.")
-	update_dialogue()
+	character.play_sound_byte()
+	var character_id : String = character.name
+	var character_data : Dictionary = Flow.get_character_data(character_id)
+	_dialogue_array = character_data.get("dialogue_text", [])
+	return update_dialogue()
 
 func update_dialogue() -> bool:
 	if not _dialogue_array.empty():
@@ -24,5 +26,5 @@ func update_dialogue() -> bool:
 		_stop_dialogue()
 		return false
 
-func _stop_dialogue():
+func _stop_dialogue() -> void:
 	visible = false

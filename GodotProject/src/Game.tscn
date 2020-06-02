@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/GameCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/EditorCamera.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/GameOverlay.gd" type="Script" id=4]
 [ext_resource path="res://resources/fonts/FiraCode-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/UI/DialogueUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/InventoryUI.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -40,6 +42,7 @@ script = ExtResource( 2 )
 [node name="GameOverlay" type="Control" parent="UICanvas"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -75,4 +78,10 @@ custom_fonts/font = SubResource( 1 )
 text = "v0.0"
 
 [node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]
+visible = false
+
+[node name="InventoryUI" parent="UICanvas" instance=ExtResource( 8 )]
+visible = false
+
+[node name="PauseUI" parent="UICanvas" instance=ExtResource( 7 )]
 visible = false
