@@ -34,9 +34,13 @@ onready var _data_loader := $DataLoader
 
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
-var inventory_UI : Control = null
+var inventory_overlay : Control = null
 
-var character_data : Dictionary = {}
+var item_being_dragged : class_inventory_item = null
+var active_character : class_character = null
+
+var character_data := {}
+var item_data := {}
 
 func _ready():
 	var _error : int = _options_loader.load_optionsCFG()
@@ -75,6 +79,13 @@ func get_character_data(character_id : String) -> Dictionary:
 		return character_data[character_id].duplicate(true)
 	else:
 		push_error("Failed to get data for character with id '{0}'.".format([character_id]))
+	return {}
+
+func get_item_data(item_id : String) -> Dictionary:
+	if item_data.has(item_id):
+		return item_data[item_id].duplicate(true)
+	else:
+		push_error("Failed to get data for item with id '{0}'.".format([item_id]))
 	return {}
 
 static func load_JSON(path : String) -> Dictionary:

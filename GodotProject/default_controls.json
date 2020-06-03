@@ -123,10 +123,18 @@
             ]
         },
         {
-            "action": "move_to_position",
+            "action": "left_mouse_button",
             "events": [
                 {
                     "button_index": 1
+                }
+            ]
+        },
+        {
+            "action": "right_mouse_button",
+            "events": [
+                {
+                    "button_index": 2
                 }
             ]
         },

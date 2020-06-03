@@ -14,7 +14,7 @@
 [ext_resource path="res://src/TrafficController.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://roda-assets/Props/Zebra_vertical.png" type="Texture" id=14]
-[ext_resource path="res://src/Item.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/items/BushItem.tscn" type="PackedScene" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -362.575, -188.067, 329.09, -188.738, 322.775, 253.361, -363.531, 247.045 )
@@ -34,12 +34,14 @@ __meta__ = {
 position = Vector2( 211.027, -36.2089 )
 texture = ExtResource( 6 )
 
-[node name="Item" parent="." instance=ExtResource( 16 )]
-position = Vector2( 10.5658, -69.055 )
-
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( -19.5532, 112.431 )
 texture = ExtResource( 14 )
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="BushItem" parent="Items" instance=ExtResource( 15 )]
+position = Vector2( 100, 0 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -55,12 +57,15 @@ position = Vector2( -49.7557, -58.5362 )
 
 [node name="SolidSnejk" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( 72.8285, -72.8285 )
+input_pickable = true
 
 [node name="Lizzy" parent="YSort/Characters" instance=ExtResource( 10 )]
 position = Vector2( -77.6682, 46.7177 )
+input_pickable = true
 
 [node name="Watto" parent="YSort/Characters" instance=ExtResource( 11 )]
 position = Vector2( -145.993, 7.29964 )
+input_pickable = true
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 
@@ -68,6 +73,7 @@ position = Vector2( -145.993, 7.29964 )
 
 [node name="TrafficLight" parent="YSort/TrafficController/TrafficLights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 155.97, -84.325 )
+direction = "side"
 
 [node name="Street4" parent="YSort/TrafficController/Streets" index="0" instance=ExtResource( 4 )]
 position = Vector2( 295.739, -81.4121 )
@@ -87,6 +93,7 @@ extents = Vector2( 100, 45 )
 
 [node name="TrafficLight" parent="YSort/TrafficController2/TrafficLights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 31.4248, 63.548 )
+direction = "front"
 
 [node name="Street" parent="YSort/TrafficController2/Streets" index="0" instance=ExtResource( 4 )]
 position = Vector2( -0.127469, 112.222 )
@@ -103,7 +110,6 @@ position = Vector2( -20.2516, 140.364 )
 extents = Vector2( 45, 100 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }

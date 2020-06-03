@@ -66,6 +66,7 @@ func _create_InputEventMouseButton(action : String, event : Dictionary) -> void:
 	## Add a mouse button event to an action.
 	var event_button : InputEventMouseButton = InputEventMouseButton.new()
 	event_button.button_index = event.button_index
+	event_button.device = -1
 	InputMap.action_add_event(action, event_button)
 	print("		> Added event for mouse with button_index '{0}'.".format([
 		event_button.button_index

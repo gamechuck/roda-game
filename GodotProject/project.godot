@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Character.gd"
 }, {
+"base": "Control",
+"class": "class_inventory_item",
+"language": "GDScript",
+"path": "res://src/InventoryItem.gd"
+}, {
 "base": "Area2D",
 "class": "class_item",
 "language": "GDScript",
 "path": "res://src/Item.gd"
+}, {
+"base": "PanelContainer",
+"class": "class_item_slot",
+"language": "GDScript",
+"path": "res://src/UI/ItemSlot.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "class_player",
@@ -52,7 +62,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "class_car": "",
 "class_character": "",
+"class_inventory_item": "",
 "class_item": "",
+"class_item_slot": "",
 "class_player": "",
 "class_prop": "",
 "class_street": "",
@@ -106,5 +118,7 @@ texture={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

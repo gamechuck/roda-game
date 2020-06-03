@@ -12,6 +12,7 @@ func load_dataJSON() -> int:
 			Flow.set(key, constants_data.get(key, Flow.get(key)))
 		else:
 			push_error("Failed to set configuration property {0}!".format([key]))
-	
+
 	Flow.character_data = data_dictionary.get("characters", {})
+	Flow.item_data = data_dictionary.get("items", {})
 	return error

@@ -29,5 +29,10 @@
                 "Ja volim ćevapčići."
             ]
         }
+    },
+    "items": {
+        "BushItem": {
+            "inventory_texture": "BushInventoryItem"
+        }
     }
 }

@@ -6,8 +6,8 @@ onready var _zebra_crossings_container := $ZebraCrossings
 
 onready var _timer := $Timer
 
-var light_color : int = Flow.LIGHT_COLOR.RED
-var previous_is_red = true
+export var light_color : int = Flow.LIGHT_COLOR.RED
+var previous_is_red := true
 
 func _ready():
 	update_traffic()
