@@ -16,7 +16,7 @@ func _ready():
 	waiting_for_reset = true
 
 func init_car(type : String):
-	var car_settings : Dictionary = car_types.get(type, "left")
+	var car_settings : Dictionary = car_types.get(type, {})
 	_animated_sprite.play(car_settings.get("animation_name", "left_right"))
 	_animated_sprite.flip_h = car_settings.get("flip_h", false)
 	_animated_sprite.flip_v = car_settings.get("flip_v", false)

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name class_player
 
-const MOVE_SPEED := 2.0
+enum STATE {DEFAULT, LEFT, RIGHT, UP, DOWN}
 
 var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
@@ -13,6 +13,7 @@ var _overlapping_zebra_crossing : class_zebra_crossing = null
 var _overlapping_item : class_item = null
 
 onready var _interact_area := $InteractArea
+onready var _animated_sprite := $AnimatedSprite
 
 func _ready():
 	var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
@@ -34,20 +35,44 @@ func _physics_process(_delta):
 			move_direction.x += 1
 			nav_path = PoolVector2Array()
 
-		move_and_slide(move_direction*MOVE_SPEED/_delta)
+		if nav_path.size() > 0:
+			var distance := position.distance_to(nav_path[0])
+			if distance > Flow.PLAYER_MOVE_SPEED:
+				var new_position := position.linear_interpolate(nav_path[0], Flow.PLAYER_MOVE_SPEED/distance)
+				move_direction = new_position - position
+			else:
+				nav_path.remove(0)
 
-		#_move(move_direction.normalized())
+		var normalized_direction := move_direction.normalized()
+		var abs_direction := normalized_direction.abs()
+		if abs_direction.x > abs_direction.y:
+			if normalized_direction.x > 0:
+				set_animation("right")
+			elif normalized_direction.x < 0:
+				set_animation("left")
+			else:
+				set_animation("idle")
+		elif abs_direction.y > abs_direction.x:
+			if normalized_direction.y > 0:
+				set_animation("down")
+			elif normalized_direction.y < 0:
+				set_animation("up")
+			else:
+				set_animation("idle")
+		else:
+			set_animation("idle")
+
+		var _linear_velocity := move_and_slide(normalized_direction*Flow.PLAYER_MOVE_SPEED/_delta)
+
 #		for i in get_slide_count():
 #			var collision = get_slide_collision(i)
 #			print("I collided with ", collision.collider.name)
-#
-#		if nav_path.size() > 0:
-#			var distance := position.distance_to(nav_path[0])
-#			if distance > MOVE_SPEED:
-#				var new_position := position.linear_interpolate(nav_path[0], MOVE_SPEED/distance)
-#				position = new_position
-#			else:
-#				nav_path.remove(0)
+
+func set_animation(state_name : String):
+	var state_settings : Dictionary = state_machine.get(state_name, {})
+	_animated_sprite.play(state_settings.get("animation_name", "default"))
+	_animated_sprite.flip_h = state_settings.get("flip_h", false)
+	_animated_sprite.flip_v = state_settings.get("flip_v", false)
 
 func _input(event):
 	if event.is_action_pressed("interact"):
@@ -120,3 +145,22 @@ func _check_panic_condition() -> void:
 			_overlapping_street.is_in_panic_mode = true
 		else:
 			_overlapping_street.is_in_panic_mode = false
+
+var state_machine := {
+	"left":{
+		"animation_name": "move_right",
+		"flip_h": true
+	},
+	"right":{
+		"animation_name": "move_right"
+	},
+	"up":{
+		"animation_name": "move_up"
+	},
+	"down":{
+		"animation_name": "move_down"
+	},
+	"idle":{
+		"animation_name": "default"
+	}
+}

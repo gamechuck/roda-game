@@ -20,6 +20,7 @@ var start_in_full_screen := false
 
 var PANIC_MODIFIER := 2.0
 var CAR_MOVE_SPEED := 4.0
+var PLAYER_MOVE_SPEED := 2.0
 var MAX_AMOUNT_OF_CARS := 10
 var MINIMUM_TIME_BETWEEN_CARS := 0.75
 var MAXIMUM_TIME_BETWEEN_CARS := 1.75
