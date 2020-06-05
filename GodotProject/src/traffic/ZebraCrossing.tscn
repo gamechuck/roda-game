@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/ZebraCrossing.gd" type="Script" id=1]
+[ext_resource path="res://src/traffic/ZebraCrossing.gd" type="Script" id=1]
+
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 0, 0 )
+extents = Vector2( 45, 100 )
 
 [node name="ZebraCrossing" type="Area2D"]
 input_pickable = false

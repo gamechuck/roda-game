@@ -5,6 +5,7 @@
 [ext_resource path="res://resources/font_size16.tres" type="DynamicFont" id=3]
 
 [node name="DialogueUI" type="Control"]
+mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,6 +16,7 @@ margin_left = 43.0064
 margin_top = 181.764
 margin_right = 445.006
 margin_bottom = 255.764
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,6 +36,7 @@ margin_left = 261.198
 margin_top = -2.06053
 margin_right = 497.198
 margin_bottom = 220.939
+mouse_filter = 2
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

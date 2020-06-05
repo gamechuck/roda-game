@@ -7,9 +7,9 @@ var player_state : int = STATE.DEFAULT
 
 var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
-var is_in_dialogue := false
 var is_dragging_item := false
 var is_in_gummy := false
+var is_in_dialogue := false
 
 var _overlapping_character : class_character = null
 var _overlapping_item : class_item = null
@@ -20,6 +20,8 @@ onready var _animated_sprite := $AnimatedSprite
 signal nav_path_requested
 
 func _ready():
+	Flow.player = self
+
 	var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
 	_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
 
@@ -27,7 +29,7 @@ func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
 		var move_direction := Vector2.ZERO
 		var move_speed := get_move_speed()
-		
+
 		if not is_in_dialogue:
 			if Input.is_action_pressed("move_down"):
 				move_direction.y += 1
@@ -68,7 +70,7 @@ func _input(event):
 			# REMOVE THIS LOGIC HERE!!!
 			var item_id := _overlapping_item.name
 			var item_data := Flow.get_item_data(item_id)
-			print(item_data)
+			#print(item_data)
 			Flow.inventory_overlay.add_item(item_data)
 			_overlapping_item.queue_free()
 			_overlapping_item = null
@@ -78,13 +80,17 @@ func _input(event):
 
 func _unhandled_input(event):
 ## Inputs that are NOT handled by any of the UI elements!
-	if Flow.item_being_dragged != null:
-		Flow.item_being_dragged._on_gui_input(event)
-		return
+
+	# Reset the item that is being dragged!
+	Flow.item_being_dragged = null
 
 	if event.is_action_pressed("left_mouse_button"):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
+			Flow.active_character = null
+		elif Flow.active_character != null:
+			is_in_dialogue = Flow.dialogue_UI.start_dialogue(Flow.active_character)
+			Flow.active_character = null
 		else:
 			emit_signal("nav_path_requested")
 
@@ -96,6 +102,10 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
+	if area is class_skater:
+		position = respawn_position
+		nav_path = PoolVector2Array()
+		print("Player got hit by a skater!")
 	if area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
@@ -112,6 +122,8 @@ func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 		return
 
 	if area is class_car:
+		pass
+	if area is class_skater:
 		pass
 	if area.get_parent() is class_character:
 		print("Player exited a character's interact area!")

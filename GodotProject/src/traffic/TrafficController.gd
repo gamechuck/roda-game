@@ -14,8 +14,6 @@ var _is_in_panic_mode := false
 
 func _ready():
 
-	print(Flow.TRAFFIC_RED_TIME)
-
 	for street in _streets_container.get_children():
 		if street is class_street:
 			street.connect("player_is_inside_area", self, "set_is_player_in_street")

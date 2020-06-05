@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/GameCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/editor/EditorCamera.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://src/UI/InventoryOverlay.gd" type="Script" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ItemSlot.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/InventoryItem.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -105,23 +104,25 @@ __meta__ = {
 }
 
 [node name="ItemSlot" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
-
-[node name="InventoryItem" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox/ItemSlot" instance=ExtResource( 11 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 25.0
-margin_bottom = 25.0
+margin_left = 16.0
+margin_right = 48.0
 
 [node name="ItemSlot2" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
+margin_left = 16.0
 margin_top = 36.0
+margin_right = 48.0
 margin_bottom = 68.0
 
 [node name="ItemSlot3" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
+margin_left = 16.0
 margin_top = 72.0
+margin_right = 48.0
 margin_bottom = 104.0
 
 [node name="ItemSlot4" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
+margin_left = 16.0
 margin_top = 108.0
+margin_right = 48.0
 margin_bottom = 140.0
 
 [node name="BottomSpacer" type="Control" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]

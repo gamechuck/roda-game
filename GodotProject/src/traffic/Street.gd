@@ -2,7 +2,7 @@ tool
 extends Area2D
 class_name class_street
 
-onready var _car_resource := preload("res://src/Car.tscn")
+onready var _car_resource := preload("res://src/traffic/Car.tscn")
 onready var _cars_container := $Cars
 onready var _timer := $Timer
 onready var _collision_shape_2D := $CollisionShape2D

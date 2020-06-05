@@ -18,24 +18,39 @@
             "dialogue_text": [
                 "Bok, moj ime je Solid Snejk",
                 "Ja volim burek."
-            ]
+            ],
+            "item_dialogues": {
+                "Bush": [
+                    "To nije burek..."
+                ]
+            }
         },
         "Lizzy": {
             "dialogue_text": [
                 "Bok, moj ime je Lizzy",
                 "Ja volim čvarci."
-            ]
+            ],
+            "item_dialogues": {
+                "Bush": [
+                    "To nije čvarci..."
+                ]
+            }
         },
         "Watto": {
             "dialogue_text": [
                 "Bok, moj ime je Watto",
                 "Ja volim ćevapčići."
-            ]
+            ],
+            "item_dialogues": {
+                "Bush": [
+                    "To nije ćevapčići..."
+                ]
+            }
         }
     },
     "items": {
-        "BushItem": {
-            "inventory_texture": "BushInventoryItem"
+        "Bush": {
+            "inventory_texture" : "res://roda-assets/Props/Bush.png"
         }
     }
 }

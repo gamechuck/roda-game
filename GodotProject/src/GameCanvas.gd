@@ -33,7 +33,7 @@ func _ready():
 
 func _on_nav_path_requested():
 	var mouse_position := get_local_mouse_position()
-	print(mouse_position)
+	#print(mouse_position)
 	print("Player is navigating to '{0}'".format([mouse_position]))
 	var nav_path = _navigation_2D.get_simple_path(_player.position, mouse_position)
 	# Remove the first point since it is the initial position!!!

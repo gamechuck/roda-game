@@ -1,20 +1,21 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Props/Park.png" type="Texture" id=2]
 [ext_resource path="res://src/GameCanvas.gd" type="Script" id=3]
-[ext_resource path="res://src/Street.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/traffic/Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/SolidSnejk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://roda-assets/Props/Zebra_horizontal.png" type="Texture" id=6]
 [ext_resource path="res://src/Props/Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Props/Bench.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/ZebraCrossing.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/characters/Lizzy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/Watto.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/TrafficController.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/TrafficLight.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/traffic/TrafficController.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://roda-assets/Props/Zebra_vertical.png" type="Texture" id=14]
-[ext_resource path="res://src/items/BushItem.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/items/Bush.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/SkaterController.tscn" type="PackedScene" id=16]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 355.682, -186.845, 363.398, 252.987, -326.786, 250.415, -324.88, 17.9908, -323.989, -90.7374, -323.356, -167.982, -435.86, -60.6866, -436.201, -5.17528 )
@@ -38,9 +39,11 @@ texture = ExtResource( 6 )
 position = Vector2( -19.5532, 112.431 )
 texture = ExtResource( 14 )
 
+[node name="SkaterController" parent="." instance=ExtResource( 16 )]
+
 [node name="Items" type="Node2D" parent="."]
 
-[node name="BushItem" parent="Items" instance=ExtResource( 15 )]
+[node name="Bush" parent="Items" instance=ExtResource( 15 )]
 position = Vector2( 100, 0 )
 
 [node name="YSort" type="YSort" parent="."]
