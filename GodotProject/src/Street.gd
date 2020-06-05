@@ -13,6 +13,8 @@ var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
 export var extents := Vector2.ZERO setget set_extents
 export(String, "left", "right", "up", "down") var direction
 
+signal player_is_inside_area(is_inside)
+
 func _ready():
 
 	var shape := RectangleShape2D.new()
@@ -20,6 +22,9 @@ func _ready():
 	$CollisionShape2D.shape = shape
 
 	if not Engine.editor_hint:
+		var _success := connect("area_shape_entered", self, "_on_area_shape_entered")
+		_success = connect("area_shape_exited", self, "_on_area_shape_exited")
+
 		for car in _cars_container.get_children():
 			_cars_container.remove_child(car)
 			car.queue_free()
@@ -27,7 +32,7 @@ func _ready():
 		for _i in range(0, Flow.MAX_AMOUNT_OF_CARS):
 			spawn_car()
 	
-		var _success := _timer.connect("timeout", self, "_on_reset_timer_timeout")
+		_success = _timer.connect("timeout", self, "_on_reset_timer_timeout")
 		_timer.one_shot = true
 		_timer.wait_time = 0.1
 		_timer.start()
@@ -56,7 +61,7 @@ func set_is_in_panic_mode(value : bool):
 	if Engine.editor_hint:
 		return
 
-	if is_in_panic_mode != value:
+	if is_in_panic_mode != value and _timer.is_inside_tree():
 		if value:
 			_timer.start(_timer.time_left/Flow.PANIC_MODIFIER)
 		else:
@@ -91,9 +96,17 @@ func reset_timer() -> void:
 
 func _on_reset_timer_timeout():
 	match light_color:
-		Flow.LIGHT_COLOR.RED, Flow.LIGHT_COLOR.YELLOW:
+		Flow.LIGHT_COLOR.RED:
 			reset_car()
-		Flow.LIGHT_COLOR.GREEN:
+		_:
 			if is_in_panic_mode:
 				reset_car()
 	reset_timer()
+
+func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
+	if area.get_parent() is class_player:
+		emit_signal("player_is_inside_area", true)
+		
+func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
+	if area.get_parent() is class_player:
+		emit_signal("player_is_inside_area", false)

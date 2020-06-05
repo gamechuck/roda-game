@@ -26,7 +26,7 @@ func set_light_color(value : int):
 	match light_color:
 		Flow.LIGHT_COLOR.RED:
 			play_animation("red")
-		Flow.LIGHT_COLOR.YELLOW:
+		Flow.LIGHT_COLOR.YELLOW_AFTER_RED, Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
 			play_animation("yellow")
 		Flow.LIGHT_COLOR.GREEN:
 			play_animation("green")

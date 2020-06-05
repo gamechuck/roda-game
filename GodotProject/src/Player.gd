@@ -9,10 +9,9 @@ var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
 var is_in_dialogue := false
 var is_dragging_item := false
+var is_in_gummy := false
 
 var _overlapping_character : class_character = null
-var _overlapping_street : class_street = null
-var _overlapping_zebra_crossing : class_zebra_crossing = null
 var _overlapping_item : class_item = null
 
 onready var _interact_area := $InteractArea
@@ -27,6 +26,7 @@ func _ready():
 func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
 		var move_direction := Vector2.ZERO
+		var move_speed := get_move_speed()
 		
 		if not is_in_dialogue:
 			if Input.is_action_pressed("move_down"):
@@ -45,14 +45,14 @@ func _physics_process(_delta):
 			if nav_path.size() > 0:
 				var distance := position.distance_to(nav_path[0])
 				if distance > Flow.PLAYER_MOVE_SPEED:
-					var new_position := position.linear_interpolate(nav_path[0], Flow.PLAYER_MOVE_SPEED/distance)
+					var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
 					move_direction = new_position - position
 				else:
 					nav_path.remove(0)
 
 		update_state(move_direction)
 		var normalized_direction := move_direction.normalized()
-		var _linear_velocity := move_and_slide(normalized_direction*Flow.PLAYER_MOVE_SPEED/_delta)
+		var _linear_velocity := move_and_slide(normalized_direction*move_speed/_delta)
 
 #		for i in get_slide_count():
 #			var collision = get_slide_collision(i)
@@ -92,18 +92,10 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
 
-	if area is class_street:
-		#respawn_position = position
-		print("Player entered the street!")
-		_overlapping_street = area
-		_check_panic_condition()
 	if area is class_car:
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
-	if area is class_zebra_crossing:
-		print("Player entered the zebra crossing!")
-		_overlapping_zebra_crossing = area
 	if area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
@@ -111,24 +103,16 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		#respawn_position = position
 		print("Player entered the item!")
 		_overlapping_item = area
+	if area is class_gummy:
+		is_in_gummy = true
+		print("Player entered gummy!")
 
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
 
-	if area is class_street:
-		print("Player exited the street!")
-		if _overlapping_street == area:
-			_overlapping_street = null
-		area.is_in_panic_mode = false
 	if area is class_car:
 		pass
-	if area is class_zebra_crossing:
-		print("Player exited the zebra crossing!")
-		_check_panic_condition()
-		if _overlapping_zebra_crossing == area:
-			_overlapping_zebra_crossing = null
-			_check_panic_condition()
 	if area.get_parent() is class_character:
 		print("Player exited a character's interact area!")
 		if _overlapping_character == area.get_parent():
@@ -138,6 +122,15 @@ func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 		print("Player exited the item!")
 		if _overlapping_item == area:
 			_overlapping_item = null
+	if area is class_gummy:
+		is_in_gummy = false
+		print("Player exited gummy!")
+
+func get_move_speed() -> float:
+	var move_speed := Flow.PLAYER_MOVE_SPEED
+	if is_in_gummy:
+		move_speed *= Flow.GUMMY_MODIFIER
+	return move_speed
 
 func update_state(move_direction : Vector2):
 	var normalized_direction := move_direction.normalized()
@@ -168,15 +161,6 @@ func update_animation():
 	_animated_sprite.play(state_settings.get("animation_name", "default"))
 	_animated_sprite.flip_h = state_settings.get("flip_h", false)
 	_animated_sprite.flip_v = state_settings.get("flip_v", false)
-
-func _check_panic_condition() -> void:
-	if _overlapping_street != null:
-		var panic_condition : bool = _overlapping_street.light_color != Flow.LIGHT_COLOR.GREEN
-		panic_condition = panic_condition or _overlapping_zebra_crossing == null
-		if panic_condition:
-			_overlapping_street.is_in_panic_mode = true
-		else:
-			_overlapping_street.is_in_panic_mode = false
 
 var state_machine := {
 	STATE.LEFT:{

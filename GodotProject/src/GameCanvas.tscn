@@ -17,9 +17,9 @@
 [ext_resource path="res://src/items/BushItem.tscn" type="PackedScene" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( -362.575, -188.067, 329.09, -188.738, 322.775, 253.361, -363.531, 247.045 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( -363.531, 247.045, 322.775, 253.361, 329.09, -188.738, -362.575, -188.067 ) ]
+vertices = PoolVector2Array( 355.682, -186.845, 363.398, 252.987, -326.786, 250.415, -324.88, 17.9908, -323.989, -90.7374, -323.356, -167.982, -435.86, -60.6866, -436.201, -5.17528 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 4, 5, 0 ), PoolIntArray( 6, 4, 3, 7 ) ]
+outlines = [ PoolVector2Array( -323.356, -167.982, -323.989, -90.7374, -435.86, -60.6866, -436.201, -5.17528, -324.88, 17.9908, -326.786, 250.415, 363.398, 252.987, 355.682, -186.845 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
@@ -70,6 +70,7 @@ input_pickable = true
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 
 [node name="TrafficController" parent="YSort" instance=ExtResource( 12 )]
+light_color = 2
 
 [node name="TrafficLight" parent="YSort/TrafficController/TrafficLights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 155.97, -84.325 )

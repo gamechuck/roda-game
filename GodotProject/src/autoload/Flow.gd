@@ -1,6 +1,6 @@
 extends Node
 
-enum LIGHT_COLOR {GREEN, YELLOW, RED}
+enum LIGHT_COLOR {RED, YELLOW_AFTER_RED, GREEN, YELLOW_AFTER_GREEN}
 
 const OPTIONS_PATH := "res://options.cfg"
 
@@ -21,11 +21,14 @@ var start_in_full_screen := false
 var PANIC_MODIFIER := 2.0
 var CAR_MOVE_SPEED := 4.0
 var PLAYER_MOVE_SPEED := 2.0
+var GUMMY_MODIFIER := 0.5
+var BIKE_MODIFIER := 2.0
 var MAX_AMOUNT_OF_CARS := 10
 var MINIMUM_TIME_BETWEEN_CARS := 0.75
 var MAXIMUM_TIME_BETWEEN_CARS := 1.75
 var TRAFFIC_RED_TIME := 2.0
-var TRAFFIC_YELLOW_TIME := 2.0
+var TRAFFIC_YELLOW_AFTER_RED_TIME := 2.0
+var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 2.0
 var TRAFFIC_GREEN_TIME := 2.0
 
 onready var _options_loader := $OptionsLoader
