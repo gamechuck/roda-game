@@ -11,7 +11,8 @@
         "TRAFFIC_RED_TIME": 10.0,
         "TRAFFIC_YELLOW_AFTER_RED_TIME": 0.5,
         "TRAFFIC_YELLOW_AFTER_GREEN_TIME": 0.5,
-        "TRAFFIC_GREEN_TIME": 10.0
+        "TRAFFIC_GREEN_TIME": 10.0,
+        "FALLBACK_INVENTORY_TEXTURE": "res://resources/fallback/inventory_texture.png"
     },
     "characters": {
         "SolidSnejk": {
@@ -19,10 +20,12 @@
                 "Bok, moj ime je Solid Snejk",
                 "Ja volim burek."
             ],
-            "item_dialogues": {
-                "Bush": [
-                    "To nije burek..."
-                ]
+            "use_item": {
+                "Bush": {
+                    "dialogue_text": [
+                        "To nije burek..."
+                    ]
+                }
             }
         },
         "Lizzy": {
@@ -30,10 +33,12 @@
                 "Bok, moj ime je Lizzy",
                 "Ja volim čvarci."
             ],
-            "item_dialogues": {
-                "Bush": [
-                    "To nije čvarci..."
-                ]
+            "use_item": {
+                "Bush": {
+                    "dialogue_text": [
+                        "To nije čvarci..."
+                    ]
+                }
             }
         },
         "Watto": {
@@ -41,16 +46,51 @@
                 "Bok, moj ime je Watto",
                 "Ja volim ćevapčići."
             ],
-            "item_dialogues": {
-                "Bush": [
-                    "To nije ćevapčići..."
-                ]
+            "use_item": {
+                "Bush": {
+                    "dialogue_text": [
+                        "To nije ćevapčići..."
+                    ]
+                }
             }
         }
     },
     "items": {
         "Bush": {
-            "inventory_texture" : "res://roda-assets/Props/Bush.png"
+            "inventory_texture": "res://roda-assets/Props/Bush.png",
+            "pickup": {
+                "condition": {},
+                "success_text": [
+                    "Ovo je lijep grm",
+                    "Ja ću ga uzeti!"
+                ],
+                "failure_text": [
+                    "Ovaj grm je zaglavljen u zemlji",
+                    "Ja ću trebati lopatu!"
+                ]
+            },
+            "use_item": {
+                "Bike": {
+                    "dialogue_text": [
+                        "Lopata koristim za iskopavanje grma"
+                    ],
+                    "set_variable": [
+                        {
+                            "id": "used_bike_on_bush",
+                            "value": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "Bike": {
+            "inventory_texture": "res://roda-assets/Props/Bikes.png",
+            "pickup": {
+                "condition": {},
+                "success_text": [
+                    "Lopata je uvijek korisna!"
+                ]
+            }
         }
     }
 }

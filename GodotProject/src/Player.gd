@@ -60,37 +60,37 @@ func _physics_process(_delta):
 #			var collision = get_slide_collision(i)
 #			print("I collided with ", collision.collider.name)
 
-func _input(event):
+func _unhandled_input(event):
+## Inputs that are NOT handled by any of the UI elements!
+
 	if event.is_action_pressed("interact"):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 		elif _overlapping_character != null:
 			is_in_dialogue = Flow.dialogue_UI.start_dialogue(_overlapping_character)
 		elif _overlapping_item != null:
-			# REMOVE THIS LOGIC HERE!!!
-			var item_id := _overlapping_item.name
-			var item_data := Flow.get_item_data(item_id)
-			#print(item_data)
-			Flow.inventory_overlay.add_item(item_data)
-			_overlapping_item.queue_free()
-			_overlapping_item = null
+			is_in_dialogue = Flow.dialogue_UI.start_pickup_dialogue(_overlapping_item)
+			Flow.inventory_overlay.add_item(_overlapping_item)
 
 	if event.is_action_pressed("toggle_inventory"):
 		Flow.inventory_overlay.toggle_inventory()
 
-func _unhandled_input(event):
-## Inputs that are NOT handled by any of the UI elements!
-
-	# Reset the item that is being dragged!
-	Flow.item_being_dragged = null
+	if event.is_action_released("left_mouse_button"):
+		# Reset the item that is being dragged!
+		Flow.item_being_dragged = null
 
 	if event.is_action_pressed("left_mouse_button"):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 			Flow.active_character = null
+			Flow.active_item = null
 		elif Flow.active_character != null:
 			is_in_dialogue = Flow.dialogue_UI.start_dialogue(Flow.active_character)
 			Flow.active_character = null
+		elif Flow.active_item != null:
+			is_in_dialogue = Flow.dialogue_UI.start_pickup_dialogue(Flow.active_item)
+			Flow.inventory_overlay.add_item(Flow.active_item)
+			Flow.active_item = null
 		else:
 			emit_signal("nav_path_requested")
 

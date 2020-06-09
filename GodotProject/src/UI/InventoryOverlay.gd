@@ -18,9 +18,13 @@ func set_is_open(value : bool):
 func toggle_inventory():
 	set_is_open(not _is_open)
 
-func add_item(item_data : Dictionary):
+func add_item(item : class_item):
+	var item_id := item.name
+	var item_data := Flow.get_item_data(item_id)
 	for slot in _inventory_vbox.get_children():
 		if slot is class_item_slot and slot.is_empty:
-			print("Adding ....")
+			slot.add_item(item_id, item_data)
+			item.queue_free()
+			item = null
 			return
 	push_error("No empty inventory slots could be found!")

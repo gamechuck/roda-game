@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/GameCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/editor/EditorCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Game.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/GameOverlay.gd" type="Script" id=4]
-[ext_resource path="res://resources/font_size8.tres" type="DynamicFont" id=5]
+[ext_resource path="res://resources/fonts/font_size8.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/DialogueUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/InventoryOverlay.gd" type="Script" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ItemSlot.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/BikeRepairUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/SettingsOverlay.gd" type="Script" id=12]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -47,6 +49,44 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SettingsCanvas" type="CanvasLayer" parent="UICanvas/GameOverlay"]
+pause_mode = 2
+layer = 2
+
+[node name="SettingsOverlay" type="MarginContainer" parent="UICanvas/GameOverlay/SettingsCanvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 16
+custom_constants/margin_top = 24
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 24
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/GameOverlay/SettingsCanvas/SettingsOverlay"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 464.0
+margin_bottom = 246.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/GameOverlay/SettingsCanvas/SettingsOverlay/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 222.0
+mouse_filter = 2
+alignment = 2
+
+[node name="SettingsButton" type="TextureButton" parent="UICanvas/GameOverlay/SettingsCanvas/SettingsOverlay/HBoxContainer/VBoxContainer"]
+margin_top = 190.0
+margin_right = 32.0
+margin_bottom = 222.0
+rect_min_size = Vector2( 32, 32 )
+texture_normal = ExtResource( 9 )
+expand = true
 
 [node name="InventoryOverlay" type="MarginContainer" parent="UICanvas/GameOverlay"]
 anchor_right = 1.0
@@ -171,3 +211,15 @@ visible = false
 
 [node name="PauseUI" parent="UICanvas" instance=ExtResource( 7 )]
 visible = false
+
+[node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="TextureRect" type="TextureRect" parent="UICanvas/BikeRepairUI"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0

@@ -2,19 +2,31 @@ extends PanelContainer
 class_name class_item_slot
 
 var is_empty := true
-var item_id := "Bush"
+var item_id := ""
 
 var _is_being_dragged := false
 var _mouse_offset := Vector2.ZERO
 
 onready var _sprite = $Sprite
 
-func fill_with_item(id : String):
+func _ready():
+	_sprite.texture = null
+
+func add_item(id : String, data : Dictionary):
 	item_id = id
+
+	var texture_path : String = data.get("inventory_texture", Flow.FALLBACK_INVENTORY_TEXTURE)
+	var texture_exists : bool = ResourceLoader.exists(texture_path)
+	if not texture_exists:
+		texture_path = Flow.FALLBACK_INVENTORY_TEXTURE
+	_sprite.texture = load(texture_path)
+
 	is_empty = false
-	pass
 
 func _gui_input(event):
+	if is_empty:
+		return
+
 	if _is_being_dragged:
 		if event.is_action_released("left_mouse_button"):
 			_is_being_dragged = false

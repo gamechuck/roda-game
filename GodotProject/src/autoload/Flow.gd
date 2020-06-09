@@ -31,6 +31,8 @@ var TRAFFIC_YELLOW_AFTER_RED_TIME := 2.0
 var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 2.0
 var TRAFFIC_GREEN_TIME := 2.0
 
+var FALLBACK_INVENTORY_TEXTURE := "res://resources/fallback/inventory_texture.png"
+
 onready var _options_loader := $OptionsLoader
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
@@ -43,6 +45,7 @@ var player : KinematicBody2D = null
 
 var item_being_dragged : class_item_slot = null
 var active_character : class_character = null
+var active_item : class_item = null
 
 var character_data := {}
 var item_data := {}
@@ -61,11 +64,7 @@ func _unhandled_input(event : InputEvent):
 		OS.window_fullscreen = not OS.window_fullscreen
 
 	if event.is_action_pressed("quit_or_pause"):
-		if is_pause_UI_enabled:
-			pause_UI.visible = not get_tree().paused
-			get_tree().paused = not get_tree().paused
-		else:
-			call_deferred("deferred_quit")
+		quit_or_pause_game()
 
 	if event.is_action_pressed("restart"):
 		call_deferred("deferred_reload_current_scene")
@@ -78,6 +77,13 @@ func deferred_reload_current_scene() -> void:
 ## It is now safe to reload the current scene.
 	var _error := get_tree().reload_current_scene()
 	get_tree().paused = false
+
+func quit_or_pause_game():
+	if is_pause_UI_enabled:
+		pause_UI.visible = not get_tree().paused
+		get_tree().paused = not get_tree().paused
+	else:
+		call_deferred("deferred_quit")
 
 func get_character_data(character_id : String) -> Dictionary:
 	if character_data.has(character_id):
