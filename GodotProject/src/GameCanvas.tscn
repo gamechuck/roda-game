@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://roda-assets/Tilemap/rodademo.tmx" type="PackedScene" id=2]
+[ext_resource path="res://roda-assets/Tilemap/DemoTilemap.tmx" type="PackedScene" id=2]
 [ext_resource path="res://src/GameCanvas.gd" type="Script" id=3]
 [ext_resource path="res://src/traffic/Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/SolidSnejk.tscn" type="PackedScene" id=5]
-[ext_resource path="res://roda-assets/Props/Zebra_horizontal.png" type="Texture" id=6]
+[ext_resource path="res://src/FenceTileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Props/Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Props/Bench.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=9]
@@ -13,7 +13,6 @@
 [ext_resource path="res://src/characters/Watto.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/traffic/TrafficController.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
-[ext_resource path="res://roda-assets/Props/Zebra_vertical.png" type="Texture" id=14]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
@@ -26,17 +25,23 @@ outlines = [ PoolVector2Array( 2643.76, 1627.72, 2634, 1299.11, 2803.19, 1299.11
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="rodademo" parent="." instance=ExtResource( 2 )]
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 211.027, -36.2089 )
-texture = ExtResource( 6 )
-
-[node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( -19.5532, 112.431 )
-texture = ExtResource( 14 )
+[node name="DemoTilemap" parent="." instance=ExtResource( 2 )]
 
 [node name="YSort" type="YSort" parent="."]
+
+[node name="Fences" type="YSort" parent="YSort"]
+
+[node name="FenceBack" parent="YSort/Fences" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 393256, 3, 0, 393257, 3, 0, 393258, 3, 0, 393259, 3, 0, 393260, 3, 0, 393261, 3, 0, 393262, 3, 0, 393263, 3, 0, 393264, 3, 0, 393265, 3, 0 )
+
+[node name="FenceFront" parent="YSort/Fences" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 983080, 7, 0, 983081, 7, 0, 983082, 7, 0, 983083, 7, 0, 983086, 7, 0, 983087, 7, 0, 983088, 7, 0, 983089, 7, 0 )
+
+[node name="FenceLeft" parent="YSort/Fences" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 393255, 4, 0, 458791, 5, 0, 524327, 5, 0, 589863, 5, 0, 655399, 5, 0, 720935, 5, 0, 786471, 5, 0, 852007, 5, 0, 917543, 5, 0, 983079, 6, 0 )
+
+[node name="FenceRight" parent="YSort/Fences" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 393266, 2, 0, 458802, 1, 0, 524338, 1, 0, 589874, 1, 0, 655410, 1, 0, 720946, 1, 0, 786482, 1, 0, 852018, 1, 0, 917554, 1, 0, 983090, 0, 0 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -122,6 +127,7 @@ position = Vector2( -20.2516, 140.364 )
 extents = Vector2( 45, 100 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
