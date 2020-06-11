@@ -12,6 +12,7 @@ VAR watto_question_solved = 0
 
 // SolidSlug
 VAR figured_out_issue_with_bike = 0
+VAR gave_back_bike = 0
 
 VAR used_item = "Bush"
 VAR conv_type = 0
@@ -199,8 +200,15 @@ I hope my magical tyre pump is useful!
 = interact
 
 {has_item("Bike"):
-	- false: -> intro
+	- false: -> main
 	- true: -> has_bike
+}
+
+= main
+
+{gave_back_bike:
+	- false: -> broken_bike
+	- true: -> intro
 }
 
 = intro
@@ -214,6 +222,7 @@ If you help me find it, I'll help you find your missing fence!
 
 Oh, thanks so much for finding my bike! 
 Here's a piece of the fence I found!
+~ gave_back_bike = 1
 -> broken_bike
 
 = broken_bike
@@ -222,15 +231,20 @@ Oh, it seems something is wrong with my bike!
 Too bad... Can you help me find out what?
 -> END
 
-4 (default after figuring out what's wrong with the bike). Oh, so I have a flat tyre? Too bad... Can you find a tyre pump so we can fix it?
-5 (default after having a tyre in inventory). Oh I see you have a tyre pump! Can you please use it on the bike?
-6 (after using tyre on bike). Thanks for fixing my bike! Here's another piece of the fence I found!
+Oh, so I have a flat tyre? Too bad... Can you find a tyre pump so we can fix it?
+Oh I see you have a tyre pump! Can you please use it on the bike?
+
+Thanks for fixing my bike! Here's another piece of the fence I found!
 BIKE - opens up in a little pop-up screen and you can press stuff:
-0 (when you open the pop-up) - I should check to find out what's wrong with the bike!
-1 (press on brakes) - It seems that the brakes work!
-2 (press on horn) - HONK! - It seems that the horn works!
-3 (press on seat) - It seems the seat is tight!
-4 (press od tyre) - Oh no! The tyres are flat!
+>>> BEGIN_MINIGAME: bike_repair
+- (bike_repair)
+I should check to find out what's wrong with the bike!
+	+ It seems that the brakes work!
+	+ HONK! - It seems that the horn works!
+	+ It seems the seat is tight!
+	+ Oh no! The tyres are flat!
+-
+>>> END_MINIGAME: bike_repair
 When using tyre pump with tyres - Let's fix this! (press the button "PUMP" to PUMP PUMP PUMP until: "It's fixed!"
 -> END
 

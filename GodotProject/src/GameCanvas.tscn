@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://roda-assets/Props/Park.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/Tilemap/rodademo.tmx" type="PackedScene" id=2]
 [ext_resource path="res://src/GameCanvas.gd" type="Script" id=3]
 [ext_resource path="res://src/traffic/Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/SolidSnejk.tscn" type="PackedScene" id=5]
@@ -14,23 +14,19 @@
 [ext_resource path="res://src/traffic/TrafficController.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://roda-assets/Props/Zebra_vertical.png" type="Texture" id=14]
-[ext_resource path="res://src/items/Bush.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 355.682, -186.845, 363.398, 252.987, -326.786, 250.415, -324.88, 17.9908, -323.989, -90.7374, -323.356, -167.982, -435.86, -60.6866, -436.201, -5.17528 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 4, 5, 0 ), PoolIntArray( 6, 4, 3, 7 ) ]
-outlines = [ PoolVector2Array( -323.356, -167.982, -323.989, -90.7374, -435.86, -60.6866, -436.201, -5.17528, -324.88, 17.9908, -326.786, 250.415, 363.398, 252.987, 355.682, -186.845 ) ]
+vertices = PoolVector2Array( 2634, 1299.11, 2643.76, 1627.72, 1716.51, 1621.21, 1716.51, 1471.55, 2798.99, 580.998, 2803.19, 1299.11, 2700.99, 580.998, 340.268, 1471.55, 342.508, 731.198, 1003.86, 727.508, 1867.16, 71.2692, 2699.07, 69.2819, 1008.42, -53.0876, 1866.17, -57.6055 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 6 ), PoolIntArray( 3, 7, 8, 9 ), PoolIntArray( 10, 11, 6, 0, 3, 9 ), PoolIntArray( 12, 13, 10, 9 ) ]
+outlines = [ PoolVector2Array( 2643.76, 1627.72, 2634, 1299.11, 2803.19, 1299.11, 2798.99, 580.998, 2700.99, 580.998, 2699.07, 69.2819, 1867.16, 71.2692, 1866.17, -57.6055, 1008.42, -53.0876, 1003.86, 727.508, 342.508, 731.198, 340.268, 1471.55, 1716.51, 1471.55, 1716.51, 1621.21 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Park" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="rodademo" parent="." instance=ExtResource( 2 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 211.027, -36.2089 )
@@ -40,42 +36,49 @@ texture = ExtResource( 6 )
 position = Vector2( -19.5532, 112.431 )
 texture = ExtResource( 14 )
 
-[node name="Items" type="Node2D" parent="."]
-
-[node name="Bush" parent="Items" instance=ExtResource( 15 )]
-position = Vector2( 100, 0 )
-
-[node name="Bike" parent="Items" instance=ExtResource( 17 )]
-position = Vector2( 17.8657, -71.9688 )
-
 [node name="YSort" type="YSort" parent="."]
+
+[node name="Items" type="YSort" parent="YSort"]
+
+[node name="Bike" parent="YSort/Items" instance=ExtResource( 17 )]
+position = Vector2( 1331.85, 457.664 )
 
 [node name="Props" type="YSort" parent="YSort"]
 
 [node name="Tree" parent="YSort/Props" instance=ExtResource( 7 )]
-position = Vector2( -166.873, -27.9257 )
+position = Vector2( 1498.55, 264.429 )
+
+[node name="Tree2" parent="YSort/Props" instance=ExtResource( 7 )]
+position = Vector2( 1330.98, 456.229 )
 
 [node name="Bench" parent="YSort/Props" instance=ExtResource( 8 )]
-position = Vector2( -49.7557, -58.5362 )
+position = Vector2( 1556.79, 249.819 )
+
+[node name="Bush" parent="YSort/Props" instance=ExtResource( 19 )]
+position = Vector2( 1360.97, 254.203 )
+
+[node name="Bush2" parent="YSort/Props" instance=ExtResource( 19 )]
+position = Vector2( 1325.13, 280.291 )
 
 [node name="Characters" type="YSort" parent="YSort"]
 
 [node name="SolidSnejk" parent="YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 80.5954, -77.2667 )
+position = Vector2( 1506.53, 353.242 )
 input_pickable = true
 
 [node name="Lizzy" parent="YSort/Characters" instance=ExtResource( 10 )]
-position = Vector2( -77.6682, 46.7177 )
+position = Vector2( 1329.26, 229.819 )
 input_pickable = true
 
 [node name="Watto" parent="YSort/Characters" instance=ExtResource( 11 )]
-position = Vector2( -145.993, 7.29964 )
+position = Vector2( 1562.42, 296.771 )
 input_pickable = true
 
 [node name="SolidSlug" parent="YSort/Characters" instance=ExtResource( 18 )]
-position = Vector2( -260.187, 14.0302 )
+position = Vector2( 1543.67, 440.643 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 1428.67, 347.914 )
 
 [node name="TrafficController" parent="YSort" instance=ExtResource( 12 )]
 light_color = 2
