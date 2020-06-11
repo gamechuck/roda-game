@@ -11,7 +11,7 @@ func _ready():
 	_editor_camera.current = Flow.is_in_editor_mode
 	_game_camera.current = not Flow.is_in_editor_mode
 
-	Flow.load_game_data()
+	Flow.load_data()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_mode"):

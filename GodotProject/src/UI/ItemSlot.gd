@@ -3,6 +3,7 @@ class_name class_item_slot
 
 var is_empty := true
 var item_id := ""
+var item_count := 0
 
 var _is_being_dragged := false
 var _mouse_offset := Vector2.ZERO
@@ -15,7 +16,7 @@ func _ready():
 func add_item(id : String, data : Dictionary):
 	item_id = id
 
-	var texture_path : String = data.get("inventory_texture", Flow.FALLBACK_INVENTORY_TEXTURE)
+	var texture_path : String = data.get("INVENTORY_TEXTURE", Flow.FALLBACK_INVENTORY_TEXTURE)
 	var texture_exists : bool = ResourceLoader.exists(texture_path)
 	if not texture_exists:
 		texture_path = Flow.FALLBACK_INVENTORY_TEXTURE

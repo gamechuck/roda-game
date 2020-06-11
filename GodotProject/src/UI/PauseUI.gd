@@ -1,6 +1,7 @@
 extends Control
 
 onready var _quit_button := $VBoxContainer/VBoxContainer/QuitButton
+onready var _resume_button := $VBoxContainer/VBoxContainer/ResumeButton
 onready var _restart_button := $VBoxContainer/VBoxContainer/RestartButton
 onready var _volume_slider := $VBoxContainer/VBoxContainer/HBoxContainer/VolumeSlider
 onready var _volume_label := $VBoxContainer/VBoxContainer/HBoxContainer/VolumeLabel
@@ -8,6 +9,7 @@ onready var _volume_label := $VBoxContainer/VBoxContainer/HBoxContainer/VolumeLa
 func _ready():
 	Flow.pause_UI = self
 	var _error : int = _restart_button.connect("pressed", self, "_on_restart_button_pressed")
+	_error = _resume_button.connect("pressed", self, "_on_resume_button_pressed")
 	_error = _volume_slider.connect("value_changed", self, "_on_volume_slider_changed")
 
 	if OS.get_name() == "HTML5":
@@ -18,6 +20,9 @@ func _ready():
 
 func _on_quit_button_pressed():
 	Flow.deferred_quit()
+
+func _on_resume_button_pressed():
+	Flow.quit_or_pause_game()
 
 func _on_restart_button_pressed():
 	Flow.deferred_reload_current_scene()

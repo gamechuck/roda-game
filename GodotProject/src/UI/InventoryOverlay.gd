@@ -22,9 +22,19 @@ func add_item(item : class_item):
 	var item_id := item.name
 	var item_data := Flow.get_item_data(item_id)
 	for slot in _inventory_vbox.get_children():
-		if slot is class_item_slot and slot.is_empty:
+		if not slot is class_item_slot:
+			continue
+		if slot.is_empty:
 			slot.add_item(item_id, item_data)
 			item.queue_free()
 			item = null
 			return
 	push_error("No empty inventory slots could be found!")
+
+func has_item(item_id : String) -> bool:
+	for slot in _inventory_vbox.get_children():
+		if not slot is class_item_slot:
+			continue
+		if slot.item_id == item_id:
+			return true
+	return false

@@ -15,8 +15,8 @@
 [ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://roda-assets/Props/Zebra_vertical.png" type="Texture" id=14]
 [ext_resource path="res://src/items/Bush.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/SkaterController.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 355.682, -186.845, 363.398, 252.987, -326.786, 250.415, -324.88, 17.9908, -323.989, -90.7374, -323.356, -167.982, -435.86, -60.6866, -436.201, -5.17528 )
@@ -40,8 +40,6 @@ texture = ExtResource( 6 )
 position = Vector2( -19.5532, 112.431 )
 texture = ExtResource( 14 )
 
-[node name="SkaterController" parent="." instance=ExtResource( 16 )]
-
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Bush" parent="Items" instance=ExtResource( 15 )]
@@ -63,7 +61,7 @@ position = Vector2( -49.7557, -58.5362 )
 [node name="Characters" type="YSort" parent="YSort"]
 
 [node name="SolidSnejk" parent="YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 72.8285, -72.8285 )
+position = Vector2( 80.5954, -77.2667 )
 input_pickable = true
 
 [node name="Lizzy" parent="YSort/Characters" instance=ExtResource( 10 )]
@@ -73,6 +71,9 @@ input_pickable = true
 [node name="Watto" parent="YSort/Characters" instance=ExtResource( 11 )]
 position = Vector2( -145.993, 7.29964 )
 input_pickable = true
+
+[node name="SolidSlug" parent="YSort/Characters" instance=ExtResource( 18 )]
+position = Vector2( -260.187, 14.0302 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 

@@ -18,3 +18,17 @@ __meta__ = {
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 4, 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

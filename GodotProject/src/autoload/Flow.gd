@@ -5,6 +5,9 @@ enum LIGHT_COLOR {RED, YELLOW_AFTER_RED, GREEN, YELLOW_AFTER_GREEN}
 const OPTIONS_PATH := "res://options.cfg"
 
 const DATA_PATH := "res://data/game_data.json"
+const STORY_PATH := "res://data/game_story.ink"
+
+const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
 
 const DEFAULT_CONTROLS_PATH := "res://default_controls.json"
 const USER_CONTROLS_PATH := "user://user_controls.json"
@@ -30,12 +33,14 @@ var TRAFFIC_RED_TIME := 2.0
 var TRAFFIC_YELLOW_AFTER_RED_TIME := 2.0
 var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 2.0
 var TRAFFIC_GREEN_TIME := 2.0
-
 var FALLBACK_INVENTORY_TEXTURE := "res://resources/fallback/inventory_texture.png"
+var FALLBACK_PORTRAIT_TEXTURE := "res://resources/fallback/inventory_texture.png"
 
 onready var _options_loader := $OptionsLoader
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
+
+var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
@@ -52,11 +57,18 @@ var item_data := {}
 
 func _ready():
 	var _error : int = _options_loader.load_optionsCFG()
-	_error = _controls_loader.load_controlsJSON()
+	_error += _controls_loader.load_controlsJSON()
 	OS.window_fullscreen = start_in_full_screen
 
-func load_game_data():
-	var _error : int = _data_loader.load_dataJSON()
+func load_data():
+	var _error = _data_loader.load_dataJSON()
+
+	if OS.get_name() == "Windows":
+		_error = build_INK(STORY_PATH, INKLECATE_PATH)
+	var content = load_INK(Flow.STORY_PATH)
+	dialogue_UI.story = _story_resource.new(content)
+	# Bind the getter functions so the story can access the game's state.
+	dialogue_UI.story.bind_external_function_general("has_item", inventory_overlay, "has_item")
 
 func _unhandled_input(event : InputEvent):
 ## Catch all unhandled input not caught be any other control nodes.
@@ -100,9 +112,9 @@ func get_item_data(item_id : String) -> Dictionary:
 	return {}
 
 static func load_JSON(path : String) -> Dictionary:
-# Load a JSON-file and convert it to a dictionary and return it.
+# Load a JSON-file, convert it to a dictionary and return it.
 	var file : File = File.new()
-	var dictionary : Dictionary
+	var dictionary := {}
 	var error : int = file.open(path, File.READ)
 	if error == OK:
 		var text : String = file.get_as_text()
@@ -119,3 +131,62 @@ static func load_JSON(path : String) -> Dictionary:
 	else:
 		push_error("Failed to open '{0}', check file availability!".format([path]))
 		return {}
+
+static func load_INK(path : String) -> String:
+# Load an INK-file, convert it to a string and return it.
+	var extended_path : String = "{0}.json".format([path])
+	var file = File.new()
+	var string : String = ""
+	var error : int = file.open(extended_path, File.READ)
+	if error == OK:
+		string = file.get_as_text()
+		file.close()
+		return string
+	else:
+		push_error("Failed to open the compiled INK file at '{0}'.".format([extended_path]))
+		return '{"inkVersion":19,"root":[[["done",{"#n":"g-0"}],null],"done",{"#f":3}],"listDefs":{}}'
+
+static func build_INK(path : String, inklecate_path : String) -> int:
+## Compile an INK file at location path to a JSON file at the same location.
+	var source_path: String = "{0}".format([path])
+	var target_path: String = "{0}.json".format([path])
+	var file : File = File.new()
+
+	# Check if all necessary files/executables exist!
+	if not file.file_exists(source_path):
+		push_error("INK-file with path '{0}' did not exist! Aborting building function...".format([source_path]))
+		return ERR_FILE_NOT_FOUND
+
+	var output := []
+
+	if not file.file_exists(inklecate_path):
+		push_error("Failed to find Inklecate building tool '{0}', check path availability!".format([inklecate_path]))
+		return ERR_FILE_NOT_FOUND
+
+	inklecate_path = ProjectSettings.globalize_path(inklecate_path)
+	var exit_code = OS.execute(inklecate_path, [
+				   '-o',
+				   ProjectSettings.globalize_path(target_path),
+				   ProjectSettings.globalize_path(source_path)
+			   ], true, output)
+	if exit_code != OK:
+		push_error("Building failed with exit code '{0}', check console for more information.".format([exit_code]))
+
+	# Outputing a BOM is inklecate's way of saying that everything went through.
+	# This is fragile. There might be a better option to express the BOM, or maybe
+	# check for inklecate's return code?
+	#
+	# On macOS the length of the BOM is 3, on Windows the length of the BOM is 0,
+	# that's fairly strange.
+	if output.size() == 1 && (output[0].length() == 3 || output[0].length() == 0):
+		print(output[0] + "Compiled to: " + target_path)
+	else:
+		print(PoolStringArray(output).join("\n"))
+
+		# TODO: It might be useful to analyze the exit_code in some way?
+		if (output.size() == 1 and output[0].length() == 0):
+			print(output[0] + "Compiled to: " + target_path)
+		else:
+			print(PoolStringArray(output).join("\n"))
+
+	return OK

@@ -67,9 +67,9 @@ func _unhandled_input(event):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 		elif _overlapping_character != null:
-			is_in_dialogue = Flow.dialogue_UI.start_dialogue(_overlapping_character)
+			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(_overlapping_character)
 		elif _overlapping_item != null:
-			is_in_dialogue = Flow.dialogue_UI.start_pickup_dialogue(_overlapping_item)
+			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(_overlapping_item)
 			Flow.inventory_overlay.add_item(_overlapping_item)
 
 	if event.is_action_pressed("toggle_inventory"):
@@ -85,10 +85,10 @@ func _unhandled_input(event):
 			Flow.active_character = null
 			Flow.active_item = null
 		elif Flow.active_character != null:
-			is_in_dialogue = Flow.dialogue_UI.start_dialogue(Flow.active_character)
+			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_character)
 			Flow.active_character = null
 		elif Flow.active_item != null:
-			is_in_dialogue = Flow.dialogue_UI.start_pickup_dialogue(Flow.active_item)
+			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_item)
 			Flow.inventory_overlay.add_item(Flow.active_item)
 			Flow.active_item = null
 		else:

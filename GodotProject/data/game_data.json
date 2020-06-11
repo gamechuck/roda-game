@@ -12,85 +12,79 @@
         "TRAFFIC_YELLOW_AFTER_RED_TIME": 0.5,
         "TRAFFIC_YELLOW_AFTER_GREEN_TIME": 0.5,
         "TRAFFIC_GREEN_TIME": 10.0,
-        "FALLBACK_INVENTORY_TEXTURE": "res://resources/fallback/inventory_texture.png"
+        "FALLBACK_INVENTORY_TEXTURE": "res://resources/fallback/inventory_texture.png",
+        "FALLBACK_PORTRAIT_TEXTURE": "res://resources/fallback/inventory_texture.png"
     },
-    "characters": {
+    "CHARACTERS": {
         "SolidSnejk": {
-            "dialogue_text": [
-                "Bok, moj ime je Solid Snejk",
-                "Ja volim burek."
-            ],
-            "use_item": {
-                "Bush": {
-                    "dialogue_text": [
-                        "To nije burek..."
-                    ]
-                }
+            "KNOT": "conv_solid_snejk",
+            "PORTRAIT": {
+                "SIZE": [
+                    256,
+                    256
+                ],
+                "POSITION": [
+                    268,
+                    -8
+                ],
+                "TEXTURE": "res://roda-assets/Characters/Portraits/Snek.png"
             }
         },
         "Lizzy": {
-            "dialogue_text": [
-                "Bok, moj ime je Lizzy",
-                "Ja volim čvarci."
-            ],
-            "use_item": {
-                "Bush": {
-                    "dialogue_text": [
-                        "To nije čvarci..."
-                    ]
-                }
+            "KNOT": "conv_lizzy",
+            "PORTRAIT": {
+                "SIZE": [
+                    200,
+                    200
+                ],
+                "POSITION": [
+                    292,
+                    30
+                ],
+                "TEXTURE": "res://roda-assets/Characters/Portraits/Lizard.png"
             }
         },
         "Watto": {
-            "dialogue_text": [
-                "Bok, moj ime je Watto",
-                "Ja volim ćevapčići."
-            ],
-            "use_item": {
-                "Bush": {
-                    "dialogue_text": [
-                        "To nije ćevapčići..."
-                    ]
-                }
+            "KNOT": "conv_watto",
+            "PORTRAIT": {
+                "SIZE": [
+                    200,
+                    200
+                ],
+                "POSITION": [
+                    300,
+                    32
+                ],
+                "TEXTURE": "res://roda-assets/Characters/Portraits/Waddo.png"
+            }
+        },
+        "SolidSlug": {
+            "KNOT": "conv_solid_slug",
+            "PORTRAIT": {
+                "SIZE": [
+                    256,
+                    256
+                ],
+                "POSITION": [
+                    244,
+                    -16
+                ],
+                "TEXTURE": "res://roda-assets/Characters/Portraits/Slug.png"
             }
         }
     },
-    "items": {
-        "Bush": {
-            "inventory_texture": "res://roda-assets/Props/Bush.png",
-            "pickup": {
-                "condition": {},
-                "success_text": [
-                    "Ovo je lijep grm",
-                    "Ja ću ga uzeti!"
-                ],
-                "failure_text": [
-                    "Ovaj grm je zaglavljen u zemlji",
-                    "Ja ću trebati lopatu!"
-                ]
-            },
-            "use_item": {
-                "Bike": {
-                    "dialogue_text": [
-                        "Lopata koristim za iskopavanje grma"
-                    ],
-                    "set_variable": [
-                        {
-                            "id": "used_bike_on_bush",
-                            "value": 1
-                        }
-                    ]
-                }
-            }
+    "ITEMS": {
+        "Fence": {
+            "KNOT": "conv_fence",
+            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bush.png"
+        },
+        "Pump": {
+            "KNOT": "conv_pump",
+            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bush.png"
         },
         "Bike": {
-            "inventory_texture": "res://roda-assets/Props/Bikes.png",
-            "pickup": {
-                "condition": {},
-                "success_text": [
-                    "Lopata je uvijek korisna!"
-                ]
-            }
+            "KNOT": "conv_bike",
+            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bikes.png"
         }
     }
 }
