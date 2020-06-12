@@ -42,7 +42,7 @@ func _on_nav_path_requested():
 	nav_path.remove(0)
 	_player.nav_path = nav_path
 
-func show_more_fence():
+func increment_visible_fences():
 	for fence in _fences.get_children():
 		if fence.visible == false:
 			fence.collision_layer = 1

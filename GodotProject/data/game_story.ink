@@ -1,6 +1,8 @@
 VAR number_of_fences_fixed = 0
 VAR found_bike = 0
 
+VAR picked_up_fence = 0
+
 // SolidSnejk
 VAR talked_with_solid_snjek = 0
 
@@ -191,7 +193,17 @@ I don't want this item!
 = intro
 
 I don't know about any fences...
+{picked_up_fence:
+	- false: -> show_fence
+}
 but if you ever need a magical item, just talk to me!
+-> END
+
+= show_fence
+>>> PAN_CAMERA: Fence
+But I did see something fall over there!
+Maybe you should go check it out?
+>>> PAN_CAMERA: Player
 -> END
 
 = need_pump
@@ -219,6 +231,7 @@ What direction do you look in FIRST before crossing the road?
 	If you keep your head in the skies you will be blue all over due to all the cars that hit you!
 	-> start_riddle
 -
+Here's a pump, buddy!
 >>> ADD_ITEM: Pump
 ~ lizzy_riddle_solved = 1
 -> END
@@ -358,6 +371,13 @@ I can take this bike with me!
 ~ found_bike = true
 -> END
 
+=== conv_fence ===
+
+I should give this fence to Solid Snejk!
+~ picked_up_fence = true
+-> END
+
+
 === conv_broken_bike ===
 
 {conv_type:
@@ -367,6 +387,19 @@ I can take this bike with me!
 
 = interact
 
+{figured_out_issue_with_bike:
+	- false : -> check_bike
+}
+
+{has_item("Pump"):
+	- true: -> fix_bike_with_pump
+}
+
+I should look around for a tyre pump!
+Maybe I should ask someone?
+-> END
+
+= check_bike
 >>> BEGIN_MINIGAME: bike_repair
 - (bike_repair)
 I should check to find out what's wrong with the bike!
@@ -390,10 +423,22 @@ I should check to find out what's wrong with the bike!
 }
 
 = pump
+
+{figured_out_issue_with_bike:
+	- 1: -> fix_bike_with_pump
+}
+
+I should first figure out what is wrong with the bike!
+-> END
+
+= fix_bike_with_pump
+
 Let's fix this!
 PUMP!
-PUMP!
-PUMP!
+PUMP! PUMP!
+PUMP! PUMP! PUMP!
+...
+...?
 It's fixed!
 ~ fixed_bike = 1
 -> END

@@ -81,21 +81,28 @@ func show(argument_values):
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
 		target_object.visible = true
+		target_object.set("collision_layer", 1)
 
 func hide(argument_values):
 	var mask : String = argument_values[0]
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
 		target_object.visible = false
+		target_object.set("collision_layer", 0)
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
 	match minigame_id:
 		"bike_repair":
-			pass
+			return
+			Flow.bike_repair_UI.visible = true
 
 func end_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
+	match minigame_id:
+		"bike_repair":
+			return
+			Flow.bike_repair_UI.visible = false
 
 var external_setters : Dictionary = {
 	"PAN_CAMERA" : {

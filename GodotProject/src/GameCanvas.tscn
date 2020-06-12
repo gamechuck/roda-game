@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Tilemap/DemoTilemap.tmx" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/characters/Debug.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/characters/BrokenBike.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/items/Fence.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
@@ -61,6 +62,9 @@ tile_data = PoolIntArray( 393266, 2, 0, 458802, 1, 0, 524338, 1, 0, 589874, 1, 0
 
 [node name="Bike" parent="YSort/Items" instance=ExtResource( 17 )]
 position = Vector2( 2205.44, 1339.42 )
+
+[node name="Fence" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 1887.24, 381.668 )
 
 [node name="Props" type="YSort" parent="YSort"]
 

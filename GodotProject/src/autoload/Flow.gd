@@ -43,6 +43,7 @@ var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
+var bike_repair_UI : Control = null
 var inventory_overlay : Control = null
 var game_canvas : Node2D = null
 
@@ -77,7 +78,7 @@ func load_data():
 func _observe_variables(variable_name, new_value):
 	match variable_name:
 		"number_of_fences_fixed":
-			game_canvas.show_more_fence()
+			game_canvas.increment_visible_fences()
 	print(str("Variable '", variable_name, "' changed to: ", new_value))
 
 func _unhandled_input(event : InputEvent):

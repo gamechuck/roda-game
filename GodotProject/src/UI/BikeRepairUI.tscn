@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://roda-assets/UI/Central Frame.png" type="Texture" id=1]
 [ext_resource path="res://roda-assets/UI/Bike.png" type="Texture" id=2]
@@ -8,11 +8,13 @@
 [ext_resource path="res://roda-assets/UI/Pedal highlight.png" type="Texture" id=6]
 [ext_resource path="res://roda-assets/UI/horn.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/HighlightRect.gd" type="Script" id=8]
+[ext_resource path="res://src/UI/BikeRepairUI.gd" type="Script" id=9]
 
 [node name="BikeRepairUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

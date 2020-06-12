@@ -91,6 +91,7 @@
     },
     "ITEMS": {
         "Fence": {
+            "KNOT": "conv_fence",
             "INVENTORY_TEXTURE": "res://roda-assets/Placeholders/fence_icon.png",
         },
         "Pump": {
