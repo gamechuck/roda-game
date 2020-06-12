@@ -2,6 +2,8 @@ extends Node
 
 onready var _tween := $Tween
 
+
+
 func _parse_command(raw_text : String) -> Dictionary:
 ## Parse the command (denoted by >>> in INK) and return as a dictionary.
 	var processed_text := raw_text.replace(">>>", "").strip_edges()
@@ -66,9 +68,62 @@ func pan_camera(argument_values : Array):
 			Tween.EASE_IN_OUT)
 		_tween.start()
 
+func add_item(argument_values):
+	var item_id : String = argument_values[0]
+	Flow.inventory_overlay.add_item_by_id(item_id)
+
+func remove_item(argument_values):
+	var item_id : String = argument_values[0]
+	Flow.inventory_overlay.remove_item_by_id(item_id)
+
+func show(argument_values):
+	var mask : String = argument_values[0]
+	var target_object = get_tree().root.find_node(mask, true, false)
+	if target_object != null:
+		target_object.visible = true
+
+func hide(argument_values):
+	var mask : String = argument_values[0]
+	var target_object = get_tree().root.find_node(mask, true, false)
+	if target_object != null:
+		target_object.visible = false
+
+func begin_minigame(argument_values):
+	var minigame_id : String = argument_values[0]
+	match minigame_id:
+		"bike_repair":
+			pass
+
+func end_minigame(argument_values):
+	var minigame_id : String = argument_values[0]
+
 var external_setters : Dictionary = {
 	"PAN_CAMERA" : {
 		"callback": funcref(self, "pan_camera"),
+		"argument_types": [TYPE_STRING]
+	},
+	"ADD_ITEM" : {
+		"callback": funcref(self, "add_item"),
+		"argument_types": [TYPE_STRING]
+	},
+	"REMOVE_ITEM" : {
+		"callback": funcref(self, "remove_item"),
+		"argument_types": [TYPE_STRING]
+	},
+	"SHOW" : {
+		"callback": funcref(self, "show"),
+		"argument_types": [TYPE_STRING]
+	},
+	"HIDE" : {
+		"callback": funcref(self, "hide"),
+		"argument_types": [TYPE_STRING]
+	},
+	"BEGIN_MINIGAME" : {
+		"callback": funcref(self, "begin_minigame"),
+		"argument_types": [TYPE_STRING]
+	},
+	"END_MINIGAME" : {
+		"callback": funcref(self, "end_minigame"),
 		"argument_types": [TYPE_STRING]
 	}
 }

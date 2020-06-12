@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Tilemap/DemoTilemap.tmx" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://src/characters/Watto.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/traffic/TrafficController.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/characters/Debug.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/characters/BrokenBike.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
@@ -32,15 +34,27 @@ script = ExtResource( 3 )
 [node name="Fences" type="YSort" parent="YSort"]
 
 [node name="FenceBack" parent="YSort/Fences" instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+collision_mask = 0
 tile_data = PoolIntArray( 393256, 3, 0, 393257, 3, 0, 393258, 3, 0, 393259, 3, 0, 393260, 3, 0, 393261, 3, 0, 393262, 3, 0, 393263, 3, 0, 393264, 3, 0, 393265, 3, 0 )
 
 [node name="FenceFront" parent="YSort/Fences" instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+collision_mask = 0
 tile_data = PoolIntArray( 983080, 7, 0, 983081, 7, 0, 983082, 7, 0, 983083, 7, 0, 983086, 7, 0, 983087, 7, 0, 983088, 7, 0, 983089, 7, 0 )
 
 [node name="FenceLeft" parent="YSort/Fences" instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+collision_mask = 0
 tile_data = PoolIntArray( 393255, 4, 0, 458791, 5, 0, 524327, 5, 0, 589863, 5, 0, 655399, 5, 0, 720935, 5, 0, 786471, 5, 0, 852007, 5, 0, 917543, 5, 0, 983079, 6, 0 )
 
 [node name="FenceRight" parent="YSort/Fences" instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+collision_mask = 0
 tile_data = PoolIntArray( 393266, 2, 0, 458802, 1, 0, 524338, 1, 0, 589874, 1, 0, 655410, 1, 0, 720946, 1, 0, 786482, 1, 0, 852018, 1, 0, 917554, 1, 0, 983090, 0, 0 )
 
 [node name="Items" type="YSort" parent="YSort"]
@@ -93,6 +107,15 @@ input_pickable = true
 
 [node name="SolidSlug" parent="YSort/Characters" instance=ExtResource( 18 )]
 position = Vector2( 1543.67, 440.643 )
+
+[node name="Debug" parent="YSort/Characters" instance=ExtResource( 14 )]
+position = Vector2( 1140.38, 52.5139 )
+
+[node name="BrokenBike" parent="YSort/Characters" instance=ExtResource( 15 )]
+visible = false
+position = Vector2( 1328.33, 463.458 )
+collision_layer = 0
+collision_mask = 0
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 1428.67, 347.914 )

@@ -33,12 +33,12 @@ func _start_dialogue(node : Node2D) -> bool:
 		data = Flow.get_character_data(node.name)
 
 		var portrait_data : Dictionary = data.get("PORTRAIT", {})
-		var texture_path : String = portrait_data.get("TEXTURE", Flow.FALLBACK_PORTRAIT_TEXTURE)
+		var texture_path : String = portrait_data.get("TEXTURE", "")
 		var texture_exists : bool = ResourceLoader.exists(texture_path)
-		print(texture_path)
-		if not texture_exists:
-			texture_path = Flow.FALLBACK_PORTRAIT_TEXTURE
-		_portrait_rect.texture = load(texture_path)
+		if texture_exists:
+			_portrait_rect.texture = load(texture_path)
+		else:
+			_portrait_rect.texture = null
 
 		var portrait_size = portrait_data.get("SIZE", [200, 200])
 		_portrait_rect.rect_min_size = Vector2(portrait_size[0], portrait_size[1])
@@ -48,7 +48,7 @@ func _start_dialogue(node : Node2D) -> bool:
 
 		_portrait_rect.flip_h = portrait_data.get("FLIP_H", false)
 		_portrait_rect.flip_v = portrait_data.get("FLIP_V", false)
-		
+
 		_portrait_rect.visible = true
 
 	elif node is class_item:

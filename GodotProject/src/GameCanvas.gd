@@ -3,10 +3,12 @@ extends Node2D
 onready var _navigation_2D := $Navigation2D
 onready var _player := $YSort/Player
 onready var _props := $YSort/Props
+onready var _fences := $YSort/Fences
 
 func _ready():
+	Flow.game_canvas = self
 	var _error := _player.connect("nav_path_requested", self, "_on_nav_path_requested")
-	
+
 	return
 	var navigation_polygon_instance := $Navigation2D/NavigationPolygonInstance
 	var navigation_polygon = navigation_polygon_instance.navpoly
@@ -39,3 +41,10 @@ func _on_nav_path_requested():
 	# Remove the first point since it is the initial position!!!
 	nav_path.remove(0)
 	_player.nav_path = nav_path
+
+func show_more_fence():
+	for fence in _fences.get_children():
+		if fence.visible == false:
+			fence.collision_layer = 1
+			fence.visible = true
+			return

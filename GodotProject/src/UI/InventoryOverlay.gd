@@ -20,16 +20,33 @@ func toggle_inventory():
 
 func add_item(item : class_item):
 	var item_id := item.name
+	var success := add_item_by_id(item_id)
+	if success:
+		item.queue_free()
+		item = null
+
+func add_item_by_id(item_id : String) -> bool:
 	var item_data := Flow.get_item_data(item_id)
 	for slot in _inventory_vbox.get_children():
 		if not slot is class_item_slot:
 			continue
 		if slot.is_empty:
 			slot.add_item(item_id, item_data)
-			item.queue_free()
-			item = null
-			return
+			return true
+		elif slot.item_id == item_id:
+			slot.increment_item()
+			return true
 	push_error("No empty inventory slots could be found!")
+	return false
+
+func remove_item_by_id(item_id : String):
+	for slot in _inventory_vbox.get_children():
+		if not slot is class_item_slot:
+			continue
+		if slot.item_id == item_id:
+			slot.remove_item()
+			return
+	push_error("Item with id '{0}' was not found in inventory!".format([item_id]))
 
 func has_item(item_id : String) -> bool:
 	for slot in _inventory_vbox.get_children():

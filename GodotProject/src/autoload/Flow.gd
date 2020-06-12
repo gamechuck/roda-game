@@ -34,7 +34,6 @@ var TRAFFIC_YELLOW_AFTER_RED_TIME := 2.0
 var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 2.0
 var TRAFFIC_GREEN_TIME := 2.0
 var FALLBACK_INVENTORY_TEXTURE := "res://resources/fallback/inventory_texture.png"
-var FALLBACK_PORTRAIT_TEXTURE := "res://resources/fallback/inventory_texture.png"
 
 onready var _options_loader := $OptionsLoader
 onready var _controls_loader := $ControlsLoader
@@ -45,6 +44,7 @@ var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
 var inventory_overlay : Control = null
+var game_canvas : Node2D = null
 
 var player : KinematicBody2D = null
 
@@ -67,8 +67,18 @@ func load_data():
 		_error = build_INK(STORY_PATH, INKLECATE_PATH)
 	var content = load_INK(Flow.STORY_PATH)
 	dialogue_UI.story = _story_resource.new(content)
+	
 	# Bind the getter functions so the story can access the game's state.
 	dialogue_UI.story.bind_external_function_general("has_item", inventory_overlay, "has_item")
+
+	# Bind an observer to some variables
+	dialogue_UI.story.observe_variables(["number_of_fences_fixed"], self, "_observe_variables")
+
+func _observe_variables(variable_name, new_value):
+	match variable_name:
+		"number_of_fences_fixed":
+			game_canvas.show_more_fence()
+	print(str("Variable '", variable_name, "' changed to: ", new_value))
 
 func _unhandled_input(event : InputEvent):
 ## Catch all unhandled input not caught be any other control nodes.
