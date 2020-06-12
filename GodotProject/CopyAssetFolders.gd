@@ -5,7 +5,7 @@ extends SceneTree
 # Will copy all the asset folders to ../build/windows-dev
 
 # Extend to other folders if necessary!
-const DATA_FOLDERS : Array = ["data"]
+const DATA_FOLDERS : Array = ["data", "inklecate"]
 
 # Globalized build path is necessary because make_dir() doesn't take relative paths.
 var _globalized_build_path : String = ""
