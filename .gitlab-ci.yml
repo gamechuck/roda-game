@@ -15,7 +15,7 @@ windows:
   stage: export
   script:
     - cd GodotProject
-    - godot -v -e --export-debug "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+    - godot -v --export-debug "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
     - godot -s ./CopyAssetFolders.gd "--build-path build/windows"
     - test -e ../build/windows/$EXPORT_NAME.exe
     - test -e ../build/windows/options.cfg
@@ -31,7 +31,7 @@ web:
   stage: export
   script:
     - cd GodotProject
-    - godot -v -e --export-debug "HTML5" ../build/web/index.html
+    - godot -v --export-debug "HTML5" ../build/web/index.html
     - test -e ../build/web/index.html
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
