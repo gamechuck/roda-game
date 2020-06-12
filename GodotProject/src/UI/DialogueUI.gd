@@ -67,13 +67,13 @@ func update_dialogue() -> bool:
 		_choice_vbox.visible = false
 
 		var text : String = story.continue()
-		print()
+		text = text.strip_edges()
+		print(text)
 		if text.left(3) == ">>>":
 			# It's some sort of command! Give it to the Director!
 			Director.execute_command(text)
 			return update_dialogue()
 
-		text = text.strip_edges()
 		if not text.empty():
 			_label.text = text.strip_edges()
 			visible = true

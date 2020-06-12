@@ -39,6 +39,9 @@ func get_recognized_extensions():
 	else:
 		return ["tsx"]
 
+func get_import_order():
+	return 200
+
 func get_save_extension():
 	return "res"
 

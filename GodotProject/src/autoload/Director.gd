@@ -21,7 +21,6 @@ func _parse_command(raw_text : String) -> Dictionary:
 func execute_command(raw_text : String):
 
 	var command_dict := _parse_command(raw_text) 
-	print(command_dict.name)
 	
 	var argument_values : Array = command_dict.argument_values
 	var external_dict : Dictionary = external_setters.get(command_dict.name, {})
@@ -50,10 +49,8 @@ func execute_command(raw_text : String):
 
 func pan_camera(argument_values : Array):
 	var mask : String = argument_values[0]
-	print(mask)
 	var target_object = get_tree().root.find_node(mask, true, false)
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-	print(target_object)
 	if target_object != null:
 		var target_position : Vector2 = target_object.position
 		target_position -= Flow.player.position
