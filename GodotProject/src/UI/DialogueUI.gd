@@ -3,10 +3,19 @@ extends Control
 onready var _label := $PanelContainer/Label
 onready var _portrait_rect := $PortraitRect
 
+onready var _choice_vbox := $ChoiceVBox
+
 var story : Object
 
 func _ready():
 	Flow.dialogue_UI = self
+	
+	var index := 0
+	for child in _choice_vbox.get_children():
+		child.connect("choice_button_pressed", self, "_on_choice_button_pressed", [index])
+		index += 1
+	
+	_choice_vbox.visible = false
 
 func start_interact_dialogue(node : Node2D) -> bool:
 	story.variables_state.set("conv_type", 0)
@@ -55,7 +64,15 @@ func _start_dialogue(node : Node2D) -> bool:
 
 func update_dialogue() -> bool:
 	if story.can_continue:
+		_choice_vbox.visible = false
+
 		var text : String = story.continue()
+		print()
+		if text.left(3) == ">>>":
+			# It's some sort of command! Give it to the Director!
+			Director.execute_command(text)
+			return update_dialogue()
+
 		text = text.strip_edges()
 		if not text.empty():
 			_label.text = text.strip_edges()
@@ -64,11 +81,23 @@ func update_dialogue() -> bool:
 		else:
 			return update_dialogue()
 	elif story.current_choices.size() > 0:
-		story.choose_choice_index(0)
-		return update_dialogue()
+		_choice_vbox.visible = true
+
+		var index := 0
+		for child in _choice_vbox.get_children():
+			var choice = story.current_choices[index]
+			child.text = choice.text
+			index += 1
+
+		#story.choose_choice_index(0)
+		return true
 	else:
 		_stop_dialogue()
 		return false
 
 func _stop_dialogue() -> void:
 	visible = false
+
+func _on_choice_button_pressed(index : int):
+	story.choose_choice_index(index)
+	Flow.player.is_in_dialogue = update_dialogue()

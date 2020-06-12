@@ -7,10 +7,12 @@ onready var _zebra_crossings_container := $ZebraCrossings
 onready var _timer := $Timer
 
 export var light_color : int = Flow.LIGHT_COLOR.RED
+export var light_controlled := true
 
 var is_player_in_street := false setget set_is_player_in_street
 var is_player_in_zebra_crossing := false setget set_is_player_in_zebra_crossing
 var _is_in_panic_mode := false
+var _player_wants_to_cross := false
 
 func _ready():
 
@@ -24,10 +26,11 @@ func _ready():
 
 	update_traffic()
 
-	var _error := _timer.connect("timeout", self, "_on_timer_timeout")
-	_timer.wait_time = get_wait_time()
-	_timer.one_shot = true
-	_timer.start()
+	if light_controlled:
+		var _error := _timer.connect("timeout", self, "_on_timer_timeout")
+		_timer.wait_time = get_wait_time()
+		_timer.one_shot = true
+		_timer.start()
 
 func update_traffic():
 	for traffic_light in _traffic_lights_container.get_children():
@@ -48,21 +51,37 @@ func _on_timer_timeout():
 	update_traffic()
 
 func _check_panic_condition() -> void:
-	if is_player_in_street:
-		match light_color:
-			Flow.LIGHT_COLOR.GREEN, Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-				if is_player_in_zebra_crossing:
-					_is_in_panic_mode = false
-				else:
-					_is_in_panic_mode = true
-			_:
-				_is_in_panic_mode = true
-	else:
-		_is_in_panic_mode = false
 	
+	if light_controlled:
+		if is_player_in_street:
+			match light_color:
+				Flow.LIGHT_COLOR.GREEN, Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+					if is_player_in_zebra_crossing:
+						_is_in_panic_mode = false
+					else:
+						_is_in_panic_mode = true
+				_:
+					_is_in_panic_mode = true
+		else:
+			_is_in_panic_mode = false
+	
+	else:
+		if is_player_in_zebra_crossing:
+			_player_wants_to_cross = true
+		else:
+			_player_wants_to_cross = false
+		if is_player_in_street:
+			if is_player_in_zebra_crossing:
+				_is_in_panic_mode = false
+			else:
+				_is_in_panic_mode = true
+		else:
+			_is_in_panic_mode = false
+
 	for street in _streets_container.get_children():
 		if street is class_street:
 			street.is_in_panic_mode = _is_in_panic_mode
+			street.player_wants_to_cross = _player_wants_to_cross
 
 func set_is_player_in_street(value : bool):
 	is_player_in_street = value

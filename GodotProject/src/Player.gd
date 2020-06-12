@@ -21,6 +21,7 @@ signal nav_path_requested
 
 func _ready():
 	Flow.player = self
+	respawn_position = position
 
 	var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
 	_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
@@ -29,6 +30,8 @@ func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
 		var move_direction := Vector2.ZERO
 		var move_speed := get_move_speed()
+
+		#print(is_in_dialogue)
 
 		if not is_in_dialogue:
 			if Input.is_action_pressed("move_down"):

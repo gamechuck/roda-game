@@ -91,10 +91,11 @@ I don't want this item!
 }
 
 = intro
-
+>>> PAN_CAMERA: Bike
 Look, there's a bike right down there
 Don't you wish you had my flying jetpack?
 Oh well!
+>>> PAN_CAMERA: Player
 -> END
 
 = has_bike
@@ -110,15 +111,15 @@ I found a piece of the park fence!
 I'll give it to you if you answer me this question:
 - (start_question)
 If the traffic light is GREEN as you are crossing it but then it turns RED! What do you do?
-* RUN BACK!!! 
++ [RUN BACK!!!] 
 	WRONG! WRONG!
 	There's no going back in life or in traffic! 
 	You have much to learn about the human condition!
 	-> start_question
-* RUN RUN RUN!!! 
++ [RUN RUN RUN!!!]
 	Ha! Wrong! Running on the street is never smart!
 	-> start_question
-* Walk a bit faster to the other side. 
++ [Walk a bit faster to the other side.]
 	This is true! Istina! Here, have this fence.
 -
 ~ watto_question_solved = 1
@@ -131,6 +132,18 @@ Where I'm going, I don't need roads.
 
 = use_item
 
+{used_item:
+	- "Bike": -> bike
+	- else: -> default
+}
+
+= bike
+Ah... I see you conquered the zebras!
+Good job!
+-> END
+
+= default
+I don't want this item!
 -> END
 
 === conv_lizzy ===
@@ -166,14 +179,14 @@ It's a tyre pump you seek, boy?
 I'll give you a MAGICAL tyre pump but first answer my riddle!
 - (start_riddle)
 What direction do you look in FIRST before crossing the road?
-+ LEFT
++ [LEFT]
 	CORRECT! 
 	The cars closest to the road are always flying in from left to right?
-+ RIGHT 
++ [RIGHT] 
 	Ha! Wrong! 
 	The cars will approach you first from the left so you should check that side first!
 	-> start_riddle
-+ UP 
++ [UP] 
 	Ha! Wrong! 
 	If you keep your head in the skies you will be blue all over due to all the cars that hit you!
 	-> start_riddle
@@ -255,4 +268,5 @@ When using tyre pump with tyres - Let's fix this! (press the button "PUMP" to PU
 === conv_bike ===
 
 I can take this bike with me!
+~ found_bike = true
 -> END

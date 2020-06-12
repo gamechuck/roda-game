@@ -34,7 +34,6 @@ texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="HornRect" type="TextureRect" parent="VBoxContainer/BackgroundRect"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -45,7 +44,6 @@ __meta__ = {
 }
 
 [node name="BikeRect" type="TextureRect" parent="VBoxContainer/BackgroundRect"]
-visible = false
 margin_right = 480.0
 margin_bottom = 166.0
 mouse_filter = 2
@@ -87,6 +85,7 @@ polygon = PoolVector2Array( 280.501, 68.1475, 262.06, 95.6477, 265.295, 128.324,
 [node name="HornHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 4 )
 stretch_mode = 4
 script = ExtResource( 8 )
@@ -102,6 +101,7 @@ polygon = PoolVector2Array( 296.56, 8.03622, 289.391, 7.49511, 283.033, 11.0123,
 [node name="PedalHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 stretch_mode = 4
 script = ExtResource( 8 )
@@ -117,6 +117,7 @@ polygon = PoolVector2Array( 228.406, 102.728, 249.87, 103.157, 260.602, 105.948,
 [node name="SaddleHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 5 )
 stretch_mode = 4
 script = ExtResource( 8 )

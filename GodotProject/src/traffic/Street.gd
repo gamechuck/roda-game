@@ -8,6 +8,7 @@ onready var _timer := $Timer
 onready var _collision_shape_2D := $CollisionShape2D
 
 var is_in_panic_mode := false setget set_is_in_panic_mode
+var player_wants_to_cross := false setget set_player_wants_to_cross
 var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
 
 export var extents := Vector2.ZERO setget set_extents
@@ -56,6 +57,14 @@ func spawn_car():
 	_cars_container.add_child(car)
 
 	car.init_car(direction)
+
+func set_player_wants_to_cross(value : bool):
+	if Engine.editor_hint:
+		return
+
+	player_wants_to_cross = value
+	for car in _cars_container.get_children():
+		car.player_wants_to_cross = value
 
 func set_is_in_panic_mode(value : bool):
 	if Engine.editor_hint:

@@ -84,7 +84,7 @@
         },
         "Bike": {
             "KNOT": "conv_bike",
-            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bikes.png"
+            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bike.png"
         }
     }
 }

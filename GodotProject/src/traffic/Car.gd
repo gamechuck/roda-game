@@ -6,6 +6,7 @@ var final_pos := Vector2(0, 0)
 
 var waiting_for_reset := false
 var is_in_panic_mode := false setget set_is_in_panic_mode
+var player_wants_to_cross := false setget set_player_wants_to_cross
 
 onready var _animated_sprite := $AnimatedSprite
 onready var _collision_shape_2D := $CollisionShape2D
@@ -35,6 +36,8 @@ func get_move_speed() -> float:
 	var move_speed := Flow.CAR_MOVE_SPEED
 	if is_in_panic_mode:
 		move_speed *= Flow.PANIC_MODIFIER
+	elif player_wants_to_cross:
+		move_speed *= 0.0
 	return move_speed
 
 func reset():
@@ -43,6 +46,9 @@ func reset():
 
 func set_is_in_panic_mode(value : bool):
 	is_in_panic_mode = value
+
+func set_player_wants_to_cross(value : bool):
+	player_wants_to_cross = value
 
 var car_types := {
 	"left":{

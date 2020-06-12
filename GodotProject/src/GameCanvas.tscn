@@ -18,9 +18,9 @@
 [ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 2634, 1299.11, 2643.76, 1627.72, 1716.51, 1621.21, 1716.51, 1471.55, 2798.99, 580.998, 2803.19, 1299.11, 2700.99, 580.998, 340.268, 1471.55, 342.508, 731.198, 1003.86, 727.508, 1867.16, 71.2692, 2699.07, 69.2819, 1008.42, -53.0876, 1866.17, -57.6055 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 6 ), PoolIntArray( 3, 7, 8, 9 ), PoolIntArray( 10, 11, 6, 0, 3, 9 ), PoolIntArray( 12, 13, 10, 9 ) ]
-outlines = [ PoolVector2Array( 2643.76, 1627.72, 2634, 1299.11, 2803.19, 1299.11, 2798.99, 580.998, 2700.99, 580.998, 2699.07, 69.2819, 1867.16, 71.2692, 1866.17, -57.6055, 1008.42, -53.0876, 1003.86, 727.508, 342.508, 731.198, 340.268, 1471.55, 1716.51, 1471.55, 1716.51, 1621.21 ) ]
+vertices = PoolVector2Array( 342.508, 731.198, 571.384, 95.9871, 1008.42, -53.0876, 1866.17, -57.6055, 1867.16, 71.2692, 457.51, 1628.4, 340.268, 1471.55, 2604.84, 82.973, 2604.84, 1621.9, 1892.32, 1625.15 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ), PoolIntArray( 4, 7, 8, 9, 5 ) ]
+outlines = [ PoolVector2Array( 2604.84, 1621.9, 2604.84, 82.973, 1867.16, 71.2692, 1866.17, -57.6055, 1008.42, -53.0876, 571.384, 95.9871, 342.508, 731.198, 340.268, 1471.55, 457.51, 1628.4, 1892.32, 1625.15 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
@@ -46,7 +46,7 @@ tile_data = PoolIntArray( 393266, 2, 0, 458802, 1, 0, 524338, 1, 0, 589874, 1, 0
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="Bike" parent="YSort/Items" instance=ExtResource( 17 )]
-position = Vector2( 1331.85, 457.664 )
+position = Vector2( 2205.44, 1339.42 )
 
 [node name="Props" type="YSort" parent="YSort"]
 
@@ -56,11 +56,23 @@ position = Vector2( 1498.55, 264.429 )
 [node name="Tree2" parent="YSort/Props" instance=ExtResource( 7 )]
 position = Vector2( 1330.98, 456.229 )
 
+[node name="Tree3" parent="YSort/Props" instance=ExtResource( 7 )]
+position = Vector2( 1141.5, 887.388 )
+
 [node name="Bench" parent="YSort/Props" instance=ExtResource( 8 )]
 position = Vector2( 1556.79, 249.819 )
 
 [node name="Bush" parent="YSort/Props" instance=ExtResource( 19 )]
 position = Vector2( 1360.97, 254.203 )
+
+[node name="Bush3" parent="YSort/Props" instance=ExtResource( 19 )]
+position = Vector2( 1135.66, 934.883 )
+
+[node name="Bush4" parent="YSort/Props" instance=ExtResource( 19 )]
+position = Vector2( 1195.39, 921.801 )
+
+[node name="Bush5" parent="YSort/Props" instance=ExtResource( 19 )]
+position = Vector2( 1149.31, 1024.18 )
 
 [node name="Bush2" parent="YSort/Props" instance=ExtResource( 19 )]
 position = Vector2( 1325.13, 280.291 )
@@ -86,45 +98,70 @@ position = Vector2( 1543.67, 440.643 )
 position = Vector2( 1428.67, 347.914 )
 
 [node name="TrafficController" parent="YSort" instance=ExtResource( 12 )]
-light_color = 2
+light_controlled = false
 
 [node name="TrafficLight" parent="YSort/TrafficController/TrafficLights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 155.97, -84.325 )
 direction = "side"
 
 [node name="Street4" parent="YSort/TrafficController/Streets" index="0" instance=ExtResource( 4 )]
-position = Vector2( 295.739, -81.4121 )
-extents = Vector2( 25, 400 )
-direction = "down"
-
-[node name="Street3" parent="YSort/TrafficController/Streets" index="1" instance=ExtResource( 4 )]
-position = Vector2( 217.993, -82.9987 )
-extents = Vector2( 50, 400 )
+position = Vector2( 1794.11, 540 )
+extents = Vector2( 25, 500 )
 direction = "up"
 
+[node name="Street3" parent="YSort/TrafficController/Streets" index="1" instance=ExtResource( 4 )]
+position = Vector2( 1726.84, 540 )
+extents = Vector2( 25, 500 )
+direction = "down"
+
 [node name="ZebraCrossing" parent="YSort/TrafficController/ZebraCrossings" index="0" instance=ExtResource( 9 )]
-position = Vector2( 228.75, -25.768 )
+position = Vector2( 1758.94, 574.977 )
 extents = Vector2( 100, 45 )
 
 [node name="TrafficController2" parent="YSort" instance=ExtResource( 12 )]
+light_controlled = false
 
 [node name="TrafficLight" parent="YSort/TrafficController2/TrafficLights" index="0" instance=ExtResource( 13 )]
 position = Vector2( 31.4248, 63.548 )
 direction = "front"
 
 [node name="Street" parent="YSort/TrafficController2/Streets" index="0" instance=ExtResource( 4 )]
-position = Vector2( -0.127469, 112.222 )
-extents = Vector2( 400, 25 )
-direction = "left"
-
-[node name="Street2" parent="YSort/TrafficController2/Streets" index="1" instance=ExtResource( 4 )]
-position = Vector2( -0.431243, 169.138 )
-extents = Vector2( 400, 25 )
+position = Vector2( 1570, 640.229 )
+extents = Vector2( 600, 25 )
 direction = "right"
 
+[node name="Street2" parent="YSort/TrafficController2/Streets" index="1" instance=ExtResource( 4 )]
+position = Vector2( 1570, 705.695 )
+extents = Vector2( 600, 25 )
+direction = "left"
+
 [node name="ZebraCrossing" parent="YSort/TrafficController2/ZebraCrossings" index="0" instance=ExtResource( 9 )]
-position = Vector2( -20.2516, 140.364 )
+position = Vector2( 1665.19, 672.604 )
 extents = Vector2( 45, 100 )
+
+[node name="TrafficController3" parent="YSort" instance=ExtResource( 12 )]
+
+[node name="TrafficLight" parent="YSort/TrafficController3/TrafficLights" index="0" instance=ExtResource( 13 )]
+position = Vector2( 1614.35, 895.244 )
+direction = "front"
+
+[node name="TrafficLight2" parent="YSort/TrafficController3/TrafficLights" index="1" instance=ExtResource( 13 )]
+position = Vector2( 1616.8, 1084.77 )
+direction = "front"
+
+[node name="Street" parent="YSort/TrafficController3/Streets" index="0" instance=ExtResource( 4 )]
+position = Vector2( 1696.77, 962.422 )
+extents = Vector2( 375, 25 )
+direction = "left"
+
+[node name="Street2" parent="YSort/TrafficController3/Streets" index="1" instance=ExtResource( 4 )]
+position = Vector2( 1696.63, 1019.3 )
+extents = Vector2( 375, 25 )
+direction = "right"
+
+[node name="ZebraCrossing" parent="YSort/TrafficController3/ZebraCrossings" index="0" instance=ExtResource( 9 )]
+position = Vector2( 1597.89, 990.501 )
+extents = Vector2( 45, 80 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 visible = false
@@ -141,3 +178,5 @@ __meta__ = {
 [editable path="YSort/TrafficController"]
 
 [editable path="YSort/TrafficController2"]
+
+[editable path="YSort/TrafficController3"]

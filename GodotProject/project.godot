@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/traffic/Car.gd"
 }, {
+"base": "Area2D",
+"class": "class_car_interact_area",
+"language": "GDScript",
+"path": "res://src/traffic/CarArea.gd"
+}, {
+"base": "PathFollow2D",
+"class": "class_car_new",
+"language": "GDScript",
+"path": "res://src/traffic/CarNew.gd"
+}, {
 "base": "StaticBody2D",
 "class": "class_character",
 "language": "GDScript",
@@ -63,9 +73,16 @@ _global_script_classes=[ {
 "class": "class_zebra_crossing",
 "language": "GDScript",
 "path": "res://src/traffic/ZebraCrossing.gd"
+}, {
+"base": "Area2D",
+"class": "class_zebra_crossing_new",
+"language": "GDScript",
+"path": "res://src/traffic/ZebraCrossingNew.gd"
 } ]
 _global_script_class_icons={
 "class_car": "",
+"class_car_interact_area": "",
+"class_car_new": "",
 "class_character": "",
 "class_gummy": "",
 "class_item": "",
@@ -75,7 +92,8 @@ _global_script_class_icons={
 "class_skater": "",
 "class_street": "",
 "class_traffic_light": "",
-"class_zebra_crossing": ""
+"class_zebra_crossing": "",
+"class_zebra_crossing_new": ""
 }
 
 [application]
@@ -88,6 +106,11 @@ config/icon="res://icon.png"
 
 Flow="*res://src/autoload/Flow.tscn"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
+Director="*res://src/autoload/Director.tscn"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [display]
 
