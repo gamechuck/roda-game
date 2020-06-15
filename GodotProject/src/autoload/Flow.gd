@@ -1,3 +1,4 @@
+tool
 extends Node
 
 enum LIGHT_COLOR {RED, YELLOW_AFTER_RED, GREEN, YELLOW_AFTER_GREEN}
@@ -26,13 +27,10 @@ var CAR_MOVE_SPEED := 4.0
 var PLAYER_MOVE_SPEED := 2.0
 var GUMMY_MODIFIER := 0.5
 var BIKE_MODIFIER := 2.0
-var MAX_AMOUNT_OF_CARS := 10
-var MINIMUM_TIME_BETWEEN_CARS := 0.75
-var MAXIMUM_TIME_BETWEEN_CARS := 1.75
-var TRAFFIC_RED_TIME := 2.0
-var TRAFFIC_YELLOW_AFTER_RED_TIME := 2.0
-var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 2.0
-var TRAFFIC_GREEN_TIME := 2.0
+var TRAFFIC_RED_TIME := 10.0
+var TRAFFIC_YELLOW_AFTER_RED_TIME := 0.5
+var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 0.5
+var TRAFFIC_GREEN_TIME := 10.0
 var FALLBACK_INVENTORY_TEXTURE := "res://resources/fallback/inventory_texture.png"
 
 onready var _options_loader := $OptionsLoader
@@ -57,9 +55,10 @@ var character_data := {}
 var item_data := {}
 
 func _ready():
-	var _error : int = _options_loader.load_optionsCFG()
-	_error += _controls_loader.load_controlsJSON()
-	OS.window_fullscreen = start_in_full_screen
+	if not Engine.editor_hint:
+		var _error : int = _options_loader.load_optionsCFG()
+		_error += _controls_loader.load_controlsJSON()
+		OS.window_fullscreen = start_in_full_screen
 
 func load_data():
 	var _error = _data_loader.load_dataJSON()
@@ -68,7 +67,7 @@ func load_data():
 		_error = build_INK(STORY_PATH, INKLECATE_PATH)
 	var content = load_INK(Flow.STORY_PATH)
 	dialogue_UI.story = _story_resource.new(content)
-	
+
 	# Bind the getter functions so the story can access the game's state.
 	dialogue_UI.story.bind_external_function_general("has_item", inventory_overlay, "has_item")
 
@@ -83,6 +82,9 @@ func _observe_variables(variable_name, new_value):
 
 func _unhandled_input(event : InputEvent):
 ## Catch all unhandled input not caught be any other control nodes.
+	if Engine.editor_hint:
+		return
+
 	if event.is_action_pressed("toggle_full_screen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 

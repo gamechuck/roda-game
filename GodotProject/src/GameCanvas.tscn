@@ -1,32 +1,43 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Tilemap/DemoTilemap.tmx" type="PackedScene" id=2]
 [ext_resource path="res://src/GameCanvas.gd" type="Script" id=3]
-[ext_resource path="res://src/traffic/Street.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/SolidSnejk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/FenceTileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Props/Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Props/Bench.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/characters/Lizzy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/Watto.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/traffic/TrafficController.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/traffic/TrafficLight.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/characters/Debug.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/characters/BrokenBike.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/items/Fence.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/items/Bike.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/characters/SolidSlug.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Props/Bush.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/traffic/TrafficLoop.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=21]
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 90, 60 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 60, 90 )
+
+[sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 342.508, 731.198, 571.384, 95.9871, 1008.42, -53.0876, 1866.17, -57.6055, 1867.16, 71.2692, 457.51, 1628.4, 340.268, 1471.55, 2604.84, 82.973, 2604.84, 1621.9, 1892.32, 1625.15 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ), PoolIntArray( 4, 7, 8, 9, 5 ) ]
 outlines = [ PoolVector2Array( 2604.84, 1621.9, 2604.84, 82.973, 1867.16, 71.2692, 1866.17, -57.6055, 1008.42, -53.0876, 571.384, 95.9871, 342.508, 731.198, 340.268, 1471.55, 457.51, 1628.4, 1892.32, 1625.15 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 703.694, 1150.24 ]
+}
 
 [node name="DemoTilemap" parent="." instance=ExtResource( 2 )]
 
@@ -113,7 +124,7 @@ input_pickable = true
 position = Vector2( 1543.67, 440.643 )
 
 [node name="Debug" parent="YSort/Characters" instance=ExtResource( 14 )]
-position = Vector2( 1140.38, 52.5139 )
+position = Vector2( 1663.37, 126.513 )
 
 [node name="BrokenBike" parent="YSort/Characters" instance=ExtResource( 15 )]
 visible = false
@@ -124,71 +135,145 @@ collision_mask = 0
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 1428.67, 347.914 )
 
-[node name="TrafficController" parent="YSort" instance=ExtResource( 12 )]
-light_controlled = false
+[node name="TrafficLoops" type="YSort" parent="YSort"]
+position = Vector2( 1428.67, 347.914 )
 
-[node name="TrafficLight" parent="YSort/TrafficController/TrafficLights" index="0" instance=ExtResource( 13 )]
-position = Vector2( 155.97, -84.325 )
+[node name="TrafficLoop" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 8
+points = PoolVector2Array( 1150, 642, 1150, 65, 1725, 65, 1725, 642 )
+
+[node name="TrafficLoop2" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 1790, 642, 1790, 190, 1980, 190, 1980, 642 )
+
+[node name="TrafficLoop3" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 1406, 958, 1406, 706, 1725, 706, 1725, 958 )
+
+[node name="TrafficLoop4" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 3
+points = PoolVector2Array( 1793, 958, 1793, 706, 1980, 706, 1980, 958 )
+
+[node name="TrafficLoop5" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 1405, 1212, 1405, 1028, 1980, 1028, 1980, 1212 )
+
+[node name="TrafficLoop6" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 2046, 642, 2046, 194, 2240, 194, 2240, 642 )
+
+[node name="TrafficLoop7" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 2046, 1154, 2046, 705, 2240, 705, 2240, 1154 )
+
+[node name="TrafficLoop8" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 2296, 1154, 2296, 705, 2508, 705, 2508, 1154 )
+
+[node name="TrafficLoop9" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 4
+points = PoolVector2Array( 1922, 1470, 1922, 1212, 2508, 1212, 2508, 1470 )
+
+[node name="TrafficLoop10" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 5
+points = PoolVector2Array( 1346, 1154, 1346, 704, 960, 704, 960, 1154 )
+
+[node name="ZebraCrossings" type="YSort" parent="YSort"]
+position = Vector2( 1428.67, 347.914 )
+
+[node name="ZebraCrossing" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 338.8, 207.423 )
+extents = Vector2( 100, 60 )
+light_color = 3
+
+[node name="ZebraCrossing2" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 215.06, 317.177 )
+extents = Vector2( 60, 100 )
+light_color = 3
+
+[node name="ZebraCrossing3" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 194.17, 643.797 )
+extents = Vector2( 60, 90 )
+light_color = 2
+
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing3" index="0"]
+shape = SubResource( 1 )
+
+[node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="0" instance=ExtResource( 4 )]
+position = Vector2( 28, 75 )
+direction = "front"
+
+[node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="1" instance=ExtResource( 4 )]
+position = Vector2( 28, -90 )
+direction = "front"
+
+[node name="ZebraCrossing4" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 587.185, -97.1707 )
+extents = Vector2( 90, 60 )
+
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing4" index="0"]
+shape = SubResource( 2 )
+
+[node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="0" instance=ExtResource( 4 )]
+position = Vector2( 85.713, 50 )
 direction = "side"
 
-[node name="Street4" parent="YSort/TrafficController/Streets" index="0" instance=ExtResource( 4 )]
-position = Vector2( 1794.11, 540 )
-extents = Vector2( 25, 500 )
-direction = "up"
-
-[node name="Street3" parent="YSort/TrafficController/Streets" index="1" instance=ExtResource( 4 )]
-position = Vector2( 1726.84, 540 )
-extents = Vector2( 25, 500 )
-direction = "down"
-
-[node name="ZebraCrossing" parent="YSort/TrafficController/ZebraCrossings" index="0" instance=ExtResource( 9 )]
-position = Vector2( 1758.94, 574.977 )
-extents = Vector2( 100, 45 )
-
-[node name="TrafficController2" parent="YSort" instance=ExtResource( 12 )]
-light_controlled = false
-
-[node name="TrafficLight" parent="YSort/TrafficController2/TrafficLights" index="0" instance=ExtResource( 13 )]
-position = Vector2( 31.4248, 63.548 )
+[node name="TrafficLight3" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="1" instance=ExtResource( 4 )]
+position = Vector2( 117.634, 113.842 )
 direction = "front"
 
-[node name="Street" parent="YSort/TrafficController2/Streets" index="0" instance=ExtResource( 4 )]
-position = Vector2( 1570, 640.229 )
-extents = Vector2( 600, 25 )
-direction = "right"
+[node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="2" instance=ExtResource( 4 )]
+position = Vector2( -84.452, 50 )
+direction = "side"
 
-[node name="Street2" parent="YSort/TrafficController2/Streets" index="1" instance=ExtResource( 4 )]
-position = Vector2( 1570, 705.695 )
-extents = Vector2( 600, 25 )
-direction = "left"
+[node name="ZebraCrossing5" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 685.403, 316.572 )
+extents = Vector2( 60, 90 )
 
-[node name="ZebraCrossing" parent="YSort/TrafficController2/ZebraCrossings" index="0" instance=ExtResource( 9 )]
-position = Vector2( 1665.19, 672.604 )
-extents = Vector2( 45, 100 )
+[node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 579.982, 436.711 )
+extents = Vector2( 90, 60 )
 
-[node name="TrafficController3" parent="YSort" instance=ExtResource( 12 )]
+[node name="ZebraCrossing7" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 847.993, 439.097 )
+extents = Vector2( 90, 60 )
 
-[node name="TrafficLight" parent="YSort/TrafficController3/TrafficLights" index="0" instance=ExtResource( 13 )]
-position = Vector2( 1614.35, 895.244 )
+[node name="ZebraCrossing8" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 841.559, 728.416 )
+extents = Vector2( 90, 60 )
+
+[node name="ZebraCrossing9" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( 983, 826.212 )
+extents = Vector2( 60, 90 )
+
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing9" index="0"]
+shape = SubResource( 3 )
+
+[node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="0" instance=ExtResource( 4 )]
+position = Vector2( -24, 85 )
 direction = "front"
 
-[node name="TrafficLight2" parent="YSort/TrafficController3/TrafficLights" index="1" instance=ExtResource( 13 )]
-position = Vector2( 1616.8, 1084.77 )
+[node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="1" instance=ExtResource( 4 )]
+position = Vector2( -24, -75 )
 direction = "front"
 
-[node name="Street" parent="YSort/TrafficController3/Streets" index="0" instance=ExtResource( 4 )]
-position = Vector2( 1696.77, 962.422 )
-extents = Vector2( 375, 25 )
-direction = "left"
+[node name="ZebraCrossing10" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( -49.1283, 720.243 )
+extents = Vector2( 90, 60 )
 
-[node name="Street2" parent="YSort/TrafficController3/Streets" index="1" instance=ExtResource( 4 )]
-position = Vector2( 1696.63, 1019.3 )
-extents = Vector2( 375, 25 )
-direction = "right"
-
-[node name="ZebraCrossing" parent="YSort/TrafficController3/ZebraCrossings" index="0" instance=ExtResource( 9 )]
-position = Vector2( 1597.89, 990.501 )
-extents = Vector2( 45, 80 )
+[node name="ZebraCrossing11" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
+position = Vector2( -501.747, 720.543 )
+extents = Vector2( 90, 60 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 visible = false
@@ -197,13 +282,13 @@ __meta__ = {
 }
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 1 )
+navpoly = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[editable path="YSort/TrafficController"]
+[editable path="YSort/ZebraCrossings/ZebraCrossing3"]
 
-[editable path="YSort/TrafficController2"]
+[editable path="YSort/ZebraCrossings/ZebraCrossing4"]
 
-[editable path="YSort/TrafficController3"]
+[editable path="YSort/ZebraCrossings/ZebraCrossing9"]

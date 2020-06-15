@@ -11,8 +11,7 @@
 [ext_resource path="res://roda-assets/Props/street_lights_side_green.png" type="Texture" id=9]
 [ext_resource path="res://roda-assets/Props/street_lights_side_yellow.png" type="Texture" id=10]
 
-
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": false,
@@ -30,7 +29,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 9 ) ],
 "loop": false,
@@ -48,9 +47,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 5 ) ],
 "loop": false,
@@ -72,22 +71,24 @@ animations = [ {
 script = ExtResource( 4 )
 
 [node name="AnimatedFront" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "green"
 offset = Vector2( 0, -32 )
 
 [node name="AnimatedSide" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
+visible = false
+frames = SubResource( 2 )
 animation = "yellow"
 offset = Vector2( 10, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
 z_index = 1
 
 [node name="AnimatedUI" type="AnimatedSprite" parent="Node2D"]
+visible = false
 position = Vector2( -26, -47 )
-frames = SubResource( 1 )
+frames = SubResource( 4 )
 animation = "green"

@@ -12,17 +12,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "class_car",
 "language": "GDScript",
-"path": "res://src/traffic/Car.gd"
-}, {
-"base": "Area2D",
-"class": "class_car_interact_area",
-"language": "GDScript",
 "path": "res://src/traffic/CarArea.gd"
-}, {
-"base": "PathFollow2D",
-"class": "class_car_new",
-"language": "GDScript",
-"path": "res://src/traffic/CarNew.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_character",
@@ -74,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/traffic/ZebraCrossing.gd"
 }, {
-"base": "Area2D",
-"class": "class_zebra_crossing_new",
-"language": "GDScript",
-"path": "res://src/traffic/ZebraCrossingNew.gd"
-}, {
 "base": "Control",
 "class": "pause_tab",
 "language": "GDScript",
@@ -86,8 +71,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "class_car": "",
-"class_car_interact_area": "",
-"class_car_new": "",
 "class_character": "",
 "class_gummy": "",
 "class_item": "",
@@ -98,7 +81,6 @@ _global_script_class_icons={
 "class_street": "",
 "class_traffic_light": "",
 "class_zebra_crossing": "",
-"class_zebra_crossing_new": "",
 "pause_tab": ""
 }
 
