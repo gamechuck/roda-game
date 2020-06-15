@@ -78,6 +78,11 @@ _global_script_classes=[ {
 "class": "class_zebra_crossing_new",
 "language": "GDScript",
 "path": "res://src/traffic/ZebraCrossingNew.gd"
+}, {
+"base": "Control",
+"class": "pause_tab",
+"language": "GDScript",
+"path": "res://src/UI/PauseTab.gd"
 } ]
 _global_script_class_icons={
 "class_car": "",
@@ -93,7 +98,8 @@ _global_script_class_icons={
 "class_street": "",
 "class_traffic_light": "",
 "class_zebra_crossing": "",
-"class_zebra_crossing_new": ""
+"class_zebra_crossing_new": "",
+"pause_tab": ""
 }
 
 [application]
@@ -169,6 +175,10 @@ vnen.tiled_importer={
 [layer_names]
 
 2d_physics/layer_4="interact"
+
+[locale]
+
+translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po" )
 
 [rendering]
 

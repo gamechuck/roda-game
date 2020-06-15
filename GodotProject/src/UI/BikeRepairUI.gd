@@ -33,4 +33,5 @@ func _ready():
 func _on_mouse_pressed(highlight_rect : TextureRect):
 	if highlight_dict.has(highlight_rect):
 		var index : int = highlight_dict[highlight_rect].index
+		Flow.dialogue_UI.choice_choice_index(index)
 		print("pressed " + highlight_dict[highlight_rect].name)

@@ -2,7 +2,7 @@ extends Node
 
 onready var _tween := $Tween
 
-
+var active_minigame : Control = null 
 
 func _parse_command(raw_text : String) -> Dictionary:
 ## Parse the command (denoted by >>> in INK) and return as a dictionary.
@@ -91,15 +91,15 @@ func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
 	match minigame_id:
 		"bike_repair":
-			return
-			Flow.bike_repair_UI.visible = true
+			active_minigame = Flow.bike_repair_UI
+			active_minigame.visible = true
 
 func end_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
 	match minigame_id:
 		"bike_repair":
-			return
-			Flow.bike_repair_UI.visible = false
+			active_minigame.visible = false
+			active_minigame = null
 
 var external_setters : Dictionary = {
 	"PAN_CAMERA" : {

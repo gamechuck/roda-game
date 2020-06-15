@@ -1,0 +1,30 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+
+msgid "Hello world!"
+msgstr ""
+
+msgid "PAUSE_MESSAGE"
+msgstr ""
+
+msgid "LANGUAGE"
+msgstr ""
+
+msgid "Volume"
+msgstr ""
+
+msgid "Resume"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Back"
+msgstr ""

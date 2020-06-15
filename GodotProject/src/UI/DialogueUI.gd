@@ -12,7 +12,7 @@ func _ready():
 	
 	var index := 0
 	for child in _choice_vbox.get_children():
-		child.connect("choice_button_pressed", self, "_on_choice_button_pressed", [index])
+		child.connect("choice_button_pressed", self, "choice_choice_index", [index])
 		index += 1
 	
 	_choice_vbox.visible = false
@@ -81,6 +81,9 @@ func update_dialogue() -> bool:
 		else:
 			return update_dialogue()
 	elif story.current_choices.size() > 0:
+		if Director.active_minigame != null:
+			return true
+
 		_choice_vbox.visible = true
 
 		var index := 0
@@ -98,6 +101,6 @@ func update_dialogue() -> bool:
 func _stop_dialogue() -> void:
 	visible = false
 
-func _on_choice_button_pressed(index : int):
+func choice_choice_index(index : int):
 	story.choose_choice_index(index)
 	Flow.player.is_in_dialogue = update_dialogue()
