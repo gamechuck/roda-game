@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
@@ -6,6 +6,23 @@
 [ext_resource path="res://src/UI/SettingsPauseTab.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
 
 [node name="PauseUI" type="Control"]
 pause_mode = 2
@@ -36,6 +53,7 @@ __meta__ = {
 }
 
 [node name="MainTab" type="Control" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -108,7 +126,6 @@ size_flags_horizontal = 4
 text = "Quit"
 
 [node name="SettingsTab" type="Control" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -123,9 +140,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
-margin_top = 47.0
+margin_top = 49.0
 margin_right = 480.0
-margin_bottom = 67.0
+margin_bottom = 69.0
 alignment = 1
 
 [node name="FrontSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/HBoxContainer"]
@@ -151,9 +168,9 @@ margin_bottom = 20.0
 rect_min_size = Vector2( 32, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
-margin_top = 99.0
+margin_top = 101.0
 margin_right = 480.0
-margin_bottom = 165.0
+margin_bottom = 163.0
 custom_constants/separation = 16
 alignment = 1
 __meta__ = {
@@ -161,61 +178,71 @@ __meta__ = {
 }
 
 [node name="LanguageHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
-margin_right = 480.0
-margin_bottom = 30.0
+margin_left = 150.0
+margin_right = 330.0
+margin_bottom = 26.0
+size_flags_horizontal = 4
 alignment = 1
 
 [node name="PreviousButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_left = 149.0
-margin_right = 171.0
-margin_bottom = 30.0
+margin_right = 22.0
+margin_bottom = 26.0
 text = "<"
 
-[node name="LineEdit" type="LineEdit" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_left = 175.0
-margin_right = 305.0
-margin_bottom = 30.0
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
+margin_left = 26.0
+margin_top = 2.0
+margin_right = 154.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/normal = SubResource( 2 )
+text = "LANGUAGE"
 align = 1
-editable = false
-placeholder_text = "LANGUAGE"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NextButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_left = 309.0
-margin_right = 331.0
-margin_bottom = 30.0
+margin_left = 158.0
+margin_right = 180.0
+margin_bottom = 26.0
 text = ">"
 
 [node name="VolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
-margin_top = 46.0
+margin_top = 42.0
 margin_right = 480.0
-margin_bottom = 66.0
+margin_bottom = 62.0
 alignment = 1
 
 [node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
-margin_left = 107.0
-margin_right = 167.0
+margin_right = 172.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 64, 0 )
+size_flags_horizontal = 3
 text = "Volume"
+align = 2
+valign = 1
 
 [node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
-margin_left = 171.0
-margin_right = 299.0
+margin_left = 176.0
+margin_right = 304.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 128, 0 )
 value = 100.0
 
 [node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
-margin_left = 303.0
-margin_right = 373.0
+margin_left = 308.0
+margin_right = 480.0
 margin_bottom = 20.0
+size_flags_horizontal = 3
 text = "(100 %)"
-align = 1
 
 [node name="BackButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer"]
 margin_left = 192.0
-margin_top = 197.0
+margin_top = 195.0
 margin_right = 288.0
-margin_bottom = 223.0
+margin_bottom = 221.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 4
 text = "Back"

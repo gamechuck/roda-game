@@ -10,12 +10,12 @@ onready var highlight_dict := {
 		"name": "Tyres",
 		"index" : 0
 	},
-	_horn_highlight : {
-		"name": "Horn",
-		"index" : 1
-	},
 	_pedal_highlight : {
 		"name": "Pedal",
+		"index" : 1
+	},
+	_horn_highlight : {
+		"name": "Horn",
 		"index" : 2
 	},
 	_saddle_highlight : {

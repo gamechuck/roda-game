@@ -401,17 +401,35 @@ Maybe I should ask someone?
 
 = check_bike
 >>> BEGIN_MINIGAME: bike_repair
+~ temp checked_tyres = 0
+~ temp checked_pedals = 0
+~ temp checked_horn = 0
+~ temp checked_saddle = 0
 - (bike_repair)
-I should check to find out what's wrong with the bike!
+{checked_tyres and checked_pedals and checked_horn and checked_saddle:
+	- true: -> after_checking_bike
+}
+{figured_out_issue_with_bike:
+	- true: I should make sure the other parts of the bike work fine!
+	- false: I should check to find out what's wrong with the bike!
+}
 + Oh no! The tyres are flat!
-+ It seems that the brakes work!
+	~ figured_out_issue_with_bike = 1
+	~ checked_tyres = 1
 	-> bike_repair
-+ HONK! - It seems that the horn works!
++ It seems that the pedals are tightly screwed on!
+	~ checked_pedals = 1
+	-> bike_repair
++ HONK!
+	It seems that the horn works!
+	~ checked_horn = 1
 	-> bike_repair
 + It seems the seat is tight!
+	~ checked_saddle = 1
 	-> bike_repair
--
-~ figured_out_issue_with_bike = 1
+= after_checking_bike
+It seems that only the tyres are broken...
+I should find a way to fix them!
 >>> END_MINIGAME: bike_repair
 -> END
 

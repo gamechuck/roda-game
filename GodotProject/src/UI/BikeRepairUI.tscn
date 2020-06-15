@@ -84,22 +84,6 @@ polygon = PoolVector2Array( 280.501, 68.1475, 262.06, 95.6477, 265.295, 128.324,
 position = Vector2( -142.996, -0.397217 )
 polygon = PoolVector2Array( 280.501, 68.1475, 262.06, 95.6477, 265.295, 128.324, 279.531, 149.677, 309.619, 161.324, 343.59, 152.266, 359.443, 129.942, 363.325, 106.324, 354.913, 82.0594, 329.354, 62.324, 301.531, 61.3534 )
 
-[node name="HornHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-texture = ExtResource( 4 )
-stretch_mode = 4
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area2D" type="Area2D" parent="VBoxContainer/BackgroundRect/Highlights/HornHighlight"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/BackgroundRect/Highlights/HornHighlight/Area2D"]
-polygon = PoolVector2Array( 296.56, 8.03622, 289.391, 7.49511, 283.033, 11.0123, 281.139, 18.9935, 285.603, 23.8634, 293.043, 26.4336, 298.59, 21.699, 307.382, 25.622, 311.847, 20.4815, 311.576, 11.2828, 306.977, 6.41291, 299.672, 10.4712 )
-
 [node name="PedalHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,6 +99,22 @@ __meta__ = {
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/BackgroundRect/Highlights/PedalHighlight/Area2D"]
 polygon = PoolVector2Array( 228.406, 102.728, 249.87, 103.157, 260.602, 105.948, 261.675, 116.894, 250.299, 119.041, 232.913, 117.538, 224.113, 113.889, 223.899, 106.592 )
+
+[node name="HornHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+stretch_mode = 4
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/BackgroundRect/Highlights/HornHighlight"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/BackgroundRect/Highlights/HornHighlight/Area2D"]
+polygon = PoolVector2Array( 296.56, 8.03622, 289.391, 7.49511, 283.033, 11.0123, 281.139, 18.9935, 285.603, 23.8634, 293.043, 26.4336, 298.59, 21.699, 307.382, 25.622, 311.847, 20.4815, 311.576, 11.2828, 306.977, 6.41291, 299.672, 10.4712 )
 
 [node name="SaddleHighlight" type="TextureRect" parent="VBoxContainer/BackgroundRect/Highlights"]
 anchor_right = 1.0
