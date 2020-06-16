@@ -18,14 +18,14 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "red",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "red",
 "speed": 5.0
 } ]
 
@@ -36,14 +36,14 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": false,
-"name": "red",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": false,
 "name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "red",
 "speed": 5.0
 } ]
 
@@ -56,14 +56,14 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": false,
-"name": "red",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
 "name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "red",
 "speed": 5.0
 } ]
 
@@ -77,6 +77,7 @@ offset = Vector2( 0, -32 )
 
 [node name="AnimatedSide" type="AnimatedSprite" parent="."]
 visible = false
+scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
 animation = "yellow"
 offset = Vector2( 10, -32 )
@@ -85,6 +86,7 @@ offset = Vector2( 10, -32 )
 shape = SubResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
+scale = Vector2( -1, 1 )
 z_index = 1
 
 [node name="AnimatedUI" type="AnimatedSprite" parent="Node2D"]

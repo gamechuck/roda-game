@@ -19,14 +19,14 @@
 [ext_resource path="res://src/traffic/TrafficLoop.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=21]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 60, 90 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 60, 100 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 90, 60 )
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 90, 50 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 60, 90 )
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 60, 100 )
 
 [sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 342.508, 731.198, 571.384, 95.9871, 1008.42, -53.0876, 1866.17, -57.6055, 1867.16, 71.2692, 457.51, 1628.4, 340.268, 1471.55, 2604.84, 82.973, 2604.84, 1621.9, 1892.32, 1625.15 )
@@ -35,9 +35,6 @@ outlines = [ PoolVector2Array( 2604.84, 1621.9, 2604.84, 82.973, 1867.16, 71.269
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 703.694, 1150.24 ]
-}
 
 [node name="DemoTilemap" parent="." instance=ExtResource( 2 )]
 
@@ -186,28 +183,31 @@ points = PoolVector2Array( 1922, 1470, 1922, 1212, 2508, 1212, 2508, 1470 )
 [node name="TrafficLoop10" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
 position = Vector2( -1428.67, -347.914 )
 amount_of_cars = 5
-points = PoolVector2Array( 1346, 1154, 1346, 704, 960, 704, 960, 1154 )
+points = PoolVector2Array( 1346, 704, 1346, 1154, 960, 1154, 960, 704 )
+
+[node name="TrafficLoop11" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
+position = Vector2( -1428.67, -347.914 )
+amount_of_cars = 24
+points = PoolVector2Array( 1085, 642, 890, 642, 890, 1212, 1860, 1212, 1860, 1533, 2595, 1533, 2595, 640, 2300, 640, 2300, 130, 1790, 130, 1790, 0, 1088, 0 )
 
 [node name="ZebraCrossings" type="YSort" parent="YSort"]
 position = Vector2( 1428.67, 347.914 )
 
 [node name="ZebraCrossing" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 338.8, 207.423 )
+position = Vector2( 326.341, 199.599 )
 extents = Vector2( 100, 60 )
-light_color = 3
 
 [node name="ZebraCrossing2" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 215.06, 317.177 )
+position = Vector2( 205.616, 317.284 )
 extents = Vector2( 60, 100 )
-light_color = 3
 
 [node name="ZebraCrossing3" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 194.17, 643.797 )
-extents = Vector2( 60, 90 )
+position = Vector2( 191.767, 644.818 )
+extents = Vector2( 60, 100 )
 light_color = 2
 
-[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing3" index="0"]
-shape = SubResource( 1 )
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing3/InteractArea" index="0"]
+shape = SubResource( 5 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="0" instance=ExtResource( 4 )]
 position = Vector2( 28, 75 )
@@ -218,61 +218,57 @@ position = Vector2( 28, -90 )
 direction = "front"
 
 [node name="ZebraCrossing4" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 587.185, -97.1707 )
-extents = Vector2( 90, 60 )
+position = Vector2( 589.007, -77.3522 )
+extents = Vector2( 90, 50 )
 
-[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing4" index="0"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing4/InteractArea" index="0"]
+shape = SubResource( 6 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="0" instance=ExtResource( 4 )]
-position = Vector2( 85.713, 50 )
-direction = "side"
+position = Vector2( 80, 30 )
+direction = "left"
 
-[node name="TrafficLight3" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="1" instance=ExtResource( 4 )]
-position = Vector2( 117.634, 113.842 )
-direction = "front"
-
-[node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="2" instance=ExtResource( 4 )]
-position = Vector2( -84.452, 50 )
-direction = "side"
+[node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="1" instance=ExtResource( 4 )]
+position = Vector2( -80, 30 )
+direction = "right"
 
 [node name="ZebraCrossing5" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 685.403, 316.572 )
+position = Vector2( 712.163, 319.081 )
 extents = Vector2( 60, 90 )
 
 [node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 579.982, 436.711 )
+position = Vector2( 576, 446.238 )
 extents = Vector2( 90, 60 )
 
 [node name="ZebraCrossing7" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 847.993, 439.097 )
-extents = Vector2( 90, 60 )
+position = Vector2( 839.19, 447 )
+extents = Vector2( 100, 60 )
 
 [node name="ZebraCrossing8" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 841.559, 728.416 )
-extents = Vector2( 90, 60 )
+position = Vector2( 841.464, 710.638 )
+extents = Vector2( 100, 60 )
 
 [node name="ZebraCrossing9" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 983, 826.212 )
-extents = Vector2( 60, 90 )
+position = Vector2( 977.156, 830.684 )
+extents = Vector2( 60, 100 )
 
-[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing9" index="0"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing9/InteractArea" index="0"]
+shape = SubResource( 7 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="0" instance=ExtResource( 4 )]
-position = Vector2( -24, 85 )
+position = Vector2( -22, 86 )
 direction = "front"
 
 [node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="1" instance=ExtResource( 4 )]
-position = Vector2( -24, -75 )
+position = Vector2( -22, -86 )
 direction = "front"
 
 [node name="ZebraCrossing10" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( -49.1283, 720.243 )
-extents = Vector2( 90, 60 )
+position = Vector2( -53.7063, 711.661 )
+extents = Vector2( 100, 60 )
 
 [node name="ZebraCrossing11" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( -501.747, 720.543 )
+position = Vector2( -500, 720 )
 extents = Vector2( 90, 60 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]

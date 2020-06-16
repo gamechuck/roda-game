@@ -7,8 +7,8 @@
 
 [node name="Item" type="Area2D"]
 input_pickable = false
-collision_layer = 8
-collision_mask = 8
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

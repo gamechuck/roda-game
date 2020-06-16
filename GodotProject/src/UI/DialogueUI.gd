@@ -6,13 +6,14 @@ onready var _portrait_rect := $PortraitRect
 onready var _choice_vbox := $ChoiceVBox
 
 var story : Object
+var is_waiting_for_choice := false
 
 func _ready():
 	Flow.dialogue_UI = self
-	
+
 	var index := 0
 	for child in _choice_vbox.get_children():
-		child.connect("choice_button_pressed", self, "choice_choice_index", [index])
+		child.connect("choice_button_pressed", self, "update_dialogue", [index])
 		index += 1
 	
 	_choice_vbox.visible = false
@@ -62,7 +63,15 @@ func _start_dialogue(node : Node2D) -> bool:
 		return update_dialogue()
 	return false
 
-func update_dialogue() -> bool:
+func update_dialogue(choice_index : int = -1) -> bool:
+	if is_waiting_for_choice:
+		if choice_index != -1 and choice_index < story.current_choices.size():
+			story.choose_choice_index(choice_index)
+			is_waiting_for_choice = false
+			return update_dialogue()
+		else:
+			return true
+
 	if story.can_continue:
 		_choice_vbox.visible = false
 
@@ -81,16 +90,16 @@ func update_dialogue() -> bool:
 		else:
 			return update_dialogue()
 	elif story.current_choices.size() > 0:
-		if Director.active_minigame != null:
-			return true
+		is_waiting_for_choice = true
 
-		_choice_vbox.visible = true
-
-		var index := 0
-		for child in _choice_vbox.get_children():
-			var choice = story.current_choices[index]
-			child.text = choice.text
-			index += 1
+		if Director.active_minigame == null:
+			_choice_vbox.visible = true
+	
+			var index := 0
+			for child in _choice_vbox.get_children():
+				var choice = story.current_choices[index]
+				child.text = choice.text
+				index += 1
 
 		#story.choose_choice_index(0)
 		return true
@@ -100,7 +109,3 @@ func update_dialogue() -> bool:
 
 func _stop_dialogue() -> void:
 	visible = false
-
-func choice_choice_index(index : int):
-	story.choose_choice_index(index)
-	Flow.player.is_in_dialogue = update_dialogue()

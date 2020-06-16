@@ -6,7 +6,7 @@ onready var _animated_UI := $Node2D/AnimatedUI
 onready var _animated_front := $AnimatedFront
 onready var _animated_side := $AnimatedSide
 
-export(String, "front", "side") var direction setget set_direction
+export(String, "front", "left", "right") var direction = "front" setget set_direction
 var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
 
 func set_direction(value : String):
@@ -16,10 +16,20 @@ func set_direction(value : String):
 			$Node2D/AnimatedUI.visible = false
 			$AnimatedFront.visible = true
 			$AnimatedSide.visible = false
-		"side":
+		"left":
 			$Node2D/AnimatedUI.visible = true
 			$AnimatedFront.visible = false
 			$AnimatedSide.visible = true
+
+			$AnimatedSide.scale.x = -1
+			$Node2D.scale.x = -1 
+		"right":
+			$Node2D/AnimatedUI.visible = true
+			$AnimatedFront.visible = false
+			$AnimatedSide.visible = true
+
+			$AnimatedSide.scale.x = 1
+			$Node2D.scale.x = 1 
 
 func set_light_color(value : int):
 	light_color = value

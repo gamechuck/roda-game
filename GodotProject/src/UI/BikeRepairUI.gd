@@ -26,12 +26,13 @@ onready var highlight_dict := {
 
 func _ready():
 	Flow.bike_repair_UI = self
-	
+
 	for key in highlight_dict.keys():
 		key.connect("mouse_pressed", self, "_on_mouse_pressed")
 
 func _on_mouse_pressed(highlight_rect : TextureRect):
 	if highlight_dict.has(highlight_rect):
 		var index : int = highlight_dict[highlight_rect].index
-		Flow.dialogue_UI.choice_choice_index(index)
+		if Flow.dialogue_UI.is_waiting_for_choice:
+			Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(index)
 		print("pressed " + highlight_dict[highlight_rect].name)

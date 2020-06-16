@@ -1,9 +1,10 @@
 tool
-extends Area2D
+extends YSort
 class_name class_zebra_crossing
 
 onready var _timer := $Timer
 onready var _traffic_lights_container := $Lights
+onready var _interact_area := $InteractArea
 
 export var extents := Vector2.ZERO setget set_extents
 export var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
@@ -15,7 +16,7 @@ signal movement_is_allowed
 
 func set_extents(value : Vector2):
 	extents = value
-	var shape : RectangleShape2D = $CollisionShape2D.shape
+	var shape : RectangleShape2D = $InteractArea/CollisionShape2D.shape
 	shape.extents = extents
 
 func set_light_color(value : int):
@@ -25,14 +26,14 @@ func set_light_color(value : int):
 func _ready():
 	var shape := RectangleShape2D.new()
 	shape.extents = extents
-	$CollisionShape2D.shape = shape
+	$InteractArea/CollisionShape2D.shape = shape
 
 	update_lights()
 
 	if not Engine.editor_hint:
 		if not has_traffic_lights:
-			var _success := connect("area_shape_entered", self, "_on_area_shape_entered")
-			_success = connect("area_shape_exited", self, "_on_area_shape_exited")
+			var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
+			_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
 		else:
 			var _error := _timer.connect("timeout", self, "_on_timer_timeout")
 			_timer.wait_time = get_wait_time()

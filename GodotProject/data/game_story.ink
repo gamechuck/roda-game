@@ -19,6 +19,7 @@ VAR gave_back_bike = 0
 
 // BrokenBike
 VAR fixed_bike = 0
+LIST checked_components = tyres, pedals, horn, saddle
 
 VAR used_item = "Bush"
 VAR conv_type = 0
@@ -401,12 +402,8 @@ Maybe I should ask someone?
 
 = check_bike
 >>> BEGIN_MINIGAME: bike_repair
-~ temp checked_tyres = 0
-~ temp checked_pedals = 0
-~ temp checked_horn = 0
-~ temp checked_saddle = 0
 - (bike_repair)
-{checked_tyres and checked_pedals and checked_horn and checked_saddle:
+{checked_components == LIST_ALL(checked_components):
 	- true: -> after_checking_bike
 }
 {figured_out_issue_with_bike:
@@ -415,17 +412,17 @@ Maybe I should ask someone?
 }
 + Oh no! The tyres are flat!
 	~ figured_out_issue_with_bike = 1
-	~ checked_tyres = 1
+	~ checked_components += tyres
 	-> bike_repair
 + It seems that the pedals are tightly screwed on!
-	~ checked_pedals = 1
+	~ checked_components += pedals
 	-> bike_repair
 + HONK!
 	It seems that the horn works!
-	~ checked_horn = 1
+	~ checked_components += horn
 	-> bike_repair
 + It seems the seat is tight!
-	~ checked_saddle = 1
+	~ checked_components += saddle
 	-> bike_repair
 = after_checking_bike
 It seems that only the tyres are broken...

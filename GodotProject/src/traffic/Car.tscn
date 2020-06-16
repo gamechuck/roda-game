@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/cars/PurpleCar.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://resources/cars/BlueCar.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/traffic/Car.gd" type="Script" id=2]
-[ext_resource path="res://src/traffic/CarArea.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 70, 25 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -17,35 +16,34 @@ script = ExtResource( 2 )
 repeat = true
 playback/repeat = true
 
-[node name="InteractArea" type="Area2D" parent="."]
-input_pickable = false
-collision_layer = 8
-collision_mask = 8
-script = ExtResource( 3 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="InteractArea"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "left"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-shape = SubResource( 1 )
+[node name="InteractArea" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 2
+collision_mask = 2
 
-[node name="Back" type="Area2D" parent="InteractArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource( 3 )
+
+[node name="BackBumper" type="Area2D" parent="."]
 position = Vector2( -48, 0 )
 input_pickable = false
-collision_layer = 8
-collision_mask = 8
+collision_layer = 4
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea/Back"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackBumper"]
 self_modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 2 )
 
-[node name="Front" type="Area2D" parent="InteractArea"]
+[node name="FrontBumper" type="Area2D" parent="."]
 position = Vector2( 48, 0 )
 input_pickable = false
-collision_layer = 8
-collision_mask = 8
+collision_layer = 4
+collision_mask = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractArea/Front"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontBumper"]
 self_modulate = Color( 1, 1, 0, 1 )
 shape = SubResource( 2 )

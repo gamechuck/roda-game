@@ -101,7 +101,8 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
 
-	if area is class_car:
+	var parent = area.get_parent()
+	if parent is class_car:
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
@@ -109,7 +110,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
-	if area.get_parent() is class_character:
+	if parent is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
 	if area is class_item:
@@ -123,12 +124,9 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
-
-	if area is class_car:
-		pass
-	if area is class_skater:
-		pass
-	if area.get_parent() is class_character:
+	
+	var parent = area.get_parent()
+	if parent is class_character:
 		print("Player exited a character's interact area!")
 		if _overlapping_character == area.get_parent():
 			_overlapping_character = null

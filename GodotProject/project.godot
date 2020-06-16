@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
+"base": "PathFollow2D",
 "class": "class_car",
 "language": "GDScript",
-"path": "res://src/traffic/CarArea.gd"
+"path": "res://src/traffic/Car.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_character",
@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/traffic/TrafficLight.gd"
 }, {
-"base": "Area2D",
+"base": "YSort",
 "class": "class_zebra_crossing",
 "language": "GDScript",
 "path": "res://src/traffic/ZebraCrossing.gd"
@@ -95,10 +95,6 @@ config/icon="res://icon.png"
 Flow="*res://src/autoload/Flow.tscn"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 Director="*res://src/autoload/Director.tscn"
-
-[debug]
-
-settings/stdout/verbose_stdout=true
 
 [display]
 
@@ -156,7 +152,8 @@ vnen.tiled_importer={
 
 [layer_names]
 
-2d_physics/layer_4="interact"
+2d_physics/layer_2="interact"
+2d_physics/layer_3="bumping"
 
 [locale]
 
