@@ -8,6 +8,8 @@ onready var _game_camera := _game_canvas.get_node("YSort/Player/GameCamera")
 func _ready():
 	randomize()
 
+	propagate_call("update")
+
 	_editor_camera.current = Flow.is_in_editor_mode
 	_game_camera.current = not Flow.is_in_editor_mode
 

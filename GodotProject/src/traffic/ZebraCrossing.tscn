@@ -3,6 +3,7 @@
 [ext_resource path="res://src/traffic/ZebraCrossing.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 0, 0 )
 
 [node name="ZebraCrossing" type="YSort"]
 script = ExtResource( 1 )
