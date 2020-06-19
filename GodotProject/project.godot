@@ -96,6 +96,10 @@ Flow="*res://src/autoload/Flow.tscn"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 Director="*res://src/autoload/Director.tscn"
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/size/width=480
