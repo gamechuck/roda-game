@@ -40,7 +40,7 @@ func get_recognized_extensions():
 		return ["tsx"]
 
 func get_import_order():
-	return 200
+	return 100
 
 func get_save_extension():
 	return "res"
