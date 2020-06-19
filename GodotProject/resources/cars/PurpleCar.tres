@@ -4,29 +4,29 @@
 [ext_resource path="res://roda-assets/Cars/purple_down.png" type="Texture" id=2]
 [ext_resource path="res://roda-assets/Cars/purple_left.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 160, 100 )
+region = Rect2( 0, 0, 158, 100 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 3 )
-region = Rect2( 160, 0, 160, 100 )
+region = Rect2( 158, 0, 158, 100 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 3 )
-region = Rect2( 320, 0, 160, 100 )
+region = Rect2( 316, 0, 158, 100 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 3 )
-region = Rect2( 480, 0, 160, 100 )
+region = Rect2( 474, 0, 158, 100 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 0, 160, 100 )
+region = Rect2( 632, 0, 158, 100 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 3 )
-region = Rect2( 800, 0, 160, 100 )
+region = Rect2( 790, 0, 158, 100 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
@@ -78,7 +78,7 @@ region = Rect2( 640, 0, 128, 100 )
 
 [resource]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
 "name": "left",
 "speed": 5.0

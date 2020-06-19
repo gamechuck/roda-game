@@ -1,43 +1,72 @@
-extends PanelContainer
+extends TextureRect
 class_name class_item_slot
 
-var is_empty := true
 var item_id := ""
 var item_count := 0
+var pressed : bool = false setget set_pressed, get_pressed
 
-var _is_being_dragged := false
-var _mouse_offset := Vector2.ZERO
-
-onready var _sprite = $Sprite
+onready var _texture_button = $TextureButton
 onready var _count_label = $Node2D/CountLabel
 
+signal pressed
+
 func _ready():
-	_sprite.texture = null
-	_count_label.visible = false
+	var _error : int = _texture_button.connect("pressed", self, "_on_button_pressed")
+	remove_item()
 
-func add_item(id : String, data : Dictionary):
-	is_empty = false
-	item_id = id
-	item_count = 0
-	increment_item()
+func empty() -> bool:
+	if item_id.empty():
+		return true
+	else:
+		return false
 
-	var texture_path : String = data.get("INVENTORY_TEXTURE", Flow.FALLBACK_INVENTORY_TEXTURE)
-	var texture_exists : bool = ResourceLoader.exists(texture_path)
-	if not texture_exists:
-		texture_path = Flow.FALLBACK_INVENTORY_TEXTURE
-	_sprite.texture = load(texture_path)
+func set_pressed(value : bool):
+	pressed = value
+	_texture_button.pressed = value
 
-func increment_item():
+func get_pressed() -> bool:
+	return pressed
+
+func _on_button_pressed():
+	if not empty():
+		pressed = _texture_button.pressed
+		emit_signal("pressed", pressed)
+
+func increase_item_count():
 	item_count += 1
 	_update_count_label()
 
-func remove_item():
+func decrease_item_count():
 	item_count -= 1
 	_update_count_label()
+
 	if item_count == 0:
-		item_id = ""
-		_sprite.texture = null
-		is_empty = true
+		remove_item()
+
+func add_item(id : String, data : Dictionary):
+	item_id = id
+	item_count = 1
+
+	var textures : Dictionary = data.get("TEXTURES", {})
+	var texture_normal_path : String = textures.get("TEXTURE_NORMAL", Flow.FALLBACK_INVENTORY_TEXTURE)
+	var	texture_pressed_path : String = textures.get("TEXTURE_PRESSED", Flow.FALLBACK_INVENTORY_TEXTURE)
+
+	if not ResourceLoader.exists(texture_normal_path):
+		texture_normal_path = Flow.FALLBACK_INVENTORY_TEXTURE
+	if not ResourceLoader.exists(texture_pressed_path):
+		texture_pressed_path = Flow.FALLBACK_INVENTORY_TEXTURE
+
+	_texture_button.texture_normal = load(texture_normal_path)
+	_texture_button.texture_pressed = load(texture_pressed_path)
+
+func remove_item():
+	item_id = ""
+	item_count = 0
+
+	self.pressed = false
+	_texture_button.texture_normal = null
+	_texture_button.texture_pressed = null
+	_update_count_label()
 
 func _update_count_label():
 	_count_label.text = "{0} x".format([item_count])
@@ -45,24 +74,3 @@ func _update_count_label():
 		_count_label.visible = true
 	else:
 		_count_label.visible = false
-
-func _gui_input(event):
-	if is_empty:
-		return
-
-	if _is_being_dragged:
-		if event.is_action_released("left_mouse_button"):
-			_is_being_dragged = false
-			#Flow.item_being_dragged = null
-	elif event.is_action_pressed("left_mouse_button"):
-		_is_being_dragged = true
-		Flow.item_being_dragged = self
-		_mouse_offset = get_local_mouse_position()
-		set_process(true)
-
-func _process(_delta):
-	if _is_being_dragged:
-		_sprite.position = get_local_mouse_position() - _mouse_offset
-	else:
-		_sprite.position = Vector2.ZERO
-		set_process(false)

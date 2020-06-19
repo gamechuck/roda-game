@@ -47,9 +47,9 @@ var game_canvas : Node2D = null
 
 var player : KinematicBody2D = null
 
-var item_being_dragged : class_item_slot = null
 var active_character : class_character = null
 var active_item : class_item = null
+var active_item_slot : class_item_slot = null
 
 var character_data := {}
 var item_data := {}

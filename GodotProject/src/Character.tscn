@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://roda-assets/Characters/Snake/Solid_snake.png" type="Texture" id=1]
+[ext_resource path="res://roda-assets/Characters/SoldSnejk/solid_snejk.png" type="Texture" id=1]
 [ext_resource path="res://src/Character.gd" type="Script" id=2]
 
 [sub_resource type="SpriteFrames" id=1]

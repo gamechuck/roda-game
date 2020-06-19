@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Item.gd"
 }, {
-"base": "PanelContainer",
+"base": "TextureRect",
 "class": "class_item_slot",
 "language": "GDScript",
 "path": "res://src/UI/ItemSlot.gd"

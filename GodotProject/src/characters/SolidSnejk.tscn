@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://audio/Chicken.wav" type="AudioStream" id=2]
-[ext_resource path="res://roda-assets/Characters/Snake/Solid_snake.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/Characters/SoldSnejk/solid_snejk.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

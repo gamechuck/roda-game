@@ -78,21 +78,34 @@ func _unhandled_input(event):
 	if event.is_action_pressed("toggle_inventory"):
 		Flow.inventory_overlay.toggle_inventory()
 
-	if event.is_action_released("left_mouse_button"):
-		# Reset the item that is being dragged!
-		Flow.item_being_dragged = null
-
 	if event.is_action_pressed("left_mouse_button"):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 			Flow.active_character = null
 			Flow.active_item = null
 		elif Flow.active_character != null:
-			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_character)
+			if Flow.active_item_slot != null:
+				print("start_interaction")
+				var item_slot : class_item_slot = Flow.active_item_slot
+				var item_id = item_slot.item_id
+				is_in_dialogue = \
+					Flow.dialogue_UI.start_use_item_dialogue(Flow.active_character, item_id)
+				Flow.active_item_slot.pressed = false
+				Flow.active_item_slot = null
+			else:
+				is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_character)
 			Flow.active_character = null
 		elif Flow.active_item != null:
-			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_item)
-			Flow.inventory_overlay.add_item(Flow.active_item)
+			if Flow.active_item_slot != null:
+				var item_slot : class_item_slot = Flow.active_item_slot
+				var item_id = item_slot.item_id
+				is_in_dialogue = \
+					Flow.dialogue_UI.start_use_item_dialogue(Flow.active_item, item_id)
+				Flow.active_item_slot.pressed = false
+				Flow.active_item_slot = null
+			else:
+				is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_item)
+				Flow.inventory_overlay.add_item(Flow.active_item)
 			Flow.active_item = null
 		else:
 			emit_signal("nav_path_requested")

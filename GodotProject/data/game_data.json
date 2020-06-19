@@ -23,7 +23,7 @@
                     268,
                     -8
                 ],
-                "TEXTURE": "res://roda-assets/Characters/Portraits/Snek.png"
+                "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png"
             }
         },
         "Lizzy": {
@@ -37,7 +37,7 @@
                     292,
                     30
                 ],
-                "TEXTURE": "res://roda-assets/Characters/Portraits/Lizard.png"
+                "TEXTURE": "res://roda-assets/Portraits/lizzy.png"
             }
         },
         "Watto": {
@@ -51,7 +51,7 @@
                     300,
                     32
                 ],
-                "TEXTURE": "res://roda-assets/Characters/Portraits/Waddo.png"
+                "TEXTURE": "res://roda-assets/Portraits/watto.png"
             }
         },
         "SolidSlug": {
@@ -65,7 +65,7 @@
                     244,
                     -16
                 ],
-                "TEXTURE": "res://roda-assets/Characters/Portraits/Slug.png"
+                "TEXTURE": "res://roda-assets/Portraits/solid_slug.png"
             }
         },
         "BrokenBike": {
@@ -82,21 +82,30 @@
                     268,
                     -8
                 ],
-                "TEXTURE": "res://roda-assets/Characters/Portraits/Snek.png"
+                "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png"
             }
         }
     },
     "ITEMS": {
         "Fence": {
             "KNOT": "conv_fence",
-            "INVENTORY_TEXTURE": "res://roda-assets/Placeholders/fence_icon.png",
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/fence_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/fence_pressed.png"
+            }
         },
         "Pump": {
-            "INVENTORY_TEXTURE": "res://roda-assets/Placeholders/pump_icon.png"
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/pump_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/pump_pressed.png"
+            }
         },
         "Bike": {
             "KNOT": "conv_bike",
-            "INVENTORY_TEXTURE": "res://roda-assets/Props/Bike.png"
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/bike_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/bike_pressed.png"
+            }
         }
     }
 }

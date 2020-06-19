@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/GameCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/editor/EditorCamera.gd" type="Script" id=2]
@@ -8,13 +8,18 @@
 [ext_resource path="res://src/UI/DialogueUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/InventoryOverlay.gd" type="Script" id=8]
-[ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://roda-assets/UI/settings_normal.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/ItemSlot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/BikeRepairUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/SettingsOverlay.gd" type="Script" id=12]
-[ext_resource path="res://roda-assets/UI/Inventory background.png" type="Texture" id=13]
-[ext_resource path="res://roda-assets/UI/Inventory icon.png" type="Texture" id=14]
+[ext_resource path="res://roda-assets/UI/Inventory/inventory_background.png" type="Texture" id=13]
+[ext_resource path="res://roda-assets/UI/Inventory/inventory_normal.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/TransitionsUI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://roda-assets/UI/settings_pressed.png" type="Texture" id=16]
+[ext_resource path="res://roda-assets/UI/Inventory/inventory_pressed.png" type="Texture" id=17]
+[ext_resource path="res://roda-assets/UI/Inventory/inventory_opened_background.png" type="Texture" id=18]
+[ext_resource path="res://roda-assets/UI/Inventory/scroll_up.png" type="Texture" id=19]
+[ext_resource path="res://roda-assets/UI/Inventory/scroll_down.png" type="Texture" id=20]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -84,40 +89,63 @@ margin_right = 32.0
 margin_bottom = 222.0
 rect_min_size = Vector2( 32, 32 )
 texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 16 )
 expand = true
 
 [node name="InventoryOverlay" type="MarginContainer" parent="UICanvas/GameOverlay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 16
-custom_constants/margin_top = 24
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 24
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/GameOverlay/InventoryOverlay"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 464.0
-margin_bottom = 246.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 478.0
+margin_bottom = 268.0
 mouse_filter = 2
 alignment = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer"]
-margin_left = 378.0
-margin_right = 448.0
-margin_bottom = 222.0
+margin_left = 406.0
+margin_right = 476.0
+margin_bottom = 266.0
 mouse_filter = 2
+size_flags_horizontal = 8
+custom_constants/separation = -2
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="InventoryButton" type="TextureButton" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
 margin_right = 70.0
 margin_bottom = 70.0
+toggle_mode = true
 texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryButton"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 42.0
+margin_right = 68.0
+margin_bottom = 266.0
+size_flags_horizontal = 4
+texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -129,51 +157,62 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopSpacer" type="Control" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
-margin_top = 74.0
+[node name="InventoryVBox" type="VBoxContainer" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
+margin_top = 68.0
 margin_right = 70.0
-margin_bottom = 74.0
+margin_bottom = 264.0
 mouse_filter = 2
 size_flags_vertical = 3
+custom_constants/separation = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryVBox" type="VBoxContainer" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
-margin_top = 78.0
+[node name="UpButton" type="TextureButton" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox"]
+margin_left = 4.0
+margin_right = 66.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 19 )
+
+[node name="Slots" type="VBoxContainer" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox"]
+margin_top = 16.0
 margin_right = 70.0
-margin_bottom = 218.0
-mouse_filter = 2
+margin_bottom = 180.0
+custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemSlot" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
-margin_left = 19.0
-margin_right = 51.0
+[node name="ItemSlot" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox/Slots" instance=ExtResource( 10 )]
+margin_left = 8.0
+margin_right = 62.0
+margin_bottom = 54.0
 
-[node name="ItemSlot2" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
-margin_left = 19.0
-margin_top = 36.0
-margin_right = 51.0
-margin_bottom = 68.0
+[node name="ItemSlot2" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox/Slots" instance=ExtResource( 10 )]
+margin_left = 8.0
+margin_top = 55.0
+margin_right = 62.0
+margin_bottom = 109.0
 
-[node name="ItemSlot3" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
-margin_left = 19.0
-margin_top = 72.0
-margin_right = 51.0
-margin_bottom = 104.0
+[node name="ItemSlot3" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox/Slots" instance=ExtResource( 10 )]
+margin_left = 8.0
+margin_top = 110.0
+margin_right = 62.0
+margin_bottom = 164.0
 
-[node name="ItemSlot4" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox" instance=ExtResource( 10 )]
-margin_left = 19.0
-margin_top = 108.0
-margin_right = 51.0
-margin_bottom = 140.0
+[node name="DownButton" type="TextureButton" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox"]
+margin_left = 4.0
+margin_top = 182.0
+margin_right = 66.0
+margin_bottom = 196.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 20 )
 
-[node name="BottomSpacer" type="Control" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
-margin_top = 222.0
+[node name="Spacer" type="Control" parent="UICanvas/GameOverlay/InventoryOverlay/HBoxContainer/VBoxContainer"]
+margin_top = 262.0
 margin_right = 70.0
-margin_bottom = 222.0
+margin_bottom = 266.0
 mouse_filter = 2
 size_flags_vertical = 3
 __meta__ = {
@@ -186,30 +225,30 @@ anchor_bottom = 1.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 12
+custom_constants/margin_right = 20
 custom_constants/margin_top = 12
-custom_constants/margin_left = 12
+custom_constants/margin_left = 20
 custom_constants/margin_bottom = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/GameOverlay/MarginContainer"]
-margin_left = 12.0
+margin_left = 20.0
 margin_top = 12.0
-margin_right = 468.0
+margin_right = 460.0
 margin_bottom = 258.0
 mouse_filter = 2
-alignment = 2
 
 [node name="VersionLabel" type="Label" parent="UICanvas/GameOverlay/MarginContainer/VBoxContainer"]
-margin_left = 436.0
-margin_top = 235.0
-margin_right = 456.0
-margin_bottom = 246.0
-size_flags_horizontal = 8
+margin_left = 210.0
+margin_right = 230.0
+margin_bottom = 11.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "v0.0"
+align = 1
+valign = 1
 
 [node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
