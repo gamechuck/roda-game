@@ -22,6 +22,7 @@ var show_version := true
 var is_pause_UI_enabled := true
 var start_in_full_screen := false
 
+var MINIMUM_INTERACTION_DISTANCE := 200
 var PANIC_MODIFIER := 2.0
 var CAR_MOVE_SPEED := 4.0
 var PLAYER_MOVE_SPEED := 2.0

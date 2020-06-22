@@ -1,5 +1,6 @@
 {
     "CONSTANTS": {
+        "MINIMUM_INTERACTION_DISTANCE": 100,
         "PANIC_MODIFIER": 6.0,
         "CAR_MOVE_SPEED": 4.0,
         "PLAYER_MOVE_SPEED": 2.0,

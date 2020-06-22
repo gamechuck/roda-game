@@ -61,7 +61,10 @@ Super! Našao si komad ograde!
 Idem ga postaviti!
 ~ number_of_fences_fixed += 1
 >>> REMOVE_ITEM: Fence
--> END
+{number_of_fences_fixed:
+    - 4: -> ending
+	- else: -> END
+}
 
 = ending
 VAU, Ovo mjesto sad izgleda mnogo ljepše, zar ne?
@@ -229,10 +232,10 @@ Pri prelasku kolnika zebrom na biciklu trebamo:
 	Krivo!
 	To će samo zbuniti druge u prometu.
 	Bolje da ti ne dam pumpu ako si tako neodgovorno biće!
+	-> start_riddle
 + [Na vrijeme se zaustaviti, sići s bicikla i hodati preko zebre gurajući bicikl.] 
 	TOČNO!
 	Na zebrama nije dopušteno voziti se s biciklom, moraš ga vući.
-	-> start_riddle
 + [Ostati na biciklu i ubrzati kako bismo što prije prešli cestu] 
 	Krivo!!!
 	Ubrzavanje će samo još više povećati šansu da te neki auto slučajno pokupi!

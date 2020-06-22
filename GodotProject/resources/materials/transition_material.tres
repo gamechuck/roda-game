@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float threshold = 0.2;
+uniform float aspect_ratio = 1.778;
+
+void fragment(){
+
+	float n_x = aspect_ratio*(UV.x - 0.5);
+	float n_y = (UV.y - 0.5); 
+	float radius_from_center = sqrt(n_x*n_x + n_y*n_y);
+
+	if (radius_from_center < threshold){
+		COLOR.a = 0.0;
+	}
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/threshold = 1.0
+shader_param/aspect_ratio = 1.778

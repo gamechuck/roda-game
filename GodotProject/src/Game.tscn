@@ -241,9 +241,9 @@ margin_bottom = 258.0
 mouse_filter = 2
 
 [node name="VersionLabel" type="Label" parent="UICanvas/GameOverlay/MarginContainer/VBoxContainer"]
-margin_left = 210.0
-margin_right = 230.0
-margin_bottom = 11.0
+margin_left = 211.0
+margin_right = 228.0
+margin_bottom = 9.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "v0.0"

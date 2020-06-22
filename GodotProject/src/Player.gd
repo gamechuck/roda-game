@@ -14,6 +14,8 @@ var is_in_dialogue := false
 var _overlapping_character : class_character = null
 var _overlapping_item : class_item = null
 
+var _target_entity : CollisionObject2D = null
+
 onready var _interact_area := $InteractArea
 onready var _animated_sprite := $AnimatedSprite
 
@@ -36,17 +38,17 @@ func _physics_process(_delta):
 		if not is_in_dialogue:
 			if Input.is_action_pressed("move_down"):
 				move_direction.y += 1
-				nav_path = PoolVector2Array()
 			if Input.is_action_pressed("move_up"):
 				move_direction.y -= 1
-				nav_path = PoolVector2Array()
 			if Input.is_action_pressed("move_left"):
 				move_direction.x -= 1
-				nav_path = PoolVector2Array()
 			if Input.is_action_pressed("move_right"):
 				move_direction.x += 1
-				nav_path = PoolVector2Array()
 	
+			if not move_direction == Vector2.ZERO:
+				nav_path = PoolVector2Array()
+				_target_entity = null
+
 			if nav_path.size() > 0:
 				var distance := position.distance_to(nav_path[0])
 				if distance > Flow.PLAYER_MOVE_SPEED:
@@ -79,36 +81,38 @@ func _unhandled_input(event):
 		Flow.inventory_overlay.toggle_inventory()
 
 	if event.is_action_pressed("left_mouse_button"):
+		_target_entity = null
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
 			Flow.active_character = null
 			Flow.active_item = null
 		elif Flow.active_character != null:
-			if Flow.active_item_slot != null:
-				print("start_interaction")
-				var item_slot : class_item_slot = Flow.active_item_slot
-				var item_id = item_slot.item_id
-				is_in_dialogue = \
-					Flow.dialogue_UI.start_use_item_dialogue(Flow.active_character, item_id)
-				Flow.active_item_slot.pressed = false
-				Flow.active_item_slot = null
-			else:
-				is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_character)
+			process_interaction(Flow.active_character)
 			Flow.active_character = null
 		elif Flow.active_item != null:
-			if Flow.active_item_slot != null:
-				var item_slot : class_item_slot = Flow.active_item_slot
-				var item_id = item_slot.item_id
-				is_in_dialogue = \
-					Flow.dialogue_UI.start_use_item_dialogue(Flow.active_item, item_id)
-				Flow.active_item_slot.pressed = false
-				Flow.active_item_slot = null
-			else:
-				is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(Flow.active_item)
-				Flow.inventory_overlay.add_item(Flow.active_item)
+			process_interaction(Flow.active_item)
 			Flow.active_item = null
 		else:
 			emit_signal("nav_path_requested")
+
+func process_interaction(active_entity : CollisionObject2D):
+	var entity_position = active_entity.position
+	var distance : float = position.distance_to(entity_position)
+	print("Distance to entity is {0}".format([distance]))
+	if distance > Flow.MINIMUM_INTERACTION_DISTANCE:
+		_target_entity = active_entity
+		emit_signal("nav_path_requested")
+	elif Flow.active_item_slot != null:
+		var item_slot : class_item_slot = Flow.active_item_slot
+		var item_id = item_slot.item_id
+		is_in_dialogue = \
+			Flow.dialogue_UI.start_use_item_dialogue(active_entity, item_id)
+		Flow.active_item_slot.pressed = false
+		Flow.active_item_slot = null
+	else:
+		is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(active_entity)
+		if active_entity is class_item:
+			Flow.inventory_overlay.add_item(active_entity)
 
 func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
@@ -126,10 +130,18 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if parent is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
+		if _overlapping_character == _target_entity:
+			process_interaction(_overlapping_character)
+			_target_entity = null
+			nav_path = PoolVector2Array()
 	if area is class_item:
 		#respawn_position = position
 		print("Player entered the item!")
 		_overlapping_item = area
+		if _overlapping_item == _target_entity:
+			process_interaction(_overlapping_item)
+			_target_entity = null
+			nav_path = PoolVector2Array()
 	if area is class_gummy:
 		is_in_gummy = true
 		print("Player entered gummy!")
