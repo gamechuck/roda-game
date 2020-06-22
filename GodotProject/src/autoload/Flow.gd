@@ -6,7 +6,7 @@ enum LIGHT_COLOR {RED, YELLOW_AFTER_RED, GREEN, YELLOW_AFTER_GREEN}
 const OPTIONS_PATH := "res://options.cfg"
 
 const DATA_PATH := "res://data/game_data.json"
-const STORY_PATH := "res://data/game_story.ink"
+const STORY_PATH := "res://data/game_story_hr.ink"
 
 const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
 

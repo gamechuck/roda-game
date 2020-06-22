@@ -13,6 +13,7 @@
     },
     "CHARACTERS": {
         "SolidSnejk": {
+            "DISPLAY_NAME" : "Solid Snejk",
             "KNOT": "conv_solid_snejk",
             "PORTRAIT": {
                 "SIZE": [
@@ -23,10 +24,12 @@
                     268,
                     -8
                 ],
-                "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png"
+                "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png",
+                "FLIP_H": true
             }
         },
         "Lizzy": {
+            "DISPLAY_NAME" : "Lizzy",
             "KNOT": "conv_lizzy",
             "PORTRAIT": {
                 "SIZE": [
@@ -41,6 +44,7 @@
             }
         },
         "Watto": {
+            "DISPLAY_NAME" : "Watto",
             "KNOT": "conv_watto",
             "PORTRAIT": {
                 "SIZE": [
@@ -55,6 +59,7 @@
             }
         },
         "SolidSlug": {
+            "DISPLAY_NAME" : "Solid Slug",
             "KNOT": "conv_solid_slug",
             "PORTRAIT": {
                 "SIZE": [

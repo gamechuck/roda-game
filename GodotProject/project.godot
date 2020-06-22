@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/ItemSlot.gd"
 }, {
+"base": "StaticBody2D",
+"class": "class_pedestrian_light",
+"language": "GDScript",
+"path": "res://src/traffic/PedestrianLight.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "class_player",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_class_icons={
 "class_gummy": "",
 "class_item": "",
 "class_item_slot": "",
+"class_pedestrian_light": "",
 "class_player": "",
 "class_prop": "",
 "class_skater": "",

@@ -39,12 +39,16 @@ func _ready():
 			_timer.wait_time = get_wait_time()
 			_timer.one_shot = true
 			_timer.start()
+	
+	update()
 
 func update_lights():
-	for traffic_light in $Lights.get_children():
-		if traffic_light is class_traffic_light:
-			has_traffic_lights = true
-			traffic_light.light_color = light_color
+	for light in $Lights.get_children():
+		has_traffic_lights = true
+		if light is class_traffic_light:
+			light.light_color = get_opposite_color()
+		if light is class_pedestrian_light:
+			light.light_color = light_color
 
 func _on_timer_timeout():
 	light_color = get_next_color()
@@ -88,5 +92,18 @@ func get_next_color() -> int:
 			return Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN
 		Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
 			return Flow.LIGHT_COLOR.RED
+		_:
+			return 0
+
+func get_opposite_color() -> int:
+	match light_color:
+		Flow.LIGHT_COLOR.RED:
+			return Flow.LIGHT_COLOR.GREEN
+		Flow.LIGHT_COLOR.YELLOW_AFTER_RED:
+			return Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN
+		Flow.LIGHT_COLOR.GREEN:
+			return Flow.LIGHT_COLOR.RED
+		Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+			return Flow.LIGHT_COLOR.YELLOW_AFTER_RED
 		_:
 			return 0

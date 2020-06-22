@@ -1,38 +1,103 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://roda-assets/Portraits/solid_snejk.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/DialogueUI.gd" type="Script" id=2]
 [ext_resource path="res://resources/fonts/font_size16.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/UI/ChoiceButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/menu_theme.tres" type="Theme" id=5]
+[ext_resource path="res://resources/fonts/orange-juice/orange juice 2.0.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 6 )
 
 [node name="DialogueUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 39.0
-margin_top = 180.0
-margin_right = 441.0
-margin_bottom = 260.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 12.0
+margin_right = -24.0
+margin_bottom = -12.0
 mouse_filter = 2
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="PanelContainer"]
+[node name="ChoiceVBox" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 432.0
+margin_bottom = 120.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoiceButton" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+margin_left = 152.0
+margin_right = 280.0
+text = "Choice 0"
+
+[node name="ChoiceButton2" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+margin_left = 152.0
+margin_top = 44.0
+margin_right = 280.0
+margin_bottom = 76.0
+text = "Choice 1"
+
+[node name="ChoiceButton3" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+margin_left = 152.0
+margin_top = 88.0
+margin_right = 280.0
+margin_bottom = 120.0
+text = "Choice 2"
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+margin_top = 124.0
+margin_right = 432.0
+margin_bottom = 138.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+margin_top = 142.0
+margin_right = 432.0
+margin_bottom = 162.0
+custom_fonts/font = SubResource( 1 )
+text = "Solid Snejk"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 166.0
+margin_right = 432.0
+margin_bottom = 246.0
+rect_min_size = Vector2( 0, 80 )
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer"]
 margin_left = 7.0
-margin_top = 7.0
-margin_right = 395.0
-margin_bottom = 73.0
+margin_top = 15.0
+margin_right = 425.0
+margin_bottom = 64.0
 custom_fonts/font = ExtResource( 3 )
 text = "If you keep your head in the skies you will be blue all over due to all the cars that hit you!"
 align = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PortraitRect" type="TextureRect" parent="."]
 margin_left = 268.0
@@ -47,26 +112,3 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ChoiceVBox" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 16.0
-margin_bottom = -16.0
-custom_constants/separation = 24
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ChoiceButton" parent="ChoiceVBox" instance=ExtResource( 4 )]
-text = "Choice 0"
-
-[node name="ChoiceButton2" parent="ChoiceVBox" instance=ExtResource( 4 )]
-margin_top = 56.0
-margin_bottom = 88.0
-text = "Choice 1"
-
-[node name="ChoiceButton3" parent="ChoiceVBox" instance=ExtResource( 4 )]
-margin_top = 112.0
-margin_bottom = 144.0
-text = "Choice 2"

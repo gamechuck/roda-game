@@ -42,12 +42,22 @@ func _ready():
 
 		if amount_of_cars > 0:
 			var offset_increment : float = 1.0/amount_of_cars
-			for _i in range(0, amount_of_cars):
-				spawn_car(_i*offset_increment)
+			var next_car : class_car = null
+			var first_car : class_car = null
+			for _i in range(amount_of_cars, 0, -1):
+				var car : class_car = spawn_car(_i*offset_increment)
+				if next_car == null:
+					first_car = car
+				else:
+					car.next_car = next_car
+				next_car = car
+			# Set the first car's next car to the last car!
+			first_car.next_car = next_car
 
-func spawn_car(initial_offset : float):
-	var car := _car_resource.instance()
+func spawn_car(initial_offset : float) -> class_car:
+	var car : class_car = _car_resource.instance()
 	car.initial_offset = initial_offset
 	car.traffic_loop = self
 	$Path2D.add_child(car)
 	car.owner = self
+	return car

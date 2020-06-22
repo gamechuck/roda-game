@@ -1,9 +1,10 @@
 extends Control
 
-onready var _label := $PanelContainer/Label
+onready var _label := $VBoxContainer/PanelContainer/Label
 onready var _portrait_rect := $PortraitRect
 
-onready var _choice_vbox := $ChoiceVBox
+onready var _name_label := $VBoxContainer/NameLabel
+onready var _choice_vbox := $VBoxContainer/ChoiceVBox
 
 var story : Object
 var is_waiting_for_choice := false
@@ -33,6 +34,8 @@ func _start_dialogue(node : Node2D) -> bool:
 		node.play_sound_byte()
 		data = Flow.get_character_data(node.name)
 
+		_name_label.text = data.get("DISPLAY_NAME", "")
+
 		var portrait_data : Dictionary = data.get("PORTRAIT", {})
 		var texture_path : String = portrait_data.get("TEXTURE", "")
 		var texture_exists : bool = ResourceLoader.exists(texture_path)
@@ -50,11 +53,13 @@ func _start_dialogue(node : Node2D) -> bool:
 		_portrait_rect.flip_h = portrait_data.get("FLIP_H", false)
 		_portrait_rect.flip_v = portrait_data.get("FLIP_V", false)
 
+		_name_label.visible = true
 		_portrait_rect.visible = true
 
 	elif node is class_item:
 		data = Flow.get_item_data(node.name)
 
+		_name_label.visible = false
 		_portrait_rect.visible = false
 
 	var knot : String = data.get("KNOT", "")
