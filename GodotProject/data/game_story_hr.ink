@@ -351,7 +351,7 @@ Ah, super, našao si pumpu za gume za bicikle! Možeš li mi napumpati bicikl, m
 
 Hvala što si popravio moj bicikl!
 {got_second_fence_from_solid_slug:
-	1 : -> END
+	- 1 : -> END
 }
 Evo, ja sam našao još jedan komad otpuhane ograde!
 >>> ADD_ITEM: Fence
