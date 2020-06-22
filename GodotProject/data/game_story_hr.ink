@@ -143,6 +143,8 @@ Ako nema pločnika, gdje se pješaci kreću?
 	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
 	-> start_question
 + [Skakuću s jedne strane prometnice na drugu.]
+	KRIVO!
+	-> start_question
 -
 >>> ADD_ITEM: Fence
 ~ watto_question_solved = 1
@@ -168,11 +170,8 @@ Svaka čast.
 -> END
 
 = pump
-Vrijeme za napumpati ispražnjelu gumu!
-*PUMP*
-*PUMP*
-*PUMP PUMP PUMP*
-Ok, kao nova!
+PUMP UP THE JAM!
+PUMP IT UP!
 -> END
 
 = fence
@@ -467,9 +466,9 @@ Trebam prvo otkriti što ne valja s bicilkom...
 = fix_bike_with_pump
 
 Vrijeme za napumpati ispražnjelu gumu!
-*PUMP*
-*PUMP*
-*PUMP PUMP PUMP*
+\*PUMP*
+\*PUMP PUMP*
+\*PUMP PUMP PUMP*
 ...
 ...?
 Eto, kao nova!

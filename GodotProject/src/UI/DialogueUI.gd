@@ -79,6 +79,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 	if story.can_continue:
 		_choice_vbox.visible = false
+		_portrait_rect.self_modulate.a = 1.0
 
 		var text : String = story.continue()
 		text = text.strip_edges()
@@ -99,11 +100,16 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 		if Director.active_minigame == null:
 			_choice_vbox.visible = true
+			_portrait_rect.self_modulate.a = 0.5
 	
 			var index := 0
 			for child in _choice_vbox.get_children():
-				var choice = story.current_choices[index]
-				child.text = choice.text
+				if index < story.current_choices.size():
+					var choice = story.current_choices[index]
+					child.text = choice.text
+					child.visible = true
+				else:
+					child.visible = false
 				index += 1
 
 		#story.choose_choice_index(0)
