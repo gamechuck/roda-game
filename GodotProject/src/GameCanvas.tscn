@@ -126,7 +126,7 @@ position = Vector2( 1663.37, 126.513 )
 
 [node name="BrokenBike" parent="YSort/Characters" instance=ExtResource( 15 )]
 visible = false
-position = Vector2( 1328.33, 463.458 )
+position = Vector2( 1332, 464 )
 collision_layer = 0
 collision_mask = 0
 
@@ -241,11 +241,11 @@ position = Vector2( 700.451, 321.525 )
 extents = Vector2( 60, 100 )
 
 [node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 576, 446.238 )
-extents = Vector2( 90, 60 )
+position = Vector2( 586, 448 )
+extents = Vector2( 100, 60 )
 
 [node name="ZebraCrossing7" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 839.19, 447 )
+position = Vector2( 839.19, 448 )
 extents = Vector2( 100, 60 )
 
 [node name="ZebraCrossing8" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
