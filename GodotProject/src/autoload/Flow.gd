@@ -57,15 +57,23 @@ var item_data := {}
 
 func _ready():
 	if not Engine.editor_hint:
-		var _error : int = _options_loader.load_optionsCFG()
-		_error += _controls_loader.load_controlsJSON()
+		var _error := load_settings()
 		OS.window_fullscreen = start_in_full_screen
 
-func load_data():
-	var _error = _data_loader.load_dataJSON()
+func load_settings() -> int:
+	print("----- (Re)loading game settings from file -----")
+	var _error : int = _options_loader.load_optionsCFG()
+	_error += _controls_loader.load_controlsJSON()
+	_error += _data_loader.load_dataJSON()
+	if _error == OK:
+		print("----> Succesfully loaded settings!")
+	else:
+		push_error("Failed to load settings! Check console for clues!")
+	return _error
 
+func load_story():
 	if OS.get_name() == "Windows":
-		_error = build_INK(STORY_PATH, INKLECATE_PATH)
+		var _error = build_INK(STORY_PATH, INKLECATE_PATH)
 	var content = load_INK(Flow.STORY_PATH)
 	dialogue_UI.story = _story_resource.new(content)
 
@@ -101,7 +109,8 @@ func deferred_quit() -> void:
 
 func deferred_reload_current_scene() -> void:
 ## It is now safe to reload the current scene.
-	var _error := get_tree().reload_current_scene()
+	var _error := load_settings()
+	_error = get_tree().reload_current_scene()
 	get_tree().paused = false
 
 func quit_or_pause_game():
@@ -193,13 +202,13 @@ static func build_INK(path : String, inklecate_path : String) -> int:
 	# On macOS the length of the BOM is 3, on Windows the length of the BOM is 0,
 	# that's fairly strange.
 	if output.size() == 1 && (output[0].length() == 3 || output[0].length() == 0):
-		print(output[0] + "Compiled to: " + target_path)
+		print(output[0] + "Compiled story to: " + target_path)
 	else:
 		print(PoolStringArray(output).join("\n"))
 
 		# TODO: It might be useful to analyze the exit_code in some way?
 		if (output.size() == 1 and output[0].length() == 0):
-			print(output[0] + "Compiled to: " + target_path)
+			print(output[0] + "Compiled story to: " + target_path)
 		else:
 			print(PoolStringArray(output).join("\n"))
 

@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "PathFollow2D",
+"base": "Area2D",
 "class": "class_car",
 "language": "GDScript",
 "path": "res://src/traffic/Car.gd"

@@ -8,13 +8,19 @@ onready var _game_camera := _game_canvas.get_node("YSort/Player/GameCamera")
 func _ready():
 	randomize()
 
-	propagate_call("update")
+	# Set language to Croatian by default.
 	TranslationServer.set_locale("hr")
 
 	_editor_camera.current = Flow.is_in_editor_mode
 	_game_camera.current = not Flow.is_in_editor_mode
 
-	Flow.load_data()
+	Flow.load_story()
+	print("----- Showing output log -----")
+
+	# Start the introduction conversation with SolidSnejk.
+	var character := Flow.game_canvas.get_node("YSort/Characters/SolidSnejk")
+	if character != null:
+		Flow.player.is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(character)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_mode"):

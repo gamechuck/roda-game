@@ -53,35 +53,35 @@ __meta__ = {
 }
 
 [node name="ChoiceButton" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
-margin_left = 15.0
-margin_right = 415.0
+margin_left = 16.0
+margin_right = 416.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 400, 24 )
 custom_fonts/font = ExtResource( 7 )
 text = "Choice 0"
 
 [node name="ChoiceButton2" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
-margin_left = 15.0
+margin_left = 16.0
 margin_top = 36.0
-margin_right = 415.0
+margin_right = 416.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 400, 24 )
 custom_fonts/font = ExtResource( 7 )
 text = "Choice 1"
 
 [node name="ChoiceButton3" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
-margin_left = 15.0
+margin_left = 16.0
 margin_top = 72.0
-margin_right = 415.0
+margin_right = 416.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 400, 24 )
 custom_fonts/font = ExtResource( 7 )
 text = "Choice 2"
 
 [node name="ChoiceButton4" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
-margin_left = 15.0
+margin_left = 16.0
 margin_top = 108.0
-margin_right = 415.0
+margin_right = 416.0
 margin_bottom = 132.0
 rect_min_size = Vector2( 400, 24 )
 custom_fonts/font = ExtResource( 7 )

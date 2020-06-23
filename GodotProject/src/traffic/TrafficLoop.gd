@@ -1,6 +1,9 @@
 tool
 extends YSort
 
+onready var _cars_container := $Cars
+
+onready var _path_follow_resource := preload("res://src/traffic/PathFollow.tscn")
 onready var _car_resource := preload("res://src/traffic/Car.tscn")
 onready var _path_2D := $Path2D
 
@@ -55,9 +58,14 @@ func _ready():
 			first_car.next_car = next_car
 
 func spawn_car(initial_offset : float) -> class_car:
+	var path_follow : PathFollow2D = _path_follow_resource.instance()
+	$Path2D.add_child(path_follow)
+
 	var car : class_car = _car_resource.instance()
 	car.initial_offset = initial_offset
-	car.traffic_loop = self
-	$Path2D.add_child(car)
+	car.path_follow = path_follow
+	_cars_container.add_child(car)
 	car.owner = self
+
+	path_follow.get_node("RemoteTransform2D").remote_path = car.get_path()
 	return car

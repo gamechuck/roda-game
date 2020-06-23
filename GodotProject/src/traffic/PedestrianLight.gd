@@ -4,9 +4,10 @@ class_name class_pedestrian_light
 
 onready var _animated_UI := $Node2D/AnimatedUI
 onready var _animated_front := $AnimatedFront
+onready var _animated_back := $AnimatedBack
 onready var _animated_side := $AnimatedSide
 
-export(String, "front", "left", "right") var direction = "front" setget set_direction
+export(String, "front", "left", "right", "back") var direction = "front" setget set_direction
 var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
 
 func _ready():
@@ -17,25 +18,15 @@ func _ready():
 
 func set_direction(value : String):
 	direction = value
-	match value:
-		"front":
-			$Node2D/AnimatedUI.visible = false
-			$AnimatedFront.visible = true
-			$AnimatedSide.visible = false
-		"left":
-			$Node2D/AnimatedUI.visible = true
-			$AnimatedFront.visible = false
-			$AnimatedSide.visible = true
+	var state = animation_state.get(value, "front")
 
-			$AnimatedSide.scale.x = 1
-			$Node2D.scale.x = 1 
-		"right":
-			$Node2D/AnimatedUI.visible = true
-			$AnimatedFront.visible = false
-			$AnimatedSide.visible = true
+	$Node2D/AnimatedUI.visible = state.get("visible_UI", false) 
+	$AnimatedFront.visible = state.get("visible_front", true) 
+	$AnimatedSide.visible = state.get("visible_side", false)
+	$AnimatedBack.visible = state.get("visible_back", false) 
 
-			$AnimatedSide.scale.x = -1
-			$Node2D.scale.x = -1 
+	$AnimatedSide.scale.x = state.get("scale", 1) 
+	$Node2D.scale.x = state.get("scale", 1) 
 
 func set_light_color(value : int):
 	light_color = value
@@ -49,3 +40,33 @@ func play_animation(animation_name : String):
 	_animated_UI.play(animation_name)
 	_animated_front.play(animation_name)
 	_animated_side.play(animation_name)
+
+var animation_state := {
+	"left": {
+		"visible_UI": true,
+		"scale": -1,
+		"visible_side": true,
+		"visible_front": false,
+		"visible_back": false
+	},
+	"front": {
+		"visible_UI": false,
+		"visible_side": false,
+		"visible_front": true,
+		"visible_back": false
+	},
+	"right": {
+		"visible_UI": true,
+		"scale": 1,
+		"visible_side": true,
+		"visible_front": false,
+		"visible_back": false
+	},
+	"back": {
+		"visible_UI": true,
+		"scale": -1,
+		"visible_side": false,
+		"visible_front": false,
+		"visible_back": true
+	}
+}

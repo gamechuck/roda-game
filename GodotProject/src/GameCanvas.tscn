@@ -20,13 +20,13 @@
 [ext_resource path="res://src/traffic/TrafficLoop.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/traffic/ZebraCrossing.tscn" type="PackedScene" id=21]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 120 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100, 80 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 110, 100 )
 
 [sub_resource type="NavigationPolygon" id=4]
@@ -193,10 +193,10 @@ extents = Vector2( 60, 130 )
 [node name="ZebraCrossing3" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 170, 645 )
 extents = Vector2( 80, 120 )
-light_color = 2
+light_color = 1
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing3/InteractArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="0" instance=ExtResource( 4 )]
 position = Vector2( -45.6163, 78.537 )
@@ -208,6 +208,7 @@ direction = "right"
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="2" instance=ExtResource( 9 )]
 position = Vector2( 48.8961, 76.5863 )
+direction = "back"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="3" instance=ExtResource( 9 )]
 position = Vector2( -46.5916, -85.4877 )
@@ -215,27 +216,29 @@ position = Vector2( -46.5916, -85.4877 )
 [node name="ZebraCrossing4" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 587.116, -105.083 )
 extents = Vector2( 100, 80 )
+light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing4/InteractArea" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="0" instance=ExtResource( 4 )]
 position = Vector2( 79.3015, -3.52019 )
 
 [node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="1" instance=ExtResource( 4 )]
 position = Vector2( -80, -4.21854 )
+direction = "back"
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="2" instance=ExtResource( 9 )]
 position = Vector2( -81.7054, 62.152 )
-direction = "left"
+direction = "right"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="3" instance=ExtResource( 9 )]
 position = Vector2( 81.7054, 62.8503 )
-direction = "right"
+direction = "left"
 
 [node name="ZebraCrossing5" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
-position = Vector2( 681.212, 321.525 )
-extents = Vector2( 80, 100 )
+position = Vector2( 700.451, 321.525 )
+extents = Vector2( 60, 100 )
 
 [node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 576, 446.238 )
@@ -252,9 +255,10 @@ extents = Vector2( 100, 60 )
 [node name="ZebraCrossing9" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 1018.29, 835.328 )
 extents = Vector2( 110, 100 )
+light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing9/InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="0" instance=ExtResource( 4 )]
 position = Vector2( -62.7251, 80.2986 )
@@ -266,6 +270,7 @@ direction = "right"
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="2" instance=ExtResource( 9 )]
 position = Vector2( 0, 79.8215 )
+direction = "back"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="3" instance=ExtResource( 9 )]
 position = Vector2( -65.9751, -88.7811 )

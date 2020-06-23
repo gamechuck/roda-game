@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://roda-assets/Props/street_lights_front_green.png" type="Texture" id=1]
 [ext_resource path="res://roda-assets/Props/street_lights_front_red.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://roda-assets/Props/street_lights_side_red.png" type="Texture" id=8]
 [ext_resource path="res://roda-assets/Props/street_lights_side_green.png" type="Texture" id=9]
 [ext_resource path="res://roda-assets/Props/street_lights_side_yellow.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/Props/street_lights_back.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,14 +19,14 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": false,
-"name": "yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "red",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "yellow",
 "speed": 5.0
 } ]
 
@@ -36,13 +37,26 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "red",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": false,
 "name": "yellow",
 "speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "green",
+"speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": false,
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
 "name": "red",
 "speed": 5.0
 } ]
@@ -56,14 +70,14 @@ animations = [ {
 "name": "green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": false,
-"name": "yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
 "name": "red",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "yellow",
 "speed": 5.0
 } ]
 
@@ -78,17 +92,21 @@ offset = Vector2( 0, -32 )
 
 [node name="AnimatedSide" type="AnimatedSprite" parent="."]
 visible = false
-scale = Vector2( -1, 1 )
 frames = SubResource( 2 )
 animation = "red"
 playing = true
 offset = Vector2( 10, -32 )
 
+[node name="AnimatedBack" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 5 )
+animation = "green"
+offset = Vector2( 0, -32 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
-scale = Vector2( -1, 1 )
 z_index = 1
 
 [node name="AnimatedUI" type="AnimatedSprite" parent="Node2D"]

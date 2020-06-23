@@ -118,8 +118,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
 
-	var parent = area.get_parent()
-	if parent is class_car:
+	if area is class_car:
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
@@ -127,6 +126,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
+	var parent = area.get_parent()
 	if parent is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()

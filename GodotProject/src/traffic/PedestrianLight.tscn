@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://roda-assets/Props/pedestrian_lights_front_green.png" type="Texture" id=1]
 [ext_resource path="res://roda-assets/Props/pedestrian_lights_front_red.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://roda-assets/Props/pedestrian_lights_UI_green.png" type="Texture" id=5]
 [ext_resource path="res://roda-assets/Props/pedestrian_lights_UI_red.png" type="Texture" id=6]
 [ext_resource path="res://src/traffic/PedestrianLight.gd" type="Script" id=7]
+[ext_resource path="res://roda-assets/Props/pedestrian_lights_back.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,7 +22,20 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "red",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
@@ -34,7 +48,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -58,16 +72,24 @@ __meta__ = {
 [node name="AnimatedFront" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "red"
+playing = true
 offset = Vector2( 0, -30 )
+
+[node name="AnimatedBack" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 5 )
+animation = "green"
+offset = Vector2( 0, -29 )
 
 [node name="AnimatedSide" type="AnimatedSprite" parent="."]
 visible = false
-frames = SubResource( 3 )
-animation = "green"
+frames = SubResource( 2 )
+animation = "red"
+playing = true
 offset = Vector2( 10, -29 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -75,4 +97,5 @@ shape = SubResource( 2 )
 visible = false
 frames = SubResource( 4 )
 animation = "red"
+playing = true
 offset = Vector2( -26, -45 )
