@@ -1,9 +1,12 @@
 extends Control
 
-onready var _tyres_highlight := $VBoxContainer/BackgroundRect/Highlights/TyresHighlight
-onready var _horn_highlight := $VBoxContainer/BackgroundRect/Highlights/HornHighlight
-onready var _pedal_highlight := $VBoxContainer/BackgroundRect/Highlights/PedalHighlight
-onready var _saddle_highlight := $VBoxContainer/BackgroundRect/Highlights/SaddleHighlight
+onready var _hightlights_container := $VBoxContainer/BackgroundRect/Highlights
+
+onready var _tyres_highlight := _hightlights_container.get_node("TyresHighlight")
+onready var _pedal_highlight := _hightlights_container.get_node("PedalHighlight")
+onready var _lights_highlight := _hightlights_container.get_node("LightsHighlight")
+onready var _horn_highlight := _hightlights_container.get_node("HornHighlight")
+onready var _saddle_highlight := _hightlights_container.get_node("SaddleHighlight")
 
 onready var highlight_dict := {
 	_tyres_highlight : {
@@ -14,13 +17,17 @@ onready var highlight_dict := {
 		"name": "Pedal",
 		"index" : 1
 	},
+	_lights_highlight : {
+		"name": "Lights",
+		"index" : 2
+	},
 	_horn_highlight : {
 		"name": "Horn",
-		"index" : 2
+		"index" : 3
 	},
 	_saddle_highlight : {
 		"name": "Saddle",
-		"index" : 3
+		"index" : 4
 	}
 }
 

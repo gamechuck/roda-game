@@ -7,7 +7,6 @@ var player_state : int = STATE.DEFAULT
 
 var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
-var is_dragging_item := false
 var is_in_gummy := false
 var is_in_dialogue := false
 
@@ -126,8 +125,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		position = respawn_position
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
-	var parent = area.get_parent()
-	if parent is class_character:
+	if area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
 		if _overlapping_character == _target_entity:
@@ -149,9 +147,8 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
-	
-	var parent = area.get_parent()
-	if parent is class_character:
+
+	if area.get_parent() is class_character:
 		print("Player exited a character's interact area!")
 		if _overlapping_character == area.get_parent():
 			_overlapping_character = null

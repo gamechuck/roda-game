@@ -19,7 +19,7 @@ VAR gave_back_bike = 0
 
 // BrokenBike
 VAR fixed_bike = 0
-LIST checked_components = tyres, pedals, horn, saddle
+LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
 VAR used_item = "Bush"
 VAR conv_type = 0
@@ -136,17 +136,17 @@ Dat ću ti komad ako mi odgovoriš na ovo pitanje:
 Ako nema pločnika, gdje se pješaci kreću?
 + [Desnom stranom prometnice] 
 	Ha! Krivo!
-	Da ideš desnom stranom bi auti išli u smjeru prema tebi i pokupili te...
+	Tako ne vidiš aute koji dolaze i u većoj si opasnosti.
 	Još ti moraš mnogo naučiti o ljudima i njihovim prometnim pravilima...
 	-> start_question
 + [Lijevom stranom prometnice]
 	Tako je!
-	Lijevom stranom je u smjeru kretanja autiju pa će te lakše vidjeti!
+	Lijevom stranom - kako bi lakše vidio promet koji nailazi prema tebi.
 + [Sredinom prometnice.]
 	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
 	-> start_question
 + [Skakuću s jedne strane prometnice na drugu.]
-	KRIVO!
+	KRIVO! KRIVO!
 	-> start_question
 -
 >>> ADD_ITEM: Fence
@@ -168,13 +168,12 @@ Tamo gdje ja idem, ne trebaju nam ceste!
 }
 
 = bike
-Ah... Vidim da si groknuo kako prijeći zebre!
+Ah... Vidim da si otkrio kako prijeći zebre!
 Svaka čast.
 -> END
 
 = pump
-PUMP UP THE JAM!
-PUMP IT UP!
+S tim napumpaj gumu na biciklu, meni za raketu to ne treba!
 -> END
 
 = fence
@@ -201,11 +200,11 @@ Ne treba mi ta stvar.
 
 = intro
 
-Sinko, ne znam ja ništa o nikakvim ogradama...
+Ne znam ja ništa o nikakvim ogradama...
 {picked_up_fence:
 	- false: -> show_fence
 }
-Ali ako ikad zatrebaš neki magični artefakt, slobodno dođi!
+Ali ako ikad zatrebaš nešto magično i korisno, slobodno me pitaj!
 -> END
 
 = show_fence
@@ -224,7 +223,7 @@ Možda da odeš provjeriti?
 
 = pop_riddle
 
-Trebaš pumpu za gume za bicikl, sinko?
+Trebaš pumpu za bicikl?
 Imam super MAGIČNU pumpu ali prvo odgovori na moju zagonetku:
 - (start_riddle)
 Pri prelasku kolnika zebrom na biciklu trebamo:
@@ -235,7 +234,7 @@ Pri prelasku kolnika zebrom na biciklu trebamo:
 	-> start_riddle
 + [Na vrijeme se zaustaviti, sići s bicikla i hodati preko zebre gurajući bicikl.] 
 	TOČNO!
-	Na zebrama nije dopušteno voziti se s biciklom, moraš ga vući.
+	Na zebrama nije dopušteno voziti se s biciklom, moraš ga gurati.
 + [Ostati na biciklu i ubrzati kako bismo što prije prešli cestu] 
 	Krivo!!!
 	Ubrzavanje će samo još više povećati šansu da te neki auto slučajno pokupi!
@@ -247,14 +246,14 @@ Pri prelasku kolnika zebrom na biciklu trebamo:
 	Bolje da ti ne dam pumpu ako si tako neodgovorno biće!
 	-> start_riddle
 -
-Evo ti magična super pumpa za bicikle, sinko.
+Evo ti magična super pumpa za bicikle.
 >>> ADD_ITEM: Pump
 ~ lizzy_riddle_solved = 1
 -> END
 
 = ending
 
-Nadam se da ti je moja magična super pumpa za bicikle korisna, sinko!
+Nadam se da ti je moja magična super pumpa za bicikle korisna!
 -> END
 
 = use_item
@@ -275,11 +274,11 @@ Uvijek, nosi biciklističku kacigu kada voziš bicikl!
 = fence
 Kako divna ograda!
 Da je bar mogu ponijeti doma sa sobom...
-Ali to bi bilo otimanje javnog vlasništva!
+Ali ova ograda je tu za sve nas! Ne smije se odnositi!
 -> END
 
 = default
-Makni mi to s očiju, sinko!
+Makni mi to s očiju!
 -> END
 
 === conv_solid_slug ===
@@ -314,9 +313,9 @@ Makni mi to s očiju, sinko!
 
 = intro
 
-Otpuhala ti se ograda od parka?
+Vjetar ti je otpuhao ogradu od parka?
 Ah, a ja sam zagubio svoj bicikl...
-Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jednu ogradu!
+Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 -> END
 
 = has_bike
@@ -339,19 +338,19 @@ Ah, čini se da nešto ne valja s mojim biciklom...
 
 Ah, znači guma je ispuhana?
 Šteta...
-Možeš li negdje od nekoga nabaviti pumpu za gume za bicikle?
+Možeš li negdje od nekoga nabaviti pumpu za bicikle?
 -> END
 
 = has_pump
 
-Ah, super, našao si pumpu za gume za bicikle! Možeš li mi napumpati bicikl, molim te?
+Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 -> END
 
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
 {got_second_fence_from_solid_slug:
-	- 1 : -> END
+	1 : -> END
 }
 Evo, ja sam našao još jedan komad otpuhane ograde!
 >>> ADD_ITEM: Fence
@@ -413,7 +412,7 @@ Trebao bih dati ovu ogradu crvu zvanom Solid Snejk.
 }
 
 Trebao bih okolo potražiti pumpu za bicikl...
-Možda pitati nekoga?
+Tko bi mi mogao pomoći?
 -> END
 
 = check_bike
@@ -423,8 +422,8 @@ Možda pitati nekoga?
 	- true: -> after_checking_bike
 }
 {figured_out_issue_with_bike:
-	- true: Trebao bih provjeriti jesu li drugi dijelovi bicikla dobro...
-	- false: Trebao bih provjeriti radi li sve kako treba na biciklu...
+	- true: Trebao bih provjeriti jesu li drugi dijelovi bicikla dobri...
+	- false: Trebao bih provjeriti je li sve kako treba na biciklu...
 }
 + Guma?
 	Oh, ne! Jedna guma je ispuhana!
@@ -433,19 +432,29 @@ Možda pitati nekoga?
 	-> bike_repair
 + Pedale?
 	Čini se da su pedale dobro ušarafljene...
+	I na pedalama je s prednje i stražnje strane po jedno mačje oko.
+	Super!
 	~ checked_components += pedals
 	-> bike_repair
-+ Truba?
-	HONK!
-	Čini se da truba radi!
-	~ checked_components += horn
++ Svijetla?
+	Prednje svjetlo bijele boje za osvjetljavanje ceste.
+	Stražnje svjetlo crvene boje s mačjim okom.
+	Super!
+	~ checked_components += lights
+	-> bike_repair
++ Zvonce?
+	Zvonce je na upravljaču.
+	TRUB TRUB!
+	Čini se da radi!
+	I jedna kočnica za svaki kotač - dobro!
+	~ checked_components += horn_and_brakes
 	-> bike_repair
 + Sjedalica?
-	Čini se da je sjedalica čvrsto uglavljena.
+	Sjedalo je dobro učvršćeno! Super!
 	~ checked_components += saddle
 	-> bike_repair
 = after_checking_bike
-Čini se da je problem u ispuhanoj gumi...
+Čini se da je problem samo u ispuhanoj gumi...
 Trebamo to popraviti!
 >>> END_MINIGAME: bike_repair
 -> END
@@ -468,7 +477,7 @@ Trebam prvo otkriti što ne valja s bicilkom...
 
 = fix_bike_with_pump
 
-Vrijeme za napumpati ispražnjelu gumu!
+Vrijeme za napumpati praznu gumu!
 \*PUMP*
 \*PUMP PUMP*
 \*PUMP PUMP PUMP*
@@ -484,13 +493,13 @@ Ne treba to biciklu...
 
 === conv_debug ===
 
-Što hoćeš?
-+ [Daj ogradu]
+TESTNI RAZGOVOR: Što hoćeš?
++ [Daj mi ogradu!]
 	>>> ADD_ITEM : Fence
-+ [Daj bicikl]
++ [Daj mi bicikl!]
 	>>> ADD_ITEM : Bike
-+ [Daj pumpu]
++ [Daj mi pumpu!]
 	>>> ADD_ITEM : Pump
 -
-Evo, sinko!
+Evo!
 -> END
