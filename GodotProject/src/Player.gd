@@ -9,6 +9,7 @@ var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
 var is_in_gummy := false
 var is_in_dialogue := false
+var is_in_cutscene := false
 
 var _overlapping_character : class_character = null
 var _overlapping_item : class_item = null
@@ -17,6 +18,7 @@ var _target_entity : CollisionObject2D = null
 
 onready var _interact_area := $InteractArea
 onready var _animated_sprite := $AnimatedSprite
+onready var _tween := $Tween
 
 signal nav_path_requested
 
@@ -26,6 +28,7 @@ func _ready():
 
 	var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
 	_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
+	_success = _tween.connect("tween_all_completed", self, "_on_tween_all_completed")
 
 func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
@@ -34,7 +37,7 @@ func _physics_process(_delta):
 
 		#print(is_in_dialogue)
 
-		if not is_in_dialogue:
+		if not is_in_dialogue and not is_in_cutscene:
 			if Input.is_action_pressed("move_down"):
 				move_direction.y += 1
 			if Input.is_action_pressed("move_up"):
@@ -116,23 +119,27 @@ func process_interaction(active_entity : CollisionObject2D):
 func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
 		return
+	if is_in_cutscene:
+		return
 
 	if area is class_car:
-		position = respawn_position
+		#position = respawn_position
+		play_death_cutscene()
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
-	if area is class_skater:
-		position = respawn_position
+	elif area is class_skater:
+		#position = respawn_position
+		play_death_cutscene()
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
-	if area.get_parent() is class_character:
+	elif area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
 		if _overlapping_character == _target_entity:
 			process_interaction(_overlapping_character)
 			_target_entity = null
 			nav_path = PoolVector2Array()
-	if area is class_item:
+	elif area is class_item:
 		#respawn_position = position
 		print("Player entered the item!")
 		_overlapping_item = area
@@ -140,9 +147,22 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 			process_interaction(_overlapping_item)
 			_target_entity = null
 			nav_path = PoolVector2Array()
-	if area is class_gummy:
+	elif area is class_gummy:
 		is_in_gummy = true
 		print("Player entered gummy!")
+	elif area is class_safe_zone:
+		respawn_position = area.position
+		print("Player entered a safe zone!")
+
+func play_death_cutscene():
+	_tween.interpolate_property($AnimatedSprite, "position", Vector2.ZERO, Vector2(0, -200), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
+	_tween.interpolate_property(self, "position", position, respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1.0)
+	_tween.interpolate_property($AnimatedSprite, "position", Vector2(0, -200), Vector2.ZERO, 1.0, Tween.TRANS_BOUNCE, Tween.EASE_OUT, 1.0)
+	_tween.start()
+	is_in_cutscene = true
+
+func _on_tween_all_completed():
+	is_in_cutscene = false
 
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:

@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://src/Prop.gd"
 }, {
 "base": "Area2D",
+"class": "class_safe_zone",
+"language": "GDScript",
+"path": "res://src/SafeZone.gd"
+}, {
+"base": "Area2D",
 "class": "class_skater",
 "language": "GDScript",
 "path": "res://src/Skater.gd"
@@ -83,6 +88,7 @@ _global_script_class_icons={
 "class_pedestrian_light": "",
 "class_player": "",
 "class_prop": "",
+"class_safe_zone": "",
 "class_skater": "",
 "class_street": "",
 "class_traffic_light": "",

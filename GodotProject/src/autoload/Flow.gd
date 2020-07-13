@@ -25,6 +25,7 @@ var start_in_full_screen := false
 var MINIMUM_INTERACTION_DISTANCE := 200
 var PANIC_MODIFIER := 2.0
 var CAR_MOVE_SPEED := 4.0
+var SKATER_MOVE_SPEED := 4.0
 var PLAYER_MOVE_SPEED := 2.0
 var GUMMY_MODIFIER := 0.5
 var BIKE_MODIFIER := 2.0
@@ -74,7 +75,7 @@ func load_settings() -> int:
 func load_story():
 	if OS.get_name() == "Windows":
 		var _error = build_INK(STORY_PATH, INKLECATE_PATH)
-	var content = load_INK(Flow.STORY_PATH)
+	var content = load_INK(STORY_PATH)
 	dialogue_UI.story = _story_resource.new(content)
 
 	# Bind the getter functions so the story can access the game's state.

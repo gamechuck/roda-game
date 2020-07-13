@@ -16,7 +16,7 @@ func _ready():
 	for child in _choice_vbox.get_children():
 		child.connect("choice_button_pressed", self, "update_dialogue", [index])
 		index += 1
-	
+
 	_choice_vbox.visible = false
 
 func start_interact_dialogue(node : Node2D) -> bool:

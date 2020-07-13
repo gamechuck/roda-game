@@ -152,3 +152,5 @@ shape = SubResource( 27 )
 [node name="GameCamera" type="Camera2D" parent="."]
 current = true
 editor_draw_drag_margin = true
+
+[node name="Tween" type="Tween" parent="."]

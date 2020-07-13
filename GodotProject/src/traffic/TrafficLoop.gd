@@ -39,9 +39,12 @@ func _ready():
 	_path_2D.curve = curve
 
 	if not Engine.editor_hint:
-		for car in _path_2D.get_children():
-			_path_2D.remove_child(car)
+		for car in _cars_container.get_children():
+			_cars_container.remove_child(car)
 			car.queue_free()
+		for path_follow in _path_2D.get_children():
+			_path_2D.remove_child(path_follow)
+			path_follow.queue_free()
 
 		if amount_of_cars > 0:
 			var offset_increment : float = 1.0/amount_of_cars

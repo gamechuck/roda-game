@@ -3,6 +3,7 @@
         "MINIMUM_INTERACTION_DISTANCE": 100,
         "PANIC_MODIFIER": 6.0,
         "CAR_MOVE_SPEED": 4.0,
+        "SKATER_MOVE_SPEED": 4.0,
         "PLAYER_MOVE_SPEED": 2.0,
         "GUMMY_MODIFIER": 0.25,
         "BIKE_MODIFIER": 2.0,

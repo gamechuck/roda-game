@@ -53,6 +53,7 @@ __meta__ = {
 }
 
 [node name="MainTab" type="Control" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -125,7 +126,6 @@ size_flags_horizontal = 4
 text = "Quit"
 
 [node name="SettingsTab" type="Control" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
