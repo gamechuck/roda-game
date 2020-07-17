@@ -4,6 +4,9 @@
         "PANIC_MODIFIER": 6.0,
         "CAR_MOVE_SPEED": 4.0,
         "SKATER_MOVE_SPEED": 4.0,
+        "GHOST_AWAKE_MOVE_SPEED": 1.0,
+        "GHOST_SLEEPING_MOVE_SPEED": 1.0,
+        "GHOST_ACTIVATION_DISTANCE": 200,
         "PLAYER_MOVE_SPEED": 2.0,
         "GUMMY_MODIFIER": 0.25,
         "BIKE_MODIFIER": 2.0,
@@ -14,7 +17,7 @@
         "FALLBACK_INVENTORY_TEXTURE": "res://resources/fallback/inventory_texture.png"
     },
     "CHARACTERS": {
-        "SolidSnejk": {
+        "solid_snejk": {
             "DISPLAY_NAME" : "Solid Snejk",
             "KNOT": "conv_solid_snejk",
             "PORTRAIT": {
@@ -30,7 +33,7 @@
                 "FLIP_H": true
             }
         },
-        "Lizzy": {
+        "lizzy": {
             "DISPLAY_NAME" : "Lizzy",
             "KNOT": "conv_lizzy",
             "PORTRAIT": {
@@ -45,7 +48,7 @@
                 "TEXTURE": "res://roda-assets/Portraits/lizzy.png"
             }
         },
-        "Watto": {
+        "watto": {
             "DISPLAY_NAME" : "Watto",
             "KNOT": "conv_watto",
             "PORTRAIT": {
@@ -60,7 +63,7 @@
                 "TEXTURE": "res://roda-assets/Portraits/watto.png"
             }
         },
-        "SolidSlug": {
+        "solid_slug": {
             "DISPLAY_NAME" : "Solid Slug",
             "KNOT": "conv_solid_slug",
             "PORTRAIT": {
@@ -75,10 +78,18 @@
                 "TEXTURE": "res://roda-assets/Portraits/solid_slug.png"
             }
         },
-        "BrokenBike": {
+        "broken_bike": {
             "KNOT": "conv_broken_bike"
         },
-        "Debug": {
+        "taxi": {
+            "DISPLAY_NAME" : "Taxi",
+            "KNOT": "conv_taxi"
+        },
+        "canster": {
+            "DISPLAY_NAME" : "Canster",
+            "KNOT": "conv_canster"
+        },
+        "debug": {
             "KNOT": "conv_debug",
             "PORTRAIT": {
                 "SIZE": [
@@ -94,24 +105,45 @@
         }
     },
     "ITEMS": {
-        "Fence": {
+        "fence": {
             "KNOT": "conv_fence",
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/fence_normal.png",
                 "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/fence_pressed.png"
             }
         },
-        "Pump": {
+        "pump": {
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/pump_normal.png",
                 "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/pump_pressed.png"
             }
         },
-        "Bike": {
+        "bike": {
             "KNOT": "conv_bike",
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/bike_normal.png",
                 "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/bike_pressed.png"
+            }
+        },
+        "trash_cup": {
+            "KNOT": "conv_trash_cup",
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_cup_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_cup_pressed.png"
+            }
+        },
+        "trash_bag": {
+            "KNOT": "conv_trash_bag",
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_bag_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_bag_pressed.png"
+            }
+        },
+        "trash_sock": {
+            "KNOT": "conv_trash_sock",
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_sock_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_sock_pressed.png"
             }
         }
     }

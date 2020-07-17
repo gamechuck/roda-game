@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "class_character",
+"class": "class_canster",
+"language": "GDScript",
+"path": "res://src/characters/Canster.gd"
+}, {
 "base": "Area2D",
 "class": "class_car",
 "language": "GDScript",
@@ -20,9 +25,19 @@ _global_script_classes=[ {
 "path": "res://src/Character.gd"
 }, {
 "base": "Area2D",
+"class": "class_ghost",
+"language": "GDScript",
+"path": "res://src/Ghost.gd"
+}, {
+"base": "Area2D",
 "class": "class_gummy",
 "language": "GDScript",
 "path": "res://src/Gummy.gd"
+}, {
+"base": "Reference",
+"class": "class_inventory_item",
+"language": "GDScript",
+"path": "res://src/UI/InventoryItem.gd"
 }, {
 "base": "Area2D",
 "class": "class_item",
@@ -80,9 +95,12 @@ _global_script_classes=[ {
 "path": "res://src/UI/PauseTab.gd"
 } ]
 _global_script_class_icons={
+"class_canster": "",
 "class_car": "",
 "class_character": "",
+"class_ghost": "",
 "class_gummy": "",
+"class_inventory_item": "",
 "class_item": "",
 "class_item_slot": "",
 "class_pedestrian_light": "",

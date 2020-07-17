@@ -9,6 +9,8 @@ onready var _choice_vbox := $VBoxContainer/ChoiceVBox
 var story : Object
 var is_waiting_for_choice := false
 
+var interact_node : Node2D = null
+
 func _ready():
 	Flow.dialogue_UI = self
 
@@ -21,18 +23,30 @@ func _ready():
 
 func start_interact_dialogue(node : Node2D) -> bool:
 	story.variables_state.set("conv_type", 0)
-	return _start_dialogue(node)
+	interact_node = node
+	return _start_dialogue()
 
 func start_use_item_dialogue(node : Node2D, item_id : String) -> bool:
 	story.variables_state.set("used_item", item_id)
 	story.variables_state.set("conv_type", 1)
-	return _start_dialogue(node)
+	interact_node = node
+	return _start_dialogue()
 
-func _start_dialogue(node : Node2D) -> bool:
+func get_state() -> int:
+	if interact_node:
+		var state : int = interact_node.get("state")
+		if state:
+			return state
+		else:
+			return 0
+	else:
+		return 0
+
+func _start_dialogue() -> bool:
 	var data := {}
-	if node is class_character:
-		node.play_sound_byte()
-		data = Flow.get_character_data(node.name)
+	if interact_node is class_character:
+		interact_node.play_sound_byte()
+		data = Flow.get_character_data(interact_node.id)
 
 		_name_label.text = data.get("DISPLAY_NAME", "")
 
@@ -56,8 +70,8 @@ func _start_dialogue(node : Node2D) -> bool:
 		_name_label.visible = true
 		_portrait_rect.visible = true
 
-	elif node is class_item:
-		data = Flow.get_item_data(node.name)
+	elif interact_node is class_item:
+		data = Flow.get_item_data(interact_node.id)
 
 		_name_label.visible = false
 		_portrait_rect.visible = false
@@ -86,8 +100,11 @@ func update_dialogue(choice_index : int = -1) -> bool:
 		print(text)
 		if text.left(3) == ">>>":
 			# It's some sort of command! Give it to the Director!
-			Director.execute_command(text)
-			return update_dialogue()
+			var can_continue := Director.execute_command(text)
+			if can_continue:
+				return update_dialogue()
+			else:
+				return true
 
 		if not text.empty():
 			_label.text = text.strip_edges()

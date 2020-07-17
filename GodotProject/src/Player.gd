@@ -1,15 +1,23 @@
 extends KinematicBody2D
 class_name class_player
 
-enum STATE {DEFAULT, LEFT, RIGHT, UP, DOWN}
+enum STATE {IDLE, WALK}
+enum DIRECTION {LEFT, RIGHT, UP, DOWN}
 
-var player_state : int = STATE.DEFAULT
+var _direction : int = DIRECTION.DOWN
+var _state : int = STATE.IDLE
+
+var bias : float = 0.0
 
 var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
 var is_in_gummy := false
 var is_in_dialogue := false
-var is_in_cutscene := false
+var is_in_cutscene := false setget set_is_in_cutscene
+func set_is_in_cutscene(value : bool):
+	is_in_cutscene = value
+	set_process_unhandled_input(not is_in_cutscene)
+var is_on_bike := true
 
 var _overlapping_character : class_character = null
 var _overlapping_item : class_item = null
@@ -28,7 +36,7 @@ func _ready():
 
 	var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
 	_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
-	_success = _tween.connect("tween_all_completed", self, "_on_tween_all_completed")
+	#_success = _tween.connect("tween_all_completed", self, "_on_tween_all_completed")
 
 func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
@@ -73,6 +81,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
+			if not is_in_dialogue:
+				_tween.set_active(true)
 		elif _overlapping_character != null:
 			is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(_overlapping_character)
 		elif _overlapping_item != null:
@@ -86,6 +96,8 @@ func _unhandled_input(event):
 		_target_entity = null
 		if is_in_dialogue:
 			is_in_dialogue = Flow.dialogue_UI.update_dialogue()
+			if not is_in_dialogue:
+				_tween.set_active(true)
 			Flow.active_character = null
 			Flow.active_item = null
 		elif Flow.active_character != null:
@@ -100,19 +112,20 @@ func _unhandled_input(event):
 func process_interaction(active_entity : CollisionObject2D):
 	var entity_position = active_entity.position
 	var distance : float = position.distance_to(entity_position)
-	print("Distance to entity is {0}".format([distance]))
+	print("Distance to entity ('{0}') is {1}".format([active_entity.name, distance]))
 	if distance > Flow.MINIMUM_INTERACTION_DISTANCE:
 		_target_entity = active_entity
 		emit_signal("nav_path_requested")
-	elif Flow.active_item_slot != null:
-		var item_slot : class_item_slot = Flow.active_item_slot
-		var item_id = item_slot.item_id
+	elif Flow.active_inventory_item != null:
+		var inventory_item : class_inventory_item = Flow.active_inventory_item
+		var item_id = inventory_item.id
 		is_in_dialogue = \
 			Flow.dialogue_UI.start_use_item_dialogue(active_entity, item_id)
-		Flow.active_item_slot.pressed = false
-		Flow.active_item_slot = null
+		Flow.active_inventory_item.pressed = false
+		Flow.active_inventory_item = null
 	else:
 		is_in_dialogue = Flow.dialogue_UI.start_interact_dialogue(active_entity)
+		print(active_entity.name)
 		if active_entity is class_item:
 			Flow.inventory_overlay.add_item(active_entity)
 
@@ -124,18 +137,19 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 
 	if area is class_car:
 		#position = respawn_position
-		play_death_cutscene()
+		play_respawn_cutscene()
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
 	elif area is class_skater:
 		#position = respawn_position
-		play_death_cutscene()
+		play_respawn_cutscene()
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
 	elif area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
-		if _overlapping_character == _target_entity:
+		if _overlapping_character == _target_entity or \
+		_overlapping_character is class_canster and _overlapping_character.state == class_canster.STATE.ANGRY:
 			process_interaction(_overlapping_character)
 			_target_entity = null
 			nav_path = PoolVector2Array()
@@ -153,16 +167,6 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	elif area is class_safe_zone:
 		respawn_position = area.position
 		print("Player entered a safe zone!")
-
-func play_death_cutscene():
-	_tween.interpolate_property($AnimatedSprite, "position", Vector2.ZERO, Vector2(0, -200), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
-	_tween.interpolate_property(self, "position", position, respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1.0)
-	_tween.interpolate_property($AnimatedSprite, "position", Vector2(0, -200), Vector2.ZERO, 1.0, Tween.TRANS_BOUNCE, Tween.EASE_OUT, 1.0)
-	_tween.start()
-	is_in_cutscene = true
-
-func _on_tween_all_completed():
-	is_in_cutscene = false
 
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 	if not is_instance_valid(area) or area == null:
@@ -185,53 +189,202 @@ func get_move_speed() -> float:
 	var move_speed := Flow.PLAYER_MOVE_SPEED
 	if is_in_gummy:
 		move_speed *= Flow.GUMMY_MODIFIER
+	if is_on_bike:
+		move_speed *= Flow.BIKE_MODIFIER
 	return move_speed
 
 func update_state(move_direction : Vector2):
 	var normalized_direction := move_direction.normalized()
 	var abs_direction := normalized_direction.abs()
-	var old_state : int = player_state
+	var old_state : int = _state
+	var old_direction : int = _direction
 	if abs_direction.x >= abs_direction.y:
 		if normalized_direction.x > 0:
-			player_state = STATE.RIGHT
+			_direction = DIRECTION.RIGHT
+			_state = STATE.WALK
 		elif normalized_direction.x < 0:
-			player_state = STATE.LEFT
+			_direction = DIRECTION.LEFT
+			_state = STATE.WALK
 		else:
-			player_state = STATE.DEFAULT
+			_state = STATE.IDLE
 	elif abs_direction.y > abs_direction.x:
 		if normalized_direction.y > 0:
-			player_state = STATE.DOWN
+			_direction = DIRECTION.DOWN
+			_state = STATE.WALK
 		elif normalized_direction.y < 0:
-			player_state = STATE.UP
+			_direction = DIRECTION.UP
+			_state = STATE.WALK
 		else:
-			player_state = STATE.DEFAULT
+			_state = STATE.IDLE
 	else:
-		player_state = STATE.DEFAULT
+		_state = STATE.IDLE
 
-	if old_state != player_state:
+	if old_state != _state or old_direction != _direction:
 		update_animation()
 
 func update_animation():
-	var state_settings : Dictionary = state_machine.get(player_state, {})
+	var direction_settings : Dictionary = state_machine.get(_direction, {})
+	var state_settings : Dictionary = direction_settings.get(_state, {})
+
 	_animated_sprite.play(state_settings.get("animation_name", "default"))
 	_animated_sprite.flip_h = state_settings.get("flip_h", false)
 	_animated_sprite.flip_v = state_settings.get("flip_v", false)
 
 var state_machine := {
-	STATE.LEFT:{
-		"animation_name": "move_right",
-		"flip_h": true
+	DIRECTION.LEFT:{
+		STATE.IDLE:{
+			"animation_name": "idle_right",
+			"flip_h": true
+		},
+		STATE.WALK:{
+			"animation_name": "walk_right",
+			"flip_h": true
+		}
 	},
-	STATE.RIGHT:{
-		"animation_name": "move_right"
+	DIRECTION.RIGHT:{
+		STATE.IDLE:{
+			"animation_name": "idle_right"
+		},
+		STATE.WALK:{
+			"animation_name": "walk_right"
+		}
 	},
-	STATE.UP:{
-		"animation_name": "move_up"
+	DIRECTION.UP:{
+		STATE.IDLE:{
+			"animation_name": "idle_up"
+		},
+		STATE.WALK:{
+			"animation_name": "walk_up"
+		}
 	},
-	STATE.DOWN:{
-		"animation_name": "move_down"
-	},
-	STATE.DEFAULT:{
-		"animation_name": "default"
+	DIRECTION.DOWN:{
+		STATE.IDLE:{
+			"animation_name": "idle_down"
+		},
+		STATE.WALK:{
+			"animation_name": "walk_down"
+		}
 	}
 }
+
+func play_respawn_cutscene():
+	var delay := 0.0
+	var duration := 1.0
+	self.is_in_cutscene = true
+
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"position", 
+		$AnimatedSprite.position, 
+		$AnimatedSprite.position + Vector2(0, -200),
+		duration, 
+		Tween.TRANS_BACK, 
+		Tween.EASE_OUT)
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"rotation_degrees", 
+		$AnimatedSprite.rotation_degrees, 
+		0, 
+		duration, 
+		Tween.TRANS_CUBIC, 
+		Tween.EASE_OUT)
+	delay += duration
+
+	_tween.interpolate_property(
+		self,
+		"position", 
+		position, 
+		respawn_position, 
+		0.0, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"position", 
+		$AnimatedSprite.position + Vector2(0, -200), 
+		Vector2(0, -200), 
+		0.0, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"position", 
+		Vector2(0, -200), 
+		Vector2.ZERO, 
+		duration, 
+		Tween.TRANS_BOUNCE, 
+		Tween.EASE_OUT, 
+		delay)
+	delay += duration
+
+	_tween.interpolate_property(
+		self, 
+		"is_in_cutscene", 
+		true, 
+		false,
+		0.0, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+	_tween.start()
+
+func play_chewing_cutscene(canster : class_canster):
+	var delay := 0.0
+	var duration := 0.5
+	self.is_in_cutscene = true
+
+	var target_position = canster.position - position
+	target_position.y -= 40
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"position", 
+		Vector2.ZERO, 
+		target_position, 
+		duration, 
+		Tween.TRANS_CUBIC, 
+		Tween.EASE_OUT)
+	_tween.interpolate_property(
+		$AnimatedSprite, 
+		"rotation_degrees", 
+		$AnimatedSprite.rotation_degrees, 
+		180, 
+		duration, 
+		Tween.TRANS_CUBIC, 
+		Tween.EASE_OUT)
+	delay += duration
+
+	duration = 2.0
+	bias = target_position.y
+	_tween.interpolate_method(
+		self, 
+		"_sinusoidal_movement", 
+		0, 
+		4, 
+		duration, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN, 
+		delay)
+	delay += duration
+	_tween.interpolate_callback(
+		self,
+		delay,
+		"update_cutscene_dialogue")
+	_tween.interpolate_property(
+		self, 
+		"is_in_cutscene", 
+		true, 
+		false,
+		0.0, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+	_tween.start()
+
+func _sinusoidal_movement(time : float):
+	var amplitude := 10
+	$AnimatedSprite.position.y = amplitude*sin(2*PI*1*time) + bias
+
+func update_cutscene_dialogue():
+	is_in_dialogue = Flow.dialogue_UI.update_dialogue()

@@ -2,7 +2,7 @@ extends Node
 
 onready var _tween := $Tween
 
-var active_minigame : Control = null 
+var active_minigame : Control = null
 
 func _parse_command(raw_text : String) -> Dictionary:
 ## Parse the command (denoted by >>> in INK) and return as a dictionary.
@@ -12,13 +12,14 @@ func _parse_command(raw_text : String) -> Dictionary:
 	var command_dict := {}
 	command_dict.name = split_text[0].strip_edges()
 	command_dict.argument_values = []
-	var argument_values := split_text[1].split(" ", false)
-	for value in argument_values:
-		command_dict.argument_values.append(value.strip_edges())
+	if split_text.size() > 1:
+		var argument_values := split_text[1].split(" ", false)
+		for value in argument_values:
+			command_dict.argument_values.append(value.strip_edges())
 
 	return command_dict
 
-func execute_command(raw_text : String):
+func execute_command(raw_text : String) -> bool:
 
 	var command_dict := _parse_command(raw_text) 
 	
@@ -29,7 +30,7 @@ func execute_command(raw_text : String):
 	if not external_dict.empty():
 		if argument_types.size() != argument_values.size() and not variable_number_of_arguments:
 			push_error("Number of arguments of external setter function '{0}' was incorrect! Requires {1} arguments!".format([command_dict.name, argument_types.size()]))
-			return
+			return true
 
 		var argument_type : int = TYPE_MAX
 		if variable_number_of_arguments:
@@ -46,6 +47,11 @@ func execute_command(raw_text : String):
 
 		var callback : FuncRef = external_dict.callback
 		callback.call_func(argument_values)
+
+	if command_dict.name == "PLAY_CUTSCENE":
+		return false
+	else:
+		return true
 
 func pan_camera(argument_values : Array):
 	var mask : String = argument_values[0]
@@ -101,6 +107,29 @@ func end_minigame(argument_values):
 			active_minigame.visible = false
 			active_minigame = null
 
+func set_state(argument_values):
+	var state : int = int(argument_values[0])
+	var node : Node2D = Flow.dialogue_UI.interact_node
+	if node:
+		node.set("state", state)
+
+func play_cutscene(argument_values):
+	var cutscene_id : String = argument_values[0]
+	match cutscene_id:
+		"respawn_player":
+			respawn_player(argument_values)
+		"chew_on_player":
+			chew_on_player(argument_values)
+
+func respawn_player(_argument_values):
+	var player : class_player = Flow.player
+	player.play_respawn_cutscene()
+
+func chew_on_player(_argument_values):
+	var player : class_player = Flow.player
+	var canster : class_canster = Flow.dialogue_UI.interact_node
+	player.play_chewing_cutscene(canster)
+
 var external_setters : Dictionary = {
 	"PAN_CAMERA" : {
 		"callback": funcref(self, "pan_camera"),
@@ -129,5 +158,17 @@ var external_setters : Dictionary = {
 	"END_MINIGAME" : {
 		"callback": funcref(self, "end_minigame"),
 		"argument_types": [TYPE_STRING]
+	},
+	"SET_STATE" : {
+		"callback": funcref(self, "set_state"),
+		"argument_types": [TYPE_STRING]
+	},
+	"PLAY_CUTSCENE" : {
+		"callback": funcref(self, "play_cutscene"),
+		"argument_types": [TYPE_STRING]
+	},
+	"RESPAWN_PLAYER" : {
+		"callback": funcref(self, "respawn_player"),
+		"argument_types": []
 	}
 }

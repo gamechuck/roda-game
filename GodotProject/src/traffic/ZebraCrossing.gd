@@ -65,6 +65,9 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		player_is_inside = true
 
 func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
+	if not is_instance_valid(area) or area == null:
+		return
+
 	if area.get_parent().name == "Player":
 		player_is_inside = false
 		emit_signal("movement_is_allowed")

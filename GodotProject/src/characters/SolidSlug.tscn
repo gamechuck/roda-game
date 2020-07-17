@@ -18,6 +18,7 @@ extents = Vector2( 30, 20 )
 extents = Vector2( 25, 10 )
 
 [node name="SolidSlug" instance=ExtResource( 1 )]
+id = "solid_slug"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )

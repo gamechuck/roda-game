@@ -21,12 +21,16 @@ VAR gave_back_bike = 0
 VAR fixed_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
-VAR used_item = "Bush"
+VAR used_item = "bush"
 VAR conv_type = 0
 
 EXTERNAL has_item(item_id)
 === function has_item(item_id) ===
 ~ return true 
+
+EXTERNAL get_state()
+=== function get_state() ===
+~ return 0
 
 === conv_solid_snejk ===
 
@@ -41,7 +45,7 @@ EXTERNAL has_item(item_id)
     - 4: -> ending
 }
 
-{has_item("Fence"):
+{has_item("fence"):
 	- true: -> fix_fence
 }
 
@@ -60,44 +64,44 @@ Idemo naći ograde i popraviti park da se možemo opet loptati!
 Super! Našao si komad ograde!
 Idem ga postaviti!
 ~ number_of_fences_fixed += 1
->>> REMOVE_ITEM: Fence
+>>> REMOVE_ITEM: fence
 {number_of_fences_fixed:
     - 4: -> ending
-	- else: -> END
+	- else: -> DONE
 }
 
 = ending
 VAU, Ovo mjesto sad izgleda mnogo ljepše, zar ne?
 Idemo se sad napokon loptati!
--> END
+-> DONE
 
 = main
 Hej, idemo popraviti ogradu zajedno!
 Ti mi donesi dijelove ograde i ja ću ju postaviti.
 Moraju biti tu negdje oko nas...
--> END
+-> DONE
 
 = use_item
 
 {used_item:
-	- "Bike": -> bike
-	- "Pump": -> pump
-	- "Fence": -> fix_fence
+	- "bike": -> bike
+	- "pump": -> pump
+	- "fence": -> fix_fence
 	- else: -> default
 }
 
 = bike
 Fora bicikl, frende!
--> END
+-> DONE
 
 = pump
 Pumpa za bicikl? Isprobaj je na biciklu!
 A ne na meni!
--> END
+-> DONE
 
 = default
 Ne želim to uzeti...
--> END
+-> DONE
 
 === conv_watto ===
 
@@ -119,7 +123,7 @@ Pogledaj, dolje je bicikl!
 Sad ti je sigurno žao što nemaš moju leteću raketu?
 Hehe, šteta zar ne...
 >>> PAN_CAMERA: Player
--> END
+-> DONE
 
 = has_bike
 
@@ -149,40 +153,40 @@ Ako nema pločnika, gdje se pješaci kreću?
 	KRIVO! KRIVO!
 	-> start_question
 -
->>> ADD_ITEM: Fence
+>>> ADD_ITEM: fence
 ~ watto_question_solved = 1
--> END
+-> DONE
 
 = ending
 
 Tamo gdje ja idem, ne trebaju nam ceste!
--> END
+-> DONE
 
 = use_item
 
 {used_item:
-	- "Bike": -> bike
-	- "Pump": -> pump
-	- "Bike": -> fence
+	- "bike": -> bike
+	- "pump": -> pump
+	- "bike": -> fence
 	- else: -> default
 }
 
 = bike
 Ah... Vidim da si otkrio kako prijeći zebre!
 Svaka čast.
--> END
+-> DONE
 
 = pump
 S tim napumpaj gumu na biciklu, meni za raketu to ne treba!
--> END
+-> DONE
 
 = fence
 Ne treba mi ta ograda.
--> END
+-> DONE
 
 = default
 Ne treba mi ta stvar.
--> END
+-> DONE
 
 === conv_lizzy ===
 
@@ -205,14 +209,14 @@ Ne znam ja ništa o nikakvim ogradama...
 	- false: -> show_fence
 }
 Ali ako ikad zatrebaš nešto magično i korisno, slobodno me pitaj!
--> END
+-> DONE
 
 = show_fence
 >>> PAN_CAMERA: Fence
 Ali vidio sam da je nešto palo tamo negdje u onom smjeru...
 Možda da odeš provjeriti?
 >>> PAN_CAMERA: Player
--> END
+-> DONE
 
 = need_pump
 
@@ -247,21 +251,21 @@ Pri prelasku kolnika zebrom na biciklu trebamo:
 	-> start_riddle
 -
 Evo ti magična super pumpa za bicikle.
->>> ADD_ITEM: Pump
+>>> ADD_ITEM: pump
 ~ lizzy_riddle_solved = 1
--> END
+-> DONE
 
 = ending
 
 Nadam se da ti je moja magična super pumpa za bicikle korisna!
--> END
+-> DONE
 
 = use_item
 
 {used_item:
-	- "Bike": -> bike
-	- "Pump": -> ending
-	- "Fence": -> fence
+	- "bike": -> bike
+	- "pump": -> ending
+	- "fence": -> fence
 	- else: -> default
 }
 
@@ -269,17 +273,17 @@ Nadam se da ti je moja magična super pumpa za bicikle korisna!
 Ah, vidim, našao si bicikl.
 Zapamti: 
 Uvijek, nosi biciklističku kacigu kada voziš bicikl!
--> END
+-> DONE
 
 = fence
 Kako divna ograda!
 Da je bar mogu ponijeti doma sa sobom...
 Ali ova ograda je tu za sve nas! Ne smije se odnositi!
--> END
+-> DONE
 
 = default
 Makni mi to s očiju!
--> END
+-> DONE
 
 === conv_solid_slug ===
 
@@ -294,7 +298,7 @@ Makni mi to s očiju!
 	- 1 : -> bike_was_fixed
 }
 
-{has_item("Pump") && figured_out_issue_with_bike:
+{has_item("pump") && figured_out_issue_with_bike:
 	- true: -> has_pump
 }
 
@@ -306,7 +310,7 @@ Makni mi to s očiju!
 	- true : -> broken_bike
 }
 
-{has_item("Bike"):
+{has_item("bike"):
 	- true: -> has_bike
 	- false: -> intro
 }
@@ -316,15 +320,15 @@ Makni mi to s očiju!
 Vjetar ti je otpuhao ogradu od parka?
 Ah, a ja sam zagubio svoj bicikl...
 Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
--> END
+-> DONE
 
 = has_bike
 
 Hvala što s mi našao bicikl.
 Evo komada ograde kojeg sam našao u međuvremenu...
 ~ gave_back_bike = 1
->>> REMOVE_ITEM: Bike
->>> ADD_ITEM: Fence
+>>> REMOVE_ITEM: bike
+>>> ADD_ITEM: fence
 >>> SHOW: BrokenBike
 -> broken_bike
 
@@ -332,37 +336,37 @@ Evo komada ograde kojeg sam našao u međuvremenu...
 
 Ah, čini se da nešto ne valja s mojim biciklom...
 Šteta... Možeš li mi pomoći otkriti što?
--> END
+-> DONE
 
 = issue_with_bike
 
 Ah, znači guma je ispuhana?
 Šteta...
 Možeš li negdje od nekoga nabaviti pumpu za bicikle?
--> END
+-> DONE
 
 = has_pump
 
 Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
--> END
+-> DONE
 
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
 {got_second_fence_from_solid_slug:
-	1 : -> END
+	1 : -> DONE
 }
 Evo, ja sam našao još jedan komad otpuhane ograde!
->>> ADD_ITEM: Fence
+>>> ADD_ITEM: fence
 ~ got_second_fence_from_solid_slug = 1
--> END
+-> DONE
 
 = use_item
 
 {used_item:
-	- "Pump": -> pump
-	- "Bike": -> has_bike
-	- "Fence": -> fence
+	- "pump": -> pump
+	- "bike": -> has_bike
+	- "fence": -> fence
 	- else: -> default
 }
 
@@ -371,27 +375,27 @@ Evo, ja sam našao još jedan komad otpuhane ograde!
 	- true: -> has_pump
 	- false: -> default
 }
--> END
+-> DONE
 
 = fence
 Kladim se da bi crv zvan Solid Snejk znao što napraviti s tom ogradom...
--> END
+-> DONE
 
 = default
 Ne treba mi to, hvala...
--> END
+-> DONE
 
 === conv_bike ===
 
 Mogu ponijeti ovaj bicikl sa sobom!
 ~ found_bike = true
--> END
+-> DONE
 
 === conv_fence ===
 
 Trebao bih dati ovu ogradu crvu zvanom Solid Snejk.
 ~ picked_up_fence = true
--> END
+-> DONE
 
 
 === conv_broken_bike ===
@@ -407,13 +411,13 @@ Trebao bih dati ovu ogradu crvu zvanom Solid Snejk.
 	- false : -> check_bike
 }
 
-{has_item("Pump"):
+{has_item("pump"):
 	- true: -> fix_bike_with_pump
 }
 
 Trebao bih okolo potražiti pumpu za bicikl...
 Tko bi mi mogao pomoći?
--> END
+-> DONE
 
 = check_bike
 >>> BEGIN_MINIGAME: bike_repair
@@ -457,12 +461,12 @@ Tko bi mi mogao pomoći?
 Čini se da je problem samo u ispuhanoj gumi...
 Trebamo to popraviti!
 >>> END_MINIGAME: bike_repair
--> END
+-> DONE
 
 = use_item
 
 {used_item:
-	- "Pump": -> pump
+	- "pump": -> pump
 	- else: -> default
 }
 
@@ -473,7 +477,7 @@ Trebamo to popraviti!
 }
 
 Trebam prvo otkriti što ne valja s bicilkom...
--> END
+-> DONE
 
 = fix_bike_with_pump
 
@@ -485,21 +489,130 @@ Vrijeme za napumpati praznu gumu!
 ...?
 Eto, kao nova!
 ~ fixed_bike = 1
--> END
+-> DONE
 
 = default
 Ne treba to biciklu...
--> END
+-> DONE
 
 === conv_debug ===
 
 TESTNI RAZGOVOR: Što hoćeš?
 + [Daj mi ogradu!]
-	>>> ADD_ITEM : Fence
+	>>> ADD_ITEM : fence
 + [Daj mi bicikl!]
-	>>> ADD_ITEM : Bike
+	>>> ADD_ITEM : bike
 + [Daj mi pumpu!]
-	>>> ADD_ITEM : Pump
+	>>> ADD_ITEM : pump
 -
 Evo!
--> END
+-> DONE
+
+=== conv_taxi ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+This is a taxi
+-> DONE
+
+= use_item
+
+{used_item:
+	- "trash_sock": -> trash_sock
+	- "trash_bag": -> trash_bag
+	- "trash_cup": -> trash_cup
+	- else: -> default
+}
+
+= trash_sock
+
+It's a sock
+-> DONE
+
+= trash_bag
+
+It's a bag
+-> DONE
+
+= trash_cup
+
+It's a cup
+-> DONE
+
+= default
+
+NO
+-> DONE
+
+=== conv_trash_sock ===
+
+A filthy sock!
+-> DONE
+
+=== conv_canster ===
+
+{get_state():
+	- 0: -> conv_canster_angry
+	- 1: -> conv_canster_appeased
+}
+
+=== conv_canster_angry ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+>>> PLAY_CUTSCENE: chew_on_player
+!!?
+Nisi smeće! Bah!
+>>> RESPAWN_PLAYER
+-> DONE
+
+= use_item
+
+{
+	- used_item == "trash_sock" or used_item == "trash_bag" or used_item == "trash_cup": -> appease_canster
+	- else: -> interact
+}
+
+= appease_canster
+
+>>> REMOVE_ITEM: {used_item}
+YUM YUM!
+Ja volim smeće!
+>>> SET_STATE: 1
+-> DONE
+
+=== conv_canster_appeased ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Hvala na smeću!
+-> DONE
+
+= use_item
+
+{
+	- used_item == "trash_sock" or used_item == "trash_bag" or used_item == "trash_cup": -> canster_cant_even
+	- else: -> default
+}
+
+= canster_cant_even
+Oprosti, puna sam...
+Ali možda negdje postoji još jedna kanta za smeće?
+-> DONE
+
+= default
+Nisi smeće! Bah!
+-> DONE

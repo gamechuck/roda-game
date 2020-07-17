@@ -28,7 +28,7 @@ __meta__ = {
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="CountLabel" type="Label" parent="Node2D"]
+[node name="AmountLabel" type="Label" parent="Node2D"]
 margin_left = -32.0
 margin_bottom = 54.0
 size_flags_horizontal = 3

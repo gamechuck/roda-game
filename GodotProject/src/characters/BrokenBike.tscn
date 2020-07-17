@@ -11,13 +11,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30, 20 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 26, 6 )
 
 [node name="BrokenBike" instance=ExtResource( 1 )]
+id = "broken_bike"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
@@ -25,7 +26,7 @@ offset = Vector2( 0, -10 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 position = Vector2( 0, -8 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )

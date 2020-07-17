@@ -4,10 +4,14 @@ onready var _navigation_2D := $Navigation2D
 onready var _player := $YSort/Player
 onready var _props := $YSort/Props
 onready var _fences := $YSort/Fences
+onready var _ghosts := $YSort/Ghosts
 
 func _ready():
 	Flow.game_canvas = self
-	var _error := _player.connect("nav_path_requested", self, "_on_nav_path_requested")
+	var _error := _player.connect("nav_path_requested", self, "_on_player_nav_path_requested")
+
+	for ghost in _ghosts.get_children():
+		_error = ghost.connect("nav_path_requested", self, "_on_nav_path_requested", [ghost])
 
 	return
 	var navigation_polygon_instance := $Navigation2D/NavigationPolygonInstance
@@ -33,7 +37,7 @@ func _ready():
 	navigation_polygon_instance.enabled = false
 	navigation_polygon_instance.enabled = true
 
-func _on_nav_path_requested():
+func _on_player_nav_path_requested():
 	var mouse_position := get_local_mouse_position()
 	#print(mouse_position)
 	print("Player is navigating to '{0}'".format([mouse_position]))
@@ -41,6 +45,12 @@ func _on_nav_path_requested():
 	# Remove the first point since it is the initial position!!!
 	nav_path.remove(0)
 	_player.nav_path = nav_path
+
+func _on_nav_path_requested(end : Vector2, ghost : class_ghost):
+	var nav_path = _navigation_2D.get_simple_path(ghost.position, end)
+	# Remove the first point since it is the initial position!!!
+	nav_path.remove(0)
+	ghost.nav_path = nav_path
 
 func increment_visible_fences():
 	for fence in _fences.get_children():

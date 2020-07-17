@@ -26,6 +26,9 @@ var MINIMUM_INTERACTION_DISTANCE := 200
 var PANIC_MODIFIER := 2.0
 var CAR_MOVE_SPEED := 4.0
 var SKATER_MOVE_SPEED := 4.0
+var GHOST_AWAKE_MOVE_SPEED := 1.0
+var GHOST_SLEEPING_MOVE_SPEED := 0.1
+var GHOST_ACTIVATION_DISTANCE := 200
 var PLAYER_MOVE_SPEED := 2.0
 var GUMMY_MODIFIER := 0.5
 var BIKE_MODIFIER := 2.0
@@ -51,7 +54,7 @@ var player : KinematicBody2D = null
 
 var active_character : class_character = null
 var active_item : class_item = null
-var active_item_slot : class_item_slot = null
+var active_inventory_item : class_inventory_item = null
 
 var character_data := {}
 var item_data := {}
@@ -79,7 +82,10 @@ func load_story():
 	dialogue_UI.story = _story_resource.new(content)
 
 	# Bind the getter functions so the story can access the game's state.
+	# Check if the player has an item in its inventory...
 	dialogue_UI.story.bind_external_function_general("has_item", inventory_overlay, "has_item")
+	# Get the state of the node that is participating in the dialogue.
+	dialogue_UI.story.bind_external_function_general("get_state", dialogue_UI, "get_state")
 
 	# Bind an observer to some variables
 	dialogue_UI.story.observe_variables(["number_of_fences_fixed"], self, "_observe_variables")

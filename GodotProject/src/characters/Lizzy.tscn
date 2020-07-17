@@ -18,6 +18,7 @@ extents = Vector2( 30, 34 )
 extents = Vector2( 30, 5 )
 
 [node name="Lizzy" instance=ExtResource( 1 )]
+id = "lizzy"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
