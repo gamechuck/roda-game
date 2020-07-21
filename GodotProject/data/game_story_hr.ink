@@ -21,6 +21,9 @@ VAR gave_back_bike = 0
 VAR fixed_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
+// Taxi
+VAR seatbelt_enigma_solved = 0
+
 VAR used_item = "bush"
 VAR conv_type = 0
 
@@ -517,7 +520,12 @@ Evo!
 
 = interact
 
+>>> BEGIN_MINIGAME: car_seat_belt
 This is a taxi
+{ seatbelt_enigma_solved:
+	- 0 : -> interact
+	- 1 : -> DONE
+}
 -> DONE
 
 = use_item

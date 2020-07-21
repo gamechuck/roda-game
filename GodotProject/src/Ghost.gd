@@ -13,6 +13,7 @@ var _player : class_player = null
 onready var _animated_sprite := $AnimatedSprite
 onready var _cpu_particles_2D := $CPUParticles2D
 onready var _visibility_notifier_2D := $VisibilityNotifier2D
+onready var _audio_stream_player_2D := $AudioStreamPlayer2D
 
 var _has_reached_target := true
 
@@ -100,13 +101,17 @@ func _update_animation():
 
 	_cpu_particles_2D.emitting = state_settings.get("emitting", false)
 
+	_audio_stream_player_2D.playing = state_settings.get("playing", false)
+
 var _state_machine := {
 	STATE.SLEEPING:{
 		"animation_name": "sleeping",
-		"emitting": true
+		"emitting": true,
+		"playing": true 
 	},
 	STATE.AWAKE:{
 		"animation_name": "awake",
-		"emitting": false
+		"emitting": false,
+		"playing": false 
 	}
 }

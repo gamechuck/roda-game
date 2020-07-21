@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/GameCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/editor/EditorCamera.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://roda-assets/UI/Inventory/inventory_opened_background.png" type="Texture" id=18]
 [ext_resource path="res://roda-assets/UI/Inventory/scroll_up.png" type="Texture" id=19]
 [ext_resource path="res://roda-assets/UI/Inventory/scroll_down.png" type="Texture" id=20]
+[ext_resource path="res://src/UI/CarSeatBeltUI.tscn" type="PackedScene" id=21]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -251,6 +252,9 @@ align = 1
 valign = 1
 
 [node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
+visible = false
+
+[node name="CarSeatBeltUI" parent="UICanvas" instance=ExtResource( 21 )]
 visible = false
 
 [node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]

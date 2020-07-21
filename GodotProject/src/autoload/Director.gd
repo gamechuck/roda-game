@@ -99,11 +99,17 @@ func begin_minigame(argument_values):
 		"bike_repair":
 			active_minigame = Flow.bike_repair_UI
 			active_minigame.visible = true
+		"car_seat_belt":
+			active_minigame = Flow.car_seat_belt_UI
+			active_minigame.visible = true
 
 func end_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
 	match minigame_id:
 		"bike_repair":
+			active_minigame.visible = false
+			active_minigame = null
+		"car_seatbelt":
 			active_minigame.visible = false
 			active_minigame = null
 

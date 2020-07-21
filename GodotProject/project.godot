@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Character.gd"
 }, {
+"base": "TextureRect",
+"class": "class_character_slot",
+"language": "GDScript",
+"path": "res://src/UI/CharacterSlot.gd"
+}, {
 "base": "Area2D",
 "class": "class_ghost",
 "language": "GDScript",
@@ -33,6 +38,11 @@ _global_script_classes=[ {
 "class": "class_gummy",
 "language": "GDScript",
 "path": "res://src/Gummy.gd"
+}, {
+"base": "TextureRect",
+"class": "class_highlight_rect",
+"language": "GDScript",
+"path": "res://src/UI/HighlightRect.gd"
 }, {
 "base": "Reference",
 "class": "class_inventory_item",
@@ -98,8 +108,10 @@ _global_script_class_icons={
 "class_canster": "",
 "class_car": "",
 "class_character": "",
+"class_character_slot": "",
 "class_ghost": "",
 "class_gummy": "",
+"class_highlight_rect": "",
 "class_inventory_item": "",
 "class_item": "",
 "class_item_slot": "",
