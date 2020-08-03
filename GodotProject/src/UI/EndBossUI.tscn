@@ -5,7 +5,7 @@
 [ext_resource path="res://roda-assets/Mockups/smog_particle.png" type="Texture" id=3]
 [ext_resource path="res://src/UI/SmogEnemy.gd" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -23,7 +23,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=3]
 radius = 8.0
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 64, 64 )
 
 [node name="EndBoss" type="Control"]
@@ -64,7 +64,7 @@ margin_right = 304.0
 margin_bottom = 260.0
 rect_min_size = Vector2( 128, 128 )
 size_flags_horizontal = 4
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer/VBoxContainer/Control"]
 margin_left = 2.0
@@ -117,7 +117,7 @@ shape = SubResource( 3 )
 position = Vector2( 62, 62 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Control/ViewportContainer/Node2D/Area2D"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/VBoxContainer/Control/ViewportContainer"]
 size = Vector2( 128, 128 )

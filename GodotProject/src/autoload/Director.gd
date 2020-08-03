@@ -98,20 +98,14 @@ func begin_minigame(argument_values):
 	match minigame_id:
 		"bike_repair":
 			active_minigame = Flow.bike_repair_UI
-			active_minigame.visible = true
 		"car_seat_belt":
 			active_minigame = Flow.car_seat_belt_UI
-			active_minigame.visible = true
+	if active_minigame != null:
+		active_minigame.show()
 
-func end_minigame(argument_values):
-	var minigame_id : String = argument_values[0]
-	match minigame_id:
-		"bike_repair":
-			active_minigame.visible = false
-			active_minigame = null
-		"car_seatbelt":
-			active_minigame.visible = false
-			active_minigame = null
+func end_minigame(_argument_values):
+	active_minigame.hide()
+	active_minigame = null
 
 func set_state(argument_values):
 	var state : int = int(argument_values[0])
@@ -126,6 +120,8 @@ func play_cutscene(argument_values):
 			respawn_player(argument_values)
 		"chew_on_player":
 			chew_on_player(argument_values)
+		"teleport_to_mountain":
+			teleport_to_mountain(argument_values)
 
 func respawn_player(_argument_values):
 	var player : class_player = Flow.player
@@ -135,6 +131,18 @@ func chew_on_player(_argument_values):
 	var player : class_player = Flow.player
 	var canster : class_canster = Flow.dialogue_UI.interact_node
 	player.play_chewing_cutscene(canster)
+
+func teleport_to_mountain(_argument_values):
+	var player : class_player = Flow.player
+	player.play_teleport_to_mountain()
+
+func fade_to_opaque(argument_values : Array):
+	var duration : float = argument_values[0]
+	Flow.transitions_UI.fade_to_opaque(duration)
+
+func fade_to_transparent(argument_values : Array):
+	var duration : float = argument_values[0]
+	Flow.transitions_UI.fade_to_transparent(duration)
 
 var external_setters : Dictionary = {
 	"PAN_CAMERA" : {
@@ -163,7 +171,7 @@ var external_setters : Dictionary = {
 	},
 	"END_MINIGAME" : {
 		"callback": funcref(self, "end_minigame"),
-		"argument_types": [TYPE_STRING]
+		"argument_types": []
 	},
 	"SET_STATE" : {
 		"callback": funcref(self, "set_state"),

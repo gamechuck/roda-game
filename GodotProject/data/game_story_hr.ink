@@ -463,7 +463,7 @@ Tko bi mi mogao pomoći?
 = after_checking_bike
 Čini se da je problem samo u ispuhanoj gumi...
 Trebamo to popraviti!
->>> END_MINIGAME: bike_repair
+>>> END_MINIGAME
 -> DONE
 
 = use_item
@@ -511,7 +511,7 @@ TESTNI RAZGOVOR: Što hoćeš?
 Evo!
 -> DONE
 
-=== conv_taxi ===
+=== conv_taxi_at_park ===
 
 {conv_type:
 	- 0: -> interact
@@ -520,13 +520,40 @@ Evo!
 
 = interact
 
->>> BEGIN_MINIGAME: car_seat_belt
-This is a taxi
-{ seatbelt_enigma_solved:
-	- 0 : -> interact
-	- 1 : -> DONE
+{seatbelt_enigma_solved:
+	- true: -> after_solving_enigma
+	- false: -> after_solving_enigma
 }
+
+= before_solving_enigma
+This is a taxi!
+>>> BEGIN_MINIGAME: car_seat_belt
+- (taxi_minigame_start)
+Could you please put everyone in the correct spot?
++ That doesn't seem correct!
+	Please try again!
+	-> taxi_minigame_start
++ Wow! That is perfect!
+	Now I will finally not get fined by policija!
+	-> taxi_minigame_solved
+= taxi_minigame_solved
+~ seatbelt_enigma_solved = true
+>>> END_MINIGAME
 -> DONE
+
+= after_solving_enigma
+
+Hey! Thanks for helping me earlier!
+As a reward I'll drive you to the mountain!
+Want me to take you to the mountain?
++ [Take me that mountain!]
+	OK!
+	>>> PLAY_CUTSCENE: teleport_to_mountain
+	Have fun!
+	-> DONE
++ [Not now... maybe later!]
+	OK!
+	-> DONE
 
 = use_item
 
@@ -555,6 +582,29 @@ It's a cup
 = default
 
 NO
+-> DONE
+
+=== conv_taxi_at_mountain ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+You wanna go back to the park?
++ [Yes]
+	Okay! Get in!
+	>>> PLAY_CUTSCENE: teleport_to TaxiAtPark
+	Have fun in the park!
+	-> DONE
++ [No]
+	Okay! I'll be waiting here for you!
+	-> DONE
+
+= use_item
+
 -> DONE
 
 === conv_trash_sock ===

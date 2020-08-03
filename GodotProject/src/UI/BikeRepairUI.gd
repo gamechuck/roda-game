@@ -37,6 +37,12 @@ func _ready():
 	for key in highlight_dict.keys():
 		key.connect("mouse_pressed", self, "_on_mouse_pressed")
 
+func show():
+	visible = true
+
+func hide():
+	visible = false
+
 func _on_mouse_pressed(highlight_rect : TextureRect):
 	if highlight_dict.has(highlight_rect):
 		var index : int = highlight_dict[highlight_rect].index

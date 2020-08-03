@@ -3,34 +3,61 @@ extends Control
 onready var _tween := $Tween
 onready var _color_rect := $ColorRect
 
-const DURATION := 4.0
+signal transition_completed()
 
-var eye_is_closed := false
+enum TRANSITION {OPAQUE, TRANSPARENT}
+
+var _transition_stack := []
+var _duration := 1.0
 
 func _ready():
-	
-	var _error : int = _tween.connect("tween_all_completed", self, "_on_tween_all_completed")
-	#_on_tween_all_completed()
+	Flow.transitions_UI = self
 
-func _on_tween_all_completed():
-	var initial_value := 0.0
-	var final_value := 1.0
-	if eye_is_closed:
-		initial_value = 1.0
-		final_value = 0.0
-		eye_is_closed = false
-	else:
-		eye_is_closed = true
-	print("completed")
+	var _error : int = _tween.connect("tween_all_completed", self, "_on_tween_all_completed")
+
+	visible = false
+
+func fade_to_opaque(duration : float = 1.0):
+	visible = true
 	_tween.interpolate_method(
 		self, 
 		"_set_shader_param", 
-		initial_value, 
-		final_value, 
-		DURATION,
+		1.0, 
+		0.0, 
+		duration,
 		Tween.TRANS_CUBIC, 
 		Tween.EASE_IN_OUT)
 	_tween.start()
+
+func fade_to_transparent(duration : float = 1.0):
+	visible = true
+	_tween.interpolate_method(
+		self,
+		"_set_shader_param", 
+		0.0,
+		1.0,
+		duration,
+		Tween.TRANS_CUBIC, 
+		Tween.EASE_IN_OUT)
+	_tween.start()
+
+func _on_tween_all_completed():
+	print("completed transition!!!")
+	if _transition_stack.empty():
+		print("completed transition!!!")
+		emit_signal("transition_completed")
+		var shader_material : ShaderMaterial = _color_rect.get_material()
+		if shader_material.get_shader_param("threshold") == 1:
+			visible = false
+		else:
+			visible = true
+	else:
+		var state : int = _transition_stack.pop_front()
+		match state:
+			TRANSITION.OPAQUE:
+				fade_to_opaque(_duration)
+			TRANSITION.TRANSPARENT:
+				fade_to_transparent(_duration)
 
 func _set_shader_param(value : float):
 	var shader_material : ShaderMaterial = _color_rect.get_material()

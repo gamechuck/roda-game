@@ -81,13 +81,21 @@
         "broken_bike": {
             "KNOT": "conv_broken_bike"
         },
-        "taxi": {
+        "taxi_at_park": {
             "DISPLAY_NAME" : "Taxi",
-            "KNOT": "conv_taxi"
+            "KNOT": "conv_taxi_at_park"
+        },
+        "taxi_at_mountain": {
+            "DISPLAY_NAME" : "Taxi",
+            "KNOT": "conv_taxi_at_mountain"
         },
         "canster": {
             "DISPLAY_NAME" : "Canster",
             "KNOT": "conv_canster"
+        },
+        "wheelie": {
+            "DISPLAY_NAME" : "Wheelie",
+            "KNOT": "conv_wheelie"
         },
         "debug": {
             "KNOT": "conv_debug",
@@ -144,6 +152,12 @@
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_sock_normal.png",
                 "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_sock_pressed.png"
+            }
+        },
+        "seat_belt": {
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/Mockups/seat_belt_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/Mockups/seat_belt_normal.png"
             }
         }
     }

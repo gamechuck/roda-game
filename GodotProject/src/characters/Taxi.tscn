@@ -46,6 +46,7 @@ id = "taxi"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 7 )
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]

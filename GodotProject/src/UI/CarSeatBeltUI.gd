@@ -20,26 +20,26 @@ var active_character : TextureRect = null
 onready var highlight_dict := {
 	_seat1_highlight : {
 		"name": "Seat1",
-		"correct_character" :  _adult_rect
+		"correct_character" :  _child_rect
 	},
 	_seat2_highlight : {
 		"name": "Seat2",
-		"correct_character" :  _child_rect
+		"correct_character" :  _teenager_rect
 	},
 	_seat3_highlight : {
 		"name": "Seat3",
-		"correct_character" :  _teenager_rect
+		"correct_character" :  _baby_rect
 	},
 	_seat4_highlight : {
 		"name": "Seat4",
-		"correct_character" :  _baby_rect
+		"correct_character" :  _adult_rect
 	}
 }
 
 func _ready():
 	Flow.car_seat_belt_UI = self
 
-	var _error := _drive_button.connect("pressed", self, "on_drive_button_pressed")
+	var _error := _drive_button.connect("pressed", self, "_on_drive_button_pressed")
 
 	for key in highlight_dict.keys():
 		key.connect("mouse_pressed", self, "_on_mouse_pressed")
@@ -47,6 +47,20 @@ func _ready():
 		if not child is class_character_slot:
 			continue
 		child.connect("button_pressed", self, "_on_character_pressed", [child])
+
+func show():
+	visible = true
+
+func hide():
+	visible = false
+
+func reset_all():
+	for key in highlight_dict.keys():
+		if key.character != null:
+			var character : class_character_slot = key.character
+			character.disabled = false
+
+			key.character = null
 
 func _on_mouse_pressed(highlight_rect : TextureRect) -> void:
 	if highlight_dict.has(highlight_rect):
@@ -76,4 +90,14 @@ func _on_character_pressed(pressed : bool, pressed_character :  class_character_
 				active_character = null
 
 func _on_drive_button_pressed():
-	print("pressed drive button!")
+	for key in highlight_dict.keys():
+		if key.character != highlight_dict[key].correct_character:
+			print("incorrect!")
+			if Flow.dialogue_UI.is_waiting_for_choice:
+				Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(0)
+			reset_all()
+			return
+	
+	if Flow.dialogue_UI.is_waiting_for_choice:
+		Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(1)
+	print("correct!")

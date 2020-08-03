@@ -251,13 +251,13 @@ text = "v0.0"
 align = 1
 valign = 1
 
+[node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]
+visible = false
+
 [node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
 
 [node name="CarSeatBeltUI" parent="UICanvas" instance=ExtResource( 21 )]
-visible = false
-
-[node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]
 visible = false
 
 [node name="TransitionsUI" parent="UICanvas" instance=ExtResource( 15 )]

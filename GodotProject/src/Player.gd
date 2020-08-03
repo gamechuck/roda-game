@@ -382,6 +382,51 @@ func play_chewing_cutscene(canster : class_canster):
 		delay)
 	_tween.start()
 
+func play_teleport_to_mountain():
+	var delay := 0.0
+	var duration := 0.5
+	self.is_in_cutscene = true
+
+	_tween.interpolate_callback(
+		Flow.transitions_UI, 
+		0,
+		"fade_to_opaque")
+
+	delay += 1
+
+	_tween.interpolate_property(
+		self,
+		"position", 
+		position,
+		Vector2(1200, 1025), 
+		0.0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+#
+	_tween.interpolate_callback(
+		Flow.transitions_UI, 
+		delay,
+		"fade_to_transparent")
+
+	delay += 1
+
+	_tween.interpolate_callback(
+		self,
+		delay,
+		"update_cutscene_dialogue")
+	_tween.interpolate_property(
+		self,
+		"is_in_cutscene", 
+		true, 
+		false,
+		0.0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+
+	_tween.start()
+
 func _sinusoidal_movement(time : float):
 	var amplitude := 10
 	$AnimatedSprite.position.y = amplitude*sin(2*PI*1*time) + bias

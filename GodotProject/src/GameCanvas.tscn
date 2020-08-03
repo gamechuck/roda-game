@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Tilemap/demo_tilemap.tmx" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://src/items/TrashSock.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/items/TrashBag.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/items/TrashCup.tscn" type="PackedScene" id=27]
+[ext_resource path="res://src/characters/Wheelie.tscn" type="PackedScene" id=28]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 80, 120 )
@@ -150,11 +151,19 @@ position = Vector2( 1332, 464 )
 collision_layer = 0
 collision_mask = 0
 
-[node name="Taxi" parent="YSort/Characters" instance=ExtResource( 23 )]
+[node name="TaxiAtPark" parent="YSort/Characters" instance=ExtResource( 23 )]
 position = Vector2( 1355.95, 541.183 )
+id = "taxi_at_park"
+
+[node name="TaxiAtMountain" parent="YSort/Characters" instance=ExtResource( 23 )]
+position = Vector2( 1150.51, 1088 )
+id = "taxi_at_mountain"
 
 [node name="Canster" parent="YSort/Characters" instance=ExtResource( 24 )]
 position = Vector2( 1666.88, 385.101 )
+
+[node name="Wheelie" parent="YSort/Characters" instance=ExtResource( 28 )]
+position = Vector2( 1434.31, 280.724 )
 
 [node name="TrafficLoops" type="YSort" parent="YSort"]
 
@@ -318,6 +327,10 @@ extents = Vector2( 90, 60 )
 light_color = 0
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="SafeZone" parent="YSort/SafeZones" instance=ExtResource( 13 )]
 position = Vector2( 1442, 355 )

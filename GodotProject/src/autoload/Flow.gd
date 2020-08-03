@@ -46,6 +46,7 @@ var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
+var transitions_UI : Control = null
 var bike_repair_UI : Control = null
 var car_seat_belt_UI : Control = null
 var inventory_overlay : Control = null
