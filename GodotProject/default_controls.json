@@ -1,7 +1,7 @@
 {
     "common": [
         {
-            "action": "quit_or_pause",
+            "action": "toggle_paused",
             "events": [
                 {
                     "scancode": "Escape"
@@ -17,7 +17,7 @@
             ]
         },
         {
-            "action": "toggle_mode",
+            "action": "toggle_editor_mode",
             "events": [
                 {
                     "scancode": "E",

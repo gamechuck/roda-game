@@ -29,7 +29,7 @@ VAR conv_type = 0
 
 EXTERNAL has_item(item_id)
 === function has_item(item_id) ===
-~ return true 
+~ return true
 
 EXTERNAL get_state()
 === function get_state() ===
@@ -58,8 +58,8 @@ EXTERNAL get_state()
 }
 
 = intro
-Oh ne! Otpuhane su ograde u našem parku...
-Idemo naći ograde i popraviti park da se možemo opet loptati!
+Oh ne! Otpuhane su ograde u našem parku... #intro1
+Idemo naći ograde i popraviti park da se možemo opet loptati! #intro2
 ~ talked_with_solid_snjek = 1
 -> main
 
@@ -79,9 +79,9 @@ Idemo se sad napokon loptati!
 -> DONE
 
 = main
-Hej, idemo popraviti ogradu zajedno!
-Ti mi donesi dijelove ograde i ja ću ju postaviti.
-Moraju biti tu negdje oko nas...
+Hej, idemo popraviti ogradu zajedno! #main1
+Ti mi donesi dijelove ograde i ja ću ju postaviti. #main2
+Moraju biti tu negdje oko nas... #main3
 -> DONE
 
 = use_item
@@ -545,10 +545,29 @@ Could you please put everyone in the correct spot?
 
 Hey! Thanks for helping me earlier!
 As a reward I'll drive you to the mountain!
+Unfortunately all my seat belts are currently broken so...
++ {has_item("seat_belt") == false}[I don't care!]
+	Okay... But this is extremely dangerous...
+	Let's go!
+	>>> PLAY_CUTSCENE: drop_player
+	Oops! You fell out!
+	You should have worn a belt!
+	-> DONE
++ {has_item("seat_belt") == true}[I have my own seat belt so everything is ok!]
+	Oh... okay!
+	Lemme take it...
+	>>> REMOVE_ITEM: seat_belt
+	-> taking_to_mountain
++ [That's too dangerous! I dont wanna die!]
+	Good choice!
+	Maybe you can find a belt somewhere?
+	-> DONE
+
+= taking_to_mountain
 Want me to take you to the mountain?
 + [Take me that mountain!]
 	OK!
-	>>> PLAY_CUTSCENE: teleport_to_mountain
+	>>> TELEPORT_PLAYER: taxi_at_mountain
 	Have fun!
 	-> DONE
 + [Not now... maybe later!]
@@ -596,7 +615,7 @@ NO
 You wanna go back to the park?
 + [Yes]
 	Okay! Get in!
-	>>> PLAY_CUTSCENE: teleport_to TaxiAtPark
+	>>> TELEPORT_PLAYER: taxi_at_park
 	Have fun in the park!
 	-> DONE
 + [No]
@@ -673,4 +692,22 @@ Ali možda negdje postoji još jedna kanta za smeće?
 
 = default
 Nisi smeće! Bah!
+-> DONE
+
+=== conv_wheelie ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+Hey man!
+Here's a belt!
+>>> ADD_ITEM: seat_belt
+-> DONE
+
+= use_item
+
 -> DONE

@@ -1,21 +1,4 @@
 {
-    "CONSTANTS": {
-        "MINIMUM_INTERACTION_DISTANCE": 100,
-        "PANIC_MODIFIER": 6.0,
-        "CAR_MOVE_SPEED": 4.0,
-        "SKATER_MOVE_SPEED": 4.0,
-        "GHOST_AWAKE_MOVE_SPEED": 1.0,
-        "GHOST_SLEEPING_MOVE_SPEED": 1.0,
-        "GHOST_ACTIVATION_DISTANCE": 200,
-        "PLAYER_MOVE_SPEED": 2.0,
-        "GUMMY_MODIFIER": 0.25,
-        "BIKE_MODIFIER": 2.0,
-        "TRAFFIC_RED_TIME": 10.0,
-        "TRAFFIC_YELLOW_AFTER_RED_TIME": 0.5,
-        "TRAFFIC_YELLOW_AFTER_GREEN_TIME": 0.5,
-        "TRAFFIC_GREEN_TIME": 10.0,
-        "FALLBACK_INVENTORY_TEXTURE": "res://resources/fallback/inventory_texture.png"
-    },
     "CHARACTERS": {
         "solid_snejk": {
             "DISPLAY_NAME" : "Solid Snejk",
@@ -157,7 +140,7 @@
         "seat_belt": {
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/Mockups/seat_belt_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/Mockups/seat_belt_normal.png"
+                "TEXTURE_PRESSED":"res://roda-assets/Mockups/seat_belt_pressed.png"
             }
         }
     }

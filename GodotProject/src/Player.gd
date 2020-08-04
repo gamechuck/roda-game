@@ -61,7 +61,7 @@ func _physics_process(_delta):
 
 			if nav_path.size() > 0:
 				var distance := position.distance_to(nav_path[0])
-				if distance > Flow.PLAYER_MOVE_SPEED:
+				if distance > ConfigData.player_move_speed:
 					var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
 					move_direction = new_position - position
 				else:
@@ -113,7 +113,7 @@ func process_interaction(active_entity : CollisionObject2D):
 	var entity_position = active_entity.position
 	var distance : float = position.distance_to(entity_position)
 	print("Distance to entity ('{0}') is {1}".format([active_entity.name, distance]))
-	if distance > Flow.MINIMUM_INTERACTION_DISTANCE:
+	if distance > ConfigData.minimum_interaction_distance:
 		_target_entity = active_entity
 		emit_signal("nav_path_requested")
 	elif Flow.active_inventory_item != null:
@@ -186,11 +186,11 @@ func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 		print("Player exited gummy!")
 
 func get_move_speed() -> float:
-	var move_speed := Flow.PLAYER_MOVE_SPEED
+	var move_speed := ConfigData.player_move_speed
 	if is_in_gummy:
-		move_speed *= Flow.GUMMY_MODIFIER
+		move_speed *= ConfigData.gummy_modifier
 	if is_on_bike:
-		move_speed *= Flow.BIKE_MODIFIER
+		move_speed *= ConfigData.bike_modifier
 	return move_speed
 
 func update_state(move_direction : Vector2):
@@ -272,6 +272,7 @@ func play_respawn_cutscene():
 	var duration := 1.0
 	self.is_in_cutscene = true
 
+	# Position is taken here to acount for previous cutscenes!!!
 	_tween.interpolate_property(
 		$AnimatedSprite, 
 		"position", 
@@ -382,7 +383,7 @@ func play_chewing_cutscene(canster : class_canster):
 		delay)
 	_tween.start()
 
-func play_teleport_to_mountain():
+func play_teleport(target_position : Vector2):
 	var delay := 0.0
 	var duration := 0.5
 	self.is_in_cutscene = true
@@ -398,7 +399,7 @@ func play_teleport_to_mountain():
 		self,
 		"position", 
 		position,
-		Vector2(1200, 1025), 
+		target_position, 
 		0.0,
 		Tween.TRANS_LINEAR, 
 		Tween.EASE_IN_OUT, 
@@ -425,6 +426,122 @@ func play_teleport_to_mountain():
 		Tween.EASE_IN_OUT, 
 		delay)
 
+	_tween.start()
+
+func play_drop_player(taxi : class_character):
+	var delay := 0.0
+	var duration := 2
+	self.is_in_cutscene = true
+
+	_tween.interpolate_property(
+		$AnimatedSprite,
+		"visible", 
+		true, 
+		false,
+		0.0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT)
+
+	_tween.interpolate_property(
+		taxi.get_node("AnimatedSprite"), 
+		"position",
+		Vector2.ZERO, 
+		Vector2(0, -100), 
+		duration, 
+		Tween.TRANS_CUBIC, 
+		Tween.EASE_OUT)
+	
+	delay += duration
+	duration = 1
+	
+	_tween.interpolate_property(
+		$AnimatedSprite,
+		"visible", 
+		false,
+		true,
+		0.0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+	_tween.interpolate_property(
+		$AnimatedSprite,
+		"rotation_degrees",
+		0,
+		90,
+		duration,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+	_tween.interpolate_property(
+		taxi.get_node("AnimatedSprite"),
+		"position",
+		Vector2(0, -100), 
+		Vector2(-400, -100),
+		duration,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+
+	delay += duration
+	duration = 2
+
+	_tween.interpolate_property(
+		taxi.get_node("AnimatedSprite"),
+		"position",
+		Vector2(-600, -100), 
+		Vector2(600, -100),
+		0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+	_tween.interpolate_property(
+		taxi.get_node("AnimatedSprite"),
+		"position",
+		Vector2(600, -100),
+		Vector2(0, -100), 
+		duration,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+	
+	delay += duration
+	
+	_tween.interpolate_property(
+		taxi.get_node("AnimatedSprite"),
+		"position",
+		Vector2(0, -100),
+		Vector2.ZERO, 
+		duration,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+
+	delay += duration
+	
+	_tween.interpolate_property(
+		$AnimatedSprite,
+		"rotation_degrees",
+		90,
+		0, 
+		duration,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT,
+		delay)
+	
+	_tween.interpolate_property(
+		self,
+		"is_in_cutscene", 
+		true, 
+		false,
+		0.0,
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN_OUT, 
+		delay)
+	_tween.interpolate_callback(
+		self,
+		delay,
+		"update_cutscene_dialogue")
+	
 	_tween.start()
 
 func _sinusoidal_movement(time : float):

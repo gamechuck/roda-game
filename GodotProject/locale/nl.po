@@ -4,61 +4,61 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: en\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Hello world!"
-msgstr "Hello world!"
+msgstr "Hallo wereld!"
 
 msgid "PAUSE_MESSAGE"
-msgstr "GAME IS PAUSED"
+msgstr "SPEL IS GEPAUSEERD"
 
 msgid "LANGUAGE"
-msgstr "English"
+msgstr "Nederlands"
 
 msgid "Volume"
 msgstr "Volume"
 
 msgid "Resume"
-msgstr "Resume"
+msgstr "Hervat"
 
 msgid "Restart"
-msgstr "Restart"
+msgstr "Herstart"
 
 msgid "Settings"
-msgstr "Settings"
+msgstr "Instellingen"
 
 msgid "Start"
 msgstr "Start"
 
 msgid "Quit"
-msgstr "Quit"
+msgstr "Stop"
 
 msgid "Back"
-msgstr "Back"
+msgstr "Terug"
 
 # CHARACTER NAMES
 msgid "Solid Snejk"
-msgstr "Solid Snake"
+msgstr "Stevige Slang"
 
 msgid "Solid Slug"
-msgstr "Solid Slug"
+msgstr "Stevige Slak"
 
 # DIALOGUE LINES
 msgid "intro1"
-msgstr "Oh no! The fences in our park got blown away!"
+msgstr "Oh nee! De hekken van ons park zijn weggeblazen!"
 
 msgid "intro2"
-msgstr "Let us find the fences and fix the park so we can play football again!"
+msgstr "Laten we de hekken vinden en het park herstellen zodat we terug voetbal kunnen spelen!"
 
 msgid "main1"
-msgstr "Hey, let's fix the park together!"
+msgstr "Hey, laten we het park samen herstellen!"
 
 msgid "main2"
-msgstr "You bring me parts of the fence and I'll set it up."
+msgstr "Jij brengt mij stukken van het hek en ik zal ze opzetten."
 
 msgid "main3"
-msgstr "They must be around here somewhere..."
+msgstr "Ze moeten hier ergens in buurt zijn..."

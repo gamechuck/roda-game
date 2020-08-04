@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/autoload/Flow.gd" type="Script" id=1]
-[ext_resource path="res://src/autoload/OptionsLoader.gd" type="Script" id=2]
-[ext_resource path="res://src/autoload/ControlsLoader.gd" type="Script" id=3]
-[ext_resource path="res://src/autoload/DataLoader.gd" type="Script" id=4]
+[ext_resource path="res://src/autoload/flow/OptionsLoader.gd" type="Script" id=2]
+[ext_resource path="res://src/autoload/flow/ControlsLoader.gd" type="Script" id=3]
+[ext_resource path="res://src/autoload/flow/DataLoader.gd" type="Script" id=4]
 
 [node name="Flow" type="Node"]
 pause_mode = 2
@@ -17,3 +17,5 @@ script = ExtResource( 3 )
 
 [node name="DataLoader" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="StateLoader" type="Node" parent="."]

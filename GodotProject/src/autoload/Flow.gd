@@ -1,48 +1,21 @@
 tool
 extends Node
 
-enum LIGHT_COLOR {RED, YELLOW_AFTER_RED, GREEN, YELLOW_AFTER_GREEN}
+enum STATE {MENU, GAME}
 
-const OPTIONS_PATH := "res://options.cfg"
+const DEFAULT_OPTIONS_PATH := "res://default_options.cfg"
+# Settings are a subset of options that can be modified by the user.
+const USER_SETTINGS_PATH := "user://user_settings.cfg"
+
+const DEFAULT_CONTROLS_PATH := "res://default_controls.json"
+const USER_CONTROLS_PATH := "user://user_controls.json"
 
 const DATA_PATH := "res://data/game_data.json"
 const STORY_PATH := "res://data/game_story_hr.ink"
 
 const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
 
-const DEFAULT_CONTROLS_PATH := "res://default_controls.json"
-const USER_CONTROLS_PATH := "user://user_controls.json"
-
-var is_in_editor_mode := false
-
-var major_version := 0
-var minor_version := 0
-var show_version := true
-
-var is_pause_UI_enabled := true
-var start_in_full_screen := false
-
-var MINIMUM_INTERACTION_DISTANCE := 200
-var PANIC_MODIFIER := 2.0
-var CAR_MOVE_SPEED := 4.0
-var SKATER_MOVE_SPEED := 4.0
-var GHOST_AWAKE_MOVE_SPEED := 1.0
-var GHOST_SLEEPING_MOVE_SPEED := 0.1
-var GHOST_ACTIVATION_DISTANCE := 200
-var PLAYER_MOVE_SPEED := 2.0
-var GUMMY_MODIFIER := 0.5
-var BIKE_MODIFIER := 2.0
-var TRAFFIC_RED_TIME := 10.0
-var TRAFFIC_YELLOW_AFTER_RED_TIME := 0.5
-var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 0.5
-var TRAFFIC_GREEN_TIME := 10.0
-var FALLBACK_INVENTORY_TEXTURE := "res://resources/fallback/inventory_texture.png"
-
-onready var _options_loader := $OptionsLoader
-onready var _controls_loader := $ControlsLoader
-onready var _data_loader := $DataLoader
-
-var _story_resource := load("res://addons/inkgd/runtime/story.gd")
+### PUBLIC VARIABLES ###
 
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
@@ -54,17 +27,59 @@ var game_canvas : Node2D = null
 
 var player : KinematicBody2D = null
 
-var active_character : class_character = null
-var active_item : class_item = null
-var active_inventory_item : class_inventory_item = null
+# Is the game currently in editor mode? or not?
+var is_in_editor_mode := false
 
 var character_data := {}
 var item_data := {}
 
+var _game_flow := {
+	"game": {
+		"packed_scene": preload("res://src/Game.tscn"),
+		"state": STATE.GAME
+		}, 
+	"menu": {
+		"packed_scene": preload("res://src/Menu.tscn"),
+		"state": STATE.MENU
+		}
+	}
+var _game_state : int = STATE.MENU
+var _story_resource := load("res://addons/inkgd/runtime/story.gd")
+
+var active_character : class_character = null
+var active_item : class_item = null
+var active_inventory_item : class_inventory_item = null
+
+onready var _options_loader := $OptionsLoader
+onready var _controls_loader := $ControlsLoader
+onready var _data_loader := $DataLoader
+onready var _state_loader := $StateLoader
+
 func _ready():
+	# Disable input so that this doesn't throw an error due to not finding
+	# the required action strings.
+	set_process_unhandled_input(false)
+	
 	if not Engine.editor_hint:
 		var _error := load_settings()
-		OS.window_fullscreen = start_in_full_screen
+		reset()
+		print(                                                                                
+			"      _____    _  _____ \n",
+			" ___ |     | _| ||  _  |\n",
+			"|  _||  |  || . ||     |\n",
+			"|_|  |_____||___||__|__|\n"                                                     
+		)
+		print("version {0}.{1}".format([ 
+			ConfigData.major_version, 
+			ConfigData.minor_version]))
+
+		if ConfigData.skip_menu:
+			if ConfigData.verbose_mode : print("Automatically skipping menu as requested by configuration data...")
+			change_scene_to("game")
+		else:
+			change_scene_to("menu")
+
+		set_process_unhandled_input(true)
 
 func load_settings() -> int:
 	print("----- (Re)loading game settings from file -----")
@@ -76,6 +91,9 @@ func load_settings() -> int:
 	else:
 		push_error("Failed to load settings! Check console for clues!")
 	return _error
+
+func reset():
+	is_in_editor_mode = false
 
 func load_story():
 	if OS.get_name() == "Windows":
@@ -100,17 +118,28 @@ func _observe_variables(variable_name, new_value):
 
 func _unhandled_input(event : InputEvent):
 ## Catch all unhandled input not caught be any other control nodes.
-	if Engine.editor_hint:
-		return
-
-	if event.is_action_pressed("toggle_full_screen"):
+	if InputMap.has_action("toggle_full_screen") and event.is_action_pressed("toggle_full_screen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 
-	if event.is_action_pressed("quit_or_pause"):
-		quit_or_pause_game()
+	match _game_state:
+		STATE.GAME:
+			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
+				print("pause has been pressed!!")
+				toggle_paused()
+			if InputMap.has_action("restart") and event.is_action_pressed("restart"):
+				call_deferred("deferred_reload_current_scene")
+			if InputMap.has_action("toggle_editor_mode") and event.is_action_pressed("toggle_editor_mode"):
+				toggle_editor_mode()
 
-	if event.is_action_pressed("restart"):
-		call_deferred("deferred_reload_current_scene")
+func toggle_editor_mode():
+	is_in_editor_mode = not is_in_editor_mode
+
+func toggle_paused():
+	get_tree().paused = not get_tree().paused
+	if get_tree().paused:
+		pause_UI.show()
+	else:
+		pause_UI.hide()
 
 func deferred_quit() -> void:
 ## Quit the game during an idle frame.
@@ -122,12 +151,21 @@ func deferred_reload_current_scene() -> void:
 	_error = get_tree().reload_current_scene()
 	get_tree().paused = false
 
-func quit_or_pause_game():
-	if is_pause_UI_enabled:
-		pause_UI.visible = not get_tree().paused
-		get_tree().paused = not get_tree().paused
+func change_scene_to(key : String) -> void:
+	if _game_flow.has(key):
+		var state_settings : Dictionary = _game_flow[key]
+		var packed_scene : PackedScene = state_settings.packed_scene
+		_game_state = state_settings.state
+
+		var error := get_tree().change_scene_to(packed_scene)
+		get_tree().paused = false
+		reset()
+		if error != OK:
+			push_error("Failed to change scene to '{0}'.".format([key]))
+		else:
+			print("Succesfully changed scene to '{0}'.".format([key]))
 	else:
-		call_deferred("deferred_quit")
+		push_error("Requested scene '{0}' was not recognized... ignoring call for changing scene.".format([key]))
 
 func get_character_data(character_id : String) -> Dictionary:
 	if character_data.has(character_id):

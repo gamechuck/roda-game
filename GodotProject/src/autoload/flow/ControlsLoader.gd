@@ -7,14 +7,14 @@ func load_controlsJSON() -> int:
 	var error : int = OK
 	# First check if there are user-specific controls available that can be loaded...
 	if file.file_exists(Flow.USER_CONTROLS_PATH):
-		print("Attempting to load user-modified controls from '{0}'.".format([Flow.USER_CONTROLS_PATH]))
+		if ConfigData.verbose_mode: print("Attempting to load user-modified controls from '{0}'.".format([Flow.USER_CONTROLS_PATH]))
 		var controls_dictionary = Flow.load_JSON(Flow.USER_CONTROLS_PATH)
 		if controls_dictionary.empty():
 			push_error("Failed to process the user-modified controls, falling back to default controls.")
 			controls_dictionary = Flow.load_JSON(Flow.DEFAULT_CONTROLS_PATH)
 		error += _create_controls(controls_dictionary)
 	else:
-		print("No user-modified are defined, loading default controls from '{0}' instead.".format([Flow.DEFAULT_CONTROLS_PATH]))
+		if ConfigData.verbose_mode: print("No user-modified are defined, loading default controls from '{0}' instead.".format([Flow.DEFAULT_CONTROLS_PATH]))
 		var controls_dictionary = Flow.load_JSON(Flow.DEFAULT_CONTROLS_PATH)
 		error += _create_controls(controls_dictionary)
 	return error
@@ -39,7 +39,8 @@ func _create_controls(controls_dictionary : Dictionary) -> int:
 					# Erase the action if it already exists!
 					InputMap.erase_action(control.action)
 				InputMap.add_action(control.action)
-				print("	> Added action '{0}' to InputMap.".format([control.action]))
+				if ConfigData.verbose_mode: 
+					print("	> Added action '{0}' to InputMap.".format([control.action]))
 				if control.has("events"):
 					for event in control.events:
 						if event.has("scancode"):
@@ -57,10 +58,11 @@ func _create_inputEventKey(action : String, event : Dictionary) -> void:
 	event_key.alt = event.get("alt", false)
 	event_key.control = event.get("control", false)
 	InputMap.action_add_event(action, event_key)
-	print("		> Added event with keyboard with scancode '{0}' ('{1}').".format([
-		event_key.scancode, 
-		OS.get_scancode_string(event_key.scancode)
-	]))
+	if ConfigData.verbose_mode:
+		print("		> Added event with keyboard with scancode '{0}' ('{1}').".format([
+			event_key.scancode, 
+			OS.get_scancode_string(event_key.scancode)
+		]))
 
 func _create_InputEventMouseButton(action : String, event : Dictionary) -> void:
 	## Add a mouse button event to an action.
@@ -68,9 +70,10 @@ func _create_InputEventMouseButton(action : String, event : Dictionary) -> void:
 	event_button.button_index = event.button_index
 	event_button.device = -1
 	InputMap.action_add_event(action, event_button)
-	print("		> Added event for mouse with button_index '{0}'.".format([
-		event_button.button_index
-	]))
+	if ConfigData.verbose_mode:
+		print("		> Added event for mouse with button_index '{0}'.".format([
+			event_button.button_index
+		]))
 
 func _create_inputEventJoypadMotion(action : String, event : Dictionary) -> void:
 	## Add a joypad motion event to an action.
@@ -78,8 +81,9 @@ func _create_inputEventJoypadMotion(action : String, event : Dictionary) -> void
 	event_joypad_motion.axis = Input.get_joy_axis_index_from_string(event.axis)
 	event_joypad_motion.axis_value = event.get("axis_value", 1)
 	InputMap.action_add_event(action, event_joypad_motion)
-	print("		> Added event for joypad with axis '{0}' ('{1}') and value '{2}'.".format([
-		event_joypad_motion.axis, 
-		Input.get_joy_axis_string(event_joypad_motion.axis),
-		event_joypad_motion.axis_value
-	]))
+	if ConfigData.verbose_mode:
+		print("		> Added event for joypad with axis '{0}' ('{1}') and value '{2}'.".format([
+			event_joypad_motion.axis, 
+			Input.get_joy_axis_string(event_joypad_motion.axis),
+			event_joypad_motion.axis_value
+		]))

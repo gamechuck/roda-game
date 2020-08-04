@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/UI/MainPauseTab.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/SettingsPauseTab.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/pause/PauseTabContainer.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -48,12 +49,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 tabs_visible = false
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainTab" type="Control" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -126,9 +127,11 @@ size_flags_horizontal = 4
 text = "Quit"
 
 [node name="SettingsTab" type="Control" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+tab_type = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SettingsTab"]
 anchor_right = 1.0
@@ -209,13 +212,13 @@ margin_right = 174.0
 margin_bottom = 29.0
 text = ">"
 
-[node name="VolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
+[node name="MasterVolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
 margin_top = 45.0
 margin_right = 480.0
 margin_bottom = 68.0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
 margin_right = 172.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 64, 0 )
@@ -224,14 +227,14 @@ text = "Volume"
 align = 2
 valign = 1
 
-[node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
+[node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
 margin_left = 176.0
 margin_right = 304.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 128, 0 )
 value = 100.0
 
-[node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/VolumeHBox"]
+[node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
 margin_left = 308.0
 margin_right = 480.0
 margin_bottom = 23.0

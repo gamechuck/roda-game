@@ -8,7 +8,7 @@ onready var _animated_back := $AnimatedBack
 onready var _animated_side := $AnimatedSide
 
 export(String, "front", "left", "right", "back") var direction = "front" setget set_direction
-var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
+var light_color : int = ConfigData.LIGHT_COLOR.RED setget set_light_color
 
 func _ready():
 	set_direction(direction)
@@ -29,11 +29,11 @@ func set_direction(value : String):
 func set_light_color(value : int):
 	light_color = value
 	match light_color:
-		Flow.LIGHT_COLOR.RED:
+		ConfigData.LIGHT_COLOR.RED:
 			play_animation("red")
-		Flow.LIGHT_COLOR.YELLOW_AFTER_RED, Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED, ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
 			play_animation("yellow")
-		Flow.LIGHT_COLOR.GREEN:
+		ConfigData.LIGHT_COLOR.GREEN:
 			play_animation("green")
 
 func play_animation(animation_name : String):

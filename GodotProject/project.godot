@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/traffic/Car.gd"
 }, {
-"base": "StaticBody2D",
+"base": "KinematicBody2D",
 "class": "class_character",
 "language": "GDScript",
 "path": "res://src/Character.gd"
@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/ItemSlot.gd"
 }, {
+"base": "Control",
+"class": "class_pause_tab",
+"language": "GDScript",
+"path": "res://src/UI/PauseTab.gd"
+}, {
 "base": "StaticBody2D",
 "class": "class_pedestrian_light",
 "language": "GDScript",
@@ -85,6 +90,11 @@ _global_script_classes=[ {
 "path": "res://src/Skater.gd"
 }, {
 "base": "Area2D",
+"class": "class_smog_particle",
+"language": "GDScript",
+"path": "res://src/characters/SmogParticle.gd"
+}, {
+"base": "Area2D",
 "class": "class_street",
 "language": "GDScript",
 "path": "res://src/traffic/Street.gd"
@@ -98,11 +108,6 @@ _global_script_classes=[ {
 "class": "class_zebra_crossing",
 "language": "GDScript",
 "path": "res://src/traffic/ZebraCrossing.gd"
-}, {
-"base": "Control",
-"class": "pause_tab",
-"language": "GDScript",
-"path": "res://src/UI/PauseTab.gd"
 } ]
 _global_script_class_icons={
 "class_canster": "",
@@ -115,28 +120,30 @@ _global_script_class_icons={
 "class_inventory_item": "",
 "class_item": "",
 "class_item_slot": "",
+"class_pause_tab": "",
 "class_pedestrian_light": "",
 "class_player": "",
 "class_prop": "",
 "class_safe_zone": "",
 "class_skater": "",
+"class_smog_particle": "",
 "class_street": "",
 "class_traffic_light": "",
-"class_zebra_crossing": "",
-"pause_tab": ""
+"class_zebra_crossing": ""
 }
 
 [application]
 
 config/name="RODA Game"
-run/main_scene="res://src/Game.tscn"
+run/main_scene="res://src/Placeholder.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+ConfigData="*res://src/autoload/ConfigData.tscn"
+Director="*res://src/autoload/Director.tscn"
 Flow="*res://src/autoload/Flow.tscn"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
-Director="*res://src/autoload/Director.tscn"
 
 [display]
 
@@ -199,7 +206,11 @@ vnen.tiled_importer={
 
 [locale]
 
-translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po" )
+fallback="hr"
+translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po", "res://locale/nl.po" )
+translation_remaps={
+
+}
 
 [rendering]
 

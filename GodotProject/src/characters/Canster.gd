@@ -21,7 +21,7 @@ func _update_animation():
 
 	var shape = _interact_collision_shape_2D.shape
 	shape.extents = state_settings.get("extents", Vector2(24, 24))
-	
+
 	_audio_Stream_player_2D.playing = state_settings.get("playing", false)
 
 var _state_machine := {

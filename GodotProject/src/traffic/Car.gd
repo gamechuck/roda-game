@@ -42,7 +42,7 @@ func _ready():
 		if curve != null:
 			var duration : float = curve.get_baked_length()
 			if not Engine.editor_hint:
-				duration /= Flow.CAR_MOVE_SPEED
+				duration /= ConfigData.car_move_speed
 			else:
 				duration /= 1.0
 			duration /= ProjectSettings.get("physics/common/physics_fps")
@@ -64,7 +64,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 		_tween.stop_all()
 	if parent is class_zebra_crossing:
 		if parent.has_traffic_lights:
-			if parent.light_color == Flow.LIGHT_COLOR.GREEN:
+			if parent.light_color == ConfigData.LIGHT_COLOR.GREEN:
 				_tween.stop_all()
 				parent.connect("movement_is_allowed", _timer, "start", [], CONNECT_ONESHOT)
 		else:

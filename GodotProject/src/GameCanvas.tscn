@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://roda-assets/Tilemap/demo_tilemap.tmx" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://src/items/TrashBag.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/items/TrashCup.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/characters/Wheelie.tscn" type="PackedScene" id=28]
+[ext_resource path="res://src/characters/MrSmog.tscn" type="PackedScene" id=29]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 80, 120 )
@@ -165,6 +166,9 @@ position = Vector2( 1666.88, 385.101 )
 [node name="Wheelie" parent="YSort/Characters" instance=ExtResource( 28 )]
 position = Vector2( 1434.31, 280.724 )
 
+[node name="MrSmog" parent="YSort/Characters" instance=ExtResource( 29 )]
+position = Vector2( 1428.11, 432.977 )
+
 [node name="TrafficLoops" type="YSort" parent="YSort"]
 
 [node name="TrafficLoop" parent="YSort/TrafficLoops" instance=ExtResource( 20 )]
@@ -217,12 +221,10 @@ position = Vector2( 1428.67, 347.914 )
 [node name="ZebraCrossing" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 331.725, 202.136 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="ZebraCrossing2" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 148.321, 325.283 )
 extents = Vector2( 60, 130 )
-light_color = 0
 
 [node name="ZebraCrossing3" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 170, 645 )
@@ -246,7 +248,6 @@ direction = "back"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="3" instance=ExtResource( 9 )]
 position = Vector2( -46.5916, -85.4877 )
-direction = "front"
 
 [node name="ZebraCrossing4" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 587.116, -105.083 )
@@ -258,7 +259,6 @@ shape = SubResource( 6 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="0" instance=ExtResource( 4 )]
 position = Vector2( 79.3015, -3.52019 )
-direction = "front"
 
 [node name="TrafficLight2" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="1" instance=ExtResource( 4 )]
 position = Vector2( -80, -4.21854 )
@@ -275,22 +275,18 @@ direction = "left"
 [node name="ZebraCrossing5" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 700.451, 321.525 )
 extents = Vector2( 60, 100 )
-light_color = 0
 
 [node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 586, 448 )
 extents = Vector2( 100, 60 )
-light_color = 0
 
 [node name="ZebraCrossing7" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 839.19, 448 )
 extents = Vector2( 100, 60 )
-light_color = 0
 
 [node name="ZebraCrossing8" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 841.464, 710.638 )
 extents = Vector2( 100, 60 )
-light_color = 0
 
 [node name="ZebraCrossing9" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( 1018.29, 835.328 )
@@ -314,17 +310,14 @@ direction = "back"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="3" instance=ExtResource( 9 )]
 position = Vector2( -65.9751, -88.7811 )
-direction = "front"
 
 [node name="ZebraCrossing10" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( -53.7063, 711.661 )
 extents = Vector2( 100, 60 )
-light_color = 0
 
 [node name="ZebraCrossing11" parent="YSort/ZebraCrossings" instance=ExtResource( 21 )]
 position = Vector2( -500, 720 )
 extents = Vector2( 90, 60 )
-light_color = 0
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
 __meta__ = {

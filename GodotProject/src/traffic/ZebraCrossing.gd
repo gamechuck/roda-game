@@ -7,7 +7,7 @@ onready var _traffic_lights_container := $Lights
 onready var _interact_area := $InteractArea
 
 export var extents := Vector2.ZERO setget set_extents
-export var light_color : int = Flow.LIGHT_COLOR.RED setget set_light_color
+export var light_color : int = ConfigData.LIGHT_COLOR.RED setget set_light_color
 
 var player_is_inside := false
 var has_traffic_lights := false
@@ -53,7 +53,7 @@ func update_lights():
 func _on_timer_timeout():
 	light_color = get_next_color()
 
-	if light_color == Flow.LIGHT_COLOR.RED:
+	if light_color == ConfigData.LIGHT_COLOR.RED:
 		emit_signal("movement_is_allowed")
 
 	_timer.wait_time = get_wait_time()
@@ -74,39 +74,39 @@ func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
 
 func get_wait_time() -> float:
 	match light_color:
-		Flow.LIGHT_COLOR.RED:
-			return Flow.TRAFFIC_RED_TIME
-		Flow.LIGHT_COLOR.YELLOW_AFTER_RED:
-			return Flow.TRAFFIC_YELLOW_AFTER_RED_TIME
-		Flow.LIGHT_COLOR.GREEN:
-			return Flow.TRAFFIC_GREEN_TIME
-		Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-			return Flow.TRAFFIC_YELLOW_AFTER_GREEN_TIME
+		ConfigData.LIGHT_COLOR.RED:
+			return ConfigData.traffic_red_time
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED:
+			return ConfigData.traffic_yellow_after_red_time
+		ConfigData.LIGHT_COLOR.GREEN:
+			return ConfigData.traffic_green_time
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+			return ConfigData.traffic_yellow_after_green_time
 		_:
 			return 0.0
 
 func get_next_color() -> int:
 	match light_color:
-		Flow.LIGHT_COLOR.RED:
-			return Flow.LIGHT_COLOR.YELLOW_AFTER_RED
-		Flow.LIGHT_COLOR.YELLOW_AFTER_RED:
-			return Flow.LIGHT_COLOR.GREEN
-		Flow.LIGHT_COLOR.GREEN:
-			return Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN
-		Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-			return Flow.LIGHT_COLOR.RED
+		ConfigData.LIGHT_COLOR.RED:
+			return ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED:
+			return ConfigData.LIGHT_COLOR.GREEN
+		ConfigData.LIGHT_COLOR.GREEN:
+			return ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+			return ConfigData.LIGHT_COLOR.RED
 		_:
 			return 0
 
 func get_opposite_color() -> int:
 	match light_color:
-		Flow.LIGHT_COLOR.RED:
-			return Flow.LIGHT_COLOR.GREEN
-		Flow.LIGHT_COLOR.YELLOW_AFTER_RED:
-			return Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN
-		Flow.LIGHT_COLOR.GREEN:
-			return Flow.LIGHT_COLOR.RED
-		Flow.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-			return Flow.LIGHT_COLOR.YELLOW_AFTER_RED
+		ConfigData.LIGHT_COLOR.RED:
+			return ConfigData.LIGHT_COLOR.GREEN
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED:
+			return ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN
+		ConfigData.LIGHT_COLOR.GREEN:
+			return ConfigData.LIGHT_COLOR.RED
+		ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
+			return ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED
 		_:
 			return 0

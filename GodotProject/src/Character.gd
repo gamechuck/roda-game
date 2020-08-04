@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends KinematicBody2D
 class_name class_character
 
 onready var _interact_collision_shape_2D := $InteractArea/CollisionShape2D
@@ -6,6 +6,13 @@ onready var _audio_stream_player := $AudioStreamPlayer
 onready var _animated_sprite := $AnimatedSprite
 
 export var id : String
+
+func _ready():
+	add_to_group("characters")
+
+func _exit_tree():
+	if is_inside_tree() and get_tree().has_group("characters"):
+		remove_from_group("characters")
 
 func play_sound_byte():
 	_audio_stream_player.play()

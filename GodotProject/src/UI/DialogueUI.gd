@@ -107,7 +107,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 				return true
 
 		if not text.empty():
-			_label.text = text.strip_edges()
+			_label.text = translate(text.strip_edges())
 			visible = true
 			return true
 		else:
@@ -123,7 +123,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 			for child in _choice_vbox.get_children():
 				if index < story.current_choices.size():
 					var choice = story.current_choices[index]
-					child.text = choice.text
+					child.text = translate(choice.text)
 					child.visible = true
 				else:
 					child.visible = false
@@ -137,3 +137,15 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 func _stop_dialogue() -> void:
 	visible = false
+
+func translate(original_text : String):
+	var tags : Array = story.current_tags
+	if tags.empty():
+		return original_text
+	else:
+		var msg_id : String = tags[0]
+		var translated_text : String = TranslationServer.translate(msg_id)
+		if translated_text != msg_id:
+			return translated_text
+		else:
+			return original_text

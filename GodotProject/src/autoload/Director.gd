@@ -120,8 +120,8 @@ func play_cutscene(argument_values):
 			respawn_player(argument_values)
 		"chew_on_player":
 			chew_on_player(argument_values)
-		"teleport_to_mountain":
-			teleport_to_mountain(argument_values)
+		"drop_player":
+			drop_player(argument_values)
 
 func respawn_player(_argument_values):
 	var player : class_player = Flow.player
@@ -132,9 +132,22 @@ func chew_on_player(_argument_values):
 	var canster : class_canster = Flow.dialogue_UI.interact_node
 	player.play_chewing_cutscene(canster)
 
-func teleport_to_mountain(_argument_values):
+func drop_player(_argument_values):
 	var player : class_player = Flow.player
-	player.play_teleport_to_mountain()
+	var taxi : class_character = Flow.dialogue_UI.interact_node
+	player.play_drop_player(taxi)
+
+func teleport_player(argument_values):
+	var character_id : String = argument_values[0]
+	var canster : class_character = Flow.dialogue_UI.interact_node
+	var player : class_player = Flow.player
+
+	for character in get_tree().get_nodes_in_group("characters"):
+		if character.id == character_id:
+			var target_position : Vector2 = character.position
+			target_position += Vector2(0, -50)
+			player.play_teleport(target_position)
+			return
 
 func fade_to_opaque(argument_values : Array):
 	var duration : float = argument_values[0]
@@ -184,5 +197,9 @@ var external_setters : Dictionary = {
 	"RESPAWN_PLAYER" : {
 		"callback": funcref(self, "respawn_player"),
 		"argument_types": []
+	},
+	"TELEPORT_PLAYER" : {
+		"callback": funcref(self, "teleport_player"),
+		"argument_types": [TYPE_STRING]
 	}
 }

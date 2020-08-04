@@ -40,7 +40,7 @@ func _physics_process(_delta):
 
 			if nav_path.size() > 0:
 				var distance := position.distance_to(nav_path[0])
-				if distance > Flow.GHOST_AWAKE_MOVE_SPEED:
+				if distance > ConfigData.ghost_awake_move_speed:
 					var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
 					move_direction = new_position - position
 				else:
@@ -57,7 +57,7 @@ func _physics_process(_delta):
 
 func _check_activation_condition() -> bool:
 	var distance_to_player = position - Flow.player.position
-	if distance_to_player.length() > Flow.GHOST_ACTIVATION_DISTANCE:
+	if distance_to_player.length() > ConfigData.ghost_activation_distance:
 		return false
 
 	var facing = Vector2.ZERO
@@ -78,9 +78,9 @@ func _check_activation_condition() -> bool:
 func _get_move_speed() -> float:
 	match _state:
 		STATE.AWAKE:
-			return Flow.GHOST_AWAKE_MOVE_SPEED
+			return ConfigData.ghost_awake_move_speed
 		STATE.SLEEPING, _:
-			return Flow.GHOST_SLEEPING_MOVE_SPEED
+			return ConfigData.ghost_sleeping_move_speed
 
 func _update_state():
 	var old_state : int = _state
