@@ -11,7 +11,7 @@ onready var _down_button := _inventory_vbox.get_node("DownButton")
 
 # Array of references to inventory items.
 var _inventory_items := []
-var _inventory_item_resource := preload("res://src/UI/InventoryItem.gd")
+var _inventory_item_resource := preload("res://src/UI/game_overlay/InventoryItem.gd")
 
 func _ready():
 	Flow.inventory_overlay = self

@@ -8,7 +8,6 @@ var nav_path : PoolVector2Array = []
 var initial_position := Vector2.ZERO
 
 var _state : int = STATE.SLEEPING 
-var _player : class_player = null
 
 onready var _animated_sprite := $AnimatedSprite
 onready var _cpu_particles_2D := $CPUParticles2D

@@ -15,9 +15,9 @@ func _ready():
 	print("----- Showing output log -----")
 
 	# Start the introduction conversation with SolidSnejk.
-#	var character := Flow.game_canvas.get_node("YSort/Characters/SolidSnejk")
-#	if character != null:
-#		Flow.dialogue_UI.start_interact_dialogue(character)
+#	for character in get_tree().get_nodes_in_group("characters"):
+#		if character.id == "solid_snejk":
+#			Flow.dialogue_UI.start_interact_dialogue(character)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_editor_mode"):

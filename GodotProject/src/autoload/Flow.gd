@@ -24,6 +24,7 @@ var bike_repair_UI : Control = null
 var car_seat_belt_UI : Control = null
 var inventory_overlay : Control = null
 var game_canvas : Node2D = null
+var boss_overlay : Control = null
 
 var player : KinematicBody2D = null
 
@@ -59,7 +60,7 @@ func _ready():
 	# Disable input so that this doesn't throw an error due to not finding
 	# the required action strings.
 	set_process_unhandled_input(false)
-	
+
 	if not Engine.editor_hint:
 		var _error := load_settings()
 		reset()
@@ -127,11 +128,6 @@ func _unhandled_input(event : InputEvent):
 				toggle_paused()
 			if InputMap.has_action("restart") and event.is_action_pressed("restart"):
 				call_deferred("deferred_reload_current_scene")
-			if InputMap.has_action("toggle_editor_mode") and event.is_action_pressed("toggle_editor_mode"):
-				toggle_editor_mode()
-
-func toggle_editor_mode():
-	is_in_editor_mode = not is_in_editor_mode
 
 func toggle_paused():
 	get_tree().paused = not get_tree().paused

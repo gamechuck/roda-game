@@ -40,6 +40,8 @@ var traffic_yellow_after_red_time := 0.5
 var traffic_yellow_after_green_time := 0.5
 var traffic_green_time := 10.0
 
+var boss_max_health := 100.0
+
 var car_move_speed := 4.0
 var panic_modifier := 2.0
 

@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "class_inventory_item",
 "language": "GDScript",
-"path": "res://src/UI/InventoryItem.gd"
+"path": "res://src/UI/game_overlay/InventoryItem.gd"
 }, {
 "base": "Area2D",
 "class": "class_item",
@@ -57,12 +57,12 @@ _global_script_classes=[ {
 "base": "TextureRect",
 "class": "class_item_slot",
 "language": "GDScript",
-"path": "res://src/UI/ItemSlot.gd"
+"path": "res://src/UI/game_overlay/ItemSlot.gd"
 }, {
 "base": "Control",
 "class": "class_pause_tab",
 "language": "GDScript",
-"path": "res://src/UI/PauseTab.gd"
+"path": "res://src/UI/pause/PauseTab.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_pedestrian_light",
