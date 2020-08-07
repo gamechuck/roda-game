@@ -46,19 +46,3 @@ msgstr "Stevige Slang"
 
 msgid "Solid Slug"
 msgstr "Stevige Slak"
-
-# DIALOGUE LINES
-msgid "intro1"
-msgstr "Oh nee! De hekken van ons park zijn weggeblazen!"
-
-msgid "intro2"
-msgstr "Laten we de hekken vinden en het park herstellen zodat we terug voetbal kunnen spelen!"
-
-msgid "main1"
-msgstr "Hey, laten we het park samen herstellen!"
-
-msgid "main2"
-msgstr "Jij brengt mij stukken van het hek en ik zal ze opzetten."
-
-msgid "main3"
-msgstr "Ze moeten hier ergens in buurt zijn..."

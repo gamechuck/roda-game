@@ -10,8 +10,8 @@ const USER_SETTINGS_PATH := "user://user_settings.cfg"
 const DEFAULT_CONTROLS_PATH := "res://default_controls.json"
 const USER_CONTROLS_PATH := "user://user_controls.json"
 
-const DATA_PATH := "res://data/game_data.json"
-const STORY_PATH := "res://data/game_story_hr.ink"
+const DATA_PATH := "res://data/data.json"
+const STORY_PATH := "res://data/story_hr.ink"
 
 const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
 
@@ -124,7 +124,6 @@ func _unhandled_input(event : InputEvent):
 	match _game_state:
 		STATE.GAME:
 			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
-				print("pause has been pressed!!")
 				toggle_paused()
 			if InputMap.has_action("restart") and event.is_action_pressed("restart"):
 				call_deferred("deferred_reload_current_scene")

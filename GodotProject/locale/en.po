@@ -46,19 +46,3 @@ msgstr "Solid Snake"
 
 msgid "Solid Slug"
 msgstr "Solid Slug"
-
-# DIALOGUE LINES
-msgid "intro1"
-msgstr "Oh no! The fences in our park got blown away!"
-
-msgid "intro2"
-msgstr "Let us find the fences and fix the park so we can play football again!"
-
-msgid "main1"
-msgstr "Hey, let's fix the park together!"
-
-msgid "main2"
-msgstr "You bring me parts of the fence and I'll set it up."
-
-msgid "main3"
-msgstr "They must be around here somewhere..."

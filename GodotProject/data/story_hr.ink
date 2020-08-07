@@ -58,8 +58,8 @@ EXTERNAL get_state()
 }
 
 = intro
-Oh ne! Otpuhane su ograde u našem parku... #intro1
-Idemo naći ograde i popraviti park da se možemo opet loptati! #intro2
+Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
+Idemo naći ograde i popraviti park da se možemo opet loptati! #solid_snejk_intro_2
 ~ talked_with_solid_snjek = 1
 -> main
 
@@ -79,9 +79,9 @@ Idemo se sad napokon loptati!
 -> DONE
 
 = main
-Hej, idemo popraviti ogradu zajedno! #main1
-Ti mi donesi dijelove ograde i ja ću ju postaviti. #main2
-Moraju biti tu negdje oko nas... #main3
+Hej, idemo popraviti ogradu zajedno! #solid_snejk_main_1
+Ti mi donesi dijelove ograde i ja ću ju postaviti. #solid_snejk_main_2
+Moraju biti tu negdje oko nas... #solid_snejk_main_3
 -> DONE
 
 = use_item

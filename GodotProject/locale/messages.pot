@@ -38,19 +38,3 @@ msgstr ""
 
 msgid "Solid Slug"
 msgstr ""
-
-# DIALOGUE LINES
-msgid "intro1"
-msgstr ""
-
-msgid "intro2"
-msgstr ""
-
-msgid "main1"
-msgstr ""
-
-msgid "main2"
-msgstr ""
-
-msgid "main3"
-msgstr ""

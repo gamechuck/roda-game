@@ -207,7 +207,7 @@ vnen.tiled_importer={
 [locale]
 
 fallback="hr"
-translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po", "res://locale/nl.po" )
+translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po", "res://locale/nl.po", "res://locale/story_translation.en.translation", "res://locale/story_translation.nl.translation" )
 translation_remaps={
 
 }
