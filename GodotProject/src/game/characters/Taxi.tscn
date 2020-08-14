@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://roda-assets/Cars/taxi_left.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 159, 100 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 159, 0, 159, 100 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 318, 0, 159, 100 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 477, 0, 159, 100 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 636, 0, 159, 100 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 795, 0, 159, 100 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 80, 35 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 70, 20 )
+
+[node name="Taxi" instance=ExtResource( 1 )]
+id = "taxi"
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 7 )
+frame = 5
+playing = true
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2( 0, -5 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0, -5 )
+shape = SubResource( 9 )

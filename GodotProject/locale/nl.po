@@ -40,6 +40,9 @@ msgstr "Stop"
 msgid "Back"
 msgstr "Terug"
 
+msgid "DRIVE_MESSAGE"
+msgstr "Kijk inrichting na..."
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr "Stevige Slang"

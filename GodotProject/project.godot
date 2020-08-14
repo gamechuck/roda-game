@@ -12,52 +12,52 @@ _global_script_classes=[ {
 "base": "class_character",
 "class": "class_canster",
 "language": "GDScript",
-"path": "res://src/characters/Canster.gd"
+"path": "res://src/game/enemies/Canster.gd"
 }, {
 "base": "Area2D",
 "class": "class_car",
 "language": "GDScript",
-"path": "res://src/traffic/Car.gd"
+"path": "res://src/game/traffic/Car.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "class_character",
 "language": "GDScript",
-"path": "res://src/Character.gd"
+"path": "res://src/game/base/Character.gd"
 }, {
-"base": "TextureRect",
+"base": "Control",
 "class": "class_character_slot",
 "language": "GDScript",
-"path": "res://src/UI/CharacterSlot.gd"
+"path": "res://src/UI/seat_sorting/CharacterSlot.gd"
 }, {
 "base": "Area2D",
 "class": "class_ghost",
 "language": "GDScript",
-"path": "res://src/Ghost.gd"
+"path": "res://src/game/enemies/Ghost.gd"
 }, {
 "base": "Area2D",
 "class": "class_gummy",
 "language": "GDScript",
-"path": "res://src/Gummy.gd"
+"path": "res://src/game/Gummy.gd"
 }, {
 "base": "TextureRect",
 "class": "class_highlight_rect",
 "language": "GDScript",
-"path": "res://src/UI/HighlightRect.gd"
+"path": "res://src/UI/base/HighlightRect.gd"
 }, {
 "base": "Reference",
 "class": "class_inventory_item",
 "language": "GDScript",
-"path": "res://src/UI/game_overlay/InventoryItem.gd"
+"path": "res://src/UI/game/InventoryItem.gd"
 }, {
 "base": "Area2D",
 "class": "class_item",
 "language": "GDScript",
-"path": "res://src/Item.gd"
+"path": "res://src/game/base/Item.gd"
 }, {
 "base": "TextureRect",
 "class": "class_item_slot",
 "language": "GDScript",
-"path": "res://src/UI/game_overlay/ItemSlot.gd"
+"path": "res://src/UI/game/ItemSlot.gd"
 }, {
 "base": "Control",
 "class": "class_pause_tab",
@@ -67,47 +67,42 @@ _global_script_classes=[ {
 "base": "StaticBody2D",
 "class": "class_pedestrian_light",
 "language": "GDScript",
-"path": "res://src/traffic/PedestrianLight.gd"
+"path": "res://src/game/traffic/PedestrianLight.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "class_character",
 "class": "class_player",
 "language": "GDScript",
-"path": "res://src/Player.gd"
+"path": "res://src/game/Player.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_prop",
 "language": "GDScript",
-"path": "res://src/Prop.gd"
+"path": "res://src/game/base/Prop.gd"
 }, {
 "base": "Area2D",
 "class": "class_safe_zone",
 "language": "GDScript",
-"path": "res://src/SafeZone.gd"
+"path": "res://src/game/SafeZone.gd"
 }, {
 "base": "Area2D",
 "class": "class_skater",
 "language": "GDScript",
-"path": "res://src/Skater.gd"
+"path": "res://src/game/enemies/Skater.gd"
 }, {
 "base": "Area2D",
 "class": "class_smog_particle",
 "language": "GDScript",
-"path": "res://src/characters/SmogParticle.gd"
-}, {
-"base": "Area2D",
-"class": "class_street",
-"language": "GDScript",
-"path": "res://src/traffic/Street.gd"
+"path": "res://src/game/enemies/SmogParticle.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_traffic_light",
 "language": "GDScript",
-"path": "res://src/traffic/TrafficLight.gd"
+"path": "res://src/game/traffic/TrafficLight.gd"
 }, {
 "base": "YSort",
 "class": "class_zebra_crossing",
 "language": "GDScript",
-"path": "res://src/traffic/ZebraCrossing.gd"
+"path": "res://src/game/traffic/ZebraCrossing.gd"
 } ]
 _global_script_class_icons={
 "class_canster": "",
@@ -127,7 +122,6 @@ _global_script_class_icons={
 "class_safe_zone": "",
 "class_skater": "",
 "class_smog_particle": "",
-"class_street": "",
 "class_traffic_light": "",
 "class_zebra_crossing": ""
 }
@@ -135,7 +129,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RODA Game"
-run/main_scene="res://src/Placeholder.tscn"
+run/main_scene="res://src/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

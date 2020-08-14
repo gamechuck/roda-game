@@ -15,6 +15,8 @@ func _ready():
 	_error = _back_button.connect("pressed", self, "_on_back_button_pressed")
 
 func update_tab():
+	_back_button.grab_focus()
+
 	_master_volume_slider.value = ConfigData.master_volume
 
 func _on_master_volume_slider_changed(value : float):
@@ -23,9 +25,15 @@ func _on_master_volume_slider_changed(value : float):
 
 func _on_language_button_pressed(increment : int):
 	var loaded_locales := TranslationServer.get_loaded_locales()
-	var index := loaded_locales.find(ConfigData.locale)
+	var unique_locales := []
+	# loaded_locales can contain duplicate locales, wihch should be avoided!
+	for locale in loaded_locales:
+		if not locale in unique_locales:
+			unique_locales.append(locale)
+
+	var index := unique_locales.find(ConfigData.locale)
 	index += increment
-	if index >= loaded_locales.size():
-		ConfigData.set_locale(loaded_locales[0])
+	if index >= unique_locales.size():
+		ConfigData.set_locale(unique_locales[0])
 	else:
-		ConfigData.set_locale(loaded_locales[index])
+		ConfigData.set_locale(unique_locales[index])

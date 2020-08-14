@@ -32,6 +32,9 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+msgid "DRIVE_MESSAGE"
+msgstr ""
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr ""

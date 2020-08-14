@@ -1,7 +1,20 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=6 format=2]
 
 [ext_resource path="res://resources/fonts/font_size16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://resources/styles/button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/styles/button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://roda-assets/UI/Elements/Dialogue.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 471, 117 )
+margin_left = 6.0
+margin_right = 8.0
 
 [resource]
 default_font = ExtResource( 1 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 2 )
+Button/styles/pressed = ExtResource( 3 )
 Label/fonts/font = null
+PanelContainer/styles/panel = SubResource( 1 )

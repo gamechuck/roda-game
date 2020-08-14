@@ -35,6 +35,24 @@ EXTERNAL get_state()
 === function get_state() ===
 ~ return 0
 
+=== conv_intro ===
+SSN: Hey! Let's play some football!
+SSL: Hurray! Let's play!
+>>> PLAY_CUTSCENE: intro_play_ball
+SSL: Guys?! Pass me the ball please!
+SSL: ...
+>>> PLAY_CUTSCENE: show_smog
+SSN: What's happening?!
+SSN: Where did this smog come from?
+MRS: BWAHAHAHAHA!
+>>> PLAY_CUTSCENE: mr_smog_intro
+MRS: Say goodbye to your park kids!
+MRS: Mr. Smog is here to ruin your day!
+>>> PLAY_CUTSCENE: mr_smog_destroy_park
+BWAHAHAHAHA!!!
+>>> PLAY_CUTSCENE: mr_smog_outro
+-> DONE
+
 === conv_solid_snejk ===
 
 {conv_type:
@@ -522,12 +540,12 @@ Evo!
 
 {seatbelt_enigma_solved:
 	- true: -> after_solving_enigma
-	- false: -> after_solving_enigma
+	- false: -> before_solving_enigma
 }
 
 = before_solving_enigma
 This is a taxi!
->>> BEGIN_MINIGAME: car_seat_belt
+>>> BEGIN_MINIGAME: seat_sorting
 - (taxi_minigame_start)
 Could you please put everyone in the correct spot?
 + That doesn't seem correct!
@@ -626,9 +644,9 @@ You wanna go back to the park?
 
 -> DONE
 
-=== conv_trash_sock ===
+=== conv_trash_bottle ===
 
-A filthy sock!
+A huge bottle!
 -> DONE
 
 === conv_canster ===

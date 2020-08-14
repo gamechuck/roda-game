@@ -98,8 +98,8 @@ func begin_minigame(argument_values):
 	match minigame_id:
 		"bike_repair":
 			active_minigame = Flow.bike_repair_UI
-		"car_seat_belt":
-			active_minigame = Flow.car_seat_belt_UI
+		"seat_sorting":
+			active_minigame = Flow.seat_sorting_UI
 	if active_minigame != null:
 		active_minigame.show()
 

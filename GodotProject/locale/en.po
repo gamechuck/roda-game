@@ -40,6 +40,9 @@ msgstr "Quit"
 msgid "Back"
 msgstr "Back"
 
+msgid "DRIVE_MESSAGE"
+msgstr "Check arrangement..."
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr "Solid Snake"

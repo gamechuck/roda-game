@@ -69,60 +69,72 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="TabContainer/MainTab/VBoxContainer"]
-margin_top = 23.0
+margin_top = 35.0
 margin_right = 480.0
-margin_bottom = 46.0
+margin_bottom = 58.0
 text = "PAUSE_MESSAGE"
 align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MainTab/VBoxContainer"]
-margin_top = 72.0
-margin_right = 480.0
-margin_bottom = 191.0
+margin_left = 192.0
+margin_top = 84.0
+margin_right = 288.0
+margin_bottom = 185.0
+size_flags_horizontal = 4
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ResumeButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
-margin_left = 192.0
-margin_right = 288.0
-margin_bottom = 29.0
+margin_right = 96.0
+margin_bottom = 23.0
 rect_min_size = Vector2( 96, 0 )
-size_flags_horizontal = 4
+focus_neighbour_top = NodePath("../../QuitButton")
+focus_neighbour_bottom = NodePath("../RestartButton")
+focus_next = NodePath("../RestartButton")
+focus_previous = NodePath("../../QuitButton")
 text = "Resume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RestartButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
-margin_left = 192.0
-margin_top = 45.0
-margin_right = 288.0
-margin_bottom = 74.0
+margin_top = 39.0
+margin_right = 96.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 96, 0 )
-size_flags_horizontal = 4
+focus_neighbour_top = NodePath("../ResumeButton")
+focus_neighbour_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ResumeButton")
 text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SettingsButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
-margin_left = 192.0
-margin_top = 90.0
-margin_right = 288.0
-margin_bottom = 119.0
+margin_top = 78.0
+margin_right = 96.0
+margin_bottom = 101.0
 rect_min_size = Vector2( 96, 0 )
-size_flags_horizontal = 4
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath("../../QuitButton")
+focus_next = NodePath("../../QuitButton")
+focus_previous = NodePath("../RestartButton")
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="TabContainer/MainTab/VBoxContainer"]
 margin_left = 192.0
-margin_top = 217.0
+margin_top = 211.0
 margin_right = 288.0
-margin_bottom = 246.0
+margin_bottom = 234.0
 rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../VBoxContainer/SettingsButton")
+focus_neighbour_bottom = NodePath("../VBoxContainer/ResumeButton")
+focus_next = NodePath("../VBoxContainer/ResumeButton")
+focus_previous = NodePath("../VBoxContainer/SettingsButton")
 size_flags_horizontal = 4
 text = "Quit"
 
@@ -143,9 +155,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
-margin_top = 43.0
+margin_top = 48.0
 margin_right = 480.0
-margin_bottom = 66.0
+margin_bottom = 71.0
 alignment = 1
 
 [node name="FrontSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/HBoxContainer"]
@@ -171,9 +183,9 @@ margin_bottom = 23.0
 rect_min_size = Vector2( 32, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
-margin_top = 98.0
+margin_top = 103.0
 margin_right = 480.0
-margin_bottom = 166.0
+margin_bottom = 167.0
 custom_constants/separation = 16
 alignment = 1
 __meta__ = {
@@ -181,22 +193,26 @@ __meta__ = {
 }
 
 [node name="LanguageHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
-margin_left = 153.0
-margin_right = 327.0
-margin_bottom = 29.0
+margin_left = 148.0
+margin_right = 332.0
+margin_bottom = 25.0
 size_flags_horizontal = 4
 alignment = 1
 
 [node name="PreviousButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_right = 19.0
-margin_bottom = 29.0
+margin_right = 24.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 24, 0 )
+focus_neighbour_top = NodePath("../../../BackButton")
+focus_neighbour_bottom = NodePath("../NextButton")
+focus_next = NodePath("../NextButton")
+focus_previous = NodePath("../../../BackButton")
 text = "<"
 
 [node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_left = 23.0
-margin_top = 2.0
-margin_right = 151.0
-margin_bottom = 27.0
+margin_left = 28.0
+margin_right = 156.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 128, 0 )
 custom_styles/normal = SubResource( 2 )
 text = "LANGUAGE"
@@ -207,15 +223,20 @@ __meta__ = {
 }
 
 [node name="NextButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/LanguageHBox"]
-margin_left = 155.0
-margin_right = 174.0
-margin_bottom = 29.0
+margin_left = 160.0
+margin_right = 184.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 24, 0 )
+focus_neighbour_top = NodePath("../PreviousButton")
+focus_neighbour_bottom = NodePath("../../MasterVolumeHBox/VolumeSlider")
+focus_next = NodePath("../../MasterVolumeHBox/VolumeSlider")
+focus_previous = NodePath("../PreviousButton")
 text = ">"
 
 [node name="MasterVolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer"]
-margin_top = 45.0
+margin_top = 41.0
 margin_right = 480.0
-margin_bottom = 68.0
+margin_bottom = 64.0
 alignment = 1
 
 [node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
@@ -230,8 +251,13 @@ valign = 1
 [node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
 margin_left = 176.0
 margin_right = 304.0
-margin_bottom = 16.0
+margin_bottom = 23.0
 rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../../LanguageHBox/NextButton")
+focus_neighbour_bottom = NodePath("../../../BackButton")
+focus_next = NodePath("../../../BackButton")
+focus_previous = NodePath("../../LanguageHBox/NextButton")
+size_flags_vertical = 1
 value = 100.0
 
 [node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/VBoxContainer/MasterVolumeHBox"]
@@ -243,9 +269,13 @@ text = "(100 %)"
 
 [node name="BackButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer"]
 margin_left = 192.0
-margin_top = 198.0
+margin_top = 199.0
 margin_right = 288.0
-margin_bottom = 227.0
+margin_bottom = 222.0
 rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../VBoxContainer/MasterVolumeHBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../VBoxContainer/LanguageHBox/PreviousButton")
+focus_next = NodePath("../VBoxContainer/LanguageHBox/PreviousButton")
+focus_previous = NodePath("../VBoxContainer/MasterVolumeHBox/VolumeSlider")
 size_flags_horizontal = 4
 text = "Back"

@@ -16,12 +16,11 @@ const STORY_PATH := "res://data/story_hr.ink"
 const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
 
 ### PUBLIC VARIABLES ###
-
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
 var transitions_UI : Control = null
 var bike_repair_UI : Control = null
-var car_seat_belt_UI : Control = null
+var seat_sorting_UI : Control = null
 var inventory_overlay : Control = null
 var game_canvas : Node2D = null
 var boss_overlay : Control = null
@@ -73,12 +72,6 @@ func _ready():
 		print("version {0}.{1}".format([ 
 			ConfigData.major_version, 
 			ConfigData.minor_version]))
-
-		if ConfigData.skip_menu:
-			if ConfigData.verbose_mode : print("Automatically skipping menu as requested by configuration data...")
-			change_scene_to("game")
-		else:
-			change_scene_to("menu")
 
 		set_process_unhandled_input(true)
 

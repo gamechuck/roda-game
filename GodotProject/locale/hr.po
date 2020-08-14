@@ -41,6 +41,9 @@ msgstr "Izlaz"
 msgid "Back"
 msgstr "Nazad"
 
+msgid "DRIVE_MESSAGE"
+msgstr "Check arrangement..."
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr ""

@@ -16,6 +16,9 @@ func _ready():
 		_quit_button.visible = true
 		_error = _quit_button.connect("pressed", self, "_on_quit_button_pressed")
 
+func update_tab():
+	_resume_button.grab_focus()
+
 func _on_resume_button_pressed():
 	Flow.toggle_paused()
 

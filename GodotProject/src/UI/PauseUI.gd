@@ -6,7 +6,7 @@ func _ready():
 	Flow.pause_UI = self
 
 func show():
-	_tab_container.current_tab = 0
+	_tab_container.set_current_tab(class_pause_tab.TABS.MAIN)
 	visible = true
 
 func hide():

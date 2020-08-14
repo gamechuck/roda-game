@@ -14,7 +14,7 @@ func _ready():
 	Flow.load_story()
 	print("----- Showing output log -----")
 
-	# Start the introduction conversation with SolidSnejk.
+	# Start the introduction cutscene
 #	for character in get_tree().get_nodes_in_group("characters"):
 #		if character.id == "solid_snejk":
 #			Flow.dialogue_UI.start_interact_dialogue(character)

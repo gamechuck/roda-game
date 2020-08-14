@@ -119,28 +119,28 @@
         "trash_cup": {
             "KNOT": "conv_trash_cup",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_cup_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_cup_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_cup_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_cup_pressed.png"
             }
         },
         "trash_bag": {
             "KNOT": "conv_trash_bag",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_bag_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_bag_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_bag_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_bag_pressed.png"
             }
         },
-        "trash_sock": {
-            "KNOT": "conv_trash_sock",
+        "trash_bottle": {
+            "KNOT": "conv_trash_bottle",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/Mockups/trash_sock_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/Mockups/trash_sock_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_bottle_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_bottle_pressed.png"
             }
         },
         "seat_belt": {
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/Mockups/seat_belt_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/Mockups/seat_belt_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/seat_belt_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/seat_belt_pressed.png"
             }
         }
     }

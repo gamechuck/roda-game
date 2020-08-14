@@ -3,9 +3,9 @@ extends TabContainer
 func _ready():
 	for child in get_children():
 		if child is class_pause_tab:
-			child.connect("button_pressed", self, "_on_button_pressed")
+			child.connect("button_pressed", self, "set_current_tab")
 
-func _on_button_pressed(type : int):
+func set_current_tab(type : int):
 	var index := 0
 	for child in get_children():
 		if child.tab_type == type:
