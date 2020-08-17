@@ -14,6 +14,8 @@ func _ready():
 	Flow.load_story()
 	print("----- Showing output log -----")
 
+	Flow.inventory_overlay.add_item_by_id("battery")
+
 	# Start the introduction cutscene
 #	for character in get_tree().get_nodes_in_group("characters"):
 #		if character.id == "solid_snejk":

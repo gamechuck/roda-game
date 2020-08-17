@@ -24,6 +24,9 @@ LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 // Taxi
 VAR seatbelt_enigma_solved = 0
 
+// Wind Turbine
+VAR turbine_fixed = 0
+
 VAR used_item = "bush"
 VAR conv_type = 0
 
@@ -728,4 +731,45 @@ Here's a belt!
 
 = use_item
 
+-> DONE
+
+=== conv_wind_turbine ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{turbine_fixed:
+	- 0: -> not_fixed
+	- 1: -> fixed
+}
+
+= not_fixed
+The turbine seems to be broken.
+There's a large hole in the base with a power symbol...
+Maybe I can find some kind of power source somewhere?
+-> DONE
+
+= fixed
+The wind turbine blew away all that filthy smog!
+Maybe people can finally breeath again there!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "battery": -> battery
+	- else: -> default
+}
+
+= battery
+Wow it works!
+>>> SET_STATE: 1
+-> DONE
+
+= default
+That's not a gonna power the turbine!
 -> DONE

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/traffic/TrafficLight.tscn" type="PackedScene" id=2]
@@ -27,188 +27,16 @@
 [ext_resource path="res://src/game/items/TrashBottle.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/game/FenceTileMap.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/game/characters/SeatSortingCar.tscn" type="PackedScene" id=27]
+[ext_resource path="res://src/game/characters/WindTurbine.tscn" type="PackedScene" id=28]
+[ext_resource path="res://src/game/props/Bus.tscn" type="PackedScene" id=29]
 
-[sub_resource type="Animation" id=1]
-resource_name = "intro_mr_smog"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("YSort/Characters/SolidSnejk:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Path2D/PathFollow2D:unit_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("YSort/Player/GameCamera:zoom")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1.75, 1.75 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("YSort/Characters/SolidSnejk:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1500, 360 ), Vector2( 1480, 360 ), Vector2( 1500, 360 ), Vector2( 1500, 360 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("YSort/Props/Ball:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1480, 362 ), Vector2( 1480, 362 ), Vector2( 1400, 362 ), Vector2( 1400, 362 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("YSort/Props/Ball:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 180.0, 180.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("YSort/Characters/SolidSlug:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1440, 265 ), Vector2( 1445, 270 ), Vector2( 1445, 265 ), Vector2( 1430, 270 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("YSort/Characters/FakePlayer:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1.5, 2, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1380, 360 ), Vector2( 1380, 360 ), Vector2( 1400, 360 ), Vector2( 1380, 360 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "intro_play_ball (copy)"
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("YSort/Characters/SolidSnejk:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1500, 360 ), Vector2( 1480, 360 ), Vector2( 1500, 360 ), Vector2( 1500, 360 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("YSort/Props/Ball:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1480, 362 ), Vector2( 1480, 362 ), Vector2( 1400, 362 ), Vector2( 1400, 362 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("YSort/Props/Ball:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 180.0, 180.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("YSort/Characters/SolidSlug:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1440, 265 ), Vector2( 1445, 270 ), Vector2( 1445, 265 ), Vector2( 1430, 270 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("YSort/Characters/FakePlayer:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1.5, 2, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1380, 360 ), Vector2( 1380, 360 ), Vector2( 1400, 360 ), Vector2( 1380, 360 ) ]
-}
-
-[sub_resource type="Curve2D" id=4]
-_data = {
-"points": PoolVector2Array( 143.469, -139.693, -143.469, 139.693, 1423.71, -127.7, 3.7755, -140.637, -3.7755, 140.637, 1214.93, 244.957, -166.122, -1.88775, 166.122, 1.88775, 1345.14, 579.451, -41.5305, 95.3313, 41.5305, -95.3313, 1446.97, 392.166, 35.7848, 13.8226, -35.7848, -13.8226, 1440.13, 210.809, 0, 0, 0, 0, 1278.84, 214.292, 0, 0, 0, 0, 1273.49, 499.379, 0, 0, 0, 0, 1600.45, 496.707, 0, 0, 0, 0, 1600.45, 208.946, 36.2708, -15.4597, -36.2708, 15.4597, 1479.08, 212.596, 0, 0, 0, 0, 1458.87, 392.166 )
-}
-
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 80, 120 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 100, 80 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 110, 100 )
 
 [sub_resource type="NavigationPolygon" id=8]
@@ -218,24 +46,6 @@ outlines = [ PoolVector2Array( 2604.84, 1621.9, 2604.84, 82.973, 1867.16, 71.269
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 5 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/intro_mr_smog = SubResource( 1 )
-anims/intro_play_ball = SubResource( 2 )
-"anims/intro_play_ball (copy)" = SubResource( 3 )
-
-[node name="Path2D" type="Path2D" parent="AnimationPlayer"]
-visible = false
-curve = SubResource( 4 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="AnimationPlayer/Path2D"]
-visible = false
-position = Vector2( 1423.71, -127.7 )
-rotate = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimationPlayer/Path2D/PathFollow2D"]
-visible = false
-remote_path = NodePath("../../../../YSort/Characters/MrSmogCutscene")
 
 [node name="DemoTilemap" parent="." instance=ExtResource( 3 )]
 
@@ -311,6 +121,9 @@ position = Vector2( 1325.13, 280.291 )
 [node name="Ball" parent="YSort/Props" instance=ExtResource( 21 )]
 position = Vector2( 1480, 362 )
 
+[node name="Bus" parent="YSort/Props" instance=ExtResource( 29 )]
+position = Vector2( 1555.5, 143.469 )
+
 [node name="Characters" type="YSort" parent="YSort"]
 
 [node name="SolidSnejk" parent="YSort/Characters" instance=ExtResource( 4 )]
@@ -353,7 +166,10 @@ position = Vector2( 1380, 360 )
 position = Vector2( 1239.2, 291.84 )
 
 [node name="AnimatedSprite" parent="YSort/Characters/SeatSortingCar" index="0"]
-frame = 3
+frame = 4
+
+[node name="WindTurbine" parent="YSort/Characters" instance=ExtResource( 28 )]
+position = Vector2( 1328.63, 196.832 )
 
 [node name="TrafficLoops" type="YSort" parent="YSort"]
 
@@ -420,7 +236,7 @@ extents = Vector2( 80, 120 )
 light_color = 1
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing3/InteractArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing3/Lights" index="0" instance=ExtResource( 2 )]
 position = Vector2( -45.6163, 78.537 )
@@ -444,7 +260,7 @@ extents = Vector2( 100, 80 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing4/InteractArea" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing4/Lights" index="0" instance=ExtResource( 2 )]
 position = Vector2( 79.3015, -3.52019 )
@@ -488,7 +304,7 @@ extents = Vector2( 110, 100 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing9/InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ZebraCrossing9/Lights" index="0" instance=ExtResource( 2 )]
 position = Vector2( -62.7251, 80.2986 )
@@ -559,6 +375,8 @@ navpoly = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Tween" type="Tween" parent="."]
 
 [editable path="YSort/Characters/SeatSortingCar"]
 

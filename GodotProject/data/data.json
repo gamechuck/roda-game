@@ -80,6 +80,10 @@
             "DISPLAY_NAME" : "Wheelie",
             "KNOT": "conv_wheelie"
         },
+        "wind_turbine": {
+            "DISPLAY_NAME" : "Wind Turbine",
+            "KNOT": "conv_wind_turbine"
+        },
         "debug": {
             "KNOT": "conv_debug",
             "PORTRAIT": {
@@ -141,6 +145,12 @@
             "TEXTURES": {
                 "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/seat_belt_normal.png",
                 "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/seat_belt_pressed.png"
+            }
+        },
+        "battery": {
+            "TEXTURES": {
+                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/battery_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/battery_pressed.png"
             }
         }
     }

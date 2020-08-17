@@ -23,10 +23,12 @@ func set_visible(value : bool = visible):
 		if ConfigData.verbose_mode : print("Enabling '{0}' collision shapes...".format([name]))
 		_collision_shape_2D.disabled = false
 		_interact_collision_shape_2D.disabled = false
+		set_process_input(true)
 	else:
 		if ConfigData.verbose_mode : print("Disabling '{0}' collision shapes...".format([name]))
 		_collision_shape_2D.disabled = true
 		_interact_collision_shape_2D.disabled = true
+		set_process_input(false)
 
 func play_sound_byte():
 	_audio_stream_player.play()
