@@ -4,20 +4,28 @@
 code = "shader_type canvas_item;
 
 uniform float threshold = 0.2;
-uniform float aspect_ratio = 1.778;
+
+uniform vec2 window_size = vec2(480, 270);
+uniform vec2 focus_point = vec2(240, 107);
 
 void fragment(){
 
-	float n_x = aspect_ratio*(UV.x - 0.5);
-	float n_y = (UV.y - 0.5); 
+	float aspect_ratio = window_size.x/window_size.y;
+
+	vec2 UV_focus = focus_point/window_size;
+	float max_distance = distance(UV_focus, vec2(1,1));
+
+	float n_x = aspect_ratio*(UV.x - UV_focus.x);
+	float n_y = (UV.y - UV_focus.y); 
 	float radius_from_center = sqrt(n_x*n_x + n_y*n_y);
 
-	if (radius_from_center < threshold){
+	if (radius_from_center*max_distance < threshold){
 		COLOR.a = 0.0;
 	}
 }"
 
 [resource]
 shader = SubResource( 1 )
-shader_param/threshold = 1.0
-shader_param/aspect_ratio = 1.778
+shader_param/threshold = 0.2
+shader_param/window_size = Vector2( 480, 270 )
+shader_param/focus_point = Vector2( 240, 107 )

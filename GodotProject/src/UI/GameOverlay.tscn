@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://resources/fonts/font_size16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://resources/fonts/font_size8.tres" type="DynamicFont" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://roda-assets/UI/boss_health_progress.png" type="Texture" id=17]
 [ext_resource path="res://src/UI/game/BossOverlay.gd" type="Script" id=18]
 [ext_resource path="res://resources/materials/smog_material.tres" type="Material" id=19]
+[ext_resource path="res://roda-assets/UI/Inventory/scroll_up_disabled.png" type="Texture" id=20]
+[ext_resource path="res://roda-assets/UI/Inventory/scroll_down_disabled.png" type="Texture" id=21]
 
 [node name="GameOverlay" type="Control"]
 anchor_right = 1.0
@@ -146,6 +148,7 @@ margin_right = 66.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 texture_normal = ExtResource( 9 )
+texture_disabled = ExtResource( 20 )
 
 [node name="Slots" type="VBoxContainer" parent="InventoryOverlay/HBoxContainer/VBoxContainer/InventoryVBox"]
 margin_top = 16.0
@@ -180,6 +183,7 @@ margin_right = 66.0
 margin_bottom = 196.0
 size_flags_horizontal = 4
 texture_normal = ExtResource( 14 )
+texture_disabled = ExtResource( 21 )
 
 [node name="Spacer" type="Control" parent="InventoryOverlay/HBoxContainer/VBoxContainer"]
 margin_top = 262.0

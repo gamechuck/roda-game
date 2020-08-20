@@ -17,6 +17,7 @@ func _ready():
 	Flow.inventory_overlay.add_item_by_id("battery")
 
 	# Start the introduction cutscene
+	#Flow.player.is_in_dialogue = Flow.dialogue_UI.start_knot_dialogue("conv_intro")
 #	for character in get_tree().get_nodes_in_group("characters"):
 #		if character.id == "solid_snejk":
 #			Flow.dialogue_UI.start_interact_dialogue(character)

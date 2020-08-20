@@ -17,7 +17,7 @@ func _ready():
 
 	visible = false
 
-func fade_to_opaque(duration : float = 1.0):
+func fade_to_opaque(duration : float = 2.0):
 	visible = true
 	_tween.interpolate_method(
 		self, 
@@ -29,7 +29,7 @@ func fade_to_opaque(duration : float = 1.0):
 		Tween.EASE_IN_OUT)
 	_tween.start()
 
-func fade_to_transparent(duration : float = 1.0):
+func fade_to_transparent(duration : float = 2.0):
 	visible = true
 	_tween.interpolate_method(
 		self,

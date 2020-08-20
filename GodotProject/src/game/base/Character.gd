@@ -6,7 +6,7 @@ onready var _interact_collision_shape_2D := $InteractArea/CollisionShape2D
 onready var _audio_stream_player := $AudioStreamPlayer
 onready var _animated_sprite := $AnimatedSprite
 
-export var id : String
+export(String) var id : String
 
 func _ready():
 	add_to_group("characters")

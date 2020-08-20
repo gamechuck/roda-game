@@ -1,10 +1,11 @@
 extends Control
 
-onready var _label := $VBoxContainer/PanelContainer/Label
-onready var _portrait_rect := $PortraitRect
-
-onready var _name_label := $VBoxContainer/NameLabel
 onready var _choice_vbox := $VBoxContainer/ChoiceVBox
+onready var _portrait_rect := $PortraitRect
+onready var _portrait_spacer := $VBoxContainer/DialogueVBox/PanelContainer/HBoxContainer/PortraitSpacer
+
+onready var _name_label := $VBoxContainer/DialogueVBox/NameLabel
+onready var _dialogue_label := $VBoxContainer/DialogueVBox/PanelContainer/HBoxContainer/DialogueLabel
 
 var story : Object
 var is_waiting_for_choice := false
@@ -32,43 +33,23 @@ func start_use_item_dialogue(node : Node2D, item_id : String) -> bool:
 	interact_node = node
 	return _start_dialogue()
 
-func get_state() -> int:
-	if interact_node:
-		var state : int = interact_node.get("state")
-		if state:
-			return state
-		else:
-			return 0
+func start_knot_dialogue(knot : String) -> bool:
+	story.variables_state.set("conv_type", 0)
+	interact_node = null
+
+	if story.knot_container_with_name(knot) != null:
+		story.choose_path_string(knot)
+		return update_dialogue()
 	else:
-		return 0
+		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
+		return false
 
 func _start_dialogue() -> bool:
 	var data := {}
 	if interact_node is class_character:
 		interact_node.play_sound_byte()
 		data = Flow.get_character_data(interact_node.id)
-
-		_name_label.text = data.get("DISPLAY_NAME", "")
-
-		var portrait_data : Dictionary = data.get("PORTRAIT", {})
-		var texture_path : String = portrait_data.get("TEXTURE", "")
-		var texture_exists : bool = ResourceLoader.exists(texture_path)
-		if texture_exists:
-			_portrait_rect.texture = load(texture_path)
-		else:
-			_portrait_rect.texture = null
-
-		var portrait_size = portrait_data.get("SIZE", [200, 200])
-		_portrait_rect.rect_min_size = Vector2(portrait_size[0], portrait_size[1])
-		_portrait_rect.rect_size = _portrait_rect.rect_min_size
-		var portrait_position = portrait_data.get("POSITION", [200, 30])
-		_portrait_rect.rect_position = Vector2(portrait_position[0], portrait_position[1])
-
-		_portrait_rect.flip_h = portrait_data.get("FLIP_H", false)
-		_portrait_rect.flip_v = portrait_data.get("FLIP_V", false)
-
-		_name_label.visible = true
-		_portrait_rect.visible = true
+		update_UI(interact_node.id)
 
 	elif interact_node is class_item:
 		data = Flow.get_item_data(interact_node.id)
@@ -80,7 +61,39 @@ func _start_dialogue() -> bool:
 	if story.knot_container_with_name(knot) != null:
 		story.choose_path_string(knot)
 		return update_dialogue()
-	return false
+	else:
+		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
+		return false
+
+func update_UI(character_id : String) -> void:
+	var data = Flow.get_character_data(character_id)
+
+	_name_label.text = data.get("DISPLAY_NAME", "")
+
+	var portrait_data : Dictionary = data.get("PORTRAIT", {})
+	var texture_path : String = portrait_data.get("TEXTURE", "")
+	var texture_exists : bool = ResourceLoader.exists(texture_path)
+	if texture_exists:
+		_portrait_rect.texture = load(texture_path)
+		
+		var portrait_size = portrait_data.get("SIZE", [200, 200])
+		_portrait_rect.rect_min_size = Vector2(portrait_size[0], portrait_size[1])
+		_portrait_rect.rect_size = _portrait_rect.rect_min_size
+		var portrait_position = portrait_data.get("POSITION", [200, 30])
+		_portrait_rect.rect_position = Vector2(portrait_position[0], portrait_position[1])
+	
+		_portrait_rect.flip_h = portrait_data.get("FLIP_H", false)
+		_portrait_rect.flip_v = portrait_data.get("FLIP_V", false)
+
+		_portrait_spacer.visible = true
+		_portrait_rect.visible = true
+	else:
+		_portrait_rect.texture = null
+
+		_portrait_spacer.visible = false
+		_portrait_rect.visible = false
+
+	_name_label.visible = true
 
 func update_dialogue(choice_index : int = -1) -> bool:
 	if is_waiting_for_choice:
@@ -107,7 +120,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 				return true
 
 		if not text.empty():
-			_label.text = translate(text.strip_edges())
+			_dialogue_label.text = translate(text.strip_edges())
 			visible = true
 			return true
 		else:
@@ -137,6 +150,16 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 func _stop_dialogue() -> void:
 	visible = false
+
+func get_state() -> int:
+	if interact_node:
+		var state : int = interact_node.get("state")
+		if state:
+			return state
+		else:
+			return 0
+	else:
+		return 0
 
 func translate(original_text : String):
 	var tags : Array = story.current_tags

@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/dialogue/ChoiceButton.gd" type="Script" id=1]
+[ext_resource path="res://resources/fonts/font_size8.tres" type="DynamicFont" id=2]
 
 [node name="ChoiceButton" type="Button"]
-margin_left = 176.0
-margin_right = 304.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 128, 32 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 400, 24 )
 size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.937255, 0.815686, 0, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

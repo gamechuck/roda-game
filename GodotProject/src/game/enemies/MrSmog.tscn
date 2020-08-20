@@ -5,14 +5,11 @@
 [ext_resource path="res://roda-assets/Characters/MrSmog/tree_smoggy.png" type="Texture" id=3]
 [ext_resource path="res://roda-assets/Characters/MrSmog/tree_clean.png" type="Texture" id=4]
 
-
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "defeated",
+"name": "friendly",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -22,7 +19,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 120, 120 )
+extents = Vector2( 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 42, 16 )
@@ -42,8 +39,8 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 3 )
 
-[node name="Particles" type="Node2D" parent="." index="4"]
+[node name="Projectiles" type="Node2D" parent="." index="4"]
 
 [node name="Timer" type="Timer" parent="." index="5"]
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="6"]
+[node name="Tween" type="Tween" parent="." index="6"]

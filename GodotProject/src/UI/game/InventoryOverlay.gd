@@ -48,7 +48,6 @@ func _on_inventory_item_pressed(pressed : bool, pressed_item : class_inventory_i
 		if item_slot.inventory_item != pressed_item:
 			item_slot.pressed = false
 		else:
-			print(pressed)
 			item_slot.pressed = pressed
 
 	for item in _inventory_items:
@@ -73,6 +72,13 @@ func update_slots():
 		else:
 			slot.clear_item()
 		idx += 1
+	
+	if _inventory_items.size() < 3:
+		_up_button.disabled = true
+		_down_button.disabled = true
+	else:
+		_up_button.disabled = false
+		_down_button.disabled = false
 
 func add_item(item : class_item) -> void:
 	var item_id := item.id

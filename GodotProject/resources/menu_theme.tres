@@ -6,15 +6,18 @@
 [ext_resource path="res://roda-assets/UI/Elements/Dialogue.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxTexture" id=1]
+content_margin_left = 6.0
+content_margin_right = 6.0
 texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 471, 117 )
-margin_left = 6.0
-margin_right = 8.0
+region_rect = Rect2( 0, 0, 469, 115 )
+margin_left = 3.0
+margin_right = 2.0
+margin_top = 3.0
+margin_bottom = 2.0
 
 [resource]
 default_font = ExtResource( 1 )
 Button/styles/hover = ExtResource( 2 )
 Button/styles/normal = ExtResource( 2 )
 Button/styles/pressed = ExtResource( 3 )
-Label/fonts/font = null
 PanelContainer/styles/panel = SubResource( 1 )

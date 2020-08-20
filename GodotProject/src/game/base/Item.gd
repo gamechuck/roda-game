@@ -3,7 +3,7 @@ class_name class_item
 
 onready var _collision_shape_2D := $CollisionShape2D
 
-export var id : String
+export(String) var id : String
 
 func _ready():
 	add_to_group("items")

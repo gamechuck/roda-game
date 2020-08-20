@@ -61,15 +61,14 @@ func pan_camera(argument_values : Array):
 		var target_position : Vector2 = target_object.position
 		target_position -= Flow.player.position
 
-		_tween.interpolate_property(
-			game_camera, 
-			"position", 
-			game_camera.position, 
-			target_position, 
-			1, 
-			Tween.TRANS_CUBIC, 
-			Tween.EASE_IN_OUT)
+		_tween.interpolate_property(game_camera, "position", game_camera.position, target_position, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		_tween.start()
+
+func zoom_camera(target_zoom : Vector2):
+	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
+
+	_tween.interpolate_property(game_camera, "zoom", game_camera.zoom, target_zoom, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	_tween.start()
 
 func add_item(argument_values):
 	var item_id : String = argument_values[0]
@@ -110,32 +109,24 @@ func end_minigame(_argument_values):
 func set_state(argument_values):
 	var state : int = int(argument_values[0])
 	var node : Node2D = Flow.dialogue_UI.interact_node
-	if node:
-		node.set("state", state)
+	if node: node.set("state", state)
+
+func update_dialogue_UI(argument_values):
+	var character_id : String = argument_values[0]
+	Flow.dialogue_UI.update_UI(character_id)
 
 func play_cutscene(argument_values):
 	var cutscene_id : String = argument_values[0]
 	match cutscene_id:
-		"respawn_player":
-			respawn_player(argument_values)
 		"chew_on_player":
-			chew_on_player(argument_values)
+			var canster : class_canster = Flow.dialogue_UI.interact_node
+			Flow.player.chew_on_player(canster)
 		"drop_player":
-			drop_player(argument_values)
+			var taxi : class_character = Flow.dialogue_UI.interact_node
+			Flow.player.drop_player(taxi)
 
 func respawn_player(_argument_values):
-	var player : class_player = Flow.player
-	player.play_respawn_cutscene()
-
-func chew_on_player(_argument_values):
-	var player : class_player = Flow.player
-	var canster : class_canster = Flow.dialogue_UI.interact_node
-	player.play_chewing_cutscene(canster)
-
-func drop_player(_argument_values):
-	var player : class_player = Flow.player
-	var taxi : class_character = Flow.dialogue_UI.interact_node
-	player.play_drop_player(taxi)
+	Flow.player.respawn()
 
 func teleport_player(argument_values):
 	var character_id : String = argument_values[0]
@@ -146,7 +137,7 @@ func teleport_player(argument_values):
 		if character.id == character_id:
 			var target_position : Vector2 = character.position
 			target_position += Vector2(0, -50)
-			player.play_teleport(target_position)
+			player.teleport(target_position)
 			return
 
 func fade_to_opaque(argument_values : Array):
@@ -188,6 +179,10 @@ var external_setters : Dictionary = {
 	},
 	"SET_STATE" : {
 		"callback": funcref(self, "set_state"),
+		"argument_types": [TYPE_STRING]
+	},
+	"UPDATE_UI" : {
+		"callback": funcref(self, "update_dialogue_UI"),
 		"argument_types": [TYPE_STRING]
 	},
 	"PLAY_CUTSCENE" : {

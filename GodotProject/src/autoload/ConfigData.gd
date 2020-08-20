@@ -42,6 +42,15 @@ var traffic_green_time := 10.0
 
 var boss_max_health := 100.0
 
+var bullet_speed := 200
+var bullet_ttl := 2
+
+var tracking_speed := 50
+var tracking_ttl := 4
+
+var whirling_speed := 1
+var whirling_ttl := 10
+
 var car_move_speed := 4.0
 var panic_modifier := 2.0
 

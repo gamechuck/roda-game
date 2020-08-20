@@ -9,8 +9,8 @@
                     256
                 ],
                 "POSITION": [
-                    268,
-                    -8
+                    266,
+                    54
                 ],
                 "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png",
                 "FLIP_H": true
@@ -25,8 +25,8 @@
                     200
                 ],
                 "POSITION": [
-                    292,
-                    30
+                    325,
+                    109
                 ],
                 "TEXTURE": "res://roda-assets/Portraits/lizzy.png"
             }
@@ -40,8 +40,8 @@
                     200
                 ],
                 "POSITION": [
-                    300,
-                    32
+                    322,
+                    107
                 ],
                 "TEXTURE": "res://roda-assets/Portraits/watto.png"
             }
@@ -55,8 +55,8 @@
                     256
                 ],
                 "POSITION": [
-                    244,
-                    -16
+                    272,
+                    57
                 ],
                 "TEXTURE": "res://roda-assets/Portraits/solid_slug.png"
             }
@@ -74,11 +74,36 @@
         },
         "canster": {
             "DISPLAY_NAME" : "Canster",
-            "KNOT": "conv_canster"
+            "KNOT": "conv_canster",
+            "PORTRAIT": {
+                "SIZE": [
+                    120,
+                    175
+                ],
+                "POSITION": [
+                    348,
+                    86
+                ],
+                "TEXTURE": "res://roda-assets/Portraits/canster.png"
+            }
         },
         "wheelie": {
             "DISPLAY_NAME" : "Wheelie",
             "KNOT": "conv_wheelie"
+        },
+        "mr_smog": {
+            "DISPLAY_NAME" : "Mr. Smog",
+            "PORTRAIT": {
+                "SIZE": [
+                    200,
+                    200
+                ],
+                "POSITION": [
+                    335,
+                    86
+                ],
+                "TEXTURE": "res://roda-assets/Portraits/MrSmog.png"
+            }
         },
         "wind_turbine": {
             "DISPLAY_NAME" : "Wind Turbine",
@@ -92,8 +117,8 @@
                     256
                 ],
                 "POSITION": [
-                    268,
-                    -8
+                    266,
+                    54
                 ],
                 "TEXTURE": "res://roda-assets/Portraits/solid_snejk.png"
             }

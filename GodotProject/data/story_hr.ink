@@ -4,7 +4,7 @@ VAR found_bike = 0
 VAR picked_up_fence = 0
 
 // SolidSnejk
-VAR talked_with_solid_snjek = 0
+VAR talked_with_solid_snejk = 0
 
 // Lizzy
 VAR lizzy_riddle_solved = 0
@@ -39,18 +39,22 @@ EXTERNAL get_state()
 ~ return 0
 
 === conv_intro ===
-SSN: Hey! Let's play some football!
-SSL: Hurray! Let's play!
+>>> UPDATE_UI: solid_snejk
+Hey! Let's play some football!
+>>> UPDATE_UI: solid_slug
+Hurray! Let's play!
 >>> PLAY_CUTSCENE: intro_play_ball
-SSL: Guys?! Pass me the ball please!
-SSL: ...
+Guys?! Pass me the ball please!
+...
 >>> PLAY_CUTSCENE: show_smog
-SSN: What's happening?!
-SSN: Where did this smog come from?
-MRS: BWAHAHAHAHA!
+>>> UPDATE_UI: solid_snejk
+What's happening?!
+Where did this smog come from?
+>>> UPDATE_UI: mr_smog
+BWAHAHAHAHA!
 >>> PLAY_CUTSCENE: mr_smog_intro
-MRS: Say goodbye to your park kids!
-MRS: Mr. Smog is here to ruin your day!
+Say goodbye to your park kids!
+Mr. Smog is here to ruin your day!
 >>> PLAY_CUTSCENE: mr_smog_destroy_park
 BWAHAHAHAHA!!!
 >>> PLAY_CUTSCENE: mr_smog_outro
@@ -73,7 +77,7 @@ BWAHAHAHAHA!!!
 	- true: -> fix_fence
 }
 
-{talked_with_solid_snjek:
+{talked_with_solid_snejk:
 	- 0: -> intro
 	- else: -> main
 }
@@ -81,7 +85,8 @@ BWAHAHAHAHA!!!
 = intro
 Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
 Idemo naći ograde i popraviti park da se možemo opet loptati! #solid_snejk_intro_2
-~ talked_with_solid_snjek = 1
+>>> SET_UI: solid_snejk
+~ talked_with_solid_snejk = 1
 -> main
 
 = fix_fence
@@ -543,7 +548,7 @@ Evo!
 
 {seatbelt_enigma_solved:
 	- true: -> after_solving_enigma
-	- false: -> before_solving_enigma
+	- false: -> after_solving_enigma
 }
 
 = before_solving_enigma
