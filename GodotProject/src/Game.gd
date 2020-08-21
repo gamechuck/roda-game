@@ -15,6 +15,7 @@ func _ready():
 	print("----- Showing output log -----")
 
 	Flow.inventory_overlay.add_item_by_id("battery")
+	Flow.inventory_overlay.add_item_by_id("trash_bag")
 
 	# Start the introduction cutscene
 	#Flow.player.is_in_dialogue = Flow.dialogue_UI.start_knot_dialogue("conv_intro")

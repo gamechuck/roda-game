@@ -72,6 +72,10 @@
             "DISPLAY_NAME" : "Taxi",
             "KNOT": "conv_taxi_at_mountain"
         },
+        "bus": {
+            "DISPLAY_NAME" : "Bus",
+            "KNOT": "conv_bus"
+        },
         "canster": {
             "DISPLAY_NAME" : "Canster",
             "KNOT": "conv_canster",

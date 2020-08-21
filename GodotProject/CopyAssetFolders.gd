@@ -54,8 +54,8 @@ func _init():
 
 	# Copy the options.cfg to the build folder.
 	# This .cfg is only used for editor purposes and the development builds.
-	print("Copying 'options.cfg'")
-	dir.copy("options.cfg", "{0}/options.cfg".format([_globalized_build_path]))
+	print("Copying 'default_options.cfg'")
+	dir.copy("default_options.cfg", "{0}/default_options.cfg".format([_globalized_build_path]))
 
 	# Copy the default_controls.json to the build folder.
 	print("Copying 'default_controls.json'")

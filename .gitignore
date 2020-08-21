@@ -4,7 +4,7 @@ export.cfg
 #export_presets.cfg --> Needs to be pushed to origin/master to allow for Gitlab CI!
 
 # Imported translations (automatically generated from CSV files)
-*.translation
+#*.translation --> Needs to be pushed to origin/master to allow for Gitlab CI!
 
 # Mono-specific ignores
 .mono/

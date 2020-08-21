@@ -39,7 +39,7 @@ animations = [ {
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 7 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionPolygon2D" parent="." index="1"]

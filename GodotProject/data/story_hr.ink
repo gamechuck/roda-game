@@ -753,14 +753,14 @@ Here's a belt!
 }
 
 = not_fixed
-The turbine seems to be broken.
+The turbine doesn't have power source...
 There's a large hole in the base with a power symbol...
 Maybe I can find some kind of power source somewhere?
 -> DONE
 
 = fixed
 The wind turbine blew away all that filthy smog!
-Maybe people can finally breeath again there!
+Maybe people can finally breath again there!
 -> DONE
 
 = use_item
@@ -773,8 +773,41 @@ Maybe people can finally breeath again there!
 = battery
 Wow it works!
 >>> SET_STATE: 1
--> DONE
+-> fixed
 
 = default
 That's not a gonna power the turbine!
+-> DONE
+
+=== conv_bus ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+Hey kid! Sorry for being in your way!
+I'm 23 hours behind schedule for this bus stop.
+But if I wait long enough here, I'll be back on schedule!
+Oh... Please watch out for cars!
+They can't see you when you cross the zebra because I block their view!
+You can try taking the other zebra if you really need to cross though!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "battery": -> battery
+	- else: -> default
+}
+
+= battery
+A battery, eh? I bet that could power the wind turbine to the north of here!
+-> DONE
+
+= default
+Nice trinket!
+Now let me wait in peace!
 -> DONE
