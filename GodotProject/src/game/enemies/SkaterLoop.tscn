@@ -2,10 +2,6 @@
 
 [ext_resource path="res://src/game/enemies/SkaterLoop.gd" type="Script" id=1]
 
-
-
-
-
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )

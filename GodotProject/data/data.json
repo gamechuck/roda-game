@@ -152,34 +152,34 @@
         "trash_cup": {
             "KNOT": "conv_trash_cup",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_cup_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_cup_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/trash_cup_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/trash_cup_pressed.png"
             }
         },
         "trash_bag": {
             "KNOT": "conv_trash_bag",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_bag_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_bag_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/trash_bag_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/trash_bag_pressed.png"
             }
         },
         "trash_bottle": {
             "KNOT": "conv_trash_bottle",
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/trash_bottle_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/trash_bottle_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/trash_bottle_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/trash_bottle_pressed.png"
             }
         },
         "seat_belt": {
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/seat_belt_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/seat_belt_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/seat_belt_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/seat_belt_pressed.png"
             }
         },
         "battery": {
             "TEXTURES": {
-                "TEXTURE_NORMAL":"res://roda-assets/UI/inventory/battery_normal.png",
-                "TEXTURE_PRESSED":"res://roda-assets/UI/inventory/battery_pressed.png"
+                "TEXTURE_NORMAL":"res://roda-assets/UI/Inventory/battery_normal.png",
+                "TEXTURE_PRESSED":"res://roda-assets/UI/Inventory/battery_pressed.png"
             }
         }
     }

@@ -3,8 +3,8 @@ extends YSort
 
 onready var _skaters_container := $Skaters
 
-onready var _path_follow_resource := preload("res://src/traffic/PathFollow.tscn")
-onready var _skater_resource := preload("res://src/Skater.tscn")
+onready var _path_follow_resource := preload("res://src/game/base/PathFollow.tscn")
+onready var _skater_resource := preload("res://src/game/enemies/Skater.tscn")
 onready var _path_2D := $Path2D
 
 export var points := PoolVector2Array() setget set_points

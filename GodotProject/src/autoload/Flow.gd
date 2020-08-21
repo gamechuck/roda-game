@@ -13,7 +13,7 @@ const USER_CONTROLS_PATH := "user://user_controls.json"
 const DATA_PATH := "res://data/data.json"
 const STORY_PATH := "res://data/story_hr.ink"
 
-const INKLECATE_PATH : String = "res://inklecate/inklecate.exe"
+const INKLECATE_PATH : String = "res://inklecate"
 
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
@@ -216,12 +216,21 @@ static func build_INK(path : String, inklecate_path : String) -> int:
 		return ERR_FILE_NOT_FOUND
 
 	var output := []
+	if OS.get_name() == "Windows" or OS.get_name() == "X11":
+		inklecate_path += "/inklecate.exe"
+	else:
+		push_error("Building INK files is not supported on platform '{0}'".format([OS.get_name()]))
+		return ERR_COMPILATION_FAILED
 
 	if not file.file_exists(inklecate_path):
 		push_error("Failed to find Inklecate building tool '{0}', check path availability!".format([inklecate_path]))
 		return ERR_FILE_NOT_FOUND
 
 	inklecate_path = ProjectSettings.globalize_path(inklecate_path)
+	print(ProjectSettings.globalize_path("res://"))
+	print(inklecate_path)
+	print(target_path)
+	print(source_path)
 	var exit_code = OS.execute(inklecate_path, [
 				   '-o',
 				   ProjectSettings.globalize_path(target_path),

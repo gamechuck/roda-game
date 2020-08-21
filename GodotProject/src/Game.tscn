@@ -57,7 +57,6 @@ script = ExtResource( 2 )
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
 [node name="GameOverlay" parent="UICanvas" instance=ExtResource( 4 )]
-smog_amount = 0.0
 
 [node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
