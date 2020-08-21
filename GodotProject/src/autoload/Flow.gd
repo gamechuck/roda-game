@@ -13,8 +13,6 @@ const USER_CONTROLS_PATH := "user://user_controls.json"
 const DATA_PATH := "res://data/data.json"
 const STORY_PATH := "res://data/story_hr.ink"
 
-const INKLECATE_PATH : String = "res://inklecate"
-
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
 var	pause_UI : Control = null
@@ -91,7 +89,7 @@ func reset():
 
 func load_story():
 	if OS.get_name() == "Windows":
-		var _error = build_INK(STORY_PATH, INKLECATE_PATH)
+		var _error = build_INK(STORY_PATH)
 	var content = load_INK(STORY_PATH)
 	dialogue_UI.story = _story_resource.new(content)
 
@@ -204,7 +202,7 @@ static func load_INK(path : String) -> String:
 		push_error("Failed to open the compiled INK file at '{0}'.".format([extended_path]))
 		return '{"inkVersion":19,"root":[[["done",{"#n":"g-0"}],null],"done",{"#f":3}],"listDefs":{}}'
 
-static func build_INK(path : String, inklecate_path : String) -> int:
+static func build_INK(path : String) -> int:
 ## Compile an INK file at location path to a JSON file at the same location.
 	var source_path: String = "{0}".format([path])
 	var target_path: String = "{0}.json".format([path])
@@ -216,8 +214,9 @@ static func build_INK(path : String, inklecate_path : String) -> int:
 		return ERR_FILE_NOT_FOUND
 
 	var output := []
+	var inklecate_path = ""
 	if OS.get_name() == "Windows" or OS.get_name() == "X11":
-		inklecate_path += "/inklecate.exe"
+		inklecate_path = get_game_folder() + "/inklecate/inklecate.exe"
 	else:
 		push_error("Building INK files is not supported on platform '{0}'".format([OS.get_name()]))
 		return ERR_COMPILATION_FAILED
@@ -226,11 +225,6 @@ static func build_INK(path : String, inklecate_path : String) -> int:
 		push_error("Failed to find Inklecate building tool '{0}', check path availability!".format([inklecate_path]))
 		return ERR_FILE_NOT_FOUND
 
-	inklecate_path = ProjectSettings.globalize_path(inklecate_path)
-	print(ProjectSettings.globalize_path("res://"))
-	print(inklecate_path)
-	print(target_path)
-	print(source_path)
 	var exit_code = OS.execute(inklecate_path, [
 				   '-o',
 				   ProjectSettings.globalize_path(target_path),
@@ -257,3 +251,11 @@ static func build_INK(path : String, inklecate_path : String) -> int:
 			print(PoolStringArray(output).join("\n"))
 
 	return OK
+
+static func get_game_folder() -> String:
+	if OS.has_feature("standalone"):
+		print("Running an exported build.")
+		return OS.get_executable_path().get_base_dir()
+	else:
+		print("Running from the editor.")
+		return ProjectSettings.globalize_path("res://")
