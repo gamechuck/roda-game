@@ -1,6 +1,6 @@
 extends class_character
 
-enum STATE {AGGRESSIVE = 0, FRIENDLY = 1}
+enum BATTLE_MODE {ATTACK, DEFEATED}
 
 #var _projectiles_resources := [
 #	preload("res://src/game/enemies/projectiles/TrackingProjectile.tscn"),
@@ -14,8 +14,6 @@ func set_health(value : float):
 	if Flow.boss_overlay:
 		Flow.boss_overlay.health = _health
 
-var _state : int = STATE.AGGRESSIVE
-
 onready var _projectiles_container := $Projectiles
 onready var _interact_area := $InteractArea
 onready var _timer := $Timer
@@ -23,6 +21,7 @@ onready var _tween := $Tween
 
 func _ready():
 	randomize()
+	register_state_property("is_defeated", BATTLE_MODE.ATTACK)
 
 	var _error : int = _timer.connect("timeout", self, "_on_timer_timeout")
 
@@ -30,7 +29,7 @@ func _ready():
 #	_error =_interact_area.connect("area_exited", self, "_on_area_exited")
 
 	_update_animation()
-	_timer.start()
+	#_timer.start()
 	#reset()
 
 func reset():
@@ -52,7 +51,7 @@ func set_monitorable(value : bool = _interact_area.monitorable):
 func _on_area_entered(area : Area2D):
 	if area and area.get_parent() is class_player:
 		match _state:
-			STATE.AGGRESSIVE:
+			BATTLE_MODE.AGGRESSIVE:
 				Flow.boss_overlay.show()
 				Director.zoom_camera(Vector2(1.5, 1.5))
 
@@ -61,7 +60,7 @@ func _on_area_entered(area : Area2D):
 func _on_area_exited(area : Area2D):
 	if area and area.get_parent() is class_player:
 		match _state:
-			STATE.AGGRESSIVE:
+			BATTLE_MODE.AGGRESSIVE:
 				Flow.boss_overlay.hide()
 				Director.zoom_camera(Vector2(1, 1))
 
@@ -87,7 +86,8 @@ func _on_timer_timeout():
 #		_update_animation()
 
 func _update_animation():
-	var state_settings : Dictionary = _state_machine.get(_state, {})
+	var is_defeated : int = get_state_property("is_defeated")
+	var state_settings : Dictionary = _state_machine.get(is_defeated, {})
 	_animated_sprite.play(state_settings.get("animation_name", "aggressive"))
 
 	var shape = _interact_collision_shape_2D.shape
@@ -96,12 +96,12 @@ func _update_animation():
 	set_monitorable(state_settings.get("monitorable", false))
 
 var _state_machine := {
-	STATE.AGGRESSIVE:{
+	BATTLE_MODE.ATTACK:{
 		"animation_name": "aggressive",
 		"extents": Vector2(480, 360),
 		"monitorable": false
 	},
-	STATE.FRIENDLY:{
+	BATTLE_MODE.DEFEATED:{
 		"animation_name": "friendly",
 		"extents": Vector2(48, 48),
 		"monitorable": true

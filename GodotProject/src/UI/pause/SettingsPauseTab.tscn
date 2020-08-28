@@ -1,0 +1,166 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/pause/SettingsPauseTab.gd" type="Script" id=1]
+[ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="SettingsPauseTab" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tab_type = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 480.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="FrontSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 169.0
+margin_right = 201.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 205.0
+margin_right = 275.0
+margin_bottom = 23.0
+text = "SETTINGS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 279.0
+margin_right = 311.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 103.0
+margin_right = 480.0
+margin_bottom = 167.0
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LanguageHBox" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_left = 148.0
+margin_right = 332.0
+margin_bottom = 25.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="PreviousButton" type="Button" parent="VBoxContainer/VBoxContainer/LanguageHBox"]
+margin_right = 24.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 24, 0 )
+focus_neighbour_top = NodePath("../../../BackButton")
+focus_neighbour_bottom = NodePath("../NextButton")
+focus_next = NodePath("../NextButton")
+focus_previous = NodePath("../../../BackButton")
+text = "<"
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/LanguageHBox"]
+margin_left = 28.0
+margin_right = 156.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/normal = SubResource( 1 )
+text = "LANGUAGE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="Button" parent="VBoxContainer/VBoxContainer/LanguageHBox"]
+margin_left = 160.0
+margin_right = 184.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 24, 0 )
+focus_neighbour_top = NodePath("../PreviousButton")
+focus_neighbour_bottom = NodePath("../../MasterVolumeHBox/VolumeSlider")
+focus_next = NodePath("../../MasterVolumeHBox/VolumeSlider")
+focus_previous = NodePath("../PreviousButton")
+text = ">"
+
+[node name="MasterVolumeHBox" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 480.0
+margin_bottom = 64.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/MasterVolumeHBox"]
+margin_right = 172.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 64, 0 )
+size_flags_horizontal = 3
+text = "VOLUME"
+align = 2
+valign = 1
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/VBoxContainer/MasterVolumeHBox"]
+margin_left = 176.0
+margin_right = 304.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../../LanguageHBox/NextButton")
+focus_neighbour_bottom = NodePath("../../../BackButton")
+focus_next = NodePath("../../../BackButton")
+focus_previous = NodePath("../../LanguageHBox/NextButton")
+size_flags_vertical = 1
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer/VBoxContainer/MasterVolumeHBox"]
+margin_left = 308.0
+margin_right = 480.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "100 %"
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+margin_left = 192.0
+margin_top = 199.0
+margin_right = 288.0
+margin_bottom = 222.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../VBoxContainer/MasterVolumeHBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../VBoxContainer/LanguageHBox/PreviousButton")
+focus_next = NodePath("../VBoxContainer/LanguageHBox/PreviousButton")
+focus_previous = NodePath("../VBoxContainer/MasterVolumeHBox/VolumeSlider")
+size_flags_horizontal = 4
+text = "BACK"

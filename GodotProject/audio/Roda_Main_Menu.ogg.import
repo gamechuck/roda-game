@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Roda_Main_Menu.ogg-fffbc98006886ca64087e419a9db9361.oggstr"
+
+[deps]
+
+source_file="res://audio/Roda_Main_Menu.ogg"
+dest_files=[ "res://.import/Roda_Main_Menu.ogg-fffbc98006886ca64087e419a9db9361.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

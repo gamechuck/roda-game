@@ -7,16 +7,13 @@ onready var _game_camera := _game_canvas.get_node("YSort/Player/GameCamera")
 
 func _ready():
 	randomize()
+	AudioEngine.play_background_music("gameplay")
 
 	_editor_camera.current = Flow.is_in_editor_mode
 	_game_camera.current = not Flow.is_in_editor_mode
 
 	Flow.load_story()
 	print("----- Showing output log -----")
-
-	Flow.inventory_overlay.add_item_by_id("battery")
-	Flow.inventory_overlay.add_item_by_id("trash_bag")
-	Flow.inventory_overlay.add_item_by_id("fence")
 
 	# Start the introduction cutscene
 	#Flow.player.is_in_dialogue = Flow.dialogue_UI.start_knot_dialogue("conv_intro")

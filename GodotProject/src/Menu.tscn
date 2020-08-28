@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=3]
+[ext_resource path="res://src/menu/main/MainMenuTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/menu/settings/SettingsMenuTab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://roda-assets/UI/MainMenu/Background2.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 782, 555 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -12,73 +20,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 24
-alignment = 1
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 80.0
-margin_right = 480.0
-margin_bottom = 103.0
-alignment = 1
+[node name="MainMenuTab" parent="TabContainer" instance=ExtResource( 4 )]
 
-[node name="FrontSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-margin_left = 184.0
-margin_right = 216.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 32, 0 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 220.0
-margin_right = 259.0
-margin_bottom = 23.0
-size_flags_horizontal = 4
-text = "RODA"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-margin_left = 263.0
-margin_right = 295.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 32, 0 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 127.0
-margin_right = 480.0
-margin_bottom = 189.0
-custom_constants/separation = 16
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 176.0
-margin_right = 304.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 128, 0 )
-focus_neighbour_bottom = NodePath("../QuitButton")
-focus_next = NodePath("../QuitButton")
-focus_previous = NodePath("../QuitButton")
-size_flags_horizontal = 4
-text = "Start"
-
-[node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 176.0
-margin_top = 39.0
-margin_right = 304.0
-margin_bottom = 62.0
-rect_min_size = Vector2( 128, 0 )
-focus_neighbour_top = NodePath("../StartButton")
-focus_next = NodePath("../StartButton")
-focus_previous = NodePath("../StartButton")
-size_flags_horizontal = 4
-text = "Quit"
+[node name="SettingsMenuTab" parent="TabContainer" instance=ExtResource( 5 )]
+visible = false
+tab_type = 1

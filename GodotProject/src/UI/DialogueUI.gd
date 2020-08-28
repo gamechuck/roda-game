@@ -7,168 +7,92 @@ onready var _portrait_spacer := $VBoxContainer/DialogueVBox/PanelContainer/HBoxC
 onready var _name_label := $VBoxContainer/DialogueVBox/NameLabel
 onready var _dialogue_label := $VBoxContainer/DialogueVBox/PanelContainer/HBoxContainer/DialogueLabel
 
-var story : Object
-var is_waiting_for_choice := false
-
-var interact_node : Node2D = null
+signal dialogue_updated
 
 func _ready():
 	Flow.dialogue_UI = self
 
+	var _error := connect("dialogue_updated", Director, "_on_dialogue_updated")
+
 	var index := 0
 	for child in _choice_vbox.get_children():
-		child.connect("choice_button_pressed", self, "update_dialogue", [index])
+		child.connect("choice_button_pressed", Director, "_on_choice_button_pressed", [index])
 		index += 1
 
 	_choice_vbox.visible = false
+	set_process_input(false)
 
-func start_interact_dialogue(node : Node2D) -> bool:
-	story.variables_state.set("conv_type", 0)
-	interact_node = node
-	return _start_dialogue()
+func show():
+	# Derive the state from the Director and update the UI as a result!
+	var node = Director.interact_node
+	if node is class_pickup:
+		update_pickup_UI(node.state)
+	elif node is class_character:
+		update_character_UI(node.state)
 
-func start_use_item_dialogue(node : Node2D, item_id : String) -> bool:
-	story.variables_state.set("used_item", item_id)
-	story.variables_state.set("conv_type", 1)
-	interact_node = node
-	return _start_dialogue()
+	visible = true
+	set_process_input(true)
 
-func start_knot_dialogue(knot : String) -> bool:
-	story.variables_state.set("conv_type", 0)
-	interact_node = null
+func hide():
+	visible = false
+	set_process_input(false)
 
-	if story.knot_container_with_name(knot) != null:
-		story.choose_path_string(knot)
-		return update_dialogue()
-	else:
-		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
-		return false
+func update_pickup_UI(_pickup : class_pickup_state) -> void:
+	_name_label.visible = false
+	_portrait_spacer.visible = false
+	_portrait_rect.visible = false
 
-func _start_dialogue() -> bool:
-	var data := {}
-	if interact_node is class_character:
-		interact_node.play_sound_byte()
-		data = Flow.get_character_data(interact_node.id)
-		update_UI(interact_node.id)
+func update_character_UI(character : class_character_state) -> void:
+	_portrait_rect.texture = character.portrait_texture
 
-	elif interact_node is class_item:
-		data = Flow.get_item_data(interact_node.id)
+	_name_label.text = character.name
+	_name_label.visible = true
 
-		_name_label.visible = false
-		_portrait_rect.visible = false
+	if _portrait_rect.texture:
+		var portrait_size := character.portrait_size
+		_portrait_rect.rect_min_size = portrait_size
+		_portrait_rect.rect_size = portrait_size
+		var portrait_position = character.portrait_position
+		_portrait_rect.rect_position = portrait_position
 
-	var knot : String = data.get("KNOT", "")
-	if story.knot_container_with_name(knot) != null:
-		story.choose_path_string(knot)
-		return update_dialogue()
-	else:
-		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
-		return false
-
-func update_UI(character_id : String) -> void:
-	var data = Flow.get_character_data(character_id)
-
-	_name_label.text = data.get("DISPLAY_NAME", "")
-
-	var portrait_data : Dictionary = data.get("PORTRAIT", {})
-	var texture_path : String = portrait_data.get("TEXTURE", "")
-	var texture_exists : bool = ResourceLoader.exists(texture_path)
-	if texture_exists:
-		_portrait_rect.texture = load(texture_path)
-		
-		var portrait_size = portrait_data.get("SIZE", [200, 200])
-		_portrait_rect.rect_min_size = Vector2(portrait_size[0], portrait_size[1])
-		_portrait_rect.rect_size = _portrait_rect.rect_min_size
-		var portrait_position = portrait_data.get("POSITION", [200, 30])
-		_portrait_rect.rect_position = Vector2(portrait_position[0], portrait_position[1])
-	
-		_portrait_rect.flip_h = portrait_data.get("FLIP_H", false)
-		_portrait_rect.flip_v = portrait_data.get("FLIP_V", false)
+		_portrait_rect.flip_h = character.flip_h
+		_portrait_rect.flip_v = character.flip_v
 
 		_portrait_spacer.visible = true
 		_portrait_rect.visible = true
 	else:
-		_portrait_rect.texture = null
-
 		_portrait_spacer.visible = false
 		_portrait_rect.visible = false
 
-	_name_label.visible = true
+func update_dialogue(text : String) -> void:
+	_choice_vbox.visible = false
+	_portrait_rect.self_modulate.a = 1.0
 
-func update_dialogue(choice_index : int = -1) -> bool:
-	if is_waiting_for_choice:
-		if choice_index != -1 and choice_index < story.current_choices.size():
-			story.choose_choice_index(choice_index)
-			is_waiting_for_choice = false
-			return update_dialogue()
+	_dialogue_label.text = text
+
+func update_multiple_choice(choices : Array) -> void:
+	_choice_vbox.visible = true
+	_portrait_rect.self_modulate.a = 0.5
+
+	var index := 0
+	for child in _choice_vbox.get_children():
+		if index < choices.size():
+			child.text = choices[index]
+			child.visible = true
 		else:
-			return true
+			child.visible = false
+		index += 1
 
-	if story.can_continue:
-		_choice_vbox.visible = false
-		_portrait_rect.self_modulate.a = 1.0
+func _input(event):
+	if event.is_action_pressed("interact"):
+		Flow.active_character = null
+		Flow.active_item = null
+		emit_signal("dialogue_updated")
+		get_tree().set_input_as_handled()
 
-		var text : String = story.continue()
-		text = text.strip_edges()
-		print(text)
-		if text.left(3) == ">>>":
-			# It's some sort of command! Give it to the Director!
-			var can_continue := Director.execute_command(text)
-			if can_continue:
-				return update_dialogue()
-			else:
-				return true
-
-		if not text.empty():
-			_dialogue_label.text = translate(text.strip_edges())
-			visible = true
-			return true
-		else:
-			return update_dialogue()
-	elif story.current_choices.size() > 0:
-		is_waiting_for_choice = true
-
-		if Director.active_minigame == null:
-			_choice_vbox.visible = true
-			_portrait_rect.self_modulate.a = 0.5
-	
-			var index := 0
-			for child in _choice_vbox.get_children():
-				if index < story.current_choices.size():
-					var choice = story.current_choices[index]
-					child.text = translate(choice.text)
-					child.visible = true
-				else:
-					child.visible = false
-				index += 1
-
-		#story.choose_choice_index(0)
-		return true
-	else:
-		_stop_dialogue()
-		return false
-
-func _stop_dialogue() -> void:
-	visible = false
-
-func get_state() -> int:
-	if interact_node:
-		var state : int = interact_node.get("state")
-		if state:
-			return state
-		else:
-			return 0
-	else:
-		return 0
-
-func translate(original_text : String):
-	var tags : Array = story.current_tags
-	if tags.empty():
-		return original_text
-	else:
-		var msg_id : String = tags[0]
-		var translated_text : String = TranslationServer.translate(msg_id)
-		if translated_text != msg_id:
-			return translated_text
-		else:
-			return original_text
+func _gui_input(event):
+	if event.is_action_pressed("left_mouse_button"):
+		Flow.active_character = null
+		Flow.active_item = null
+		emit_signal("dialogue_updated")
+		get_tree().set_input_as_handled()

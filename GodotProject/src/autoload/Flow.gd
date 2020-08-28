@@ -1,14 +1,18 @@
-tool
 extends Node
 
 enum STATE {MENU, GAME}
 
-const DEFAULT_OPTIONS_PATH := "res://default_options.cfg"
+const OPTIONS_PATH := "res://options.cfg"
 # Settings are a subset of options that can be modified by the user.
 const USER_SETTINGS_PATH := "user://user_settings.cfg"
 
-const DEFAULT_CONTROLS_PATH := "res://default_controls.json"
+const CONTROLS_PATH := "res://controls.json"
 const USER_CONTROLS_PATH := "user://user_controls.json"
+
+const SAVE_FOLDER := "user://saves"
+
+const DEFAULT_CONTEXT_PATH := "res://default_context.json"
+const USER_SAVE_PATH := SAVE_FOLDER + "/user_save.json"
 
 const DATA_PATH := "res://data/data.json"
 const STORY_PATH := "res://data/story_hr.ink"
@@ -19,7 +23,7 @@ var	pause_UI : Control = null
 var transitions_UI : Control = null
 var bike_repair_UI : Control = null
 var seat_sorting_UI : Control = null
-var inventory_overlay : Control = null
+var inventory : Control = null
 var game_canvas : Node2D = null
 var boss_overlay : Control = null
 
@@ -28,8 +32,9 @@ var player : KinematicBody2D = null
 # Is the game currently in editor mode? or not?
 var is_in_editor_mode := false
 
-var character_data := {}
-var item_data := {}
+var characters_data := {}
+var items_data := {}
+var pickups_data := {}
 
 var _game_flow := {
 	"game": {
@@ -45,39 +50,32 @@ var _game_state : int = STATE.MENU
 var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 
 var active_character : class_character = null
-var active_item : class_item = null
-var active_inventory_item : class_inventory_item = null
+var active_pickup : class_pickup = null
+var active_item : class_item_state = null
 
-onready var _options_loader := $OptionsLoader
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
-onready var _state_loader := $StateLoader
 
 func _ready():
-	# Disable input so that this doesn't throw an error due to not finding
-	# the required action strings.
-	set_process_unhandled_input(false)
-
-	if not Engine.editor_hint:
-		var _error := load_settings()
-		reset()
-		print(                                                                                
-			"      _____    _  _____ \n",
-			" ___ |     | _| ||  _  |\n",
-			"|  _||  |  || . ||     |\n",
-			"|_|  |_____||___||__|__|\n"                                                     
-		)
-		print("version {0}.{1}".format([ 
-			ConfigData.major_version, 
-			ConfigData.minor_version]))
-
-		set_process_unhandled_input(true)
+	var _error := load_settings()
+	reset()
+	print(                                                                                
+		"      _____    _  _____ \n",
+		" ___ |     | _| ||  _  |\n",
+		"|  _||  |  || . ||     |\n",
+		"|_|  |_____||___||__|__|\n"                                                     
+	)
+	print("version {0}.{1}".format([ 
+		ConfigData.major_version, 
+		ConfigData.minor_version]))
 
 func load_settings() -> int:
 	print("----- (Re)loading game settings from file -----")
-	var _error : int = _options_loader.load_optionsCFG()
+	var _error : int = ConfigData.load_optionsCFG()
 	_error += _controls_loader.load_controlsJSON()
 	_error += _data_loader.load_dataJSON()
+	# Also load the default context.
+	_error += State.load_stateJSON()
 	if _error == OK:
 		print("----> Succesfully loaded settings!")
 	else:
@@ -91,16 +89,18 @@ func load_story():
 	if OS.get_name() == "Windows":
 		var _error = build_INK(STORY_PATH)
 	var content = load_INK(STORY_PATH)
-	dialogue_UI.story = _story_resource.new(content)
+	var story : Object = _story_resource.new(content)
 
 	# Bind the getter functions so the story can access the game's state.
 	# Check if the player has an item in its inventory...
-	dialogue_UI.story.bind_external_function_general("has_item", inventory_overlay, "has_item")
+	story.bind_external_function_general("has_item", State, "has_item")
 	# Get the state of the node that is participating in the dialogue.
-	dialogue_UI.story.bind_external_function_general("get_state", dialogue_UI, "get_state")
+	story.bind_external_function_general("get_state_property", Director, "get_state_property")
 
 	# Bind an observer to some variables
-	dialogue_UI.story.observe_variables(["number_of_fences_fixed"], self, "_observe_variables")
+	story.observe_variables(["number_of_fences_fixed"], self, "_observe_variables")
+
+	Director.story = story
 
 func _observe_variables(variable_name, new_value):
 	match variable_name:
@@ -108,17 +108,39 @@ func _observe_variables(variable_name, new_value):
 			game_canvas.increment_visible_fences()
 	print(str("Variable '", variable_name, "' changed to: ", new_value))
 
+func get_item_value(id : String, key : String, default):
+	if items_data.has(id):
+		var data : Dictionary = items_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_pickup_value(id : String, key : String, default):
+	if pickups_data.has(id):
+		var data : Dictionary = pickups_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_character_value(id : String, key : String, default):
+	if characters_data.has(id):
+		var data : Dictionary = characters_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
 func _unhandled_input(event : InputEvent):
 ## Catch all unhandled input not caught be any other control nodes.
 	if InputMap.has_action("toggle_full_screen") and event.is_action_pressed("toggle_full_screen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 
+	if InputMap.has_action("restart") and event.is_action_pressed("restart"):
+		call_deferred("deferred_reload_current_scene")
+
 	match _game_state:
 		STATE.GAME:
 			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
 				toggle_paused()
-			if InputMap.has_action("restart") and event.is_action_pressed("restart"):
-				call_deferred("deferred_reload_current_scene")
 
 func toggle_paused():
 	get_tree().paused = not get_tree().paused
@@ -126,6 +148,9 @@ func toggle_paused():
 		pause_UI.show()
 	else:
 		pause_UI.hide()
+
+func toggle_inventory():
+	inventory.pressed = not inventory.pressed
 
 func deferred_quit() -> void:
 ## Quit the game during an idle frame.
@@ -152,20 +177,6 @@ func change_scene_to(key : String) -> void:
 			print("Succesfully changed scene to '{0}'.".format([key]))
 	else:
 		push_error("Requested scene '{0}' was not recognized... ignoring call for changing scene.".format([key]))
-
-func get_character_data(character_id : String) -> Dictionary:
-	if character_data.has(character_id):
-		return character_data[character_id].duplicate(true)
-	else:
-		push_error("Failed to get data for character with id '{0}'.".format([character_id]))
-	return {}
-
-func get_item_data(item_id : String) -> Dictionary:
-	if item_data.has(item_id):
-		return item_data[item_id].duplicate(true)
-	else:
-		push_error("Failed to get data for item with id '{0}'.".format([item_id]))
-	return {}
 
 static func load_JSON(path : String) -> Dictionary:
 # Load a JSON-file, convert it to a dictionary and return it.

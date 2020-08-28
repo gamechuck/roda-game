@@ -16,10 +16,13 @@ onready var _characters_array := [_adult, _teenager, _child, _baby]
 
 var active_character : class_character_slot = null
 
+signal drive_button_pressed(index)
+
 func _ready():
 	Flow.seat_sorting_UI = self
 
 	var _error := _drive_button.connect("pressed", self, "_on_drive_button_pressed")
+	connect("drive_button_pressed", Director, "_on_choice_button_pressed")
 
 	for child in _highlights_container.get_children():
 		if child is class_highlight_rect:
@@ -77,11 +80,11 @@ func _on_drive_button_pressed():
 		if child is class_highlight_rect:
 			if not child.is_valid_character:
 				if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is incorrect!")
-				if Flow.dialogue_UI.is_waiting_for_choice:
-					Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(0)
+				if Director.is_waiting_for_choice:
+					emit_signal("drive_button_pressed", 0)
 				reset_all()
 				return
 
 	if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is correct!")
-	if Flow.dialogue_UI.is_waiting_for_choice:
-		Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(1)
+	if Director.is_waiting_for_choice:
+		emit_signal("drive_button_pressed", 1)

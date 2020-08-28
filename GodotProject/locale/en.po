@@ -19,25 +19,25 @@ msgstr "GAME IS PAUSED"
 msgid "LANGUAGE"
 msgstr "English"
 
-msgid "Volume"
+msgid "VOLUME"
 msgstr "Volume"
 
-msgid "Resume"
+msgid "RESUME"
 msgstr "Resume"
 
-msgid "Restart"
+msgid "RESTART"
 msgstr "Restart"
 
-msgid "Settings"
+msgid "SETTINGS"
 msgstr "Settings"
 
-msgid "Start"
+msgid "START"
 msgstr "Start"
 
-msgid "Quit"
+msgid "QUIT"
 msgstr "Quit"
 
-msgid "Back"
+msgid "BACK"
 msgstr "Back"
 
 msgid "DRIVE_MESSAGE"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/Wheelie.tscn" type="PackedScene" id=2]
@@ -7,11 +7,11 @@
 [ext_resource path="res://src/game/GameCanvas.gd" type="Script" id=5]
 [ext_resource path="res://src/game/props/Tree.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/game/props/Bench.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/game/base/PathFollow.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/game/characters/FakePlayer.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/game/characters/Debug.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/game/items/Fence.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/game/items/Bike.tscn" type="PackedScene" id=12]
+[ext_resource path="res://roda-assets/Tilemap/release_tilemap.tmx" type="PackedScene" id=8]
+[ext_resource path="res://src/game/characters/HelterSkelter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/characters/Copper.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/game/pickups/Fence.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/game/pickups/BrokenBike.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/game/characters/SolidSlug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/game/characters/Lizzy.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/game/characters/Watto.tscn" type="PackedScene" id=15]
@@ -22,246 +22,361 @@
 [ext_resource path="res://src/game/traffic/ZebraCrossing.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/game/props/Ball.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/game/characters/Taxi.tscn" type="PackedScene" id=22]
-[ext_resource path="res://src/game/items/TrashCup.tscn" type="PackedScene" id=23]
-[ext_resource path="res://src/game/items/TrashBag.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/game/items/TrashBottle.tscn" type="PackedScene" id=25]
+[ext_resource path="res://src/game/pickups/TrashCup.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/game/pickups/TrashBag.tscn" type="PackedScene" id=24]
+[ext_resource path="res://src/game/pickups/TrashBottle.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/game/FenceTileMap.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/game/characters/SeatSortingCar.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/game/characters/WindTurbine.tscn" type="PackedScene" id=28]
-[ext_resource path="res://roda-assets/Tilemap/release_tilemap.tmx" type="PackedScene" id=30]
+[ext_resource path="res://src/game/characters/LoveInterest.tscn" type="PackedScene" id=29]
+[ext_resource path="res://src/game/traffic/TrafficLight.tscn" type="PackedScene" id=30]
+[ext_resource path="res://src/game/characters/HappyTree.tscn" type="PackedScene" id=31]
+[ext_resource path="res://src/game/traffic/PedestrianLight.tscn" type="PackedScene" id=32]
+[ext_resource path="res://src/game/enemies/MrSmog.tscn" type="PackedScene" id=33]
+[ext_resource path="res://src/game/enemies/Canster.tscn" type="PackedScene" id=34]
+[ext_resource path="res://resources/tilemaps/FenceTileMap.tres" type="TileSet" id=35]
+[ext_resource path="res://src/game/Gummy.tscn" type="PackedScene" id=36]
+[ext_resource path="res://src/game/enemies/SkaterLoop.tscn" type="PackedScene" id=37]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 195.67, -1765.63, 0, 0, 0, 0, 188.543, -1525.09, 0, 0, 0, 0, 642.901, -1517.96, 0, 0, 0, 0, 1021.89, -1515.32, 0, 0, 0, 0, 1303.33, -1512.75, 0, 0, 0, 0, 1310.87, -1887.77, 0, 0, 0, 0, 1604.54, -1887.02, 0, 0, 0, 0, 1696.69, -1782.88 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1576.4, 3208.52, 0, 0, 0, 0, 1858, 3260, 0, 0, 0, 0, 1580.18, 3328.21, 0, 0, 0, 0, 1861.14, 3388.68, 0, 0, 0, 0, 1576.36, 3454.51, 0, 0, 0, 0, 1849.8, 3505.86, 0, 0, 0, 0, 1582.97, 3572.5, 0, 0, 0, 0, 1841.59, 3637.63, 0, 0, 0, 0, 1576.4, 3208.52 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=7]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 2080, 2563, 0, 0, 0, 0, 1504, 2563, 0, 0, 0, 0, 1504, 2050, 0, 0, 0, 0, 2080, 2050, 0, 0, 0, 0, 2080, 2563 )
+"points": PoolVector2Array( 0, 0, 0, 0, 2057.62, 3948.2, 0, 0, 0, 0, 2063.55, 3664.78, 0, 0, 0, 0, 2099.59, 3666.78, 0, 0, 0, 0, 2101.03, 3949.09, 0, 0, 0, 0, 2057.92, 3948.2 )
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
+}
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="NavigationPolygon" id=4]
-vertices = PoolVector2Array( 1445.43, 1970.41, 1867.16, 71.2692, 2604.84, 82.973, 2136.2, 1974.65, 1447, 3141, 2145.93, 3142.24, 342.508, 731.198, 571.384, 95.9871, 1008.42, -53.0876, 1866.17, -57.6055 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 3, 5, 4 ), PoolIntArray( 1, 0, 6, 7, 8, 9 ) ]
-outlines = [ PoolVector2Array( 2136.2, 1974.65, 2604.84, 82.973, 1867.16, 71.2692, 1866.17, -57.6055, 1008.42, -53.0876, 571.384, 95.9871, 342.508, 731.198, 1445.43, 1970.41, 1447, 3141, 2145.93, 3142.24 ) ]
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 130, 60 )
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 2640.84, 4087.27, 1396.6, 4101.2, 1400.45, 3357.57, 2645.88, 3638.74, 356.168, 167.025, 1429.62, 169.545, 1421.9, 1421.01, 359.107, 2182.9, 3517.81, 1873.54, 3621.25, 1733.96, 4354.63, 1729.2, 4363.27, 3613.2, 3247.54, 3622.18, 3211.62, 3566.06, 1788.7, 1875.92, 2675.4, 3567.13, 316.27, 2371.89, 316.27, 3347.07, 1733.38, 1423.12 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10, 11, 12, 13 ), PoolIntArray( 14, 8, 13, 15, 2, 16, 7 ), PoolIntArray( 2, 17, 16 ), PoolIntArray( 6, 18, 14, 7 ), PoolIntArray( 15, 3, 2 ) ]
+outlines = [ PoolVector2Array( 1788.7, 1875.92, 1733.38, 1423.12, 1421.9, 1421.01, 1429.62, 169.545, 356.168, 167.025, 359.107, 2182.9, 316.27, 2371.89, 316.27, 3347.07, 1400.45, 3357.57, 1396.6, 4101.2, 2640.84, 4087.27, 2645.88, 3638.74, 2675.4, 3567.13, 3211.62, 3566.06, 3247.54, 3622.18, 4363.27, 3613.2, 4354.63, 1729.2, 3621.25, 1733.96, 3517.81, 1873.54 ) ]
 
 [node name="GameCanvas" type="Node2D"]
 script = ExtResource( 5 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 318.909, 895.01 ],
-"_edit_vertical_guides_": [ 1726.11, 2271.63 ]
+"_edit_horizontal_guides_": [ 240.031, 1408.61, 3260.92, 3630.25, 3345.46 ],
+"_edit_vertical_guides_": [ 2556.7, 1983.12, 1567.09, 1858.47 ]
 }
 
-[node name="release_tilemap" parent="." instance=ExtResource( 30 )]
+[node name="release_tilemap" parent="." instance=ExtResource( 8 )]
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="FakeFences" type="TileMap" parent="YSort"]
+tile_set = ExtResource( 35 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 2001.02, 606.897 )
+position = Vector2( 1659.64, 3092.24 )
+id = "player"
 
 [node name="Fences" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="FenceBack" parent="YSort/Fences" instance=ExtResource( 26 )]
-tile_data = PoolIntArray( 917562, 3, 0, 917563, 3, 0, 917564, 3, 0, 917565, 3, 0, 917566, 3, 0, 917567, 3, 0, 917568, 3, 0, 917569, 3, 0 )
+visible = false
+tile_data = PoolIntArray( 4325443, 3, 0, 4325444, 3, 0, 4325445, 3, 0, 4325446, 3, 0, 4325447, 3, 0, 4325448, 3, 0, 4325449, 3, 0, 4325450, 3, 0 )
 
 [node name="FenceFront" parent="YSort/Fences" instance=ExtResource( 26 )]
-tile_data = PoolIntArray( 1441850, 7, 0, 1441851, 7, 0, 1441852, 7, 0, 1441855, 7, 0, 1441856, 7, 0, 1441857, 7, 0 )
+visible = false
+tile_data = PoolIntArray( 4784195, 7, 0, 4784196, 7, 0, 4784197, 7, 0, 4784200, 7, 0, 4784201, 7, 0, 4784202, 7, 0 )
 
 [node name="FenceRight" parent="YSort/Fences" instance=ExtResource( 26 )]
-tile_data = PoolIntArray( 917570, 2, 0, 983106, 1, 0, 1048642, 1, 0, 1114178, 1, 0, 1179714, 1, 0, 1245250, 1, 0, 1310786, 1, 0, 1376322, 1, 0, 1441858, 0, 0 )
+visible = false
+tile_data = PoolIntArray( 4325451, 2, 0, 4390987, 1, 0, 4456523, 1, 0, 4522059, 1, 0, 4587595, 1, 0, 4653131, 1, 0, 4718667, 1, 0, 4784203, 0, 0 )
 
 [node name="FenceLeft" parent="YSort/Fences" instance=ExtResource( 26 )]
-tile_data = PoolIntArray( 917561, 4, 0, 983097, 5, 0, 1048633, 5, 0, 1114169, 5, 0, 1179705, 5, 0, 1245241, 5, 0, 1310777, 5, 0, 1376313, 5, 0, 1441849, 6, 0 )
+visible = false
+tile_data = PoolIntArray( 4325442, 4, 0, 4390978, 5, 0, 4456514, 5, 0, 4522050, 5, 0, 4587586, 5, 0, 4653122, 5, 0, 4718658, 5, 0, 4784194, 6, 0 )
 
-[node name="Items" type="YSort" parent="YSort"]
+[node name="Pickups" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Bike" parent="YSort/Items" instance=ExtResource( 12 )]
-position = Vector2( 3279.05, 1401.98 )
+[node name="BrokenBike" parent="YSort/Pickups" instance=ExtResource( 12 )]
+position = Vector2( 3560.6, 3032.67 )
 
-[node name="FenceAtTurbine" parent="YSort/Items" instance=ExtResource( 11 )]
-position = Vector2( 1671.22, 2213.76 )
+[node name="FenceAtTurbine" parent="YSort/Pickups" instance=ExtResource( 11 )]
+position = Vector2( 1046.85, 700.486 )
 
-[node name="TrashBag" parent="YSort/Items" instance=ExtResource( 24 )]
-position = Vector2( 2558.24, 572.967 )
+[node name="FenceInSmogTown" parent="YSort/Pickups" instance=ExtResource( 11 )]
+position = Vector2( 1438.86, 1768.13 )
+id = "fence_in_smog_town"
 
-[node name="TrashCup" parent="YSort/Items" instance=ExtResource( 23 )]
-position = Vector2( 2517.8, 726.299 )
+[node name="TrashBagOne" parent="YSort/Pickups" instance=ExtResource( 24 )]
+position = Vector2( 2827.04, 2149.92 )
+id = "trash_bag_one"
 
-[node name="TrashBottle" parent="YSort/Items" instance=ExtResource( 25 )]
-position = Vector2( 2722.26, 692.343 )
+[node name="TrashBagTwo" parent="YSort/Pickups" instance=ExtResource( 24 )]
+position = Vector2( 2141.41, 3003.75 )
+id = "trash_bag_two"
+
+[node name="TrashCupOne" parent="YSort/Pickups" instance=ExtResource( 23 )]
+position = Vector2( 2818.91, 2340.48 )
+id = "trash_cup_one"
+
+[node name="TrashCupTwo" parent="YSort/Pickups" instance=ExtResource( 23 )]
+position = Vector2( 4014.05, 2286.79 )
+id = "trash_cup_two"
+
+[node name="TrashBottleOne" parent="YSort/Pickups" instance=ExtResource( 25 )]
+position = Vector2( 2997.72, 2268.82 )
+id = "trash_bottle_one"
+
+[node name="TrashBottleTwo" parent="YSort/Pickups" instance=ExtResource( 25 )]
+position = Vector2( 2788.95, 3333.72 )
+id = "trash_bottle_two"
 
 [node name="Props" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Tree" parent="YSort/Props" instance=ExtResource( 6 )]
-position = Vector2( 2090.55, 494.279 )
+position = Vector2( 2373.89, 2162.36 )
 
 [node name="Tree2" parent="YSort/Props" instance=ExtResource( 6 )]
-position = Vector2( 1901.45, 677.496 )
+position = Vector2( 2190.17, 2314.15 )
 
 [node name="Tree3" parent="YSort/Props" instance=ExtResource( 6 )]
-position = Vector2( 3658.06, 537.18 )
+position = Vector2( 3962.02, 1917.93 )
 
 [node name="Bench" parent="YSort/Props" instance=ExtResource( 7 )]
-position = Vector2( 2048.42, 489.083 )
+position = Vector2( 2361.02, 2172.65 )
 
 [node name="Bush" parent="YSort/Props" instance=ExtResource( 16 )]
-position = Vector2( 1936.12, 494.848 )
+position = Vector2( 2226.95, 2161.31 )
 
 [node name="Bush3" parent="YSort/Props" instance=ExtResource( 16 )]
-position = Vector2( 1135.66, 934.883 )
+position = Vector2( 1014.41, 570.937 )
 
 [node name="Bush4" parent="YSort/Props" instance=ExtResource( 16 )]
-position = Vector2( 1195.39, 921.801 )
+position = Vector2( 1061.11, 602.776 )
 
 [node name="Bush5" parent="YSort/Props" instance=ExtResource( 16 )]
-position = Vector2( 1149.31, 1024.18 )
+position = Vector2( 754.198, 614.384 )
 
 [node name="Bush2" parent="YSort/Props" instance=ExtResource( 16 )]
-position = Vector2( 1879.5, 531.015 )
+position = Vector2( 2160.77, 2182.35 )
 
 [node name="Ball" parent="YSort/Props" instance=ExtResource( 21 )]
-position = Vector2( 1480, 362 )
+position = Vector2( 1843.08, 2161.36 )
 
 [node name="Characters" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SolidSnejk" parent="YSort/Characters" instance=ExtResource( 4 )]
-position = Vector2( 2074, 549 )
+position = Vector2( 2358.23, 2205.18 )
 input_pickable = true
 
 [node name="SolidSlug" parent="YSort/Characters" instance=ExtResource( 13 )]
-position = Vector2( 1440, 265 )
+position = Vector2( 2358.49, 2317.26 )
 
 [node name="Lizzy" parent="YSort/Characters" instance=ExtResource( 14 )]
-position = Vector2( 1329.26, 229.819 )
+position = Vector2( 3873.29, 2274.05 )
 input_pickable = true
 
 [node name="Watto" parent="YSort/Characters" instance=ExtResource( 15 )]
-position = Vector2( 1562.42, 296.771 )
+position = Vector2( 2972.85, 2139.95 )
 input_pickable = true
 
-[node name="Debug" parent="YSort/Characters" instance=ExtResource( 10 )]
-visible = false
-position = Vector2( 1663.37, 126.513 )
-
-[node name="BrokenBike" parent="YSort/Characters" instance=ExtResource( 18 )]
-position = Vector2( 1900.86, 690.316 )
+[node name="ReturnedBike" parent="YSort/Characters" instance=ExtResource( 18 )]
+position = Vector2( 2189.4, 2320.21 )
+id = "returned_bike"
 
 [node name="TaxiAtPark" parent="YSort/Characters" instance=ExtResource( 22 )]
-position = Vector2( 2573.27, 423.759 )
+position = Vector2( 2973.4, 3175.65 )
 id = "taxi_at_park"
 
 [node name="TaxiAtMountain" parent="YSort/Characters" instance=ExtResource( 22 )]
-position = Vector2( 1903.62, 2949.15 )
+position = Vector2( 785.477, 1120.98 )
 id = "taxi_at_mountain"
 
-[node name="FakePlayer" parent="YSort/Characters" instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 1380, 360 )
-
 [node name="SeatSortingCar" parent="YSort/Characters" instance=ExtResource( 27 )]
-position = Vector2( 2622.78, 1135.94 )
+position = Vector2( 2976.64, 2767.99 )
+id = "seat_sorting_car"
 
 [node name="WindTurbine" parent="YSort/Characters" instance=ExtResource( 28 )]
-position = Vector2( 1791.2, 2308.43 )
+position = Vector2( 894.602, 535.483 )
 
-[node name="Path2D" type="Path2D" parent="YSort/Characters"]
-position = Vector2( 1791.2, 2308.43 )
-curve = SubResource( 1 )
-
-[node name="PathFollow" parent="YSort/Characters/Path2D" instance=ExtResource( 8 )]
-position = Vector2( 195.67, -1765.63 )
-rotate = false
-
-[node name="Wheelie" parent="YSort/Characters/Path2D/PathFollow" instance=ExtResource( 2 )]
+[node name="Wheelie" parent="YSort/Characters" instance=ExtResource( 2 )]
+position = Vector2( 2381.81, 2386.28 )
+id = "wheelie"
 
 [node name="Bus" parent="YSort/Characters" instance=ExtResource( 3 )]
-position = Vector2( 1789.06, 2625.49 )
+position = Vector2( 894.899, 897.336 )
+
+[node name="LoveInterest" parent="YSort/Characters" instance=ExtResource( 29 )]
+position = Vector2( 2322.68, 2873.1 )
+
+[node name="HappyTree" parent="YSort/Characters" instance=ExtResource( 31 )]
+position = Vector2( 2178.74, 2160.58 )
+id = "happy_tree"
+
+[node name="Copper" parent="YSort/Characters" instance=ExtResource( 10 )]
+position = Vector2( 1792.79, 2368.36 )
+
+[node name="HelterSkelter" parent="YSort/Characters" instance=ExtResource( 9 )]
+position = Vector2( 2499.86, 3738.54 )
+id = "helter_skelter"
+
+[node name="MrSmog" parent="YSort/Characters" instance=ExtResource( 33 )]
+position = Vector2( 737.818, 2732.66 )
+
+[node name="Canster" parent="YSort/Characters" instance=ExtResource( 34 )]
+position = Vector2( 3350.25, 2384.29 )
+
+[node name="Canster2" parent="YSort/Characters" instance=ExtResource( 34 )]
+position = Vector2( 3671.28, 2027.22 )
+
+[node name="Canster3" parent="YSort/Characters" instance=ExtResource( 34 )]
+position = Vector2( 3436.35, 2040.57 )
 
 [node name="TrafficLoops" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MountainLoop1" parent="YSort/TrafficLoops" instance=ExtResource( 19 )]
 amount_of_cars = 10
-points = PoolVector2Array( 2080, 2563, 1504, 2563, 1504, 2050, 2080, 2050 )
-
-[node name="Path2D" parent="YSort/TrafficLoops/MountainLoop1" index="0"]
-curve = SubResource( 2 )
+points = PoolVector2Array( 1180, 830, 610, 830, 610, 314, 1180, 314 )
 
 [node name="MountainLoop2" parent="YSort/TrafficLoops" instance=ExtResource( 19 )]
 amount_of_cars = 20
-points = PoolVector2Array( 1440, 1970, 1440, 3136, 2146, 3136, 2146, 1970 )
+points = PoolVector2Array( 541, 240, 541, 1410, 1248, 1410, 1248, 240 )
 
 [node name="ParkLoop" parent="YSort/TrafficLoops" instance=ExtResource( 19 )]
 amount_of_cars = 10
-points = PoolVector2Array( 1726, 320, 1726, 895, 2272, 895, 2272, 320 )
+points = PoolVector2Array( 1983, 1954, 2557, 1954, 2557, 2524, 1983, 2524 )
+
+[node name="SkaterLoops" type="YSort" parent="YSort"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SkaterLoop" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
+
+[node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop" index="0"]
+curve = SubResource( 6 )
+
+[node name="SkaterLoop2" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
+
+[node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop2" index="0"]
+curve = SubResource( 7 )
+
+[node name="SkaterLoop3" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
+
+[node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop3" index="0"]
+curve = SubResource( 8 )
 
 [node name="ZebraCrossings" type="YSort" parent="YSort"]
-visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="ZebraCrossing" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 331.725, 202.136 )
+[node name="ParkToTrash" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 2591.63, 2432.4 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
-[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ZebraCrossing/InteractArea" index="0"]
-shape = SubResource( 3 )
+[node name="ParkingToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3228.31, 3065.67 )
+extents = Vector2( 130, 60 )
 
-[node name="ZebraCrossing2" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 148.321, 325.283 )
+[node name="BikeToEmpty" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3837.83, 2948.6 )
+extents = Vector2( 130, 60 )
+
+[node name="TrashToCansters" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3235.64, 2432.35 )
+extents = Vector2( 130, 60 )
+
+[node name="CansterToLake" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3549.6, 2035.55 )
+extents = Vector2( 130, 60 )
+
+[node name="LoveToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 2590.04, 3004.68 )
+extents = Vector2( 130, 60 )
+
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
+shape = SubResource( 4 )
+
+[node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 32 )]
+position = Vector2( 114.859, -44.3281 )
+direction = "left"
+
+[node name="PedestrianLight2" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="1" instance=ExtResource( 32 )]
+position = Vector2( -113.889, 49.8137 )
+direction = "right"
+
+[node name="TrafficLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="2" instance=ExtResource( 30 )]
+position = Vector2( -111.786, -44.595 )
+direction = "back"
+
+[node name="TrafficLight2" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="3" instance=ExtResource( 30 )]
+position = Vector2( 113.569, 49.4917 )
+direction = "front"
+
+[node name="Mountain" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 1136, 864.376 )
+extents = Vector2( 80, 100 )
+
+[node name="ParkToLove" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 2467.75, 2557.53 )
 extents = Vector2( 60, 130 )
-light_color = 0
-
-[node name="ZebraCrossing3" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 170, 645 )
-extents = Vector2( 80, 120 )
 light_color = 1
 
-[node name="ZebraCrossing4" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 587.116, -105.083 )
-extents = Vector2( 100, 80 )
+[node name="ParkToCopper" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 1966.25, 2042.91 )
+extents = Vector2( 130, 60 )
 light_color = 3
 
-[node name="ZebraCrossing5" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 700.451, 321.525 )
+[node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
+shape = SubResource( 5 )
+
+[node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 30 )]
+position = Vector2( 98.7507, 53.7722 )
+direction = "front"
+
+[node name="PedestrianLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="1" instance=ExtResource( 32 )]
+position = Vector2( 97.7231, -15.0156 )
+direction = "left"
+
+[node name="PedestrianLight2" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="2" instance=ExtResource( 32 )]
+position = Vector2( -94.2867, -14.0308 )
+direction = "right"
+
+[node name="CopperToSkater" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 1854.87, 2913.42 )
 extents = Vector2( 60, 100 )
-light_color = 0
 
-[node name="ZebraCrossing6" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 586, 448 )
-extents = Vector2( 100, 60 )
-light_color = 0
-
-[node name="ZebraCrossing7" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 839.19, 448 )
-extents = Vector2( 100, 60 )
-light_color = 0
-
-[node name="ZebraCrossing8" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 841.464, 710.638 )
-extents = Vector2( 100, 60 )
-light_color = 0
-
-[node name="ZebraCrossing9" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 1018.29, 835.328 )
-extents = Vector2( 110, 100 )
-light_color = 3
-
-[node name="ZebraCrossing10" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( -53.7063, 711.661 )
-extents = Vector2( 100, 60 )
-light_color = 0
-
-[node name="ZebraCrossing11" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( -500, 720 )
-extents = Vector2( 90, 60 )
-light_color = 0
-
-[node name="ZebraCrossing12" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 2040.09, 2592.87 )
+[node name="TrashToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3085.59, 2566.36 )
 extents = Vector2( 60, 100 )
-light_color = 0
+
+[node name="CansterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
+position = Vector2( 3377.65, 2821.59 )
+extents = Vector2( 60, 100 )
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
 visible = false
@@ -271,33 +386,86 @@ __meta__ = {
 }
 
 [node name="UpperMountain" parent="YSort/SafeZones" instance=ExtResource( 17 )]
-position = Vector2( 1792.73, 2304.36 )
+position = Vector2( 893.288, 573.792 )
 extents = Vector2( 200, 150 )
 
 [node name="LowerMountain" parent="YSort/SafeZones" instance=ExtResource( 17 )]
-position = Vector2( 1791.84, 2847.75 )
+position = Vector2( 895.678, 1118.69 )
 extents = Vector2( 200, 120 )
 
 [node name="Park" parent="YSort/SafeZones" instance=ExtResource( 17 )]
-position = Vector2( 1983.13, 606.809 )
+position = Vector2( 2271.39, 2235.31 )
 extents = Vector2( 200, 200 )
 
-[node name="SkaterLoops" type="YSort" parent="YSort"]
+[node name="BeforeSkaters" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 1711.98, 2710.3 )
+extents = Vector2( 140, 100 )
+
+[node name="Bike" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 3539.17, 3044.89 )
+extents = Vector2( 200, 100 )
+
+[node name="Parking" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 2913.66, 3046.94 )
+extents = Vector2( 180, 360 )
+
+[node name="Love" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 2272.58, 2877.73 )
+extents = Vector2( 180, 180 )
+
+[node name="Lake" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 3878.14, 2109.94 )
+extents = Vector2( 180, 300 )
+
+[node name="Trash" parent="YSort/SafeZones" instance=ExtResource( 17 )]
+position = Vector2( 2911.97, 2241.15 )
+extents = Vector2( 180, 180 )
+
+[node name="Gummies" type="Node2D" parent="YSort"]
+visible = false
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TopGummy" parent="YSort/Gummies" instance=ExtResource( 36 )]
+
+[node name="CollisionPolygon2D" parent="YSort/Gummies/TopGummy" index="0"]
+polygon = PoolVector2Array( 1890.27, 3037.4, 1727.71, 3036.66, 1727.71, 3134.05, 1692.82, 3134.5, 1692.5, 3292.12, 1828.09, 3426.22, 1891.77, 3427.71 )
+
+[node name="MiddleGummy" parent="YSort/Gummies" instance=ExtResource( 36 )]
+
+[node name="CollisionPolygon2D" parent="YSort/Gummies/MiddleGummy" index="0"]
+polygon = PoolVector2Array( 1760.8, 3744.29, 1746.51, 3587.14, 1697.31, 3471.26, 1560.79, 3326.81, 1533.8, 3333.16, 1531.84, 3845.29, 1663.97, 3844.3 )
+
+[node name="BottomGummy" parent="YSort/Gummies" instance=ExtResource( 36 )]
+
+[node name="CollisionPolygon2D" parent="YSort/Gummies/BottomGummy" index="0"]
+polygon = PoolVector2Array( 2204.84, 3810.52, 2172.9, 3806.44, 2174.49, 3766.18, 2211.04, 3720.09, 2238.06, 3712.68, 2237.92, 3647.89, 2117.93, 3646.56, 2086.55, 3678.25, 2013.98, 3781.54, 2010.06, 3967.84, 2204.84, 3970.84 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
+visible = false
+navpoly = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[editable path="YSort/TrafficLoops/MountainLoop1"]
+[editable path="YSort/SkaterLoops/SkaterLoop"]
 
-[editable path="YSort/ZebraCrossings/ZebraCrossing"]
+[editable path="YSort/SkaterLoops/SkaterLoop2"]
+
+[editable path="YSort/SkaterLoops/SkaterLoop3"]
+
+[editable path="YSort/ZebraCrossings/LoveToParking"]
+
+[editable path="YSort/ZebraCrossings/ParkToCopper"]
+
+[editable path="YSort/Gummies/TopGummy"]
+
+[editable path="YSort/Gummies/MiddleGummy"]
+
+[editable path="YSort/Gummies/BottomGummy"]

@@ -1,14 +1,23 @@
 extends TextureRect
 class_name class_item_slot
 
-const FALLBACK_ITEM_TEXTURE := "res://resources/fallback/item_texture.png"
+var item : class_item_state setget set_item, get_item
+func set_item(value : class_item_state) -> void:
+	_item = weakref(value)
+	if value:
+		self.pressed = value.pressed
 
-var inventory_item : class_inventory_item setget set_inventory_item, get_inventory_item
-var _inventory_item := WeakRef.new()
-func set_inventory_item(value : class_inventory_item) -> void:
-	_inventory_item = weakref(value)
-func get_inventory_item() -> class_inventory_item:
-	return _inventory_item.get_ref()
+		_texture_button.texture_normal = value.texture_normal
+		_texture_button.texture_pressed = value.texture_pressed
+	else:
+		self.pressed = false
+
+		_texture_button.texture_normal = null
+		_texture_button.texture_pressed = null
+
+	_update_amount_label()
+func get_item() -> class_item_state:
+	return _item.get_ref()
 
 var pressed := false setget set_pressed, get_pressed
 func set_pressed(value : bool):
@@ -19,61 +28,32 @@ func get_pressed() -> bool:
 
 var amount : int setget , get_amount
 func get_amount():
-	var item : class_inventory_item = self.inventory_item
-	if item:
-		return item.amount
+	if self.item:
+		return self.item.amount
 	else:
 		return 0
 
+var _item := WeakRef.new()
+
 onready var _texture_button := $TextureButton
-onready var _amount_label := $Node2D/AmountLabel
+onready var _amount_label := $AmountLabel
+
+signal item_pressed
 
 func _ready():
 	var _error : int = _texture_button.connect("pressed", self, "_on_button_pressed")
-	clear_item()
+
+	self.item = null
 
 func _on_button_pressed():
-	var item := self.inventory_item
-	if item != null:
+	if self.item:
 		# Dont change pressed here! This will be done by the overlay instead!
-		#pressed = _texture_button.pressed
-		# This triggers the setter function of the InventoryItem.gd which will
-		# take care of everything!
-		item.pressed = _texture_button.pressed
-
-func set_item(item : class_inventory_item):
-	var data : Dictionary = Flow.get_item_data(item.id)
-
-	self.pressed = item.pressed
-
-	var textures : Dictionary = data.get("TEXTURES", {})
-	var texture_normal_path : String = textures.get("TEXTURE_NORMAL", FALLBACK_ITEM_TEXTURE)
-	if ResourceLoader.exists(texture_normal_path):
-		_texture_button.texture_normal = load(texture_normal_path)
-	else:
-		_texture_button.texture_normal = load(FALLBACK_ITEM_TEXTURE)
-
-	var texture_pressed_path : String = textures.get("TEXTURE_PRESSED", FALLBACK_ITEM_TEXTURE)
-	if ResourceLoader.exists(texture_pressed_path):
-		_texture_button.texture_pressed = load(texture_pressed_path)
-	else:
-		_texture_button.texture_pressed = load(FALLBACK_ITEM_TEXTURE)
-
-	self.inventory_item = item
-	_update_amount_label()
-
-func clear_item():
-	self.pressed = false
-	_texture_button.texture_normal = null
-	_texture_button.texture_pressed = null
-
-	self.inventory_item = null
-	_update_amount_label()
+		emit_signal("item_pressed", _texture_button.pressed, self.item)
 
 func _update_amount_label():
-	var item_amount = get_amount()
-	_amount_label.text = "{0} x".format([item_amount])
-	if item_amount > 1:
+	var _amount = self.amount
+	_amount_label.text = "{0} x".format([_amount])
+	if _amount > 1:
 		_amount_label.visible = true
 	else:
 		_amount_label.visible = false

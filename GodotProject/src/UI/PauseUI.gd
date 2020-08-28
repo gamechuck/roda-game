@@ -10,4 +10,8 @@ func show():
 	visible = true
 
 func hide():
+	# Save the user-settings to the local system.
+	var _error := ConfigData.save_settingsCFG()
+	if _error != OK:
+		push_error("Failed to save settings to local storage! Check console for clues!")
 	visible = false

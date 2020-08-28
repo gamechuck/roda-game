@@ -1,20 +1,21 @@
 VAR number_of_fences_fixed = 0
 VAR found_bike = 0
-
-VAR picked_up_fence = 0
+VAR picked_up_fence_at_turbine = 0
+VAR picked_up_fence_in_smog_town = 0
+VAR got_fence_from_helter_skelter = 0
+VAR got_fence_from_wheelie = 0
 
 // SolidSnejk
-VAR talked_with_solid_snejk = 0
+VAR talked_to_solid_snejk = 0
 
 // Lizzy
-VAR lizzy_riddle_solved = 0
+VAR talked_to_lizzy = 0
 
 // Watto
 VAR watto_question_solved = 0
 
 // SolidSlug
 VAR figured_out_issue_with_bike = 0
-VAR got_second_fence_from_solid_slug = 0
 VAR gave_back_bike = 0
 
 // BrokenBike
@@ -22,45 +23,70 @@ VAR fixed_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
 // Taxi
-VAR seatbelt_enigma_solved = 0
+VAR seat_belt_given_to_taxi = 1
+
+// Helter Skelter
+VAR talked_to_helter_skelter = 0
+
+// SeatBeltCar
+VAR seat_sorting_completed = 0
 
 // Wind Turbine
 VAR turbine_fixed = 0
 
+// Mr. Smog
+VAR smog_defeated = 0
+
+// Canster
+VAR received_pump_from_canster = 0
+
+// Wheelie
+VAR escorted_wheelie_to_house = 0
+VAR escorted_wheelie_back_to_park = 0
+
+VAR talked_to_wheelie_at_park = 0
+VAR talked_to_wheelie_at_house = 0
+VAR talked_to_wheelie_back_at_park = 0
+
 VAR used_item = "bush"
+VAR interact_id = "player"
+
 VAR conv_type = 0
 
 EXTERNAL has_item(item_id)
 === function has_item(item_id) ===
 ~ return true
 
-EXTERNAL get_state()
-=== function get_state() ===
+EXTERNAL get_state_property(entity_id, property)
+=== function get_state_property(entity_id, property) ===
 ~ return 0
 
 === conv_intro ===
 >>> UPDATE_UI: solid_snejk
-Hey! Let's play some football!
+Hej svi, idemo igrati nogomet!
 >>> UPDATE_UI: solid_slug
-Hurray! Let's play!
+Daaaaa! Dodaj mi loptu!
 >>> PLAY_CUTSCENE: intro_play_ball
-Guys?! Pass me the ball please!
+Dajte, dodajte i meni loptu!
 ...
 >>> PLAY_CUTSCENE: show_smog
 >>> UPDATE_UI: solid_snejk
-What's happening?!
-Where did this smog come from?
+Čekaj, što se događa?
+Odakle sav ovaj smog?
 >>> UPDATE_UI: mr_smog
-BWAHAHAHAHA!
+AHAHAHAHA!
 >>> PLAY_CUTSCENE: mr_smog_intro
-Say goodbye to your park kids!
-Mr. Smog is here to ruin your day!
+Pozdravite se sa svojim slatkim parkom, djeco!
+Mister Smog je došao pokvariti vašu zabavu!
 >>> PLAY_CUTSCENE: mr_smog_destroy_park
-BWAHAHAHAHA!!!
+AHAHAHAHA!!!
 >>> PLAY_CUTSCENE: mr_smog_outro
 -> DONE
 
 === conv_solid_snejk ===
+// Solid Snejk tasks you with bringing back the fences to him.
+// After bringing all 4 fences back to him, he tasks you with 
+// restoring the park to its former glory.
 
 {conv_type:
 	- 0: -> interact
@@ -69,15 +95,19 @@ BWAHAHAHAHA!!!
 
 = interact
 
+{smog_defeated:
+    - 1: -> second_ending
+}
+
 {number_of_fences_fixed:
-    - 4: -> ending
+    - 4: -> first_ending
 }
 
 {has_item("fence"):
 	- true: -> fix_fence
 }
 
-{talked_with_solid_snejk:
+{talked_to_solid_snejk:
 	- 0: -> intro
 	- else: -> main
 }
@@ -85,8 +115,7 @@ BWAHAHAHAHA!!!
 = intro
 Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
 Idemo naći ograde i popraviti park da se možemo opet loptati! #solid_snejk_intro_2
->>> SET_UI: solid_snejk
-~ talked_with_solid_snejk = 1
+~ talked_to_solid_snejk = 1
 -> main
 
 = fix_fence
@@ -95,19 +124,28 @@ Idem ga postaviti!
 ~ number_of_fences_fixed += 1
 >>> REMOVE_ITEM: fence
 {number_of_fences_fixed:
-    - 4: -> ending
+    - 4: -> first_ending
 	- else: -> DONE
 }
 
-= ending
+= second_ending
+Ne mogu vjerovati da je Mister Smog zapravo bio naše izgubljeno drvo!
+Sada se napokon možemo igrati u miru!
+Vrijeme je za nogomet!
+-> DONE
+
+= first_ending
 VAU, Ovo mjesto sad izgleda mnogo ljepše, zar ne?
-Idemo se sad napokon loptati!
+Makar, čini mi se da je tu nekada bilo jedno drvo...
+Pitam se što mu se dogodilo?
+Možda možeš otkriti što se dogodilo s našim omiljenim drvetom!
+Nakon toga se možemo nastaviti loptati!
 -> DONE
 
 = main
 Hej, idemo popraviti ogradu zajedno! #solid_snejk_main_1
 Ti mi donesi dijelove ograde i ja ću ju postaviti. #solid_snejk_main_2
-Moraju biti tu negdje oko nas... #solid_snejk_main_3
+Zločesti Mister Smog ih je otpuhao na sve strane svijeta... #solid_snejk_main_3
 -> DONE
 
 = use_item
@@ -132,189 +170,10 @@ A ne na meni!
 Ne želim to uzeti...
 -> DONE
 
-=== conv_watto ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-
-{found_bike:
-	- 0: -> intro
-	- 1: -> has_bike
-}
-
-= intro
->>> PAN_CAMERA: Bike
-Pogledaj, dolje je bicikl!
-Sad ti je sigurno žao što nemaš moju leteću raketu?
-Hehe, šteta zar ne...
->>> PAN_CAMERA: Player
--> DONE
-
-= has_bike
-
-{watto_question_solved:
-	- 0: -> pop_question
-	- 1: -> ending
-}
-
-= pop_question
-
-Našao sam komadić ograde od parka!
-Dat ću ti komad ako mi odgovoriš na ovo pitanje:
-- (start_question)
-Ako nema pločnika, gdje se pješaci kreću?
-+ [Desnom stranom prometnice] 
-	Ha! Krivo!
-	Tako ne vidiš aute koji dolaze i u većoj si opasnosti.
-	Još ti moraš mnogo naučiti o ljudima i njihovim prometnim pravilima...
-	-> start_question
-+ [Lijevom stranom prometnice]
-	Tako je!
-	Lijevom stranom - kako bi lakše vidio promet koji nailazi prema tebi.
-+ [Sredinom prometnice.]
-	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
-	-> start_question
-+ [Skakuću s jedne strane prometnice na drugu.]
-	KRIVO! KRIVO!
-	-> start_question
--
->>> ADD_ITEM: fence
-~ watto_question_solved = 1
--> DONE
-
-= ending
-
-Tamo gdje ja idem, ne trebaju nam ceste!
--> DONE
-
-= use_item
-
-{used_item:
-	- "bike": -> bike
-	- "pump": -> pump
-	- "bike": -> fence
-	- else: -> default
-}
-
-= bike
-Ah... Vidim da si otkrio kako prijeći zebre!
-Svaka čast.
--> DONE
-
-= pump
-S tim napumpaj gumu na biciklu, meni za raketu to ne treba!
--> DONE
-
-= fence
-Ne treba mi ta ograda.
--> DONE
-
-= default
-Ne treba mi ta stvar.
--> DONE
-
-=== conv_lizzy ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-
-{figured_out_issue_with_bike:
-	- 0: -> intro
-	- 1: -> need_pump
-}
-
-= intro
-
-Ne znam ja ništa o nikakvim ogradama...
-{picked_up_fence:
-	- false: -> show_fence
-}
-Ali ako ikad zatrebaš nešto magično i korisno, slobodno me pitaj!
--> DONE
-
-= show_fence
->>> PAN_CAMERA: Fence
-Ali vidio sam da je nešto palo tamo negdje u onom smjeru...
-Možda da odeš provjeriti?
->>> PAN_CAMERA: Player
--> DONE
-
-= need_pump
-
-{lizzy_riddle_solved:
-	- 0: -> pop_riddle
-	- 1: -> ending
-}
-
-= pop_riddle
-
-Trebaš pumpu za bicikl?
-Imam super MAGIČNU pumpu ali prvo odgovori na moju zagonetku:
-- (start_riddle)
-Pri prelasku kolnika zebrom na biciklu trebamo:
-+ [Naglo zakočiti prije prelaska.]
-	Krivo!
-	To će samo zbuniti druge u prometu.
-	Bolje da ti ne dam pumpu ako si tako neodgovorno biće!
-	-> start_riddle
-+ [Na vrijeme se zaustaviti, sići s bicikla i hodati preko zebre gurajući bicikl.] 
-	TOČNO!
-	Na zebrama nije dopušteno voziti se s biciklom, moraš ga gurati.
-+ [Ostati na biciklu i ubrzati kako bismo što prije prešli cestu] 
-	Krivo!!!
-	Ubrzavanje će samo još više povećati šansu da te neki auto slučajno pokupi!
-	Bolje da ti ne dam pumpu ako si tako neodgovorno biće!
-	-> start_riddle
-+ [Pjevati i ne obazirati se na druge sudionike prometa.]
-	To sigurno.
-	Zapravo: To sigurno NE!
-	Bolje da ti ne dam pumpu ako si tako neodgovorno biće!
-	-> start_riddle
--
-Evo ti magična super pumpa za bicikle.
->>> ADD_ITEM: pump
-~ lizzy_riddle_solved = 1
--> DONE
-
-= ending
-
-Nadam se da ti je moja magična super pumpa za bicikle korisna!
--> DONE
-
-= use_item
-
-{used_item:
-	- "bike": -> bike
-	- "pump": -> ending
-	- "fence": -> fence
-	- else: -> default
-}
-
-= bike
-Ah, vidim, našao si bicikl.
-Zapamti: 
-Uvijek, nosi biciklističku kacigu kada voziš bicikl!
--> DONE
-
-= fence
-Kako divna ograda!
-Da je bar mogu ponijeti doma sa sobom...
-Ali ova ograda je tu za sve nas! Ne smije se odnositi!
--> DONE
-
-= default
-Makni mi to s očiju!
--> DONE
-
 === conv_solid_slug ===
+// Solid slug is missing his bike... Mr. Smog blew it away.
+// He asks you to find his bike somewhere and bring it back to him.
+// Afterwards, when you fixed his bike, he tells you that you can use his bike.
 
 {conv_type:
 	- 0: -> interact
@@ -353,12 +212,10 @@ Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 
 = has_bike
 
-Hvala što s mi našao bicikl.
-Evo komada ograde kojeg sam našao u međuvremenu...
+Hvala što s mi našao bicikl!
 ~ gave_back_bike = 1
 >>> REMOVE_ITEM: bike
->>> ADD_ITEM: fence
->>> SHOW: BrokenBike
+>>> SHOW: ReturnedBike
 -> broken_bike
 
 = broken_bike
@@ -382,12 +239,8 @@ Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
-{got_second_fence_from_solid_slug:
-	1 : -> DONE
-}
-Evo, ja sam našao još jedan komad otpuhane ograde!
->>> ADD_ITEM: fence
-~ got_second_fence_from_solid_slug = 1
+You can use my bike if you want!
+Just take it and use it on yourself any time to ride the bicycle!
 -> DONE
 
 = use_item
@@ -414,20 +267,314 @@ Kladim se da bi crv zvan Solid Snejk znao što napraviti s tom ogradom...
 Ne treba mi to, hvala...
 -> DONE
 
-=== conv_bike ===
+=== conv_watto ===
+// Watto points out where the bike is and ...
 
-Mogu ponijeti ovaj bicikl sa sobom!
-~ found_bike = true
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{found_bike:
+	- 0: -> no_bike
+	- 1: -> ending
+}
+
+= no_bike
+
+{watto_question_solved:
+	- 0: -> pop_question
+	- 1: -> show_bike_location
+}
+
+= pop_question
+
+Tražiš bicikl!
+Pokazat ću ti gdje sam ga našao ako mi odgovoriš na ovo pitanje:
+- (start_question)
+Ako nema pločnika, gdje se pješaci kreću?
++ [Defencesnom stranom prometnice] 
+	Ha! Krivo!
+	Tako ne vidiš aute koji dolaze i u većoj si opasnosti.
+	Još ti moraš mnogo naučiti o ljudima i njihovim prometnim pravilima...
+	-> start_question
++ [Lijevom stranom prometnice]
+	Tako je!
+	Lijevom stranom - kako bi lakše vidio promet koji nailazi prema tebi.
+	~ watto_question_solved = 1
+	-> show_bike_location
++ [Sredinom prometnice.]
+	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
+	-> start_question
++ [Skakuću s jedne strane prometnice na drugu.]
+	KRIVO! KRIVO!
+	-> start_question
+
+= show_bike_location
+Eno gdje stoji izgubljeni bicikl!
+>>> PAN_CAMERA: broken_bike
+Sad ti je sigurno žao što nemaš moju leteću raketu?
+Hehe, šteta zar ne...
+>>> PAN_CAMERA: player
 -> DONE
 
-=== conv_fence ===
-
-Trebao bih dati ovu ogradu crvu zvanom Solid Snejk.
-~ picked_up_fence = true
+= ending
+Vidim da si savladao šetanje po pločnicima i zebrama.
+Ali tamo gdje ja idem, ne trebaju mi ceste!
 -> DONE
 
+= use_item
 
-=== conv_broken_bike ===
+{used_item:
+	- "bike": -> bike
+	- "pump": -> pump
+	- "fence": -> fence
+	- else: -> default
+}
+
+= bike
+Ah... Vidim da si otkrio kako prijeći zebre!
+Svaka čast.
+-> DONE
+
+= pump
+S tim napumpaj gumu na biciklu, meni za raketu to ne treba!
+-> DONE
+
+= fence
+Ne treba mi ta ograda.
+-> DONE
+
+= default
+Ne treba mi ta stvar.
+-> DONE
+
+=== conv_lizzy ===
+// A wizard who has the power to show you the location of the fences!
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{talked_to_lizzy:
+	- 0: -> intro
+	- 1: -> main
+}
+
+= intro
+Ja sam Veliki Lizijan! Čarobnjak iz daleke zemlje Prometije.
+Došao sam tu na odmor, ali čini se da tu imate neke probleme.
+Možda ti mogu pomoći? Imam moć s kojom ti mogu pokazati što tražiš!
+Ali... prvo moraš odgovoriti na jednu od mojih zagonetki!
+Žao mi je zbog toga, ali tako moje moći rade...
+~ talked_to_lizzy = 1
+-> main
+
+= main
+Želiš li riješiti zagonetku?
+Pokazat ću ti što tvoje srce želi!
++ [Želim riješiti zagonetku!]
+	-> pop_riddle
++ [Ne treba mi tvoja pomoć!]
+	Dobro onda! Ja sam tu do kraja godine pa se samo vrati ako se predomisliš!
+	-> DONE
+
+// There should be at least ~ four (more is always kewl) riddles here, I'll make a switch to randomly choose one!
+= pop_riddle
+{shuffle:
+	- -> first_riddle
+	- -> second_riddle
+	- -> third_riddle
+	- -> fourth_riddle
+}
+
+// RIDDLE ONE // PIET MAKE A SWITCH!
+= first_riddle
+- (start_riddle)
+Pri prelasku kolnika zebrom na biciklu trebamo:
++ [Naglo zakočiti prije prelaska.]
+	Krivo!
+	To će samo zbuniti druge u prometu.
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
++ [Na vrijeme se zaustaviti, sići s bicikla i hodati preko zebre gurajući bicikl.] 
+	TOČNO!
+	Na zebrama nije dopušteno voziti se s biciklom, moraš ga gurati.
+	-> dobroide
++ [Ostati na biciklu i ubrzati kako bismo što prije prešli cestu] 
+	Krivo!!!
+	Ubrzavanje će samo još više povećati šansu da te neki auto slučajno pokupi!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
++ [Pjevati i ne obazirati se na druge sudionike prometa.]
+	To sigurno.
+	Zapravo: To sigurno NE!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
+
+// RIDDLE TWO
+= second_riddle
+- (start_riddle)
+Zašto se prometni znakovi moraju poštivati?
++ [Zbog veselih boja.]
+	Krivo!
+	Razmisli malo bolje!
+	-> start_riddle
++ [Zbog sigurnosti u prometu.] 
+	TOČNO!
+	Inače bismo svi bili u velikoj opasnosti!
+	-> dobroide
++ [Zbog dosade kad sami hodamo.] 
+	Krivo!!!
+	Znakove se treba poštivati i kad nam je dosadno i kad nam je zabavno!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
++ [Zbog moguće kazne.]
+	To sigurno.
+	Zapravo: To sigurno NE!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
+
+// RIDDLE THREE
+= third_riddle
+- (start_riddle)
+Što može povećati pozornost pješaka u prometu?
++ [Pričanje s prijateljima.]
+	Krivo!
+	Samo ćete se zapričati i imati još manju pozornost!
+	-> start_riddle
++ [Predviđanje i očekivanje opasnosti.] 
+	TOČNO!
+	Razmisli i probaj predvidjeti moguće opasnosti!
+	-> dobroide
++ [Razgovor mobitelom.] 
+	Krivo!!!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
++ [Pretrčavanje preko kolnika.]
+	To sigurno.
+	Zapravo: To sigurno NE!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
+
+// RIDDLE FOUR
+= fourth_riddle
+- (start_riddle)
+Što je kolnik?
++ [Dio ceste kojom se kreću pješaci.]
+	Krivo!
+	To bi bio pločnik, a ne kolnik!
+	-> start_riddle
++ [Dio ceste kojom se kreću vozila.] 
+	TOČNO!
+	-> dobroide
++ [Osoba koja voli koka kolu.] 
+	Krivo!!!
+	Bolje da ti ne pomažem ako si tako neodgovorno biće!
+	-> start_riddle
++ [Slovenski atletičar koji je 1960-e sudjelovao na ljetnoj Olimpijadi.]
+	Opa, još jedan obožavatelj lika i djela Mirka Kolnika!
+	Zapravo, točan odgovor je "Kolnik je dio ceste kojom se kreću vozila."
+	Ali nagradit ću tvoje znanje regionalnih atletičara i smatrati ovo točnim.
+	Čestitam!!!
+	-> dobroide
+
+= dobroide
+Dobro ti ide odgovaranje na moje zagonetke!
+{ picked_up_fence_in_smog_town && picked_up_fence_at_turbine && got_fence_from_wheelie && got_fence_from_helter_skelter:
+	- 0: -> show_missing_fence_locations
+	- 1: -> pan_to_love_interest
+}
+
+// Here the lizard will show you (the camera will pan) to one of the locations of the fence.
+// If there are no more fences, he'll pan the camera to your love interest.. because that is
+// what you desire most! <3
+= show_missing_fence_locations
+Hmmm, vidim sada... Ti tragaš za ogradom, koju želiš popraviti da bude kao nekad!
+Da vidimo...
+{got_fence_from_wheelie:
+	0: -> pan_to_house
+}
+
+{got_fence_from_helter_skelter:
+	0: -> pan_to_helter_skelter
+}
+
+{picked_up_fence_at_turbine:
+	0: -> pan_to_fence_in_smog_town
+}
+
+{picked_up_fence_in_smog_town:
+	0: -> pan_to_fence_at_turbine
+}
+
+= pan_to_house
+// PAN TO HOUSE:
+Opa! Čini se da je jedan dio ograde pao na krov ove zgrade!
+Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može ući i popeti se na krov po taj dio ograde.
+-> DONE
+
+= pan_to_helter_skelter
+// PAN TO HELTER SKELTER:
+Čini se da je neki ljutko sa skejtom našao ogradu i prisvojio je sebi.
+Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i riječitost, čini se!
+-> DONE
+
+= pan_to_fence_in_smog_town
+// PAN TO SMOG ZONE:
+Moj magični vid jedva može vidjeti kroz sav ovaj smog!
+Ova regija se čini vrlo opasnom i mislim da ćeš u njoj morati nositi raznobojnu odjeću da te auti bolje vide!
+I ne samo to...
+Tamo je sve puno duhova!!!!!
+-> DONE
+
+= pan_to_fence_at_turbine
+// PAN TO WIND TURBINE:
+Hmm... komad ograde pao je blizu stare zračne turbine na vrhu planine...
+To je prilično daleko... Ali mislim da će ti neko motorno vozilo pomoći da dođeš do gore.
+Mlad si i pametan, otkrit ćeš već put do gore!
+-> DONE
+
+= pan_to_love_interest
+// PAN TO LOVE INTEREST
+Da vidimo što najviše voliš...
+Opa! Kakvo ljupko čudovište! Nemoj zaboraviti: moraš izraziti svoje osjećaje!
+Ja sam to zaboravio previše puta i sada sam vrlo usamljeni čarobnjak.
+-> DONE
+
+= use_item
+
+{used_item:
+	- "bike": -> bike
+	- "fence": -> fence
+	- else: -> default
+}
+
+= bike
+Ah, vidim, našao si bicikl.
+Zapamti: 
+Uvijek, nosi biciklističku kacigu kada voziš bicikl!
+-> DONE
+
+= fence
+Kako divna ograda!
+Da je bar mogu ponijeti doma sa sobom...
+Ali ova ograda je tu za sve nas! Ne smije se odnositi!
+-> DONE
+
+= default
+Makni mi to s očiju!
+-> DONE
+
+=== conv_returned_bike ===
+// A broken bike which has to be fixed using the tyre pump.
+// This bike first has to be found and carried to solid slug.
+// After the bike is fixed and you talked to sold slug, you can pick it up.
 
 {conv_type:
 	- 0: -> interact
@@ -524,20 +671,57 @@ Eto, kao nova!
 Ne treba to biciklu...
 -> DONE
 
-=== conv_debug ===
+=== conv_seat_sorting_car ===
+// This car has some problems with arranging it's passengers... when you correctly arrange everyone
+// the driver gives you a seat belt.
 
-TESTNI RAZGOVOR: Što hoćeš?
-+ [Daj mi ogradu!]
-	>>> ADD_ITEM : fence
-+ [Daj mi bicikl!]
-	>>> ADD_ITEM : bike
-+ [Daj mi pumpu!]
-	>>> ADD_ITEM : pump
--
-Evo!
+{seat_sorting_completed:
+	- 0: -> before_solving_enigma
+	- 1: -> after_solving_enigma
+}
+
+= before_solving_enigma
+Hej, simpatično čudovište. Žalim slučaj, malo sam zauzet...
+Ali čekaj malo, možda mi možeš pomoći!
+Pokušavam posložiti sva ova čudovišta na prava mjesta ali ne znam koji pojas ide na koju dob.
+Pomozi mi molim te!
++ [Kako da ne, meni sortiranje čudovišta po pojasevima dolazi skroz prirodno!]
+	-> start_seat_sorting
++ [Nemam vremena, imam ja i svoj zadatak za riješiti!]
+	Ajoj! Ja neću moći poletjeti dok to ne razriješim.
+	-> DONE
+
+= start_seat_sorting
+Okej, hvala ti puno!
+>>> BEGIN_MINIGAME: seat_sorting
+- (sorting_minigame_start)
+Stavi pravo čudovište na pravo mjesto! I čini to često!
++ Ne, ne, ne, pa čak i ja vidim da to nije dobro...
+	Probajmo opet.
+	-> sorting_minigame_start
++ Wow! To je savršeno!
+	Sada napokon neću više morati plaćati kazne!
+	Da ne spominjem povećanu sigurnost!
+	-> sorting_minigame_solved
+= sorting_minigame_solved
+~ seat_sorting_completed = 1
+>>> END_MINIGAME
 -> DONE
 
-=== conv_taxi_at_park ===
+= after_solving_enigma
+Thanks again!
+Now we can finally go to the sea!
+-> DONE
+
+=== conv_skater ===
+// Regular skater who runs into you and bumps you back to a safe zone.
+
+{Makni se, luzeru! | Haha, prespor si! Odi doma mamici!} 
+>>> RESPAWN_PLAYER
+-> DONE
+
+=== conv_helter_skelter ===
+// The boss of the skaters gives you some questions and if you answer correctly he gives you a piece of the fence.
 
 {conv_type:
 	- 0: -> interact
@@ -546,90 +730,134 @@ Evo!
 
 = interact
 
-{seatbelt_enigma_solved:
-	- true: -> after_solving_enigma
-	- false: -> after_solving_enigma
+{got_fence_from_helter_skelter:
+	- 1: -> question_solved
 }
 
-= before_solving_enigma
-This is a taxi!
->>> BEGIN_MINIGAME: seat_sorting
-- (taxi_minigame_start)
-Could you please put everyone in the correct spot?
-+ That doesn't seem correct!
-	Please try again!
-	-> taxi_minigame_start
-+ Wow! That is perfect!
-	Now I will finally not get fined by policija!
-	-> taxi_minigame_solved
-= taxi_minigame_solved
-~ seatbelt_enigma_solved = true
->>> END_MINIGAME
+{talked_to_helter_skelter:
+	- 1: -> try_again
+}
+
+?
+Kako si prošao sve moje skejter minione???
+Ja sam im eksplicitno rekao da nikoga ne puštaju!
+Sigurno si došao po komadić ograde koji sam našao?!
+E pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
+Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planine!
+~ talked_to_helter_skelter = true
+-> choices
+
+= choices
++ [Ne zafrkavaj ti mene, ja sam veliko i opasno Čudovište!]
+	Nisi ni blizu velik i opasan kao ja!
+	A sad briši dok te nisam ozlijedio!
+	-> DONE
++ [Ako si ti strah i trepet, ja sam semafor!]
+	Pa tako i izgledaš, kao mali plavi semafor!
+	Ali hmm, semafori nisu plavi...
+	Nema veze, makni mi se s očiju!
+	-> DONE
++ [Molim te, gospodine Helter Skejter, možete li nam ipak dati komadić ograde, jako nam je to važno?]
+	Što?!
+	Je li to... Pristojnost!?
+	U mojoj butigi?!?!?!
+	To nisam čuo od...
+	Od...
+	Od kad sam išao svojoj dragoj bakici na kolače...
+	Ah, kako je to bilo lijepo.
+	Hvala što si me podsjetio na nevinije vrijeme mog djetinjstva dok nisam bio vođa bande skejtera.
+	Evo, uzmi ovu ogradu.
+	Zbogom, čudovište!
+	>>> ADD_ITEM: fence
+	A vi, skejteri, prestanite ga udarati!
+	~ got_fence_from_helter_skelter = true
+	-> DONE
+
+= try_again
+
+Opet ti, što hoćeš?
+-> choices
+
+= question_solved
+Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. Tko bi rekao!
 -> DONE
 
-= after_solving_enigma
+= use_item
 
-Hey! Thanks for helping me earlier!
-As a reward I'll drive you to the mountain!
-Unfortunately all my seat belts are currently broken so...
-+ {has_item("seat_belt") == false}[I don't care!]
-	Okay... But this is extremely dangerous...
-	Let's go!
+{used_item:
+	- else: -> default
+}
+
+= default
+Keep your junk to yourself!
+-> DONE
+
+=== conv_taxi_at_park ===
+// The taxi at the park 
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{seat_belt_given_to_taxi:
+	- 0: -> no_seat_belt
+	- 1: -> taking_to_mountain
+}
+
+= no_seat_belt
+Moj posao je voziti ljude do planine.
+Nažalost, nemam više pojaseva za putnike tako da...
++ {has_item("seat_belt") == false}[Ma kaj me briga!]
+	Okej, ali to je izuzetno opasno...
+	Idemo!
 	>>> PLAY_CUTSCENE: drop_player
-	Oops! You fell out!
-	You should have worn a belt!
+	Ups! Ispao si!
+	Trebao si nositi pojas!
 	-> DONE
-+ {has_item("seat_belt") == true}[I have my own seat belt so everything is ok!]
-	Oh... okay!
-	Lemme take it...
++ {has_item("seat_belt") == true}[Imam svoj pojas tako da - sve je okej!]
+	Oh... okej!
+	Čekaj da ga uglavim u vozilo...
 	>>> REMOVE_ITEM: seat_belt
+	~ seat_belt_given_to_taxi = 1
 	-> taking_to_mountain
-+ [That's too dangerous! I dont wanna die!]
-	Good choice!
-	Maybe you can find a belt somewhere?
++ [To je preopasno! Neću!]
+	Mudar izbor.
+	Možda možeš naći pojas viška negdje...
 	-> DONE
 
 = taking_to_mountain
-Want me to take you to the mountain?
+Možeš me odvesti do planine?
 + [Take me that mountain!]
 	OK!
 	>>> TELEPORT_PLAYER: taxi_at_mountain
-	Have fun!
+	Zabavi se!
 	-> DONE
-+ [Not now... maybe later!]
++ [Ništa sada, možda poslije...]
 	OK!
 	-> DONE
 
 = use_item
 
 {used_item:
-	- "trash_sock": -> trash_sock
-	- "trash_bag": -> trash_bag
-	- "trash_cup": -> trash_cup
+	- "seat_belt": -> seat_belt
 	- else: -> default
 }
 
-= trash_sock
-
-It's a sock
--> DONE
-
-= trash_bag
-
-It's a bag
--> DONE
-
-= trash_cup
-
-It's a cup
+= seat_belt
+Fora pojas. Taman ono što trebam!
+Sad ću napokon opet moći sigurno voziti ljude do planine!
+Samo pričaj sa mnom kad god želiš do planine!
 -> DONE
 
 = default
-
-NO
+Nije mi to interesantno.
 -> DONE
 
 === conv_taxi_at_mountain ===
+// This taxi waits for you at the mountain and can take you back to the parking.
 
 {conv_type:
 	- 0: -> interact
@@ -638,33 +866,36 @@ NO
 
 = interact
 
-You wanna go back to the park?
-+ [Yes]
-	Okay! Get in!
+Želiš nazad u park?
++ [Da!]
+	OK! Idemo!
 	>>> TELEPORT_PLAYER: taxi_at_park
-	Have fun in the park!
+	Zabavi se!
 	-> DONE
-+ [No]
-	Okay! I'll be waiting here for you!
++ [Ne!]
+	OK! Čekam te ovdje!
 	-> DONE
 
 = use_item
 
--> DONE
+{used_item:
+	- else: -> default
+}
 
-=== conv_trash_bottle ===
-
-A huge bottle!
+= default
+Ne treba mi to.
 -> DONE
 
 === conv_canster ===
+// This trashbin eats you if it isn't appeased with some trash tribute!
 
-{get_state():
+{get_state_property(interact_id, "is_appeased"):
 	- 0: -> conv_canster_angry
 	- 1: -> conv_canster_appeased
 }
 
 === conv_canster_angry ===
+// The canster is angry and eats you... unless your active item is trash.
 
 {conv_type:
 	- 0: -> interact
@@ -688,12 +919,26 @@ Nisi smeće! Bah!
 = appease_canster
 
 >>> REMOVE_ITEM: {used_item}
+>>> SET_STATE: {interact_id} is_appeased 1
+{received_pump_from_canster:
+	0: -> thanks_for_trash
+	0: -> give_a_pump
+}
+
+= thanks_for_trash
 YUM YUM!
 Ja volim smeće!
->>> SET_STATE: 1
+-> DONE
+
+= give_a_pump
+Njam njam, hvala na smeću!
+Zauzvrat, evo tebi nešto što je netko bacio, a uopće nije smeće!
+Zapravo je korisna pumpa za bicikl!
+>>> ADD_ITEM: pump
 -> DONE
 
 === conv_canster_appeased ===
+// The canster has previously been given some trash and is now happy!
 
 {conv_type:
 	- 0: -> interact
@@ -721,6 +966,11 @@ Nisi smeće! Bah!
 -> DONE
 
 === conv_wheelie ===
+// Wheelie is a kid in a wheelchair who wants to go home.
+// You have to escort him and make sure he doesn't get scared away by cansters.
+// You'll have to escort him twice... one time to his house and afterwards back to the park.
+// When arriving at his house, he goes and comes back out with a fence.
+// Afterwards, when getting back to the park he gives you the battery 
 
 {conv_type:
 	- 0: -> interact
@@ -729,16 +979,134 @@ Nisi smeće! Bah!
 
 = interact
 
-Hey man!
-Here's a belt!
->>> ADD_ITEM: seat_belt
+{escorted_wheelie_back_to_park:
+	- 1: -> back_at_park 
+}
+
+{escorted_wheelie_to_house:
+	- 0: -> intro
+	- 1: -> at_house
+}
+
+{talked_to_wheelie_at_park:
+	- 0: -> intro
+	- 1: -> main_at_park
+}
+
+= intro
+Sad kad nema ograde, ne možemo igrati nogomet...
+Dok se stvari ne riješe, idem ja doma.
+No na putu do mene doma je hrpa gladnih kanti za smeće!
+Možeš ih molim te nahraniti smećem? Inače krenu jesti nas čudovišta!
+~ talked_to_wheelie_at_park = 1
+-> main_at_park
+
+= main_at_park
+Hej, jesi li nahranio sve kante za smeće?
++ [Da, sad je put siguran!]
+	Super, idemo!
+	// You escort wheelie to his house/park! 
+	-> DONE
++ [Ne još, možda kasnije.]
+	Okej, samo mi javi kad pročistiš put do mene doma!
+	-> DONE
+
+= at_house
+// WHEELIE AT HOUSE!
+
+{talked_to_wheelie_at_house:
+	- 0: -> just_arrived_at_house
+	- 1: -> main_before_fixing_park
+}
+
+= just_arrived_at_house
+
+Hvala na praćenju do kuće!
+Idem vidjeti što mi rade mama i tata doma dok mene nema!
+// Goes in and checks with his mom.
+Hej, čini se da je na krovu ostao otpuhan dio ograde.
+Slobodno ga uzmi, pa možda popraviš ogradu!
+>> ADD_ITEM: fence
+~ talked_to_wheelie_at_house = 1
+-> DONE
+
+= main_before_fixing_park
+
+{number_of_fences_fixed:
+    - 4: -> after_park_fixed
+}
+
+Hvala što si me otpratio.
+Mislim da ću ostati ovjde dok se ne popravi ograda u parku.
+Dođi po mene kad je popravite! Bok bok!
+-> DONE
+
+= after_park_fixed
+
+{talked_to_wheelie_at_house:
+    - 1: -> main_at_house
+}
+
+Vau, popravio si park!
+Želio bih opet ići igrati nogomet s vama ali...
+Opet su kante za smeće postale gladne!
+Možeš ih opet nahraniti smećem molim te?
+Jako ih se plašim!
+~ talked_to_wheelie_at_house = 1
+-> DONE
+
+= main_at_house
+Jesu li sve kante nahranjene?
++ [Da, sad je sigurno!]
+	Super! Idemo!
+	// You escort wheelie back to the park! 
+	-> DONE
++ [Ne još, još radim na tome!]
+	Okej, samo mi javi! Znaš kakve te kante znaju biti kad su gladne!
+	-> DONE
+
+= back_at_park
+// WHEELIE BACK AT PARK!
+
+{talked_to_wheelie_back_at_park:
+	- 0: -> just_arrived_back_at_park
+	- 1: -> main_back_at_park
+}
+
+= just_arrived_back_at_park
+Hvala što si me otpratio do našeg predivnog parka!
+Mislim da ću ostati ovdje i uživati u parku zauvijek!
+Evo, možeš uzeti moju bateriju. Ne treba mi više!
+>> ADD_ITEM: battery
+~ talked_to_wheelie_back_at_park = 1
+-> DONE
+
+= main_back_at_park
+Predivan dan!
+Jedino što fali je ono veliko drvo koje je nekad tu bilo posađeno.
+Pitam se što se dogodilo s tim drvom...
 -> DONE
 
 = use_item
 
+{used_item:
+	- "battery": -> battery
+	- else: -> default
+}
+
+= battery
+Keep the battery! I don't need it anymore!
+-> DONE
+
+= default
+I don't need that stuff!
+-> DONE
+
 -> DONE
 
 === conv_wind_turbine ===
+// The wind turbine can be powered by a battery you get from Wheelie and
+// removes the smog from the smoggy part of twon.
 
 {conv_type:
 	- 0: -> interact
@@ -753,14 +1121,15 @@ Here's a belt!
 }
 
 = not_fixed
-The turbine doesn't have power source...
-There's a large hole in the base with a power symbol...
-Maybe I can find some kind of power source somewhere?
+Obično vjetrenjače pretvaraju vjetar u energiju, ali ova je drugačija!
+Ova vjetrenjača pretvara energiju u vjetar!
+Tu je velika rupa, i ima simbol za bateriju.
+Možda kad bih imao neku bateriju sa sobom, mogao bih pokrenuti ovu vjetrenjaču.
 -> DONE
 
 = fixed
-The wind turbine blew away all that filthy smog!
-Maybe people can finally breath again there!
+Vau, stvorilo se toliko vjetra da je sav smog u gradu otpuhan!
+Ljudi će napokon moći disati!
 -> DONE
 
 = use_item
@@ -771,15 +1140,17 @@ Maybe people can finally breath again there!
 }
 
 = battery
-Wow it works!
->>> SET_STATE: 1
+Vau, sad radi!
+>>> SET_STATE_PROPERTY: wind_turbine is_powered 1
+>>> REMOVE_ITEM: battery
 -> fixed
 
 = default
-That's not a gonna power the turbine!
+To neće pomoći, ovdje trebam staviti neki izvor napajanja.
 -> DONE
 
 === conv_bus ===
+// This bus blocks the view for incoming cars, you'll have to take the other zebra!
 
 {conv_type:
 	- 0: -> interact
@@ -788,12 +1159,12 @@ That's not a gonna power the turbine!
 
 = interact
 
-Hey kid! Sorry for being in your way!
-I'm 23 hours behind schedule for this bus stop.
-But if I wait long enough here, I'll be back on schedule!
-Oh... Please watch out for cars!
-They can't see you when you cross the zebra because I block their view!
-You can try taking the other zebra if you really need to cross though!
+Hej, čudovište! Žao mi je što sam ti na putu.
+Ali ja jako kasnim za voznim redom, čak 23 sata.
+Ali nema veze - ako još sat vremena pričekam ovdje, taman ću biti na vrijeme!
+E da, pazi na aute!
+Ne mogu te vidjeti kad prelaziš zebru jer je moj bus tu parkiran!
+Probaj prijeći cestu sa zebrom s druge strane ceste!
 -> DONE
 
 = use_item
@@ -804,10 +1175,217 @@ You can try taking the other zebra if you really need to cross though!
 }
 
 = battery
-A battery, eh? I bet that could power the wind turbine to the north of here!
+Baterija, kažeš? Simpatično. Možda je možeš uglaviti u onu vjetrenjaču sjeverno odavde.
 -> DONE
 
 = default
-Nice trinket!
-Now let me wait in peace!
+Simpatično.
+A sad me pusti na miru!
+-> DONE
+
+=== conv_love_interest ===
+// The love interest trades you her colorful jacket in exchange for your plain one.
+// You need this jacket to get into the smoggy part of town.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{get_state_property("player", "wearing_color"):
+	- 0: -> switch_to_colorful
+	- 1: -> switch_to_plain
+}
+
+= switch_to_colorful
+Hej ti! Kako ti se sviđa moja nova jakna! Baš je šarena, zar ne?
+Mislim da bi ti dobro stajala!
+Hoćeš da se mijenjamo za jakne?
++ [Da, mijenjajmo se!]
+	>>> SET_STATE_PROPERTY: player wearing_color 1
+	>>> SET_STATE_PROPERTY: love_interest wearing_color 0
+	Super! Samo mi javi kad se zaželiš svoje stare jakne!
+	-> DONE
++ [Ne, volim svoju jaknu]
+	Okej!
+	-> DONE
+
+= switch_to_plain
+Hej! Hoćeš se opet mijenjati za jakne?
++ [Da, vrati mi moju jaknu!]
+	>>> SET_STATE_PROPERTY: player wearing_color 0
+	>>> SET_STATE_PROPERTY: love_interest wearing_color 1
+	Naravno, izvoli!
+	-> DONE
++ [Ne, sviđa mi se tvoja jakna!]
+	Okej, nosi je koliko želiš!
+	-> DONE
+
+= use_item
+
+Hvala, ali sve što trebam od tebe je tvoja ljubav!
+-> DONE
+
+=== conv_copper ===
+// The copper blocks you from entering the smoggy part of town until you are wearing something colorful.
+// He also tells you about the windmill as a tip.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+{turbine_fixed:
+	- true: -> smog_is_gone
+}
+
+{get_state_property("player", "wearing_color"):
+	- 0: -> plain
+	- 1: -> colorful
+}
+
+= plain
+STANI!
+Ne možeš tako ući u Smogograd!
+Zar ne vidiš kakav je unutra smog?! Nitko te neće vidjeti s takvom odjećom!
+Vrati se kad imaš nešto svijetlije na sebi!
+Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
+-> DONE
+
+= colorful
+Pozdrav, čudovište. Čini se da imaš jako šarenu jaknu na sebi.
+Smiješ ući u Smogograd dok god nosiš tako nešto vidljivo!
+Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
+-> DONE
+
+= smog_is_gone
+Opa! Čini se da je netko upalio vjetrenjaču na planini!
+Sav smog je nestao i sad možeš nositi što god želiš!
+-> DONE
+
+= use_item
+
+{used_item:
+	- else: -> default
+}
+
+= default
+Zašto mi to daješ? Želiš me podmititi?!
+Zar ne znaš da je policija najčasnija služba u javnom sektoru!?
+Čak dajemo novce za udruge koje uče djecu prometnim pravilima!
+-> DONE
+
+=== conv_happy_tree ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+I was possessed by evil smog!
+But now I am a happy tree again!
+Thank you for your help!
+-> DONE
+
+= use_item
+
+{used_item:
+	- else: -> default
+}
+
+= default
+Thank you for your gift!
+>>> REMOVE_ITEM: {used_item}
+-> DONE
+
+=== conv_broken_bike ===
+// The broken bike of Solid Slug
+
+I think this is the bike of Solid Slug!
+Wow, it got blown all the way out here!
+I better bring it back to him!
+~ found_bike = true
+-> DONE
+
+=== conv_trash_bag ===
+// Trash necessary to feed the cansters...
+
+Netko se jako potrudio da stavi hrpu raznog smeća u torbu...
+Ali onda su je zaboravili baciti u smeće!
+-> DONE
+
+=== conv_trash_cup ===
+// Trash necessary to feed the cansters...
+
+Netko je ostavio ovu polu-praznu čašu na podu!
+Ili polu-punu?
+U svakom slučaju, trebao bih je baciti u kantu za smeće!
+-> DONE
+
+=== conv_trash_bottle ===
+// Trash necessary to feed the cansters...
+
+Ova boca ima nešto malo kole, ali uopće više nije gazirana!
+Možda najbolje da je bacim u smeće.
+-> DONE
+
+=== conv_fence_at_turbine ===
+// A fence piece lying next to the wind farm.
+
+Wow! This fence piece flew all the way over here.
+Better get it back to the park!
+~ picked_up_fence_at_turbine = true
+-> DONE
+
+=== conv_fence_in_smog_town ===
+// A fence piece lying in the smoggy part of town.
+
+Komadić ograde! Gotovo da mi je izvakao u ovom smogu!
+Najbolje da ga odnesem Solid Snejku!
+~ picked_up_fence_in_smog_town = true
+-> DONE
+
+=== conv_player ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+This should not be reachable!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "bike": -> bike
+	- else: -> default
+}
+
+= bike
+{get_state_property("player", "on_bike"):
+	- 0: -> hop_on_bike
+	- 1: -> step_off_bike
+}
+
+= step_off_bike
+>>> SET_STATE_PROPERTY: player on_bike 0
+Off the bike I go!
+-> DONE
+
+= hop_on_bike
+>>> SET_STATE_PROPERTY: player on_bike 1
+Let's start using that bike!
+-> DONE
+
+= default
+{used_item}
+I should think really hard about what to with this item!
 -> DONE

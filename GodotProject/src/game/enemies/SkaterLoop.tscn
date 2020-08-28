@@ -4,7 +4,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array(  )
+"points": PoolVector2Array( 0, 0, 0, 0, 1858, 3260, 0, 0, 0, 0, 1858, 3260 )
 }
 
 [node name="SkaterLoop" type="YSort"]

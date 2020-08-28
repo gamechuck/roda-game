@@ -12,7 +12,7 @@ func set_smog_amount(value : float):
 func _ready():
 	if not Engine.editor_hint:
 		var _error : int = ConfigData.connect("version_visibility_changed", self, "update_version_label")
-	
+
 		update_version_label()
 
 func update_version_label():

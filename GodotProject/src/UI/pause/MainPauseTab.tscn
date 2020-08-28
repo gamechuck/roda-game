@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/pause/MainPauseTab.gd" type="Script" id=1]
+[ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
+
+[node name="MainPauseTab" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+custom_constants/separation = 26
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 35.0
+margin_right = 480.0
+margin_bottom = 58.0
+text = "PAUSE_MESSAGE"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_left = 192.0
+margin_top = 84.0
+margin_right = 288.0
+margin_bottom = 185.0
+size_flags_horizontal = 4
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_right = 96.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../../QuitButton")
+focus_neighbour_bottom = NodePath("../RestartButton")
+focus_next = NodePath("../RestartButton")
+focus_previous = NodePath("../../QuitButton")
+text = "RESUME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 39.0
+margin_right = 96.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../ResumeButton")
+focus_neighbour_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ResumeButton")
+text = "RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 96.0
+margin_bottom = 101.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath("../../QuitButton")
+focus_next = NodePath("../../QuitButton")
+focus_previous = NodePath("../RestartButton")
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_left = 192.0
+margin_top = 211.0
+margin_right = 288.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../VBoxContainer/SettingsButton")
+focus_neighbour_bottom = NodePath("../VBoxContainer/ResumeButton")
+focus_next = NodePath("../VBoxContainer/ResumeButton")
+focus_previous = NodePath("../VBoxContainer/SettingsButton")
+size_flags_horizontal = 4
+text = "Quit"

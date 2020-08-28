@@ -20,25 +20,25 @@ msgstr "IGRA JE PAUZIRANA"
 msgid "LANGUAGE"
 msgstr "Hrvatski"
 
-msgid "Volume"
+msgid "VOLUME"
 msgstr "Zvuk"
 
-msgid "Resume"
+msgid "RESUME"
 msgstr "Nastavi"
 
-msgid "Restart"
+msgid "RESTART"
 msgstr "Ponovno"
 
-msgid "Settings"
+msgid "SETTINGS"
 msgstr "Postavke"
 
-msgid "Start"
+msgid "START"
 msgstr "Pokreni"
 
-msgid "Quit"
+msgid "QUIT"
 msgstr "Izlaz"
 
-msgid "Back"
+msgid "BACK"
 msgstr "Nazad"
 
 msgid "DRIVE_MESSAGE"
