@@ -1,17 +1,5 @@
 {
     "items": [
-        {
-            "id": "fence",
-            "amount": 10
-        },
-        {
-            "id": "bike",
-            "amount": 1
-        },
-        {
-            "id": "trash_bag",
-            "amount": 1
-        }
     ],
     "characters": [
         {
@@ -20,25 +8,21 @@
                 "wearing_color": 0,
                 "on_bike": 0
             },
-            "position": [0, 0]
-        },
-        {
-            "id": "canster_1",
-            "properties": {
-                "is_appeased": 1
-            }
+            "position": [0, 0],
+            "visible": true
         },
         {
             "id": "love_interest",
             "properties": {
                 "wearing_color": 1
-            }
+            },
+            "visible": true
         }
     ],
     "pickups": [
         {
             "id": "trash_bag_two",
-            "picked_up": false
+            "visible": true
         }
     ]
 }

@@ -101,6 +101,8 @@ var gummy_modifier := 0.5
 var bike_modifier := 2.0
 var minimum_interaction_distance := 200
 
+var wheelie_move_speed := 1.5
+
 var traffic_red_time := 10.0
 var traffic_yellow_after_red_time := 0.5
 var traffic_yellow_after_green_time := 0.5

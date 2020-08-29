@@ -2,7 +2,7 @@ extends Reference
 class_name class_pickup_state
 
 var id := ""
-var picked_up := false
+var visible := true
 # The actual visual representation of this state.
 var object : CollisionObject2D = null 
 
@@ -13,15 +13,15 @@ func set_context(value : Dictionary) -> void:
 		return
 
 	id = value.id
-	picked_up = value.get("picked_up", false)
+	visible = value.get("visible", true)
 
 func get_context() -> Dictionary:
 	var _context := {}
 
-	# Only save the pickup to the context if it is picked_up!
-	if picked_up:
+	# Only save the pickup to the context if it is NOT visible!
+	if not visible:
 		_context.id = id
-		_context.picked_up = true
+		_context.visible = true
 
 	return _context
 

@@ -98,14 +98,16 @@ func load_story():
 	story.bind_external_function_general("get_state_property", Director, "get_state_property")
 
 	# Bind an observer to some variables
-	story.observe_variables(["number_of_fences_fixed"], self, "_observe_variables")
+	story.observe_variables(["number_of_fences_fixed", "turbine_fixed"], self, "_observe_variables")
 
 	Director.story = story
 
 func _observe_variables(variable_name, new_value):
 	match variable_name:
 		"number_of_fences_fixed":
-			game_canvas.increment_visible_fences()
+			game_canvas._on_number_of_fences_fixed(new_value)
+		"turbine_fixed":
+			game_canvas._on_turbine_fixed(new_value)
 	print(str("Variable '", variable_name, "' changed to: ", new_value))
 
 func get_item_value(id : String, key : String, default):

@@ -4,17 +4,13 @@ class_name class_pickup
 onready var _collision_shape_2D := $CollisionShape2D
 
 export(String) var id : String
-var picked_up := false setget set_picked_up
-func set_picked_up(value : bool) -> void:
-	picked_up = value
-	set_visible(not picked_up)
 
 var state : class_pickup_state setget set_state, get_state
 func set_state(value : class_pickup_state) -> void:
 	if value:
 		_state = weakref(value)
 		value.object = self
-		self.visible = not value.picked_up
+		set_visible(value.visible)
 func get_state() -> class_pickup_state:
 	return _state.get_ref()
 

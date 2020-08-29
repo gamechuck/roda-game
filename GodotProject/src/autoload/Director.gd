@@ -31,6 +31,17 @@ func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	interact_node = node
 	dialogue_in_progress = _start_dialogue()
 
+#func start_knot_dialogue(knot : String) -> bool:
+#	story.variables_state.set("conv_type", 0)
+#	interact_node = null
+#
+#	if story.knot_container_with_name(knot) != null:
+#		story.choose_path_string(knot)
+#		return update_dialogue()
+#	else:
+#		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
+#		return false
+
 func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) -> void:
 	if not cutscene_in_progress:
 		# First stop the player autonomy!
@@ -56,23 +67,21 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 				if interact_node is class_character:
 					drop_player(interact_node)
 					yield(self, "cutscene_completed")
+			"eat_player":
+				if interact_node is class_character:
+					eat_player(interact_node)
+					yield(self, "cutscene_completed")
+			"spit_out_player":
+				if interact_node is class_character:
+					spit_out_player(interact_node)
+					yield(self, "cutscene_completed")
 			_:
+				push_error("Cutscene with id '{0}' was not recognized!".format([cutscene_id]))
 				pass
 
 		cutscene_in_progress = false
 		if not dialogue_in_progress:
 			emit_signal("grant_player_autonomy")
-
-#func start_knot_dialogue(knot : String) -> bool:
-#	story.variables_state.set("conv_type", 0)
-#	interact_node = null
-#
-#	if story.knot_container_with_name(knot) != null:
-#		story.choose_path_string(knot)
-#		return update_dialogue()
-#	else:
-#		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
-#		return false
 
 func _start_dialogue() -> bool:
 	var state : Reference
@@ -297,7 +306,11 @@ func end_minigame(_argument_values):
 
 func update_dialogue_UI(argument_values):
 	var character_id : String = argument_values[0]
-	Flow.dialogue_UI.update_UI(character_id)
+
+	var character : class_character_state = State.get_character_by_id(character_id)
+	if character:
+		var object = character.object
+		Director.interact_node = object
 
 func _start_cutscene(argument_values : Array) -> void:
 	var cutscene_id : String = argument_values[0]
@@ -442,30 +455,59 @@ func drop_player(taxi : class_character):
 
 	emit_signal("cutscene_completed")
 
-func chew_on_player(canster : class_canster):
+func eat_player(canster : class_canster):
 	var player : class_player = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
+	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
-	var target_position = canster.position - player.position
-	target_position.y -= 40
-	_tween.interpolate_property($AnimatedSprite, "position", Vector2.ZERO, target_position, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.interpolate_property($AnimatedSprite, "rotation_degrees", $AnimatedSprite.rotation_degrees, 180, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+	player.update_state(Vector2.ZERO)
 
-	bias = target_position.y
-	_tween.interpolate_method(self, "_sinusoidal_movement", 0, 4, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
+	canster_anim_sprite.play("devour_1")
+	yield(canster_anim_sprite, "animation_finished")
 
-	Flow.dialogue_UI.update_dialogue()
+	anim_sprite.visible = false
+
+	canster_anim_sprite.play("devour_2")
+	yield(canster_anim_sprite, "animation_finished")
+
+	canster_anim_sprite.play("aggressive")
+
+	dialogue_in_progress = update_dialogue()
+	Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
 
 	emit_signal("cutscene_completed")
 
-	set_process_unhandled_input(true)
+func spit_out_player(canster : class_canster):
+	var player : class_player = Flow.player
+	var anim_sprite := player.get_node("AnimatedSprite")
+	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
-var bias : float = 0.0
+	dialogue_in_progress = update_dialogue()
 
-func _sinusoidal_movement(time : float):
-	var amplitude := 10
-	$AnimatedSprite.position.y = amplitude*sin(2*PI*1*time) + bias
+	canster_anim_sprite.play("spit_out_1")
+	yield(canster_anim_sprite, "animation_finished")
+
+	anim_sprite.position = canster.position - player.position
+	anim_sprite.visible = true
+
+	canster_anim_sprite.play("spit_out_2")
+	_tween.interpolate_property(anim_sprite, "position:x", anim_sprite.position.x, -600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(anim_sprite, "position:y", anim_sprite.position.y, -600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	canster_anim_sprite.play("aggressive")
+
+	_tween.interpolate_property(player,"position", player.position, player.respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(anim_sprite, "position", anim_sprite.position + Vector2(0, -200), Vector2(0, -200), 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(anim_sprite, "position", Vector2(0, -200), Vector2.ZERO, 1.0, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	dialogue_in_progress = update_dialogue()
+
+	emit_signal("cutscene_completed")

@@ -19,6 +19,7 @@ var _overlapping_with_gummy := false
 var _target_entity : CollisionObject2D = null
 
 onready var _interact_area := $InteractArea
+onready var _bump_area := $BumpArea
 onready var _tween := $Tween
 
 signal nav_path_requested()
@@ -33,10 +34,10 @@ func _ready():
 	register_state_property("on_bike", TRANSPORT_MODE.FOOT)
 	register_state_property("wearing_color", CLOTHING.PLAIN)
 
-	#var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
-	#_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
+	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
+	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
 
-	var _error = _interact_area.connect("area_entered", self, "_on_area_entered")
+	_error = _bump_area.connect("area_entered", self, "_on_bump_area_entered")
 
 	_error = connect("dialogue_requested", Director, "_on_dialogue_requested")
 	_error = connect("cutscene_requested", Director, "_on_cutscene_requested")
@@ -90,7 +91,7 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 ## Inputs that are NOT handled by any of the UI elements!
 	if event.is_action_pressed("interact"):
-		if _overlapping_character:
+		if _overlapping_character and _overlapping_character != self:
 			emit_signal("dialogue_requested", _overlapping_character)
 		elif _overlapping_pickup:
 			emit_signal("dialogue_requested", _overlapping_pickup)
@@ -122,7 +123,7 @@ func process_interaction(active_entity : CollisionObject2D):
 		var item_id = item.id
 		emit_signal("dialogue_requested", active_entity, item_id)
 		Flow.inventory.reset_slots()
-	else:
+	elif active_entity != self:
 		emit_signal("dialogue_requested", active_entity)
 		if active_entity is class_pickup:
 			Flow.inventory.add_item(active_entity)
@@ -170,8 +171,11 @@ func _on_interact_area_exited(area):
 		_overlapping_with_gummy = false
 		print("Player exited gummy!")
 
-func _on_area_entered(area):
+func _on_bump_area_entered(area):
 # Stuff that should really be precise should be added here!
+	if not area:
+		return
+
 	if area is class_car:
 		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
@@ -180,14 +184,17 @@ func _on_area_entered(area):
 		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
-	elif area is class_canster:
-		print("CANSTER")
-		if area.get_state_property("is_appeased") == 0:
+	elif area is class_projectile:
+		emit_signal("cutscene_requested", "respawn")
+		nav_path = PoolVector2Array()
+		print("Player got hit by a projectile!")
+	elif area.get_parent() is class_canster:
+		var canster = area.get_parent()
+		if canster.get_state_property("is_appeased") == 0:
 			# The canster is angry!!!
-			process_interaction(area)
+			process_interaction(canster)
 			_target_entity = null
 			nav_path = PoolVector2Array()
-			emit_signal("cutscene_requested", "respawn")
 			print("Player got eaten by a canster!")
 
 func get_move_speed() -> float:

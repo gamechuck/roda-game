@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/Wheelie.tscn" type="PackedScene" id=2]
@@ -37,6 +37,66 @@
 [ext_resource path="res://resources/tilemaps/FenceTileMap.tres" type="TileSet" id=35]
 [ext_resource path="res://src/game/Gummy.tscn" type="PackedScene" id=36]
 [ext_resource path="res://src/game/enemies/SkaterLoop.tscn" type="PackedScene" id=37]
+[ext_resource path="res://roda-assets/UI/test.png" type="Texture" id=38]
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_texture;
+uniform vec4 color : hint_color;
+
+uniform float speed = 0.1;
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+    float cosa = cos(rotation);
+    float sina = sin(rotation);
+    uv -= pivot;
+    return vec2(
+        cosa * uv.x - sina * uv.y,
+        cosa * uv.y + sina * uv.x 
+    ) + pivot;
+}
+
+void vertex() {
+	VERTEX = rotateUV(VERTEX, 0.0/TEXTURE_PIXEL_SIZE, TIME * speed);
+}
+
+void fragment() {
+	//vec2 modified_UV = UV;
+	//modified_UV.x = modified_UV.x + TIME/25.0;
+	//modified_UV.y = modified_UV.y + TIME/25.0;
+
+	COLOR = color*texture(noise_texture, UV);
+
+	//COLOR = color*texture(noise_texture, rotateUV(UV, vec2(0.5), TIME));
+
+	//COLOR = texture(TEXTURE, UV);
+	
+	vec2 c_UV = UV - vec2(0.5, 0.5);
+	float radius_to_center = sqrt(c_UV.x*c_UV.x+c_UV.y*c_UV.y);
+	if (radius_to_center > 0.5) {
+		 COLOR.a = 0.0;
+	} else {
+	 	COLOR.a = 1.0 - 2.0*radius_to_center;
+		COLOR.a *= 2.0;
+	}
+    //COLOR.a = 1.0 - UV.x;
+
+	//COLOR.a *= amount;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=12]
+period = 32.0
+
+[sub_resource type="NoiseTexture" id=11]
+seamless = true
+noise = SubResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/color = Color( 0.541176, 0.168627, 0.890196, 1 )
+shader_param/speed = 0.1
+shader_param/noise_texture = SubResource( 11 )
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -53,10 +113,10 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 130, 60 )
 
 [sub_resource type="NavigationPolygon" id=6]
@@ -71,6 +131,13 @@ __meta__ = {
 "_edit_vertical_guides_": [ 2556.7, 1983.12, 1567.09, 1858.47, 3559.3, 3871.59 ]
 }
 
+[node name="SmogSprite" type="Sprite" parent="."]
+material = SubResource( 10 )
+position = Vector2( 778.484, 2422.09 )
+scale = Vector2( 40, 40 )
+z_index = 1
+texture = ExtResource( 38 )
+
 [node name="release_tilemap" parent="." instance=ExtResource( 8 )]
 
 [node name="YSort" type="YSort" parent="."]
@@ -82,7 +149,7 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 3391.64, 2188.2 )
+position = Vector2( 2284.14, 2256.92 )
 id = "player"
 
 [node name="Fences" type="YSort" parent="YSort"]
@@ -219,8 +286,7 @@ id = "seat_sorting_car"
 position = Vector2( 894.602, 535.483 )
 
 [node name="Wheelie" parent="YSort/Characters" instance=ExtResource( 2 )]
-position = Vector2( 2381.81, 2386.28 )
-id = "wheelie"
+position = Vector2( 2382, 2386 )
 
 [node name="Bus" parent="YSort/Characters" instance=ExtResource( 3 )]
 position = Vector2( 894.899, 897.336 )
@@ -230,7 +296,6 @@ position = Vector2( 2299.37, 2870.98 )
 
 [node name="HappyTree" parent="YSort/Characters" instance=ExtResource( 31 )]
 position = Vector2( 2178.74, 2160.58 )
-id = "happy_tree"
 
 [node name="Copper" parent="YSort/Characters" instance=ExtResource( 10 )]
 position = Vector2( 1792.79, 2368.36 )
@@ -240,7 +305,7 @@ position = Vector2( 2499.86, 3738.54 )
 id = "helter_skelter"
 
 [node name="MrSmog" parent="YSort/Characters" instance=ExtResource( 33 )]
-position = Vector2( 737.818, 2732.66 )
+position = Vector2( 736.404, 2782.16 )
 
 [node name="CansterLeft" parent="YSort/Characters" instance=ExtResource( 34 )]
 position = Vector2( 3350.25, 2384.29 )
@@ -299,35 +364,29 @@ __meta__ = {
 [node name="ParkToTrash" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2591.63, 2432.4 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="ParkingToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3228.31, 3065.67 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="BikeToEmpty" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3837.83, 2948.6 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="TrashToCansters" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3235.64, 2432.35 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="CansterToLake" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3549.6, 2035.55 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="LoveToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2590.04, 3004.68 )
 extents = Vector2( 130, 60 )
-light_color = 0
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 13 )
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 32 )]
 position = Vector2( 114.859, -44.3281 )
@@ -348,7 +407,6 @@ direction = "front"
 [node name="Mountain" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1136, 864.376 )
 extents = Vector2( 80, 100 )
-light_color = 0
 
 [node name="ParkToLove" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2467.75, 2557.53 )
@@ -361,7 +419,7 @@ extents = Vector2( 130, 60 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 8 )
+shape = SubResource( 14 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( 98.7507, 53.7722 )
@@ -378,17 +436,14 @@ direction = "right"
 [node name="CopperToSkater" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1854.87, 2913.42 )
 extents = Vector2( 60, 100 )
-light_color = 0
 
 [node name="TrashToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3085.59, 2566.36 )
 extents = Vector2( 60, 100 )
-light_color = 0
 
 [node name="CansterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3377.65, 2821.59 )
 extents = Vector2( 60, 100 )
-light_color = 0
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
 visible = false

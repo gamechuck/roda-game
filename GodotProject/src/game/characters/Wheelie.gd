@@ -1,6 +1,7 @@
 extends class_character
 
 onready var _tween := $Tween
+onready var _interact_area := $InteractArea
 
 enum MOVING {IDLE, WALK}
 enum DIRECTION {LEFT, RIGHT, UP, DOWN}
@@ -8,67 +9,143 @@ enum DIRECTION {LEFT, RIGHT, UP, DOWN}
 var _direction : int = DIRECTION.DOWN
 var _moving : int = MOVING.IDLE
 
-var initial_offset := 0.0
+var nav_path : PoolVector2Array = []
 
-#onready var path_follow : PathFollow2D = $".."
+var target_points : PoolVector2Array = [
+	Vector2(2382, 2386),
+	Vector2(2777, 2403), 
+	Vector2(3399, 2423), 
+	Vector2(3391, 2072), 
+	Vector2(3877, 2043),
+	Vector2(3825, 1789),
+	Vector2(3825, 1889)
+	]
+
+var current_idx := 0
+var target_idx := 0
+var got_scared := false
+var its_over := false
+
+signal nav_path_requested
 
 func _ready():
-	update_animation()
+	register_state_property("going_to_house", 0)
+	register_state_property("going_to_park", 0)
+	register_state_property("arrived_safely", 0)
 
-#	var parent = path_follow.get_parent()
-#	if parent is Path2D:
-#		var curve : Curve2D = parent.curve
-#		if curve != null:
-#			var duration : float = curve.get_baked_length()
-#			duration /= ConfigData.car_move_speed
-#			duration /= ProjectSettings.get("physics/common/physics_fps")
-#
-#			_tween.interpolate_method(self, "set_unit_offset", 0, 1, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#			_tween.repeat = true
-#			_tween.seek(initial_offset*duration)
-#			_tween.start()
-#
-#func set_unit_offset(value : float):
-#	var old_position := path_follow.position
-#	path_follow.unit_offset = value
-#	var direction : Vector2 = path_follow.position - old_position
-#	update_state(direction.normalized())
+	var _error := _interact_area.connect("area_entered", self, "_on_area_entered")
+
+	set_physics_process(false)
+
+	_update_animation()
+
+func _physics_process(_delta):
+	if its_over:
+		set_physics_process(false)
+		its_over = false
+		return
+
+	var move_direction := Vector2.ZERO
+	var move_speed := get_move_speed()
+
+	if nav_path.size() > 0:
+		var distance := position.distance_to(nav_path[0])
+		if distance > move_speed:
+			var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
+			move_direction = new_position - position
+		else:
+			nav_path.remove(0)
+	else:
+		process_next_point()
+
+	update_state(move_direction)
+	var normalized_direction := move_direction.normalized()
+	var _linear_velocity := move_and_slide(normalized_direction*move_speed/_delta)
+
+func process_next_point():
+	if target_idx > current_idx:
+		current_idx += 1
+	elif target_idx < current_idx:
+		current_idx -= 1
+	else:
+		its_over = true
+		set_physics_process(false)
+		set_state_property("going_to_house", 0)
+		set_state_property("going_to_park", 0)
+		if got_scared:
+			set_state_property("arrived_safely", 0)
+			got_scared = false
+		else:
+			set_state_property("arrived_safely", 1)
+		return
+
+	emit_signal("nav_path_requested", target_points[current_idx])
+
+func get_move_speed() -> float:
+	var move_speed := ConfigData.wheelie_move_speed
+	if got_scared:
+		move_speed *= 4
+	return move_speed
+
+func _on_area_entered(area):
+	if not area:
+		return
+
+	if area.get_parent() is class_canster:
+		var canster = area.get_parent()
+		if canster.get_state_property("is_appeased") == 0:
+			nav_path = PoolVector2Array()
+			got_scared = true
+			if target_idx == target_points.size() - 1:
+				target_idx = 0
+			elif target_idx == 0:
+				target_idx = target_points.size() - 1
 
 func update_state(move_direction : Vector2):
 	var normalized_direction := move_direction.normalized()
 	var abs_direction := normalized_direction.abs()
-	var old_state : int = _state
+	var old_moving : int = _moving
 	var old_direction : int = _direction
 
 	if abs_direction.x >= abs_direction.y:
 		if normalized_direction.x > 0:
 			_direction = DIRECTION.RIGHT
-			_state = MOVING.WALK
+			_moving = MOVING.WALK
 		elif normalized_direction.x < 0:
 			_direction = DIRECTION.LEFT
-			_state = MOVING.WALK
+			_moving = MOVING.WALK
 		else:
-			_state = MOVING.IDLE
+			_moving = MOVING.IDLE
 	elif abs_direction.y > abs_direction.x:
 		if normalized_direction.y > 0:
 			_direction = DIRECTION.DOWN
-			_state = MOVING.WALK
+			_moving = MOVING.WALK
 		elif normalized_direction.y < 0:
 			_direction = DIRECTION.UP
-			_state = MOVING.WALK
+			_moving = MOVING.WALK
 		else:
-			_state = MOVING.IDLE
+			_moving = MOVING.IDLE
 	else:
-		_state = MOVING.IDLE
+		_moving = MOVING.IDLE
 
-	if old_state != _state or old_direction != _direction:
-		update_animation()
+	if old_moving != _moving or old_direction != _direction:
+		_update_animation()
 
 func update_animation():
+	if get_state_property("going_to_house") == 1:
+		current_idx = 0
+		target_idx = target_points.size() - 1
+		set_physics_process(true)
+	elif get_state_property("going_to_park") == 1:
+		current_idx = target_points.size() - 1
+		target_idx = 0
+		set_physics_process(true)
+
+func _update_animation():
 	var state_settings : Dictionary = state_machine.get(_direction, {})
 	state_settings = state_settings.get(_moving, {})
 
-	_animated_sprite.play(state_settings.get("animation_name", "default"))
+	_animated_sprite.play(state_settings.get("animation_name", "idle_down"))
 	_animated_sprite.flip_h = state_settings.get("flip_h", false)
 	_animated_sprite.flip_v = state_settings.get("flip_v", false)
 

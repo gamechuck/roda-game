@@ -198,7 +198,7 @@ Ne želim to uzeti...
 	- true : -> broken_bike
 }
 
-{has_item("bike"):
+{has_item("broken_bike"):
 	- true: -> has_bike
 	- false: -> intro
 }
@@ -214,8 +214,8 @@ Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 
 Hvala što s mi našao bicikl!
 ~ gave_back_bike = 1
->>> REMOVE_ITEM: bike
->>> SHOW: ReturnedBike
+>>> REMOVE_ITEM: broken_bike
+>>> SHOW: returned_bike
 -> broken_bike
 
 = broken_bike
@@ -907,10 +907,10 @@ Ne treba mi to.
 }
 
 = interact
->>> PLAY_CUTSCENE: chew_on_player
+>>> PLAY_CUTSCENE: eat_player
 !!?
 Nisi smeće! Bah!
->>> RESPAWN_PLAYER
+>>> PLAY_CUTSCENE: spit_out_player
 -> DONE
 
 = use_item
@@ -984,12 +984,15 @@ Nisi smeće! Bah!
 
 = interact
 
+{get_state_property("wheelie", "arrived_safely"):
+	- 1: -> process_arrival
+}
+
 {escorted_wheelie_back_to_park:
 	- 1: -> back_at_park 
 }
 
 {escorted_wheelie_to_house:
-	- 0: -> intro
 	- 1: -> at_house
 }
 
@@ -1010,7 +1013,7 @@ Možeš ih molim te nahraniti smećem? Inače krenu jesti nas čudovišta!
 Hej, jesi li nahranio sve kante za smeće?
 + [Da, sad je put siguran!]
 	Super, idemo!
-	// You escort wheelie to his house/park! 
+	>>> SET_STATE_PROPERTY: wheelie going_to_house 1
 	-> DONE
 + [Ne još, možda kasnije.]
 	Okej, samo mi javi kad pročistiš put do mene doma!
@@ -1031,7 +1034,7 @@ Idem vidjeti što mi rade mama i tata doma dok mene nema!
 // Goes in and checks with his mom.
 Hej, čini se da je na krovu ostao otpuhan dio ograde.
 Slobodno ga uzmi, pa možda popraviš ogradu!
->> ADD_ITEM: fence
+>>> ADD_ITEM: fence
 ~ talked_to_wheelie_at_house = 1
 -> DONE
 
@@ -1082,7 +1085,7 @@ Jesu li sve kante nahranjene?
 Hvala što si me otpratio do našeg predivnog parka!
 Mislim da ću ostati ovdje i uživati u parku zauvijek!
 Evo, možeš uzeti moju bateriju. Ne treba mi više!
->> ADD_ITEM: battery
+>>> ADD_ITEM: battery
 ~ talked_to_wheelie_back_at_park = 1
 -> DONE
 
@@ -1091,6 +1094,15 @@ Predivan dan!
 Jedino što fali je ono veliko drvo koje je nekad tu bilo posađeno.
 Pitam se što se dogodilo s tim drvom...
 -> DONE
+
+= process_arrival
+
+{escorted_wheelie_to_house:
+	- 0: ~ escorted_wheelie_to_house = 1
+	- 1: ~ escorted_wheelie_back_to_park = 1
+}
+>>> SET_STATE_PROPERTY: wheelie arrived_safely 0
+-> interact
 
 = use_item
 
@@ -1146,6 +1158,7 @@ Ljudi će napokon moći disati!
 
 = battery
 Vau, sad radi!
+~ turbine_fixed = 1
 >>> SET_STATE_PROPERTY: wind_turbine is_powered 1
 >>> REMOVE_ITEM: battery
 -> fixed
@@ -1309,6 +1322,29 @@ Thank you for your gift!
 >>> REMOVE_ITEM: {used_item}
 -> DONE
 
+=== conv_mr_smog ===
+
+{get_state_property("mr_smog", "is_defeated"):
+	- 0: -> angry_mr_smog
+	- 1: -> defeated_mr_smog
+}
+
+= angry_mr_smog
+>>> PAN_CAMERA_TO_POSITION: 736 2782
+MUHAHAHAHA
+You will never defeat my majestic smogginess!
+>>> RESET_CAMERA
+-> DONE
+
+= defeated_mr_smog
+>>> UPDATE_UI: happy_tree
+>>> PAN_CAMERA_TO_POSITION: 736 2782
+All the smog has left me!
+Now I am a happy tree again!
+I am going back to the park!
+>>> RESET_CAMERA
+-> DONE
+
 === conv_broken_bike ===
 // The broken bike of Solid Slug
 
@@ -1371,6 +1407,12 @@ This should not be reachable!
 
 {used_item:
 	- "bike": -> bike
+	- "battery": -> battery
+	- "fence": -> fence
+	- "broken_bike": -> broken_bike
+	- "trash_bag": -> trash_talk
+	- "trash_cup": -> trash_talk
+	- "trash_bottle": -> trash_talk
 	- else: -> default
 }
 
@@ -1388,6 +1430,36 @@ Off the bike I go!
 = hop_on_bike
 >>> SET_STATE_PROPERTY: player on_bike 1
 Let's start using that bike!
+-> DONE
+
+= pump
+A pump? 
+A common appliance would be to use this on a tire!
+... But you never know in these types of games!
+-> DONE
+
+= seat_belt
+I should wear this whenever I use a car!
+Or maybe... a taxi?
+-> DONE
+
+= battery
+A battery? And it still has plenty of power!
+I better find some place to power with this battery.
+-> DONE
+
+= fence
+A fence of the park! 
+I better bring this back to Solid Snejk!
+-> DONE
+
+= broken_bike
+This bike belongs to Solid Slug! 
+I better bring it back to him... it looks a bit busted...
+-> DONE
+
+= trash_talk
+I should find a trash bin to put this in!
 -> DONE
 
 = default

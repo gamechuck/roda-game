@@ -4,11 +4,16 @@ onready var _navigation_2D := $Navigation2D
 onready var _player := $YSort/Player
 onready var _props := $YSort/Props
 onready var _fences := $YSort/Fences
-#onready var _ghosts := $YSort/Ghosts
+
+onready var _smog_sprite := $SmogSprite
+
+onready var _wheelie := $YSort/Characters/Wheelie
 
 func _ready():
 	Flow.game_canvas = self
 	var _error := _player.connect("nav_path_requested", self, "_on_player_nav_path_requested")
+
+	_error = _wheelie.connect("nav_path_requested", self, "_on_nav_path_requested", [_wheelie])
 
 #	for ghost in _ghosts.get_children():
 #		_error = ghost.connect("nav_path_requested", self, "_on_nav_path_requested", [ghost])
@@ -46,14 +51,23 @@ func _on_player_nav_path_requested():
 	nav_path.remove(0)
 	_player.nav_path = nav_path
 
-func _on_nav_path_requested(end : Vector2, ghost : class_ghost):
-	var nav_path = _navigation_2D.get_simple_path(ghost.position, end)
+func _on_nav_path_requested(end : Vector2, node : Node2D):
+	var nav_path = _navigation_2D.get_simple_path(node.position, end)
 	# Remove the first point since it is the initial position!!!
 	nav_path.remove(0)
-	ghost.nav_path = nav_path
+	node.nav_path = nav_path
 
-func increment_visible_fences():
+func _on_number_of_fences_fixed(new_value):
+	var value := 0
 	for fence in _fences.get_children():
-		if fence.visible == false:
+		if value < new_value:
 			fence.set_visible(true)
-			return
+		else:
+			fence.set_visible(false)
+		value += 1
+
+func _on_turbine_fixed(new_value : int):
+	if new_value:
+		_smog_sprite.visible = false
+	else:
+		_smog_sprite.visible = true

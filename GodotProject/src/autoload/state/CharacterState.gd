@@ -5,6 +5,7 @@ const FALLBACK_CHARACTER_TEXTURE := "res://resources/fallback/character_texture.
 
 var id := ""
 var properties := {}
+var visible := true
 # The actual visual representation of this state.
 var object : KinematicBody2D = null
 
@@ -16,6 +17,9 @@ func set_context(value : Dictionary) -> void:
 
 	id = value.id
 	properties = value.get("properties", {})
+
+	# Overwrite the visibility if defined by the state!
+	visible = value.get("visible", visible)
 
 func get_context() -> Dictionary:
 	var _context := {}

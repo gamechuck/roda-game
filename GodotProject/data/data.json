@@ -17,7 +17,7 @@
             }
         },
         "lizzy": {
-            "name": "Lizzy",
+            "name": "Lizijan",
             "knot": "conv_lizzy",
             "portrait": {
                 "size": [
@@ -67,7 +67,8 @@
         },
         "returned_bike": {
             "name": "Bike",
-            "knot": "conv_returned_bike"
+            "knot": "conv_returned_bike",
+            "visible": false
         },
         "taxi_at_park": {
             "name": "Taxi",
@@ -176,7 +177,8 @@
                     32
                 ],
                 "texture": "res://roda-assets/portraits/happy_tree.png"
-            }
+            },
+            "visible": false
         },
         "love_interest": {
             "name": "Mia",
@@ -210,6 +212,7 @@
         },
         "mr_smog": {
             "name": "Mr. Smog",
+            "knot": "conv_mr_smog",
             "portrait": {
                 "size": [
                     256,

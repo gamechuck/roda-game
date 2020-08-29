@@ -13,6 +13,7 @@ func set_state(value : class_character_state) -> void:
 	if value:
 		_state = weakref(value)
 		value.object = self
+		set_visible(value.visible)
 func get_state() -> class_character_state:
 	return _state.get_ref()
 var _state = WeakRef.new()
@@ -34,8 +35,8 @@ func get_state_property(property : String) -> int:
 
 func set_state_property(property : String, value : int):
 	if self.state:
-		if property in self.state:
-			self.state.set(property, value)
+		if property in self.state.properties:
+			self.state.properties[property] = value
 		else:
 			push_error("Property with name '{0}' was not defined in the character state!".format([property]))
 

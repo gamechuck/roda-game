@@ -7,19 +7,19 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "friendly",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "aggressive",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "friendly",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 64, 64 )
+extents = Vector2( 480, 360 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 42, 16 )
@@ -31,7 +31,7 @@ id = "mr_smog"
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "aggressive"
-offset = Vector2( 2, -22 )
+offset = Vector2( 11, -60 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 2 )
@@ -42,5 +42,6 @@ shape = SubResource( 3 )
 [node name="Projectiles" type="Node2D" parent="." index="4"]
 
 [node name="Timer" type="Timer" parent="." index="5"]
+wait_time = 1.5
 
 [node name="Tween" type="Tween" parent="." index="6"]

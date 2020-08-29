@@ -121,6 +121,7 @@ func init_characters() -> void:
 	for key in Flow.characters_data.keys():
 		var character := _character_resource.new()
 		character.id = key
+		character.visible = Flow.characters_data[key].get("visible", true)
 
 		if ConfigData.verbose_mode: print("Adding registered character with id '{0}' to State!".format([key]))
 		characters.append(character)
