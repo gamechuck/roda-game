@@ -23,7 +23,7 @@ VAR fixed_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
 // Taxi
-VAR seat_belt_given_to_taxi = 1
+VAR seat_belt_given_to_taxi = 0
 
 // Helter Skelter
 VAR talked_to_helter_skelter = 0
@@ -314,10 +314,10 @@ Ako nema pločnika, gdje se pješaci kreću?
 
 = show_bike_location
 Eno gdje stoji izgubljeni bicikl!
->>> PAN_CAMERA: broken_bike
+>>> PAN_CAMERA_TO_POSITION: 3560 3032
 Sad ti je sigurno žao što nemaš moju leteću raketu?
 Hehe, šteta zar ne...
->>> PAN_CAMERA: player
+>>> RESET_CAMERA
 -> DONE
 
 = ending
@@ -497,54 +497,56 @@ Dobro ti ide odgovaranje na moje zagonetke!
 = show_missing_fence_locations
 Hmmm, vidim sada... Ti tragaš za ogradom, koju želiš popraviti da bude kao nekad!
 Da vidimo...
-{got_fence_from_wheelie:
-	0: -> pan_to_house
+{shuffle:
+- {not got_fence_from_wheelie: -> pan_to_house }
+- {not got_fence_from_helter_skelter: -> pan_to_helter_skelter }
+- {not picked_up_fence_at_turbine: -> pan_to_fence_at_turbine }
+- {not picked_up_fence_in_smog_town: -> pan_to_fence_in_smog_town }
 }
-
-{got_fence_from_helter_skelter:
-	0: -> pan_to_helter_skelter
-}
-
-{picked_up_fence_at_turbine:
-	0: -> pan_to_fence_in_smog_town
-}
-
-{picked_up_fence_in_smog_town:
-	0: -> pan_to_fence_at_turbine
-}
+-> DONE
 
 = pan_to_house
 // PAN TO HOUSE:
+>>> PAN_CAMERA_TO_POSITION: 3870 1788
 Opa! Čini se da je jedan dio ograde pao na krov ove zgrade!
 Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može ući i popeti se na krov po taj dio ograde.
+>>> RESET_CAMERA
 -> DONE
 
 = pan_to_helter_skelter
 // PAN TO HELTER SKELTER:
+>>> PAN_CAMERA_TO_POSITION: 2500 3738
 Čini se da je neki ljutko sa skejtom našao ogradu i prisvojio je sebi.
 Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i riječitost, čini se!
+>>> RESET_CAMERA
 -> DONE
 
 = pan_to_fence_in_smog_town
 // PAN TO SMOG ZONE:
+>>> PAN_CAMERA_TO_POSITION: 1439 1768
 Moj magični vid jedva može vidjeti kroz sav ovaj smog!
 Ova regija se čini vrlo opasnom i mislim da ćeš u njoj morati nositi raznobojnu odjeću da te auti bolje vide!
 I ne samo to...
 Tamo je sve puno duhova!!!!!
+>>> RESET_CAMERA
 -> DONE
 
 = pan_to_fence_at_turbine
 // PAN TO WIND TURBINE:
+>>> PAN_CAMERA_TO_POSITION: 1047 700
 Hmm... komad ograde pao je blizu stare zračne turbine na vrhu planine...
 To je prilično daleko... Ali mislim da će ti neko motorno vozilo pomoći da dođeš do gore.
 Mlad si i pametan, otkrit ćeš već put do gore!
+>>> RESET_CAMERA
 -> DONE
 
 = pan_to_love_interest
 // PAN TO LOVE INTEREST
+>>> PAN_CAMERA_TO_POSITION: 2300 2871
 Da vidimo što najviše voliš...
 Opa! Kakvo ljupko čudovište! Nemoj zaboraviti: moraš izraziti svoje osjećaje!
 Ja sam to zaboravio previše puta i sada sam vrlo usamljeni čarobnjak.
+>>> RESET_CAMERA
 -> DONE
 
 = use_item
@@ -704,8 +706,10 @@ Stavi pravo čudovište na pravo mjesto! I čini to često!
 	Da ne spominjem povećanu sigurnost!
 	-> sorting_minigame_solved
 = sorting_minigame_solved
-~ seat_sorting_completed = 1
 >>> END_MINIGAME
+Here take this pump as a reward for your help!
+>>> ADD_ITEM: pump
+~ seat_sorting_completed = 1
 -> DONE
 
 = after_solving_enigma
@@ -830,9 +834,9 @@ Nažalost, nemam više pojaseva za putnike tako da...
 
 = taking_to_mountain
 Možeš me odvesti do planine?
-+ [Take me that mountain!]
-	OK!
++ [Take me to the mountain!]
 	>>> TELEPORT_PLAYER: taxi_at_mountain
+	OK!
 	Zabavi se!
 	-> DONE
 + [Ništa sada, možda poslije...]
@@ -868,8 +872,8 @@ Nije mi to interesantno.
 
 Želiš nazad u park?
 + [Da!]
-	OK! Idemo!
 	>>> TELEPORT_PLAYER: taxi_at_park
+	OK! Idemo!
 	Zabavi se!
 	-> DONE
 + [Ne!]
@@ -919,10 +923,10 @@ Nisi smeće! Bah!
 = appease_canster
 
 >>> REMOVE_ITEM: {used_item}
->>> SET_STATE: {interact_id} is_appeased 1
+>>> SET_STATE_PROPERTY: {interact_id} is_appeased 1
 {received_pump_from_canster:
-	0: -> thanks_for_trash
-	0: -> give_a_pump
+	- 1: -> thanks_for_trash
+	- 0: -> give_a_pump
 }
 
 = thanks_for_trash
@@ -935,6 +939,7 @@ Njam njam, hvala na smeću!
 Zauzvrat, evo tebi nešto što je netko bacio, a uopće nije smeće!
 Zapravo je korisna pumpa za bicikl!
 >>> ADD_ITEM: pump
+~ received_pump_from_canster = 1
 -> DONE
 
 === conv_canster_appeased ===

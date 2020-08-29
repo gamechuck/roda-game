@@ -16,8 +16,6 @@ var _overlapping_character : class_character = null
 var _overlapping_pickup : class_pickup = null
 var _overlapping_with_gummy := false
 
-var _is_inside_cutscene := false
-
 var _target_entity : CollisionObject2D = null
 
 onready var _interact_area := $InteractArea
@@ -25,8 +23,8 @@ onready var _tween := $Tween
 
 signal nav_path_requested()
 
-signal dialogue_started()
-signal cutscene_started()
+signal dialogue_requested()
+signal cutscene_requested()
 
 func _ready():
 	Flow.player = self
@@ -35,43 +33,29 @@ func _ready():
 	register_state_property("on_bike", TRANSPORT_MODE.FOOT)
 	register_state_property("wearing_color", CLOTHING.PLAIN)
 
-	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
-	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
+	#var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
+	#_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
 
-	_error = _interact_area.connect("area_entered", self, "_on_area_entered")
+	var _error = _interact_area.connect("area_entered", self, "_on_area_entered")
 
-	_error = connect("dialogue_started", Director, "_on_dialogue_started")
-	_error = connect("cutscene_started", Director, "play_cutscene")
+	_error = connect("dialogue_requested", Director, "_on_dialogue_requested")
+	_error = connect("cutscene_requested", Director, "_on_cutscene_requested")
 
-	_error = Director.connect("dialogue_ended", self, "_on_dialogue_ended")
-	_error = Director.connect("cutscene_ended", self, "_on_cutscene_ended")
+	_error = Director.connect("revoke_player_autonomy", self, "_on_autonomy_revoked")
+	_error = Director.connect("grant_player_autonomy", self, "_on_autonomy_granted")
 
 	update_animation()
 
-func _on_dialogue_ended():
-	if not _is_inside_cutscene:
-		# Enable the player again!
-		set_physics_process(true)
-		set_process_unhandled_input(true)
-
-func _on_cutscene_ended():
-	_is_inside_cutscene = false
-	_on_dialogue_ended()
-
-func start_dialogue(entity : CollisionObject2D, item_id : String = ""):
+func _on_autonomy_revoked():
 	set_physics_process(false)
 	set_process_unhandled_input(false)
 
-	emit_signal("dialogue_started", entity, item_id)
+	# On extra animation update to force idle!
+	update_animation()
 
-func start_cutscene(cutscene_id : String):
-	if not _is_inside_cutscene:
-		set_physics_process(false)
-		set_process_unhandled_input(false)
-
-		emit_signal("cutscene_started", [cutscene_id])
-
-		_is_inside_cutscene = true
+func _on_autonomy_granted():
+	set_physics_process(true)
+	set_process_unhandled_input(true)
 
 func _physics_process(_delta):
 	if not Flow.is_in_editor_mode:
@@ -107,9 +91,9 @@ func _unhandled_input(event):
 ## Inputs that are NOT handled by any of the UI elements!
 	if event.is_action_pressed("interact"):
 		if _overlapping_character:
-			start_dialogue(_overlapping_character)
+			emit_signal("dialogue_requested", _overlapping_character)
 		elif _overlapping_pickup:
-			start_dialogue(_overlapping_pickup)
+			emit_signal("dialogue_requested", _overlapping_pickup)
 			Flow.inventory.add_item(_overlapping_pickup)
 
 	if event.is_action_pressed("toggle_inventory"):
@@ -136,10 +120,10 @@ func process_interaction(active_entity : CollisionObject2D):
 	elif Flow.active_item != null:
 		var item : class_item_state = Flow.active_item
 		var item_id = item.id
-		start_dialogue(active_entity, item_id)
+		emit_signal("dialogue_requested", active_entity, item_id)
 		Flow.inventory.reset_slots()
 	else:
-		start_dialogue(active_entity)
+		emit_signal("dialogue_requested", active_entity)
 		if active_entity is class_pickup:
 			Flow.inventory.add_item(active_entity)
 
@@ -150,8 +134,7 @@ func _on_interact_area_entered(area):
 	if area.get_parent() is class_character:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
-		if _overlapping_character == _target_entity or \
-		_overlapping_character is class_canster and _overlapping_character.state == class_canster.STATE.ANGRY:
+		if _overlapping_character == _target_entity:
 			process_interaction(_overlapping_character)
 			_target_entity = null
 			nav_path = PoolVector2Array()
@@ -190,13 +173,22 @@ func _on_interact_area_exited(area):
 func _on_area_entered(area):
 # Stuff that should really be precise should be added here!
 	if area is class_car:
-		start_cutscene("respawn")
+		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
 	elif area is class_skater:
-		start_cutscene("respawn")
+		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
+	elif area is class_canster:
+		print("CANSTER")
+		if area.get_state_property("is_appeased") == 0:
+			# The canster is angry!!!
+			process_interaction(area)
+			_target_entity = null
+			nav_path = PoolVector2Array()
+			emit_signal("cutscene_requested", "respawn")
+			print("Player got eaten by a canster!")
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.player_move_speed
@@ -429,94 +421,3 @@ var state_machine := {
 		}
 	}
 }
-
-func respawn():
-	set_process_unhandled_input(false)
-
-	var anim_sprite := $AnimatedSprite
-
-	# Position is taken here to acount for previous cutscenes!!!
-	_tween.interpolate_property(anim_sprite, "position", anim_sprite.position, anim_sprite.position + Vector2(0, -200), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
-	_tween.interpolate_property(anim_sprite, "rotation_degrees", anim_sprite.rotation_degrees, 0, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	_tween.interpolate_property(self,"position", position, respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(anim_sprite, "position", anim_sprite.position + Vector2(0, -200), Vector2(0, -200), 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(anim_sprite, "position", Vector2(0, -200), Vector2.ZERO, 1.0, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	set_process_unhandled_input(true)
-
-func teleport(target_position : Vector2):
-	set_process_unhandled_input(false)
-
-	Flow.transitions_UI.fade_to_opaque()
-	yield(Flow.transitions_UI, "transition_completed")
-
-	Flow.dialogue_UI.update_dialogue()
-	_tween.interpolate_property(self, "position", position, target_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	Flow.transitions_UI.fade_to_transparent()
-	yield(Flow.transitions_UI, "transition_completed")
-
-	set_process_unhandled_input(true)
-
-func chew_on_player(canster : class_canster):
-
-	set_process_unhandled_input(false)
-
-	var target_position = canster.position - position
-	target_position.y -= 40
-	_tween.interpolate_property($AnimatedSprite, "position", Vector2.ZERO, target_position, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.interpolate_property($AnimatedSprite, "rotation_degrees", $AnimatedSprite.rotation_degrees, 180, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	bias = target_position.y
-	_tween.interpolate_method(self, "_sinusoidal_movement", 0, 4, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	Flow.dialogue_UI.update_dialogue()
-
-	set_process_unhandled_input(true)
-
-func drop_player(taxi : class_character):
-	set_process_unhandled_input(false)
-
-	$AnimatedSprite.visible = false
-	_tween.interpolate_property(taxi.get_node("AnimatedSprite"), "position", Vector2.ZERO, Vector2(0, -100), 2.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	$AnimatedSprite.visible = true
-	_tween.interpolate_property($AnimatedSprite, "rotation_degrees", 0, 90, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(taxi.get_node("AnimatedSprite"), "position", Vector2(0, -100), Vector2(-400, -100), 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	taxi.get_node("AnimatedSprite").position = Vector2(600, -100)
-	_tween.interpolate_property(taxi.get_node("AnimatedSprite"),"position",Vector2(600, -100),Vector2(0, -100), 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	_tween.interpolate_property(taxi.get_node("AnimatedSprite"),"position",Vector2(0, -100),Vector2.ZERO, 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-	
-	_tween.interpolate_property($AnimatedSprite, "rotation_degrees", 90, 0, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
-
-	Flow.dialogue_UI.update_dialogue()
-	set_process_unhandled_input(true)
-
-var bias : float = 0.0
-
-func _sinusoidal_movement(time : float):
-	var amplitude := 10
-	$AnimatedSprite.position.y = amplitude*sin(2*PI*1*time) + bias

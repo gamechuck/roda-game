@@ -8,11 +8,19 @@ var active_minigame : Control = null
 
 var is_waiting_for_choice := false
 var dialogue_in_progress := false
+var cutscene_in_progress := false
 
-signal dialogue_ended()
-signal cutscene_ended()
+var dialogue_can_be_updated := true
 
-func _on_dialogue_started(node : Node2D, item_id : String = ""):
+signal revoke_player_autonomy()
+signal grant_player_autonomy()
+
+signal cutscene_completed()
+
+func _on_dialogue_requested(node : Node2D, item_id : String = ""):
+	# First stop the player autonomy!
+	emit_signal("revoke_player_autonomy")
+
 	if item_id.empty():
 		story.variables_state.set("interact_id", node.state.id)
 		story.variables_state.set("conv_type", 0)
@@ -22,6 +30,38 @@ func _on_dialogue_started(node : Node2D, item_id : String = ""):
 		story.variables_state.set("conv_type", 1)
 	interact_node = node
 	dialogue_in_progress = _start_dialogue()
+
+func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) -> void:
+	if not cutscene_in_progress:
+		# First stop the player autonomy!
+		emit_signal("revoke_player_autonomy")
+		cutscene_in_progress = true
+
+		match cutscene_id:
+			"respawn":
+				respawn()
+				yield(self, "cutscene_completed")
+			"teleport":
+				var character_id : String = argument_values[0]
+
+				var character = State.get_character_by_id(character_id)
+				if character:
+					var object : class_character = character.object
+					var target_position : Vector2 = object.position
+					target_position += Vector2(0, -50)
+
+					teleport(target_position)
+					yield(self, "cutscene_completed")
+			"drop_player":
+				if interact_node is class_character:
+					drop_player(interact_node)
+					yield(self, "cutscene_completed")
+			_:
+				pass
+
+		cutscene_in_progress = false
+		if not dialogue_in_progress:
+			emit_signal("grant_player_autonomy")
 
 #func start_knot_dialogue(knot : String) -> bool:
 #	story.variables_state.set("conv_type", 0)
@@ -56,10 +96,12 @@ func _start_dialogue() -> bool:
 		return false
 
 func _on_dialogue_updated() -> void:
-	dialogue_in_progress = update_dialogue()
+	if dialogue_can_be_updated:
+		dialogue_in_progress = update_dialogue()
 
-func _on_choice_button_pressed(choice_index : int = -1) -> void: 
-	dialogue_in_progress = update_dialogue(choice_index)
+func _on_choice_button_pressed(choice_index : int = -1) -> void:
+	if dialogue_can_be_updated:
+		dialogue_in_progress = update_dialogue(choice_index)
 
 func update_dialogue(choice_index : int = -1) -> bool:
 	if is_waiting_for_choice:
@@ -108,7 +150,8 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 func _stop_dialogue() -> void:
 	Flow.dialogue_UI.hide()
-	emit_signal("dialogue_ended")
+	if not cutscene_in_progress:
+		emit_signal("grant_player_autonomy")
 
 func get_state_property(character_id : String, property : String) -> int:
 	var character : class_character_state = State.get_character_by_id(character_id)
@@ -195,16 +238,22 @@ func execute_command(raw_text : String) -> bool:
 	else:
 		return true
 
-func pan_camera(argument_values : Array):
-	var mask : String = argument_values[0]
-	var target_object = get_tree().root.find_node(mask, true, false)
+func pan_camera_to_position(argument_values : Array):
+	var x_pos : int = argument_values[0]
+	var y_pos : int = argument_values[1]
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-	if target_object != null:
-		var target_position : Vector2 = target_object.position
-		target_position -= Flow.player.position
+	
+	var target_position : Vector2 = Vector2(x_pos, y_pos)
+	target_position -= Flow.player.position
 
-		_tween.interpolate_property(game_camera, "position", game_camera.position, target_position, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		_tween.start()
+	_tween.interpolate_property(game_camera, "position", game_camera.position, target_position, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	_tween.start()
+
+func reset_camera(_argument_values : Array):
+	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
+
+	_tween.interpolate_property(game_camera, "position", game_camera.position, Vector2.ZERO, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	_tween.start()
 
 func zoom_camera(target_zoom : Vector2):
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
@@ -225,14 +274,12 @@ func show(argument_values):
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
 		target_object.visible = true
-		target_object.set("collision_layer", 1)
 
 func hide(argument_values):
 	var mask : String = argument_values[0]
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
 		target_object.visible = false
-		target_object.set("collision_layer", 0)
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
@@ -252,44 +299,24 @@ func update_dialogue_UI(argument_values):
 	var character_id : String = argument_values[0]
 	Flow.dialogue_UI.update_UI(character_id)
 
-func play_cutscene(argument_values):
+func _start_cutscene(argument_values : Array) -> void:
 	var cutscene_id : String = argument_values[0]
-	match cutscene_id:
-		"chew_on_player":
-			var canster : class_canster = Flow.dialogue_UI.interact_node
-			Flow.player.chew_on_player(canster)
-		"drop_player":
-			var taxi : class_character = Flow.dialogue_UI.interact_node
-			Flow.player.drop_player(taxi)
-		"respawn":
-			respawn()
+	_on_cutscene_requested(cutscene_id)
 
-func respawn_player(_argument_values):
-	Flow.player.respawn()
+func respawn_player(_argument_values : Array) -> void:
+	_on_cutscene_requested("respawn")
 
-func teleport_player(argument_values):
-	var character_id : String = argument_values[0]
-	var player : class_player = Flow.player
-
-	var character = State.get_character_by_id(character_id)
-	if character:
-		var object : class_character = character.object
-		var target_position : Vector2 = object.position
-		target_position += Vector2(0, -50)
-		player.teleport(target_position)
-
-func fade_to_opaque(argument_values : Array):
-	var duration : float = argument_values[0]
-	Flow.transitions_UI.fade_to_opaque(duration)
-
-func fade_to_transparent(argument_values : Array):
-	var duration : float = argument_values[0]
-	Flow.transitions_UI.fade_to_transparent(duration)
+func teleport_player(argument_values : Array) -> void:
+	_on_cutscene_requested("teleport", argument_values)
 
 var external_setters : Dictionary = {
-	"PAN_CAMERA" : {
-		"callback": funcref(self, "pan_camera"),
-		"argument_types": [TYPE_STRING]
+	"PAN_CAMERA_TO_POSITION" : {
+		"callback": funcref(self, "pan_camera_to_position"),
+		"argument_types": [TYPE_INT, TYPE_INT]
+	},
+	"RESET_CAMERA" : {
+		"callback": funcref(self, "reset_camera"),
+		"argument_types": []
 	},
 	"ADD_ITEM" : {
 		"callback": funcref(self, "add_item"),
@@ -324,7 +351,7 @@ var external_setters : Dictionary = {
 		"argument_types": [TYPE_STRING]
 	},
 	"PLAY_CUTSCENE" : {
-		"callback": funcref(self, "play_cutscene"),
+		"callback": funcref(self, "_start_cutscene"),
 		"argument_types": [TYPE_STRING]
 	},
 	"RESPAWN_PLAYER" : {
@@ -338,7 +365,7 @@ var external_setters : Dictionary = {
 }
 
 ### CUTSCENES ###
-func respawn():
+func respawn() -> void:
 	var player : class_player = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 
@@ -354,4 +381,91 @@ func respawn():
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	
-	emit_signal("cutscene_ended")
+	emit_signal("cutscene_completed")
+
+func teleport(target_position : Vector2) -> void:
+	var player : class_player = Flow.player
+
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	_tween.interpolate_property(player, "position", player.position, target_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
+func drop_player(taxi : class_character):
+	var player : class_player = Flow.player
+	var anim_sprite := player.get_node("AnimatedSprite")
+	var taxi_anim_sprite := taxi.get_node("AnimatedSprite")
+	
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+
+	anim_sprite.visible = false
+	_tween.interpolate_property(taxi_anim_sprite, "position", Vector2.ZERO, Vector2(0, -100), 2.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	anim_sprite.visible = true
+	_tween.interpolate_property(anim_sprite, "rotation_degrees", 0, 90, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(taxi_anim_sprite, "position", Vector2(0, -100), Vector2(-400, -100), 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	taxi_anim_sprite.position = Vector2(600, -100)
+	_tween.interpolate_property(taxi_anim_sprite,"position",Vector2(600, -100),Vector2(0, -100), 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_tween.interpolate_property(taxi_anim_sprite,"position",Vector2(0, -100),Vector2.ZERO, 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+	
+	_tween.interpolate_property(anim_sprite, "rotation_degrees", 90, 0, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	dialogue_in_progress = update_dialogue()
+	Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
+func chew_on_player(canster : class_canster):
+	var player : class_player = Flow.player
+	var anim_sprite := player.get_node("AnimatedSprite")
+
+	var target_position = canster.position - player.position
+	target_position.y -= 40
+	_tween.interpolate_property($AnimatedSprite, "position", Vector2.ZERO, target_position, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.interpolate_property($AnimatedSprite, "rotation_degrees", $AnimatedSprite.rotation_degrees, 180, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	bias = target_position.y
+	_tween.interpolate_method(self, "_sinusoidal_movement", 0, 4, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	Flow.dialogue_UI.update_dialogue()
+
+	emit_signal("cutscene_completed")
+
+	set_process_unhandled_input(true)
+
+var bias : float = 0.0
+
+func _sinusoidal_movement(time : float):
+	var amplitude := 10
+	$AnimatedSprite.position.y = amplitude*sin(2*PI*1*time) + bias

@@ -7,6 +7,10 @@
         {
             "id": "bike",
             "amount": 1
+        },
+        {
+            "id": "trash_bag",
+            "amount": 1
         }
     ],
     "characters": [

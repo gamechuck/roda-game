@@ -80,12 +80,13 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 24, 24 )
+extents = Vector2( 60, 60 )
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 14, 8 )
 
 [node name="Canster" instance=ExtResource( 1 )]
+collision_layer = 2147483649
 script = ExtResource( 4 )
 id = "canster"
 

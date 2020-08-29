@@ -17,6 +17,6 @@ func hide():
 
 func _on_mouse_pressed(component_rect : class_highlight_rect):
 	var index : int = component_rect.type
-	if Flow.dialogue_UI.is_waiting_for_choice:
-		Flow.player.is_in_dialogue = Flow.dialogue_UI.update_dialogue(index)
+	if Director.is_waiting_for_choice:
+		Director._on_choice_button_pressed(index)
 	if ConfigData.verbose_mode : print("BIKE REPAIR - pressed {0}".format([component_rect.type]))

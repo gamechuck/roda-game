@@ -78,8 +78,8 @@
                     200
                 ],
                 "position": [
-                    326,
-                    130
+                    285,
+                    120
                 ],
                 "texture": "res://roda-assets/portraits/taxi.png"
             }
@@ -93,8 +93,8 @@
                     200
                 ],
                 "position": [
-                    326,
-                    130
+                    285,
+                    120
                 ],
                 "texture": "res://roda-assets/portraits/taxi.png"
             }
@@ -103,8 +103,38 @@
             "name": "Bus",
             "knot": "conv_bus"
         },
-        "canster": {
+        "canster_left": {
             "name": "Canster",
+            "knot": "conv_canster",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/canster.png"
+            }
+        },
+        "canster_middle": {
+            "name": "Canster",
+            "knot": "conv_canster",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/canster.png"
+            }
+        },
+        "canster_right": {
+            "name": "Cansterino",
             "knot": "conv_canster",
             "portrait": {
                 "size": [

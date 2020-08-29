@@ -28,7 +28,7 @@ margin_bottom = 3.0
 [node name="DialogueUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {

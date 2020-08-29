@@ -23,7 +23,7 @@
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=24]
 [ext_resource path="res://roda-assets/UI/SeatSorting/windshield.png" type="Texture" id=25]
 
-[node name="CarSeatBeltUI" type="Control"]
+[node name="SeatSortingUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -78,6 +78,7 @@ texture_disabled = ExtResource( 20 )
 [node name="Adult" parent="VBoxContainer/HBoxContainer/VBoxLeft" instance=ExtResource( 10 )]
 margin_top = 85.0
 margin_bottom = 166.0
+type = 3
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 9 )
 texture_disabled = ExtResource( 19 )

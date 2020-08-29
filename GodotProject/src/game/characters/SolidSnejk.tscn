@@ -12,7 +12,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 20, 20 )
+extents = Vector2( 24, 24 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 6 )
@@ -22,7 +22,7 @@ id = "solid_snejk"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-offset = Vector2( 2, -12 )
+offset = Vector2( 6, -21 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 position = Vector2( 0, -10 )
