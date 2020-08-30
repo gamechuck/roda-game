@@ -42,7 +42,7 @@ msgid "BACK"
 msgstr "Nazad"
 
 msgid "DRIVE_MESSAGE"
-msgstr "Check arrangement..."
+msgstr "Raspored sjedenja..."
 
 # CHARACTER NAMES
 msgid "Solid Snejk"

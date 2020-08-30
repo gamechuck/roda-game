@@ -14,7 +14,7 @@ func load_controlsJSON() -> int:
 			controls_dictionary = Flow.load_JSON(Flow.CONTROLS_PATH)
 		error += _create_controls(controls_dictionary)
 	else:
-		if ConfigData.verbose_mode: print("No user-modified are defined, loading default controls from '{0}' instead.".format([Flow.DEFAULT_CONTROLS_PATH]))
+		if ConfigData.verbose_mode: print("No user-modified are defined, loading default controls from '{0}' instead.".format([Flow.CONTROLS_PATH]))
 		var controls_dictionary = Flow.load_JSON(Flow.CONTROLS_PATH)
 		error += _create_controls(controls_dictionary)
 	return error
