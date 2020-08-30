@@ -1,5 +1,10 @@
 {
-    "items": [
+    "items": [{
+        "id": "broken_bike"
+    },
+    {
+        "id": "pump"
+    }
     ],
     "characters": [
         {

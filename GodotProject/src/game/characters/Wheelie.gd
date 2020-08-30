@@ -18,7 +18,7 @@ var target_points : PoolVector2Array = [
 	Vector2(3391, 2072), 
 	Vector2(3877, 2043),
 	Vector2(3825, 1789),
-	Vector2(3825, 1889)
+	Vector2(3825, 1799)
 	]
 
 var current_idx := 0

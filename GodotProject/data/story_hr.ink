@@ -19,6 +19,7 @@ VAR watto_question_solved = 0
 // SolidSlug
 VAR figured_out_issue_with_bike = 0
 VAR gave_back_bike = 0
+VAR take_bike_allowed = 0
 
 // BrokenBike
 VAR fixed_bike = 0
@@ -37,7 +38,7 @@ VAR seat_sorting_completed = 0
 VAR turbine_fixed = 0
 
 // Mr. Smog
-VAR smog_defeated = 0
+VAR mr_smog_defeated = 0
 
 // Canster
 VAR received_pump_from_canster = 0
@@ -112,7 +113,7 @@ AHAHAHAHA!!!
 
 = interact
 
-{smog_defeated:
+{mr_smog_defeated:
     - 1: -> second_ending
 }
 
@@ -212,11 +213,11 @@ Ne želim to uzeti...
 }
 
 {gave_back_bike:
-	- true : -> broken_bike
+	- true : -> bike_is_broken
 }
 
 {has_item("broken_bike"):
-	- true: -> has_bike
+	- true: -> has_broken_bike
 	- false: -> intro
 }
 
@@ -227,15 +228,15 @@ Ah, a ja sam zagubio svoj bicikl...
 Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 -> DONE
 
-= has_bike
+= has_broken_bike
 
 Hvala što s mi našao bicikl!
 ~ gave_back_bike = 1
 >>> REMOVE_ITEM: broken_bike
->>> SHOW: returned_bike
--> broken_bike
+>>> SHOW: ReturnedBike
+-> bike_is_broken
 
-= broken_bike
+= bike_is_broken
 
 Ah, čini se da nešto ne valja s mojim biciklom...
 Šteta... Možeš li mi pomoći otkriti što?
@@ -258,13 +259,15 @@ Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 Hvala što si popravio moj bicikl!
 Možete koristiti moj bicikl ako želite!
 Samo ga uzmite i upotrijebite na sebi bilo kada za vožnju bicikla!
+~ take_bike_allowed = 1
 -> DONE
 
 = use_item
 
 {used_item:
 	- "pump": -> pump
-	- "bike": -> has_bike
+	- "broken_bike": -> has_broken_bike
+	- "bike": -> bike
 	- "fence": -> fence
 	- else: -> default
 }
@@ -274,6 +277,10 @@ Samo ga uzmite i upotrijebite na sebi bilo kada za vožnju bicikla!
 	- true: -> has_pump
 	- false: -> default
 }
+-> DONE
+
+= bike
+Zasad možeš zadržati moj bicikl!
 -> DONE
 
 = fence
@@ -505,7 +512,7 @@ Zašto se prometni znakovi moraju poštivati?
 Dobro ti ide odgovaranje na moje zagonetke!
 { picked_up_fence_in_smog_town && picked_up_fence_at_turbine && got_fence_from_wheelie && got_fence_from_helter_skelter:
 	- 0: -> show_missing_fence_locations
-	- 1: -> pan_to_love_interest
+	- else: -> pan_to_love_interest
 }
 
 // Here the lizard will show you (the camera will pan) to one of the locations of the fence.
@@ -514,13 +521,14 @@ Dobro ti ide odgovaranje na moje zagonetke!
 = show_missing_fence_locations
 Hmmm, vidim sada... Ti tragaš za ogradom, koju želiš popraviti da bude kao nekad!
 Da vidimo...
+= shuffle_fence_location
 {shuffle:
 - {not got_fence_from_wheelie: -> pan_to_house }
 - {not got_fence_from_helter_skelter: -> pan_to_helter_skelter }
 - {not picked_up_fence_at_turbine: -> pan_to_fence_at_turbine }
 - {not picked_up_fence_in_smog_town: -> pan_to_fence_in_smog_town }
 }
--> DONE
+-> shuffle_fence_location
 
 = pan_to_house
 // PAN TO HOUSE:
@@ -602,6 +610,10 @@ Makni mi to s očiju!
 
 = interact
 
+{fixed_bike:
+	- 1: -> tyr_taking_fixed_bike
+}
+
 {figured_out_issue_with_bike:
 	- false : -> check_bike
 }
@@ -656,6 +668,23 @@ Tko bi mi mogao pomoći?
 Čini se da je problem samo u ispuhanoj gumi...
 Trebamo to popraviti!
 >>> END_MINIGAME
+-> DONE
+
+= tyr_taking_fixed_bike
+Mogao bi mi bicikl!
+{take_bike_allowed:
+	- 0: -> first_ask_nicely
+	- else: -> take_fixed_bike
+}
+
+= first_ask_nicely
+Bolje da pitam Solid Slug prije nego što ga uzmem...
+-> DONE
+
+= take_fixed_bike
+Solid Slug je rekao da to mogu podnijeti!
+>>> HIDE: ReturnedBike
+>>> ADD_ITEM: bike
 -> DONE
 
 = use_item
@@ -800,7 +829,8 @@ Opet ti, što hoćeš?
 -> choices
 
 = question_solved
-Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. Tko bi rekao!
+Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
+Tko bi rekao!
 -> DONE
 
 = use_item
@@ -851,7 +881,7 @@ Nažalost, nemam više pojaseva za putnike tako da...
 
 = taking_to_mountain
 Možeš me odvesti do planine?
-+ [Take me to the mountain!]
++ [Odvedi me u planinu]
 	>>> TELEPORT_PLAYER: taxi_at_mountain
 	OK!
 	Zabavi se!
@@ -928,7 +958,7 @@ Nisi smeće! Bah!
 = use_item
 
 {
-	- used_item == "trash_sock" or used_item == "trash_bag" or used_item == "trash_cup": -> appease_canster
+	- used_item == "trash_bottle" or used_item == "trash_bag" or used_item == "trash_cup": -> appease_canster
 	- else: -> interact
 }
 
@@ -969,7 +999,7 @@ Hvala na smeću!
 = use_item
 
 {
-	- used_item == "trash_sock" or used_item == "trash_bag" or used_item == "trash_cup": -> canster_cant_even
+	- used_item == "trash_bottle" or used_item == "trash_bag" or used_item == "trash_cup": -> canster_cant_even
 	- else: -> default
 }
 
@@ -1047,6 +1077,7 @@ Idem vidjeti što mi rade mama i tata doma dok mene nema!
 Hej, čini se da je na krovu ostao otpuhan dio ograde.
 Slobodno ga uzmi, pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
+~ got_fence_from_wheelie = 1
 ~ talked_to_wheelie_at_house = 1
 -> DONE
 
@@ -1343,7 +1374,7 @@ Zahvaljujemo na poklonu!
 
 {get_state_property("mr_smog", "is_defeated"):
 	- 0: -> angry_mr_smog
-	- 1: -> defeated_mr_smog
+	- 1: -> happy_mr_smog
 }
 
 = angry_mr_smog
@@ -1353,13 +1384,26 @@ Sto mi smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> RESET_CAMERA
 -> DONE
 
-= defeated_mr_smog
+= happy_mr_smog
+{mr_smog_defeated:
+	- 0: -> intro
+	- else: -> main
+}
+
+= intro
+~ mr_smog_defeated = 1
 >>> UPDATE_UI: happy_tree
 >>> PAN_CAMERA_TO_POSITION: 736 2782
 Ajme, sav me smog napustio!
 Sada sam ponovno sretno drvo!
 Idem nazad u svoj rodni park!
+>>> SHOW: HappyTree
 >>> RESET_CAMERA
+-> DONE
+
+= main
+>>> UPDATE_UI: happy_tree
+Sam ponovno sretno drvo!
 -> DONE
 
 === conv_broken_bike ===

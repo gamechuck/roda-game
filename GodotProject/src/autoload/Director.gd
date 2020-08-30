@@ -287,13 +287,13 @@ func show(argument_values):
 	var mask : String = argument_values[0]
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
-		target_object.visible = true
+		target_object.set_visible(true)
 
 func hide(argument_values):
 	var mask : String = argument_values[0]
 	var target_object = get_tree().root.find_node(mask, true, false)
 	if target_object != null:
-		target_object.visible = false
+		target_object.set_visible(false)
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
@@ -398,7 +398,7 @@ func respawn() -> void:
 	_tween.interpolate_property(anim_sprite, "position", Vector2(0, -200), Vector2.ZERO, 1.0, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	emit_signal("cutscene_completed")
 
 func teleport(target_position : Vector2) -> void:
@@ -406,6 +406,7 @@ func teleport(target_position : Vector2) -> void:
 
 	# Block the dialogue from updating
 	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
 
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
@@ -417,6 +418,8 @@ func teleport(target_position : Vector2) -> void:
 	Flow.transitions_UI.fade_to_transparent()
 	yield(Flow.transitions_UI, "transition_completed")
 
+	dialogue_in_progress = update_dialogue()
+	Flow.dialogue_UI.show()
 	dialogue_can_be_updated = true
 
 	emit_signal("cutscene_completed")
@@ -425,7 +428,7 @@ func drop_player(taxi : class_character):
 	var player : class_player = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var taxi_anim_sprite := taxi.get_node("AnimatedSprite")
-	
+
 	# Block the dialogue from updating
 	dialogue_can_be_updated = false
 	Flow.dialogue_UI.hide()
@@ -594,8 +597,8 @@ func intro_cutscene():
 	# Everything flies away!
 	_tween.interpolate_property(fence_front,"position:y", fence_front.position.y, fence_front.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(fence_back,"position:y", fence_back.position.y, fence_back.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(fence_left,"position:x", fence_left.position.x, fence_left.position.x - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(fence_right,"position:x", fence_right.position.x, fence_right.position.x + 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_left,"position:x", fence_left.position.x, fence_left.position.x - 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_right,"position:x", fence_right.position.x, fence_right.position.x + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(ball,"position:x", ball.position.x, ball.position.x + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(bike,"position:y", bike.position.y, bike.position.y + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()

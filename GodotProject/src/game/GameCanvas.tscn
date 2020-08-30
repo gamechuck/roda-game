@@ -147,13 +147,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 130, 60 )
 
 [sub_resource type="NavigationPolygon" id=12]
@@ -168,7 +168,6 @@ __meta__ = {
 }
 
 [node name="SmogSprite" type="Sprite" parent="."]
-visible = false
 material = SubResource( 4 )
 position = Vector2( 778.484, 2422.09 )
 scale = Vector2( 40, 40 )
@@ -220,7 +219,7 @@ format = 1
 tile_data = PoolIntArray( 983129, 2, 0, 1048665, 1, 0, 1114201, 1, 0, 1179737, 1, 0, 1245273, 1, 0, 1310809, 1, 0, 1376345, 1, 0, 1441881, 0, 0 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 2278.33, 2240.24 )
+position = Vector2( 960.438, 2297.6 )
 id = "player"
 
 [node name="Intro" type="YSort" parent="YSort"]
@@ -418,7 +417,7 @@ position = Vector2( 2299.37, 2870.98 )
 position = Vector2( 2178.74, 2160.58 )
 
 [node name="Copper" parent="YSort/Characters" instance=ExtResource( 10 )]
-position = Vector2( 1792.79, 2368.36 )
+position = Vector2( 1794.05, 2290.83 )
 
 [node name="HelterSkelter" parent="YSort/Characters" instance=ExtResource( 9 )]
 position = Vector2( 2499.86, 3738.54 )
@@ -538,7 +537,7 @@ position = Vector2( 1180.11, 1793.16 )
 extents = Vector2( 130, 60 )
 
 [node name="CopperToSmog" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 1698.22, 2364.98 )
+position = Vector2( 1679.42, 2360.24 )
 extents = Vector2( 130, 60 )
 
 [node name="ParkingToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
@@ -546,7 +545,7 @@ position = Vector2( 3228.31, 3065.67 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
-shape = SubResource( 9 )
+shape = SubResource( 17 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkingToBike/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( -113.569, 55.2981 )
@@ -581,7 +580,7 @@ position = Vector2( 2590.04, 3004.68 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 10 )
+shape = SubResource( 18 )
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 32 )]
 position = Vector2( 114.859, -44.3281 )
@@ -614,7 +613,7 @@ extents = Vector2( 130, 60 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 11 )
+shape = SubResource( 19 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( 98.7507, 53.7722 )

@@ -89,4 +89,4 @@ focus_neighbour_bottom = NodePath("../VBoxContainer/ResumeButton")
 focus_next = NodePath("../VBoxContainer/ResumeButton")
 focus_previous = NodePath("../VBoxContainer/SettingsButton")
 size_flags_horizontal = 4
-text = "Quit"
+text = "QUIT"

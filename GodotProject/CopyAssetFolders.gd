@@ -61,6 +61,10 @@ func _init():
 	print("Copying 'controls.json'")
 	dir.copy("controls.json", "{0}/controls.json".format([_globalized_build_path]))
 
+	# Copy the default_controls.json to the build folder.
+	print("Copying 'default_context.json'")
+	dir.copy("default_context.json", "{0}/default_context.json".format([_globalized_build_path]))
+
 	quit()
 
 func _copy_directory_content(current_folder : String):

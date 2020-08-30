@@ -40,8 +40,8 @@
                     200
                 ],
                 "position": [
-                    295,
-                    117
+                    302,
+                    51
                 ],
                 "texture": "res://roda-assets/Portraits/watto.png"
             }
@@ -79,7 +79,7 @@
                     200
                 ],
                 "position": [
-                    285,
+                    312,
                     120
                 ],
                 "texture": "res://roda-assets/Portraits/taxi.png"
