@@ -108,6 +108,9 @@ func _unhandled_input(event):
 		elif Flow.active_pickup != null:
 			process_interaction(Flow.active_pickup)
 			Flow.active_pickup = null
+		elif Flow.player_is_active and Flow.active_item != null:
+			process_interaction(self)
+			Flow.active_pickup = null
 		else:
 			emit_signal("nav_path_requested")
 
@@ -123,7 +126,7 @@ func process_interaction(active_entity : CollisionObject2D):
 		var item_id = item.id
 		emit_signal("dialogue_requested", active_entity, item_id)
 		Flow.inventory.reset_slots()
-	elif active_entity != self:
+	else:
 		emit_signal("dialogue_requested", active_entity)
 		if active_entity is class_pickup:
 			Flow.inventory.add_item(active_entity)

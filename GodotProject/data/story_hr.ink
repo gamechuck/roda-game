@@ -521,14 +521,26 @@ Dobro ti ide odgovaranje na moje zagonetke!
 = show_missing_fence_locations
 Hmmm, vidim sada... Ti tragaš za ogradom, koju želiš popraviti da bude kao nekad!
 Da vidimo...
-= shuffle_fence_location
+- (choice_shuffle)
 {shuffle:
-- {not got_fence_from_wheelie: -> pan_to_house }
-- {not got_fence_from_helter_skelter: -> pan_to_helter_skelter }
-- {not picked_up_fence_at_turbine: -> pan_to_fence_at_turbine }
-- {not picked_up_fence_in_smog_town: -> pan_to_fence_in_smog_town }
+- {got_fence_from_wheelie: 
+	- 0: -> pan_to_house
+	- else: -> choice_shuffle
+	}
+- {got_fence_from_helter_skelter: 
+	- 0:-> pan_to_helter_skelter
+	- else: -> choice_shuffle
+	}
+- {picked_up_fence_at_turbine: 
+	- 0: -> pan_to_fence_at_turbine
+	- else: -> choice_shuffle
+	}
+- {picked_up_fence_in_smog_town: 
+	- 0: -> pan_to_fence_in_smog_town
+	- else: -> choice_shuffle
+	}
 }
--> shuffle_fence_location
+-> DONE
 
 = pan_to_house
 // PAN TO HOUSE:
@@ -1474,6 +1486,7 @@ Greškica.
 	- "trash_bag": -> trash_talk
 	- "trash_cup": -> trash_talk
 	- "trash_bottle": -> trash_talk
+	- "pump": -> pump
 	- else: -> default
 }
 

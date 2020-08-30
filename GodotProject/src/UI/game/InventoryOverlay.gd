@@ -103,7 +103,7 @@ func add_item(pickup : class_pickup) -> void:
 	print(item_id)
 	add_item_by_id(item_id)
 
-	pickup.visible = false
+	pickup.set_visible(false)
 
 func add_item_by_id(item_id : String) -> void:
 	State.add_item_by_id(item_id)

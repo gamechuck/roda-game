@@ -49,6 +49,7 @@ var _game_flow := {
 var _game_state : int = STATE.MENU
 var _story_resource := load("res://addons/inkgd/runtime/story.gd")
 
+var player_is_active := false
 var active_character : class_character = null
 var active_pickup : class_pickup = null
 var active_item : class_item_state = null

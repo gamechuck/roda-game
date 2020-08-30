@@ -71,10 +71,16 @@ func _input(event):
 	if event.is_action_pressed("left_mouse_button"):
 		var extents : Vector2 = _interact_collision_shape_2D.shape.extents
 		var rect : Rect2 = Rect2(position - extents, 2*extents)
-		if rect.has_point(get_global_mouse_position()):
-			Flow.active_character = self
-		# This is a bit filthy, but it does the job!
-		# Otherwise new mouse clicks might still contain the 
-		# now obsolete active_character!
-		elif Flow.active_character == self:
-			Flow.active_character = null
+		if name == "Player":
+			if rect.has_point(get_global_mouse_position()):
+				Flow.player_is_active = true
+			else:
+				Flow.player_is_active = false
+		else:
+			if rect.has_point(get_global_mouse_position()):
+				Flow.active_character = self
+			# This is a bit filthy, but it does the job!
+			# Otherwise new mouse clicks might still contain the 
+			# now obsolete active_character!
+			elif Flow.active_character == self:
+				Flow.active_character = null

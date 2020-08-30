@@ -104,7 +104,7 @@ shader_param/noise_texture = SubResource( 3 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 36, 144 )
 
-[sub_resource type="Shader" id=13]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform sampler2D noise_texture;
@@ -120,43 +120,43 @@ void fragment() {
 	COLOR.a *= amount;
 }"
 
-[sub_resource type="OpenSimplexNoise" id=14]
+[sub_resource type="OpenSimplexNoise" id=7]
 
-[sub_resource type="NoiseTexture" id=15]
+[sub_resource type="NoiseTexture" id=8]
 seamless = true
-noise = SubResource( 14 )
+noise = SubResource( 7 )
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = SubResource( 13 )
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 6 )
 shader_param/amount = 0.0
 shader_param/color = Color( 0.541176, 0.168627, 0.890196, 0.784314 )
-shader_param/noise_texture = SubResource( 15 )
+shader_param/noise_texture = SubResource( 8 )
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="Curve2D" id=10]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1576.4, 3208.52, 0, 0, 0, 0, 1858, 3260, 0, 0, 0, 0, 1580.18, 3328.21, 0, 0, 0, 0, 1861.14, 3388.68, 0, 0, 0, 0, 1576.36, 3454.51, 0, 0, 0, 0, 1849.8, 3505.86, 0, 0, 0, 0, 1582.97, 3572.5, 0, 0, 0, 0, 1841.59, 3637.63, 0, 0, 0, 0, 1576.4, 3208.52 )
 }
 
-[sub_resource type="Curve2D" id=7]
+[sub_resource type="Curve2D" id=11]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2057.62, 3948.2, 0, 0, 0, 0, 2063.55, 3664.78, 0, 0, 0, 0, 2099.59, 3666.78, 0, 0, 0, 0, 2101.03, 3949.09, 0, 0, 0, 0, 2057.92, 3948.2 )
 }
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="NavigationPolygon" id=12]
+[sub_resource type="NavigationPolygon" id=16]
 vertices = PoolVector2Array( 2640.84, 4087.27, 1396.6, 4101.2, 1400.45, 3357.57, 2645.88, 3638.74, 356.168, 167.025, 1429.62, 169.545, 1421.9, 1421.01, 359.107, 2182.9, 3517.81, 1873.54, 3621.25, 1733.96, 4354.63, 1729.2, 4363.27, 3613.2, 3247.54, 3622.18, 3211.62, 3566.06, 1788.7, 1875.92, 2675.4, 3567.13, 316.27, 2371.89, 316.27, 3347.07, 1733.38, 1423.12 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10, 11, 12, 13 ), PoolIntArray( 14, 8, 13, 15, 2, 16, 7 ), PoolIntArray( 2, 17, 16 ), PoolIntArray( 6, 18, 14, 7 ), PoolIntArray( 15, 3, 2 ) ]
 outlines = [ PoolVector2Array( 1788.7, 1875.92, 1733.38, 1423.12, 1421.9, 1421.01, 1429.62, 169.545, 356.168, 167.025, 359.107, 2182.9, 316.27, 2371.89, 316.27, 3347.07, 1400.45, 3357.57, 1396.6, 4101.2, 2640.84, 4087.27, 2645.88, 3638.74, 2675.4, 3567.13, 3211.62, 3566.06, 3247.54, 3622.18, 4363.27, 3613.2, 4354.63, 1729.2, 3621.25, 1733.96, 3517.81, 1873.54 ) ]
@@ -219,13 +219,13 @@ format = 1
 tile_data = PoolIntArray( 983129, 2, 0, 1048665, 1, 0, 1114201, 1, 0, 1179737, 1, 0, 1245273, 1, 0, 1310809, 1, 0, 1376345, 1, 0, 1441881, 0, 0 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 960.438, 2297.6 )
+position = Vector2( 2282, 2247.3 )
 id = "player"
 
 [node name="Intro" type="YSort" parent="YSort"]
 
 [node name="Smog" type="Sprite" parent="YSort/Intro"]
-material = SubResource( 16 )
+material = SubResource( 9 )
 position = Vector2( 2716.44, 624.334 )
 scale = Vector2( 22.8517, 13.1522 )
 z_index = 1
@@ -511,17 +511,17 @@ __meta__ = {
 [node name="SkaterLoop" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
 
 [node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop" index="0"]
-curve = SubResource( 6 )
+curve = SubResource( 10 )
 
 [node name="SkaterLoop2" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
 
 [node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop2" index="0"]
-curve = SubResource( 7 )
+curve = SubResource( 11 )
 
 [node name="SkaterLoop3" parent="YSort/SkaterLoops" instance=ExtResource( 37 )]
 
 [node name="Path2D" parent="YSort/SkaterLoops/SkaterLoop3" index="0"]
-curve = SubResource( 8 )
+curve = SubResource( 12 )
 
 [node name="ZebraCrossings" type="YSort" parent="YSort"]
 __meta__ = {
@@ -545,7 +545,7 @@ position = Vector2( 3228.31, 3065.67 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
-shape = SubResource( 17 )
+shape = SubResource( 13 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkingToBike/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( -113.569, 55.2981 )
@@ -580,7 +580,7 @@ position = Vector2( 2590.04, 3004.68 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 18 )
+shape = SubResource( 14 )
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 32 )]
 position = Vector2( 114.859, -44.3281 )
@@ -613,7 +613,7 @@ extents = Vector2( 130, 60 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 19 )
+shape = SubResource( 15 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( 98.7507, 53.7722 )
@@ -719,7 +719,7 @@ __meta__ = {
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 visible = false
-navpoly = SubResource( 12 )
+navpoly = SubResource( 16 )
 
 [node name="Tween" type="Tween" parent="."]
 
