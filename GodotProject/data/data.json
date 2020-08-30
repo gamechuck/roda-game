@@ -258,6 +258,26 @@
                 ],
                 "texture": "res://roda-assets/portraits/skater.png"
             }
+        },
+        "intro_mr_smog": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_player": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_solid_slug": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_solid_snejk": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_happy_tree": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
         }
     },
     "items": {

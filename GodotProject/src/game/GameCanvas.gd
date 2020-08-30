@@ -7,6 +7,8 @@ onready var _fences := $YSort/Fences
 
 onready var _smog_sprite := $SmogSprite
 
+onready var _copper_blockade_shape := $CopperBlockade/CollisionShape2D
+
 onready var _wheelie := $YSort/Characters/Wheelie
 
 func _ready():
@@ -71,3 +73,9 @@ func _on_turbine_fixed(new_value : int):
 		_smog_sprite.visible = false
 	else:
 		_smog_sprite.visible = true
+
+func _on_player_wearing_color(new_value : int):
+	if new_value:
+		_copper_blockade_shape.disabled = true
+	else:
+		_copper_blockade_shape.disabled = false

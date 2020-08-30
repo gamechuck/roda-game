@@ -15,6 +15,7 @@ var dialogue_can_be_updated := true
 signal revoke_player_autonomy()
 signal grant_player_autonomy()
 
+signal dialogue_completed()
 signal cutscene_completed()
 
 func _on_dialogue_requested(node : Node2D, item_id : String = ""):
@@ -31,16 +32,17 @@ func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	interact_node = node
 	dialogue_in_progress = _start_dialogue()
 
-#func start_knot_dialogue(knot : String) -> bool:
-#	story.variables_state.set("conv_type", 0)
-#	interact_node = null
-#
-#	if story.knot_container_with_name(knot) != null:
-#		story.choose_path_string(knot)
-#		return update_dialogue()
-#	else:
-#		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
-#		return false
+func _start_knot_dialogue(node: Node2D, knot : String) -> void:
+	story.variables_state.set("interact_id", node.state.id)
+	story.variables_state.set("conv_type", 0)
+	interact_node = node
+
+	if story.knot_container_with_name(knot) != null:
+		story.choose_path_string(knot)
+		dialogue_in_progress = update_dialogue()
+	else:
+		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
+		dialogue_in_progress = false
 
 func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) -> void:
 	if not cutscene_in_progress:
@@ -75,6 +77,8 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 				if interact_node is class_character:
 					spit_out_player(interact_node)
 					yield(self, "cutscene_completed")
+			"intro":
+				intro_cutscene()
 			_:
 				push_error("Cutscene with id '{0}' was not recognized!".format([cutscene_id]))
 				pass
@@ -159,6 +163,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 func _stop_dialogue() -> void:
 	Flow.dialogue_UI.hide()
+	emit_signal("dialogue_completed")
 	if not cutscene_in_progress:
 		emit_signal("grant_player_autonomy")
 
@@ -509,5 +514,112 @@ func spit_out_player(canster : class_canster):
 	yield(_tween, "tween_all_completed")
 
 	dialogue_in_progress = update_dialogue()
+
+	emit_signal("cutscene_completed")
+
+func intro_cutscene():
+	var mr_smog := State.get_character_by_id("intro_mr_smog").object
+	var player := State.get_character_by_id("intro_player").object
+	var solid_snejk := State.get_character_by_id("intro_solid_snejk").object
+	var solid_slug := State.get_character_by_id("intro_solid_slug").object
+	var happy_tree := State.get_character_by_id("intro_happy_tree").object
+
+	var ball = Flow.game_canvas.get_node("YSort/Intro/Ball")
+	var bike = Flow.game_canvas.get_node("YSort/Intro/Bike")
+
+	var fence_front = Flow.game_canvas.get_node("YSort/FakeFences/FenceFront")
+	var fence_back = Flow.game_canvas.get_node("YSort/FakeFences/FenceBack")
+	var fence_left = Flow.game_canvas.get_node("YSort/FakeFences/FenceLeft")
+	var fence_right = Flow.game_canvas.get_node("YSort/FakeFences/FenceRight")
+
+	var smog : Sprite = Flow.game_canvas.get_node("YSort/Intro/Smog")
+
+	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
+
+	# ideal camera position = 2717.95 621.74
+	game_camera.zoom = Vector2(1.5, 1.5)
+	game_camera.position = Vector2(2718, 622) - Flow.player.position
+
+	_start_knot_dialogue(Flow.player, "conv_intro")
+	yield(self, "dialogue_completed")
+
+	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.5)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.5)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_start_knot_dialogue(Flow.player, "conv_intro_slug_no_ball")
+	yield(self, "dialogue_completed")
+
+	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.5)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_tween.interpolate_property(smog.material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.5)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_start_knot_dialogue(Flow.player, "conv_intro_smog_appears")
+	yield(self, "dialogue_completed")
+
+	_tween.interpolate_property(mr_smog,"position", mr_smog.position, Vector2(2628, 478), 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_start_knot_dialogue(Flow.player, "conv_intro_mr_smog_taunts")
+	yield(self, "dialogue_completed")
+
+	# SMOG SMASH
+	_tween.interpolate_property(happy_tree,"position:y", happy_tree.position.y, happy_tree.position.y - 20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, mr_smog.position.y - 20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(happy_tree,"position:y", happy_tree.position.y -20, happy_tree.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y -20, mr_smog.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+	
+	# Everything flies away!
+	_tween.interpolate_property(fence_front,"position:y", fence_front.position.y, fence_front.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_back,"position:y", fence_back.position.y, fence_back.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_left,"position:x", fence_left.position.x, fence_left.position.x - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_right,"position:x", fence_right.position.x, fence_right.position.x + 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(ball,"position:x", ball.position.x, ball.position.x + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(bike,"position:y", bike.position.y, bike.position.y + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_start_knot_dialogue(Flow.player, "conv_intro_mr_smog_exits")
+	yield(self, "dialogue_completed")
+
+	_tween.interpolate_property(happy_tree,"position:x", happy_tree.position.x, happy_tree.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(mr_smog,"position:x", mr_smog.position.x, mr_smog.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	_start_knot_dialogue(Flow.player, "conv_intro_outro")
+	yield(self, "dialogue_completed")
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	game_camera.zoom = Vector2(1, 1)
+	game_camera.position = Vector2.ZERO
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	solid_snejk = State.get_character_by_id("solid_snejk").object
+	_on_dialogue_requested(solid_snejk)
 
 	emit_signal("cutscene_completed")

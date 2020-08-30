@@ -39,7 +39,7 @@ func get_name():
 
 var knot : String setget , get_knot
 func get_knot():
-	return Flow.get_character_value(id, "knot", "MISSING NAME")
+	return Flow.get_character_value(id, "knot", "MISSING KNOT")
 
 var portrait_texture : Texture setget , get_portrait_texture
 func get_portrait_texture():

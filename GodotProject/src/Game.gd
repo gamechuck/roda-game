@@ -15,11 +15,8 @@ func _ready():
 	Flow.load_story()
 	print("----- Showing output log -----")
 
-	# Start the introduction cutscene
-	#Flow.player.is_in_dialogue = Flow.dialogue_UI.start_knot_dialogue("conv_intro")
-#	for character in get_tree().get_nodes_in_group("characters"):
-#		if character.id == "solid_snejk":
-#			Flow.dialogue_UI.start_interact_dialogue(character)
+	if not ConfigData.skip_intro:
+		Director._on_cutscene_requested("intro")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_editor_mode"):

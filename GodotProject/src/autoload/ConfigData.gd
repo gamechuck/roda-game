@@ -90,6 +90,8 @@ var verbose_mode := true
 var skip_menu := true
 
 ## GAME CONFIG #################################################################
+var skip_intro := true
+
 var skater_move_speed := 4.0
 
 var ghost_awake_move_speed := 1.0

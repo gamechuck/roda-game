@@ -5,6 +5,8 @@ VAR picked_up_fence_in_smog_town = 0
 VAR got_fence_from_helter_skelter = 0
 VAR got_fence_from_wheelie = 0
 
+VAR player_wearing_color = 0
+
 // SolidSnejk
 VAR talked_to_solid_snejk = 0
 
@@ -66,21 +68,36 @@ EXTERNAL get_state_property(entity_id, property)
 Hej svi, idemo igrati nogomet!
 >>> UPDATE_UI: solid_slug
 Daaaaa! Dodaj mi loptu!
->>> PLAY_CUTSCENE: intro_play_ball
+-> DONE
+
+=== conv_intro_slug_no_ball ===
+>>> UPDATE_UI: solid_slug
 Dajte, dodajte i meni loptu!
 ...
->>> PLAY_CUTSCENE: show_smog
+-> DONE
+
+=== conv_intro_smog_appears ===
 >>> UPDATE_UI: solid_snejk
 Čekaj, što se događa?
 Odakle sav ovaj smog?
 >>> UPDATE_UI: mr_smog
 AHAHAHAHA!
->>> PLAY_CUTSCENE: mr_smog_intro
+-> DONE
+
+=== conv_intro_mr_smog_taunts ===
+>>> UPDATE_UI: mr_smog
 Pozdravite se sa svojim slatkim parkom, djeco!
 Mister Smog je došao pokvariti vašu zabavu!
->>> PLAY_CUTSCENE: mr_smog_destroy_park
+-> DONE
+
+=== conv_intro_mr_smog_exits ===
+>>> UPDATE_UI: mr_smog
 AHAHAHAHA!!!
->>> PLAY_CUTSCENE: mr_smog_outro
+-> DONE
+
+=== conv_intro_outro ===
+>>> UPDATE_UI: solid_snejk
+...
 -> DONE
 
 === conv_solid_snejk ===
@@ -239,8 +256,8 @@ Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
-You can use my bike if you want!
-Just take it and use it on yourself any time to ride the bicycle!
+Možete koristiti moj bicikl ako želite!
+Samo ga uzmite i upotrijebite na sebi bilo kada za vožnju bicikla!
 -> DONE
 
 = use_item
@@ -701,20 +718,20 @@ Stavi pravo čudovište na pravo mjesto! I čini to često!
 + Ne, ne, ne, pa čak i ja vidim da to nije dobro...
 	Probajmo opet.
 	-> sorting_minigame_start
-+ Wow! To je savršeno!
++ Vau! To je savršeno!
 	Sada napokon neću više morati plaćati kazne!
 	Da ne spominjem povećanu sigurnost!
 	-> sorting_minigame_solved
 = sorting_minigame_solved
 >>> END_MINIGAME
-Here take this pump as a reward for your help!
->>> ADD_ITEM: pump
+Uzmite ovaj sigurnosni pojas kao nagradu za pomoć!
+>>> ADD_ITEM: seat_belt
 ~ seat_sorting_completed = 1
 -> DONE
 
 = after_solving_enigma
-Thanks again!
-Now we can finally go to the sea!
+Hvala još jednom!
+Sad napokon možemo na more!
 -> DONE
 
 === conv_skater ===
@@ -882,11 +899,6 @@ Nije mi to interesantno.
 
 = use_item
 
-{used_item:
-	- else: -> default
-}
-
-= default
 Ne treba mi to.
 -> DONE
 
@@ -930,7 +942,7 @@ Nisi smeće! Bah!
 }
 
 = thanks_for_trash
-YUM YUM!
+Njam njam!
 Ja volim smeće!
 -> DONE
 
@@ -1055,6 +1067,9 @@ Dođi po mene kad je popravite! Bok bok!
     - 1: -> main_at_house
 }
 
+>>> SET_STATE_PROPERTY: canster_left is_appeased 0
+>>> SET_STATE_PROPERTY: canster_middle is_appeased 0
+>>> SET_STATE_PROPERTY: canster_right is_appeased 0
 Vau, popravio si park!
 Želio bih opet ići igrati nogomet s vama ali...
 Opet su kante za smeće postale gladne!
@@ -1112,11 +1127,11 @@ Pitam se što se dogodilo s tim drvom...
 }
 
 = battery
-Keep the battery! I don't need it anymore!
+Zadrži bateriju, ne trebam je više!
 -> DONE
 
 = default
-I don't need that stuff!
+Ne treba mi to!
 -> DONE
 
 -> DONE
@@ -1222,6 +1237,7 @@ Hej ti! Kako ti se sviđa moja nova jakna! Baš je šarena, zar ne?
 Mislim da bi ti dobro stajala!
 Hoćeš da se mijenjamo za jakne?
 + [Da, mijenjajmo se!]
+	~ player_wearing_color = 1
 	>>> SET_STATE_PROPERTY: player wearing_color 1
 	>>> SET_STATE_PROPERTY: love_interest wearing_color 0
 	Super! Samo mi javi kad se zaželiš svoje stare jakne!
@@ -1233,6 +1249,7 @@ Hoćeš da se mijenjamo za jakne?
 = switch_to_plain
 Hej! Hoćeš se opet mijenjati za jakne?
 + [Da, vrati mi moju jaknu!]
+	~ player_wearing_color = 0
 	>>> SET_STATE_PROPERTY: player wearing_color 0
 	>>> SET_STATE_PROPERTY: love_interest wearing_color 1
 	Naravno, izvoli!
@@ -1306,9 +1323,9 @@ Zar ne znaš da je policija najčasnija služba u javnom sektoru!?
 
 = interact
 
-I was possessed by evil smog!
-But now I am a happy tree again!
-Thank you for your help!
+Opsjednuo me zli smog!
+Ali sad sam opet sretno drvo!
+Hvala vam na pomoći!
 -> DONE
 
 = use_item
@@ -1318,7 +1335,7 @@ Thank you for your help!
 }
 
 = default
-Thank you for your gift!
+Zahvaljujemo na poklonu!
 >>> REMOVE_ITEM: {used_item}
 -> DONE
 
@@ -1331,26 +1348,26 @@ Thank you for your gift!
 
 = angry_mr_smog
 >>> PAN_CAMERA_TO_POSITION: 736 2782
-MUHAHAHAHA
-You will never defeat my majestic smogginess!
+MUHUHAHAHA
+Sto mi smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> RESET_CAMERA
 -> DONE
 
 = defeated_mr_smog
 >>> UPDATE_UI: happy_tree
 >>> PAN_CAMERA_TO_POSITION: 736 2782
-All the smog has left me!
-Now I am a happy tree again!
-I am going back to the park!
+Ajme, sav me smog napustio!
+Sada sam ponovno sretno drvo!
+Idem nazad u svoj rodni park!
 >>> RESET_CAMERA
 -> DONE
 
 === conv_broken_bike ===
 // The broken bike of Solid Slug
 
-I think this is the bike of Solid Slug!
-Wow, it got blown all the way out here!
-I better bring it back to him!
+Ovo je Slagačev bicikl!
+Vau, otpuhan je skroz do tu...
+Bolje da mu ga odnesem.
 ~ found_bike = true
 -> DONE
 
@@ -1379,15 +1396,15 @@ Možda najbolje da je bacim u smeće.
 === conv_fence_at_turbine ===
 // A fence piece lying next to the wind farm.
 
-Wow! This fence piece flew all the way over here.
-Better get it back to the park!
+Vau, ovaj komad ograde je otpuhan skroz do tu...
+Bolje da ga dofuram nazad do parka.
 ~ picked_up_fence_at_turbine = true
 -> DONE
 
 === conv_fence_in_smog_town ===
 // A fence piece lying in the smoggy part of town.
 
-Komadić ograde! Gotovo da mi je izvakao u ovom smogu!
+Komadić ograde! Gotovo da mi je izmakao u ovom smogu!
 Najbolje da ga odnesem Solid Snejku!
 ~ picked_up_fence_in_smog_town = true
 -> DONE
@@ -1400,7 +1417,7 @@ Najbolje da ga odnesem Solid Snejku!
 }
 
 = interact
-This should not be reachable!
+Greškica.
 -> DONE
 
 = use_item
@@ -1424,45 +1441,45 @@ This should not be reachable!
 
 = step_off_bike
 >>> SET_STATE_PROPERTY: player on_bike 0
-Off the bike I go!
+Dosta je bilo bicikla za sada.
 -> DONE
 
 = hop_on_bike
 >>> SET_STATE_PROPERTY: player on_bike 1
-Let's start using that bike!
+Vrijeme je za malo bicikliranja!
 -> DONE
 
 = pump
-A pump? 
-A common appliance would be to use this on a tire!
-... But you never know in these types of games!
+Pumpa?
+Ovo bi se moglo iskoristiti za napumpati probušenu gumu!
+... Ali nikad ne znaš što nas čeka u ovakvim igrama...
 -> DONE
 
 = seat_belt
-I should wear this whenever I use a car!
-Or maybe... a taxi?
+Trebao bih nositi ovakav pojas kad god se vozim u autu.
+Pa čak i u... taksiju!
 -> DONE
 
 = battery
-A battery? And it still has plenty of power!
-I better find some place to power with this battery.
+Baterija? I još je puna!
+Baš me zanima što bi trebalo toliko energije?
 -> DONE
 
 = fence
-A fence of the park! 
-I better bring this back to Solid Snejk!
+Dio otpuhane ograde našeg parka...
+Bolje da to iz ovih stopa odnesem Solid Snejku da on to popravi.
 -> DONE
 
 = broken_bike
-This bike belongs to Solid Slug! 
-I better bring it back to him... it looks a bit busted...
+Ovo je Slagačev bicikl.
+Bolje da mu ga što prije odnesem, izgleda malo potrgan...
 -> DONE
 
 = trash_talk
-I should find a trash bin to put this in!
+Trebao bih naći kantu za smeće u koju ću ovo baciti!
 -> DONE
 
 = default
 {used_item}
-I should think really hard about what to with this item!
+Pitam se što da radim s ovim?
 -> DONE

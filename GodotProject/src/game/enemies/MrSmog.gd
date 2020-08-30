@@ -111,15 +111,19 @@ func update_animation():
 
 	set_monitorable(state_settings.get("monitorable", false))
 
+	_animated_sprite.material = state_settings.get("material", null)
+
 var _state_machine := {
 	BATTLE_STATUS.OFFENSIVE:{
 		"animation_name": "aggressive",
 		"extents": Vector2(480, 360),
-		"monitorable": false
+		"monitorable": false,
+		"material": preload("res://resources/materials/mr_smog_material_test.tres")
 	},
 	BATTLE_STATUS.DEFEATED:{
 		"animation_name": "friendly",
 		"extents": Vector2(48, 48),
-		"monitorable": true
+		"monitorable": true,
+		"material": null
 	}
 }
