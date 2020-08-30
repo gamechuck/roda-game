@@ -3,8 +3,8 @@
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=3]
-[ext_resource path="res://src/menu/main/MainMenuTab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/menu/settings/SettingsMenuTab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/menu/MainMenuTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/menu/SettingsMenuTab.tscn" type="PackedScene" id=5]
 [ext_resource path="res://roda-assets/UI/MainMenu/Background2.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]

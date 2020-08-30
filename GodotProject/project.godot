@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "MarginContainer",
 "class": "class_menu_tab",
 "language": "GDScript",
-"path": "res://MenuTab.gd"
+"path": "res://src/menu/MenuTab.gd"
 }, {
 "base": "MarginContainer",
 "class": "class_pause_tab",

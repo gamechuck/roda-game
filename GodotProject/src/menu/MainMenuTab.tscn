@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/menu_theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/menu/main/MainMenuTab.gd" type="Script" id=2]
+[ext_resource path="res://src/menu/MainMenuTab.gd" type="Script" id=2]
 [ext_resource path="res://resources/fonts/luckiest-guy/LuckiestGuy.ttf" type="DynamicFontData" id=3]
+
 
 [sub_resource type="StyleBoxLine" id=2]
 color = Color( 0.937255, 0.815686, 0, 1 )

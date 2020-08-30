@@ -612,10 +612,10 @@ func intro_cutscene():
 	_start_knot_dialogue(Flow.player, "conv_intro_outro")
 	yield(self, "dialogue_completed")
 
-	AudioEngine.play_background_music("gameplay")
-
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
+
+	AudioEngine.play_background_music("gameplay")
 
 	game_camera.zoom = Vector2(1, 1)
 	game_camera.position = Vector2.ZERO

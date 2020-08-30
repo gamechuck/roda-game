@@ -12,7 +12,7 @@
                     291,
                     73
                 ],
-                "texture": "res://roda-assets/portraits/solid_snejk.png",
+                "texture": "res://roda-assets/Portraits/solid_snejk.png",
                 "flip_h": true
             }
         },
@@ -28,7 +28,7 @@
                     280,
                     76
                 ],
-                "texture": "res://roda-assets/portraits/lizzy.png"
+                "texture": "res://roda-assets/Portraits/lizzy.png"
             }
         },
         "watto": {
@@ -43,7 +43,7 @@
                     295,
                     117
                 ],
-                "texture": "res://roda-assets/portraits/watto.png"
+                "texture": "res://roda-assets/Portraits/watto.png"
             }
         },
         "seat_sorting_car": {
@@ -62,7 +62,7 @@
                     320,
                     115
                 ],
-                "texture": "res://roda-assets/portraits/solid_slug.png"
+                "texture": "res://roda-assets/Portraits/solid_slug.png"
             }
         },
         "returned_bike": {
@@ -82,7 +82,7 @@
                     285,
                     120
                 ],
-                "texture": "res://roda-assets/portraits/taxi.png"
+                "texture": "res://roda-assets/Portraits/taxi.png"
             }
         },
         "taxi_at_mountain": {
@@ -97,7 +97,7 @@
                     285,
                     120
                 ],
-                "texture": "res://roda-assets/portraits/taxi.png"
+                "texture": "res://roda-assets/Portraits/taxi.png"
             }
         },
         "bus": {
@@ -116,7 +116,7 @@
                     309,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/canster.png"
+                "texture": "res://roda-assets/Portraits/canster.png"
             }
         },
         "canster_middle": {
@@ -131,7 +131,7 @@
                     309,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/canster.png"
+                "texture": "res://roda-assets/Portraits/canster.png"
             }
         },
         "canster_right": {
@@ -146,7 +146,7 @@
                     309,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/canster.png"
+                "texture": "res://roda-assets/Portraits/canster.png"
             }
         },
         "copper": {
@@ -161,7 +161,7 @@
                     286,
                     42
                 ],
-                "texture": "res://roda-assets/portraits/copper.png"
+                "texture": "res://roda-assets/Portraits/copper.png"
             }
         },
         "happy_tree": {
@@ -176,7 +176,7 @@
                     283,
                     32
                 ],
-                "texture": "res://roda-assets/portraits/happy_tree.png"
+                "texture": "res://roda-assets/Portraits/happy_tree.png"
             },
             "visible": false
         },
@@ -192,7 +192,7 @@
                     309,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/love_interest.png"
+                "texture": "res://roda-assets/Portraits/love_interest.png"
             }
         },
         "wheelie": {
@@ -207,7 +207,7 @@
                     345,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/wheelie.png"
+                "texture": "res://roda-assets/Portraits/wheelie.png"
             }
         },
         "mr_smog": {
@@ -222,7 +222,7 @@
                     300,
                     35
                 ],
-                "texture": "res://roda-assets/portraits/mr_smog.png"
+                "texture": "res://roda-assets/Portraits/mr_smog.png"
             }
         },
         "wind_turbine": {
@@ -241,7 +241,7 @@
                     311,
                     71
                 ],
-                "texture": "res://roda-assets/portraits/player.png"
+                "texture": "res://roda-assets/Portraits/player.png"
             }
         },
         "helter_skelter": {
@@ -256,7 +256,7 @@
                     306,
                     69
                 ],
-                "texture": "res://roda-assets/portraits/skater.png"
+                "texture": "res://roda-assets/Portraits/skater.png"
             }
         },
         "intro_mr_smog": {
