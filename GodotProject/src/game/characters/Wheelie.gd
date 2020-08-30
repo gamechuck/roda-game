@@ -30,7 +30,7 @@ signal nav_path_requested
 
 func _ready():
 	register_state_property("going_to_house", 0)
-	register_state_property("going_to_park", 0)
+	register_state_property("going_back_to_park", 0)
 	register_state_property("arrived_safely", 0)
 
 	var _error := _interact_area.connect("area_entered", self, "_on_area_entered")
@@ -71,7 +71,7 @@ func process_next_point():
 		its_over = true
 		set_physics_process(false)
 		set_state_property("going_to_house", 0)
-		set_state_property("going_to_park", 0)
+		set_state_property("going_back_to_park", 0)
 		if got_scared:
 			set_state_property("arrived_safely", 0)
 			got_scared = false
@@ -136,7 +136,7 @@ func update_animation():
 		current_idx = 0
 		target_idx = target_points.size() - 1
 		set_physics_process(true)
-	elif get_state_property("going_to_park") == 1:
+	elif get_state_property("going_back_to_park") == 1:
 		current_idx = target_points.size() - 1
 		target_idx = 0
 		set_physics_process(true)

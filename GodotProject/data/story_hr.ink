@@ -44,12 +44,13 @@ VAR mr_smog_defeated = 0
 VAR received_pump_from_canster = 0
 
 // Wheelie
-VAR escorted_wheelie_to_house = 0
-VAR escorted_wheelie_back_to_park = 0
+VAR wheelie_escorted_to_house = 0
+VAR wheelie_escorted_back_to_park = 0
 
-VAR talked_to_wheelie_at_park = 0
-VAR talked_to_wheelie_at_house = 0
-VAR talked_to_wheelie_back_at_park = 0
+VAR wheelie_intro_at_park_completed = 0
+VAR wheelie_intro_before_park_fixed_completed = 0
+VAR wheelie_intro_after_park_fixed_completed = 0
+VAR wheelie_intro_back_at_park_completed = 0
 
 VAR used_item = "bush"
 VAR interact_id = "player"
@@ -1030,7 +1031,6 @@ Nisi smeće! Bah!
 // You'll have to escort him twice... one time to his house and afterwards back to the park.
 // When arriving at his house, he goes and comes back out with a fence.
 // Afterwards, when getting back to the park he gives you the battery 
-
 {conv_type:
 	- 0: -> interact
 	- 1: -> use_item
@@ -1042,25 +1042,25 @@ Nisi smeće! Bah!
 	- 1: -> process_arrival
 }
 
-{escorted_wheelie_back_to_park:
+{wheelie_escorted_back_to_park:
 	- 1: -> back_at_park 
 }
 
-{escorted_wheelie_to_house:
+{wheelie_escorted_to_house:
 	- 1: -> at_house
 }
 
-{talked_to_wheelie_at_park:
-	- 0: -> intro
+{wheelie_intro_at_park_completed:
+	- 0: -> intro_at_park
 	- 1: -> main_at_park
 }
 
-= intro
+= intro_at_park
 Sad kad nema ograde, ne možemo igrati nogomet...
 Dok se stvari ne riješe, idem ja doma.
 No na putu do mene doma je hrpa gladnih kanti za smeće!
 Možeš ih molim te nahraniti smećem? Inače krenu jesti nas čudovišta!
-~ talked_to_wheelie_at_park = 1
+~ wheelie_intro_at_park_completed = 1
 -> main_at_park
 
 = main_at_park
@@ -1075,14 +1075,18 @@ Hej, jesi li nahranio sve kante za smeće?
 
 = at_house
 // WHEELIE AT HOUSE!
-
-{talked_to_wheelie_at_house:
-	- 0: -> just_arrived_at_house
-	- 1: -> main_before_fixing_park
+{number_of_fences_fixed:
+    - 4: -> after_park_fixed
+	- else: -> before_park_fixed
 }
 
-= just_arrived_at_house
+= before_park_fixed
+{wheelie_intro_before_park_fixed_completed:
+	- 0: -> intro_at_house_before_park_fixed
+	- 1: -> main_at_house_before_park_fixed
+}
 
+= intro_at_house_before_park_fixed
 Hvala na praćenju do kuće!
 Idem vidjeti što mi rade mama i tata doma dok mene nema!
 // Goes in and checks with his mom.
@@ -1090,26 +1094,22 @@ Hej, čini se da je na krovu ostao otpuhan dio ograde.
 Slobodno ga uzmi, pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
 ~ got_fence_from_wheelie = 1
-~ talked_to_wheelie_at_house = 1
--> DONE
+~ wheelie_intro_before_park_fixed_completed = 1
+-> main_at_house_before_park_fixed
 
-= main_before_fixing_park
-
-{number_of_fences_fixed:
-    - 4: -> after_park_fixed
-}
-
+= main_at_house_before_park_fixed
 Hvala što si me otpratio.
 Mislim da ću ostati ovjde dok se ne popravi ograda u parku.
 Dođi po mene kad je popravite! Bok bok!
 -> DONE
 
 = after_park_fixed
-
-{talked_to_wheelie_at_house:
-    - 1: -> main_at_house
+{wheelie_intro_after_park_fixed_completed:
+	- 0: -> intro_at_house_after_park_fixed
+	- 1: -> main_at_house_after_park_fixed
 }
 
+= intro_at_house_after_park_fixed
 >>> SET_STATE_PROPERTY: canster_left is_appeased 0
 >>> SET_STATE_PROPERTY: canster_middle is_appeased 0
 >>> SET_STATE_PROPERTY: canster_right is_appeased 0
@@ -1118,13 +1118,14 @@ Vau, popravio si park!
 Opet su kante za smeće postale gladne!
 Možeš ih opet nahraniti smećem molim te?
 Jako ih se plašim!
-~ talked_to_wheelie_at_house = 1
--> DONE
+~ wheelie_intro_after_park_fixed_completed = 1
+-> main_at_house_after_park_fixed
 
-= main_at_house
+= main_at_house_after_park_fixed
 Jesu li sve kante nahranjene?
 + [Da, sad je sigurno!]
 	Super! Idemo!
+	>>> SET_STATE_PROPERTY: wheelie going_back_to_park 1
 	// You escort wheelie back to the park! 
 	-> DONE
 + [Ne još, još radim na tome!]
@@ -1133,19 +1134,18 @@ Jesu li sve kante nahranjene?
 
 = back_at_park
 // WHEELIE BACK AT PARK!
-
-{talked_to_wheelie_back_at_park:
-	- 0: -> just_arrived_back_at_park
+{wheelie_intro_back_at_park_completed:
+	- 0: -> intro_back_at_park
 	- 1: -> main_back_at_park
 }
 
-= just_arrived_back_at_park
+= intro_back_at_park
 Hvala što si me otpratio do našeg predivnog parka!
 Mislim da ću ostati ovdje i uživati u parku zauvijek!
 Evo, možeš uzeti moju bateriju. Ne treba mi više!
 >>> ADD_ITEM: battery
-~ talked_to_wheelie_back_at_park = 1
--> DONE
+~ wheelie_intro_back_at_park_completed = 1
+-> main_back_at_park
 
 = main_back_at_park
 Predivan dan!
@@ -1155,9 +1155,9 @@ Pitam se što se dogodilo s tim drvom...
 
 = process_arrival
 
-{escorted_wheelie_to_house:
-	- 0: ~ escorted_wheelie_to_house = 1
-	- 1: ~ escorted_wheelie_back_to_park = 1
+{wheelie_escorted_to_house:
+	- 0: ~ wheelie_escorted_to_house = 1
+	- 1: ~ wheelie_escorted_back_to_park = 1
 }
 >>> SET_STATE_PROPERTY: wheelie arrived_safely 0
 -> interact
