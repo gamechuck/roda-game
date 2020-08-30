@@ -571,6 +571,8 @@ func intro_cutscene():
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
+	AudioEngine.play_background_music("smog_gameplay")
+
 	_start_knot_dialogue(Flow.player, "conv_intro_smog_appears")
 	yield(self, "dialogue_completed")
 
@@ -609,6 +611,8 @@ func intro_cutscene():
 
 	_start_knot_dialogue(Flow.player, "conv_intro_outro")
 	yield(self, "dialogue_completed")
+
+	AudioEngine.play_background_music("gameplay")
 
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
