@@ -7,11 +7,6 @@ onready var _audio_stream_player_2D := $AudioStreamPlayer2D
 
 func _ready():
 	register_state_property("is_appeased", MOOD.ANGRY)
-
-	# Make the interact_area unique!
-	var shape := RectangleShape2D.new()
-	_interact_collision_shape_2D.shape = shape
-
 	update_animation()
 
 func update_animation():
@@ -19,8 +14,10 @@ func update_animation():
 	var state_settings : Dictionary = _state_machine.get(is_appeased, {})
 	_animated_sprite.play(state_settings.get("animation_name", "aggressive"))
 
+	# Work with SCALING here! Don't change the actual extents!!!
 	var shape = _interact_collision_shape_2D.shape
-	shape.extents = state_settings.get("extents", Vector2(24, 24))
+	var scale_factor = state_settings.get("extents", Vector2(24, 24))/shape.extents
+	_interact_collision_shape_2D.scale = scale_factor
 
 	_audio_stream_player_2D.playing = state_settings.get("playing", false)
 

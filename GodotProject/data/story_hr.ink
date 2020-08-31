@@ -320,7 +320,7 @@ Tražiš bicikl!
 Pokazat ću ti gdje sam ga našao ako mi odgovoriš na ovo pitanje:
 - (start_question)
 Ako nema pločnika, gdje se pješaci kreću?
-+ [Defencesnom stranom prometnice] 
++ [Desnom stranom prometnice] 
 	Ha! Krivo!
 	Tako ne vidiš aute koji dolaze i u većoj si opasnosti.
 	Još ti moraš mnogo naučiti o ljudima i njihovim prometnim pravilima...

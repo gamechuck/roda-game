@@ -1,5 +1,9 @@
 extends Control
 
+# Ideally two thing would have to change drastically here:
+# 1. Not allowing the user to add/select characters nor push the drive button when not waiting for a choice!
+# 2. Change everything to be derived from control vs the current mix that is currently implemented!
+
 onready var _drive_button := $VBoxContainer/DriveButton
 
 onready var _highlights_container := $VBoxContainer/HBoxContainer/BackgroundRect/Highlights
@@ -38,16 +42,13 @@ func show():
 func hide():
 	visible = false
 
-func reset_all():
-	if Director.is_waiting_for_choice:
-		emit_signal("drive_button_pressed", 0)
-
+func clear_all_characters():
 	for child in _highlights_container.get_children():
 		if child is class_highlight_rect:
 			if child.character != null:
 				var character : class_character_slot = child.character
 				character.disabled = false
-	
+
 				child.character = null
 
 func _on_mouse_pressed(seat_rect : class_highlight_rect) -> void:
@@ -80,13 +81,10 @@ func _on_drive_button_pressed():
 		if child is class_highlight_rect:
 			if not child.is_valid_character:
 				if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is incorrect!")
-				while not Director.is_waiting_for_choice:
+				if Director.is_waiting_for_choice:
 					emit_signal("drive_button_pressed", 0)
-				emit_signal("drive_button_pressed", 0)
-				reset_all()
+				clear_all_characters()
 				return
 
 	if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is correct!")
-	while not Director.is_waiting_for_choice:
-		emit_signal("drive_button_pressed", 1)
 	emit_signal("drive_button_pressed", 1)
