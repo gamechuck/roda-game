@@ -21,40 +21,40 @@ atlas = ExtResource( 2 )
 region = Rect2( 268, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 7 )
-region = Rect2( 402, 0, 134, 84 )
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 7 )
-region = Rect2( 536, 0, 134, 84 )
+atlas = ExtResource( 8 )
+region = Rect2( 134, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 134, 84 )
+region = Rect2( 268, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 8 )
-region = Rect2( 134, 0, 134, 84 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 8 )
-region = Rect2( 268, 0, 134, 84 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 8 )
 region = Rect2( 402, 0, 134, 84 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 134, 84 )
+region = Rect2( 402, 0, 134, 84 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 536, 0, 134, 84 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 536, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
-region = Rect2( 134, 0, 134, 84 )
+atlas = ExtResource( 6 )
+region = Rect2( 670, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 7 )
-region = Rect2( 268, 0, 134, 84 )
+atlas = ExtResource( 6 )
+region = Rect2( 804, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 6 )
@@ -73,16 +73,16 @@ atlas = ExtResource( 6 )
 region = Rect2( 402, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 6 )
-region = Rect2( 536, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 6 )
-region = Rect2( 670, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 134, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 6 )
-region = Rect2( 804, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 268, 0, 134, 84 )
 
 [sub_resource type="SpriteFrames" id=20]
 animations = [ {
@@ -91,19 +91,19 @@ animations = [ {
 "name": "friendly",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": false,
-"name": "spit_out_2",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "aggressive",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "spit_out_2",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": false,
-"name": "spit_out_1",
+"name": "devour_2",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
@@ -113,7 +113,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
-"name": "devour_2",
+"name": "spit_out_1",
 "speed": 5.0
 } ]
 
