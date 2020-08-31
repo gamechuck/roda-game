@@ -35,6 +35,10 @@ frames = SubResource( 1 )
 animation = "aggressive"
 offset = Vector2( 11, -60 )
 
+[node name="InteractArea" parent="." index="1"]
+collision_layer = 3
+collision_mask = 3
+
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 2 )
 

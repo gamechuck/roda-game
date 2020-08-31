@@ -2,33 +2,32 @@ extends class_character
 
 enum BATTLE_STATUS {OFFENSIVE, DEFEATED}
 
-var _attacking_player := false
-
 #var _projectiles_resources := [
 #	preload("res://src/game/enemies/projectiles/TrackingProjectile.tscn"),
 #	preload("res://src/game/enemies/projectiles/BulletProjectile.tscn"),
 #	preload("res://src/game/enemies/projectiles/WhirlingProjectile.tscn")
 #]
 
-var health := 10.0 setget set_health
-func set_health(value : float):
+var future_health := ConfigData.boss_max_health
+var health := ConfigData.boss_max_health setget set_health
+func set_health(value : float) -> void:
 	health = value
 	if Flow.boss_overlay:
-		Flow.boss_overlay.health = value
+		Flow.boss_overlay.health = health
 
 onready var _projectiles_container := $Projectiles
 onready var _interact_area := $InteractArea
-onready var _timer := $Timer
+onready var _spawn_timer := $Timer
 onready var _tween := $Tween
 
 func _ready():
 	randomize()
 	register_state_property("is_defeated", BATTLE_STATUS.OFFENSIVE)
 
-	var _error : int = _timer.connect("timeout", self, "_on_timer_timeout")
+	var _error : int = _spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
 
-	_error = _interact_area.connect("area_entered", self, "_on_area_entered")
-	_error = _interact_area.connect("area_exited", self, "_on_area_exited")
+	_error = _interact_area.connect("body_entered", self, "_on_body_entered")
+	_error = _interact_area.connect("body_exited", self, "_on_body_exited")
 
 	update_animation()
 	#_timer.start()
@@ -40,8 +39,13 @@ func reset():
 		_projectiles_container.remove_child(child)
 		child.queue_free()
 
+	future_health = ConfigData.boss_max_health
 	self.health = ConfigData.boss_max_health
-	_timer.stop()
+	_spawn_timer.stop()
+
+func update_overlay():
+	if Flow.boss_overlay:
+		Flow.boss_overlay.health = health
 
 func set_monitorable(value : bool = _interact_area.monitorable):
 	_interact_area.monitorable = value
@@ -50,11 +54,8 @@ func set_monitorable(value : bool = _interact_area.monitorable):
 	else:
 		set_process_input(false)
 
-func _on_area_entered(area : Area2D):
-	if not area:
-		return
-	
-	if area.get_parent() is class_player:
+func _on_body_entered(body : PhysicsBody2D):
+	if body is class_player:
 		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
 			Director._on_dialogue_requested(self)
 			Director.zoom_camera(Vector2(1.5, 1.5))
@@ -63,35 +64,41 @@ func _on_area_entered(area : Area2D):
 
 			Flow.boss_overlay.show()
 
-			_timer.start()
+			_spawn_timer.start()
 
-func _on_area_exited(area : Area2D):
-	if not area:
-		return
-
-	if area.get_parent() is class_player:
+func _on_body_exited(body : PhysicsBody2D):
+	if body is class_player:
 		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
 			reset()
 			Flow.boss_overlay.hide()
 			Director.zoom_camera(Vector2(1, 1))
-			
-			_timer.stop()
 
-func _on_timer_timeout():
-	if _projectiles_container.get_children().size() < 10:
-		#var index := rand_range(0, _projectiles_resources.size())
-		var projectile = load("res://src/game/enemies/projectiles/BulletProjectile.tscn").instance()
-		#var projectile = _projectiles_resources[0].instance()
-		_projectiles_container.add_child(projectile)
-		projectile.owner = _projectiles_container
+			_spawn_timer.stop()
 
-		projectile.connect("projectile_timeout", self, "_on_projectile_timeout")
-		#projectile.connect("player_hit", self, "_on_player_hit")
+func _on_spawn_timer_timeout():
+	if future_health > 0:
+		if _projectiles_container.get_children().size() < 10:
+			#var index := rand_range(0, _projectiles_resources.size())
+			var projectile = load("res://src/game/enemies/projectiles/BulletProjectile.tscn").instance()
+			#var projectile = _projectiles_resources[0].instance()
+			_projectiles_container.add_child(projectile)
+			projectile.owner = _projectiles_container
+	
+			future_health -= 1
+	
+			projectile.connect("projectile_timeout", self, "_on_projectile_timeout")
+			#projectile.connect("player_hit", self, "_on_player_hit")
+	else:
+		_spawn_timer.stop()
 
 func _on_player_hit():
+	# Would be better to do this here? For future stuff?
 	pass
 
-func _on_projectile_timeout():
+func _on_projectile_timeout(projectile : class_projectile):
+	_projectiles_container.remove_child(projectile)
+	projectile.queue_free()
+
 	self.health -= 1
 
 	if health <= 0:

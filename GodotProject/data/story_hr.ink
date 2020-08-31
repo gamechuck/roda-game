@@ -766,7 +766,7 @@ Stavi pravo čudovište na pravo mjesto! I čini to često!
 	-> sorting_minigame_solved
 = sorting_minigame_solved
 >>> END_MINIGAME
-Uzmite ovaj sigurnosni pojas kao nagradu za pomoć!
+Uzmi ovaj sigurnosni pojas kao nagradu za pomoć!
 >>> ADD_ITEM: seat_belt
 ~ seat_sorting_completed = 1
 -> DONE
@@ -853,7 +853,7 @@ Tko bi rekao!
 }
 
 = default
-Keep your junk to yourself!
+Zadrži si te tričarije!
 -> DONE
 
 === conv_taxi_at_park ===
@@ -1379,7 +1379,7 @@ Hvala vam na pomoći!
 }
 
 = default
-Zahvaljujemo na poklonu!
+Zahvaljujem na poklonu!
 >>> REMOVE_ITEM: {used_item}
 -> DONE
 

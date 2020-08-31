@@ -9,4 +9,4 @@ func _ready():
 	var _error := _timer.connect("timeout", self, "_on_timer_timeout")
 
 func _on_timer_timeout():
-	emit_signal("projectile_timeout")
+	emit_signal("projectile_timeout", self)
