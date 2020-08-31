@@ -317,7 +317,7 @@ position = Vector2( 2818.91, 2340.48 )
 id = "trash_cup_one"
 
 [node name="TrashCupTwo" parent="YSort/Pickups" instance=ExtResource( 23 )]
-position = Vector2( 4014.05, 2286.79 )
+position = Vector2( 3735.04, 2245.28 )
 id = "trash_cup_two"
 
 [node name="TrashBottleOne" parent="YSort/Pickups" instance=ExtResource( 25 )]

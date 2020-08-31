@@ -8,10 +8,10 @@ VAR got_fence_from_wheelie = 0
 VAR player_wearing_color = 0
 
 // SolidSnejk
-VAR talked_to_solid_snejk = 0
+VAR solid_snejk_intro_completed = 0
 
 // Lizzy
-VAR talked_to_lizzy = 0
+VAR lizzy_intro_completed = 0
 
 // Watto
 VAR watto_question_solved = 0
@@ -26,22 +26,22 @@ VAR fixed_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
 // Taxi
-VAR seat_belt_given_to_taxi = 0
+VAR taxi_received_seat_belt = 0
 
-// Helter Skelter
-VAR talked_to_helter_skelter = 0
+// HelterSkelter
+VAR helter_skelter_intro_completed = 0
 
-// SeatBeltCar
+// SeatSortingCar
 VAR seat_sorting_completed = 0
 
-// Wind Turbine
+// WindTurbine
 VAR turbine_fixed = 0
 
-// Mr. Smog
+// MrSmog
 VAR mr_smog_defeated = 0
 
 // Canster
-VAR received_pump_from_canster = 0
+VAR canster_gave_pump = 0
 
 // Wheelie
 VAR wheelie_escorted_to_house = 0
@@ -126,7 +126,7 @@ AHAHAHAHA!!!
 	- true: -> fix_fence
 }
 
-{talked_to_solid_snejk:
+{solid_snejk_intro_completed:
 	- 0: -> intro
 	- else: -> main
 }
@@ -134,7 +134,7 @@ AHAHAHAHA!!!
 = intro
 Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
 Idemo naći ograde i popraviti park da se možemo opet loptati! #solid_snejk_intro_2
-~ talked_to_solid_snejk = 1
+~ solid_snejk_intro_completed = 1
 -> main
 
 = fix_fence
@@ -258,8 +258,8 @@ Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
-Možete koristiti moj bicikl ako želite!
-Samo ga uzmite i upotrijebite na sebi bilo kada za vožnju bicikla!
+Možeš voziti moj bicikl ako želiš!
+Samo ga uzmi i iskoristi (na samom sebi!) kad god se poželiš voziti.
 ~ take_bike_allowed = 1
 -> DONE
 
@@ -386,7 +386,7 @@ Ne treba mi ta stvar.
 
 = interact
 
-{talked_to_lizzy:
+{lizzy_intro_completed:
 	- 0: -> intro
 	- 1: -> main
 }
@@ -397,7 +397,7 @@ Došao sam tu na odmor, ali čini se da tu imate neke probleme.
 Možda ti mogu pomoći? Imam moć s kojom ti mogu pokazati što tražiš!
 Ali... prvo moraš odgovoriti na jednu od mojih zagonetki!
 Žao mi je zbog toga, ali tako moje moći rade...
-~ talked_to_lizzy = 1
+~ lizzy_intro_completed = 1
 -> main
 
 = main
@@ -797,7 +797,7 @@ Sad napokon možemo na more!
 	- 1: -> question_solved
 }
 
-{talked_to_helter_skelter:
+{helter_skelter_intro_completed:
 	- 1: -> try_again
 }
 
@@ -807,7 +807,7 @@ Ja sam im eksplicitno rekao da nikoga ne puštaju!
 Sigurno si došao po komadić ograde koji sam našao?!
 E pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
 Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planine!
-~ talked_to_helter_skelter = true
+~ helter_skelter_intro_completed = true
 -> choices
 
 = choices
@@ -866,7 +866,7 @@ Keep your junk to yourself!
 
 = interact
 
-{seat_belt_given_to_taxi:
+{taxi_received_seat_belt:
 	- 0: -> no_seat_belt
 	- 1: -> taking_to_mountain
 }
@@ -885,7 +885,7 @@ Nažalost, nemam više pojaseva za putnike tako da...
 	Oh... okej!
 	Čekaj da ga uglavim u vozilo...
 	>>> REMOVE_ITEM: seat_belt
-	~ seat_belt_given_to_taxi = 1
+	~ taxi_received_seat_belt = 1
 	-> taking_to_mountain
 + [To je preopasno! Neću!]
 	Mudar izbor.
@@ -893,7 +893,7 @@ Nažalost, nemam više pojaseva za putnike tako da...
 	-> DONE
 
 = taking_to_mountain
-Možeš me odvesti do planine?
+Mogu te odvesti do planine!
 + [Odvedi me u planinu]
 	>>> TELEPORT_PLAYER: taxi_at_mountain
 	OK!
@@ -979,22 +979,22 @@ Nisi smeće! Bah!
 
 >>> REMOVE_ITEM: {used_item}
 >>> SET_STATE_PROPERTY: {interact_id} is_appeased 1
-{received_pump_from_canster:
-	- 1: -> thanks_for_trash
-	- 0: -> give_a_pump
+{canster_gave_pump:
+	- 1: -> thank_for_trash
+	- 0: -> give_pump
 }
 
-= thanks_for_trash
+= thank_for_trash
 Njam njam!
 Ja volim smeće!
 -> DONE
 
-= give_a_pump
+= give_pump
 Njam njam, hvala na smeću!
 Zauzvrat, evo tebi nešto što je netko bacio, a uopće nije smeće!
 Zapravo je korisna pumpa za bicikl!
 >>> ADD_ITEM: pump
-~ received_pump_from_canster = 1
+~ canster_gave_pump = 1
 -> DONE
 
 === conv_canster_appeased ===

@@ -79,6 +79,7 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 					yield(self, "cutscene_completed")
 			"intro":
 				intro_cutscene()
+				yield(self, "cutscene_completed")
 			_:
 				push_error("Cutscene with id '{0}' was not recognized!".format([cutscene_id]))
 				pass
@@ -524,7 +525,6 @@ func intro_cutscene():
 	var mr_smog := State.get_character_by_id("intro_mr_smog").object
 	var player := State.get_character_by_id("intro_player").object
 	var solid_snejk := State.get_character_by_id("intro_solid_snejk").object
-	var solid_slug := State.get_character_by_id("intro_solid_slug").object
 	var happy_tree := State.get_character_by_id("intro_happy_tree").object
 
 	var ball = Flow.game_canvas.get_node("YSort/Intro/Ball")
@@ -628,5 +628,6 @@ func intro_cutscene():
 
 	solid_snejk = State.get_character_by_id("solid_snejk").object
 	_on_dialogue_requested(solid_snejk)
+	yield(self, "dialogue_completed")
 
 	emit_signal("cutscene_completed")
