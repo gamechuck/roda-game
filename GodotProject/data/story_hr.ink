@@ -930,7 +930,7 @@ Nije mi to interesantno.
 
 = interact
 
-Želiš nazad u park?
+Želiš nazad u grad?
 + [Da!]
 	>>> TELEPORT_PLAYER: taxi_at_park
 	OK! Idemo!
@@ -1090,6 +1090,7 @@ Hej, jesi li nahranio sve kante za smeće?
 Hvala na praćenju do kuće!
 Idem vidjeti što mi rade mama i tata doma dok mene nema!
 // Goes in and checks with his mom.
+>>> PLAY_CUTSCENE: fade_to_black_and_back
 Hej, čini se da je na krovu ostao otpuhan dio ograde.
 Slobodno ga uzmi, pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
