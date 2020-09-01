@@ -5,6 +5,8 @@ enum CLOTHING {PLAIN, COLORFUL}
 func _ready():
 	register_state_property("wearing_color", CLOTHING.COLORFUL)
 
+	update_animation()
+
 func update_animation():
 	var wearing_color : int = get_state_property("wearing_color")
 	var state_settings : Dictionary = _state_machine.get(wearing_color, {})

@@ -36,7 +36,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 20, 24 )
+extents = Vector2( 20, 30 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 16, 6 )
@@ -46,12 +46,12 @@ id = "watto"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 7 )
-frame = 5
+frame = 4
 playing = true
-offset = Vector2( 0, -10 )
+offset = Vector2( 0, -25 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-position = Vector2( 0, -12 )
+position = Vector2( 0, -20 )
 shape = SubResource( 8 )
 
 [node name="CollisionShape2D" parent="." index="2"]

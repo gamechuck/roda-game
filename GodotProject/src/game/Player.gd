@@ -100,7 +100,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("toggle_inventory"):
 		Flow.toggle_inventory()
 
-	if event.is_action_pressed("left_mouse_button"):
+	if event.is_action_released("left_mouse_button"):
 		_target_entity = null
 		if Flow.active_character != null:
 			process_interaction(Flow.active_character)
@@ -342,44 +342,36 @@ var state_machine := {
 		TRANSPORT_MODE.FOOT: {
 			MOVING.IDLE: {
 				CLOTHING.PLAIN: {
-					"animation_name": "idle_up",
-					"flip_h": true
+					"animation_name": "idle_up"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "idle_up_color",
-					"flip_h": true
+					"animation_name": "idle_up_color"
 				},
 			},
 			MOVING.WALK: {
 				CLOTHING.PLAIN: {
-					"animation_name": "walk_up",
-					"flip_h": true
+					"animation_name": "walk_up"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "walk_up_color",
-					"flip_h": true
+					"animation_name": "walk_up_color"
 				}
 			}
 		},
 		TRANSPORT_MODE.BIKE: {
 			MOVING.IDLE:{
 				CLOTHING.PLAIN: {
-					"animation_name": "cycle_up_idle",
-					"flip_h": true
+					"animation_name": "cycle_up_idle"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_up_idle_color",
-					"flip_h": true
+					"animation_name": "cycle_up_idle_color"
 				}
 			},
 			MOVING.WALK:{
 				CLOTHING.PLAIN: {
-					"animation_name": "cycle_up",
-					"flip_h": true
+					"animation_name": "cycle_up"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_up_color",
-					"flip_h": true
+					"animation_name": "cycle_up_color"
 				}
 			}
 		}
@@ -388,44 +380,36 @@ var state_machine := {
 		TRANSPORT_MODE.FOOT: {
 			MOVING.IDLE: {
 				CLOTHING.PLAIN: {
-					"animation_name": "idle_down",
-					"flip_h": true
+					"animation_name": "idle_down"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "idle_down_color",
-					"flip_h": true
+					"animation_name": "idle_down_color"
 				},
 			},
 			MOVING.WALK: {
 				CLOTHING.PLAIN: {
-					"animation_name": "walk_down",
-					"flip_h": true
+					"animation_name": "walk_down"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "walk_down_color",
-					"flip_h": true
+					"animation_name": "walk_down_color"
 				}
 			}
 		},
 		TRANSPORT_MODE.BIKE: {
 			MOVING.IDLE:{
 				CLOTHING.PLAIN: {
-					"animation_name": "cycle_down_idle",
-					"flip_h": true
+					"animation_name": "cycle_down_idle"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_down_idle_color",
-					"flip_h": true
+					"animation_name": "cycle_down_idle_color"
 				}
 			},
 			MOVING.WALK:{
 				CLOTHING.PLAIN: {
-					"animation_name": "cycle_down",
-					"flip_h": true
+					"animation_name": "cycle_down"
 				},
 				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_down_color",
-					"flip_h": true
+					"animation_name": "cycle_down_color"
 				}
 			}
 		}
