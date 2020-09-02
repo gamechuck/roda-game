@@ -805,7 +805,7 @@ Sad napokon možemo na more!
 
 ?
 Kako si prošao sve moje skejter minione???
-Ja sam im eksplicitno rekao da nikoga ne puštaju!
+Ja sam im jasno rekao da nikoga ne puštaju!
 Sigurno si došao po komadić ograde koji sam našao?!
 E pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
 Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planine!
@@ -825,7 +825,7 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planin
 + [Molim te, gospodine Helter Skejter, možete li nam ipak dati komadić ograde, jako nam je to važno?]
 	Što?!
 	Je li to... Pristojnost!?
-	U mojoj butigi?!?!?!
+	U mojem parku?!?!?!
 	To nisam čuo od...
 	Od...
 	Od kad sam išao svojoj dragoj bakici na kolače...
@@ -834,7 +834,6 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planin
 	Evo, uzmi ovu ogradu.
 	Zbogom, čudovište!
 	>>> ADD_ITEM: fence
-	A vi, skejteri, prestanite ga udarati!
 	~ got_fence_from_helter_skelter = true
 	-> DONE
 
@@ -1151,9 +1150,17 @@ Evo, možeš uzeti moju bateriju. Ne treba mi više!
 -> main_back_at_park
 
 = main_back_at_park
+{mr_smog_defeated:
+	- 1: -> after_mr_smog_defeated
+}
 Predivan dan!
 Jedino što fali je ono veliko drvo koje je nekad tu bilo posađeno.
 Pitam se što se dogodilo s tim drvom...
+-> DONE
+
+= after_mr_smog_defeated
+Thanks for bringing back our happy tree!
+That foolish grin of his always brightens up my day!
 -> DONE
 
 = process_arrival
@@ -1513,23 +1520,23 @@ Vrijeme je za malo bicikliranja!
 -> DONE
 
 = pop_bike_question
-So nice of Solid Slug to let me use his bike!
-I can't use this bike everywhere though!
+Drago mi je da mi je Slug dopustio da koristim njegov bicikl.
+Ali zbog sigurnosti u prometu mogu ga koristiti samo u određenim situacijama.
 - (multiple_choice)
-Where am I allowed to use Solid Slug's bike?
-+ [Everywhere! Even in the middle of the street!]
-	No no no!
-	I distinctly remember some places where it is dangerous to ride my bike!
-	Regardless, I would get run over by cars if I drive in the middle of the street!
+Gdje sve smijem koristiti bicikl?
++ [Svugdje! Čak i nasred ceste!]
+	Ne, ne, ne...
+	Točno se sjećam da ima mjesta gdje je preopasno za mene ili druge da vozim bicikl...
+	Da ga vozim nasred ceste, pokupili bi me auti!
 	-> multiple_choice
-+ [On the red bike lanes and the parks and sidewalks, but not on the zebras!] 
-	Yes! I remember now!
-	This is exactly what I should do!
++ [Na biciklističkim stazama i po parkovima ali ako ne po pločniku ni kolniku.] 
+	Da, tako je!
+	To je najtočnije.
 	~ player_answered_bike_question = 1
 	-> hop_on_bike
-+ [On the zebras and the sidewalks!] 
-	I don't think zebras are allowed for bikes!
-	I should always get off my bike when crossing a zebra!
++ [Po biciklističkim stazama, parkovima i preko bilo koje zebre, ali ne po pločniku i kolniku.] 
+	Mislim da ne smijem ići preko bilo koje zebre...
+	Ako nema biciklističke staze, moram se spustiti s bicikla i zebru prijeći ručno.
 	-> multiple_choice
 
 = pump
@@ -1568,48 +1575,44 @@ Pitam se što da radim s ovim?
 -> DONE
 
 === conv_first_time_gummy ===
-Eww!!! This stuff is sticky!
-I move really slow on this chewing gum.
-And it's all around this part of town...
+Uhuhuh, što je ovo posvuda na podu?!
+Ljepljive žvakaće gume? Fuj!
+Morat ću usporiti dok se tu šetam...
+Možda bi bilo lakše s biciklom.
 -> DONE
 
 === conv_first_time_zebra ===
-How do I use this thing again?
-Let's try to remember what I have to do here.
-I don't want to get run over by cars!
+Kako prelazim zebru?
+Ovo je važno da me ne pregaze auti!
 - (multiple_choice)
-If I remember correctly, to cross these zebras I will have to...
-+ [Look up into the sky and just hope I don't get crushed.]
+Ako se točno sjećam, da sigurno prijeđem preko zebre, moram...
++ [Gledati u nebo i moliti se da me nitko ne pregazi!]
 	...
-	That doesn't sound right!
-	I should at least look out for cars when I cross!
+	Ne, nije to točno...
 	-> multiple_choice
-+ [Look left and then right, look left again and then cross!] 
-	Yes! I remember now!
-	This is exactly what I should do!
++ [Pogledati lijevo pa desno, pa opet lijevo i onda prijeći!] 
+	Da, tako je!
+	Lijevo-desno-lijevo! I onda opet na pola zebre!
 	-> DONE
-+ [Look right and then left, look right again and then cross!] 
-	Mmmmmh... I think I'm mixing up directions!
-	Lemme me think reaaaaalllly hard again!
++ [Pogledati desno pa lijevo pa opet desno i onda prijeći!] 
+	Ne, nije dobro, mislim da sam fulao smjer...
 	-> multiple_choice
 
 === conv_first_time_traffic_lights ===
 
-Oh no! they put some traffic lights here!
-I faintly remember something about green and red, but..
-What was it again?
+Tu su sada neki semafori!
+Skroz sam zaboravio kako prelaziti preko zebre dok radi semafor...
 - (multiple_choice)
-If I remember correctly, to cross these zebras I will have to...
-+ [Look up into the sky and just hope I don't get crushed.]
+Kako se ono prelazi cesta koja ima semafore?
++ [Gledati u nebo i moliti se da me nitko ne pregazi!]
 	...
-	I don't think this is the solution to any problem!
-	
+	Ne, mislim da to nije rješenje nijednom problemu...
 	-> multiple_choice
-+ [Wait for a green pedestrian light and cross the screet.] 
-	Yes! I remember now!
-	This is exactly what I should do!
++ [Čekati da na pješačkom semaforu bude zeleno i onda prijeći.] 
+	Da, tako je!
+	Točno to trebam napraviti.
 	-> DONE
-+ [Wait for a green traffic light and cross the street.] 
-	Wait wouldn't this mean the cars are driving?
-	This is gonna get me in an accident!
++ [Čekati da na semaforu za aute bude zeleno i onda prijeći.] 
+	Ne bi li ovo značilo da će me auti pregaziti jer je njima zeleno?
+	Moram bolje promisliti.
 	-> multiple_choice
