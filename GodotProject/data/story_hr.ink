@@ -5,6 +5,8 @@ VAR picked_up_fence_in_smog_town = 0
 VAR got_fence_from_helter_skelter = 0
 VAR got_fence_from_wheelie = 0
 
+VAR player_answered_bike_question = 0
+
 VAR player_wearing_color = 0
 
 // SolidSnejk
@@ -164,7 +166,7 @@ Nakon toga se možemo nastaviti loptati!
 = main
 Hej, idemo popraviti ogradu zajedno! #solid_snejk_main_1
 Ti mi donesi dijelove ograde i ja ću ju postaviti. #solid_snejk_main_2
-Zločesti Mister Smog ih je otpuhao na sve strane svijeta... #solid_snejk_main_3
+Mister Smog ih je otpuhao na sve strane svijeta... #solid_snejk_main_3
 -> DONE
 
 = use_item
@@ -231,7 +233,7 @@ Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 
 = has_broken_bike
 
-Hvala što s mi našao bicikl!
+Hvala što si mi našao bicikl!
 ~ gave_back_bike = 1
 >>> REMOVE_ITEM: broken_bike
 >>> SHOW: ReturnedBike
@@ -1503,9 +1505,32 @@ Dosta je bilo bicikla za sada.
 -> DONE
 
 = hop_on_bike
+{player_answered_bike_question:
+	- 0:  -> pop_bike_question
+}
 >>> SET_STATE_PROPERTY: player on_bike 1
 Vrijeme je za malo bicikliranja!
 -> DONE
+
+= pop_bike_question
+So nice of Solid Slug to let me use his bike!
+I can't use this bike everywhere though!
+- (multiple_choice)
+Where am I allowed to use Solid Slug's bike?
++ [Everywhere! Even in the middle of the street!]
+	No no no!
+	I distinctly remember some places where it is dangerous to ride my bike!
+	Regardless, I would get run over by cars if I drive in the middle of the street!
+	-> multiple_choice
++ [On the red bike lanes and the parks and sidewalks, but not on the zebras!] 
+	Yes! I remember now!
+	This is exactly what I should do!
+	~ player_answered_bike_question = 1
+	-> hop_on_bike
++ [On the zebras and the sidewalks!] 
+	I don't think zebras are allowed for bikes!
+	I should always get off my bike when crossing a zebra!
+	-> multiple_choice
 
 = pump
 Pumpa?
@@ -1541,3 +1566,50 @@ Trebao bih naći kantu za smeće u koju ću ovo baciti!
 {used_item}
 Pitam se što da radim s ovim?
 -> DONE
+
+=== conv_first_time_gummy ===
+Eww!!! This stuff is sticky!
+I move really slow on this chewing gum.
+And it's all around this part of town...
+-> DONE
+
+=== conv_first_time_zebra ===
+How do I use this thing again?
+Let's try to remember what I have to do here.
+I don't want to get run over by cars!
+- (multiple_choice)
+If I remember correctly, to cross these zebras I will have to...
++ [Look up into the sky and just hope I don't get crushed.]
+	...
+	That doesn't sound right!
+	I should at least look out for cars when I cross!
+	-> multiple_choice
++ [Look left and then right, look left again and then cross!] 
+	Yes! I remember now!
+	This is exactly what I should do!
+	-> DONE
++ [Look right and then left, look right again and then cross!] 
+	Mmmmmh... I think I'm mixing up directions!
+	Lemme me think reaaaaalllly hard again!
+	-> multiple_choice
+
+=== conv_first_time_traffic_lights ===
+
+Oh no! they put some traffic lights here!
+I faintly remember something about green and red, but..
+What was it again?
+- (multiple_choice)
+If I remember correctly, to cross these zebras I will have to...
++ [Look up into the sky and just hope I don't get crushed.]
+	...
+	I don't think this is the solution to any problem!
+	
+	-> multiple_choice
++ [Wait for a green pedestrian light and cross the screet.] 
+	Yes! I remember now!
+	This is exactly what I should do!
+	-> DONE
++ [Wait for a green traffic light and cross the street.] 
+	Wait wouldn't this mean the cars are driving?
+	This is gonna get me in an accident!
+	-> multiple_choice

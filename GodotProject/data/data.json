@@ -59,7 +59,7 @@
                     200
                 ],
                 "position": [
-                    320,
+                    340,
                     115
                 ],
                 "texture": "res://roda-assets/Portraits/solid_slug.png"
@@ -75,12 +75,12 @@
             "knot": "conv_taxi_at_park",
             "portrait": {
                 "size": [
-                    200,
-                    200
+                    150,
+                    150
                 ],
                 "position": [
-                    312,
-                    120
+                    345,
+                    152
                 ],
                 "texture": "res://roda-assets/Portraits/taxi.png"
             }
@@ -90,12 +90,12 @@
             "knot": "conv_taxi_at_mountain",
             "portrait": {
                 "size": [
-                    200,
-                    200
+                    150,
+                    150
                 ],
                 "position": [
-                    285,
-                    120
+                    345,
+                    152
                 ],
                 "texture": "res://roda-assets/Portraits/taxi.png"
             }
@@ -196,7 +196,7 @@
             }
         },
         "wheelie": {
-            "name": "Wheelie",
+            "name": "Vilko",
             "knot": "conv_wheelie",
             "portrait": {
                 "size": [
@@ -253,8 +253,8 @@
                     200
                 ],
                 "position": [
-                    306,
-                    69
+                    327,
+                    79
                 ],
                 "texture": "res://roda-assets/Portraits/skater.png"
             }

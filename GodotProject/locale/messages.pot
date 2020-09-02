@@ -5,6 +5,9 @@ msgstr ""
 msgid "Hello world!"
 msgstr ""
 
+msgid "GAME_TITLE"
+msgstr ""
+
 msgid "PAUSE_MESSAGE"
 msgstr ""
 

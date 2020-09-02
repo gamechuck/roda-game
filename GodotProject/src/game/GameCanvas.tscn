@@ -147,13 +147,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 130, 60 )
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 130, 60 )
 
 [sub_resource type="NavigationPolygon" id=16]
@@ -427,15 +427,15 @@ id = "helter_skelter"
 position = Vector2( 736.404, 2782.16 )
 
 [node name="CansterLeft" parent="YSort/Characters" instance=ExtResource( 34 )]
-position = Vector2( 3350.25, 2384.29 )
+position = Vector2( 3392.72, 2306.89 )
 id = "canster_left"
 
 [node name="CansterMiddle" parent="YSort/Characters" instance=ExtResource( 34 )]
-position = Vector2( 3436.35, 2040.57 )
+position = Vector2( 3391.99, 2124.57 )
 id = "canster_middle"
 
 [node name="CansterRight" parent="YSort/Characters" instance=ExtResource( 34 )]
-position = Vector2( 3671.28, 2027.22 )
+position = Vector2( 3747.73, 1934.72 )
 id = "canster_right"
 
 [node name="TrafficLoops" type="YSort" parent="YSort"]
@@ -545,7 +545,7 @@ position = Vector2( 3228.31, 3065.67 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
-shape = SubResource( 17 )
+shape = SubResource( 13 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkingToBike/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( -110.008, -42.5591 )
@@ -580,7 +580,7 @@ position = Vector2( 2590.04, 3004.68 )
 extents = Vector2( 130, 60 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 18 )
+shape = SubResource( 14 )
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 32 )]
 position = Vector2( 114.859, -44.3281 )
@@ -613,7 +613,7 @@ extents = Vector2( 130, 60 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 19 )
+shape = SubResource( 15 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 30 )]
 position = Vector2( 98.3051, 55.5539 )
