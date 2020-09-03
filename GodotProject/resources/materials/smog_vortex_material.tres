@@ -1,0 +1,56 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_texture;
+uniform vec4 color : hint_color;
+
+// Rotation speed of the vortex.
+uniform float speed = 0.1;
+
+// Rotate a UV with a certain degree in radians.
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+    float cosa = cos(rotation);
+    float sina = sin(rotation);
+    uv -= pivot;
+    return vec2(
+        cosa * uv.x - sina * uv.y,
+        cosa * uv.y + sina * uv.x 
+    ) + pivot;
+}
+
+// Do the actual rotation in a vertex shader for performance.
+void vertex() {
+	VERTEX = rotateUV(VERTEX, 0.0/TEXTURE_PIXEL_SIZE, TIME * speed);
+}
+
+// 
+void fragment() {
+	COLOR = color*texture(noise_texture, UV);
+
+	// Center the UV to the middle.
+	vec2 c_UV = UV - vec2(0.5, 0.5);
+	float radius_to_center = sqrt(c_UV.x*c_UV.x+c_UV.y*c_UV.y);
+	// Cut-off fully when the radius is > 0.5, otherwise have a gradual increase towards
+	// the center of the vortex.
+	if (radius_to_center > 0.5) {
+		 COLOR.a = 0.0;
+	} else {
+	 	COLOR.a = 1.0 - 2.0*radius_to_center;
+		COLOR.a *= 2.0;
+	}
+}"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+period = 32.0
+
+[sub_resource type="NoiseTexture" id=3]
+seamless = true
+noise = SubResource( 2 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/color = Color( 0.541176, 0.168627, 0.890196, 1 )
+shader_param/speed = 0.1
+shader_param/noise_texture = SubResource( 3 )

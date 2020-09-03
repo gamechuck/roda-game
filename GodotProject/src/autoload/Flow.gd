@@ -1,6 +1,6 @@
 extends Node
 
-enum STATE {MENU, GAME}
+enum STATE {MENU, LOGO, GAME}
 
 const OPTIONS_PATH := "res://options.cfg"
 # Settings are a subset of options that can be modified by the user.
@@ -41,6 +41,10 @@ var _game_flow := {
 		"packed_scene": preload("res://src/Game.tscn"),
 		"state": STATE.GAME
 		}, 
+	"logo": {
+		"packed_scene": preload("res://src/Logo.tscn"),
+		"state": STATE.LOGO
+		},
 	"menu": {
 		"packed_scene": preload("res://src/Menu.tscn"),
 		"state": STATE.MENU

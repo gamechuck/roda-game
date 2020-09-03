@@ -34,6 +34,10 @@ func _ready():
 	register_state_property("on_bike", TRANSPORT_MODE.FOOT)
 	register_state_property("wearing_color", CLOTHING.PLAIN)
 
+	register_state_property("entered_gummy", 0)
+	register_state_property("entered_zebra", 0)
+	register_state_property("entered_traffic_lights", 0)
+
 	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
 
@@ -51,8 +55,9 @@ func _on_autonomy_revoked():
 	set_physics_process(false)
 	set_process_unhandled_input(false)
 
-	# On extra animation update to force idle!
-	update_animation()
+	# One extra animation update to force idle!
+	update_state()
+	nav_path = PoolVector2Array()
 
 func _on_autonomy_granted():
 	set_physics_process(true)
@@ -152,6 +157,10 @@ func _on_interact_area_entered(area):
 			nav_path = PoolVector2Array()
 	elif area is class_gummy:
 		_overlapping_with_gummy = true
+		if get_state_property("entered_gummy") == 0:
+			set_state_property("entered_gummy", 1)
+			update_state()
+			Director._start_knot_dialogue(self, "conv_first_time_gummy")
 		print("Player entered gummy!")
 	elif area is class_safe_zone:
 		respawn_position = area.position
@@ -208,7 +217,7 @@ func get_move_speed() -> float:
 		move_speed *= ConfigData.gummy_modifier
 	return move_speed
 
-func update_state(move_direction : Vector2):
+func update_state(move_direction : Vector2 = Vector2.ZERO):
 	var normalized_direction := move_direction.normalized()
 	var abs_direction := normalized_direction.abs()
 	var old_moving : int = _moving

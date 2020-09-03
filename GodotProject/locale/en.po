@@ -34,6 +34,9 @@ msgstr "Restart"
 msgid "SETTINGS"
 msgstr "Settings"
 
+msgid "HOW_TO_PLAY"
+msgstr "How to Play?"
+
 msgid "START"
 msgstr "Start"
 
@@ -42,6 +45,12 @@ msgstr "Quit"
 
 msgid "BACK"
 msgstr "Back"
+
+msgid "USE_KEY"
+msgstr "Use"
+
+msgid "MOVE_KEY"
+msgstr "Movement"
 
 msgid "DRIVE_MESSAGE"
 msgstr "Check arrangement..."

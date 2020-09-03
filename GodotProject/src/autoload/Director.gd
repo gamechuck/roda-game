@@ -33,6 +33,9 @@ func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	dialogue_in_progress = _start_dialogue()
 
 func _start_knot_dialogue(node: Node2D, knot : String) -> void:
+	# First stop the player autonomy!
+	emit_signal("revoke_player_autonomy")
+
 	story.variables_state.set("interact_id", node.state.id)
 	story.variables_state.set("conv_type", 0)
 	interact_node = node
@@ -42,7 +45,7 @@ func _start_knot_dialogue(node: Node2D, knot : String) -> void:
 		dialogue_in_progress = update_dialogue()
 	else:
 		push_error("Could not find knot '{0}' in compiled INK-file.".format([knot]))
-		dialogue_in_progress = false
+		_stop_dialogue()
 
 func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) -> void:
 	if not cutscene_in_progress:

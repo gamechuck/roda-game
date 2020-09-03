@@ -335,7 +335,7 @@ Ako nema pločnika, gdje se pješaci kreću?
 + [Sredinom prometnice.]
 	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
 	-> start_question
-+ [Skakuću s jedne strane prometnice na drugu.]
++ [Skakućući s jedne strane prometnice na drugu.]
 	KRIVO! KRIVO!
 	-> start_question
 
@@ -557,7 +557,7 @@ Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može ući i popeti se
 // PAN TO HELTER SKELTER:
 >>> PAN_CAMERA_TO_POSITION: 2500 3738
 Čini se da je neki ljutko sa skejtom našao ogradu i prisvojio je sebi.
-Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i riječitost, čini se!
+Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i rječitost, čini se!
 >>> RESET_CAMERA
 -> DONE
 
@@ -686,14 +686,14 @@ Trebamo to popraviti!
 -> DONE
 
 = tyr_taking_fixed_bike
-Mogao bi mi bicikl!
+Mogao bi uzeti bicikl!
 {take_bike_allowed:
 	- 0: -> first_ask_nicely
 	- else: -> take_fixed_bike
 }
 
 = first_ask_nicely
-Bolje da pitam Solid Slug prije nego što ga uzmem...
+Bolje da pitam Solid Slug-a prije nego što ga uzmem...
 -> DONE
 
 = take_fixed_bike
@@ -715,7 +715,7 @@ Solid Slug je rekao da to mogu podnijeti!
 	- 1: -> fix_bike_with_pump
 }
 
-Trebam prvo otkriti što ne valja s bicilkom...
+Trebam prvo otkriti što ne valja s biciklom...
 -> DONE
 
 = fix_bike_with_pump
@@ -805,7 +805,7 @@ Sad napokon možemo na more!
 
 ?
 Kako si prošao sve moje skejter minione???
-Ja sam im jasno rekao da nikoga ne puštaju!
+Ja sam im eksplicitno rekao da nikoga ne puštaju!
 Sigurno si došao po komadić ograde koji sam našao?!
 E pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
 Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planine!
@@ -825,7 +825,7 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planin
 + [Molim te, gospodine Helter Skejter, možete li nam ipak dati komadić ograde, jako nam je to važno?]
 	Što?!
 	Je li to... Pristojnost!?
-	U mojem parku?!?!?!
+	U mojoj butigi?!?!?!
 	To nisam čuo od...
 	Od...
 	Od kad sam išao svojoj dragoj bakici na kolače...
@@ -834,6 +834,7 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planin
 	Evo, uzmi ovu ogradu.
 	Zbogom, čudovište!
 	>>> ADD_ITEM: fence
+	A vi, skejteri, prestanite ga udarati!
 	~ got_fence_from_helter_skelter = true
 	-> DONE
 
@@ -1101,7 +1102,7 @@ Slobodno ga uzmi, pa možda popraviš ogradu!
 
 = main_at_house_before_park_fixed
 Hvala što si me otpratio.
-Mislim da ću ostati ovjde dok se ne popravi ograda u parku.
+Mislim da ću ostati ovdje dok se ne popravi ograda u parku.
 Dođi po mene kad je popravite! Bok bok!
 -> DONE
 
@@ -1159,8 +1160,8 @@ Pitam se što se dogodilo s tim drvom...
 -> DONE
 
 = after_mr_smog_defeated
-Thanks for bringing back our happy tree!
-That foolish grin of his always brightens up my day!
+Hvala ti što si nam vratio naše sretno drvo!
+Taj njegov glupavi osmijeh uvijek mi razveseli dan!
 -> DONE
 
 = process_arrival
@@ -1340,7 +1341,7 @@ Hvala, ali sve što trebam od tebe je tvoja ljubav!
 STANI!
 Ne možeš tako ući u Smogograd!
 Zar ne vidiš kakav je unutra smog?! Nitko te neće vidjeti s takvom odjećom!
-Vrati se kad imaš nešto svijetlije na sebi!
+Vrati se kad imaš nešto svjetlije na sebi!
 Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
 -> DONE
 
@@ -1382,12 +1383,6 @@ Hvala vam na pomoći!
 -> DONE
 
 = use_item
-
-{used_item:
-	- else: -> default
-}
-
-= default
 Zahvaljujem na poklonu!
 >>> REMOVE_ITEM: {used_item}
 -> DONE

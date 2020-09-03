@@ -4,12 +4,18 @@
 code = "shader_type canvas_item;
 
 uniform sampler2D noise_texture;
+// The actual density of the fog.
 uniform float amount;
 uniform vec4 color : hint_color;
 
+// Movement speed of the vortex.
+uniform float speed = 0.04;
+
+// Move a noisey colored texture in function of time.
 void fragment() {
 	vec2 modified_UV = UV;
-	modified_UV.x = modified_UV.x + TIME/25.0;
+	// Move the UV...
+	modified_UV.x = modified_UV.x + TIME*speed;
 
 	COLOR = color*texture(noise_texture, modified_UV);
 
@@ -26,4 +32,5 @@ noise = SubResource( 2 )
 shader = SubResource( 1 )
 shader_param/amount = 0.0
 shader_param/color = Color( 0.541176, 0.168627, 0.890196, 0.784314 )
+shader_param/speed = 0.04
 shader_param/noise_texture = SubResource( 3 )

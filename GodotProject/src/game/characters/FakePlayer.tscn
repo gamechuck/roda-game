@@ -54,6 +54,6 @@ animations = [ {
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 9 )
 animation = "idle_up"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 0, -18 )

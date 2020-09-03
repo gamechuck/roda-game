@@ -13,7 +13,8 @@ func set_state(value : class_character_state) -> void:
 	if value:
 		_state = weakref(value)
 		value.object = self
-		set_visible(value.visible)
+		if visible != value.visible:
+			set_visible(value.visible)
 func get_state() -> class_character_state:
 	return _state.get_ref()
 var _state = WeakRef.new()

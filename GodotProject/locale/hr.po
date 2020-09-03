@@ -35,6 +35,9 @@ msgstr "Ponovno"
 msgid "SETTINGS"
 msgstr "Postavke"
 
+msgid "HOW_TO_PLAY"
+msgstr "Kako igrati?"
+
 msgid "START"
 msgstr "Pokreni"
 
@@ -43,6 +46,12 @@ msgstr "Izlaz"
 
 msgid "BACK"
 msgstr "Nazad"
+
+msgid "USE_KEY"
+msgstr "Upotrijebi"
+
+msgid "MOVE_KEY"
+msgstr "Kretanje"
 
 msgid "DRIVE_MESSAGE"
 msgstr "Raspored sjedenja..."

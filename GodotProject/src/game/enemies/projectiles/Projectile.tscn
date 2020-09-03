@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/game/enemies/projectiles/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://roda-assets/Characters/MrSmog/smog_particle.png" type="Texture" id=2]
-[ext_resource path="res://resources/materials/mr_smog_material_test.tres" type="Material" id=3]
+[ext_resource path="res://resources/materials/smog_distortion_material.tres" type="Material" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

@@ -5,7 +5,7 @@ onready var _player := $YSort/Player
 onready var _props := $YSort/Props
 onready var _fences := $YSort/Fences
 
-onready var _smog_sprite := $SmogSprite
+onready var _smog_sprite := $Map/SmogVortex
 
 onready var _copper_blockade_shape := $CopperBlockade/CollisionShape2D
 

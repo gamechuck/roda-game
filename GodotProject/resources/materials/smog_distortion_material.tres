@@ -8,23 +8,13 @@ uniform vec4 color : hint_color;
 
 uniform float speed = 0.1;
 
+// Gives Mr. Smog and his projectiles a smokey appearance by offsetting the 
+// UV-texture with a randomized noisey texture in function of time.
 void fragment() {
 	vec2 modified_UV = UV;
 	modified_UV.x = modified_UV.x - TIME/5.0;
-	//modified_UV.y = modified_UV.y + TIME/25.0;
 
-	//COLOR = texture(TEXTURE, UV);
 	COLOR = texture(TEXTURE, UV + 0.1*texture(noise_texture, modified_UV).rg-0.05);
-	//COLOR.rgb -= texture(noise_texture, modified_UV).rgb;
-	//COLOR.a *= texture(noise_texture, modified_UV).a;
-
-	//COLOR = color*texture(noise_texture, rotateUV(UV, vec2(0.5), TIME));
-
-	//COLOR = texture(TEXTURE, UV);
-
-    //COLOR.a = 1.0 - UV.x;
-
-	//COLOR.a *= amount;
 }"
 
 [sub_resource type="OpenSimplexNoise" id=2]

@@ -31,10 +31,10 @@ func _ready():
 	update_lights()
 
 	if not Engine.editor_hint:
-		if not has_traffic_lights:
-			var _success := _interact_area.connect("area_shape_entered", self, "_on_area_shape_entered")
-			_success = _interact_area.connect("area_shape_exited", self, "_on_area_shape_exited")
-		else:
+		var _success := _interact_area.connect("body_entered", self, "_on_body_entered")
+		_success = _interact_area.connect("body_exited", self, "_on_body_exited")
+
+		if has_traffic_lights:
 			var _error := _timer.connect("timeout", self, "_on_timer_timeout")
 			_timer.wait_time = get_wait_time()
 			_timer.one_shot = true
@@ -60,17 +60,21 @@ func _on_timer_timeout():
 	_timer.start()
 	update_lights()
 
-func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
-	if area.get_parent().name == "Player":
+func _on_body_entered(body : PhysicsBody2D):
+	if body.name == "Player":
+		if not has_traffic_lights and body.get_state_property("entered_zebra") == 0:
+			body.set_state_property("entered_zebra", 1)
+			Director._start_knot_dialogue(body, "conv_first_time_zebra")
+		elif has_traffic_lights and body.get_state_property("entered_traffic_lights") == 0 :
+			body.set_state_property("entered_traffic_lights", 1)
+			Director._start_knot_dialogue(body, "conv_first_time_traffic_lights")
 		player_is_inside = true
 
-func _on_area_shape_exited(_area_id, area, _area_shape, _self_shape):
-	if not is_instance_valid(area) or area == null:
-		return
-
-	if area.get_parent().name == "Player":
+func _on_body_exited(body : PhysicsBody2D):
+	if body.name == "Player":
 		player_is_inside = false
-		emit_signal("movement_is_allowed")
+		if not has_traffic_lights:
+			emit_signal("movement_is_allowed")
 
 func get_wait_time() -> float:
 	match light_color:

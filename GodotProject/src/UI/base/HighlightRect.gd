@@ -23,5 +23,5 @@ func _on_mouse_exited():
 	self_modulate.a = 0
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if is_mouse_inside and event.is_action_pressed("left_mouse_button"):
+	if is_mouse_inside and event.is_action_released("left_mouse_button"):
 		emit_signal("mouse_pressed")

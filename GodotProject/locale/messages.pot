@@ -26,6 +26,9 @@ msgstr ""
 msgid "SETTINGS"
 msgstr ""
 
+msgid "HOW_TO_PLAY"
+msgstr ""
+
 msgid "START"
 msgstr ""
 
@@ -33,6 +36,12 @@ msgid "QUIT"
 msgstr ""
 
 msgid "BACK"
+msgstr ""
+
+msgid "USE_KEY"
+msgstr ""
+
+msgid "MOVE_KEY"
 msgstr ""
 
 msgid "DRIVE_MESSAGE"

@@ -9,10 +9,10 @@ onready var _animated_sprite := $AnimatedSprite
 enum STATE {INITIAL, LEFT, RIGHT, UP, DOWN}
 
 var frames_resources := [
-	"res://resources/cars/GreenCar.tres",
-	"res://resources/cars/RedCar.tres",
-	"res://resources/cars/PurpleCar.tres",
-	"res://resources/cars/BlueCar.tres"
+	"res://resources/cars/green_car.tres",
+	"res://resources/cars/red_car.tres",
+	"res://resources/cars/purple_car.tres",
+	"res://resources/cars/blue_car.tres"
 ]
 
 var car_state : int = STATE.INITIAL
