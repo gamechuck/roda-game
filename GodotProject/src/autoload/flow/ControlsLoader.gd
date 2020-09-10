@@ -22,6 +22,10 @@ func load_controlsJSON() -> int:
 func save_controlsJSON() -> int:
 	## Save new user-modified controls to the user://-folder
 	# TODO
+	# WARNING: There should be some kind of versioning here since the user controls
+	# directly overwrite the default ones! Leading to situations where the default
+	# controls get updated, but the user controls stay the same and miss vital
+	# control configurations!!!
 	return OK
 
 func _create_controls(controls_dictionary : Dictionary) -> int:

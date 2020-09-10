@@ -1,4 +1,4 @@
-extends class_pause_tab
+extends classPauseTab
 
 onready var _resume_button := $VBoxContainer/VBoxContainer/ResumeButton
 onready var _restart_button := $VBoxContainer/VBoxContainer/RestartButton

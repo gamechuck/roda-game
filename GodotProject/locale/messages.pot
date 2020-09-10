@@ -29,6 +29,9 @@ msgstr ""
 msgid "HOW_TO_PLAY"
 msgstr ""
 
+msgid "ABOUT"
+msgstr ""
+
 msgid "START"
 msgstr ""
 

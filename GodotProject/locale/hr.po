@@ -38,6 +38,9 @@ msgstr "Postavke"
 msgid "HOW_TO_PLAY"
 msgstr "Kako igrati?"
 
+msgid "ABOUT"
+msgstr "O igri"
+
 msgid "START"
 msgstr "Pokreni"
 

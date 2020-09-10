@@ -2,7 +2,7 @@ extends TabContainer
 
 func _ready():
 	for child in get_children():
-		if child is class_menu_tab:
+		if child is classMenuTab:
 			child.connect("button_pressed", self, "set_current_tab")
 
 func set_current_tab(type : int):

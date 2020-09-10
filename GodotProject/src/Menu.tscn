@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://resources/theme.tres" type="Theme" id=2]
-[ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=3]
-[ext_resource path="res://src/menu/MainMenuTab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/menu/SettingsMenuTab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/menu/MenuTabContainer.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/menu/MainMenuTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/menu/SettingsMenuTab.tscn" type="PackedScene" id=5]
 [ext_resource path="res://roda-assets/UI/MainMenu/Background2.png" type="Texture" id=6]
-[ext_resource path="res://src/menu/HowToPlayMenuTab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/menu/HowToPlayMenuTab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/menu/AboutMenuTab.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 6 )
@@ -49,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="MenuTabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
@@ -59,15 +60,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenuTab" parent="TabContainer" instance=ExtResource( 4 )]
+[node name="MainMenuTab" parent="MenuTabContainer" instance=ExtResource( 4 )]
 
-[node name="HowToPlayMenuTab" parent="TabContainer" instance=ExtResource( 7 )]
+[node name="HowToPlayMenuTab" parent="MenuTabContainer" instance=ExtResource( 7 )]
 visible = false
 tab_type = 1
 
-[node name="SettingsMenuTab" parent="TabContainer" instance=ExtResource( 5 )]
+[node name="AboutMenuTab" parent="MenuTabContainer" instance=ExtResource( 8 )]
 visible = false
 tab_type = 2
+
+[node name="SettingsMenuTab" parent="MenuTabContainer" instance=ExtResource( 5 )]
+visible = false
+tab_type = 3
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

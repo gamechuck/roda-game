@@ -1,7 +1,7 @@
 extends Control
 
-onready var _tab_container := $TabContainer
+onready var _menu_tab_container := $MenuTabContainer
 
 func _ready():
 	AudioEngine.play_background_music("title")
-	_tab_container.set_current_tab(class_menu_tab.TABS.MAIN)
+	_menu_tab_container.set_current_tab(classMenuTab.TABS.MAIN)

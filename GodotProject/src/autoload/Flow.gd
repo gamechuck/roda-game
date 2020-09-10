@@ -51,7 +51,7 @@ var _game_flow := {
 		}
 	}
 var _game_state : int = STATE.MENU
-var _story_resource := load("res://addons/inkgd/runtime/story.gd")
+var _story_resource := preload("res://addons/inkgd/runtime/story.gd")
 
 var player_is_active := false
 var active_character : class_character = null
@@ -63,16 +63,17 @@ onready var _data_loader := $DataLoader
 
 func _ready():
 	var _error := load_settings()
-	reset()
-	print(                                                                                
-		"      _____    _  _____ \n",
-		" ___ |     | _| ||  _  |\n",
-		"|  _||  |  || . ||     |\n",
-		"|_|  |_____||___||__|__|\n"                                                     
-	)
-	print("version {0}.{1}".format([ 
-		ConfigData.major_version, 
-		ConfigData.minor_version]))
+	if ConfigData.verbose_mode:
+		print(                                                                                
+			"      _____    _  _____ \n",
+			" ___ |     | _| ||  _  |\n",
+			"|  _||  |  || . ||     |\n",
+			"|_|  |_____||___||__|__|\n"                                                     
+		)
+		# ASCII -> Rectangles
+		print("version {0}.{1}".format([ 
+			ConfigData.major_version, 
+			ConfigData.minor_version]))
 
 func load_settings() -> int:
 	print("----- (Re)loading game settings from file -----")
@@ -86,9 +87,6 @@ func load_settings() -> int:
 	else:
 		push_error("Failed to load settings! Check console for clues!")
 	return _error
-
-func reset():
-	is_in_editor_mode = false
 
 func load_story():
 	if OS.get_name() == "Windows":
@@ -179,7 +177,6 @@ func change_scene_to(key : String) -> void:
 
 		var error := get_tree().change_scene_to(packed_scene)
 		get_tree().paused = false
-		reset()
 		if error != OK:
 			push_error("Failed to change scene to '{0}'.".format([key]))
 		else:

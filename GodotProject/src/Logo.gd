@@ -8,7 +8,7 @@ func _ready():
 		Flow.change_scene_to("game")
 	else:
 		AudioEngine.play_background_music("title")
-		_animation_player.connect("animation_finished", self, "_on_animation_finished")
+		var _error : int = _animation_player.connect("animation_finished", self, "_on_animation_finished")
 
 func _on_animation_finished(_anim_name : String):
 	Flow.change_scene_to("menu")

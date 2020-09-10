@@ -27,7 +27,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="PauseTabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
@@ -37,11 +37,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainPauseTab" parent="TabContainer" instance=ExtResource( 3 )]
+[node name="MainPauseTab" parent="PauseTabContainer" instance=ExtResource( 3 )]
 custom_constants/margin_top = 32
 custom_constants/margin_bottom = 32
 
-[node name="SettingsPauseTab" parent="TabContainer" instance=ExtResource( 4 )]
+[node name="SettingsPauseTab" parent="PauseTabContainer" instance=ExtResource( 4 )]
 visible = false
 custom_constants/margin_top = 32
 custom_constants/margin_bottom = 32

@@ -1,4 +1,4 @@
-extends classPauseTab
+extends classMenuTab
 
 onready var _back_button := $VBoxContainer/BackButton
 

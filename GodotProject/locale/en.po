@@ -37,6 +37,9 @@ msgstr "Settings"
 msgid "HOW_TO_PLAY"
 msgstr "How to Play?"
 
+msgid "ABOUT"
+msgstr "About"
+
 msgid "START"
 msgstr "Start"
 

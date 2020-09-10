@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/json_beautifier/json_beautifier.gd"
 }, {
+"base": "MarginContainer",
+"class": "classMenuTab",
+"language": "GDScript",
+"path": "res://src/UI/menu/MenuTab.gd"
+}, {
+"base": "MarginContainer",
+"class": "classPauseTab",
+"language": "GDScript",
+"path": "res://src/UI/pause/PauseTab.gd"
+}, {
 "base": "class_character",
 "class": "class_canster",
 "language": "GDScript",
@@ -63,16 +73,6 @@ _global_script_classes=[ {
 "class": "class_item_state",
 "language": "GDScript",
 "path": "res://src/autoload/state/ItemState.gd"
-}, {
-"base": "MarginContainer",
-"class": "class_menu_tab",
-"language": "GDScript",
-"path": "res://src/menu/MenuTab.gd"
-}, {
-"base": "MarginContainer",
-"class": "class_pause_tab",
-"language": "GDScript",
-"path": "res://src/UI/pause/PauseTab.gd"
 }, {
 "base": "StaticBody2D",
 "class": "class_pedestrian_light",
@@ -126,6 +126,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "JSONBeautifier": "",
+"classMenuTab": "",
+"classPauseTab": "",
 "class_canster": "",
 "class_car": "",
 "class_character": "",
@@ -136,8 +138,6 @@ _global_script_class_icons={
 "class_highlight_rect": "",
 "class_item_slot": "",
 "class_item_state": "",
-"class_menu_tab": "",
-"class_pause_tab": "",
 "class_pedestrian_light": "",
 "class_pickup": "",
 "class_pickup_state": "",

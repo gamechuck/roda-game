@@ -1,6 +1,9 @@
+# This script loads and manages all settings and options as saved in default_options.cfg
+# and user_settings.cfg (if available).
+# Custom setter/getters should be defined whenever required!
 extends Node
 
-signal version_visibility_changed()
+signal version_visibility_changed
 
 func load_optionsCFG() -> int:
 	## Load the game and editor options and settings from both the default and the user-modified one.
@@ -42,10 +45,22 @@ func save_settingsCFG() -> int:
 						push_error("Failed to set configuration property {0}!".format([key]))
 			else: # Erase the section, since it doesnt pertain to any user-modifiable settings!
 				config.erase_section(section_id)
-		return config.save(Flow.USER_SETTINGS_PATH)
+		return _synchronize_user_settings(config)
 	else:
 		push_error("Failed to open '{0}', check file availability!".format([Flow.OPTIONS_PATH]))
 		return error
+
+func _synchronize_user_settings(config : ConfigFile) -> int:
+	## Check if 'user_settings.cfg' already exists and only overwrite settings.
+	# Thus leaving any custom dev options alone.
+	var old_config : ConfigFile = ConfigFile.new()
+	var error : int = old_config.load(Flow.USER_SETTINGS_PATH)
+	if  error == OK:
+		for section_id in config.get_sections():
+			for key in config.get_section_keys(section_id):
+				old_config.set_value(section_id, key, ConfigData.get(key))
+
+	return old_config.save(Flow.USER_SETTINGS_PATH)
 
 func _parse_config(config : ConfigFile) -> int:
 	## Load all configuration variables to the ConfigData autoload script.
