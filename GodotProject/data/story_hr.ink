@@ -69,9 +69,9 @@ EXTERNAL get_state_property(entity_id, property)
 
 === conv_intro ===
 >>> UPDATE_UI: solid_snejk
-Hej svi, idemo igrati nogomet!
+Ekipo, idemo igrati nogomet!
 >>> UPDATE_UI: solid_slug
-Daaaaa! Dodaj mi loptu!
+Daaaaa! Dodaj loptu!
 -> DONE
 
 === conv_intro_slug_no_ball ===
@@ -135,7 +135,7 @@ AHAHAHAHA!!!
 
 = intro
 Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
-Idemo naći ograde i popraviti park da se možemo opet loptati! #solid_snejk_intro_2
+Idemo naći dijelove ograde i popraviti je da se možemo opet loptati! #solid_snejk_intro_2
 ~ solid_snejk_intro_completed = 1
 -> main
 
@@ -156,16 +156,16 @@ Vrijeme je za nogomet!
 -> DONE
 
 = first_ending
-VAU, Ovo mjesto sad izgleda mnogo ljepše, zar ne?
-Makar, čini mi se da je tu nekada bilo jedno drvo...
+Vau! Ovo mjesto sad izgleda mnogo ljepše, zar ne?
+Iako, čini mi se da je tu nekada bilo jedno drvo...
 Pitam se što mu se dogodilo?
-Možda možeš otkriti što se dogodilo s našim omiljenim drvetom!
-Nakon toga se možemo nastaviti loptati!
+Možda možeš otkriti što se dogodilo s našim omiljenim drvetom?
+Nakon toga se možemo nastaviti loptati.
 -> DONE
 
 = main
-Hej, idemo popraviti ogradu zajedno! #solid_snejk_main_1
-Ti mi donesi dijelove ograde i ja ću ju postaviti. #solid_snejk_main_2
+Hej, popravimo ogradu zajedno! #solid_snejk_main_1
+Ti mi donesi dijelove ograde, a ja ću ih postaviti. #solid_snejk_main_2
 Mister Smog ih je otpuhao na sve strane svijeta... #solid_snejk_main_3
 -> DONE
 
@@ -226,8 +226,8 @@ Ne želim to uzeti...
 
 = intro
 
-Vjetar ti je otpuhao ogradu od parka?
-Ah, a ja sam zagubio svoj bicikl...
+Vjetar ti je otpuhao ogradu daleko od parka?
+A ja sam zagubio svoj bicikl...
 Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 -> DONE
 
@@ -241,27 +241,27 @@ Hvala što si mi našao bicikl!
 
 = bike_is_broken
 
-Ah, čini se da nešto ne valja s mojim biciklom...
+Čini se da nešto ne valja s mojim biciklom...
 Šteta... Možeš li mi pomoći otkriti što?
 -> DONE
 
 = issue_with_bike
 
-Ah, znači guma je ispuhana?
+Znači guma je ispuhana?
 Šteta...
 Možeš li negdje od nekoga nabaviti pumpu za bicikle?
 -> DONE
 
 = has_pump
 
-Ah, super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
+Super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 -> DONE
 
 = bike_was_fixed
 
 Hvala što si popravio moj bicikl!
 Možeš voziti moj bicikl ako želiš!
-Samo ga uzmi i iskoristi (na samom sebi!) kad god se poželiš voziti.
+Samo ga uzmi i klikni na mene kad god se poželiš voziti.
 ~ take_bike_allowed = 1
 -> DONE
 
@@ -318,38 +318,38 @@ Ne treba mi to, hvala...
 
 = pop_question
 
-Tražiš bicikl!
+Tražiš bicikl?
 Pokazat ću ti gdje sam ga našao ako mi odgovoriš na ovo pitanje:
 - (start_question)
-Ako nema pločnika, gdje se pješaci kreću?
-+ [Desnom stranom prometnice] 
-	Ha! Krivo!
+Ako nema pločnika, kuda se pješaci kreću?
++ [Desnom stranom prometnice.] 
+	Ha! Pogrešno!
 	Tako ne vidiš aute koji dolaze i u većoj si opasnosti.
 	Još ti moraš mnogo naučiti o ljudima i njihovim prometnim pravilima...
 	-> start_question
-+ [Lijevom stranom prometnice]
++ [Lijevom stranom prometnice.]
 	Tako je!
 	Lijevom stranom - kako bi lakše vidio promet koji nailazi prema tebi.
 	~ watto_question_solved = 1
 	-> show_bike_location
 + [Sredinom prometnice.]
-	Ha! Krivo! Sredinom ceste će te najlakše pokupiti auto!
+	Ha! Pogrešno! Sredinom ceste je najopasnije!
 	-> start_question
 + [Skakućući s jedne strane prometnice na drugu.]
-	KRIVO! KRIVO!
+	POGREŠNO! POGREŠNO!
 	-> start_question
 
 = show_bike_location
 Eno gdje stoji izgubljeni bicikl!
 >>> PAN_CAMERA_TO_POSITION: 3560 3032
-Sad ti je sigurno žao što nemaš moju leteću raketu?
-Hehe, šteta zar ne...
+Sad ti je sigurno žao što nemaš moju leteću raketu.
+Hehe, šteta ,zar ne...
 >>> RESET_CAMERA
 -> DONE
 
 = ending
 Vidim da si savladao šetanje po pločnicima i zebrama.
-Ali tamo gdje ja idem, ne trebaju mi ceste!
+Ali onamo kamo ja idem, ne trebaju mi ceste!
 -> DONE
 
 = use_item
@@ -362,12 +362,12 @@ Ali tamo gdje ja idem, ne trebaju mi ceste!
 }
 
 = bike
-Ah... Vidim da si otkrio kako prijeći zebre!
-Svaka čast.
+Ah... Vidim da si otkrio kako prijeći zebre.
+Svaka čast!
 -> DONE
 
 = pump
-S tim napumpaj gumu na biciklu, meni za raketu to ne treba!
+S tim napumpaj gumu na biciklu, meni za raketu to ne treba.
 -> DONE
 
 = fence
@@ -425,22 +425,22 @@ Pokazat ću ti što tvoje srce želi!
 - (start_riddle)
 Pri prelasku kolnika zebrom na biciklu trebamo:
 + [Naglo zakočiti prije prelaska.]
-	Krivo!
+	pogrešno!
 	To će samo zbuniti druge u prometu.
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 + [Na vrijeme se zaustaviti, sići s bicikla i hodati preko zebre gurajući bicikl.] 
 	TOČNO!
-	Na zebrama nije dopušteno voziti se s biciklom, moraš ga gurati.
+	Na zebrama nije dopušteno voziti bicikl, moraš ga gurati.
 	-> dobroide
 + [Ostati na biciklu i ubrzati kako bismo što prije prešli cestu] 
-	Krivo!!!
-	Ubrzavanje će samo još više povećati šansu da te neki auto slučajno pokupi!
+	Pogrešno!!!
+	Ubrzavanje će samo još više povećati opasnost da te neki auto slučajno pokupi!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
-+ [Pjevati i ne obazirati se na druge sudionike prometa.]
++ [Pjevati i ne obazirati se na druge sudionike u prometu.]
 	To sigurno.
-	Zapravo: To sigurno NE!
+	Zapravo, To sigurno NE!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 
@@ -449,7 +449,7 @@ Pri prelasku kolnika zebrom na biciklu trebamo:
 - (start_riddle)
 Zašto se prometni znakovi moraju poštivati?
 + [Zbog veselih boja.]
-	Krivo!
+	Pogrešno!
 	Razmisli malo bolje!
 	-> start_riddle
 + [Zbog sigurnosti u prometu.] 
@@ -457,13 +457,13 @@ Zašto se prometni znakovi moraju poštivati?
 	Inače bismo svi bili u velikoj opasnosti!
 	-> dobroide
 + [Zbog dosade kad sami hodamo.] 
-	Krivo!!!
-	Znakove se treba poštivati i kad nam je dosadno i kad nam je zabavno!
+	Pogrešno!!!
+	Znakove treba poštovati i kad nam je dosadno i kad nam je zabavno!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 + [Zbog moguće kazne.]
 	To sigurno.
-	Zapravo: To sigurno NE!
+	Zapravo, To sigurno NE!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 
@@ -471,21 +471,21 @@ Zašto se prometni znakovi moraju poštivati?
 = third_riddle
 - (start_riddle)
 Što može povećati pozornost pješaka u prometu?
-+ [Pričanje s prijateljima.]
-	Krivo!
-	Samo ćete se zapričati i imati još manju pozornost!
++ [Razgovaranje s prijateljima.]
+	Pogrešno!
+	Samo će se zapričati i imati još manju pozornost!
 	-> start_riddle
 + [Predviđanje i očekivanje opasnosti.] 
 	TOČNO!
-	Razmisli i probaj predvidjeti moguće opasnosti!
+	Razmisli i pokušaj predvidjeti moguće opasnosti!
 	-> dobroide
 + [Razgovor mobitelom.] 
-	Krivo!!!
+	Pogrešno!!!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 + [Pretrčavanje preko kolnika.]
 	To sigurno.
-	Zapravo: To sigurno NE!
+	Zapravo, To sigurno NE!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
 
@@ -493,20 +493,20 @@ Zašto se prometni znakovi moraju poštivati?
 = fourth_riddle
 - (start_riddle)
 Što je kolnik?
-+ [Dio ceste kojom se kreću pješaci.]
-	Krivo!
++ [Dio ceste kojim se kreću pješaci.]
+	Pogrešno!
 	To bi bio pločnik, a ne kolnik!
 	-> start_riddle
-+ [Dio ceste kojom se kreću vozila.] 
++ [Dio ceste kojim se kreću vozila.] 
 	TOČNO!
 	-> dobroide
-+ [Osoba koja voli koka kolu.] 
-	Krivo!!!
++ [Osoba koja voli Coca-colu.] 
+	Pogrešno!!!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> start_riddle
-+ [Slovenski atletičar koji je 1960-e sudjelovao na ljetnoj Olimpijadi.]
++ [Slovenski atletičar koji je 1960. sudjelovao na Olimpijskim igrama.]
 	Opa, još jedan obožavatelj lika i djela Mirka Kolnika!
-	Zapravo, točan odgovor je "Kolnik je dio ceste kojom se kreću vozila."
+	Zapravo, točan odgovor je: "Kolnik je dio ceste kojim se kreću vozila."
 	Ali nagradit ću tvoje znanje regionalnih atletičara i smatrati ovo točnim.
 	Čestitam!!!
 	-> dobroide
@@ -549,7 +549,7 @@ Da vidimo...
 // PAN TO HOUSE:
 >>> PAN_CAMERA_TO_POSITION: 3870 1788
 Opa! Čini se da je jedan dio ograde pao na krov ove zgrade!
-Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može ući i popeti se na krov po taj dio ograde.
+Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može spustiti taj dio ograde.
 >>> RESET_CAMERA
 -> DONE
 
@@ -557,7 +557,7 @@ Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može ući i popeti se
 // PAN TO HELTER SKELTER:
 >>> PAN_CAMERA_TO_POSITION: 2500 3738
 Čini se da je neki ljutko sa skejtom našao ogradu i prisvojio je sebi.
-Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i rječitost, čini se!
+Morat ćeš ga zamoliti da ti je vrati koristeći svojom karizmom i rječitošću, čini se!
 >>> RESET_CAMERA
 -> DONE
 
@@ -565,9 +565,9 @@ Morat ćeš ga zamoliti da ti je vrati koristeći svoju karizmu i rječitost, č
 // PAN TO SMOG ZONE:
 >>> PAN_CAMERA_TO_POSITION: 1439 1768
 Moj magični vid jedva može vidjeti kroz sav ovaj smog!
-Ova regija se čini vrlo opasnom i mislim da ćeš u njoj morati nositi raznobojnu odjeću da te auti bolje vide!
+Ova regija čini se vrlo opasnom i mislim da ćeš u njoj morati nositi raznobojnu odjeću da te auti bolje vide!
 I ne samo to...
-Tamo je sve puno duhova!!!!!
+Tamo je sve puno duhova!!!
 >>> RESET_CAMERA
 -> DONE
 
@@ -585,7 +585,7 @@ Mlad si i pametan, otkrit ćeš već put do gore!
 >>> PAN_CAMERA_TO_POSITION: 2300 2871
 Da vidimo što najviše voliš...
 Opa! Kakvo ljupko čudovište! Nemoj zaboraviti: moraš izraziti svoje osjećaje!
-Ja sam to zaboravio previše puta i sada sam vrlo usamljeni čarobnjak.
+Ja sam to zaboravio previše puta i sada sam vrlo usamljen čarobnjak.
 >>> RESET_CAMERA
 -> DONE
 
@@ -637,7 +637,7 @@ Makni mi to s očiju!
 	- true: -> fix_bike_with_pump
 }
 
-Trebao bih okolo potražiti pumpu za bicikl...
+Trebao bih naokolo potražiti pumpu za bicikl...
 Tko bi mi mogao pomoći?
 -> DONE
 
@@ -657,12 +657,12 @@ Tko bi mi mogao pomoći?
 	~ checked_components += tyres
 	-> bike_repair
 + Pedale?
-	Čini se da su pedale dobro ušarafljene...
+	Čini se da su pedale dobro smontirane...
 	I na pedalama je s prednje i stražnje strane po jedno mačje oko.
 	Super!
 	~ checked_components += pedals
 	-> bike_repair
-+ Svijetla?
++ Svjetla?
 	Prednje svjetlo bijele boje za osvjetljavanje ceste.
 	Stražnje svjetlo crvene boje s mačjim okom.
 	Super!
@@ -670,7 +670,7 @@ Tko bi mi mogao pomoći?
 	-> bike_repair
 + Zvonce?
 	Zvonce je na upravljaču.
-	TRUB TRUB!
+	TRUB, TRUB!
 	Čini se da radi!
 	I jedna kočnica za svaki kotač - dobro!
 	~ checked_components += horn_and_brakes
@@ -744,13 +744,13 @@ Ne treba to biciklu...
 }
 
 = before_solving_enigma
-Hej, simpatično čudovište. Žalim slučaj, malo sam zauzet...
+Hej, simpatično čudovište! Žalim slučaj, malo sam zauzet...
 Ali čekaj malo, možda mi možeš pomoći!
-Pokušavam posložiti sva ova čudovišta na prava mjesta ali ne znam koji pojas ide na koju dob.
-Pomozi mi molim te!
-+ [Kako da ne, meni sortiranje čudovišta po pojasevima dolazi skroz prirodno!]
+Pokušavam posložiti sva ta čudovišta na prava mjesta, ali ne znam koji pojas ide za koju dob.
+Pomozi mi, molim te!
++ [Kako da ne, ja sam za sortiranje čudovišta prema pojasevima prirodno nadaren!]
 	-> start_seat_sorting
-+ [Nemam vremena, imam ja i svoj zadatak za riješiti!]
++ [Nemam vremena, imam ja i svoj zadatak koji trebam riješiti!]
 	Ajoj! Ja neću moći poletjeti dok to ne razriješim.
 	-> DONE
 
@@ -758,9 +758,9 @@ Pomozi mi molim te!
 Okej, hvala ti puno!
 >>> BEGIN_MINIGAME: seat_sorting
 - (sorting_minigame_start)
-Stavi pravo čudovište na pravo mjesto! I čini to često!
+Stavi pravo čudovište na pravo mjesto!
 + Ne, ne, ne, pa čak i ja vidim da to nije dobro...
-	Probajmo opet.
+	Pokušajmo opet.
 	-> sorting_minigame_start
 + Vau! To je savršeno!
 	Sada napokon neću više morati plaćati kazne!
@@ -805,10 +805,10 @@ Sad napokon možemo na more!
 
 ?
 Kako si prošao sve moje skejter minione???
-Ja sam im eksplicitno rekao da nikoga ne puštaju!
+Ja sam im jasno i glasno rekao da nikoga ne puštaju!
 Sigurno si došao po komadić ograde koji sam našao?!
-E pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
-Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planine!
+E, pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
+Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak planine!
 ~ helter_skelter_intro_completed = true
 -> choices
 
@@ -819,19 +819,19 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak Planin
 	-> DONE
 + [Ako si ti strah i trepet, ja sam semafor!]
 	Pa tako i izgledaš, kao mali plavi semafor!
-	Ali hmm, semafori nisu plavi...
+	Ali hmmm, semafori nisu plavi...
 	Nema veze, makni mi se s očiju!
 	-> DONE
-+ [Molim te, gospodine Helter Skejter, možete li nam ipak dati komadić ograde, jako nam je to važno?]
++ [Molim Vas, gospodine Helter Skejter, možete li nam ipak dati komadić ograde, jako nam je to važno?]
 	Što?!
-	Je li to... Pristojnost!?
-	U mojoj butigi?!?!?!
+	Je li to... pristojnost!?
+	U mojem parku?!?!
 	To nisam čuo od...
 	Od...
 	Od kad sam išao svojoj dragoj bakici na kolače...
 	Ah, kako je to bilo lijepo.
-	Hvala što si me podsjetio na nevinije vrijeme mog djetinjstva dok nisam bio vođa bande skejtera.
-	Evo, uzmi ovu ogradu.
+	Hvala što si me podsjetio na sretnije vrijeme mojeg djetinjstva dok nisam bio vođa bande skejtera.
+	Evo, uzmi tu ogradu.
 	Zbogom, čudovište!
 	>>> ADD_ITEM: fence
 	A vi, skejteri, prestanite ga udarati!
@@ -855,7 +855,7 @@ Tko bi rekao!
 }
 
 = default
-Zadrži si te tričarije!
+Zadrži si te gluposti!
 -> DONE
 
 === conv_taxi_at_park ===
@@ -876,12 +876,12 @@ Zadrži si te tričarije!
 = no_seat_belt
 Moj posao je voziti ljude do planine.
 Nažalost, nemam više pojaseva za putnike tako da...
-+ {has_item("seat_belt") == false}[Ma kaj me briga!]
++ {has_item("seat_belt") == false}[Ma baš me briga!]
 	Okej, ali to je izuzetno opasno...
 	Idemo!
 	>>> PLAY_CUTSCENE: drop_player
 	Ups! Ispao si!
-	Trebao si nositi pojas!
+	Trebao si koristiti pojas!
 	-> DONE
 + {has_item("seat_belt") == true}[Imam svoj pojas tako da - sve je okej!]
 	Oh... okej!
@@ -896,7 +896,7 @@ Nažalost, nemam više pojaseva za putnike tako da...
 
 = taking_to_mountain
 Mogu te odvesti do planine!
-+ [Odvedi me u planinu]
++ [Odvedi me u planinu.]
 	>>> TELEPORT_PLAYER: taxi_at_mountain
 	OK!
 	Zabavi se!
@@ -913,9 +913,9 @@ Mogu te odvesti do planine!
 }
 
 = seat_belt
-Fora pojas. Taman ono što trebam!
+Fora pojas! Taman ono što trebam!
 Sad ću napokon opet moći sigurno voziti ljude do planine!
-Samo pričaj sa mnom kad god želiš do planine!
+Samo mi se javi kad god želiš do planine!
 -> DONE
 
 = default
@@ -966,7 +966,7 @@ Ne treba mi to.
 = interact
 >>> PLAY_CUTSCENE: eat_player
 !!?
-Nisi smeće! Bah!
+Nisi smeće! Bljak!
 >>> PLAY_CUTSCENE: spit_out_player
 -> DONE
 
@@ -1060,8 +1060,8 @@ Nisi smeće! Bah!
 = intro_at_park
 Sad kad nema ograde, ne možemo igrati nogomet...
 Dok se stvari ne riješe, idem ja doma.
-No na putu do mene doma je hrpa gladnih kanti za smeće!
-Možeš ih molim te nahraniti smećem? Inače krenu jesti nas čudovišta!
+No na putu do moja kuće je hrpa gladnih kanti za smeće!
+Možeš li ih, molim te, nahraniti smećem? Inače krenu jesti nas čudovišta!
 ~ wheelie_intro_at_park_completed = 1
 -> main_at_park
 
@@ -1094,16 +1094,16 @@ Idem vidjeti što mi rade mama i tata doma dok mene nema!
 // Goes in and checks with his mom.
 >>> PLAY_CUTSCENE: fade_to_black_and_back
 Hej, čini se da je na krovu ostao otpuhan dio ograde.
-Slobodno ga uzmi, pa možda popraviš ogradu!
+Slobodno ga uzmi pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
 ~ got_fence_from_wheelie = 1
 ~ wheelie_intro_before_park_fixed_completed = 1
 -> main_at_house_before_park_fixed
 
 = main_at_house_before_park_fixed
-Hvala što si me otpratio.
+Hvala što si me dopratio.
 Mislim da ću ostati ovdje dok se ne popravi ograda u parku.
-Dođi po mene kad je popravite! Bok bok!
+Dođi po mene kad je popravite! Bok, bok!
 -> DONE
 
 = after_park_fixed
@@ -1116,11 +1116,11 @@ Dođi po mene kad je popravite! Bok bok!
 >>> SET_STATE_PROPERTY: canster_left is_appeased 0
 >>> SET_STATE_PROPERTY: canster_middle is_appeased 0
 >>> SET_STATE_PROPERTY: canster_right is_appeased 0
-Vau, popravio si park!
-Želio bih opet ići igrati nogomet s vama ali...
+Vau, popravio si ograde!
+Želio bih opet ići igrati nogomet s vama, ali...
 Opet su kante za smeće postale gladne!
-Možeš ih opet nahraniti smećem molim te?
-Jako ih se plašim!
+Možeš li ih opet nahraniti smećem molim te?
+Jako ih se bojim!
 ~ wheelie_intro_after_park_fixed_completed = 1
 -> main_at_house_after_park_fixed
 
@@ -1131,7 +1131,7 @@ Jesu li sve kante nahranjene?
 	>>> SET_STATE_PROPERTY: wheelie going_back_to_park 1
 	// You escort wheelie back to the park! 
 	-> DONE
-+ [Ne još, još radim na tome!]
++ [Ne još, radim na tome!]
 	Okej, samo mi javi! Znaš kakve te kante znaju biti kad su gladne!
 	-> DONE
 
@@ -1155,8 +1155,8 @@ Evo, možeš uzeti moju bateriju. Ne treba mi više!
 	- 1: -> after_mr_smog_defeated
 }
 Predivan dan!
-Jedino što fali je ono veliko drvo koje je nekad tu bilo posađeno.
-Pitam se što se dogodilo s tim drvom...
+Jedino što fali ono je veliko drvo koje je nekad tu bilo posađeno.
+Pitam se što se dogodilo s tim drvetom...
 -> DONE
 
 = after_mr_smog_defeated
@@ -1210,7 +1210,7 @@ Ne treba mi to!
 Obično vjetrenjače pretvaraju vjetar u energiju, ali ova je drugačija!
 Ova vjetrenjača pretvara energiju u vjetar!
 Tu je velika rupa, i ima simbol za bateriju.
-Možda kad bih imao neku bateriju sa sobom, mogao bih pokrenuti ovu vjetrenjaču.
+Možda bih, kad bih imao neku bateriju sa sobom, mogao bih pokrenuti tu vjetrenjaču.
 -> DONE
 
 = fixed
@@ -1247,11 +1247,11 @@ To neće pomoći, ovdje trebam staviti neki izvor napajanja.
 = interact
 
 Hej, čudovište! Žao mi je što sam ti na putu.
-Ali ja jako kasnim za voznim redom, čak 23 sata.
+Ali ja jako kasnim za voznim redom, čak 23 sata!
 Ali nema veze - ako još sat vremena pričekam ovdje, taman ću biti na vrijeme!
 E da, pazi na aute!
 Ne mogu te vidjeti kad prelaziš zebru jer je moj bus tu parkiran!
-Probaj prijeći cestu sa zebrom s druge strane ceste!
+Probaj prijeći cestu s druge strane gdje je zebra!
 -> DONE
 
 = use_item
@@ -1287,7 +1287,7 @@ A sad me pusti na miru!
 }
 
 = switch_to_colorful
-Hej ti! Kako ti se sviđa moja nova jakna! Baš je šarena, zar ne?
+Hej, ti! Kako ti se sviđa moja nova jakna? Baš je šarena, zar ne?
 Mislim da bi ti dobro stajala!
 Hoćeš da se mijenjamo za jakne?
 + [Da, mijenjajmo se!]
@@ -1296,7 +1296,7 @@ Hoćeš da se mijenjamo za jakne?
 	>>> SET_STATE_PROPERTY: love_interest wearing_color 0
 	Super! Samo mi javi kad se zaželiš svoje stare jakne!
 	-> DONE
-+ [Ne, volim svoju jaknu]
++ [Ne, volim svoju jaknu.]
 	Okej!
 	-> DONE
 
@@ -1341,13 +1341,13 @@ Hvala, ali sve što trebam od tebe je tvoja ljubav!
 STANI!
 Ne možeš tako ući u Smogograd!
 Zar ne vidiš kakav je unutra smog?! Nitko te neće vidjeti s takvom odjećom!
-Vrati se kad imaš nešto svjetlije na sebi!
+Vrati se kad budeš imao nešto svjetlije na sebi!
 Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
 -> DONE
 
 = colorful
-Pozdrav, čudovište. Čini se da imaš jako šarenu jaknu na sebi.
-Smiješ ući u Smogograd dok god nosiš tako nešto vidljivo!
+Pozdrav, čudovište! Čini se da imaš jako šarenu jaknu na sebi.
+Smiješ ući u Smogograd dokle god nosiš nešto tako vidljivo!
 Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
 -> DONE
 
@@ -1363,7 +1363,7 @@ Sav smog je nestao i sad možeš nositi što god želiš!
 }
 
 = default
-Ne treba mi to, hvala.
+Ne treba mi to, hvala! Ja samo pazim na sigurnost u prometu.
 -> DONE
 
 === conv_happy_tree ===
@@ -1375,7 +1375,7 @@ Ne treba mi to, hvala.
 
 = interact
 
-Opsjednuo me zli smog!
+Opsjeo me zli smog!
 Ali sad sam opet sretno drvo!
 Hvala vam na pomoći!
 -> DONE
@@ -1395,7 +1395,7 @@ Zahvaljujem na poklonu!
 = angry_mr_smog
 >>> PAN_CAMERA_TO_POSITION: 736 2782
 MUHUHAHAHA
-Sto mi smogova, nikad nećeš pobijediti moju smogastu smogovitost!
+Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> RESET_CAMERA
 -> DONE
 
@@ -1411,7 +1411,7 @@ Sto mi smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> PAN_CAMERA_TO_POSITION: 736 2782
 Ajme, sav me smog napustio!
 Sada sam ponovno sretno drvo!
-Idem nazad u svoj rodni park!
+Idem natrag u svoj rodni park!
 >>> SHOW: HappyTree
 >>> RESET_CAMERA
 -> DONE
@@ -1440,30 +1440,30 @@ Ali onda su je zaboravili baciti u smeće!
 === conv_trash_cup ===
 // Trash necessary to feed the cansters...
 
-Netko je ostavio ovu polu-praznu čašu na podu!
-Ili polu-punu?
+Netko je ostavio ovu polupraznu čašu na podu!
+Ili polupunu?
 U svakom slučaju, trebao bih je baciti u kantu za smeće!
 -> DONE
 
 === conv_trash_bottle ===
 // Trash necessary to feed the cansters...
 
-Ova boca ima nešto malo kole, ali uopće više nije gazirana!
+Ova boca ima nešto malo Coca-cole, ali uopće više nije gazirana!
 Možda najbolje da je bacim u smeće.
 -> DONE
 
 === conv_fence_at_turbine ===
 // A fence piece lying next to the wind farm.
 
-Vau, ovaj komad ograde je otpuhan skroz do tu...
-Bolje da ga dofuram nazad do parka.
+Vau, ovaj komad ograde otpuhan je skroz do tu...
+Bolje da ga odnesem nazad do parka.
 ~ picked_up_fence_at_turbine = true
 -> DONE
 
 === conv_fence_in_smog_town ===
 // A fence piece lying in the smoggy part of town.
 
-Komadić ograde! Gotovo da mi je izmakao u ovom smogu!
+Komadić ograde! Gotovo da mi je izmaknuo u ovom smogu!
 Najbolje da ga odnesem Solid Snejku!
 ~ picked_up_fence_in_smog_town = true
 -> DONE
@@ -1519,23 +1519,23 @@ Ali zbog sigurnosti u prometu mogu ga koristiti samo u određenim situacijama.
 Gdje sve smijem koristiti bicikl?
 + [Svugdje! Čak i nasred ceste!]
 	Ne, ne, ne...
-	Točno se sjećam da ima mjesta gdje je preopasno za mene ili druge da vozim bicikl...
+	Točno se sjećam da postoje mjesta na kojima je voziti bicikl preopasno za mene ili druge...
 	Da ga vozim nasred ceste, pokupili bi me auti!
 	-> multiple_choice
-+ [Na biciklističkim stazama i po parkovima ali ako ne po pločniku ni kolniku.] 
++ [Na biciklističkim stazama i po parkovima, ali ako ne po pločniku ni kolniku.] 
 	Da, tako je!
 	To je najtočnije.
 	~ player_answered_bike_question = 1
 	-> hop_on_bike
 + [Po biciklističkim stazama, parkovima i preko bilo koje zebre, ali ne po pločniku i kolniku.] 
 	Mislim da ne smijem ići preko bilo koje zebre...
-	Ako nema biciklističke staze, moram se spustiti s bicikla i zebru prijeći ručno.
+	Ako nema biciklističke staze, moram se spustiti s bicikla i zebru prijeći gurajući bicikl.
 	-> multiple_choice
 
 = pump
 Pumpa?
-Ovo bi se moglo iskoristiti za napumpati probušenu gumu!
-... Ali nikad ne znaš što nas čeka u ovakvim igrama...
+Ovo bi se moglo iskoristiti da napumpam probušenu gumu!
+...Ali nikad ne znaš što nas čeka u ovakvim igrama...
 -> DONE
 
 = seat_belt
@@ -1545,7 +1545,7 @@ Pa čak i u... taksiju!
 
 = battery
 Baterija? I još je puna!
-Baš me zanima što bi trebalo toliko energije?
+Baš me zanima zašto bi trebalo toliko energije?
 -> DONE
 
 = fence
@@ -1571,7 +1571,7 @@ Pitam se što da radim s ovim?
 Uhuhuh, što je ovo posvuda na podu?!
 Ljepljive žvakaće gume? Fuj!
 Morat ću usporiti dok se tu šetam...
-Možda bi bilo lakše s biciklom.
+Možda bi bilo lakše biciklom.
 -> DONE
 
 === conv_first_time_zebra ===
@@ -1579,16 +1579,16 @@ Kako prelazim zebru?
 Ovo je važno da me ne pregaze auti!
 - (multiple_choice)
 Ako se točno sjećam, da sigurno prijeđem preko zebre, moram...
-+ [Gledati u nebo i moliti se da me nitko ne pregazi!]
++ [Što brže pretrčati na drugu stranu!]
 	...
-	Ne, nije to točno...
+	Ne, preko zebre se nikada ne trči! To je jako opasno.
 	-> multiple_choice
-+ [Pogledati lijevo pa desno, pa opet lijevo i onda prijeći!] 
++ [Pogledati lijevo, desno, pa opet lijevo i onda prijeći!] 
 	Da, tako je!
 	Lijevo-desno-lijevo! I onda opet na pola zebre!
 	-> DONE
-+ [Pogledati desno pa lijevo pa opet desno i onda prijeći!] 
-	Ne, nije dobro, mislim da sam fulao smjer...
++ [Pogledati desno, pa lijevo pa opet desno i onda prijeći!] 
+	Ne, nije dobro, mislim da sam pogriješio smjer...
 	-> multiple_choice
 
 === conv_first_time_traffic_lights ===
@@ -1597,15 +1597,15 @@ Tu su sada neki semafori!
 Skroz sam zaboravio kako prelaziti preko zebre dok radi semafor...
 - (multiple_choice)
 Kako se ono prelazi cesta koja ima semafore?
-+ [Gledati u nebo i moliti se da me nitko ne pregazi!]
++ [Hodati jako sporo da nas vozači bolje vide!s]
 	...
-	Ne, mislim da to nije rješenje nijednom problemu...
+	Ne, to nije točno.
 	-> multiple_choice
 + [Čekati da na pješačkom semaforu bude zeleno i onda prijeći.] 
 	Da, tako je!
 	Točno to trebam napraviti.
 	-> DONE
 + [Čekati da na semaforu za aute bude zeleno i onda prijeći.] 
-	Ne bi li ovo značilo da će me auti pregaziti jer je njima zeleno?
+	Ne bi li to značilo da će me auti pregaziti jer je njima zeleno?
 	Moram bolje promisliti.
 	-> multiple_choice
