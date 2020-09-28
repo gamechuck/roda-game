@@ -41,10 +41,6 @@ var _game_flow := {
 		"packed_scene": preload("res://src/Game.tscn"),
 		"state": STATE.GAME
 		}, 
-	"logo": {
-		"packed_scene": preload("res://src/Logo.tscn"),
-		"state": STATE.LOGO
-		},
 	"menu": {
 		"packed_scene": preload("res://src/Menu.tscn"),
 		"state": STATE.MENU

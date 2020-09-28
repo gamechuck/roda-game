@@ -1363,9 +1363,7 @@ Sav smog je nestao i sad možeš nositi što god želiš!
 }
 
 = default
-Zašto mi to daješ? Želiš me podmititi?!
-Zar ne znaš da je policija najčasnija služba u javnom sektoru!?
-Čak dajemo novce za udruge koje uče djecu prometnim pravilima!
+Ne treba mi to, hvala.
 -> DONE
 
 === conv_happy_tree ===
