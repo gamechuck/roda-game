@@ -1210,7 +1210,7 @@ Ne treba mi to!
 Obično vjetrenjače pretvaraju vjetar u energiju, ali ova je drugačija!
 Ova vjetrenjača pretvara energiju u vjetar!
 Tu je velika rupa, i ima simbol za bateriju.
-Možda bih, kad bih imao neku bateriju sa sobom, mogao bih pokrenuti tu vjetrenjaču.
+Možda bih, kad bih imao neku bateriju sa sobom, mogao pokrenuti tu vjetrenjaču.
 -> DONE
 
 = fixed
@@ -1522,7 +1522,7 @@ Gdje sve smijem koristiti bicikl?
 	Točno se sjećam da postoje mjesta na kojima je voziti bicikl preopasno za mene ili druge...
 	Da ga vozim nasred ceste, pokupili bi me auti!
 	-> multiple_choice
-+ [Na biciklističkim stazama i po parkovima, ali ako ne po pločniku ni kolniku.] 
++ [Na biciklističkim stazama i po parkovima.] 
 	Da, tako je!
 	To je najtočnije.
 	~ player_answered_bike_question = 1
