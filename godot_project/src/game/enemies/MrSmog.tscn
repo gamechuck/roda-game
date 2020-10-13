@@ -4,7 +4,8 @@
 [ext_resource path="res://src/game/enemies/MrSmog.gd" type="Script" id=2]
 [ext_resource path="res://roda-assets/Characters/MrSmog/tree_smoggy.png" type="Texture" id=3]
 [ext_resource path="res://roda-assets/Characters/MrSmog/tree_clean.png" type="Texture" id=4]
-[ext_resource path="res://resources/materials/smog_distortion_material.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/smog_distortion_material.tres" type="Material" id=5]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

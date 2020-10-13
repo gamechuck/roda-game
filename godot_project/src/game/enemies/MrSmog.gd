@@ -125,7 +125,7 @@ var _state_machine := {
 		"animation_name": "aggressive",
 		"extents": Vector2(480, 360),
 		"monitorable": false,
-		"material": preload("res://resources/materials/smog_distortion_material.tres")
+		"material": preload("res://assets/materials/smog_distortion_material.tres")
 	},
 	BATTLE_STATUS.DEFEATED:{
 		"animation_name": "friendly",

@@ -20,8 +20,9 @@
 [ext_resource path="res://roda-assets/UI/SeatSorting/child_disabled.png" type="Texture" id=21]
 [ext_resource path="res://roda-assets/UI/SeatSorting/baby_disabled.png" type="Texture" id=22]
 [ext_resource path="res://src/UI/seat_sorting/SeatRect.gd" type="Script" id=23]
-[ext_resource path="res://resources/theme.tres" type="Theme" id=24]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=24]
 [ext_resource path="res://roda-assets/UI/SeatSorting/windshield.png" type="Texture" id=25]
+
 
 
 [node name="SeatSortingUI" type="Control"]

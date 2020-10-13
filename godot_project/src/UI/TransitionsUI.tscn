@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/TransitionsUI.gd" type="Script" id=1]
-[ext_resource path="res://resources/materials/transition_material.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/transition_material.tres" type="Material" id=2]
+
 
 [node name="TransitionsUI" type="Control"]
 anchor_right = 1.0

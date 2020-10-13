@@ -641,7 +641,7 @@ func intro_cutscene():
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
 
-	AudioEngine.play_background_music("game_default")
+	AudioEngine.play_music("game_default")
 
 	game_camera.zoom = Vector2(1, 1)
 	game_camera.position = Vector2.ZERO

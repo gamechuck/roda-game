@@ -1,12 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://resources/fonts/FiraCode-Regular_size8.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/fonts/dynamic/fira_code_regular_size8.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/UI/menu/AboutMenuTab.gd" type="Script" id=3]
 [ext_resource path="res://roda-assets/logo/banner_logo.jpg" type="Texture" id=4]
 [ext_resource path="res://roda-assets/logo/HAK_logo.png" type="Texture" id=5]
 [ext_resource path="res://roda-assets/logo/NPSCP_logo.png" type="Texture" id=6]
 [ext_resource path="res://roda-assets/logo/policija_logo.png" type="Texture" id=7]
+
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.937255, 0.815686, 0, 1 )

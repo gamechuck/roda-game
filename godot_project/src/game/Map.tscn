@@ -2,15 +2,18 @@
 
 [ext_resource path="res://src/game/Gummy.gd" type="Script" id=1]
 [ext_resource path="res://roda-assets/Tilemap/release_tilemap.tmx" type="PackedScene" id=2]
-[ext_resource path="res://resources/tilesets/gummy_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://assets/tilesets/gummy_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://roda-assets/UI/test.png" type="Texture" id=4]
-[ext_resource path="res://resources/materials/smog_vortex_material.tres" type="Material" id=5]
-[ext_resource path="res://resources/tilesets/ground_tileset.tres" type="TileSet" id=6]
-[ext_resource path="res://resources/tilesets/cover_tileset.tres" type="TileSet" id=7]
+[ext_resource path="res://assets/materials/smog_vortex_material.tres" type="Material" id=5]
+[ext_resource path="res://assets/tilesets/ground_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/tilesets/cover_tileset.tres" type="TileSet" id=7]
+
+
 
 [node name="Map" type="Node2D"]
 
 [node name="SmogVortex" type="Sprite" parent="."]
+visible = false
 material = ExtResource( 5 )
 position = Vector2( 778.484, 2422.09 )
 scale = Vector2( 40, 40 )
