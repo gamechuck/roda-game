@@ -1,0 +1,58 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+
+msgid "Hello world!"
+msgstr ""
+
+msgid "GAME_TITLE"
+msgstr ""
+
+msgid "PAUSE_MESSAGE"
+msgstr ""
+
+msgid "LANGUAGE"
+msgstr ""
+
+msgid "VOLUME"
+msgstr ""
+
+msgid "RESUME"
+msgstr ""
+
+msgid "RESTART"
+msgstr ""
+
+msgid "SETTINGS"
+msgstr ""
+
+msgid "HOW_TO_PLAY"
+msgstr ""
+
+msgid "ABOUT"
+msgstr ""
+
+msgid "START"
+msgstr ""
+
+msgid "QUIT"
+msgstr ""
+
+msgid "BACK"
+msgstr ""
+
+msgid "USE_KEY"
+msgstr ""
+
+msgid "MOVE_KEY"
+msgstr ""
+
+msgid "DRIVE_MESSAGE"
+msgstr ""
+
+# CHARACTER NAMES
+msgid "Solid Snejk"
+msgstr ""
+
+msgid "Solid Slug"
+msgstr ""

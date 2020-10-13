@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/game/traffic/TrafficLight.gd" type="Script" id=1]
+[ext_resource path="res://roda-assets/Props/street_lights_ui_yellow.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/Props/street_lights_side_red.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/Props/street_lights_back.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/Props/street_lights_front_red.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/Props/street_lights_front_green.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/Props/street_lights_ui_green.png" type="Texture" id=7]
+[ext_resource path="res://roda-assets/Props/street_lights_ui_red.png" type="Texture" id=8]
+[ext_resource path="res://roda-assets/Props/street_lights_front_yellow.png" type="Texture" id=9]
+[ext_resource path="res://roda-assets/Props/street_lights_side_green.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/Props/street_lights_side_yellow.png" type="Texture" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "red",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "red",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "red",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "red",
+"speed": 5.0
+} ]
+
+[node name="TrafficLight" type="StaticBody2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedFront" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "red"
+playing = true
+offset = Vector2( 0, -32 )
+
+[node name="AnimatedSide" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
+animation = "red"
+playing = true
+offset = Vector2( 10, -32 )
+
+[node name="AnimatedBack" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 3 )
+animation = "green"
+offset = Vector2( 0, -32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 1
+
+[node name="AnimatedUI" type="AnimatedSprite" parent="Node2D"]
+visible = false
+position = Vector2( -26, -47 )
+frames = SubResource( 5 )
+animation = "red"
+playing = true

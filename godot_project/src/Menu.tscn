@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/Menu.gd" type="Script" id=1]
+[ext_resource path="res://resources/theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/UI/menu/MenuTabContainer.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/menu/MainMenuTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/menu/SettingsMenuTab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://roda-assets/UI/MainMenu/Background2.png" type="Texture" id=6]
+[ext_resource path="res://src/UI/menu/HowToPlayMenuTab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/menu/AboutMenuTab.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 782, 555 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuTab" parent="MenuTabContainer" instance=ExtResource( 4 )]
+
+[node name="HowToPlayMenuTab" parent="MenuTabContainer" instance=ExtResource( 7 )]
+visible = false
+tab_type = 1
+
+[node name="AboutMenuTab" parent="MenuTabContainer" instance=ExtResource( 8 )]
+visible = false
+tab_type = 2
+
+[node name="SettingsMenuTab" parent="MenuTabContainer" instance=ExtResource( 5 )]
+visible = false
+tab_type = 3

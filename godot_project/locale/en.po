@@ -1,0 +1,66 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Hello world!"
+msgstr "Hello world!"
+
+msgid "GAME_TITLE"
+msgstr "Family Monster Adventure"
+
+msgid "PAUSE_MESSAGE"
+msgstr "GAME IS PAUSED"
+
+msgid "LANGUAGE"
+msgstr "English"
+
+msgid "VOLUME"
+msgstr "Volume"
+
+msgid "RESUME"
+msgstr "Resume"
+
+msgid "RESTART"
+msgstr "Restart"
+
+msgid "SETTINGS"
+msgstr "Settings"
+
+msgid "HOW_TO_PLAY"
+msgstr "How to Play?"
+
+msgid "ABOUT"
+msgstr "About"
+
+msgid "START"
+msgstr "Start"
+
+msgid "QUIT"
+msgstr "Quit"
+
+msgid "BACK"
+msgstr "Back"
+
+msgid "USE_KEY"
+msgstr "Use"
+
+msgid "MOVE_KEY"
+msgstr "Movement"
+
+msgid "DRIVE_MESSAGE"
+msgstr "Check arrangement..."
+
+# CHARACTER NAMES
+msgid "Solid Snejk"
+msgstr "Solid Snake"
+
+msgid "Solid Slug"
+msgstr "Solid Slug"

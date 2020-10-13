@@ -1,25 +1,44 @@
 image: barichello/godot-ci:3.2.3
 
+# Cache imported assets between runs
+cache:
+  key: import-assets
+  paths:
+    - .import/
+
 stages:
   - export
   - deploy
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  EXPORT_NAME: rodina-cudovisna-avantura
 
-before_script:
-  - mkdir -v -p build/windows
-  - mkdir -v -p build/web
+windows_dev:
+  stage: export
+  script:
+    - mkdir -v -p build/windows_dev
+    - cd godot_project
+    - godot -v --export-debug "Windows Desktop Dev" ../build/windows_dev/$EXPORT_NAME.exe
+    - godot -s ./CopyAssetFolders.gd "--build-path build/windows_dev"
+    - test -e ../build/windows_dev/$EXPORT_NAME.exe
+    - test -e ../build/windows_dev/default_options.cfg
+    - test -e ../build/windows_dev/default_controls.json
+    - test -e ../build/windows_dev/default_context.json
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/windows_dev
+  only:
+      - master
 
 windows:
   stage: export
   script:
-    - cd GodotProject
+    - mkdir -v -p build/windows
+    - cd godot_project
     - godot -v --export-debug "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
-    - godot -s ./CopyAssetFolders.gd "--build-path build/windows"
     - test -e ../build/windows/$EXPORT_NAME.exe
-    - test -e ../build/windows/options.cfg
-    - test -e ../build/windows/controls.json
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
@@ -27,10 +46,26 @@ windows:
   only:
       - master
 
+# Android Debug Job. It will use the generated debug.keystore. 
+android_debug:
+  stage: export
+  script:
+    - mkdir -v -p build/android
+    - cd godot_project
+    - godot -v --export-debug "Android Debug" ../build/android/$EXPORT_NAME-debug.apk
+    - test -e ../build/android/$EXPORT_NAME-debug.apk
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/android
+  only:
+    - master
+
 web:
   stage: export
   script:
-    - cd GodotProject
+    - mkdir -v -p build/web
+    - cd godot_project
     - godot -v --export-debug "HTML5" ../build/web/index.html
     - test -e ../build/web/index.html
   artifacts:
