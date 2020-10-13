@@ -42,8 +42,6 @@
 [ext_resource path="res://src/game/characters/FakeMrSmog.tscn" type="PackedScene" id=40]
 [ext_resource path="res://src/game/props/Bike.tscn" type="PackedScene" id=41]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 144 )
 
@@ -439,18 +437,22 @@ __meta__ = {
 [node name="ParkToTrash" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2592.16, 2433.46 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="SmogToBoss" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1180.11, 1793.16 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="CopperToSmog" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1696.07, 2363.21 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="ParkingToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3228.31, 3065.67 )
 extents = Vector2( 144, 64 )
+light_color = 0
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
 position = Vector2( -13, 5.5 )
@@ -475,18 +477,22 @@ direction = "right"
 [node name="BikeToEmpty" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3840.58, 2942.99 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="TrashToCansters" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3232.3, 2431.68 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="CansterToLake" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3553.31, 2041.91 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="LoveToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2590.04, 3004.68 )
 extents = Vector2( 160, 60 )
+light_color = 0
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
 shape = SubResource( 6 )
@@ -513,6 +519,7 @@ direction = "front"
 [node name="Mountain" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1136, 864.376 )
 extents = Vector2( 80, 100 )
+light_color = 0
 
 [node name="ParkToLove" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2463.59, 2558.12 )
@@ -546,22 +553,27 @@ direction = "right"
 [node name="CopperToSkater" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1854.87, 2913.42 )
 extents = Vector2( 64, 128 )
+light_color = 0
 
 [node name="TrashToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3104, 2560 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="CansterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3360.65, 2832.59 )
 extents = Vector2( 60, 144 )
+light_color = 0
 
 [node name="InterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3680.9, 2844.63 )
 extents = Vector2( 64, 128 )
+light_color = 0
 
 [node name="LakeToInter" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3679.79, 2588.17 )
 extents = Vector2( 64, 128 )
+light_color = 0
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
 visible = false

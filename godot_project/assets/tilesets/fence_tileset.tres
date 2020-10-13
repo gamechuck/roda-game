@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=10 format=2]
 
-[ext_resource path="res://roda-assets/Tilemap/fence.png" type="Texture" id=1]
+[ext_resource path="res://roda-assets/tilemap/fence.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 32, 0, 32 )
