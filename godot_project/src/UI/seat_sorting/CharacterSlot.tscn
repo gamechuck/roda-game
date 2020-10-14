@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/seat_sorting/CharacterSlot.gd" type="Script" id=1]
-[ext_resource path="res://roda-assets/UI/SeatSorting/teenager_pressed.png" type="Texture" id=2]
-[ext_resource path="res://roda-assets/UI/SeatSorting/teenager_disabled.png" type="Texture" id=3]
-[ext_resource path="res://roda-assets/UI/SeatSorting/teenager_normal.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/UI/seat_sorting/teenager_pressed.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/UI/seat_sorting/teenager_disabled.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/UI/seat_sorting/teenager_normal.png" type="Texture" id=4]
 
 [node name="CharacterSlot" type="Control"]
 margin_right = 79.0

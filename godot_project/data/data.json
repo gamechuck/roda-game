@@ -283,56 +283,56 @@
     "items": {
         "fence": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/fence_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/fence_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/fence_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/fence_pressed.png"
             }
         },
         "pump": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/pump_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/pump_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/pump_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/pump_pressed.png"
             }
         },
         "bike": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/bike_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/bike_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
             }
         },
         "broken_bike": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/bike_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/bike_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
             }
         },
         "trash_cup": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/trash_cup_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/trash_cup_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_cup_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_cup_pressed.png"
             }
         },
         "trash_bag": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/trash_bag_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/trash_bag_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bag_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bag_pressed.png"
             }
         },
         "trash_bottle": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/trash_bottle_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/trash_bottle_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bottle_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bottle_pressed.png"
             }
         },
         "seat_belt": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/seat_belt_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/seat_belt_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/seat_belt_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/seat_belt_pressed.png"
             }
         },
         "battery": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/battery_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/battery_pressed.png"
+                "texture_normal": "res://roda-assets/UI/inventory/items/battery_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/battery_pressed.png"
             }
         }
     },
