@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://roda-assets/Characters/SoldSnejk/solid_snejk_idle.png" type="Texture" id=1]
+[ext_resource path="res://roda-assets/characters/solid_snejk/solid_snejk_idle.png" type="Texture" id=1]
 [ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=2]
 
 [sub_resource type="AtlasTexture" id=4]

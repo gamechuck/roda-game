@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://roda-assets/Characters/WindTurbine/wind_turbine_off.png" type="Texture" id=2]
-[ext_resource path="res://roda-assets/Characters/WindTurbine/wind_turbine_on.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/characters/wind_turbine/wind_turbine_off.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/characters/wind_turbine/wind_turbine_on.png" type="Texture" id=3]
 [ext_resource path="res://src/game/characters/WindTurbine.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]

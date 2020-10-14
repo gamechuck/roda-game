@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/dynamic/luckiest_guy_size16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/styles/button_normal.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/styles/button_pressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://roda-assets/UI/Elements/Dialogue.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/UI/elements/dialogue.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.937255, 0.815686, 0, 1 )

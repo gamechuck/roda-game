@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://roda-assets/Props/bike.png" type="Texture" id=1]
+[ext_resource path="res://roda-assets/props/bike.png" type="Texture" id=1]
 [ext_resource path="res://src/game/base/Prop.tscn" type="PackedScene" id=2]
 
 [node name="Bike" instance=ExtResource( 2 )]

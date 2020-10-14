@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/game/enemies/Skater.gd" type="Script" id=1]
-[ext_resource path="res://roda-assets/Characters/Skater/skater2_NE.png" type="Texture" id=2]
-[ext_resource path="res://roda-assets/Characters/Skater/skater2_NW.png" type="Texture" id=3]
-[ext_resource path="res://roda-assets/Characters/Skater/skater2_SW.png" type="Texture" id=4]
-[ext_resource path="res://roda-assets/Characters/Skater/skater2_SE.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_ne.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_nw.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_sw.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_se.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )

@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/game/traffic/PedestrianLight.gd" type="Script" id=1]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_side_green.png" type="Texture" id=2]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_back.png" type="Texture" id=3]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_front_red.png" type="Texture" id=4]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_UI_red.png" type="Texture" id=5]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_side_red.png" type="Texture" id=6]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_front_green.png" type="Texture" id=7]
-[ext_resource path="res://roda-assets/Props/pedestrian_lights_UI_green.png" type="Texture" id=8]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_side_green.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_back.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_front_red.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_UI_red.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_side_red.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_front_green.png" type="Texture" id=7]
+[ext_resource path="res://roda-assets/props/pedestrian_lights_UI_green.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
