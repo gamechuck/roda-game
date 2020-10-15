@@ -847,6 +847,9 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak planin
 	>>> ADD_ITEM: fence
 	A vi, skejteri, prestanite ga udarati!
 	~ got_fence_from_helter_skelter = true
+	>>> HIDE: SkaterLoop
+	>>> HIDE: SkaterLoop2
+	>>> HIDE: SkaterLoop3
 	-> DONE
 
 = try_again

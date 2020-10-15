@@ -14,7 +14,7 @@ func _ready():
 		_path_2D.remove_child(path_follow)
 		path_follow.queue_free()
 
-	var _skater : class_skater = spawn_skater(0.0)
+	set_visible()
 
 func spawn_skater(initial_offset : float) -> class_skater:
 	var path_follow : PathFollow2D = _path_follow_resource.instance()
@@ -28,3 +28,15 @@ func spawn_skater(initial_offset : float) -> class_skater:
 
 	path_follow.get_node("RemoteTransform2D").remote_path = skater.get_path()
 	return skater
+
+func set_visible(value : bool = visible):
+	visible = value
+	if visible:
+		var _skater : class_skater = spawn_skater(0.0)
+	else:
+		for skater in _skaters_container.get_children():
+			_skaters_container.remove_child(skater)
+			skater.queue_free()
+		for path_follow in _path_2D.get_children():
+			_path_2D.remove_child(path_follow)
+			path_follow.queue_free()

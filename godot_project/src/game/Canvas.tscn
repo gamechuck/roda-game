@@ -173,9 +173,8 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="SmogVortex" type="Sprite" parent="."]
-visible = false
 material = ExtResource( 5 )
-position = Vector2( 778.484, 2422.09 )
+position = Vector2( 904, 2440 )
 scale = Vector2( 40, 40 )
 z_index = 1
 texture = ExtResource( 8 )
