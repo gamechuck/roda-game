@@ -4,6 +4,9 @@ extends Control
 # 1. Not allowing the user to add/select characters nor push the drive button when not waiting for a choice!
 # 2. Change everything to be derived from control vs the current mix that is currently implemented!
 
+enum PHASE {SEAT_SORTING = 0, BELTING = 1, ENDING = 2}
+var _phase : int = PHASE.SEAT_SORTING
+
 onready var _drive_button := $VBoxContainer/DriveButton
 
 onready var _highlights_container := $VBoxContainer/HBoxContainer/BackgroundRect/Highlights
@@ -52,39 +55,63 @@ func clear_all_characters():
 				child.character = null
 
 func _on_mouse_pressed(seat_rect : class_highlight_rect) -> void:
-	if active_character and seat_rect.character == null:
-		active_character.pressed = false
-		active_character.disabled = true
-		seat_rect.character = active_character
+	match _phase:
+		PHASE.SEAT_SORTING:
+			if active_character and seat_rect.character == null:
+				active_character.pressed = false
+				active_character.disabled = true
+				seat_rect.character = active_character
 
-		active_character = null
-	elif seat_rect.character != null:
-		var character : class_character_slot = seat_rect.character
-		character.disabled = false
+				active_character = null
+			elif seat_rect.character != null:
+				var character : class_character_slot = seat_rect.character
+				character.disabled = false
 
-		seat_rect.character = null
+				seat_rect.character = null
+		PHASE.BELTING:
+			seat_rect.is_belted = not seat_rect.is_belted
 
 func _on_character_pressed(pressed : bool, pressed_character :  class_character_slot) -> void:
-	for child in [_adult, _teenager, _child, _baby]:
-		if child is class_character_slot:
-			if child != pressed_character:
-				child.pressed = false
-			else:
-				child.pressed = pressed
-				if pressed:
-					active_character = pressed_character
-				else:
-					active_character = null
+	match _phase:
+		PHASE.SEAT_SORTING:
+			for child in [_adult, _teenager, _child, _baby]:
+				if child is class_character_slot:
+					if child != pressed_character:
+						child.pressed = false
+					else:
+						child.pressed = pressed
+						if pressed:
+							active_character = pressed_character
+						else:
+							active_character = null
+		_:
+			#You can't press any character buttons during belting and ending!!
+			return
 
 func _on_drive_button_pressed():
-	for child in _highlights_container.get_children():
-		if child is class_highlight_rect:
-			if not child.is_valid_character:
-				if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is incorrect!")
-				if Director.is_waiting_for_choice:
-					emit_signal("drive_button_pressed", 0)
-				clear_all_characters()
-				return
+	match _phase:
+		PHASE.SEAT_SORTING:
+			for child in _highlights_container.get_children():
+				if child is class_highlight_rect:
+					if not child.is_valid_character:
+						if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is incorrect!")
+						if Director.is_waiting_for_choice:
+							emit_signal("drive_button_pressed", 0)
+						clear_all_characters()
+						return
 
-	if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is correct!")
-	emit_signal("drive_button_pressed", 1)
+			if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is correct!")
+			emit_signal("drive_button_pressed", 1)
+			_phase = PHASE.BELTING
+		PHASE.BELTING:
+			for child in _highlights_container.get_children():
+				if child is class_highlight_rect:
+					if not child.is_belted:
+						if ConfigData.verbose_mode : print("BELTING - someone is not wearing their belt!")
+						if Director.is_waiting_for_choice:
+							emit_signal("drive_button_pressed", 0)
+						return
+
+			if ConfigData.verbose_mode : print("BELTING - everyone is wearing their belt!")
+			emit_signal("drive_button_pressed", 1)
+			_phase = PHASE.ENDING

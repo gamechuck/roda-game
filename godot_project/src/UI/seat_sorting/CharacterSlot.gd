@@ -37,6 +37,9 @@ func set_texture_disabled(value : Texture) -> void:
 func get_texture_disabled() -> Texture:
 	return $TextureButton.texture_disabled
 
+#The belted version!
+export var texture_belted : Texture
+
 signal button_pressed(pressed)
 
 func _ready():

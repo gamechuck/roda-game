@@ -760,13 +760,24 @@ Okej, hvala ti puno!
 - (sorting_minigame_start)
 Stavi pravo čudovište na pravo mjesto!
 + Ne, ne, ne, pa čak i ja vidim da to nije dobro...
-	Pokušajmo opet.
-	-> sorting_minigame_start
+    Pokušajmo opet.
+    -> sorting_minigame_start
 + Vau! To je savršeno!
-	Sada napokon neću više morati plaćati kazne!
-	Da ne spominjem povećanu sigurnost!
-	-> sorting_minigame_solved
+    Sve si napravio točno!
+    -> sorting_minigame_solved
 = sorting_minigame_solved
+Prije vožnje svi moraju vezati pojaseve!
+Ja svoj već imam, ali molim te provjeri za druge!
+- (belting_start)
+Podsjeti sva čudovišta da vežu pojaseve!
++ Mislim da ipak netko još nema pojas!
+    Provjeri ponovno!
+    -> belting_start
++ Bravo! Sada su svi vezani pojasevima!
+    Sada napokon neću više morati plaćati kazne!
+    Da ne spominjem povećanu sigurnost!
+    -> belting_end
+= belting_end
 >>> END_MINIGAME
 Uzmi ovaj sigurnosni pojas kao nagradu za pomoć!
 >>> ADD_ITEM: seat_belt

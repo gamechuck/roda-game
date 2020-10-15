@@ -4,6 +4,14 @@ enum CHARACTER {BABY, CHILD, TEENAGER, ADULT}
 export(CHARACTER) var type := CHARACTER.ADULT
 
 var is_valid_character := false
+var is_belted := false setget set_is_belted
+func set_is_belted(value : bool):
+	is_belted = value
+	if character:
+		if is_belted:
+			$Sprite.texture = character.texture_belted
+		else:
+			$Sprite.texture = character.texture_normal
 
 var character : class_character_slot = null setget set_character, get_character
 func set_character(value : class_character_slot) -> void:

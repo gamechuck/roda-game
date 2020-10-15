@@ -1,19 +1,22 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://roda-assets/UI/seat_sorting/chasis.png" type="Texture" id=1]
 [ext_resource path="res://roda-assets/UI/bike_repair/bike_overlay.png" type="Texture" id=2]
 [ext_resource path="res://roda-assets/UI/bike_repair/central_frame.png" type="Texture" id=3]
 [ext_resource path="res://roda-assets/UI/seat_sorting/interior.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/SeatSortingUI.gd" type="Script" id=5]
-[ext_resource path="res://roda-assets/UI/seat_sorting/driver.png" type="Texture" id=7]
+[ext_resource path="res://roda-assets/UI/seat_sorting/teenager_belted.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/UI/seat_sorting/driver_belted.png" type="Texture" id=7]
 [ext_resource path="res://roda-assets/UI/seat_sorting/child_pressed.png" type="Texture" id=8]
 [ext_resource path="res://roda-assets/UI/seat_sorting/adult_pressed.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/seat_sorting/CharacterSlot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://roda-assets/UI/seat_sorting/adult_normal.png" type="Texture" id=11]
+[ext_resource path="res://roda-assets/UI/seat_sorting/adult_belted.png" type="Texture" id=12]
 [ext_resource path="res://roda-assets/UI/seat_sorting/baby_normal.png" type="Texture" id=13]
 [ext_resource path="res://roda-assets/UI/seat_sorting/teenager_pressed.png" type="Texture" id=14]
 [ext_resource path="res://roda-assets/UI/seat_sorting/child_normal.png" type="Texture" id=15]
 [ext_resource path="res://roda-assets/UI/seat_sorting/teenager_normal.png" type="Texture" id=16]
+[ext_resource path="res://roda-assets/UI/seat_sorting/child_belted.png" type="Texture" id=17]
 [ext_resource path="res://roda-assets/UI/seat_sorting/baby_pressed.png" type="Texture" id=18]
 [ext_resource path="res://roda-assets/UI/seat_sorting/adult_disabled.png" type="Texture" id=19]
 [ext_resource path="res://roda-assets/UI/seat_sorting/teenager_disabled.png" type="Texture" id=20]
@@ -22,8 +25,7 @@
 [ext_resource path="res://src/UI/seat_sorting/SeatRect.gd" type="Script" id=23]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=24]
 [ext_resource path="res://roda-assets/UI/seat_sorting/windshield.png" type="Texture" id=25]
-
-
+[ext_resource path="res://roda-assets/UI/seat_sorting/baby_belted.png" type="Texture" id=26]
 
 [node name="SeatSortingUI" type="Control"]
 anchor_right = 1.0
@@ -76,14 +78,15 @@ type = 2
 texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 14 )
 texture_disabled = ExtResource( 20 )
+texture_belted = ExtResource( 6 )
 
 [node name="Adult" parent="VBoxContainer/HBoxContainer/VBoxLeft" instance=ExtResource( 10 )]
 margin_top = 85.0
 margin_bottom = 166.0
-type = 3
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 9 )
 texture_disabled = ExtResource( 19 )
+texture_belted = ExtResource( 12 )
 
 [node name="BackgroundRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_left = 83.0
@@ -265,6 +268,7 @@ type = 1
 texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 8 )
 texture_disabled = ExtResource( 21 )
+texture_belted = ExtResource( 17 )
 
 [node name="Baby" parent="VBoxContainer/HBoxContainer/VBoxRight" instance=ExtResource( 10 )]
 margin_top = 85.0
@@ -273,6 +277,7 @@ type = 0
 texture_normal = ExtResource( 13 )
 texture_pressed = ExtResource( 18 )
 texture_disabled = ExtResource( 22 )
+texture_belted = ExtResource( 26 )
 
 [node name="DriveButton" type="Button" parent="VBoxContainer"]
 margin_left = 161.0
