@@ -1,0 +1,203 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://roda-assets/portraits/taxi.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/DialogueUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/dynamic/luckiest_guy_size16.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/UI/dialogue/ChoiceButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=5]
+[ext_resource path="res://roda-assets/UI/elements/dialogue.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/UI/elements/name.png" type="Texture" id=8]
+
+
+[sub_resource type="StyleBoxTexture" id=1]
+content_margin_left = 24.0
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 114, 32 )
+margin_left = 3.0
+margin_right = 4.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+content_margin_left = 6.0
+content_margin_right = 6.0
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 469, 80 )
+margin_left = 3.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 3.0
+
+[node name="DialogueUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 179.927, 188.992, 190.383 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 122.992 ]
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopSpacer" type="Control" parent="VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 25.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="ChoiceVBox" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 25.0
+margin_right = 480.0
+margin_bottom = 133.0
+
+[node name="ChoiceButton" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 440.0
+margin_bottom = 24.0
+text = "Choice 0"
+
+[node name="ChoiceButton2" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_top = 28.0
+margin_right = 440.0
+margin_bottom = 52.0
+text = "Choice 1"
+
+[node name="ChoiceButton3" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_top = 56.0
+margin_right = 440.0
+margin_bottom = 80.0
+text = "Choice 2"
+
+[node name="ChoiceButton4" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_top = 84.0
+margin_right = 440.0
+margin_bottom = 108.0
+text = "Choice 3"
+
+[node name="BottomSpacer" type="Control" parent="VBoxContainer"]
+margin_top = 133.0
+margin_right = 480.0
+margin_bottom = 158.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="DialogueVBox" type="VBoxContainer" parent="VBoxContainer"]
+margin_left = 5.0
+margin_top = 158.0
+margin_right = 474.0
+margin_bottom = 270.0
+size_flags_horizontal = 4
+custom_constants/separation = -3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/DialogueVBox"]
+margin_right = 119.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 114, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 1
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0.937255, 0.815686, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Solid Snake"
+align = 1
+valign = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/DialogueVBox"]
+show_behind_parent = true
+margin_top = 29.0
+margin_right = 469.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 469, 80 )
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DialogueVBox/PanelContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 463.0
+margin_bottom = 77.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/DialogueVBox/PanelContainer/HBoxContainer"]
+margin_right = 339.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.937255, 0.815686, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "If you keep your head in the skies you will be blue all over due to all the cars that hit you!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitSpacer" type="Control" parent="VBoxContainer/DialogueVBox/PanelContainer/HBoxContainer"]
+margin_left = 343.0
+margin_right = 457.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+
+[node name="BottomSpacer" type="Control" parent="VBoxContainer/DialogueVBox"]
+margin_top = 106.0
+margin_right = 469.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 6 )
+
+[node name="PortraitRect" type="TextureRect" parent="."]
+margin_left = 345.0
+margin_top = 152.0
+margin_right = 495.0
+margin_bottom = 302.0
+rect_min_size = Vector2( 150, 150 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InteractTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

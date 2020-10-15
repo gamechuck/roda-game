@@ -1,0 +1,377 @@
+{
+    "characters": {
+        "solid_snejk": {
+            "name": "Solid Snejk",
+            "knot": "conv_solid_snejk",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    291,
+                    73
+                ],
+                "texture": "res://roda-assets/portraits/solid_snejk.png",
+                "flip_h": true
+            }
+        },
+        "lizzy": {
+            "name": "Lizijan",
+            "knot": "conv_lizzy",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    280,
+                    76
+                ],
+                "texture": "res://roda-assets/portraits/lizzy.png"
+            }
+        },
+        "watto": {
+            "name": "Watto",
+            "knot": "conv_watto",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    302,
+                    51
+                ],
+                "texture": "res://roda-assets/portraits/watto.png"
+            }
+        },
+        "seat_sorting_car": {
+            "name": "Car",
+            "knot": "conv_seat_sorting_car"
+        },
+        "solid_slug": {
+            "name": "Slagač",
+            "knot": "conv_solid_slug",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    340,
+                    115
+                ],
+                "texture": "res://roda-assets/portraits/solid_slug.png"
+            }
+        },
+        "returned_bike": {
+            "name": "Bike",
+            "knot": "conv_returned_bike",
+            "visible": false
+        },
+        "taxi_at_park": {
+            "name": "Taxi",
+            "knot": "conv_taxi_at_park",
+            "portrait": {
+                "size": [
+                    150,
+                    150
+                ],
+                "position": [
+                    345,
+                    152
+                ],
+                "texture": "res://roda-assets/portraits/taxi.png"
+            }
+        },
+        "taxi_at_mountain": {
+            "name": "Taxi",
+            "knot": "conv_taxi_at_mountain",
+            "portrait": {
+                "size": [
+                    150,
+                    150
+                ],
+                "position": [
+                    345,
+                    152
+                ],
+                "texture": "res://roda-assets/portraits/taxi.png"
+            }
+        },
+        "bus": {
+            "name": "Bus",
+            "knot": "conv_bus"
+        },
+        "canster_left": {
+            "name": "Canster",
+            "knot": "conv_canster",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/canster.png"
+            }
+        },
+        "canster_middle": {
+            "name": "Canster",
+            "knot": "conv_canster",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/canster.png"
+            }
+        },
+        "canster_right": {
+            "name": "Cansterino",
+            "knot": "conv_canster",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/canster.png"
+            }
+        },
+        "copper": {
+            "name": "Copper",
+            "knot": "conv_copper",
+            "portrait": {
+                "size": [
+                    256,
+                    256
+                ],
+                "position": [
+                    286,
+                    42
+                ],
+                "texture": "res://roda-assets/portraits/copper.png"
+            }
+        },
+        "happy_tree": {
+            "name": "Happy Tree",
+            "knot": "conv_happy_tree",
+            "portrait": {
+                "size": [
+                    256,
+                    256
+                ],
+                "position": [
+                    283,
+                    32
+                ],
+                "texture": "res://roda-assets/portraits/happy_tree.png"
+            },
+            "visible": false
+        },
+        "love_interest": {
+            "name": "Mia",
+            "knot": "conv_love_interest",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    309,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/love_interest.png"
+            }
+        },
+        "wheelie": {
+            "name": "Vilko",
+            "knot": "conv_wheelie",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    345,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/wheelie.png"
+            }
+        },
+        "mr_smog": {
+            "name": "Mr. Smog",
+            "knot": "conv_mr_smog",
+            "portrait": {
+                "size": [
+                    256,
+                    256
+                ],
+                "position": [
+                    300,
+                    35
+                ],
+                "texture": "res://roda-assets/portraits/mr_smog.png"
+            }
+        },
+        "wind_turbine": {
+            "name": "Wind Turbine",
+            "knot": "conv_wind_turbine"
+        },
+        "player": {
+            "name": "Plavko",
+            "knot": "conv_player",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    311,
+                    71
+                ],
+                "texture": "res://roda-assets/portraits/player.png"
+            }
+        },
+        "helter_skelter": {
+            "name": "Helter Skejter",
+            "knot": "conv_helter_skelter",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    327,
+                    79
+                ],
+                "texture": "res://roda-assets/portraits/skater.png"
+            }
+        },
+        "intro_mr_smog": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_player": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_solid_slug": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_solid_snejk": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        },
+        "intro_happy_tree": {
+            "name": "Helter Skelter",
+            "knot": "conv_helter_skelter"
+        }
+    },
+    "items": {
+        "fence": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/fence_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/fence_pressed.png"
+            }
+        },
+        "pump": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/pump_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/pump_pressed.png"
+            }
+        },
+        "bike": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
+            }
+        },
+        "broken_bike": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
+            }
+        },
+        "trash_cup": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_cup_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_cup_pressed.png"
+            }
+        },
+        "trash_bag": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bag_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bag_pressed.png"
+            }
+        },
+        "trash_bottle": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bottle_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bottle_pressed.png"
+            }
+        },
+        "seat_belt": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/seat_belt_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/seat_belt_pressed.png"
+            }
+        },
+        "battery": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/battery_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/battery_pressed.png"
+            }
+        }
+    },
+    "pickups": {
+        "trash_bag_one": {
+            "knot": "conv_trash_bag",
+            "item_id": "trash_bag"
+        },
+        "trash_bag_two": {
+            "knot": "conv_trash_bag",
+            "item_id": "trash_bag"
+        },
+        "trash_bottle_one": {
+            "knot": "conv_trash_bottle",
+            "item_id": "trash_bottle"
+        },
+        "trash_bottle_two": {
+            "knot": "conv_trash_bottle",
+            "item_id": "trash_bottle"
+        },
+        "trash_cup_one": {
+            "knot": "conv_trash_cup",
+            "item_id": "trash_cup"
+        },
+        "trash_cup_two": {
+            "knot": "conv_trash_cup",
+            "item_id": "trash_cup"
+        },
+        "broken_bike": {
+            "knot": "conv_broken_bike",
+            "item_id": "broken_bike"
+        },
+        "fence_at_turbine": {
+            "knot": "conv_fence_at_turbine",
+            "item_id": "fence"
+        },
+        "fence_in_smog_town": {
+            "knot": "conv_fence_in_smog_town",
+            "item_id": "fence"
+        }
+    }
+}

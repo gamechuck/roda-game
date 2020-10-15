@@ -1,4 +1,4 @@
-[submodule "GodotProject/roda-assets"]
-	path = GodotProject/roda-assets
+[submodule "godot_project/roda-assets"]
+	path = godot_project/roda-assets
 	url = ../../roda/roda-assets.git
 	branch = master

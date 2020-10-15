@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/UI/PauseUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/UI/pause/MainPauseTab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/pause/SettingsPauseTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/pause/PauseTabContainer.gd" type="Script" id=5]
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="PauseUI" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 232.85, 81.3131, 46.3969 ],
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseTabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPauseTab" parent="PauseTabContainer" instance=ExtResource( 3 )]
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="SettingsPauseTab" parent="PauseTabContainer" instance=ExtResource( 4 )]
+visible = false
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32

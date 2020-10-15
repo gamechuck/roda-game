@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/UI/game/ItemSlot.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=2]
+[ext_resource path="res://roda-assets/UI/inventory/slot_background.png" type="Texture" id=3]
+
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="ItemSlot" type="TextureRect"]
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 2 )
+texture = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+toggle_mode = true
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -54.0
+margin_right = -54.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 1 )
+text = "1 x"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

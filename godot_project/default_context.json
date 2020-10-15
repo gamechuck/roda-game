@@ -1,0 +1,28 @@
+{
+    "items": [
+    ],
+    "characters": [
+        {
+            "id": "player",
+            "properties": {
+                "wearing_color": 0,
+                "on_bike": 0
+            },
+            "position": [0, 0],
+            "visible": true
+        },
+        {
+            "id": "love_interest",
+            "properties": {
+                "wearing_color": 1
+            },
+            "visible": true
+        }
+    ],
+    "pickups": [
+        {
+            "id": "trash_bag_two",
+            "visible": true
+        }
+    ]
+}

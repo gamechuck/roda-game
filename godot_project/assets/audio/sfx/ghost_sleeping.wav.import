@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ghost_sleeping.wav-f21953371ce8d6a5dd4687c9b2c2fcad.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/ghost_sleeping.wav"
+dest_files=[ "res://.import/ghost_sleeping.wav-f21953371ce8d6a5dd4687c9b2c2fcad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
