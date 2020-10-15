@@ -12,13 +12,13 @@ var _moving : int = MOVING.IDLE
 var nav_path : PoolVector2Array = []
 
 var target_points : PoolVector2Array = [
-	Vector2(2382, 2386),
-	Vector2(2777, 2403), 
-	Vector2(3399, 2423), 
-	Vector2(3391, 2072), 
-	Vector2(3877, 2043),
-	Vector2(3825, 1789),
-	Vector2(3825, 1799)
+	Vector2(2480, 2360),
+	Vector2(3474, 2360), 
+	Vector2(2424, 2248), 
+	Vector2(3497, 2021), 
+	Vector2(3818, 2018),
+	Vector2(4020, 1742),
+	Vector2(4020, 1767)
 	]
 
 var current_idx := 0

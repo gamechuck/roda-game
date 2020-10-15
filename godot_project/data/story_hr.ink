@@ -341,7 +341,7 @@ Ako nema pločnika, kuda se pješaci kreću?
 
 = show_bike_location
 Eno gdje stoji izgubljeni bicikl!
->>> PAN_CAMERA_TO_POSITION: 3560 3032
+>>> PAN_CAMERA_TO_POSITION: 3584 3096
 Sad ti je sigurno žao što nemaš moju leteću raketu.
 Hehe, šteta ,zar ne...
 >>> RESET_CAMERA
@@ -547,7 +547,7 @@ Da vidimo...
 
 = pan_to_house
 // PAN TO HOUSE:
->>> PAN_CAMERA_TO_POSITION: 3870 1788
+>>> PAN_CAMERA_TO_POSITION: 4020 1742
 Opa! Čini se da je jedan dio ograde pao na krov ove zgrade!
 Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može spustiti taj dio ograde.
 >>> RESET_CAMERA
@@ -555,7 +555,7 @@ Morat ćeš otkriti tko je vlasnik zgrade pa ti možda on može spustiti taj dio
 
 = pan_to_helter_skelter
 // PAN TO HELTER SKELTER:
->>> PAN_CAMERA_TO_POSITION: 2500 3738
+>>> PAN_CAMERA_TO_POSITION: 2464 3744
 Čini se da je neki ljutko sa skejtom našao ogradu i prisvojio je sebi.
 Morat ćeš ga zamoliti da ti je vrati koristeći svojom karizmom i rječitošću, čini se!
 >>> RESET_CAMERA
@@ -563,7 +563,7 @@ Morat ćeš ga zamoliti da ti je vrati koristeći svojom karizmom i rječitošć
 
 = pan_to_fence_in_smog_town
 // PAN TO SMOG ZONE:
->>> PAN_CAMERA_TO_POSITION: 1439 1768
+>>> PAN_CAMERA_TO_POSITION: 1440 1760
 Moj magični vid jedva može vidjeti kroz sav ovaj smog!
 Ova regija čini se vrlo opasnom i mislim da ćeš u njoj morati nositi raznobojnu odjeću da te auti bolje vide!
 I ne samo to...
@@ -573,7 +573,7 @@ Tamo je sve puno duhova!!!
 
 = pan_to_fence_at_turbine
 // PAN TO WIND TURBINE:
->>> PAN_CAMERA_TO_POSITION: 1047 700
+>>> PAN_CAMERA_TO_POSITION: 1056 672
 Hmm... komad ograde pao je blizu stare zračne turbine na vrhu planine...
 To je prilično daleko... Ali mislim da će ti neko motorno vozilo pomoći da dođeš do gore.
 Mlad si i pametan, otkrit ćeš već put do gore!
@@ -582,7 +582,7 @@ Mlad si i pametan, otkrit ćeš već put do gore!
 
 = pan_to_love_interest
 // PAN TO LOVE INTEREST
->>> PAN_CAMERA_TO_POSITION: 2300 2871
+>>> PAN_CAMERA_TO_POSITION: 2336 2848
 Da vidimo što najviše voliš...
 Opa! Kakvo ljupko čudovište! Nemoj zaboraviti: moraš izraziti svoje osjećaje!
 Ja sam to zaboravio previše puta i sada sam vrlo usamljen čarobnjak.
@@ -1404,7 +1404,7 @@ Zahvaljujem na poklonu!
 }
 
 = angry_mr_smog
->>> PAN_CAMERA_TO_POSITION: 736 2782
+>>> PAN_CAMERA_TO_POSITION: 672 2720
 MUHUHAHAHA
 Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> RESET_CAMERA
@@ -1419,7 +1419,7 @@ Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 = intro
 ~ mr_smog_defeated = 1
 >>> UPDATE_UI: happy_tree
->>> PAN_CAMERA_TO_POSITION: 736 2782
+>>> PAN_CAMERA_TO_POSITION: 672 2720
 Ajme, sav me smog napustio!
 Sada sam ponovno sretno drvo!
 Idem natrag u svoj rodni park!

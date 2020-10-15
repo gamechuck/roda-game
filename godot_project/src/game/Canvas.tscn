@@ -65,13 +65,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 160, 64 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 160, 64 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 160, 64 )
 
 [sub_resource type="NavigationPolygon" id=8]
@@ -293,10 +293,10 @@ __meta__ = {
 position = Vector2( 3584, 3096 )
 
 [node name="FenceAtTurbine" parent="YSort/Pickups" instance=ExtResource( 28 )]
-position = Vector2( 1056.3, 667.098 )
+position = Vector2( 1056, 672 )
 
 [node name="FenceInSmogTown" parent="YSort/Pickups" instance=ExtResource( 28 )]
-position = Vector2( 1438.86, 1768.13 )
+position = Vector2( 1440, 1760 )
 id = "fence_in_smog_town"
 
 [node name="TrashBagOne" parent="YSort/Pickups" instance=ExtResource( 36 )]
@@ -368,7 +368,7 @@ position = Vector2( 2480, 2360 )
 position = Vector2( 897.28, 864.001 )
 
 [node name="LoveInterest" parent="YSort/Characters" instance=ExtResource( 44 )]
-position = Vector2( 2319.42, 2850.94 )
+position = Vector2( 2336, 2848 )
 
 [node name="HappyTree" parent="YSort/Characters" instance=ExtResource( 21 )]
 position = Vector2( 2247.52, 2109.28 )
@@ -377,11 +377,11 @@ position = Vector2( 2247.52, 2109.28 )
 position = Vector2( 1826.89, 2271.76 )
 
 [node name="HelterSkelter" parent="YSort/Characters" instance=ExtResource( 34 )]
-position = Vector2( 2460.01, 3739.66 )
+position = Vector2( 2464, 3744 )
 id = "helter_skelter"
 
 [node name="MrSmog" parent="YSort/Characters" instance=ExtResource( 32 )]
-position = Vector2( 719.586, 2721.62 )
+position = Vector2( 672, 2720 )
 
 [node name="CansterLeft" parent="YSort/Characters" instance=ExtResource( 46 )]
 position = Vector2( 3496, 2256 )
@@ -503,7 +503,7 @@ position = Vector2( 3296, 3040 )
 extents = Vector2( 160, 64 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkingToBike/Lights" index="0" instance=ExtResource( 22 )]
 position = Vector2( -112, -40 )
@@ -538,7 +538,7 @@ position = Vector2( 2656, 3048 )
 extents = Vector2( 160, 64 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Lights" parent="YSort/ZebraCrossings/LoveToParking" index="1"]
 position = Vector2( 7.55078, -3.77563 )
@@ -574,7 +574,7 @@ extents = Vector2( 160, 64 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 22 )]
 position = Vector2( 112, 47.9999 )
@@ -667,6 +667,44 @@ visible = false
 navpoly = SubResource( 8 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="Points"]
+position = Vector2( 2480, 2360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D2" type="Position2D" parent="Points"]
+position = Vector2( 3474, 2360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D3" type="Position2D" parent="Points"]
+position = Vector2( 3424.72, 2248.68 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D4" type="Position2D" parent="Points"]
+position = Vector2( 3497.39, 2021.69 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D5" type="Position2D" parent="Points"]
+position = Vector2( 3818.5, 2018.02 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D6" type="Position2D" parent="Points"]
+position = Vector2( 4020.79, 1742.04 )
+
+[node name="Position2D7" type="Position2D" parent="Points"]
+position = Vector2( 4020.68, 1767.57 )
 
 [editable path="YSort/SkaterLoops/SkaterLoop"]
 
