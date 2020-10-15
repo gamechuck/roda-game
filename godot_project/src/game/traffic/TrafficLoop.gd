@@ -1,6 +1,9 @@
 tool
 extends YSort
 
+const tile_width := 32.0*Vector2.ONE
+const tile_offset := 32.0*Vector2.ONE
+
 onready var _cars_container := $Cars
 
 onready var _path_follow_resource := preload("res://src/game/base/PathFollow.tscn")
@@ -8,19 +11,22 @@ onready var _car_resource := preload("res://src/game/traffic/Car.tscn")
 onready var _path_2D := $Path2D
 
 export var amount_of_cars := 0 setget set_amount_of_cars
-export var points := PoolVector2Array() setget set_points
-
 func set_amount_of_cars(value : int):
 	amount_of_cars = value
 	if Engine.editor_hint:
 		_ready()
 
+export var points := PoolVector2Array() setget set_points
 func set_points(value : PoolVector2Array):
 	points = value
 	var curve : Curve2D = $Path2D.curve
 	curve.clear_points()
-	for point in points:
-		curve.add_point(point, Vector2.ZERO, Vector2.ZERO)
+	for index in points.size():
+		# Snap & offset the point!
+		points[index] -= tile_offset 
+		points[index] = (points[index]/tile_width).round()*tile_width
+		points[index] += tile_offset 
+		curve.add_point(points[index], Vector2.ZERO, Vector2.ZERO)
 	# Close the curve!
 	if not points.empty():
 		curve.add_point(points[0], Vector2.ZERO, Vector2.ZERO)

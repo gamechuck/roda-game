@@ -1,6 +1,6 @@
 extends Control
 
-onready var _game_canvas : = $ViewportContainer/GameCanvas
+onready var _game_canvas : = $ViewportContainer/Canvas
 
 onready var _editor_camera := $EditorCamera
 onready var _game_camera := _game_canvas.get_node("YSort/Player/GameCamera")
