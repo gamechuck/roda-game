@@ -1,4 +1,4 @@
-image: hunternn/godot-ci
+image: barichello/godot-ci:latest
 
 # Cache imported assets between runs
 cache:
