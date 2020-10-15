@@ -272,15 +272,19 @@ __meta__ = {
 }
 
 [node name="FenceBack" parent="YSort/Fences" instance=ExtResource( 26 )]
+visible = false
 tile_data = PoolIntArray( 4194373, 3, 0, 4194374, 3, 0, 4194375, 3, 0, 4194376, 3, 0, 4194377, 3, 0, 4194378, 3, 0, 4194379, 3, 0, 4194380, 3, 0 )
 
 [node name="FenceFront" parent="YSort/Fences" instance=ExtResource( 26 )]
+visible = false
 tile_data = PoolIntArray( 4718661, 7, 0, 4718662, 7, 0, 4718663, 7, 0, 4718666, 7, 0, 4718667, 7, 0, 4718668, 7, 0 )
 
 [node name="FenceRight" parent="YSort/Fences" instance=ExtResource( 26 )]
+visible = false
 tile_data = PoolIntArray( 4194381, 2, 0, 4259917, 1, 0, 4325453, 1, 0, 4390989, 1, 0, 4456525, 1, 0, 4522061, 1, 0, 4587597, 1, 0, 4653133, 1, 0, 4718669, 0, 0 )
 
 [node name="FenceLeft" parent="YSort/Fences" instance=ExtResource( 26 )]
+visible = false
 tile_data = PoolIntArray( 4194372, 4, 0, 4259908, 5, 0, 4325444, 5, 0, 4390980, 5, 0, 4456516, 5, 0, 4522052, 5, 0, 4587588, 5, 0, 4653124, 5, 0, 4718660, 6, 0 )
 
 [node name="Pickups" type="YSort" parent="YSort"]
