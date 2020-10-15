@@ -227,7 +227,7 @@ format = 1
 tile_data = PoolIntArray( 917593, 0, 0, 983129, 1, 0, 1048665, 1, 0, 1114201, 1, 0, 1179737, 1, 0, 1245273, 1, 0, 1310809, 1, 0, 1376345, 1, 0, 1441881, 0, 0 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 25 )]
-position = Vector2( 2886.99, 2826.27 )
+position = Vector2( 2336, 2208 )
 id = "player"
 
 [node name="Intro" type="YSort" parent="YSort"]
@@ -482,9 +482,6 @@ curve = SubResource( 3 )
 curve = SubResource( 4 )
 
 [node name="ZebraCrossings" type="YSort" parent="YSort"]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="ParkToTrash" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2656, 2400 )
@@ -534,7 +531,7 @@ position = Vector2( 3616, 2016 )
 extents = Vector2( 160, 64 )
 
 [node name="LoveToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
-position = Vector2( 2656, 3048 )
+position = Vector2( 2656, 3040 )
 extents = Vector2( 160, 64 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
@@ -544,7 +541,7 @@ shape = SubResource( 6 )
 position = Vector2( 7.55078, -3.77563 )
 
 [node name="PedestrianLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="0" instance=ExtResource( 24 )]
-position = Vector2( 104.449, -68.2244 )
+position = Vector2( 104.449, -76.2244 )
 direction = "left"
 
 [node name="PedestrianLight2" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="1" instance=ExtResource( 24 )]
@@ -552,11 +549,11 @@ position = Vector2( -119.551, 11.7756 )
 direction = "right"
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="2" instance=ExtResource( 22 )]
-position = Vector2( -119.551, -68.2244 )
+position = Vector2( -119.551, -76.2244 )
 direction = "back"
 
 [node name="TrafficLight2" parent="YSort/ZebraCrossings/LoveToParking/Lights" index="3" instance=ExtResource( 22 )]
-position = Vector2( 104.449, 11.7756 )
+position = Vector2( 104.449, 51.7756 )
 direction = "front"
 
 [node name="Mountain" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
