@@ -146,7 +146,7 @@ var traffic_green_time := 10.0
 var boss_max_health := 100.0
 
 var bullet_speed := 200
-var bullet_ttl := 2
+var bullet_ttl := 4
 
 var tracking_speed := 50
 var tracking_ttl := 4

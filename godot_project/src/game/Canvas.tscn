@@ -65,13 +65,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2125.72, 3663.83, 0, 0, 0, 0, 2124.39, 3948.82, 0, 0, 0, 0, 2163.68, 3948.49, 0, 0, 0, 0, 2163.96, 3948.23, 0, 0, 0, 0, 2162.45, 3664.98, 0, 0, 0, 0, 2125.72, 3663.83 )
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 160, 64 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 160, 64 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 160, 64 )
 
 [sub_resource type="NavigationPolygon" id=8]
@@ -189,7 +189,7 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 cell_tile_origin = 1
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 786464, 0, 0, 851993, 5, 0, 917527, 5, 0, 917535, 0, 0, 983123, 5, 0, 983126, 9, 0, 983127, 0, 0, 1048598, 0, 0, 1179679, 5, 0, 1245271, 5, 0, 1310743, 5, 0, 1310801, 0, 0, 1310806, 5, 0, 1441879, 5, 0, 1638479, 3, 0, 1638488, 3, 0, 3145785, 6, 0, 3145790, 7, 0, 3145797, 8, 0, 3145804, 6, 0, 3145809, 8, 0, 3145816, 7, 0, 3145823, 8, 0, 3145830, 6, 0, 3145843, 8, 0, 3145850, 7, 0, 3866668, 3, 0, 3866749, 0, 0, 3932284, 5, 0, 3997821, 5, 0, 4259911, 5, 0, 4259914, 9, 0, 4259915, 0, 0, 4391037, 5, 0, 4522059, 5, 0, 4587589, 0, 0, 4587594, 5, 0, 4718667, 5, 0, 4915246, 3, 0, 4915249, 3, 0, 4915267, 3, 0, 4915276, 3, 0, 4915286, 3, 0, 4915297, 3, 0, 5046398, 3, 0, 5505096, 5, 0, 5570686, 3, 0, 5636166, 0, 0, 5898308, 5, 0, 5898314, 0, 0, 5963845, 9, 0, 5963851, 5, 0, 6029381, 5, 0, 6029383, 5, 0, 6225987, 3, 0, 6225996, 3, 0, 6619243, 3, 0, 6619250, 3, 0, 6881347, 0, 0, 6881351, 0, 0, 6881355, 0, 0, 7012439, 3, 0, 7012448, 3, 0 )
+tile_data = PoolIntArray( 786464, 0, 0, 851993, 5, 0, 917527, 5, 0, 917535, 0, 0, 983123, 5, 0, 983126, 9, 0, 983127, 0, 0, 1048598, 0, 0, 1114199, 5, 0, 1179679, 5, 0, 1179734, 5, 0, 1310743, 5, 0, 1310801, 0, 0, 1441879, 5, 0, 1638479, 3, 0, 1638488, 3, 0, 3145785, 6, 0, 3145790, 7, 0, 3145797, 8, 0, 3145804, 6, 0, 3145809, 8, 0, 3145816, 7, 0, 3145823, 8, 0, 3145830, 6, 0, 3145843, 8, 0, 3145850, 7, 0, 3866668, 3, 0, 3866749, 0, 0, 3932284, 5, 0, 3997821, 5, 0, 4259911, 5, 0, 4259914, 9, 0, 4259915, 0, 0, 4390987, 5, 0, 4391037, 5, 0, 4456522, 5, 0, 4587589, 0, 0, 4718667, 5, 0, 4915246, 3, 0, 4915249, 3, 0, 4915267, 3, 0, 4915276, 3, 0, 4915286, 3, 0, 4915297, 3, 0, 5046398, 3, 0, 5505096, 5, 0, 5570686, 3, 0, 5636166, 0, 0, 5898308, 5, 0, 5898314, 0, 0, 5963845, 9, 0, 5963851, 5, 0, 6029381, 5, 0, 6029383, 5, 0, 6225987, 3, 0, 6225996, 3, 0, 6619243, 3, 0, 6619250, 3, 0, 6881347, 0, 0, 6881351, 0, 0, 6881355, 0, 0, 7012439, 3, 0, 7012448, 3, 0 )
 
 [node name="FakeFences" type="YSort" parent="YSort"]
 
@@ -239,11 +239,11 @@ z_index = 1
 texture = ExtResource( 8 )
 
 [node name="IntroHappyTree" parent="YSort/Intro" instance=ExtResource( 21 )]
-position = Vector2( 2624.89, 537.99 )
+position = Vector2( 2624, 536 )
 id = "intro_happy_tree"
 
 [node name="IntroSolidSlug" parent="YSort/Intro" instance=ExtResource( 16 )]
-position = Vector2( 2812.55, 614.286 )
+position = Vector2( 2808, 648 )
 id = "intro_solid_slug"
 
 [node name="IntroSolidSnejk" parent="YSort/Intro" instance=ExtResource( 14 )]
@@ -256,7 +256,7 @@ position = Vector2( 2721.54, 683.341 )
 id = "intro_player"
 
 [node name="IntroMrSmog" parent="YSort/Intro" instance=ExtResource( 15 )]
-position = Vector2( 2618.89, 131.692 )
+position = Vector2( 2624, 128 )
 z_index = 1
 id = "intro_mr_smog"
 
@@ -323,7 +323,7 @@ position = Vector2( 3069.72, 2270.82 )
 id = "trash_bottle_one"
 
 [node name="TrashBottleTwo" parent="YSort/Pickups" instance=ExtResource( 38 )]
-position = Vector2( 2788.95, 3333.72 )
+position = Vector2( 3168, 3184 )
 id = "trash_bottle_two"
 
 [node name="Characters" type="YSort" parent="YSort"]
@@ -336,7 +336,7 @@ position = Vector2( 2376, 2136 )
 input_pickable = true
 
 [node name="SolidSlug" parent="YSort/Characters" instance=ExtResource( 16 )]
-position = Vector2( 2432, 2200 )
+position = Vector2( 2424, 2248 )
 
 [node name="Lizzy" parent="YSort/Characters" instance=ExtResource( 30 )]
 position = Vector2( 3940.57, 2247.56 )
@@ -374,7 +374,7 @@ position = Vector2( 897.28, 864.001 )
 position = Vector2( 2336, 2848 )
 
 [node name="HappyTree" parent="YSort/Characters" instance=ExtResource( 21 )]
-position = Vector2( 2247.52, 2109.28 )
+position = Vector2( 2240, 2136 )
 
 [node name="Copper" parent="YSort/Characters" instance=ExtResource( 45 )]
 position = Vector2( 1826.89, 2271.76 )
@@ -429,11 +429,11 @@ amount_of_cars = 8
 points = PoolVector2Array( 3328, 2880, 3808, 2880, 3808, 3296, 3328, 3296 )
 
 [node name="InterLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
-amount_of_cars = 8
+amount_of_cars = 4
 points = PoolVector2Array( 3648, 2592, 4192, 2592, 4192, 2784, 3648, 2784 )
 
 [node name="LakeLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
-amount_of_cars = 8
+amount_of_cars = 12
 points = PoolVector2Array( 3648, 1376, 4192, 1376, 4192, 2528, 3648, 2528 )
 
 [node name="ParkingLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
@@ -449,7 +449,7 @@ amount_of_cars = 20
 points = PoolVector2Array( 288, 3104, 288, 2336, 736, 2336, 736, 1632, 1120, 1632, 1120, 3104 )
 
 [node name="CopperLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
-amount_of_cars = 8
+amount_of_cars = 6
 points = PoolVector2Array( 1952, 1920, 1952, 2848, 1504, 2848, 1504, 2528, 1760, 2528, 1760, 1920 )
 
 [node name="HelterSkelterLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
@@ -503,7 +503,7 @@ position = Vector2( 3296, 3040 )
 extents = Vector2( 160, 64 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkingToBike/Lights" index="0" instance=ExtResource( 22 )]
 position = Vector2( -112, -40 )
@@ -538,7 +538,7 @@ position = Vector2( 2656, 3040 )
 extents = Vector2( 160, 64 )
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Lights" parent="YSort/ZebraCrossings/LoveToParking" index="1"]
 position = Vector2( 7.55078, -3.77563 )
@@ -574,7 +574,7 @@ extents = Vector2( 160, 64 )
 light_color = 3
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkToCopper/InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="TrafficLight" parent="YSort/ZebraCrossings/ParkToCopper/Lights" index="0" instance=ExtResource( 22 )]
 position = Vector2( 112, 47.9999 )
