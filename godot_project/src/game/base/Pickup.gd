@@ -1,17 +1,17 @@
+class_name classPickup
 extends Area2D
-class_name class_pickup
 
 onready var _collision_shape_2D := $CollisionShape2D
 
 export(String) var id : String
 
-var state : class_pickup_state setget set_state, get_state
-func set_state(value : class_pickup_state) -> void:
+var state : classPickupState setget set_state, get_state
+func set_state(value : classPickupState) -> void:
 	if value:
 		_state = weakref(value)
 		value.object = self
 		set_visible(value.visible)
-func get_state() -> class_pickup_state:
+func get_state() -> classPickupState:
 	return _state.get_ref()
 
 var _state = WeakRef.new()

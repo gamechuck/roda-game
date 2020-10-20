@@ -1,4 +1,4 @@
-extends class_character
+extends classCharacter
 
 enum BATTLE_STATUS {OFFENSIVE, DEFEATED}
 
@@ -55,7 +55,7 @@ func set_monitorable(value : bool = _interact_area.monitorable):
 		set_process_input(false)
 
 func _on_body_entered(body : PhysicsBody2D):
-	if body is class_player:
+	if body is classPlayer:
 		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
 			Director._on_dialogue_requested(self)
 			Director.zoom_camera(Vector2(1.5, 1.5))
@@ -67,7 +67,7 @@ func _on_body_entered(body : PhysicsBody2D):
 			_spawn_timer.start()
 
 func _on_body_exited(body : PhysicsBody2D):
-	if body is class_player:
+	if body is classPlayer:
 		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
 			reset()
 			Flow.boss_overlay.hide()
@@ -83,9 +83,9 @@ func _on_spawn_timer_timeout():
 			#var projectile = _projectiles_resources[0].instance()
 			_projectiles_container.add_child(projectile)
 			projectile.owner = _projectiles_container
-	
+
 			future_health -= 1
-	
+
 			projectile.connect("projectile_timeout", self, "_on_projectile_timeout")
 			#projectile.connect("player_hit", self, "_on_player_hit")
 	else:
@@ -95,7 +95,7 @@ func _on_player_hit():
 	# Would be better to do this here? For future stuff?
 	pass
 
-func _on_projectile_timeout(projectile : class_projectile):
+func _on_projectile_timeout(projectile : classProjectile):
 	_projectiles_container.remove_child(projectile)
 	projectile.queue_free()
 

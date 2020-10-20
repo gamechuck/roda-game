@@ -1,5 +1,5 @@
+class_name classCharacter
 extends KinematicBody2D
-class_name class_character
 
 onready var _collision_shape_2D := $CollisionShape2D
 onready var _interact_collision_shape_2D := $InteractArea/CollisionShape2D
@@ -8,14 +8,14 @@ onready var _animated_sprite := $AnimatedSprite
 
 export(String) var id : String
 
-var state : class_character_state setget set_state, get_state
-func set_state(value : class_character_state) -> void:
+var state : classCharacterState setget set_state, get_state
+func set_state(value : classCharacterState) -> void:
 	if value:
 		_state = weakref(value)
 		value.object = self
 		if visible != value.visible:
 			set_visible(value.visible)
-func get_state() -> class_character_state:
+func get_state() -> classCharacterState:
 	return _state.get_ref()
 var _state = WeakRef.new()
 
@@ -81,7 +81,7 @@ func _input(event):
 			if rect.has_point(get_global_mouse_position()):
 				Flow.active_character = self
 			# This is a bit filthy, but it does the job!
-			# Otherwise new mouse clicks might still contain the 
+			# Otherwise new mouse clicks might still contain the
 			# now obsolete active_character!
 			elif Flow.active_character == self:
 				Flow.active_character = null

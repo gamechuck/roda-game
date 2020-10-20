@@ -1,6 +1,6 @@
 tool
+class_name classSafeZone
 extends Area2D
-class_name class_safe_zone
 
 export var extents := Vector2.ZERO setget set_extents
 

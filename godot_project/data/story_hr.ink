@@ -1206,7 +1206,7 @@ Ne treba mi to!
 
 === conv_wind_turbine ===
 // The wind turbine can be powered by a battery you get from Wheelie and
-// removes the smog from the smoggy part of twon.
+// removes the smog from the smoggy part of town.
 
 {conv_type:
 	- 0: -> interact
@@ -1245,6 +1245,34 @@ Vau, sad radi!
 >>> SET_STATE_PROPERTY: wind_turbine is_powered 1
 >>> REMOVE_ITEM: battery
 -> fixed
+
+= default
+To neće pomoći, ovdje trebam staviti neki izvor napajanja.
+-> DONE
+
+=== conv_flower_box ===
+// Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Roses in a box!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+kewl
+>>> SET_STATE_PROPERTY: flower_box has_rose_seeds 1
+-> DONE
 
 = default
 To neće pomoći, ovdje trebam staviti neki izvor napajanja.

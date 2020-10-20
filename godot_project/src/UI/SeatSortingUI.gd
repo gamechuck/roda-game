@@ -21,7 +21,7 @@ onready var _child := _vbox_right.get_node("Child")
 
 onready var _characters_array := [_adult, _teenager, _child, _baby]
 
-var active_character : class_character_slot = null
+var active_character : classCharacterSlot = null
 
 signal drive_button_pressed(index)
 
@@ -32,11 +32,11 @@ func _ready():
 	_error = connect("drive_button_pressed", Director, "_on_choice_button_pressed")
 
 	for child in _highlights_container.get_children():
-		if child is class_highlight_rect:
+		if child is classHighlightRect:
 			child.connect("mouse_pressed", self, "_on_mouse_pressed", [child])
 
 	for child in _characters_array:
-		if child is class_character_slot:
+		if child is classCharacterSlot:
 			child.connect("button_pressed", self, "_on_character_pressed", [child])
 
 func show():
@@ -47,14 +47,14 @@ func hide():
 
 func clear_all_characters():
 	for child in _highlights_container.get_children():
-		if child is class_highlight_rect:
+		if child is classHighlightRect:
 			if child.character != null:
-				var character : class_character_slot = child.character
+				var character : classCharacterSlot = child.character
 				character.disabled = false
 
 				child.character = null
 
-func _on_mouse_pressed(seat_rect : class_highlight_rect) -> void:
+func _on_mouse_pressed(seat_rect : classHighlightRect) -> void:
 	match _phase:
 		PHASE.SEAT_SORTING:
 			if active_character and seat_rect.character == null:
@@ -64,18 +64,18 @@ func _on_mouse_pressed(seat_rect : class_highlight_rect) -> void:
 
 				active_character = null
 			elif seat_rect.character != null:
-				var character : class_character_slot = seat_rect.character
+				var character : classCharacterSlot = seat_rect.character
 				character.disabled = false
 
 				seat_rect.character = null
 		PHASE.BELTING:
 			seat_rect.is_belted = not seat_rect.is_belted
 
-func _on_character_pressed(pressed : bool, pressed_character :  class_character_slot) -> void:
+func _on_character_pressed(pressed : bool, pressed_character :  classCharacterSlot) -> void:
 	match _phase:
 		PHASE.SEAT_SORTING:
 			for child in [_adult, _teenager, _child, _baby]:
-				if child is class_character_slot:
+				if child is classCharacterSlot:
 					if child != pressed_character:
 						child.pressed = false
 					else:
@@ -92,7 +92,7 @@ func _on_drive_button_pressed():
 	match _phase:
 		PHASE.SEAT_SORTING:
 			for child in _highlights_container.get_children():
-				if child is class_highlight_rect:
+				if child is classHighlightRect:
 					if not child.is_valid_character:
 						if ConfigData.verbose_mode : print("SEAT SORTING - arrangement is incorrect!")
 						if Director.is_waiting_for_choice:
@@ -105,7 +105,7 @@ func _on_drive_button_pressed():
 			_phase = PHASE.BELTING
 		PHASE.BELTING:
 			for child in _highlights_container.get_children():
-				if child is class_highlight_rect:
+				if child is classHighlightRect:
 					if not child.is_belted:
 						if ConfigData.verbose_mode : print("BELTING - someone is not wearing their belt!")
 						if Director.is_waiting_for_choice:

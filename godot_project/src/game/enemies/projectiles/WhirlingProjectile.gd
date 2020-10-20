@@ -1,4 +1,4 @@
-extends class_projectile
+extends classProjectile
 
 #var _angle := 0.0
 #var _radius := 0.0

@@ -1,5 +1,5 @@
+class_name classHighlightRect
 extends TextureRect
-class_name class_highlight_rect
 
 onready var _area_2D := $Area2D
 

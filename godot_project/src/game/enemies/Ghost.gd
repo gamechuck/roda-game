@@ -1,5 +1,5 @@
+class_name classGhost
 extends Area2D
-class_name class_ghost
 
 enum STATE {SLEEPING, AWAKE}
 
@@ -61,13 +61,13 @@ func _check_activation_condition() -> bool:
 
 	var facing = Vector2.ZERO
 	match Flow.player._direction:
-		class_player.DIRECTION.LEFT:
+		classPlayer.DIRECTION.LEFT:
 			facing = Vector2.LEFT
-		class_player.DIRECTION.RIGHT:
+		classPlayer.DIRECTION.RIGHT:
 			facing = Vector2.RIGHT
-		class_player.DIRECTION.UP:
+		classPlayer.DIRECTION.UP:
 			facing = Vector2.UP
-		class_player.DIRECTION.DOWN:
+		classPlayer.DIRECTION.DOWN:
 			facing = Vector2.DOWN
 	if acos(distance_to_player.normalized().dot(facing)) < deg2rad(90):
 		return false

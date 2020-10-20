@@ -62,22 +62,22 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 
 				var character = State.get_character_by_id(character_id)
 				if character:
-					var object : class_character = character.object
+					var object : classCharacter = character.object
 					var target_position : Vector2 = object.position
 					target_position += Vector2(0, -50)
 
 					teleport(target_position)
 					yield(self, "cutscene_completed")
 			"drop_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					drop_player(interact_node)
 					yield(self, "cutscene_completed")
 			"eat_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					eat_player(interact_node)
 					yield(self, "cutscene_completed")
 			"spit_out_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					spit_out_player(interact_node)
 					yield(self, "cutscene_completed")
 			"fade_to_black_and_back":
@@ -97,11 +97,11 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 func _start_dialogue() -> bool:
 	var state : Reference
 	var knot := ""
-	if interact_node is class_character:
+	if interact_node is classCharacter:
 		interact_node.play_sound_byte()
 		state = interact_node.state
 
-	elif interact_node is class_pickup:
+	elif interact_node is classPickup:
 		state = interact_node.state
 
 	if state:
@@ -175,7 +175,7 @@ func _stop_dialogue() -> void:
 		emit_signal("grant_player_autonomy")
 
 func get_state_property(character_id : String, property : String) -> int:
-	var character : class_character_state = State.get_character_by_id(character_id)
+	var character : classCharacterState = State.get_character_by_id(character_id)
 	if character:
 		var properties : Dictionary = character.properties
 		return properties.get(property, 0)
@@ -186,7 +186,7 @@ func set_state_property(argument_values : Array) -> void:
 	var key : String = argument_values[1]
 	var value : int = argument_values[2]
 
-	var character : class_character_state = State.get_character_by_id(character_id)
+	var character : classCharacterState = State.get_character_by_id(character_id)
 	if character:
 		var properties : Dictionary = character.properties
 		if properties.has(key):
@@ -225,8 +225,8 @@ func _parse_command(raw_text : String) -> Dictionary:
 
 func execute_command(raw_text : String) -> bool:
 
-	var command_dict := _parse_command(raw_text) 
-	
+	var command_dict := _parse_command(raw_text)
+
 	var argument_values : Array = command_dict.argument_values
 	var external_dict : Dictionary = external_setters.get(command_dict.name, {})
 	var argument_types : Array = external_dict.get("argument_types", [])
@@ -263,7 +263,7 @@ func pan_camera_to_position(argument_values : Array):
 	var x_pos : int = argument_values[0]
 	var y_pos : int = argument_values[1]
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-	
+
 	var target_position : Vector2 = Vector2(x_pos, y_pos)
 	target_position -= Flow.player.position
 
@@ -319,7 +319,7 @@ func end_minigame(_argument_values):
 func update_dialogue_UI(argument_values):
 	var character_id : String = argument_values[0]
 
-	var character : class_character_state = State.get_character_by_id(character_id)
+	var character : classCharacterState = State.get_character_by_id(character_id)
 	if character:
 		var object = character.object
 		Director.interact_node = object
@@ -391,7 +391,7 @@ var external_setters : Dictionary = {
 
 ### CUTSCENES ###
 func respawn() -> void:
-	var player : class_player = Flow.player
+	var player : classPlayer = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 
 	# Position is taken here to acount for previous cutscenes!!!
@@ -409,7 +409,7 @@ func respawn() -> void:
 	emit_signal("cutscene_completed")
 
 func teleport(target_position : Vector2) -> void:
-	var player : class_player = Flow.player
+	var player : classPlayer = Flow.player
 
 	# Block the dialogue from updating
 	dialogue_can_be_updated = false
@@ -448,8 +448,8 @@ func fade_to_black_and_back() -> void:
 
 	emit_signal("cutscene_completed")
 
-func drop_player(taxi : class_character):
-	var player : class_player = Flow.player
+func drop_player(taxi : classCharacter):
+	var player : classPlayer = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var taxi_anim_sprite := taxi.get_node("AnimatedSprite")
 
@@ -476,7 +476,7 @@ func drop_player(taxi : class_character):
 	_tween.interpolate_property(taxi_anim_sprite,"position",Vector2(0, -100),Vector2.ZERO, 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	_tween.interpolate_property(anim_sprite, "rotation_degrees", 90, 0, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
@@ -487,8 +487,8 @@ func drop_player(taxi : class_character):
 
 	emit_signal("cutscene_completed")
 
-func eat_player(canster : class_canster):
-	var player : class_player = Flow.player
+func eat_player(canster : classCanster):
+	var player : classPlayer = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
@@ -513,8 +513,8 @@ func eat_player(canster : class_canster):
 
 	emit_signal("cutscene_completed")
 
-func spit_out_player(canster : class_canster):
-	var player : class_player = Flow.player
+func spit_out_player(canster : classCanster):
+	var player : classPlayer = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
@@ -616,7 +616,7 @@ func intro_cutscene():
 	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y -20, mr_smog.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	# Everything flies away!
 	_tween.interpolate_property(fence_front,"position:y", fence_front.position.y, fence_front.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(fence_back,"position:y", fence_back.position.y, fence_back.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

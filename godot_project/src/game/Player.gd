@@ -1,5 +1,5 @@
-extends class_character
-class_name class_player
+class_name classPlayer
+extends classCharacter
 
 enum MOVING {IDLE, WALK}
 enum DIRECTION {LEFT, RIGHT, UP, DOWN}
@@ -12,8 +12,8 @@ var _direction : int = DIRECTION.DOWN
 var respawn_position := Vector2.ZERO
 var nav_path : PoolVector2Array = []
 
-var _overlapping_character : class_character = null
-var _overlapping_pickup : class_pickup = null
+var _overlapping_character : classCharacter = null
+var _overlapping_pickup : classPickup = null
 var _overlapping_with_gummy := false
 
 var _target_entity : CollisionObject2D = null
@@ -76,7 +76,7 @@ func _physics_process(_delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("move_right"):
 			move_direction.x += 1
-	
+
 		if not move_direction == Vector2.ZERO:
 			nav_path = PoolVector2Array()
 			_target_entity = null
@@ -127,27 +127,27 @@ func process_interaction(active_entity : CollisionObject2D):
 		_target_entity = active_entity
 		emit_signal("nav_path_requested")
 	elif Flow.active_item != null:
-		var item : class_item_state = Flow.active_item
+		var item : classItemState = Flow.active_item
 		var item_id = item.id
 		emit_signal("dialogue_requested", active_entity, item_id)
 		Flow.inventory.reset_slots()
 	else:
 		emit_signal("dialogue_requested", active_entity)
-		if active_entity is class_pickup:
+		if active_entity is classPickup:
 			Flow.inventory.add_item(active_entity)
 
 func _on_interact_area_entered(area):
 	if not area:
 		return
 
-	if area.get_parent() is class_character:
+	if area.get_parent() is classCharacter:
 		print("Player entered a character's interact area!")
 		_overlapping_character = area.get_parent()
 		if _overlapping_character == _target_entity:
 			process_interaction(_overlapping_character)
 			_target_entity = null
 			nav_path = PoolVector2Array()
-	elif area is class_pickup:
+	elif area is classPickup:
 		#respawn_position = position
 		print("Player entered the item!")
 		_overlapping_pickup = area
@@ -155,14 +155,14 @@ func _on_interact_area_entered(area):
 			process_interaction(_overlapping_pickup)
 			_target_entity = null
 			nav_path = PoolVector2Array()
-	elif area is class_gummy:
+	elif area is classGummy:
 		_overlapping_with_gummy = true
 		if get_state_property("entered_gummy") == 0:
 			set_state_property("entered_gummy", 1)
 			update_state()
 			Director._start_knot_dialogue(self, "conv_first_time_gummy")
 		print("Player entered gummy!")
-	elif area is class_safe_zone:
+	elif area is classSafeZone:
 		respawn_position = area.position
 		print("Player entered a safe zone!")
 
@@ -170,16 +170,16 @@ func _on_interact_area_exited(area):
 	if not area:
 		return
 
-	if area.get_parent() is class_character:
+	if area.get_parent() is classCharacter:
 		print("Player exited a character's interact area!")
 		if _overlapping_character == area.get_parent():
 			_overlapping_character = null
-	if area is class_pickup:
+	if area is classPickup:
 		#respawn_position = position
 		print("Player exited the item!")
 		if _overlapping_pickup == area:
 			_overlapping_pickup = null
-	if area is class_gummy:
+	if area is classGummy:
 		_overlapping_with_gummy = false
 		print("Player exited gummy!")
 
@@ -188,19 +188,19 @@ func _on_bump_area_entered(area):
 	if not area:
 		return
 
-	if area is class_car:
+	if area is classCar:
 		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a car!")
-	elif area is class_skater:
+	elif area is classSkater:
 		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a skater!")
-	elif area is class_projectile:
+	elif area is classProjectile:
 		emit_signal("cutscene_requested", "respawn")
 		nav_path = PoolVector2Array()
 		print("Player got hit by a projectile!")
-	elif area.get_parent() is class_canster:
+	elif area.get_parent() is classCanster:
 		var canster = area.get_parent()
 		if canster.get_state_property("is_appeased") == 0:
 			# The canster is angry!!!

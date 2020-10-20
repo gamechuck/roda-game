@@ -1,5 +1,5 @@
+class_name classCar
 extends Area2D
-class_name class_car
 
 onready var _tween := $Tween
 onready var _timer := $Timer
@@ -62,7 +62,7 @@ func _on_area_shape_entered(_area_id, area, _area_shape, _self_shape):
 	var parent = area.get_parent()
 	if area == next_car:
 		_tween.stop_all()
-	if parent is class_zebra_crossing:
+	if parent is classZebraCrossing:
 		if parent.has_traffic_lights:
 			if parent.light_color == ConfigData.LIGHT_COLOR.GREEN:
 				_tween.stop_all()

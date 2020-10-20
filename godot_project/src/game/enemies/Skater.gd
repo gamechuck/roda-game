@@ -1,5 +1,5 @@
+class_name classSkater
 extends Area2D
-class_name class_skater
 
 onready var _tween := $Tween
 

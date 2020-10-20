@@ -229,6 +229,10 @@
             "name": "Wind Turbine",
             "knot": "conv_wind_turbine"
         },
+        "flower_box": {
+            "name": "Flower Box",
+            "knot": "conv_flower_box"
+        },
         "player": {
             "name": "Plavko",
             "knot": "conv_player",
@@ -333,6 +337,24 @@
             "textures": {
                 "texture_normal": "res://roda-assets/UI/inventory/items/battery_normal.png",
                 "texture_pressed": "res://roda-assets/UI/inventory/items/battery_pressed.png"
+            }
+        },
+        "rose_seeds": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/rose_seeds_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/rose_seeds_pressed.png"
+            }
+        },
+        "squirrel_nuts": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/squirrel_nuts_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/squirrel_nuts_pressed.png"
+            }
+        },
+        "grocery_bag": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/inventory/items/grocery_bag_normal.png",
+                "texture_pressed": "res://roda-assets/UI/inventory/items/grocery_bag_pressed.png"
             }
         }
     },

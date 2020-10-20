@@ -16,11 +16,11 @@ func _ready():
 
 	set_visible()
 
-func spawn_skater(initial_offset : float) -> class_skater:
+func spawn_skater(initial_offset : float) -> classSkater:
 	var path_follow : PathFollow2D = _path_follow_resource.instance()
 	$Path2D.add_child(path_follow)
 
-	var skater : class_skater = _skater_resource.instance()
+	var skater : classSkater = _skater_resource.instance()
 	skater.initial_offset = initial_offset
 	skater.path_follow = path_follow
 	_skaters_container.add_child(skater)
@@ -32,7 +32,7 @@ func spawn_skater(initial_offset : float) -> class_skater:
 func set_visible(value : bool = visible):
 	visible = value
 	if visible:
-		var _skater : class_skater = spawn_skater(0.0)
+		var _skater : classSkater = spawn_skater(0.0)
 	else:
 		for skater in _skaters_container.get_children():
 			_skaters_container.remove_child(skater)

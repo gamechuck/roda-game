@@ -30,9 +30,9 @@ func _ready():
 func show():
 	# Derive the state from the Director and update the UI as a result!
 	var node = Director.interact_node
-	if node is class_pickup:
+	if node is classPickup:
 		update_pickup_UI(node.state)
-	elif node is class_character:
+	elif node is classCharacter:
 		update_character_UI(node.state)
 
 	visible = true
@@ -42,12 +42,12 @@ func hide():
 	visible = false
 	set_process_input(false)
 
-func update_pickup_UI(_pickup : class_pickup_state) -> void:
+func update_pickup_UI(_pickup : classPickupState) -> void:
 	_name_label.visible = false
 	_portrait_spacer.visible = false
 	_portrait_rect.visible = false
 
-func update_character_UI(character : class_character_state) -> void:
+func update_character_UI(character : classCharacterState) -> void:
 	_portrait_rect.texture = character.portrait_texture
 
 	_name_label.text = character.name

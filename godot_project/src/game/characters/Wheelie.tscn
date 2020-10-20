@@ -50,43 +50,43 @@ atlas = ExtResource( 2 )
 region = Rect2( 376, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 94, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 188, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 282, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 376, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 94, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 188, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 282, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 376, 0, 94, 55 )
 
 [sub_resource type="AtlasTexture" id=21]
@@ -143,12 +143,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 12.0
 }, {
 "frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_up",
 "speed": 12.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
@@ -176,7 +176,7 @@ id = "wheelie"
 position = Vector2( -2.22725, -13.8089 )
 frames = SubResource( 31 )
 animation = "walk_left"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 2, -28 )
 

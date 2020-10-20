@@ -1,6 +1,6 @@
 tool
+class_name classCharacterSlot
 extends Control
-class_name class_character_slot
 
 enum CHARACTER {BABY, CHILD, TEENAGER, ADULT}
 export(CHARACTER) var type := CHARACTER.ADULT

@@ -39,14 +39,14 @@ func _on_direction_button_pressed(direction : int):
 		return
 
 	if direction == +1:
-		var item : class_item_state = State.items.pop_front()
+		var item : classItemState = State.items.pop_front()
 		State.items.push_back(item)
 	else:
-		var item : class_item_state = State.items.pop_back()
+		var item : classItemState = State.items.pop_back()
 		State.items.push_front(item)
 	update_slots()
 
-func _on_item_pressed(_pressed : bool, _item : class_item_state) -> void:
+func _on_item_pressed(_pressed : bool, _item : classItemState) -> void:
 	# Go through all the slots and check their items...
 	for slot in _slots_container.get_children():
 		if slot.item != _item:
@@ -81,7 +81,7 @@ func update_slots():
 	var idx := 0
 	for slot in _slots_container.get_children():
 		if State.items.size() > idx:
-			var item : class_item_state = State.items[idx]
+			var item : classItemState = State.items[idx]
 			if item:
 				slot.item = item
 			else:
@@ -97,7 +97,7 @@ func update_slots():
 		_up_button.disabled = false
 		_down_button.disabled = false
 
-func add_item(pickup : class_pickup) -> void:
+func add_item(pickup : classPickup) -> void:
 	var state = pickup.state
 	var item_id = state.item_id
 	print(item_id)

@@ -1,5 +1,5 @@
+class_name classProjectile
 extends Area2D
-class_name class_projectile
 
 onready var _timer := $Timer
 

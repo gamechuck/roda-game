@@ -1,4 +1,4 @@
-extends class_highlight_rect
+extends classHighlightRect
 
 enum CHARACTER {BABY, CHILD, TEENAGER, ADULT}
 export(CHARACTER) var type := CHARACTER.ADULT
@@ -13,8 +13,8 @@ func set_is_belted(value : bool):
 		else:
 			$Sprite.texture = character.texture_normal
 
-var character : class_character_slot = null setget set_character, get_character
-func set_character(value : class_character_slot) -> void:
+var character : classCharacterSlot = null setget set_character, get_character
+func set_character(value : classCharacterSlot) -> void:
 	character = value
 	if character:
 		$Sprite.texture = character.texture_normal
@@ -30,7 +30,7 @@ func set_character(value : class_character_slot) -> void:
 
 		is_valid_character = false
 
-func get_character() -> class_character_slot:
+func get_character() -> classCharacterSlot:
 	return character
 
 func _ready():

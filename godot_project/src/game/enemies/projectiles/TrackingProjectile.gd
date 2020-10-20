@@ -1,4 +1,4 @@
-extends class_projectile
+extends classProjectile
 
 func _ready():
 	_timer.wait_time = ConfigData.tracking_ttl

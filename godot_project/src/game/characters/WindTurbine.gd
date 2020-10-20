@@ -1,4 +1,4 @@
-extends class_character
+extends classCharacter
 
 enum POWER {EMPTY, FULL}
 
@@ -6,9 +6,11 @@ func _ready():
 	register_state_property("is_powered", POWER.EMPTY)
 
 func update_animation():
-	var is_powered : int = get_state_property("is_powered")
-	var state_settings : Dictionary = _state_machine.get(is_powered, {})
-	_animated_sprite.play(state_settings.get("animation_name", "broken"))
+	var has_battery : int = get_state_property("has_battery")
+	if has_battery:
+		_animated_sprite.play("fixed")
+	else:
+		_animated_sprite.play("broken")
 
 var _state_machine := {
 	POWER.EMPTY:{

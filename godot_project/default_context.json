@@ -1,5 +1,17 @@
 {
     "items": [
+        {
+            "id": "squirrel_nuts",
+            "amount": 3
+        },
+        {
+            "id": "grocery_bag",
+            "amount": 3
+        },
+        {
+            "id": "rose_seeds",
+            "amount": 3
+        }
     ],
     "characters": [
         {

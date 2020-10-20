@@ -9,7 +9,7 @@ func load_dataJSON() -> int:
 			"setter": funcref(self, "_set_data")
 		}
 	}
-	
+
 	var file : File = File.new()
 	var error : int = OK
 
@@ -21,7 +21,7 @@ func load_dataJSON() -> int:
 			if data.empty():
 				push_error("Failed to open the data settings at '{0}' for loading purposes.".format([path]))
 			else:
-				(data_dict[key].setter as FuncRef).call_func(data) 
+				(data_dict[key].setter as FuncRef).call_func(data)
 
 		else:
 			push_error("Essential file '{0}' does not exist, check its existence!".format([path]))

@@ -1,6 +1,6 @@
 tool
+class_name classTrafficLight
 extends StaticBody2D
-class_name class_traffic_light
 
 onready var _animated_UI := $Node2D/AnimatedUI
 onready var _animated_front := $AnimatedFront

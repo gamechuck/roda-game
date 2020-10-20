@@ -1,5 +1,5 @@
-extends class_character
-class_name class_canster
+extends classCharacter
+class_name classCanster
 
 enum MOOD {ANGRY, HAPPY}
 
@@ -7,7 +7,7 @@ onready var _audio_stream_player_2D := $AudioStreamPlayer2D
 
 func _ready():
 	register_state_property("is_appeased", MOOD.ANGRY)
-	
+
 	var shape = _interact_collision_shape_2D.shape
 	_interact_collision_shape_2D.shape = shape.duplicate(true)
 

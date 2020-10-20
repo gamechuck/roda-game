@@ -1,4 +1,4 @@
-extends class_character
+extends classCharacter
 
 enum CLOTHING {PLAIN, COLORFUL}
 

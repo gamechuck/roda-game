@@ -6,7 +6,7 @@ func _ready():
 	Flow.bike_repair_UI = self
 
 	for child in _highlights_container.get_children():
-		if child is class_highlight_rect:
+		if child is classHighlightRect:
 			child.connect("mouse_pressed", self, "_on_mouse_pressed", [child])
 
 func show():
@@ -15,7 +15,7 @@ func show():
 func hide():
 	visible = false
 
-func _on_mouse_pressed(component_rect : class_highlight_rect):
+func _on_mouse_pressed(component_rect : classHighlightRect):
 	var index : int = component_rect.type
 	if Director.is_waiting_for_choice:
 		Director._on_choice_button_pressed(index)

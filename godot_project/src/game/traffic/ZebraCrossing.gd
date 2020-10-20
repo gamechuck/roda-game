@@ -1,6 +1,6 @@
 tool
 extends YSort
-class_name class_zebra_crossing
+class_name classZebraCrossing
 
 onready var _timer := $Timer
 onready var _traffic_lights_container := $Lights
@@ -39,15 +39,15 @@ func _ready():
 			_timer.wait_time = get_wait_time()
 			_timer.one_shot = true
 			_timer.start()
-	
+
 	update()
 
 func update_lights():
 	for light in $Lights.get_children():
 		has_traffic_lights = true
-		if light is class_traffic_light:
+		if light is classTrafficLight:
 			light.light_color = get_opposite_color()
-		if light is class_pedestrian_light:
+		if light is classPedestrianLight:
 			light.light_color = light_color
 
 func _on_timer_timeout():

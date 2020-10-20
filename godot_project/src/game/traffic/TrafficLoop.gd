@@ -23,9 +23,9 @@ func set_points(value : PoolVector2Array):
 	curve.clear_points()
 	for index in points.size():
 		# Snap & offset the point!
-		points[index] -= tile_offset 
+		points[index] -= tile_offset
 		points[index] = (points[index]/tile_width).round()*tile_width
-		points[index] += tile_offset 
+		points[index] += tile_offset
 		curve.add_point(points[index], Vector2.ZERO, Vector2.ZERO)
 	# Close the curve!
 	if not points.empty():
@@ -54,10 +54,10 @@ func _ready():
 
 		if amount_of_cars > 0:
 			var offset_increment : float = 1.0/amount_of_cars
-			var next_car : class_car = null
-			var first_car : class_car = null
+			var next_car : classCar = null
+			var first_car : classCar = null
 			for _i in range(amount_of_cars, 0, -1):
-				var car : class_car = spawn_car(_i*offset_increment)
+				var car : classCar = spawn_car(_i*offset_increment)
 				if next_car == null:
 					first_car = car
 				else:
@@ -66,11 +66,11 @@ func _ready():
 			# Set the first car's next car to the last car!
 			first_car.next_car = next_car
 
-func spawn_car(initial_offset : float) -> class_car:
+func spawn_car(initial_offset : float) -> classCar:
 	var path_follow : PathFollow2D = _path_follow_resource.instance()
 	$Path2D.add_child(path_follow)
 
-	var car : class_car = _car_resource.instance()
+	var car : classCar = _car_resource.instance()
 	car.initial_offset = initial_offset
 	car.path_follow = path_follow
 	_cars_container.add_child(car)

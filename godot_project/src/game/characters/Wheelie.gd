@@ -1,4 +1,4 @@
-extends class_character
+extends classCharacter
 
 onready var _tween := $Tween
 onready var _interact_area := $InteractArea
@@ -13,9 +13,9 @@ var nav_path : PoolVector2Array = []
 
 var target_points : PoolVector2Array = [
 	Vector2(2480, 2360),
-	Vector2(3474, 2360), 
-	Vector2(3424, 2248), 
-	Vector2(3497, 2021), 
+	Vector2(3474, 2360),
+	Vector2(3424, 2248),
+	Vector2(3497, 2021),
 	Vector2(3818, 2018),
 	Vector2(4020, 1742),
 	Vector2(4020, 1767)
@@ -91,7 +91,7 @@ func _on_area_entered(area):
 	if not area:
 		return
 
-	if area.get_parent() is class_canster:
+	if area.get_parent() is classCanster:
 		var canster = area.get_parent()
 		if canster.get_state_property("is_appeased") == 0:
 			nav_path = PoolVector2Array()
