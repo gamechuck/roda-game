@@ -233,6 +233,46 @@
             "name": "Flower Box",
             "knot": "conv_flower_box"
         },
+        "rosalina": {
+            "name": "Rosalina",
+            "knot": "conv_rosalina"
+        },
+        "bell_old_man": {
+            "name": "Stari Musk",
+            "knot": "conv_bell_old_man"
+        },
+        "bell_wheelie": {
+            "name": "Vilko's mom",
+            "knot": "conv_bell_wheelie"
+        },
+        "bell_student": {
+            "name": "Student",
+            "knot": "conv_bell_student"
+        },
+        "student": {
+            "name": "Student",
+            "knot": "conv_student"
+        },
+        "shop_dog_trainer": {
+            "name": "Dog Trainer",
+            "knot": "conv_shop_dog_trainer"
+        },
+        "shop_park_lovers": {
+            "name": "Park Lover",
+            "knot": "conv_shop_park_lovers"
+        },
+        "shop_watch_dog": {
+            "name": "Watch Dog",
+            "knot": "conv_watch_dog"
+        },
+        "shop_animal_protection": {
+            "name": "Animal Protection Services",
+            "knot": "conv_shop_animal_protection"
+        },
+        "shop_roda": {
+            "name": "Roda",
+            "knot": "conv_shop_roda"
+        },
         "player": {
             "name": "Plavko",
             "knot": "conv_player",
