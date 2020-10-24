@@ -225,8 +225,8 @@ func _parse_command(raw_text : String) -> Dictionary:
 
 func execute_command(raw_text : String) -> bool:
 
-	var command_dict := _parse_command(raw_text) 
-	
+	var command_dict := _parse_command(raw_text)
+
 	var argument_values : Array = command_dict.argument_values
 	var external_dict : Dictionary = external_setters.get(command_dict.name, {})
 	var argument_types : Array = external_dict.get("argument_types", [])
@@ -263,7 +263,7 @@ func pan_camera_to_position(argument_values : Array):
 	var x_pos : int = argument_values[0]
 	var y_pos : int = argument_values[1]
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-	
+
 	var target_position : Vector2 = Vector2(x_pos, y_pos)
 	target_position -= Flow.player.position
 
@@ -476,7 +476,7 @@ func drop_player(taxi : class_character):
 	_tween.interpolate_property(taxi_anim_sprite,"position",Vector2(0, -100),Vector2.ZERO, 2.0,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	_tween.interpolate_property(anim_sprite, "rotation_degrees", 90, 0, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
@@ -616,7 +616,7 @@ func intro_cutscene():
 	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y -20, mr_smog.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	# Everything flies away!
 	_tween.interpolate_property(fence_front,"position:y", fence_front.position.y, fence_front.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(fence_back,"position:y", fence_back.position.y, fence_back.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

@@ -24,7 +24,7 @@ func set_context(value : Dictionary) -> void:
 func get_context() -> Dictionary:
 	var _context := {}
 
-	# Don't save anything if the 
+	# Don't save anything if the
 	# TODO: Don't save anything if all properties are the default state!
 	_context.id = id
 	if not properties.empty():

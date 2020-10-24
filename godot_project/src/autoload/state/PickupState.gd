@@ -4,7 +4,7 @@ class_name class_pickup_state
 var id := ""
 var visible := true
 # The actual visual representation of this state.
-var object : CollisionObject2D = null 
+var object : CollisionObject2D = null
 
 var context : Dictionary setget set_context, get_context
 func set_context(value : Dictionary) -> void:

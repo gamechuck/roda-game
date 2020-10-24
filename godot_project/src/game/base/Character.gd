@@ -81,7 +81,7 @@ func _input(event):
 			if rect.has_point(get_global_mouse_position()):
 				Flow.active_character = self
 			# This is a bit filthy, but it does the job!
-			# Otherwise new mouse clicks might still contain the 
+			# Otherwise new mouse clicks might still contain the
 			# now obsolete active_character!
 			elif Flow.active_character == self:
 				Flow.active_character = null

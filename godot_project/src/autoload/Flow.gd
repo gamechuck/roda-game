@@ -40,7 +40,7 @@ var _game_flow := {
 	"game": {
 		"packed_scene": preload("res://src/Game.tscn"),
 		"state": STATE.GAME
-		}, 
+		},
 	"menu": {
 		"packed_scene": preload("res://src/Menu.tscn"),
 		"state": STATE.MENU
@@ -60,15 +60,15 @@ onready var _data_loader := $DataLoader
 func _ready():
 	var _error := load_settings()
 	if ConfigData.verbose_mode:
-		print(                                                                                
+		print(
 			"      _____    _  _____ \n",
 			" ___ |     | _| ||  _  |\n",
 			"|  _||  |  || . ||     |\n",
-			"|_|  |_____||___||__|__|\n"                                                     
+			"|_|  |_____||___||__|__|\n"
 		)
 		# ASCII -> Rectangles
-		print("version {0}.{1}".format([ 
-			ConfigData.major_version, 
+		print("version {0}.{1}".format([
+			ConfigData.major_version,
 			ConfigData.minor_version]))
 
 func load_settings() -> int:
@@ -77,7 +77,7 @@ func load_settings() -> int:
 	_error += _controls_loader.load_controlsJSON()
 	_error += _data_loader.load_dataJSON()
 
-	# Also load the default context.. 
+	# Also load the default context..
 	# might autoload the user_context in the future here?
 	_error += State.load_stateJSON()
 	if _error == OK:

@@ -76,7 +76,7 @@ func _physics_process(_delta):
 			move_direction.x -= 1
 		if Input.is_action_pressed("move_right"):
 			move_direction.x += 1
-	
+
 		if not move_direction == Vector2.ZERO:
 			nav_path = PoolVector2Array()
 			_target_entity = null
