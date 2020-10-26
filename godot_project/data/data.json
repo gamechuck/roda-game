@@ -273,6 +273,18 @@
             "name": "Roda",
             "knot": "conv_shop_roda"
         },
+        "squirrel_tree_square": {
+            "name": "Urban tree",
+            "knot": "conv_squirrel_tree"
+        },
+        "squirrel_tree_mountains": {
+            "name": "Mountain tree",
+            "knot": "conv_squirrel_tree"
+        },
+        "squirrel_tree_lake": {
+            "name": "Lake tree",
+            "knot": "conv_squirrel_tree"
+        },
         "player": {
             "name": "Plavko",
             "knot": "conv_player",

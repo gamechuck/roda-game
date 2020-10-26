@@ -1253,207 +1253,6 @@ Vau, sad radi!
 To neće pomoći, ovdje trebam staviti neki izvor napajanja.
 -> DONE
 
-=== conv_flower_box ===
-// Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-Roses in a box!
--> DONE
-
-= use_item
-
-{used_item:
-	- "rose_seeds": -> rose_seeds
-	- else: -> default
-}
-
-= rose_seeds
-The monster roses grow immediately in the fertile soil.
->>> SET_STATE_PROPERTY: flower_box has_rose_seeds 1
->>> REMOVE_ITEM: rose_seeds
-~ rose_seeds_planted = 1
--> DONE
-
-= default
-I don't think this is plantable?
--> DONE
-
-=== conv_bell_old_man ===
-// The old man wants his groceries so you deliver them?
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-
-HELLO?
-Are you here to deliver my groceries?
-+ {has_item("grocery_bag")}[Here are your groceries, sir!]
-	-> grocery_bag
-+ [No, I'm just your friendly neighborhood monster.]
-	Come back when you get me my groceries!
-	They were to be delivered almost an hour ago!
-	You can get them at the "Super Roda" in the merchant square!
-	'click'
-	-> DONE
-+ [Quietly walk away...]
-	HELLO? IS ANYONE THERE?
-	...
-	'click'
-	-> DONE
-
-= use_item
-
-{used_item:
-	- "grocery_bag": -> grocery_bag
-	- else: -> default
-}
-
-= grocery_bag
-Good! Finally something to eat!
-Now run along! Don't you have some other people to bother?
->>> REMOVE_ITEM: grocery_bag
--> DONE
-
-= default
-Those aren't my groceries!
--> DONE
-
-=== conv_rosalina ===
-// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{rose_seeds_planted:
-	- 0: -> intro
-	- 1: -> after_rose_seeds_planted
-}
-
-= intro
-Hello! My name is Rosalina and I love flowers!
-Did you see that flower box in front of the building?
-I can't believe they forgot to plant any flowers in them!
-Could you do me a favor?
-Would it be possible to get some flower seeds from the flower store?
-Any type of flower is good!
-+ [Sorry, I'm on an epic quest to save my park from Mr. Smog]
-	Oh...
-	Well if you change your mind, I'll always be here...
-	-> DONE
-+ [Sure! I'll stop by the flower store and get some seeds!]
-	My hero!
-	This building will look much more beautiful with some flowers in that box. 
-	-> DONE
-
-= after_rose_seeds_planted
-A thousand times thanks!
-You can't believe how happy this makes me!
--> DONE
-
-= use_item
-
-{used_item:
-	- "rose_seeds": -> rose_seeds
-	- else: -> default
-}
-
-= rose_seeds
-Oh! Rose seeds! I love those!
-Could you go and plant them in the flower box?
-I would do it, but I'm scared of the policija...
--> DONE
-
-= default
-I'm flattered, but I can't accept that.
--> DONE
-
-
-=== conv_shop_dog_trainer ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_shop_park_lovers ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_watch_dog ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_shop_animal_protection ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_shop_roda ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
 === conv_bus ===
 // This bus blocks the view for incoming cars, you'll have to take the other zebra!
 
@@ -1827,3 +1626,233 @@ Kako se ono prelazi cesta koja ima semafore?
 	Ne bi li to značilo da će me auti pregaziti jer je njima zeleno?
 	Moram bolje promisliti.
 	-> multiple_choice
+
+=== conv_flower_box ===
+// Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Roses in a box!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+The monster roses grow immediately in the fertile soil.
+>>> SET_STATE_PROPERTY: flower_box has_rose_seeds 1
+>>> REMOVE_ITEM: rose_seeds
+~ rose_seeds_planted = 1
+-> DONE
+
+= default
+I don't think this is plantable?
+-> DONE
+
+=== conv_bell_old_man ===
+// The old man wants his groceries so you deliver them?
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+
+HELLO?
+Are you here to deliver my groceries?
++ {has_item("grocery_bag")}[Here are your groceries, sir!]
+	-> grocery_bag
++ [No, I'm just your friendly neighborhood monster.]
+	Come back when you get me my groceries!
+	They were to be delivered almost an hour ago!
+	You can get them at the "Super Roda" in the merchant square!
+	'click'
+	-> DONE
++ [Quietly walk away...]
+	HELLO? IS ANYONE THERE?
+	...
+	'click'
+	-> DONE
+
+= use_item
+
+{used_item:
+	- "grocery_bag": -> grocery_bag
+	- else: -> default
+}
+
+= grocery_bag
+Good! Finally something to eat!
+Now run along! Don't you have some other people to bother?
+>>> REMOVE_ITEM: grocery_bag
+-> DONE
+
+= default
+Those aren't my groceries!
+-> DONE
+
+=== conv_rosalina ===
+// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{rose_seeds_planted:
+	- 0: -> intro
+	- 1: -> after_rose_seeds_planted
+}
+
+= intro
+Hello! My name is Rosalina and I love flowers!
+Did you see that flower box in front of the building?
+I can't believe they forgot to plant any flowers in them!
+Could you do me a favor?
+Would it be possible to get some flower seeds from the flower store?
+Any type of flower is good!
++ [Sorry, I'm on an epic quest to save my park from Mr. Smog]
+	Oh...
+	Well if you change your mind, I'll always be here...
+	-> DONE
++ [Sure! I'll stop by the flower store and get some seeds!]
+	My hero!
+	This building will look much more beautiful with some flowers in that box. 
+	-> DONE
+
+= after_rose_seeds_planted
+A thousand times thanks!
+You can't believe how happy this makes me!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+Oh! Rose seeds! I love those!
+Could you go and plant them in the flower box?
+I would do it, but I'm scared of the policija...
+-> DONE
+
+= default
+I'm flattered, but I can't accept that.
+-> DONE
+
+
+=== conv_shop_dog_trainer ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+interact
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_shop_park_lovers ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+interact
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_watch_dog ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+interact
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_shop_animal_protection ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+interact
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_shop_roda ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+interact
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_squirrel_tree ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+This tree has a squirrel's house!
+I can vaguely see some squirrels huddled inside, but I can't reach.
+{has_item("squirrel_nuts"):
+	- 0: -> has_no_nuts
+	- 1: -> has_nuts
+}
+
+= has_no_nuts
+If only I had some food to give to these poor animals...
+-> DONE
+
+= has_nuts
+Lunja gave me some nuts to give them!
+>>> REMOVE_ITEM: squirrel_nuts
+>>> SET_STATE_PROPERTY: {interact_id} has_squirrel_nuts 1
+-> DONE
+
+= use_item
+use_item
+-> DONE
