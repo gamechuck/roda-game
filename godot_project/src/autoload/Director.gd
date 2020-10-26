@@ -562,22 +562,21 @@ func intro_cutscene():
 
 	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
 
-	# ideal camera position = 2717.95 621.74
 	game_camera.zoom = Vector2(1.5, 1.5)
-	game_camera.position = Vector2(2718, 622) - Flow.player.position
+	game_camera.position = Vector2(928, 5280) - Flow.player.position
 
 	_start_knot_dialogue(Flow.player, "conv_intro")
 	yield(self, "dialogue_completed")
 
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
 	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
@@ -586,14 +585,14 @@ func intro_cutscene():
 
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
 	_tween.interpolate_property(smog.material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
@@ -602,7 +601,7 @@ func intro_cutscene():
 	_start_knot_dialogue(Flow.player, "conv_intro_smog_appears")
 	yield(self, "dialogue_completed")
 
-	_tween.interpolate_property(mr_smog,"position", mr_smog.position, Vector2(2628, 478), 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, happy_tree.position.y - 60, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 

@@ -8,7 +8,6 @@
 [ext_resource path="res://roda-assets/UI/elements/dialogue.png" type="Texture" id=6]
 [ext_resource path="res://roda-assets/UI/elements/name.png" type="Texture" id=8]
 
-
 [sub_resource type="StyleBoxTexture" id=1]
 content_margin_left = 24.0
 texture = ExtResource( 8 )

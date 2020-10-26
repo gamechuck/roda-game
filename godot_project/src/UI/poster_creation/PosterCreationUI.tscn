@@ -1,15 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://roda-assets/UI/bike_repair/bike_overlay.png" type="Texture" id=1]
 [ext_resource path="res://roda-assets/UI/poster_creation/peace_symbol.png" type="Texture" id=2]
 [ext_resource path="res://roda-assets/UI/poster_creation/drawing_area.png" type="Texture" id=3]
 [ext_resource path="res://src/UI/poster_creation/PosterCreationUI.gd" type="Script" id=4]
-[ext_resource path="res://roda-assets/UI/poster_creation/white_color.png" type="Texture" id=5]
-[ext_resource path="res://roda-assets/UI/poster_creation/slogan1.png" type="Texture" id=6]
-[ext_resource path="res://roda-assets/UI/poster_creation/slogan2.png" type="Texture" id=7]
-[ext_resource path="res://roda-assets/UI/poster_creation/baby_pink.png" type="Texture" id=8]
-[ext_resource path="res://roda-assets/UI/poster_creation/baby_blue.png" type="Texture" id=9]
+[ext_resource path="res://src/UI/poster_creation/ColorButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://roda-assets/UI/poster_creation/cool_tree.png" type="Texture" id=10]
+[ext_resource path="res://src/UI/poster_creation/DrawingRect.gd" type="Script" id=11]
 
 [node name="PosterMakingUI" type="Control"]
 anchor_right = 1.0
@@ -35,35 +32,49 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 140.0
+margin_left = 15.0
+margin_right = 121.0
 margin_bottom = 270.0
 size_flags_horizontal = 6
+custom_constants/separation = 16
 alignment = 1
 
+[node name="SymbolLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 26.0
+margin_top = 23.0
+margin_right = 80.0
+margin_bottom = 37.0
+size_flags_horizontal = 4
+text = "Symbols"
+align = 1
+valign = 1
+
 [node name="SymbolGrid" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
-margin_left = 24.0
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 106.0
+margin_left = 7.0
+margin_top = 53.0
+margin_right = 99.0
+margin_bottom = 133.0
 size_flags_horizontal = 6
-size_flags_vertical = 6
 columns = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/SymbolGrid"]
 margin_right = 44.0
 margin_bottom = 38.0
+toggle_mode = true
 icon = ExtResource( 2 )
 
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/SymbolGrid"]
 margin_left = 48.0
 margin_right = 92.0
 margin_bottom = 38.0
+toggle_mode = true
 icon = ExtResource( 10 )
 
 [node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/SymbolGrid"]
 margin_top = 42.0
 margin_right = 44.0
 margin_bottom = 80.0
+toggle_mode = true
 icon = ExtResource( 2 )
 
 [node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/SymbolGrid"]
@@ -71,94 +82,118 @@ margin_left = 48.0
 margin_top = 42.0
 margin_right = 92.0
 margin_bottom = 80.0
+toggle_mode = true
 icon = ExtResource( 2 )
 
+[node name="SloganLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 29.0
+margin_top = 149.0
+margin_right = 77.0
+margin_bottom = 163.0
+size_flags_horizontal = 4
+text = "Slogans"
+align = 1
+valign = 1
+
 [node name="SloganGrid" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 163.0
-margin_right = 140.0
-margin_bottom = 243.0
+margin_top = 179.0
+margin_right = 106.0
+margin_bottom = 247.0
 size_flags_horizontal = 6
-size_flags_vertical = 6
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/SloganGrid"]
-margin_right = 140.0
-margin_bottom = 38.0
-icon = ExtResource( 6 )
+margin_right = 106.0
+margin_bottom = 20.0
+text = "We want park!"
 
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/SloganGrid"]
-margin_top = 42.0
-margin_right = 140.0
-margin_bottom = 80.0
-icon = ExtResource( 7 )
+margin_top = 24.0
+margin_right = 106.0
+margin_bottom = 44.0
+text = "Trees are love!"
+
+[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/SloganGrid"]
+margin_top = 48.0
+margin_right = 106.0
+margin_bottom = 68.0
+text = "Trees are love!"
 
 [node name="DrawingRect" type="TextureRect" parent="HBoxContainer"]
-margin_left = 144.0
+margin_left = 140.0
 margin_top = 35.0
-margin_right = 344.0
+margin_right = 340.0
 margin_bottom = 235.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 texture = ExtResource( 3 )
+script = ExtResource( 11 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 348.0
+margin_left = 344.0
 margin_right = 480.0
 margin_bottom = 270.0
 size_flags_horizontal = 3
+custom_constants/separation = 24
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
-margin_top = 65.0
-margin_right = 132.0
-margin_bottom = 79.0
-text = "Background Color"
+margin_top = 15.0
+margin_right = 136.0
+margin_bottom = 46.0
+text = "Background
+Color"
 align = 1
 valign = 1
 
 [node name="BGColorGrid" type="GridContainer" parent="HBoxContainer/VBoxContainer2"]
-margin_left = 20.0
-margin_top = 83.0
-margin_right = 112.0
-margin_bottom = 205.0
+margin_left = 22.0
+margin_top = 70.0
+margin_right = 114.0
+margin_bottom = 210.0
 size_flags_horizontal = 6
 columns = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
-margin_right = 44.0
-margin_bottom = 38.0
-icon = ExtResource( 5 )
+[node name="ColorButton" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
+margin_bottom = 44.0
+color = Color( 1, 0.588235, 0.588235, 1 )
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
+[node name="ColorButton2" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 38.0
-icon = ExtResource( 8 )
+margin_bottom = 44.0
+color = Color( 0, 1, 0.929412, 1 )
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
-margin_top = 42.0
-margin_right = 44.0
-margin_bottom = 80.0
-icon = ExtResource( 9 )
+[node name="ColorButton3" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
+margin_top = 48.0
+margin_bottom = 92.0
+color = Color( 1, 0.54902, 0.866667, 1 )
 
-[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
+[node name="ColorButton4" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
 margin_left = 48.0
-margin_top = 42.0
+margin_top = 48.0
 margin_right = 92.0
-margin_bottom = 80.0
-icon = ExtResource( 5 )
+margin_bottom = 92.0
+color = Color( 0.392157, 0.427451, 1, 1 )
 
-[node name="Button5" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
-margin_top = 84.0
-margin_right = 44.0
-margin_bottom = 122.0
-icon = ExtResource( 5 )
+[node name="ColorButton5" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
+margin_top = 96.0
+margin_bottom = 140.0
+color = Color( 0.498039, 1, 0.458824, 1 )
 
-[node name="Button6" type="Button" parent="HBoxContainer/VBoxContainer2/BGColorGrid"]
+[node name="ColorButton6" parent="HBoxContainer/VBoxContainer2/BGColorGrid" instance=ExtResource( 6 )]
 margin_left = 48.0
-margin_top = 84.0
+margin_top = 96.0
 margin_right = 92.0
-margin_bottom = 122.0
-icon = ExtResource( 5 )
+margin_bottom = 140.0
+color = Color( 1, 0.92549, 0.635294, 1 )
+
+[node name="ClearButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+margin_left = 46.0
+margin_top = 234.0
+margin_right = 90.0
+margin_bottom = 254.0
+size_flags_horizontal = 4
+text = "Clear"

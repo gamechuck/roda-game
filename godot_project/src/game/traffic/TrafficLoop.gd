@@ -10,15 +10,13 @@ onready var _path_follow_resource := preload("res://src/game/base/PathFollow.tsc
 onready var _car_resource := preload("res://src/game/traffic/Car.tscn")
 onready var _path_2D := $Path2D
 
-export var amount_of_cars := 0 setget set_amount_of_cars
-func set_amount_of_cars(value : int):
-	amount_of_cars = value
-	if Engine.editor_hint:
-		_ready()
+export(int) var amount_of_cars := 0
+export(bool) var is_clockwise := true
 
 export var points := PoolVector2Array() setget set_points
 func set_points(value : PoolVector2Array):
 	points = value
+
 	var curve : Curve2D = $Path2D.curve
 	curve.clear_points()
 	for index in points.size():
@@ -37,6 +35,12 @@ func _ready():
 	randomize()
 
 	var curve := Curve2D.new()
+
+	if Geometry.is_polygon_clockwise(points) and not is_clockwise:
+		points.invert()
+	elif not Geometry.is_polygon_clockwise(points) and is_clockwise:
+		points.invert()
+
 	for point in points:
 		curve.add_point(point, Vector2.ZERO, Vector2.ZERO)
 	# Close the curve!
