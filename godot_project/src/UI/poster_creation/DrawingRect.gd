@@ -3,9 +3,6 @@ extends TextureRect
 var font : Font = preload("res://assets/fonts/dynamic/luckiest_guy_size8.tres")
 
 var _image := Image.new()
-var _temp_image := Image.new()
-
-var _clear_texture := ImageTexture.new()
 
 var background_color := Color.white
 var pressed_texture : Texture
@@ -13,18 +10,10 @@ var pressed_texture : Texture
 func _ready():
 	reset()
 
-	texture = _clear_texture
-	print(texture.get_size())
-	update()
-
 func reset():
 	_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_BPTC_RGBA)
 	var _error : int = _image.decompress()
 	_image.fill(Color.transparent)
-
-	var _clear_texture = ImageTexture.new()
-	_clear_texture.flags = 0
-	_clear_texture.create_from_image(_image)
 
 	background_color = Color.white
 
@@ -51,37 +40,13 @@ func _gui_input(event : InputEvent):
 
 		update_texture()
 
-var text := "GFRREG"
-
-func _draw():
-	#draw_string(font, Vector2.ZERO, text, Color.red)
-
-	if not text.empty():
-
-		print(text)
-
-		draw_string(font, 100*Vector2.ONE, text, Color.red)
-
-		#text = ""
-
-		#_temp_image = texture.get_data().duplicate(true)
-
-		update_texture()
-
 func update_texture():
-	return
 	var color_image = _image.duplicate(true)
 	color_image.fill(background_color)
-
-	print(_temp_image)
-	print(_temp_image.is_empty())
-	if not _temp_image.is_empty():
-		_image.blend_rect(_temp_image, Rect2(Vector2.ZERO, _temp_image.get_size()), Vector2.ZERO)
-		_temp_image = Image.new()
 
 	color_image.blend_rect(_image, Rect2(Vector2.ZERO, _image.get_size()), Vector2.ZERO)
 
 	var image_texture = ImageTexture.new()
-	image_texture.flags = 0
-	image_texture.create_from_image(color_image)
+	print(image_texture.storage)
+	image_texture.create_from_image(color_image, 0)
 	texture = image_texture
