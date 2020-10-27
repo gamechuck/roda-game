@@ -309,6 +309,8 @@ func begin_minigame(argument_values):
 			active_minigame = Flow.bike_repair_UI
 		"seat_sorting":
 			active_minigame = Flow.seat_sorting_UI
+		"poster_creation":
+			active_minigame = Flow.poster_creation_UI
 	if active_minigame != null:
 		active_minigame.show()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/tilesets/fence_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/game/Canvas.gd" type="Script" id=2]
@@ -50,8 +50,9 @@
 [ext_resource path="res://roda-assets/tilemap/ground/house_interior.png" type="Texture" id=48]
 [ext_resource path="res://src/game/characters/DoorBell.tscn" type="PackedScene" id=49]
 [ext_resource path="res://src/game/characters/Rosalina.tscn" type="PackedScene" id=50]
-[ext_resource path="res://src/game/characters/ShopDogTrainer.tscn" type="PackedScene" id=51]
+[ext_resource path="res://src/game/characters/BuildingEntrance.tscn" type="PackedScene" id=51]
 [ext_resource path="res://src/game/characters/TreeWithSquirrelHouse.tscn" type="PackedScene" id=52]
+[ext_resource path="res://src/game/props/Billboard.tscn" type="PackedScene" id=53]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 160 )
@@ -329,7 +330,7 @@ format = 1
 tile_data = PoolIntArray( 10485793, 0, 0, 10551329, 1, 0, 10616865, 1, 0, 10682401, 1, 0, 10747937, 1, 0, 10813473, 1, 0, 10879009, 1, 0, 10944545, 1, 0, 11010081, 0, 0 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 25 )]
-position = Vector2( 4280, 5256 )
+position = Vector2( 2872, 1312 )
 id = "player"
 
 [node name="Intro" type="YSort" parent="YSort"]
@@ -523,10 +524,6 @@ id = "bell_old_man"
 position = Vector2( 4160, 5144 )
 id = "rosalina"
 
-[node name="ShopDogTrainer" parent="YSort/Characters" instance=ExtResource( 51 )]
-position = Vector2( 3376, 1696 )
-id = "shop_dog_trainer"
-
 [node name="SquirrelTreeLake" parent="YSort/Characters" instance=ExtResource( 52 )]
 position = Vector2( 4064, 2112 )
 id = "squirrel_tree_lake"
@@ -539,6 +536,10 @@ id = "squirrel_tree_mountains"
 position = Vector2( 1952, 1248 )
 id = "squirrel_tree_square"
 
+[node name="BuildingEntrance" parent="YSort/Characters" instance=ExtResource( 51 )]
+position = Vector2( 3184, 1216 )
+id = "shop_park_lovers"
+
 [node name="TrafficLoops" type="YSort" parent="YSort"]
 __meta__ = {
 "_edit_group_": true,
@@ -547,7 +548,6 @@ __meta__ = {
 
 [node name="MountainLoop1" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 10
-is_clockwise = false
 points = PoolVector2Array( 1184, 800, 608, 800, 608, 288, 1184, 288 )
 
 [node name="MountainLoop2" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
@@ -556,72 +556,58 @@ points = PoolVector2Array( 1248, 224, 1248, 1376, 544, 1376, 544, 224 )
 
 [node name="ParkLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 2016, 1920, 2624, 1920, 2624, 2496, 2016, 2496 )
 
 [node name="TrashLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 3264, 2496, 2688, 2496, 2688, 1920, 3264, 1920 )
 
 [node name="CansterLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 3328, 1920, 3584, 1920, 3584, 2816, 3328, 2816 )
 
 [node name="BikeLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 3328, 2880, 3808, 2880, 3808, 3296, 3328, 3296 )
 
 [node name="InterLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 4
-is_clockwise = false
 points = PoolVector2Array( 3648, 2592, 4192, 2592, 4192, 2784, 3648, 2784 )
 
 [node name="LakeLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 12
-is_clockwise = false
 points = PoolVector2Array( 3648, 1376, 4192, 1376, 4192, 2528, 3648, 2528 )
 
 [node name="ParkingLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 10
-is_clockwise = false
 points = PoolVector2Array( 2688, 3552, 2688, 2560, 3264, 2560, 3264, 3552 )
 
 [node name="BridgeLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 10
-is_clockwise = false
 points = PoolVector2Array( 3296, 4800, 2656, 4800, 2656, 3616, 3296, 3616 )
 
 [node name="BossLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 20
-is_clockwise = false
 points = PoolVector2Array( 288, 3104, 288, 2336, 736, 2336, 736, 1632, 1120, 1632, 1120, 3104 )
 
 [node name="CopperLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 6
-is_clockwise = false
 points = PoolVector2Array( 1952, 1920, 1952, 2848, 1504, 2848, 1504, 2528, 1760, 2528, 1760, 1920 )
 
 [node name="HelterSkelterLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 1952, 2912, 1952, 3616, 2592, 3616, 2592, 3872, 2400, 3872, 2400, 3936, 2336, 3936, 2336, 4000, 1504, 4000, 1504, 2912 )
 
 [node name="SmogLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 1184, 2464, 1184, 1632, 1696, 1632, 1696, 2464 )
 
 [node name="LoveLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 2016, 2560, 2624, 2560, 2624, 3136, 2016, 3136 )
 
 [node name="SquareLoop" parent="YSort/TrafficLoops" instance=ExtResource( 18 )]
 amount_of_cars = 8
-is_clockwise = false
 points = PoolVector2Array( 3584, 544, 3584, 1856, 1760, 1856, 1760, 544 )
 
 [node name="SkaterLoops" type="YSort" parent="YSort"]
@@ -834,6 +820,9 @@ extents = Vector2( 180, 300 )
 [node name="Trash" parent="YSort/SafeZones" instance=ExtResource( 33 )]
 position = Vector2( 2976, 2208 )
 extents = Vector2( 180, 180 )
+
+[node name="Billboard" parent="YSort" instance=ExtResource( 53 )]
+position = Vector2( 2656, 1728 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 visible = false

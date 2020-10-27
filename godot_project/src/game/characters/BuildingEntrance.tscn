@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 36 )
 
-[node name="ShopDogTrainer" instance=ExtResource( 1 )]
+[node name="BuildingEntrance" instance=ExtResource( 1 )]
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = null

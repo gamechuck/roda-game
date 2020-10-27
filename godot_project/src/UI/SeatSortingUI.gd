@@ -23,7 +23,7 @@ onready var _characters_array := [_adult, _teenager, _child, _baby]
 
 var active_character : classCharacterSlot = null
 
-signal drive_button_pressed(index)
+signal drive_button_pressed
 
 func _ready():
 	Flow.seat_sorting_UI = self

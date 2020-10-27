@@ -1776,7 +1776,25 @@ use_item
 }
 
 = interact
-interact
+We love the park!
+We are searching for aspiring designers to make a poster for our campaign!
+Would you be interested in designing a poster for us?
++ [Yes! I'm an expert at making posters]
+	Perfect! Here's a blank canvas!
+	Tell me when you are done with the design!
+	-> start_poster_creation
++ [No, I'll pass on this opportunity!]
+	Oh... well someone else will come along then!
+	-> DONE
+
+= start_poster_creation
+	>>> BEGIN_MINIGAME: poster_creation
+	Tell me when you are done with the design!
+	+ That looks like shit!
+		-> end_poster_creation
+
+= end_poster_creation
+>>> END_MINIGAME
 -> DONE
 
 = use_item

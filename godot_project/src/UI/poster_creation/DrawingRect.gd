@@ -47,6 +47,5 @@ func update_texture():
 	color_image.blend_rect(_image, Rect2(Vector2.ZERO, _image.get_size()), Vector2.ZERO)
 
 	var image_texture = ImageTexture.new()
-	print(image_texture.storage)
 	image_texture.create_from_image(color_image, 0)
 	texture = image_texture

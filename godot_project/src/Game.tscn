@@ -64,6 +64,7 @@ script = ExtResource( 2 )
 visible = false
 
 [node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]
+visible = false
 
 [node name="PosterMakingUI" parent="UICanvas" instance=ExtResource( 5 )]
 visible = false
