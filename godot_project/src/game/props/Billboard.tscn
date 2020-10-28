@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://roda-assets/props/billboard.png" type="Texture" id=1]
-[ext_resource path="res://roda-assets/UI/poster_creation/blank_canvas.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/blank_canvas.png" type="Texture" id=2]
 [ext_resource path="res://src/game/props/Billboard.gd" type="Script" id=3]
 
 [node name="Billboard" type="StaticBody2D"]

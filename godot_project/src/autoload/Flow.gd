@@ -19,11 +19,9 @@ const STORY_PATH := "res://data/story_hr.ink"
 
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
-var	pause_UI : Control = null
+var pause_UI : Control = null
 var transitions_UI : Control = null
-var bike_repair_UI : Control = null
-var poster_creation_UI : Control = null
-var seat_sorting_UI : Control = null
+
 var inventory : Control = null
 var game_canvas : Node2D = null
 var boss_overlay : Control = null
@@ -54,8 +52,6 @@ var player_is_active := false
 var active_character : classCharacter
 var active_pickup : classPickup
 var active_item : classItemState
-
-var poster_texture : Texture
 
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader

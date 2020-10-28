@@ -13,8 +13,9 @@
 [ext_resource path="res://roda-assets/tilemap/store_park_love.png" type="Texture" id=11]
 [ext_resource path="res://roda-assets/tilemap/store_dog_trainer.png" type="Texture" id=12]
 [ext_resource path="res://roda-assets/tilemap/store_watch_dog.png" type="Texture" id=13]
-[ext_resource path="res://roda-assets/tilemap/store_roof.png" type="Texture" id=14]
-[ext_resource path="res://roda-assets/tilemap/house_roof.png" type="Texture" id=15]
+[ext_resource path="res://roda-assets/props/table.png" type="Texture" id=16]
+[ext_resource path="res://roda-assets/tilemap/roof2.png" type="Texture" id=17]
+[ext_resource path="res://roda-assets/tilemap/roof.png" type="Texture" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 54, 131, 38, 131, 38, 124, 54, 124 )
@@ -35,24 +36,21 @@ points = PoolVector2Array( 160, 160, 0, 160, 0, 0, 160, 0 )
 points = PoolVector2Array( 160, 160, 0, 160, 0, 0, 160, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 160, 64, 0, 64, 0, 0, 160, 0 )
+points = PoolVector2Array( 96, 64, 0, 64, 0, 48, 96, 48 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 224, 64, 0, 64, 0, 0, 224, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 24, 22, 2, 22, 2, 12, 24, 12 )
 
-[sub_resource type="ConvexPolygonShape2D" id=10]
+[sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 160, 160, 0, 160, 0, 0, 160, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 224, 160, 0, 160, 0, 0, 224, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 points = PoolVector2Array( 224, 160, 0, 160, 0, 0, 224, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( 224, 160, 0, 160, 0, 0, 224, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=13]
 points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 
 [resource]
@@ -115,14 +113,14 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shape_offset = Vector2( 3, 3 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 3, 3 )
-5/shape = SubResource( 9 )
+5/shape = SubResource( 8 )
 5/shape_one_way = false
 5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 3, 3 )
 } ]
 5/z_index = 0
@@ -136,14 +134,14 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shape_offset = Vector2( 16, 16 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-6/shape = SubResource( 10 )
+6/shape = SubResource( 9 )
 6/shape_one_way = false
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 10 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 6/z_index = 0
@@ -157,14 +155,14 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shape_offset = Vector2( 16, 16 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-7/shape = SubResource( 11 )
+7/shape = SubResource( 10 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 11 ),
+"shape": SubResource( 10 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 7/z_index = 0
@@ -178,14 +176,14 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shape_offset = Vector2( 16, 16 )
 8/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-8/shape = SubResource( 12 )
+8/shape = SubResource( 11 )
 8/shape_one_way = false
 8/shape_one_way_margin = 1.0
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 12 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 8/z_index = 0
@@ -199,14 +197,14 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape = SubResource( 13 )
+9/shape = SubResource( 12 )
 9/shape_one_way = false
 9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 13 ),
+"shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 9/z_index = 0
@@ -315,45 +313,108 @@ points = PoolVector2Array( 42, 34, 2, 34, 2, 16, 42, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
 } ]
 14/z_index = 0
-15/name = "store_roof"
-15/texture = ExtResource( 14 )
-15/tex_offset = Vector2( 16, 16 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 0, 0, 160, 64 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 0, 0 )
-15/navigation_offset = Vector2( 0, 0 )
-15/shape_offset = Vector2( 16, 16 )
-15/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-15/shape = SubResource( 7 )
-15/shape_one_way = false
-15/shape_one_way_margin = 1.0
-15/shapes = [ {
+17/name = "table.png 17"
+17/texture = ExtResource( 16 )
+17/tex_offset = Vector2( -32, -32 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 0, 0, 96, 72 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 0, 0 )
+17/navigation_offset = Vector2( 0, 0 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape = SubResource( 7 )
+17/shape_one_way = false
+17/shape_one_way_margin = 1.0
+17/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 7 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-15/z_index = 0
-16/name = "house_roof"
-16/texture = ExtResource( 15 )
-16/tex_offset = Vector2( 16, 16 )
-16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 0, 0, 224, 64 )
-16/tile_mode = 0
-16/occluder_offset = Vector2( 0, 0 )
-16/navigation_offset = Vector2( 0, 0 )
-16/shape_offset = Vector2( 16, 16 )
-16/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-16/shape = SubResource( 8 )
-16/shape_one_way = false
-16/shape_one_way_margin = 1.0
-16/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 8 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-16/z_index = 0
+17/z_index = 0
+18/name = "roof2"
+18/texture = ExtResource( 17 )
+18/tex_offset = Vector2( 16, 16 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 32, 0, 32, 64 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 0, 0 )
+18/navigation_offset = Vector2( 0, 0 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 1
+19/name = "roof"
+19/texture = ExtResource( 18 )
+19/tex_offset = Vector2( 16, 16 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 32, 0, 32, 64 )
+19/tile_mode = 0
+19/occluder_offset = Vector2( 0, 0 )
+19/navigation_offset = Vector2( 0, 0 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape_one_way = false
+19/shape_one_way_margin = 0.0
+19/shapes = [  ]
+19/z_index = 1
+20/name = "roof2.png 20"
+20/texture = ExtResource( 17 )
+20/tex_offset = Vector2( 16, 16 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 0, 0, 32, 64 )
+20/tile_mode = 0
+20/occluder_offset = Vector2( 0, 0 )
+20/navigation_offset = Vector2( 0, 0 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape_one_way = false
+20/shape_one_way_margin = 0.0
+20/shapes = [  ]
+20/z_index = 1
+21/name = "roof2.png 21"
+21/texture = ExtResource( 17 )
+21/tex_offset = Vector2( 16, 16 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 64, 0, 32, 64 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 1
+22/name = "roof.png 22"
+22/texture = ExtResource( 18 )
+22/tex_offset = Vector2( 16, 16 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 0, 0, 32, 64 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
+22/shapes = [  ]
+22/z_index = 1
+23/name = "roof.png 23"
+23/texture = ExtResource( 18 )
+23/tex_offset = Vector2( 16, 16 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 64, 0, 32, 64 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 1

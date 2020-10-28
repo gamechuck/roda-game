@@ -1,7 +1,5 @@
 extends classCharacter
 
-enum BATTLE_STATUS {OFFENSIVE, DEFEATED}
-
 #var _projectiles_resources := [
 #	preload("res://src/game/enemies/projectiles/TrackingProjectile.tscn"),
 #	preload("res://src/game/enemies/projectiles/BulletProjectile.tscn"),
@@ -22,7 +20,6 @@ onready var _tween := $Tween
 
 func _ready():
 	randomize()
-	register_state_property("is_defeated", BATTLE_STATUS.OFFENSIVE)
 
 	var _error : int = _spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
 
@@ -56,7 +53,7 @@ func set_monitorable(value : bool = _interact_area.monitorable):
 
 func _on_body_entered(body : PhysicsBody2D):
 	if body is classPlayer:
-		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
+		if get_state_property("is_defeated") == 0:
 			Director._on_dialogue_requested(self)
 			Director.zoom_camera(Vector2(1.5, 1.5))
 			reset()
@@ -68,7 +65,7 @@ func _on_body_entered(body : PhysicsBody2D):
 
 func _on_body_exited(body : PhysicsBody2D):
 	if body is classPlayer:
-		if get_state_property("is_defeated") == BATTLE_STATUS.OFFENSIVE:
+		if get_state_property("is_defeated") == 0:
 			reset()
 			Flow.boss_overlay.hide()
 			Director.zoom_camera(Vector2(1, 1))
@@ -110,27 +107,19 @@ func _on_projectile_timeout(projectile : classProjectile):
 
 func update_animation():
 	var is_defeated : int = get_state_property("is_defeated")
-	var state_settings : Dictionary = _state_machine.get(is_defeated, {})
-	_animated_sprite.play(state_settings.get("animation_name", "aggressive"))
+	if is_defeated:
+		_animated_sprite.play("is_defeated")
 
-	var shape = _interact_collision_shape_2D.shape
-	shape.extents = state_settings.get("extents", Vector2(24, 24))
+		var shape = _interact_collision_shape_2D.shape
+		shape.extents = Vector2(48, 48)
 
-	set_monitorable(state_settings.get("monitorable", false))
+		set_monitorable(true)
+		_animated_sprite.material = null
+	else:
+		_animated_sprite.play("default")
 
-	_animated_sprite.material = state_settings.get("material", null)
+		var shape = _interact_collision_shape_2D.shape
+		shape.extents = Vector2(480, 360)
 
-var _state_machine := {
-	BATTLE_STATUS.OFFENSIVE:{
-		"animation_name": "aggressive",
-		"extents": Vector2(480, 360),
-		"monitorable": false,
-		"material": preload("res://assets/materials/smog_distortion_material.tres")
-	},
-	BATTLE_STATUS.DEFEATED:{
-		"animation_name": "friendly",
-		"extents": Vector2(48, 48),
-		"monitorable": true,
-		"material": null
-	}
-}
+		set_monitorable(false)
+		_animated_sprite.material = preload("res://assets/materials/smog_distortion_material.tres")

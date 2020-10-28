@@ -4,7 +4,8 @@ onready var _tween := $Tween
 
 var story : Object
 var interact_node : Node2D = null
-var active_minigame : Control = null
+
+var minigame : classMinigame = null
 
 var is_waiting_for_choice := false
 var dialogue_in_progress := false
@@ -155,7 +156,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 	elif story.current_choices.size() > 0:
 		is_waiting_for_choice = true
 
-		if Director.active_minigame == null:
+		if Director.minigame == null:
 			var choices := []
 			for choice in story.current_choices:
 				var text : String = translate(choice.text)
@@ -304,19 +305,15 @@ func hide(argument_values):
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
-	match minigame_id:
-		"bike_repair":
-			active_minigame = Flow.bike_repair_UI
-		"seat_sorting":
-			active_minigame = Flow.seat_sorting_UI
-		"poster_creation":
-			active_minigame = Flow.poster_creation_UI
-	if active_minigame != null:
-		active_minigame.show()
+
+	for node in get_tree().get_nodes_in_group("minigames"):
+		if node.id == minigame_id:
+			minigame = node
+			minigame.show()
 
 func end_minigame(_argument_values):
-	active_minigame.hide()
-	active_minigame = null
+	minigame.hide()
+	minigame = null
 
 func update_dialogue_UI(argument_values):
 	var character_id : String = argument_values[0]

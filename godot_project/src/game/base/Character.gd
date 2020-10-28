@@ -7,45 +7,33 @@ onready var _audio_stream_player := $AudioStreamPlayer
 onready var _animated_sprite := $AnimatedSprite
 
 export(String) var id : String
-
-var state : classCharacterState setget set_state, get_state
-func set_state(value : classCharacterState) -> void:
-	if value:
-		_state = weakref(value)
-		value.object = self
-		if visible != value.visible:
-			set_visible(value.visible)
-func get_state() -> classCharacterState:
-	return _state.get_ref()
-var _state = WeakRef.new()
-
-func register_state_property(property : String, value : int) -> void:
-	if self.state:
-		if self.state.properties.has(property):
-			# Don't register it if it already exists!
-			return
-		else:
-			self.state.properties[property] = value
+var state : classCharacterState
 
 func get_state_property(property : String) -> int:
-	if self.state and self.state.properties.has(property):
-		return self.state.properties[property]
-	else:
-		push_error("Property with name '{0}' was not defined in the character state!".format([property]))
+	if state:
+		if state.properties.has(property):
+			return state.properties[property]
+		else:
+			push_error("Property with name '{0}' was not defined in the character state!".format([property]))
 	return 0
 
 func set_state_property(property : String, value : int):
-	if self.state:
-		if property in self.state.properties:
-			self.state.properties[property] = value
+	if state:
+		if state.properties.has(property):
+			state.properties[property] = value
 		else:
 			push_error("Property with name '{0}' was not defined in the character state!".format([property]))
 
 func _ready():
-	# Initiate the character's state!
-	self.state = State.get_character_by_id(id)
+	add_to_group("characters")
 
-	set_visible()
+	# Initiate the character's state!
+	state = State.get_character_by_id(id)
+	if state:
+		state.object = self
+		set_visible(state.visible)
+	else:
+		push_error("Character with id '{0}' does not have a valid registered state in the context!".format([id]))
 
 func set_visible(value : bool = visible):
 	visible = value

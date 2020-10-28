@@ -1,6 +1,6 @@
-extends Control
+extends classMinigame
 
-# Ideally two thing would have to change drastically here:
+# Ideally two things would have to change drastically here:
 # 1. Not allowing the user to add/select characters nor push the drive button when not waiting for a choice!
 # 2. Change everything to be derived from control vs the current mix that is currently implemented!
 
@@ -26,8 +26,6 @@ var active_character : classCharacterSlot = null
 signal drive_button_pressed
 
 func _ready():
-	Flow.seat_sorting_UI = self
-
 	var _error := _drive_button.connect("pressed", self, "_on_drive_button_pressed")
 	_error = connect("drive_button_pressed", Director, "_on_choice_button_pressed")
 
@@ -38,12 +36,6 @@ func _ready():
 	for child in _characters_array:
 		if child is classCharacterSlot:
 			child.connect("button_pressed", self, "_on_character_pressed", [child])
-
-func show():
-	visible = true
-
-func hide():
-	visible = false
 
 func clear_all_characters():
 	for child in _highlights_container.get_children():

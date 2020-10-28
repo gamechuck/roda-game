@@ -11,6 +11,7 @@ VAR player_wearing_color = 0
 
 // SolidSnejk
 VAR solid_snejk_intro_completed = 0
+VAR operation_better_park_started = 0
 
 // Lizzy
 VAR lizzy_intro_completed = 0
@@ -44,6 +45,9 @@ VAR mr_smog_defeated = 0
 
 // FlowerBox
 VAR rose_seeds_planted = 0
+
+// Student
+VAR homework_completed = 0
 
 // Canster
 VAR canster_gave_pump = 0
@@ -645,7 +649,7 @@ Tko bi mi mogao pomoći?
 -> DONE
 
 = check_bike
->>> BEGIN_MINIGAME: bike_repair
+>>> BEGIN_MINIGAME: bike_minigame
 - (bike_repair)
 {checked_components == LIST_ALL(checked_components):
 	- true: -> after_checking_bike
@@ -759,7 +763,7 @@ Pomozi mi, molim te!
 
 = start_seat_sorting
 Okej, hvala ti puno!
->>> BEGIN_MINIGAME: seat_sorting
+>>> BEGIN_MINIGAME: car_minigame
 - (sorting_minigame_start)
 Stavi pravo čudovište na pravo mjesto!
 + Ne, ne, ne, pa čak i ja vidim da to nije dobro...
@@ -1753,7 +1757,7 @@ I'm flattered, but I can't accept that.
 -> DONE
 
 
-=== conv_shop_dog_trainer ===
+=== conv_dog_trainer_club ===
 
 {conv_type:
 	- 0: -> interact
@@ -1761,14 +1765,14 @@ I'm flattered, but I can't accept that.
 }
 
 = interact
-interact
+Hello! Welcome to the Dog Trainer's club!
 -> DONE
 
 = use_item
 use_item
 -> DONE
 
-=== conv_shop_park_lovers ===
+=== conv_park_lovers ===
 
 {conv_type:
 	- 0: -> interact
@@ -1782,18 +1786,18 @@ Would you be interested in designing a poster for us?
 + [Yes! I'm an expert at making posters]
 	Perfect! Here's a blank canvas!
 	Tell me when you are done with the design!
-	-> start_poster_creation
+	-> start_poster_minigame
 + [No, I'll pass on this opportunity!]
 	Oh... well someone else will come along then!
 	-> DONE
 
-= start_poster_creation
-	>>> BEGIN_MINIGAME: poster_creation
+= start_poster_minigame
+	>>> BEGIN_MINIGAME: poster_minigame
 	Tell me when you are done with the design!
-	+ That looks like shit!
-		-> end_poster_creation
+	+ That looks like awesome!
+		-> end_poster_minigame
 
-= end_poster_creation
+= end_poster_minigame
 >>> END_MINIGAME
 -> DONE
 
@@ -1801,7 +1805,41 @@ Would you be interested in designing a poster for us?
 use_item
 -> DONE
 
-=== conv_watch_dog ===
+=== conv_monsters_without_borders ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Welcome to Monsters Without Borders!
+We guard the safety of every monster big or small.
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_animal_protection_services ===
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Here are some nuts to feed to the squirrels!
+>>> ADD_ITEM: squirrel_nuts
+>>> ADD_ITEM: squirrel_nuts
+>>> ADD_ITEM: squirrel_nuts
+-> DONE
+
+= use_item
+use_item
+-> DONE
+
+=== conv_roda_shop ===
 
 {conv_type:
 	- 0: -> interact
@@ -1816,7 +1854,7 @@ interact
 use_item
 -> DONE
 
-=== conv_shop_animal_protection ===
+=== conv_wheelie_appartment_building
 
 {conv_type:
 	- 0: -> interact
@@ -1824,14 +1862,14 @@ use_item
 }
 
 = interact
-interact
+>>> TELEPORT_PLAYER:
 -> DONE
 
 = use_item
 use_item
 -> DONE
 
-=== conv_shop_roda ===
+=== conv_student
 
 {conv_type:
 	- 0: -> interact
@@ -1839,12 +1877,54 @@ use_item
 }
 
 = interact
-interact
+
+{homework_completed:
+	- 0: -> intro
+	- 1: -> end_homework
+}
+
+= intro
+Sorry! I don't have time to come and play outside...
+I have to finish my homework, but it is super-difficult.
++ [I can help you if you want?]
+	Really? Yeah, that would be awesome!
+	-> start_homework
++ [I'll leave you to it then...]
+	Yes, let me concentrate in peace!
 -> DONE
+
+= start_homework
+Ok, so the first question is ...
++ [A]
+	-> wrong_answer
++ [B]
+	Let's see...
+	Yes! That checks out! You are my hero!
+	-> end_homework
++ [C]
+	-> wrong_answer
+
+= wrong_answer
+That doesn't seem to be the correct answer!
+Do you even know anything about homework?
+Let's try again shall we?
+-> start_homework
+
+= end_homework
+Thanks so much for helping me with my homework!
+If you ever need a favor from me, just tell me!
++ [I will!]
+	-> DONE
++ {operation_better_park_started}[Actually... would you be willing to protest together with me for a better park?]
+	Certainly! That park is way too small!
+	We, the people, deserve something much bigger and majestic!
+	I'll be there to demand a bigger park!
+	-> DONE
 
 = use_item
 use_item
 -> DONE
+
 
 === conv_squirrel_tree ===
 
@@ -1854,8 +1934,15 @@ use_item
 }
 
 = interact
+{get_state_property(interact_id, "has_squirrel_nuts"):
+	- 0: -> squirrel_hungry
+	- 1: -> squirrel_satiated
+}
+
+= squirrel_hungry
 This tree has a squirrel's house!
 I can vaguely see some squirrels huddled inside, but I can't reach.
+These creatures look like they are starving.
 {has_item("squirrel_nuts"):
 	- 0: -> has_no_nuts
 	- 1: -> has_nuts
@@ -1866,11 +1953,34 @@ If only I had some food to give to these poor animals...
 -> DONE
 
 = has_nuts
-Lunja gave me some nuts to give them!
+Luckily, the Animal Protection Services gave me some nuts!
+Let's feed these poor animals.
 >>> REMOVE_ITEM: squirrel_nuts
 >>> SET_STATE_PROPERTY: {interact_id} has_squirrel_nuts 1
+A hungry squirrel came out and ate my nuts!
+That's one squirrel that won't go hungry today!
+-> DONE
+
+= squirrel_satiated
+The squirrels in the squirrel's house look satiated and happy.
+Giving these animals any more nuts will just make them fat and lazy.
+{has_item("squirrel_nuts"):
+	- 1: -> find_other_squirrel_tree
+}
+-> DONE
+
+= find_other_squirrel_tree
+I'll have to find another tree with squirrels that haven't been fed yet.
 -> DONE
 
 = use_item
-use_item
+
+{used_item:
+	- "squirrel_nuts": -> has_nuts
+	- else: -> default
+}
+
+= default
+I don't think this will be useful!
+
 -> DONE

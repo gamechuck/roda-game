@@ -1,7 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/game/base/Pickup.tscn" type="PackedScene" id=1]
-[ext_resource path="res://roda-assets/UI/inventory/items/trash_bag_normal.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/UI/game/items/trash_bag_normal.png" type="Texture" id=2]
+
+
+
+
 
 [node name="TrashBag" instance=ExtResource( 1 )]
 id = "trash_bag"

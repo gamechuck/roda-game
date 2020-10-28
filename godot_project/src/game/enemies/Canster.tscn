@@ -49,40 +49,40 @@ atlas = ExtResource( 6 )
 region = Rect2( 804, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
-region = Rect2( 402, 0, 134, 84 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 7 )
-region = Rect2( 536, 0, 134, 84 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 134, 84 )
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
 region = Rect2( 134, 0, 134, 84 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 6 )
+region = Rect2( 268, 0, 134, 84 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 6 )
+region = Rect2( 402, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 7 )
-region = Rect2( 268, 0, 134, 84 )
+region = Rect2( 402, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 536, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 6 )
-region = Rect2( 134, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 6 )
-region = Rect2( 268, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 134, 0, 134, 84 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 6 )
-region = Rect2( 402, 0, 134, 84 )
+atlas = ExtResource( 7 )
+region = Rect2( 268, 0, 134, 84 )
 
 [sub_resource type="SpriteFrames" id=20]
 animations = [ {
@@ -101,19 +101,19 @@ animations = [ {
 "name": "devour_2",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": false,
+"name": "devour_1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
 "loop": false,
 "name": "spit_out_2",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "spit_out_1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
-"loop": false,
-"name": "devour_1",
 "speed": 5.0
 } ]
 
@@ -131,7 +131,7 @@ id = "canster"
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 20 )
 animation = "aggressive"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( -10, -13 )
 

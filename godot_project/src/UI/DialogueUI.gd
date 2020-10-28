@@ -103,7 +103,7 @@ func _input(event):
 		Flow.active_item = null
 		emit_signal("dialogue_updated")
 		start_interact_timeout()
-		if Director.active_minigame != null:
+		if Director.minigame != null:
 			return
 		elif Director.is_waiting_for_choice:
 			return

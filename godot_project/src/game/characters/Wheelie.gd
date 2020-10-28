@@ -29,10 +29,6 @@ var its_over := false
 signal nav_path_requested
 
 func _ready():
-	register_state_property("going_to_house", 0)
-	register_state_property("going_back_to_park", 0)
-	register_state_property("arrived_safely", 0)
-
 	var _error := _interact_area.connect("area_entered", self, "_on_area_entered")
 
 	set_physics_process(false)
@@ -142,14 +138,14 @@ func update_animation():
 		set_physics_process(true)
 
 func _update_animation():
-	var state_settings : Dictionary = state_machine.get(_direction, {})
-	state_settings = state_settings.get(_moving, {})
+	var animations : Dictionary = default_animations.get(_direction, {})
+	animations = animations.get(_moving, {})
 
-	_animated_sprite.play(state_settings.get("animation_name", "idle_down"))
-	_animated_sprite.flip_h = state_settings.get("flip_h", false)
-	_animated_sprite.flip_v = state_settings.get("flip_v", false)
+	_animated_sprite.play(animations.get("animation_name", "idle_down"))
+	_animated_sprite.flip_h = animations.get("flip_h", false)
+	_animated_sprite.flip_v = animations.get("flip_v", false)
 
-var state_machine := {
+var default_animations := {
 	DIRECTION.LEFT:{
 		MOVING.IDLE:{
 			"animation_name": "idle_left",

@@ -3,8 +3,6 @@ extends classCharacter
 
 enum MOVING {IDLE, WALK}
 enum DIRECTION {LEFT, RIGHT, UP, DOWN}
-enum TRANSPORT_MODE {FOOT, BIKE}
-enum CLOTHING {PLAIN, COLORFUL}
 
 var _moving : int = MOVING.IDLE
 var _direction : int = DIRECTION.DOWN
@@ -30,13 +28,6 @@ signal cutscene_requested()
 func _ready():
 	Flow.player = self
 	respawn_position = position
-
-	register_state_property("on_bike", TRANSPORT_MODE.FOOT)
-	register_state_property("wearing_color", CLOTHING.PLAIN)
-
-	register_state_property("entered_gummy", 0)
-	register_state_property("entered_zebra", 0)
-	register_state_property("entered_traffic_lights", 0)
 
 	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
@@ -211,7 +202,7 @@ func _on_bump_area_entered(area):
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.player_move_speed
-	if get_state_property("on_bike") == TRANSPORT_MODE.BIKE:
+	if get_state_property("on_bike") == 1:
 		move_speed *= ConfigData.bike_modifier
 	elif _overlapping_with_gummy:
 		move_speed *= ConfigData.gummy_modifier
@@ -248,179 +239,172 @@ func update_state(move_direction : Vector2 = Vector2.ZERO):
 		update_animation()
 
 func update_animation():
-	var direction : int = _direction
-	var moving : int = _moving
-	var clothing : int = get_state_property("wearing_color")
-	var transport_mode : int = get_state_property("on_bike")
+	var wearing_color : int = get_state_property("wearing_color")
+	var on_bike : int = get_state_property("on_bike")
 
-	var state_settings : Dictionary = state_machine.get(direction, {})
-	state_settings = state_settings.get(transport_mode, {})
-	state_settings = state_settings.get(moving, {})
-	state_settings = state_settings.get(clothing, {})
+	var animations := {}
+	if wearing_color:
+		if on_bike:
+			animations = colorful_on_bike_animations
+		else:
+			animations = colorful_on_foot_animations
+	else:
+		if on_bike:
+			animations = plain_on_bike_animations
+		else:
+			animations = plain_on_foot_animations
 
-	_animated_sprite.play(state_settings.get("animation_name", "default"))
-	_animated_sprite.flip_h = state_settings.get("flip_h", false)
-	#_animated_sprite.flip_v = clothing_settings.get("flip_v", false)
+	animations = animations.get(_direction, {})
+	animations = animations.get(_moving, {})
 
-var state_machine := {
+	_animated_sprite.play(animations.get("animation_name", "default"))
+	_animated_sprite.flip_h = animations.get("flip_h", false)
+	_animated_sprite.flip_v = animations.get("flip_v", false)
+
+var colorful_on_bike_animations := {
 	DIRECTION.LEFT:{
-		TRANSPORT_MODE.FOOT: {
-			MOVING.IDLE: {
-				CLOTHING.PLAIN: {
-					"animation_name": "idle_right",
-					"flip_h": true
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "idle_right_color",
-					"flip_h": true
-				},
-			},
-			MOVING.WALK: {
-				CLOTHING.PLAIN: {
-					"animation_name": "walk_right",
-					"flip_h": true
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "walk_right_color",
-					"flip_h": true
-				}
-			}
+		MOVING.IDLE: {
+			"animation_name": "idle_right",
+			"flip_h": true
 		},
-		TRANSPORT_MODE.BIKE: {
-			MOVING.IDLE:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_right_idle",
-					"flip_h": true
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_right_idle_color",
-					"flip_h": true
-				}
-			},
-			MOVING.WALK:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_right",
-					"flip_h": true
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_right_color",
-					"flip_h": true
-				}
-			}
+		MOVING.WALK: {
+			"animation_name": "walk_right",
+			"flip_h": true
 		}
 	},
 	DIRECTION.RIGHT:{
-		TRANSPORT_MODE.FOOT: {
-			MOVING.IDLE: {
-				CLOTHING.PLAIN: {
-					"animation_name": "idle_right",
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "idle_right_color",
-				},
-			},
-			MOVING.WALK: {
-				CLOTHING.PLAIN: {
-					"animation_name": "walk_right",
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "walk_right_color",
-				}
-			}
+		MOVING.IDLE: {
+			"animation_name": "idle_right",
 		},
-		TRANSPORT_MODE.BIKE: {
-			MOVING.IDLE:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_right_idle",
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_right_idle_color",
-				}
-			},
-			MOVING.WALK:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_right",
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_right_color",
-				}
-			}
+		MOVING.WALK: {
+			"animation_name": "walk_right",
 		}
 	},
 	DIRECTION.UP:{
-		TRANSPORT_MODE.FOOT: {
-			MOVING.IDLE: {
-				CLOTHING.PLAIN: {
-					"animation_name": "idle_up"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "idle_up_color"
-				},
-			},
-			MOVING.WALK: {
-				CLOTHING.PLAIN: {
-					"animation_name": "walk_up"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "walk_up_color"
-				}
-			}
+		MOVING.IDLE: {
+			"animation_name": "idle_up"
 		},
-		TRANSPORT_MODE.BIKE: {
-			MOVING.IDLE:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_up_idle"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_up_idle_color"
-				}
-			},
-			MOVING.WALK:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_up"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_up_color"
-				}
-			}
+		MOVING.WALK: {
+			"animation_name": "walk_up"
 		}
 	},
 	DIRECTION.DOWN:{
-		TRANSPORT_MODE.FOOT: {
-			MOVING.IDLE: {
-				CLOTHING.PLAIN: {
-					"animation_name": "idle_down"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "idle_down_color"
-				},
-			},
-			MOVING.WALK: {
-				CLOTHING.PLAIN: {
-					"animation_name": "walk_down"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "walk_down_color"
-				}
-			}
+		MOVING.IDLE: {
+			"animation_name": "idle_down"
 		},
-		TRANSPORT_MODE.BIKE: {
-			MOVING.IDLE:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_down_idle"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_down_idle_color"
-				}
-			},
-			MOVING.WALK:{
-				CLOTHING.PLAIN: {
-					"animation_name": "cycle_down"
-				},
-				CLOTHING.COLORFUL: {
-					"animation_name": "cycle_down_color"
-				}
-			}
+		MOVING.WALK: {
+			"animation_name": "walk_down"
+		}
+	}
+}
+
+var colorful_on_foot_animations := {
+	DIRECTION.LEFT:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_right_idle_color",
+			"flip_h": true
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_right_color",
+			"flip_h": true
+		}
+	},
+	DIRECTION.RIGHT:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_right_idle_color",
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_right_color",
+		}
+	},
+	DIRECTION.UP:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_up_idle_color"
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_up_color"
+		}
+	},
+	DIRECTION.DOWN:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_down_idle_color"
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_down_color"
+		}
+	}
+}
+
+var plain_on_bike_animations := {
+	DIRECTION.LEFT:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_right_idle",
+			"flip_h": true
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_right",
+			"flip_h": true
+		}
+	},
+	DIRECTION.RIGHT:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_right_idle",
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_right",
+		}
+	},
+	DIRECTION.UP:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_up_idle"
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_up"
+		}
+	},
+	DIRECTION.DOWN:{
+		MOVING.IDLE: {
+			"animation_name": "cycle_down_idle"
+		},
+		MOVING.WALK: {
+			"animation_name": "cycle_down"
+		}
+	}
+}
+
+var plain_on_foot_animations := {
+	DIRECTION.LEFT:{
+		MOVING.IDLE: {
+			"animation_name": "idle_right",
+			"flip_h": true
+		},
+		MOVING.WALK: {
+			"animation_name": "walk_right",
+			"flip_h": true
+		}
+	},
+	DIRECTION.RIGHT:{
+		MOVING.IDLE: {
+			"animation_name": "idle_right",
+		},
+		MOVING.WALK: {
+			"animation_name": "walk_right",
+		}
+	},
+	DIRECTION.UP:{
+		MOVING.IDLE: {
+			"animation_name": "idle_up"
+		},
+		MOVING.WALK: {
+			"animation_name": "walk_up"
+		}
+	},
+	DIRECTION.DOWN:{
+		MOVING.IDLE: {
+			"animation_name": "idle_down"
+		},
+		MOVING.WALK: {
+			"animation_name": "walk_down"
 		}
 	}
 }

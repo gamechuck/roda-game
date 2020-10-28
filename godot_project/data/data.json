@@ -117,6 +117,9 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
+            },
+            "properties": {
+                "has_trash": 0
             }
         },
         "canster_middle": {
@@ -132,6 +135,9 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
+            },
+            "properties": {
+                "has_trash": 0
             }
         },
         "canster_right": {
@@ -147,6 +153,9 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
+            },
+            "properties": {
+                "has_trash": 0
             }
         },
         "copper": {
@@ -193,6 +202,9 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/love_interest.png"
+            },
+            "properties": {
+                "wearing_color": 1
             }
         },
         "wheelie": {
@@ -208,6 +220,11 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/wheelie.png"
+            },
+            "properties": {
+                "going_to_house": 0,
+                "going_back_to_park": 0,
+                "arrived_safely": 0
             }
         },
         "mr_smog": {
@@ -223,15 +240,24 @@
                     35
                 ],
                 "texture": "res://roda-assets/portraits/mr_smog.png"
+            },
+            "properties": {
+                "is_defeated" : 0
             }
         },
         "wind_turbine": {
             "name": "Wind Turbine",
-            "knot": "conv_wind_turbine"
+            "knot": "conv_wind_turbine",
+            "properties" : {
+                "has_battery" : 0
+            }
         },
         "flower_box": {
             "name": "Flower Box",
-            "knot": "conv_flower_box"
+            "knot": "conv_flower_box",
+            "properties" : {
+                "has_rose_seeds" : 0
+            }
         },
         "rosalina": {
             "name": "Rosalina",
@@ -253,25 +279,29 @@
             "name": "Student",
             "knot": "conv_student"
         },
-        "shop_dog_trainer": {
-            "name": "Dog Trainer",
-            "knot": "conv_shop_dog_trainer"
+        "dog_trainer_club": {
+            "name": "Dog Trainer Club",
+            "knot": "conv_dog_trainer_club"
         },
-        "shop_park_lovers": {
-            "name": "Park Lover",
-            "knot": "conv_shop_park_lovers"
+        "park_lovers": {
+            "name": "Park Lovers Inc.",
+            "knot": "conv_park_lovers"
         },
-        "shop_watch_dog": {
-            "name": "Watch Dog",
-            "knot": "conv_watch_dog"
+        "monsters_without_borders": {
+            "name": "Monster Without Borders",
+            "knot": "conv_monsters_without_borders"
         },
-        "shop_animal_protection": {
+        "animal_protection_services": {
             "name": "Animal Protection Services",
-            "knot": "conv_shop_animal_protection"
+            "knot": "conv_animal_protection_services"
         },
-        "shop_roda": {
+        "roda_shop": {
             "name": "Roda",
-            "knot": "conv_shop_roda"
+            "knot": "conv_roda_shop"
+        },
+        "wheelie_appartment_building": {
+            "name": "Roda",
+            "knot": "conv_wheelie_appartment_building"
         },
         "squirrel_tree_square": {
             "name": "Urban tree",
@@ -298,6 +328,13 @@
                     71
                 ],
                 "texture": "res://roda-assets/portraits/player.png"
+            },
+            "properties" : {
+                "on_bike" : 0,
+                "wearing_color": 0,
+                "entered_gummy": 0,
+                "entered_zebra": 0,
+                "entered_traffic_lights": 0
             }
         },
         "helter_skelter": {
@@ -317,7 +354,7 @@
         },
         "intro_mr_smog": {
             "name": "Helter Skelter",
-            "knot": "conv_helter_skelter"
+            "knot": "conv_helter_skelter",
         },
         "intro_player": {
             "name": "Helter Skelter",
@@ -339,74 +376,74 @@
     "items": {
         "fence": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/fence_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/fence_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/fence_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/fence_pressed.png"
             }
         },
         "pump": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/pump_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/pump_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/pump_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/pump_pressed.png"
             }
         },
         "bike": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/bike_pressed.png"
             }
         },
         "broken_bike": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/bike_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/bike_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/bike_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/bike_pressed.png"
             }
         },
         "trash_cup": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/trash_cup_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_cup_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/trash_cup_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/trash_cup_pressed.png"
             }
         },
         "trash_bag": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bag_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bag_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/trash_bag_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/trash_bag_pressed.png"
             }
         },
         "trash_bottle": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/trash_bottle_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/trash_bottle_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/trash_bottle_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/trash_bottle_pressed.png"
             }
         },
         "seat_belt": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/seat_belt_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/seat_belt_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/seat_belt_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/seat_belt_pressed.png"
             }
         },
         "battery": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/battery_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/battery_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/battery_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/battery_pressed.png"
             }
         },
         "rose_seeds": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/rose_seeds_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/rose_seeds_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/rose_seeds_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/rose_seeds_pressed.png"
             }
         },
         "squirrel_nuts": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/squirrel_nuts_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/squirrel_nuts_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/squirrel_nuts_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/squirrel_nuts_pressed.png"
             }
         },
         "grocery_bag": {
             "textures": {
-                "texture_normal": "res://roda-assets/UI/inventory/items/grocery_bag_normal.png",
-                "texture_pressed": "res://roda-assets/UI/inventory/items/grocery_bag_pressed.png"
+                "texture_normal": "res://roda-assets/UI/game/items/grocery_bag_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/grocery_bag_pressed.png"
             }
         }
     },

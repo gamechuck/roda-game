@@ -3,23 +3,28 @@
 [ext_resource path="res://assets/fonts/dynamic/luckiest_guy_size16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/dynamic/luckiest_guy_size8.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/UI/GameOverlay.gd" type="Script" id=3]
-[ext_resource path="res://roda-assets/UI/boss_overlay/boss_health_under.png" type="Texture" id=4]
-[ext_resource path="res://roda-assets/UI/settings_normal.png" type="Texture" id=5]
-[ext_resource path="res://roda-assets/UI/boss_overlay/boss_health_over.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/UI/game/boss_overlay/boss_health_under.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/UI/game/settings_normal.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/UI/game/boss_overlay/boss_health_over.png" type="Texture" id=6]
 [ext_resource path="res://src/UI/game/InventoryOverlay.gd" type="Script" id=7]
-[ext_resource path="res://roda-assets/UI/settings_pressed.png" type="Texture" id=8]
-[ext_resource path="res://roda-assets/UI/inventory/scroll_up.png" type="Texture" id=9]
-[ext_resource path="res://roda-assets/UI/inventory/inventory_opened_background.png" type="Texture" id=10]
-[ext_resource path="res://roda-assets/UI/inventory/inventory_pressed.png" type="Texture" id=11]
-[ext_resource path="res://roda-assets/UI/inventory/inventory_normal.png" type="Texture" id=12]
-[ext_resource path="res://roda-assets/UI/inventory/inventory_background.png" type="Texture" id=13]
-[ext_resource path="res://roda-assets/UI/inventory/scroll_down.png" type="Texture" id=14]
+[ext_resource path="res://roda-assets/UI/game/settings_pressed.png" type="Texture" id=8]
+[ext_resource path="res://roda-assets/UI/game/inventory/scroll_up.png" type="Texture" id=9]
+[ext_resource path="res://roda-assets/UI/game/inventory/inventory_opened_background.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/UI/game/inventory/inventory_pressed.png" type="Texture" id=11]
+[ext_resource path="res://roda-assets/UI/game/inventory/inventory_normal.png" type="Texture" id=12]
+[ext_resource path="res://roda-assets/UI/game/inventory/inventory_background.png" type="Texture" id=13]
+[ext_resource path="res://roda-assets/UI/game/inventory/scroll_down.png" type="Texture" id=14]
 [ext_resource path="res://src/UI/game/SettingsOverlay.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/game/ItemSlot.tscn" type="PackedScene" id=16]
-[ext_resource path="res://roda-assets/UI/boss_overlay/boss_health_progress.png" type="Texture" id=17]
+[ext_resource path="res://roda-assets/UI/game/boss_overlay/boss_health_progress.png" type="Texture" id=17]
 [ext_resource path="res://src/UI/game/BossOverlay.gd" type="Script" id=18]
-[ext_resource path="res://roda-assets/UI/inventory/scroll_up_disabled.png" type="Texture" id=20]
-[ext_resource path="res://roda-assets/UI/inventory/scroll_down_disabled.png" type="Texture" id=21]
+[ext_resource path="res://roda-assets/UI/game/inventory/scroll_up_disabled.png" type="Texture" id=20]
+[ext_resource path="res://roda-assets/UI/game/inventory/scroll_down_disabled.png" type="Texture" id=21]
+
+
+
+
+
 
 [node name="GameOverlay" type="Control"]
 anchor_right = 1.0

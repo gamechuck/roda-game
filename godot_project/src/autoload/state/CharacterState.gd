@@ -5,6 +5,7 @@ const FALLBACK_CHARACTER_TEXTURE := "res://resources/fallback/character_texture.
 
 var id := ""
 var properties := {}
+
 var visible := true
 # The actual visual representation of this state.
 var object : KinematicBody2D = null
@@ -16,7 +17,13 @@ func set_context(value : Dictionary) -> void:
 		return
 
 	id = value.id
-	properties = value.get("properties", {})
+	# Merge the context properties with the default ones.
+	var _properties : Dictionary = value.get("properties", {})
+	for key in _properties.keys():
+		if properties.has(key):
+			properties[key] = _properties[key]
+		else:
+			push_error("Property with key '{0}' is undefined in character with id '{1}'!".format([key, id]))
 
 	# Overwrite the visibility if defined by the state!
 	visible = value.get("visible", visible)
@@ -24,13 +31,18 @@ func set_context(value : Dictionary) -> void:
 func get_context() -> Dictionary:
 	var _context := {}
 
-	# Don't save anything if the
 	# TODO: Don't save anything if all properties are the default state!
 	_context.id = id
-	if not properties.empty():
-		_context.properties = properties
+	_context.properties = {}
+	var _properties : Dictionary = Flow.get_character_value(id, "properties", {})
+	for key in _properties.keys():
+		if _properties[key] != properties[key]:
+			_context.properties[key] = properties[key]
 
-	return _context
+	if _context.properties.is_empty():
+		return {}
+	else:
+		return _context
 
 # These are all constants derived from data.JSON and should be treated as such!
 var name : String setget , get_name

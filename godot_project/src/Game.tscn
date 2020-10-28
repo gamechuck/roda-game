@@ -4,12 +4,12 @@
 [ext_resource path="res://src/editor/EditorCamera.gd" type="Script" id=2]
 [ext_resource path="res://src/Game.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/GameOverlay.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/UI/poster_creation/PosterCreationUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/minigames/PosterMinigame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/DialogueUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/UI/BikeRepairUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/minigames/BikeMinigame.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/TransitionsUI.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/UI/SeatSortingUI.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/UI/minigames/CarMinigame.tscn" type="PackedScene" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "test"
@@ -60,13 +60,13 @@ script = ExtResource( 2 )
 
 [node name="GameOverlay" parent="UICanvas" instance=ExtResource( 4 )]
 
-[node name="BikeRepairUI" parent="UICanvas" instance=ExtResource( 11 )]
+[node name="BikeMinigame" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
 
 [node name="DialogueUI" parent="UICanvas" instance=ExtResource( 6 )]
 visible = false
 
-[node name="PosterMakingUI" parent="UICanvas" instance=ExtResource( 5 )]
+[node name="PosterMinigame" parent="UICanvas" instance=ExtResource( 5 )]
 visible = false
 
 [node name="SeatSortingUI" parent="UICanvas" instance=ExtResource( 21 )]

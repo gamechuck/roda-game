@@ -30,6 +30,10 @@ func save_stateJSON(path : String = Flow.USER_SAVE_PATH) -> int:
 
 ## STATE ######################################################################
 
+# Poster properties
+var foreground_image := Image.new()
+var background_color : Color
+
 func load_state_from_context(context : Dictionary) -> void:
 	if ConfigData.verbose_mode : print("Loading state from the context...")
 
@@ -122,6 +126,8 @@ func init_characters() -> void:
 	for key in Flow.characters_data.keys():
 		var character := SCENE_CHARACTER_STATE.new()
 		character.id = key
+		character.properties = Flow.characters_data[key].get("properties", {})
+
 		character.visible = Flow.characters_data[key].get("visible", true)
 
 		if ConfigData.verbose_mode: print("Adding registered character with id '{0}' to State!".format([key]))
