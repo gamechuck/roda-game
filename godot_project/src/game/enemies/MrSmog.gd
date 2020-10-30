@@ -83,9 +83,9 @@ func _on_spawn_timer_timeout():
 			#var projectile = _projectiles_resources[0].instance()
 			_projectiles_container.add_child(projectile)
 			projectile.owner = _projectiles_container
-	
+
 			future_health -= 1
-	
+
 			projectile.connect("projectile_timeout", self, "_on_projectile_timeout")
 			#projectile.connect("player_hit", self, "_on_player_hit")
 	else:

@@ -23,9 +23,9 @@ func set_points(value : PoolVector2Array):
 	curve.clear_points()
 	for index in points.size():
 		# Snap & offset the point!
-		points[index] -= tile_offset 
+		points[index] -= tile_offset
 		points[index] = (points[index]/tile_width).round()*tile_width
-		points[index] += tile_offset 
+		points[index] += tile_offset
 		curve.add_point(points[index], Vector2.ZERO, Vector2.ZERO)
 	# Close the curve!
 	if not points.empty():

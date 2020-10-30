@@ -91,7 +91,7 @@ func update_multiple_choice(choices : Array) -> void:
 func _input(event):
 	if not _is_interaction_enabled:
 		return
-	
+
 	if event.is_action_pressed("interact"):
 		Flow.active_character = null
 		Flow.active_item = null
@@ -107,7 +107,7 @@ func _input(event):
 			return
 		elif Director.is_waiting_for_choice:
 			return
-		
+
 		get_tree().set_input_as_handled()
 
 func start_interact_timeout():
