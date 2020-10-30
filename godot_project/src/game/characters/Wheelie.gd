@@ -6,8 +6,8 @@ onready var _interact_area := $InteractArea
 enum MOVING {IDLE, WALK}
 enum DIRECTION {LEFT, RIGHT, UP, DOWN}
 
-var _direction : int = DIRECTION.DOWN
 var _moving : int = MOVING.IDLE
+var _direction : int = DIRECTION.DOWN
 
 var nav_path : PoolVector2Array = []
 
@@ -21,10 +21,8 @@ var target_points : PoolVector2Array = [
 	Vector2(4020, 1767)
 	]
 
-var current_idx := 0
-var target_idx := 0
-var got_scared := false
-var its_over := false
+var index := 0
+var target_index := 0
 
 signal nav_path_requested
 
@@ -36,11 +34,6 @@ func _ready():
 	_update_animation()
 
 func _physics_process(_delta):
-	if its_over:
-		set_physics_process(false)
-		its_over = false
-		return
-
 	var move_direction := Vector2.ZERO
 	var move_speed := get_move_speed()
 
@@ -59,27 +52,25 @@ func _physics_process(_delta):
 	var _linear_velocity := move_and_slide(normalized_direction*move_speed/_delta)
 
 func process_next_point():
-	if target_idx > current_idx:
-		current_idx += 1
-	elif target_idx < current_idx:
-		current_idx -= 1
+	if target_index > index:
+		index += 1
+	elif target_index < index:
+		index -= 1
 	else:
-		its_over = true
-		set_physics_process(false)
-		set_state_property("going_to_house", 0)
-		set_state_property("going_back_to_park", 0)
-		if got_scared:
+		if get_state_property("got_scared"):
 			set_state_property("arrived_safely", 0)
-			got_scared = false
 		else:
 			set_state_property("arrived_safely", 1)
+		set_state_property("got_scared", 0)
+		set_physics_process(false)
+		$InteractArea.set_monitorable(true)
 		return
 
-	emit_signal("nav_path_requested", target_points[current_idx])
+	emit_signal("nav_path_requested", target_points[index])
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.wheelie_move_speed
-	if got_scared:
+	if get_state_property("got_scared"):
 		move_speed *= 4
 	return move_speed
 
@@ -89,13 +80,17 @@ func _on_area_entered(area):
 
 	if area.get_parent() is classCanster:
 		var canster = area.get_parent()
-		if canster.get_state_property("is_appeased") == 0:
+		if canster.get_state_property("has_trash") == 0:
 			nav_path = PoolVector2Array()
-			got_scared = true
-			if target_idx == target_points.size() - 1:
-				target_idx = 0
-			elif target_idx == 0:
-				target_idx = target_points.size() - 1
+			set_state_property("got_scared", 1)
+			if get_state_property("going_to_house"):
+				set_state_property("going_to_house", 0)
+				set_state_property("going_to_park", 1)
+				target_index = 0
+			elif get_state_property("going_to_park"):
+				set_state_property("going_to_house", 1)
+				set_state_property("going_to_park", 0)
+				target_index = target_points.size() - 1
 
 func update_state(move_direction : Vector2):
 	var normalized_direction := move_direction.normalized()
@@ -129,13 +124,15 @@ func update_state(move_direction : Vector2):
 
 func update_animation():
 	if get_state_property("going_to_house") == 1:
-		current_idx = 0
-		target_idx = target_points.size() - 1
+		index = 0
+		target_index = target_points.size() - 1
 		set_physics_process(true)
-	elif get_state_property("going_back_to_park") == 1:
-		current_idx = target_points.size() - 1
-		target_idx = 0
+	elif get_state_property("going_to_park") == 1:
+		index = target_points.size() - 1
+		target_index = 0
 		set_physics_process(true)
+
+	_update_animation()
 
 func _update_animation():
 	var animations : Dictionary = default_animations.get(_direction, {})

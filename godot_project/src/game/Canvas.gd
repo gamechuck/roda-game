@@ -12,6 +12,7 @@ onready var _wheelie := $YSort/Characters/Wheelie
 
 func _ready():
 	Flow.game_canvas = self
+
 	var _error := _player.connect("nav_path_requested", self, "_on_player_nav_path_requested")
 
 	_error = _wheelie.connect("nav_path_requested", self, "_on_nav_path_requested", [_wheelie])

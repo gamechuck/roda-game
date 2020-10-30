@@ -46,11 +46,36 @@ VAR mr_smog_defeated = 0
 // FlowerBox
 VAR rose_seeds_planted = 0
 
+// Old Man
+VAR grocery_quest_completed = 0
+VAR old_man_gone_protesting = 0
+
 // Student
-VAR homework_completed = 0
+VAR homework_quest_completed = 0
+VAR student_gone_protesting = 0
+
+// Animal Protection Services
+VAR feeding_quest_started = 0
+VAR feeding_quest_completed = 0
+VAR lunja_gone_protesting = 0
 
 // Canster
 VAR canster_gave_pump = 0
+
+// Rosalina
+VAR flower_quest_started = 0
+VAR flower_quest_completed = 0
+VAR rosalina_gone_protesting = 0
+
+// Dog Trainer Club
+VAR test_quest_started = 0
+VAR test_quest_completed = 0
+VAR dog_quest_started = 0
+VAR dog_quest_completed = 0
+VAR dog_trainer_club_gone_protesting = 0
+
+// Monsters Without Borders
+VAR monsters_without_borders_quest_completed = 0
 
 // Wheelie
 VAR wheelie_escorted_to_house = 0
@@ -1149,7 +1174,7 @@ Jako ih se bojim!
 Jesu li sve kante nahranjene?
 + [Da, sad je sigurno!]
 	Super! Idemo!
-	>>> SET_STATE_PROPERTY: wheelie going_back_to_park 1
+	>>> SET_STATE_PROPERTY: wheelie going_to_park 1
 	// You escort wheelie back to the park! 
 	-> DONE
 + [Ne još, radim na tome!]
@@ -1632,7 +1657,9 @@ Kako se ono prelazi cesta koja ima semafore?
 	-> multiple_choice
 
 === conv_flower_box ===
+//-- STATUS:
 // Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
+// The police officer will appear here and disagree with your actions, but won't interfere.
 
 {conv_type:
 	- 0: -> interact
@@ -1640,7 +1667,18 @@ Kako se ono prelazi cesta koja ima semafore?
 }
 
 = interact
-Roses in a box!
+{get_state_property(interact_id, "has_rose_seeds"):
+	- 0: -> has_no_rose_seeds
+	- 1: -> has_rose_seeds
+}
+
+= has_rose_seeds
+The roses smell nice and look good!
+A fine addition to the building's facade!
+-> DONE
+
+= has_no_rose_seeds
+The fertile soil yearns to be used!
 -> DONE
 
 = use_item
@@ -1654,15 +1692,17 @@ Roses in a box!
 The monster roses grow immediately in the fertile soil.
 >>> SET_STATE_PROPERTY: flower_box has_rose_seeds 1
 >>> REMOVE_ITEM: rose_seeds
-~ rose_seeds_planted = 1
+~ flower_quest_completed = 1
 -> DONE
 
 = default
 I don't think this is plantable?
 -> DONE
 
-=== conv_bell_old_man ===
-// The old man wants his groceries so you deliver them?
+=== conv_dog_trainer_club ===
+//-- STATUS:
+// These guys ask you questions about training dogs and then ask you to walk a dog for them.
+// Afterwards you can ask her to join you in the park protests.
 
 {conv_type:
 	- 0: -> interact
@@ -1670,109 +1710,122 @@ I don't think this is plantable?
 }
 
 = interact
-
-HELLO?
-Are you here to deliver my groceries?
-+ {has_item("grocery_bag")}[Here are your groceries, sir!]
-	-> grocery_bag
-+ [No, I'm just your friendly neighborhood monster.]
-	Come back when you get me my groceries!
-	They were to be delivered almost an hour ago!
-	You can get them at the "Super Roda" in the merchant square!
-	'click'
-	-> DONE
-+ [Quietly walk away...]
-	HELLO? IS ANYONE THERE?
-	...
-	'click'
-	-> DONE
-
-= use_item
-
-{used_item:
-	- "grocery_bag": -> grocery_bag
-	- else: -> default
-}
-
-= grocery_bag
-Good! Finally something to eat!
-Now run along! Don't you have some other people to bother?
->>> REMOVE_ITEM: grocery_bag
--> DONE
-
-= default
-Those aren't my groceries!
--> DONE
-
-=== conv_rosalina ===
-// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{rose_seeds_planted:
-	- 0: -> intro
-	- 1: -> after_rose_seeds_planted
+{dog_trainer_club_gone_protesting:
+	- 0:
+		{test_quest_started:
+			- 0: -> intro
+			- 1:
+				{test_quest_completed:
+					- 0: -> before_test_quest_completed
+					- 1:
+						{dog_quest_started:
+							- 0: -> after_test_quest_completed
+							- 1:
+								{dog_quest_completed:
+									- 0: -> before_dog_quest_completed
+									- 1: -> after_dog_quest_completed
+								}
+						}
+				}
+		}
+	- 1: -> protesting
 }
 
 = intro
-Hello! My name is Rosalina and I love flowers!
-Did you see that flower box in front of the building?
-I can't believe they forgot to plant any flowers in them!
-Could you do me a favor?
-Would it be possible to get some flower seeds from the flower store?
-Any type of flower is good!
-+ [Sorry, I'm on an epic quest to save my park from Mr. Smog]
-	Oh...
-	Well if you change your mind, I'll always be here...
-	-> DONE
-+ [Sure! I'll stop by the flower store and get some seeds!]
-	My hero!
-	This building will look much more beautiful with some flowers in that box. 
-	-> DONE
-
-= after_rose_seeds_planted
-A thousand times thanks!
-You can't believe how happy this makes me!
--> DONE
-
-= use_item
-
-{used_item:
-	- "rose_seeds": -> rose_seeds
-	- else: -> default
-}
-
-= rose_seeds
-Oh! Rose seeds! I love those!
-Could you go and plant them in the flower box?
-I would do it, but I'm scared of the policija...
--> DONE
-
-= default
-I'm flattered, but I can't accept that.
--> DONE
-
-
-=== conv_dog_trainer_club ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
 Hello! Welcome to the Dog Trainer's club!
+We train dogs for therapeutic purposes.
+These dogs are invaluable for blind people and other people with disabilities!
+You look like a thrustworthy kid, would you be willing to help us out?
++ [Actually I don't think I have time right now...]
+	That's too bad!
+	Please do come back whenever you change your mind!
+	-> DONE
++ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
+	Here's the deal: You help us out, and we help you out?
+	Sounds good to you? OK!
+	-> before_test_quest_started
++ [It would be my honor.]
+	-> before_test_quest_started
+
+= before_test_quest_started
+See these dogs need to be walked daily and you look like just the person to do it!
+But before that... we'll need to make sure you know what you are doing!
+We have a few questions that will test your dog knowledge to the limits.
+Are you ready to become a certified junior dog trainer?
+-> after_test_quest_started
+
+= before_test_quest_completed
+Welcome again! Would you like to try the test again?
+-> after_test_quest_started
+
+= after_test_quest_started
+++ [Bring it on!]
+	Okay, lets go through the test together.
+	~ test_quest_started = 1
+	-> start_dog_test
+++ [Maybe later?]
+	That's also okay for me!
+	Please do come back any time you wish!
+	-> DONE
+
+= start_dog_test
+The first question to become a certified junior dog trainer is the following:
+...
++ [A]
+	-> wrong_answer
++ [B]
+	-> second_question
++ [C]
+	-> wrong_answer
+
+= second_question
++ [A]
+	-> wrong_answer
++ [B]
+	-> third_question
++ [C]
+	-> wrong_answer
+
+= third_question
++ [A]
+	-> wrong_answer
++ [B]
+	That's the correct answer!
+	It seems that you truly have what it takes to become a dog trainer!
+	You are now a certified junior dog trainer! Congratulations!
+	~ test_quest_completed = 1
+	-> after_test_quest_completed
++ [C]
+	-> wrong_answer
+
+= wrong_answer
+That's completely wrong!
+I'm afraid I'll have to stop the test here.
+Don't worry though: you can try to take the test again anytime!
+-> DONE
+
+= after_test_quest_completed
+-> DONE
+
+= before_dog_quest_completed
+-> DONE
+
+= after_dog_quest_completed
+-> DONE
+
+= protesting
+Hello? Ah it's you!
+Everyone has gone protesting!
+I'm just making sure the dogs are okay.
 -> DONE
 
 = use_item
-use_item
+We don't have any need for that!
 -> DONE
 
 === conv_park_lovers ===
+//-- STATUS:
+// The park crowd wants you to design a poster for them.
 
 {conv_type:
 	- 0: -> interact
@@ -1805,46 +1858,29 @@ Would you be interested in designing a poster for us?
 use_item
 -> DONE
 
-=== conv_monsters_without_borders ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-Welcome to Monsters Without Borders!
-We guard the safety of every monster big or small.
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_animal_protection_services ===
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-Here are some nuts to feed to the squirrels!
->>> ADD_ITEM: squirrel_nuts
->>> ADD_ITEM: squirrel_nuts
->>> ADD_ITEM: squirrel_nuts
--> DONE
-
-= use_item
-use_item
--> DONE
-
 === conv_roda_shop ===
+//-- STATUS:
+// RODA's shop is where you can get the old man's groceries and the rose seeds.
 
 {conv_type:
 	- 0: -> interact
 	- 1: -> use_item
 }
+
+= interact
+We are RODA, an amazing organisation that helps families with their domestic issues.
+// Some more stuff explaining about what RODA is?
+Is there anything we might be able to help you with today?
++ [Yeah, the old man from the appartment building told me to get his groceries here?]
+-> DONE
+
+= use_item
+Thanks, but we don't need this!
+-> DONE
+
+=== conv_blind_guy ===
+// Blind guy who wants to cross the street but can't because see the traffic lights.
+// You help him cross the street and he joins you in protests for a better park.
 
 = interact
 interact
@@ -1854,7 +1890,9 @@ interact
 use_item
 -> DONE
 
-=== conv_wheelie_appartment_building
+=== conv_monsters_without_borders ===
+// Monsters without Borders protects the civil rights of monsters big and small!
+// They ask you some questions about monster rights?
 
 {conv_type:
 	- 0: -> interact
@@ -1862,14 +1900,295 @@ use_item
 }
 
 = interact
->>> TELEPORT_PLAYER:
+{monsters_without_borders_quest_completed:
+	- 0: -> intro
+	- 1: -> intro
+}
+
+= intro
+Welcome to Monsters Without Borders!
+We guard the safety of every monster big or small.
+-> DONE
+
+// Add some questions here!
+
+= use_item
+We don't need that!
+-> DONE
+
+=== conv_rosalina ===
+//-- STATUS : READY FOR TRANSLATION
+// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
+// Afterwards you can ask her to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// rosalina_gone_protesting
+// flower_quest_started
+// flower_quest_completed
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{rosalina_gone_protesting:
+	- 0:
+		{flower_quest_started:
+			- 0: -> intro
+			- 1:
+			{flower_quest_completed:
+				- 0: -> before_flower_quest_completed
+				- 1: -> after_flower_quest_completed
+			}
+		}
+	- 1: -> protesting
+}
+
+= intro
+Hello! My name is Rosalina and I love flowers!
+Did you see that flower box in front of the building?
+I can't believe they forgot to plant any flowers in them!
+Could you do me a favor?
+Would it be possible to get some flower seeds from the flower store?
+Any type of flower is good!
++ {mr_smog_defeated == 0}[Sorry, I'm on an epic quest to save my park from Mr. Smog]
+	Oh...
+	Well if you change your mind, I'll always be here...
+	-> DONE
++ {operation_better_park_started}[Sorry, I'm trying to recruit people to protest for a better park!]
+	That sounds interesting! Parks have lots of flowers!
+	But first I would like to fix the problems with my own building.
+	Like that issue with the empty flower box...
+	-> DONE
++ [Sure! I'll stop by the flower store and get some seeds!]
+	My hero!
+	I think you can get some rose seeds in the "Super Roda" store.
+	This building will look much more beautiful with some flowers in that box.
+	~ flower_quest_started = 1
+	-> DONE
+
+= before_flower_quest_completed
+You can find some rose seeds in the "Super Roda"!
+I think they were giving them away for free if I remember correctly?
+Please get them quickly before supply runs out!
+-> DONE
+
+= after_flower_quest_completed
+A thousand times thanks!
+You can't believe how happy this makes me!
++ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
+	Oh my! I would be delighted to!
+	I will explicitly demand that they add flowers to the park!
+	Becuase this is my only personality trait!
+	See you in the park!
+	~ rosalina_gone_protesting = 1
+	-> DONE
++ [It was my pleasure!]
+	-> DONE
+
+= protesting
+Give us roses! Give us tulips!
+Give us all the flowers!
 -> DONE
 
 = use_item
-use_item
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+Oh! Rose seeds! I love those!
+Could you go and plant them in the flower box?
+I would do it, but I'm scared of the policija...
+-> DONE
+
+= default
+I'm flattered, but I can't accept that.
+-> DONE
+
+=== conv_bell_old_man ===
+//-- STATUS : READY FOR TRANSLATION
+// The old man wants his groceries so you deliver them?
+// Afterwards you can ask him to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// old_man_gone_protesting
+// grocery_quest_completed
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{old_man_gone_protesting:
+	- 0:
+		{grocery_quest_completed:
+			- 0: -> intro
+			- 1: -> after_grocery_quest_completed
+		}
+	- 1: -> protesting
+}
+
+= intro
+HELLO?
+Are you here to deliver my groceries?
++ {has_item("grocery_bag")}[Here are your groceries, sir!]
+	~ grocery_quest_completed = 1
+	-> grocery_bag
++ [No, I'm just your friendly neighborhood monster.]
+	Come back when you get me my groceries!
+	They were to be delivered almost an hour ago!
+	You can get them at the "Super Roda" in the shopping square!
+	'click'
+	-> DONE
++ [Quietly walk away...]
+	HELLO? IS ANYONE THERE?
+	...
+	'click'
+	-> DONE
+
+= after_grocery_quest_completed
+Are you still standing here?
+Do you need something from me, young monster?
++ [Actually, I'm searching for some protesters to demand for a better park.]
+	Ah... and you want me to come and protest with you?
+	I do think that we deserve a much better park than the tiny one we got!
+	I'll be there to protest with you!
+	See you there!
+	~ old_man_gone_protesting = 1
+	-> DONE
++ [Nope, I'll be running along now!]
+	Okay! Have fun doing your kid stuff!
+	-> DONE
+
+= protesting
+...
+....
+'click'
+I don't think there's anyone home?
+Didn't he say he was going to join the protests?
+-> DONE
+
+= use_item
+
+{used_item:
+	- "grocery_bag": -> grocery_bag
+	- else: -> default
+}
+
+= grocery_bag
+Hey! Those are my groceries!
+>>> REMOVE_ITEM: grocery_bag
+Did you go all the way and bring them from the "Super Roda"?
+It seems chivalry isn't dead just yet! Thanks!
+If you ever need a favor in return, be sure to ask!
+{operation_better_park_started:
+	0: -> DONE
+	1: -> after_grocery_quest_completed
+}
+
+= default
+Those aren't my groceries!
+-> DONE
+
+=== conv_animal_protection_services ===
+//-- STATUS : READY FOR TRANSLATION
+// These guys ask you to go and feed  all of the squirrel houses scattered across the map.
+// Afterwards you can ask them to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// lunja_gone_protesting
+// feeding_quest_started
+// feeding_quest_completed
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{lunja_gone_protesting:
+	- 0:
+		{feeding_quest_started:
+			- 0: -> intro
+			- 1:
+			{feeding_quest_completed:
+				- 0: -> before_feeding_quest_completed
+				- 1: -> after_feeding_quest_completed
+			}
+		}
+	- 1: -> protesting
+}
+
+= intro
+Hello! We are Lunja, the animal protection services.
+Wherever there is an animal in need, we are there to help them!
+Currently we are swamped with work! Soo many animals to protect and so little time!
++ {operation_better_park_started}[Would you be willing to help me protest for a better park?]
+	Oh! That sounds like an awesome idea!
+	A bigger park means more space for animals in our midst!
+	But... unfortunately we are drowning in work lately...
+	Maybe next time?
+	-> DONE
++ [Can I help the animal cause?]
+	That would be amazing!
+	Yes, we are always looking for more people to help us protect the animals.
+	Let's see what kind of task I can give you...
+	Ah! The squirrels haven't been fed yet!
+	All around the city we placed squirrel houses onto trees.
+	Please go around and feed the squirrels some of deez nuts.
+	>>> ADD_ITEM: squirrel_nuts
+	>>> ADD_ITEM: squirrel_nuts
+	>>> ADD_ITEM: squirrel_nuts
+	~ feeding_quest_started = 1
+	-> DONE
++ [I'll leave you to it then!]
+	Remember: Animals are our friends!
+	-> DONE
+
+= before_feeding_quest_completed
+Hello! Thanks again for helping us out with the squirrels!
+{has_item("squirrel_nuts"):
+	- 0: -> after_feeding_quest_completed
+	- 1: -> feeding_in_progress
+}
+
+= feeding_in_progress
+Seems like you still have some squirrels left to feed...
+Quickly now, before those poor creatures starve!
+-> DONE
+
+= after_feeding_quest_completed
+All the squirrels have been fed!
+You have no idea how much this helps our cause!
+~ feeding_quest_completed = 1
++ {operation_better_park_started}[Would you be willing to help me protest for a better park?]
+	Oh! That sounds like an awesome idea!
+	A bigger park means more space for animals in our very midst!
+	And I see here that we are done with today's tasks!
+	Let's do some protesting!
+	~ lunja_gone_protesting = 1
+	-> DONE
++ [Glad to have been of service to cause]
+	Remember: animals are our friends!
+	-> DONE
+
+= protesting
+The store is empty...
+I guess the Lunja volunteers went protesting in the park?
+-> DONE
+
+= use_item
+We don't need that!
 -> DONE
 
 === conv_student
+//-- STATUS : READY FOR TRANSLATION
+// A student monster who has serious issues with his homework. 
+// Afterwards you can ask him to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// student_gone_protesting
+// homework_quest_completed
 
 {conv_type:
 	- 0: -> interact
@@ -1878,55 +2197,93 @@ use_item
 
 = interact
 
-{homework_completed:
-	- 0: -> intro
-	- 1: -> end_homework
+{student_gone_protesting:
+	- 0:
+		{homework_quest_completed:
+			0: -> intro
+			1: -> after_homework_quest_completed
+		}
+	- 1: -> protesting
 }
 
 = intro
 Sorry! I don't have time to come and play outside...
-I have to finish my homework, but it is super-difficult.
+I have to finish my homework, but I can't concentrate!
+And my head is woozy from all the fumes those cars make!
 + [I can help you if you want?]
 	Really? Yeah, that would be awesome!
-	-> start_homework
+	This homework has been tormenting me for hours now!
+	-> first_question
 + [I'll leave you to it then...]
 	Yes, let me concentrate in peace!
 -> DONE
 
-= start_homework
+// TODO : Add some actual questions here!
+
+= first_question
 Ok, so the first question is ...
 + [A]
-	-> wrong_answer
+	-> first_question
 + [B]
 	Let's see...
-	Yes! That checks out! You are my hero!
-	-> end_homework
+	Yes! That checks out! You are a genius!
+	Onto the next question... this one is even harder!
+	-> second_question
 + [C]
-	-> wrong_answer
+	-> first_question
 
-= wrong_answer
-That doesn't seem to be the correct answer!
-Do you even know anything about homework?
-Let's try again shall we?
--> start_homework
+= second_question
+Ok, so the second question is ...
++ [A]
+	-> second_question
++ [B]
+	Let's see...
+	Yes! That checks out! You are a genius!
+	Onto the next question... this one is even harder!
+	-> third_question
++ [C]
+	-> second_question
 
-= end_homework
+= third_question
+Ok, so the third question is ...
++ [A]
+	-> third_question
++ [B]
+	Let's see...
+	Yes! That checks out! You are a genius!
+	That's all of the questions!
+	I'm finally done!
+	~ homework_quest_completed = 1
+	-> after_homework_quest_completed
++ [C]
+	-> third_question
+
+= after_homework_quest_completed
 Thanks so much for helping me with my homework!
 If you ever need a favor from me, just tell me!
-+ [I will!]
++ [Thank you!]
+	No problem!
 	-> DONE
 + {operation_better_park_started}[Actually... would you be willing to protest together with me for a better park?]
 	Certainly! That park is way too small!
 	We, the people, deserve something much bigger and majestic!
 	I'll be there to demand a bigger park!
+	~ student_gone_protesting = 1
 	-> DONE
 
-= use_item
-use_item
+= protesting
+We demand a better park now!
+Remove all the cars! 
+Their fumes make our heads all woozy and stop me from doing my homework! 
 -> DONE
 
+= use_item
+I don't need this!
+-> DONE
 
 === conv_squirrel_tree ===
+//-- STATUS : READY FOR TRANSLATION
+// Squirrel trees scattered around the map with squirrels that can be fed with nuts.
 
 {conv_type:
 	- 0: -> interact
@@ -1976,11 +2333,10 @@ I'll have to find another tree with squirrels that haven't been fed yet.
 = use_item
 
 {used_item:
-	- "squirrel_nuts": -> has_nuts
+	- "squirrel_nuts": -> interact
 	- else: -> default
 }
 
 = default
-I don't think this will be useful!
-
+I don't think I can feed this to the squirrels!
 -> DONE

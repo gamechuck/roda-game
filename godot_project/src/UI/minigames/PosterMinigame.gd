@@ -42,9 +42,9 @@ func _on_child_button_pressed(button : Button) -> void:
 				child.pressed = pressed
 
 				if pressed:
-					_canvas_rect.pressed_icon = button.icon
+					_canvas_rect.pressed_texture = button.texture
 				else:
-					_canvas_rect.pressed_icon = null
+					_canvas_rect.pressed_texture = null
 
 func _on_color_button_pressed(color : Color) -> void:
 	_canvas_rect.background_color = color

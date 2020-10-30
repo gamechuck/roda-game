@@ -1,13 +1,13 @@
 extends TextureRect
 
-var pressed_icon : Texture
+var pressed_texture : Texture
 
 var foreground_image := Image.new()
 var background_color : Color
 
 func _gui_input(event : InputEvent):
-	if event.is_action_released("left_mouse_button") and pressed_icon:
-		var pressed_data = pressed_icon.get_data()
+	if event.is_action_released("left_mouse_button") and pressed_texture:
+		var pressed_data = pressed_texture.get_data()
 		foreground_image.lock()
 		pressed_data.lock()
 

@@ -223,7 +223,8 @@
             },
             "properties": {
                 "going_to_house": 0,
-                "going_back_to_park": 0,
+                "going_to_park": 0,
+                "got_scared": 0,
                 "arrived_safely": 0
             }
         },
@@ -292,12 +293,28 @@
             "knot": "conv_monsters_without_borders"
         },
         "animal_protection_services": {
-            "name": "Animal Protection Services",
+            "name": "Lunja",
             "knot": "conv_animal_protection_services"
         },
         "roda_shop": {
             "name": "Roda",
             "knot": "conv_roda_shop"
+        },
+        "blind_guy": {
+            "name": "Blind man",
+            "knot": "conv_blind_guy",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    312,
+                    67
+                ],
+                "texture": "res://roda-assets/portraits/blindie.png",
+                "flip_h": true
+            }
         },
         "wheelie_appartment_building": {
             "name": "Roda",

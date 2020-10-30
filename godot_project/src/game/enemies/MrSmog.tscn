@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/sprite_frames/characters/mr_smog.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/materials/smog_distortion_material.tres" type="Material" id=5]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 480, 360 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 42, 16 )
 
 [node name="MrSmog" instance=ExtResource( 1 )]
@@ -25,10 +25,10 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Projectiles" type="Node2D" parent="." index="4"]
 

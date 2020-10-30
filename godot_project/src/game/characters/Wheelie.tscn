@@ -18,7 +18,7 @@ id = "wheelie"
 position = Vector2( -2.22725, -13.8089 )
 frames = ExtResource( 2 )
 animation = "walk_left"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 2, -28 )
 

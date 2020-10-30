@@ -13,18 +13,13 @@ func set_health(value : float) -> void:
 	if Flow.boss_overlay:
 		Flow.boss_overlay.health = health
 
-onready var _projectiles_container := $Projectiles
-onready var _interact_area := $InteractArea
-onready var _spawn_timer := $Timer
-onready var _tween := $Tween
-
 func _ready():
 	randomize()
 
-	var _error : int = _spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+	var _error : int = $Timer.connect("timeout", self, "_on_spawn_timer_timeout")
 
-	_error = _interact_area.connect("body_entered", self, "_on_body_entered")
-	_error = _interact_area.connect("body_exited", self, "_on_body_exited")
+	_error = $InteractArea.connect("body_entered", self, "_on_body_entered")
+	_error = $InteractArea.connect("body_exited", self, "_on_body_exited")
 
 	update_animation()
 	#_timer.start()
@@ -32,21 +27,21 @@ func _ready():
 
 func reset():
 	# Remove all the still-living particles.
-	for child in _projectiles_container.get_children():
-		_projectiles_container.remove_child(child)
+	for child in $Projectiles.get_children():
+		$Projectiles.remove_child(child)
 		child.queue_free()
 
 	future_health = ConfigData.boss_max_health
 	self.health = ConfigData.boss_max_health
-	_spawn_timer.stop()
+	$Timer.stop()
 
 func update_overlay():
 	if Flow.boss_overlay:
 		Flow.boss_overlay.health = health
 
-func set_monitorable(value : bool = _interact_area.monitorable):
-	_interact_area.monitorable = value
-	if _interact_area.monitorable:
+func set_monitorable(value : bool = $InteractArea.monitorable):
+	$InteractArea.monitorable = value
+	if value:
 		set_process_input(true)
 	else:
 		set_process_input(false)
@@ -61,7 +56,7 @@ func _on_body_entered(body : PhysicsBody2D):
 
 			Flow.boss_overlay.show()
 
-			_spawn_timer.start()
+			$Timer.start()
 
 func _on_body_exited(body : PhysicsBody2D):
 	if body is classPlayer:
@@ -70,30 +65,30 @@ func _on_body_exited(body : PhysicsBody2D):
 			Flow.boss_overlay.hide()
 			Director.zoom_camera(Vector2(1, 1))
 
-			_spawn_timer.stop()
+			$Timer.stop()
 
 func _on_spawn_timer_timeout():
 	if future_health > 0:
-		if _projectiles_container.get_children().size() < 10:
+		if $Projectiles.get_children().size() < 10:
 			#var index := rand_range(0, _projectiles_resources.size())
 			var projectile = load("res://src/game/enemies/projectiles/BulletProjectile.tscn").instance()
 			#var projectile = _projectiles_resources[0].instance()
-			_projectiles_container.add_child(projectile)
-			projectile.owner = _projectiles_container
+			$Projectiles.add_child(projectile)
+			projectile.owner = $Projectiles
 
 			future_health -= 1
 
 			projectile.connect("projectile_timeout", self, "_on_projectile_timeout")
 			#projectile.connect("player_hit", self, "_on_player_hit")
 	else:
-		_spawn_timer.stop()
+		$Timer.stop()
 
 func _on_player_hit():
 	# Would be better to do this here? For future stuff?
 	pass
 
 func _on_projectile_timeout(projectile : classProjectile):
-	_projectiles_container.remove_child(projectile)
+	$Projectiles.remove_child(projectile)
 	projectile.queue_free()
 
 	self.health -= 1
