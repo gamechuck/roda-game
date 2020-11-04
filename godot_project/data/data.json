@@ -46,9 +46,9 @@
                 "texture": "res://roda-assets/portraits/watto.png"
             }
         },
-        "seat_sorting_car": {
+        "minigame_car": {
             "name": "Car",
-            "knot": "conv_seat_sorting_car"
+            "knot": "conv_minigame_car"
         },
         "solid_slug": {
             "name": "Slagač",
@@ -123,7 +123,7 @@
             }
         },
         "canster_middle": {
-            "name": "Canster",
+            "name": "Mr. Canster",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -187,7 +187,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/happy_tree.png"
             },
-            "visible": false
+            "visible": true
         },
         "love_interest": {
             "name": "Mia",
@@ -268,14 +268,6 @@
             "name": "Stari Musk",
             "knot": "conv_bell_old_man"
         },
-        "bell_wheelie": {
-            "name": "Vilko's mom",
-            "knot": "conv_bell_wheelie"
-        },
-        "bell_student": {
-            "name": "Student",
-            "knot": "conv_bell_student"
-        },
         "student": {
             "name": "Student",
             "knot": "conv_student"
@@ -285,7 +277,7 @@
             "knot": "conv_dog_trainer_club"
         },
         "park_lovers": {
-            "name": "Park Lovers Inc.",
+            "name": "Park Crowd",
             "knot": "conv_park_lovers"
         },
         "monsters_without_borders": {
@@ -299,6 +291,10 @@
         "roda_shop": {
             "name": "Roda",
             "knot": "conv_roda_shop"
+        },
+        "mayor": {
+            "name": "Mayor Billy",
+            "knot": "conv_outro"
         },
         "blind_guy": {
             "name": "Blind man",
@@ -316,21 +312,33 @@
                 "flip_h": true
             }
         },
-        "wheelie_appartment_building": {
+        "wheelie_appartment": {
             "name": "Roda",
-            "knot": "conv_wheelie_appartment_building"
+            "knot": "conv_wheelie_appartment",
+            "properties": {
+                "is_open": 1
+            }
         },
-        "squirrel_tree_square": {
+        "squirrel_tree_at_square": {
             "name": "Urban tree",
-            "knot": "conv_squirrel_tree"
+            "knot": "conv_squirrel_tree",
+            "properties": {
+                "has_squirrel_nuts": 0
+            }
         },
-        "squirrel_tree_mountains": {
+        "squirrel_tree_at_mountains": {
             "name": "Mountain tree",
-            "knot": "conv_squirrel_tree"
+            "knot": "conv_squirrel_tree",
+            "properties": {
+                "has_squirrel_nuts": 0
+            }
         },
-        "squirrel_tree_lake": {
+        "squirrel_tree_at_lake": {
             "name": "Lake tree",
-            "knot": "conv_squirrel_tree"
+            "knot": "conv_squirrel_tree",
+            "properties": {
+                "has_squirrel_nuts": 0
+            }
         },
         "player": {
             "name": "Plavko",
@@ -351,7 +359,8 @@
                 "wearing_color": 0,
                 "entered_gummy": 0,
                 "entered_zebra": 0,
-                "entered_traffic_lights": 0
+                "entered_traffic_lights": 0,
+                "entered_bike": 0
             }
         },
         "helter_skelter": {
@@ -372,18 +381,6 @@
         "intro_mr_smog": {
             "name": "Helter Skelter",
             "knot": "conv_helter_skelter",
-        },
-        "intro_player": {
-            "name": "Helter Skelter",
-            "knot": "conv_helter_skelter"
-        },
-        "intro_solid_slug": {
-            "name": "Helter Skelter",
-            "knot": "conv_helter_skelter"
-        },
-        "intro_solid_snejk": {
-            "name": "Helter Skelter",
-            "knot": "conv_helter_skelter"
         },
         "intro_happy_tree": {
             "name": "Helter Skelter",
@@ -497,8 +494,8 @@
             "knot": "conv_fence_at_turbine",
             "item_id": "fence"
         },
-        "fence_in_smog_town": {
-            "knot": "conv_fence_in_smog_town",
+        "fence_at_smog": {
+            "knot": "conv_fence_at_smog",
             "item_id": "fence"
         }
     }

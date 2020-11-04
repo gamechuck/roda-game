@@ -5,7 +5,7 @@
 [ext_resource path="res://src/game/characters/Wheelie.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18, 32 )
+extents = Vector2( 24, 36 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 8 )
@@ -18,7 +18,7 @@ id = "wheelie"
 position = Vector2( -2.22725, -13.8089 )
 frames = ExtResource( 2 )
 animation = "walk_left"
-frame = 4
+frame = 2
 playing = true
 offset = Vector2( 2, -28 )
 
@@ -28,5 +28,3 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 2 )
-
-[node name="Tween" type="Tween" parent="." index="4"]

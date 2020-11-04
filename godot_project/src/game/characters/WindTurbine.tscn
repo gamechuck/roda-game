@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/sprite_frames/characters/wind_turbine.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://src/game/characters/WindTurbine.gd" type="Script" id=4]
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 36, 24 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36, 36 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20, 6 )
 
 [node name="WindTurbine" instance=ExtResource( 1 )]
@@ -19,8 +19,11 @@ frames = ExtResource( 2 )
 playing = true
 offset = Vector2( 0, -88 )
 
+[node name="InteractArea" parent="." index="1"]
+position = Vector2( 0, -16 )
+
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 8 )
+shape = SubResource( 2 )

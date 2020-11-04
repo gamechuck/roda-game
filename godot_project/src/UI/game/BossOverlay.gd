@@ -6,7 +6,7 @@ onready var _label := $VBoxContainer/NameLabel
 var health := 0.0 setget set_health
 func set_health(value : float):
 	health = value
-	_health_bar.value = 100.0*health/ConfigData.boss_max_health
+	_health_bar.value = 100.0*health/ConfigData.BOSS_MAX_HEALTH
 
 func _ready():
 	Flow.boss_overlay = self

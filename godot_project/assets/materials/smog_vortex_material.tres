@@ -1,9 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform sampler2D noise_texture;
 uniform vec4 color : hint_color;
 
 // Rotation speed of the vortex.
@@ -27,7 +26,7 @@ void vertex() {
 
 // 
 void fragment() {
-	COLOR = color*texture(noise_texture, UV);
+	COLOR = color*texture(TEXTURE, UV);
 
 	// Center the UV to the middle.
 	vec2 c_UV = UV - vec2(0.5, 0.5);
@@ -42,15 +41,7 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="OpenSimplexNoise" id=2]
-period = 32.0
-
-[sub_resource type="NoiseTexture" id=3]
-seamless = true
-noise = SubResource( 2 )
-
 [resource]
 shader = SubResource( 1 )
 shader_param/color = Color( 0.541176, 0.168627, 0.890196, 1 )
 shader_param/speed = 0.1
-shader_param/noise_texture = SubResource( 3 )

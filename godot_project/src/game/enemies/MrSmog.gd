@@ -6,8 +6,8 @@ extends classCharacter
 #	preload("res://src/game/enemies/projectiles/WhirlingProjectile.tscn")
 #]
 
-var future_health := ConfigData.boss_max_health
-var health := ConfigData.boss_max_health setget set_health
+var future_health := ConfigData.BOSS_MAX_HEALTH
+var health := ConfigData.BOSS_MAX_HEALTH setget set_health
 func set_health(value : float) -> void:
 	health = value
 	if Flow.boss_overlay:
@@ -31,8 +31,8 @@ func reset():
 		$Projectiles.remove_child(child)
 		child.queue_free()
 
-	future_health = ConfigData.boss_max_health
-	self.health = ConfigData.boss_max_health
+	future_health = ConfigData.BOSS_MAX_HEALTH
+	self.health = ConfigData.BOSS_MAX_HEALTH
 	$Timer.stop()
 
 func update_overlay():

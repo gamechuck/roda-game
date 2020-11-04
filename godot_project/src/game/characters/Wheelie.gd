@@ -1,6 +1,5 @@
 extends classCharacter
 
-onready var _tween := $Tween
 onready var _interact_area := $InteractArea
 
 enum MOVING {IDLE, WALK}
@@ -69,9 +68,9 @@ func process_next_point():
 	emit_signal("nav_path_requested", target_points[index])
 
 func get_move_speed() -> float:
-	var move_speed := ConfigData.wheelie_move_speed
+	var move_speed := ConfigData.WHEELIE_MOVE_SPEED
 	if get_state_property("got_scared"):
-		move_speed *= 4
+		move_speed *= ConfigData.SCARED_MODIFIER
 	return move_speed
 
 func _on_area_entered(area):

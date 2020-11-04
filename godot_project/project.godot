@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "classCharacter",
 "class": "classCanster",
 "language": "GDScript",
-"path": "res://src/game/enemies/Canster.gd"
+"path": "res://src/game/characters/Canster.gd"
 }, {
 "base": "Area2D",
 "class": "classCar",
@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "classItemState",
 "language": "GDScript",
 "path": "res://src/autoload/state/ItemState.gd"
+}, {
+"base": "Node2D",
+"class": "classLevel",
+"language": "GDScript",
+"path": "res://src/game/base/Level.gd"
 }, {
 "base": "MarginContainer",
 "class": "classMenuTab",
@@ -124,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/traffic/TrafficLight.gd"
 }, {
+"base": "Sprite",
+"class": "classWaypoint",
+"language": "GDScript",
+"path": "res://src/game/Waypoint.gd"
+}, {
 "base": "YSort",
 "class": "classZebraCrossing",
 "language": "GDScript",
@@ -141,6 +151,7 @@ _global_script_class_icons={
 "classHighlightRect": "",
 "classItemSlot": "",
 "classItemState": "",
+"classLevel": "",
 "classMenuTab": "",
 "classMinigame": "",
 "classPauseTab": "",
@@ -153,6 +164,7 @@ _global_script_class_icons={
 "classSafeZone": "",
 "classSkater": "",
 "classTrafficLight": "",
+"classWaypoint": "",
 "classZebraCrossing": ""
 }
 

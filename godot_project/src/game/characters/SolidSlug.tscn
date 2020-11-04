@@ -14,7 +14,7 @@ id = "solid_slug"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
-frame = 1
+frame = 8
 playing = true
 offset = Vector2( 1, -22 )
 

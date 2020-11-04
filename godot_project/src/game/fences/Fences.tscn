@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/fences/FenceTileMap.tscn" type="PackedScene" id=1]
+
+[node name="Fences" type="YSort"]
+
+[node name="Top" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -262148, 3, 0, -262147, 3, 0, -262146, 3, 0, -262145, 3, 0, -327680, 3, 0, -327679, 3, 0, -327678, 3, 0, -327677, 3, 0 )
+
+[node name="Left" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -262149, 4, 0, -196613, 5, 0, -131077, 5, 0, -65541, 5, 0, -5, 5, 0, 65531, 5, 0, 131067, 5, 0, 196603, 5, 0, 262139, 6, 0 )
+
+[node name="Right" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -327676, 2, 0, -262140, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, 4, 1, 0, 65540, 1, 0, 131076, 1, 0, 196612, 0, 0 )
+
+[node name="Bottom" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 262140, 7, 0, 262141, 7, 0, 262142, 7, 0, 196609, 7, 0, 196610, 7, 0, 196611, 7, 0 )

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://roda-assets/waypoint.png" type="Texture" id=1]
+[ext_resource path="res://src/game/Waypoint.gd" type="Script" id=2]
+
+[node name="Waypoint" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+id = "id"
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = -24.0
+margin_right = -10.0
+margin_bottom = -24.0
+grow_horizontal = 2
+text = "id"
+__meta__ = {
+"_edit_use_anchors_": false
+}

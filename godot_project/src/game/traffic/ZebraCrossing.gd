@@ -64,10 +64,10 @@ func _on_body_entered(body : PhysicsBody2D):
 	if body.name == "Player":
 		if not has_traffic_lights and body.get_state_property("entered_zebra") == 0:
 			body.set_state_property("entered_zebra", 1)
-			Director._start_knot_dialogue(body, "conv_first_time_zebra")
+			Director.start_knot_dialogue(body, "conv_first_time_zebra")
 		elif has_traffic_lights and body.get_state_property("entered_traffic_lights") == 0 :
 			body.set_state_property("entered_traffic_lights", 1)
-			Director._start_knot_dialogue(body, "conv_first_time_traffic_lights")
+			Director.start_knot_dialogue(body, "conv_first_time_traffic_lights")
 		player_is_inside = true
 
 func _on_body_exited(body : PhysicsBody2D):
@@ -79,13 +79,13 @@ func _on_body_exited(body : PhysicsBody2D):
 func get_wait_time() -> float:
 	match light_color:
 		ConfigData.LIGHT_COLOR.RED:
-			return ConfigData.traffic_red_time
+			return ConfigData.TRAFFIC_RED_TIME
 		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED:
-			return ConfigData.traffic_yellow_after_red_time
+			return ConfigData.TRAFFIC_YELLOW_AFTER_RED_TIME
 		ConfigData.LIGHT_COLOR.GREEN:
-			return ConfigData.traffic_green_time
+			return ConfigData.TRAFFIC_GREEN_TIME
 		ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-			return ConfigData.traffic_yellow_after_green_time
+			return ConfigData.TRAFFIC_YELLOW_AFTER_GREEN_TIME
 		_:
 			return 0.0
 

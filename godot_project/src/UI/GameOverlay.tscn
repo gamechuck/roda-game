@@ -21,16 +21,19 @@
 [ext_resource path="res://roda-assets/UI/game/inventory/scroll_up_disabled.png" type="Texture" id=20]
 [ext_resource path="res://roda-assets/UI/game/inventory/scroll_down_disabled.png" type="Texture" id=21]
 
-
-
-
-
-
 [node name="GameOverlay" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SmogOverlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

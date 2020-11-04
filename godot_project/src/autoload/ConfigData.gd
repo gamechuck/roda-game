@@ -124,26 +124,24 @@ var skip_menu := true
 
 ## GAME CONFIG #################################################################
 var skip_intro := true
+var skip_main := true
 
-var skater_move_speed := 4.0
+var SKATER_MOVE_SPEED := 4.0
 
-var ghost_awake_move_speed := 1.0
-var ghost_sleeping_move_speed := 0.1
-var ghost_activation_distance := 200
+var PLAYER_MOVE_SPEED := 2.0
+var GUMMY_MODIFIER := 0.5
+var BIKE_MODIFIER := 2.0
+var MINIMUM_INTERACTION_DISTANCE := 200
 
-var player_move_speed := 2.0
-var gummy_modifier := 0.5
-var bike_modifier := 2.0
-var minimum_interaction_distance := 200
+var WHEELIE_MOVE_SPEED := 60.0
+var SCARED_MODIFIER := 4.0
 
-var wheelie_move_speed := 1.5
+var TRAFFIC_RED_TIME := 10.0
+var TRAFFIC_YELLOW_AFTER_RED_TIME := 0.5
+var TRAFFIC_YELLOW_AFTER_GREEN_TIME := 0.5
+var TRAFFIC_GREEN_TIME := 10.0
 
-var traffic_red_time := 10.0
-var traffic_yellow_after_red_time := 0.5
-var traffic_yellow_after_green_time := 0.5
-var traffic_green_time := 10.0
-
-var boss_max_health := 100.0
+var BOSS_MAX_HEALTH := 100.0
 
 var bullet_speed := 200
 var bullet_ttl := 4
@@ -154,5 +152,9 @@ var tracking_ttl := 4
 var whirling_speed := 1
 var whirling_ttl := 10
 
-var car_move_speed := 4.0
-var panic_modifier := 2.0
+var CAR_MOVE_SPEED := 240.0
+var PANIC_MODIFIER := 2.0
+
+## DEBUG CONFIG #################################################################
+
+var DEBUG_SHOW_WAYPOINTS := true

@@ -18,12 +18,11 @@ var _target_entity : CollisionObject2D = null
 
 onready var _interact_area := $InteractArea
 onready var _bump_area := $BumpArea
-onready var _tween := $Tween
 
-signal nav_path_requested()
+signal nav_path_requested
 
-signal dialogue_requested()
-signal cutscene_requested()
+signal dialogue_requested
+signal cutscene_requested
 
 func _ready():
 	Flow.player = self
@@ -54,7 +53,7 @@ func _on_autonomy_granted():
 	set_physics_process(true)
 	set_process_unhandled_input(true)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not Flow.is_in_editor_mode:
 		var move_direction := Vector2.ZERO
 		var move_speed := get_move_speed()
@@ -74,7 +73,7 @@ func _physics_process(_delta):
 
 		if nav_path.size() > 0:
 			var distance := position.distance_to(nav_path[0])
-			if distance > ConfigData.player_move_speed:
+			if distance > ConfigData.PLAYER_MOVE_SPEED * delta:
 				var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
 				move_direction = new_position - position
 			else:
@@ -82,7 +81,7 @@ func _physics_process(_delta):
 
 		update_state(move_direction)
 		var normalized_direction := move_direction.normalized()
-		var _linear_velocity := move_and_slide(normalized_direction*move_speed/_delta)
+		var _linear_velocity := move_and_slide(normalized_direction*move_speed)
 
 func _unhandled_input(event):
 ## Inputs that are NOT handled by any of the UI elements!
@@ -114,7 +113,7 @@ func process_interaction(active_entity : CollisionObject2D):
 	var entity_position = active_entity.position
 	var distance : float = position.distance_to(entity_position)
 	print("Distance to entity ('{0}') is {1}".format([active_entity.name, distance]))
-	if distance > ConfigData.minimum_interaction_distance:
+	if distance > ConfigData.MINIMUM_INTERACTION_DISTANCE:
 		_target_entity = active_entity
 		emit_signal("nav_path_requested")
 	elif Flow.active_item != null:
@@ -151,7 +150,7 @@ func _on_interact_area_entered(area):
 		if get_state_property("entered_gummy") == 0:
 			set_state_property("entered_gummy", 1)
 			update_state()
-			Director._start_knot_dialogue(self, "conv_first_time_gummy")
+			Director.start_knot_dialogue(self, "conv_first_time_gummy")
 		print("Player entered gummy!")
 	elif area is classSafeZone:
 		respawn_position = area.position
@@ -201,11 +200,11 @@ func _on_bump_area_entered(area):
 			print("Player got eaten by a canster!")
 
 func get_move_speed() -> float:
-	var move_speed := ConfigData.player_move_speed
+	var move_speed := ConfigData.PLAYER_MOVE_SPEED
 	if get_state_property("on_bike") == 1:
-		move_speed *= ConfigData.bike_modifier
+		move_speed *= ConfigData.BIKE_MODIFIER
 	elif _overlapping_with_gummy:
-		move_speed *= ConfigData.gummy_modifier
+		move_speed *= ConfigData.GUMMY_MODIFIER
 	return move_speed
 
 func update_state(move_direction : Vector2 = Vector2.ZERO):

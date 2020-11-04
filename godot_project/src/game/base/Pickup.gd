@@ -9,7 +9,7 @@ var state : classPickupState
 func _ready():
 	add_to_group("pickups")
 
-	# Initiate the character's state!
+	# Initiate the pickup's state!
 	state = State.get_pickup_by_id(id)
 	if state:
 		state.object = self

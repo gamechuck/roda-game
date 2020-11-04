@@ -23,7 +23,8 @@ var pause_UI : Control = null
 var transitions_UI : Control = null
 
 var inventory : Control = null
-var game_canvas : Node2D = null
+var level : classLevel = null
+var game_camera : Camera2D = null
 var boss_overlay : Control = null
 
 var player : KinematicBody2D = null
@@ -98,19 +99,14 @@ func load_story():
 	story.bind_external_function_general("get_state_property", Director, "get_state_property")
 
 	# Bind an observer to some variables
-	story.observe_variables(["number_of_fences_fixed", "turbine_fixed", "player_wearing_color"], self, "_observe_variables")
+	var variable_names := ["number_of_fences_fixed", "battery_quest_completed", "player_wearing_color"]
+	story.observe_variables(variable_names, self, "_on_property_changed")
 
 	Director.story = story
 
-func _observe_variables(variable_name, new_value):
-	match variable_name:
-		"number_of_fences_fixed":
-			game_canvas._on_number_of_fences_fixed(new_value)
-		"turbine_fixed":
-			game_canvas._on_turbine_fixed(new_value)
-		"player_wearing_color":
-			game_canvas._on_player_wearing_color(new_value)
-	print(str("Variable '", variable_name, "' changed to: ", new_value))
+func _on_property_changed(property : String, value) -> void:
+	level.set(property, value)
+	print(str("Variable '", property, "' changed to: ", value))
 
 func get_item_value(id : String, key : String, default):
 	if items_data.has(id):

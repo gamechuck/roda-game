@@ -10,12 +10,12 @@ extents = Vector2( 48, 64 )
 extents = Vector2( 28, 43.75 )
 
 [node name="MinigameCar" instance=ExtResource( 1 )]
+id = "minigame_car"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
-frame = 5
+frame = 3
 playing = true
-offset = Vector2( 0, 0 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 1 )

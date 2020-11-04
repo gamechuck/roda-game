@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprite_frames/characters/wheelie_appartment.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/game/characters/WheelieAppartment.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46, 60 )
+
+[node name="WheelieAppartment" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+id = "wheelie_appartment"
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = ExtResource( 2 )
+offset = Vector2( 0, -72 )
+
+[node name="InteractArea" parent="." index="1"]
+position = Vector2( -26, -48 )
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource( 1 )
