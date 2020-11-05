@@ -30,6 +30,9 @@ func set_player_wearing_color(value : int) -> void:
 		#_copper_blockade_shape.disabled = false
 
 func _ready():
+	var dog : classCharacter = $Sorted/Characters/Dog
+	var _error := dog.connect("nav_path_requested", self, "_on_nav_path_requested", [dog])
+
 	var solid_snejk := $Sorted/Characters/SolidSnejk
 
 	emit_signal("dialogue_requested", solid_snejk)

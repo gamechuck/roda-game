@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://src/game/base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/SolidSnejk.tscn" type="PackedScene" id=2]
@@ -39,8 +39,9 @@
 [ext_resource path="res://assets/materials/smog_vortex_material.tres" type="Material" id=37]
 [ext_resource path="res://src/game/characters/Copper.tscn" type="PackedScene" id=38]
 [ext_resource path="res://src/game/levels/MainLevel.gd" type="Script" id=39]
-[ext_resource path="res://src/game/enemies/MrSmog.tscn" type="PackedScene" id=40]
+[ext_resource path="res://src/game/characters/MrSmogBoss.tscn" type="PackedScene" id=40]
 [ext_resource path="res://src/game/traffic/TrafficLoop2.tscn" type="PackedScene" id=41]
+[ext_resource path="res://src/game/characters/Dog.tscn" type="PackedScene" id=42]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1728, 3264, 3584, 2624, 3584, 4224, 1728, 4224, 3584, 2624, 3904, 2432, 3904, 1472, 2496, 2432, 3968, 2368, 3968, 2368, 4032, 1472, 4032, 704, 2304, 704, 1600, 1152, 2496, 1152, 3136, 256, 3136, 256, 2304, 1280, 192, 1280, 1408, 512, 1408, 512, 192, 3876, 5240, 3876, 5120, 4496, 5120, 4144, 5240, 4496, 5112, 4384, 5112, 4384, 4928, 4640, 4928, 4640, 5112, 4528, 5112, 4528, 5120, 4364, 5240, 4640, 5120, 4640, 5240, 4364, 5368, 4272, 5368, 4272, 5376, 4316, 5376, 4316, 5496, 4196, 5496, 4196, 5376, 4240, 5376, 4240, 5368, 4144, 5368 )
@@ -211,8 +212,11 @@ id = "canster_middle"
 position = Vector2( 3840, 1920 )
 id = "canster_right"
 
-[node name="MrSmog" parent="Sorted/Characters" index="30" instance=ExtResource( 40 )]
+[node name="MrSmogBoss" parent="Sorted/Characters" index="30" instance=ExtResource( 40 )]
 position = Vector2( 704, 2720 )
+
+[node name="Dog" parent="Sorted/Characters" index="31" instance=ExtResource( 42 )]
+position = Vector2( 2288.82, 2402.51 )
 
 [node name="Billboard" parent="Sorted/Props" index="0" instance=ExtResource( 18 )]
 position = Vector2( 2656, 1712 )

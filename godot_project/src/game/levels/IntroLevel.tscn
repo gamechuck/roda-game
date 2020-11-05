@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/game/base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/SolidSlug.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/characters/SolidSnejk.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/characters/ReturnedBike.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/game/characters/HappyTree.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/characters/MrSmog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/game/props/Ball.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/game/levels/IntroLevel.gd" type="Script" id=8]
 
@@ -30,7 +31,7 @@ tile_data = PoolIntArray( 131136, 12, 0, 131137, 12, 0, 131138, 12, 0, 131140, 1
 tile_data = PoolIntArray( 1310780, 0, 0, 1376314, 0, 0, 1376315, 5, 0, 3080248, 22, 0, 3080249, 19, 0, 3080250, 19, 0, 3080251, 19, 0, 3080252, 19, 0, 3080253, 19, 0, 3080254, 18, 0, 3080255, 18, 0, 3080256, 18, 0, 3080257, 18, 0, 3080258, 18, 0, 3080259, 18, 0, 3080260, 18, 0, 3080261, 21, 0, 3145800, 536870921, 0, 3211324, 10, 0, 3211330, 7, 0, 3276872, 536870921, 0, 3407944, 536870921, 0, 3866668, 3, 0, 4259911, 5, 0, 4259914, 9, 0, 4259915, 0, 0, 4390987, 5, 0, 4456522, 5, 0, 4587589, 0, 0, 4718667, 5, 0, 4915246, 3, 0, 4915249, 3, 0, 4915267, 3, 0, 4915276, 3, 0, 4915286, 3, 0, 4915297, 3, 0, 5505096, 5, 0, 5636166, 0, 0, 5898308, 5, 0, 5898314, 0, 0, 5963845, 9, 0, 5963851, 5, 0, 6029381, 5, 0, 6029383, 5, 0, 6225931, 3, 0, 6225950, 3, 0, 6225987, 3, 0, 6225996, 3, 0, 6619243, 3, 0, 6619250, 3, 0, 7012439, 3, 0, 7012448, 3, 0, 7798860, 3, 0 )
 
 [node name="Player" parent="Sorted" index="1"]
-position = Vector2( 2336, 2304 )
+position = Vector2( 2336, 2288 )
 
 [node name="SolidSlug" parent="Sorted/Characters" index="0" instance=ExtResource( 2 )]
 position = Vector2( 2416, 2256 )
@@ -44,5 +45,8 @@ position = Vector2( 2240, 2136 )
 [node name="ReturnedBike" parent="Sorted/Characters" index="3" instance=ExtResource( 4 )]
 position = Vector2( 2240, 2280 )
 
+[node name="MrSmog" parent="Sorted/Characters" index="4" instance=ExtResource( 6 )]
+position = Vector2( 2248, 1792 )
+
 [node name="Ball" parent="Sorted/Props" index="0" instance=ExtResource( 7 )]
-position = Vector2( 2336, 2152 )
+position = Vector2( 2336, 2144 )

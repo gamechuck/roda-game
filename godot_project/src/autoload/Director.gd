@@ -548,6 +548,7 @@ func play_intro():
 	var solid_snejk := level.get_node("Sorted/Characters/SolidSnejk")
 	var happy_tree := level.get_node("Sorted/Characters/HappyTree")
 	var returned_bike := level.get_node("Sorted/Characters/ReturnedBike")
+	var mr_smog := level.get_node("Sorted/Characters/MrSmog")
 
 	var ball := level.get_node("Sorted/Props/Ball")
 
@@ -555,6 +556,9 @@ func play_intro():
 	var fence_bottom := level.get_node("Sorted/Fences/Bottom")
 	var fence_left := level.get_node("Sorted/Fences/Left")
 	var fence_right := level.get_node("Sorted/Fences/Right")
+
+	player._direction = player.DIRECTION.UP
+	player.update_animation()
 
 	#var smog : Sprite = Flow.game_canvas.get_node("YSort/Intro/Smog")
 
@@ -600,7 +604,7 @@ func play_intro():
 	start_knot_dialogue(player, "conv_intro_smog_appears")
 	yield(self, "dialogue_completed")
 
-	#_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, happy_tree.position.y - 60, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, happy_tree.position.y - 72, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
@@ -609,9 +613,9 @@ func play_intro():
 
 	# SMOG SMASH
 	_tween.interpolate_property(happy_tree,"position:y", happy_tree.position.y, happy_tree.position.y - 20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	#_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, mr_smog.position.y - 20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, mr_smog.position.y - 20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(happy_tree,"position:y", happy_tree.position.y -20, happy_tree.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
-	#_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y -20, mr_smog.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y -20, mr_smog.position.y, 0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT, 0.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
@@ -629,7 +633,7 @@ func play_intro():
 	yield(self, "dialogue_completed")
 
 	_tween.interpolate_property(happy_tree,"position:x", happy_tree.position.x, happy_tree.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	#_tween.interpolate_property(mr_smog,"position:x", mr_smog.position.x, mr_smog.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(mr_smog,"position:x", mr_smog.position.x, mr_smog.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 

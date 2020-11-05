@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/base/Minigame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/minigames/BrailleMinigame.gd" type="Script" id=2]
+[ext_resource path="res://roda-assets/UI/minigames/braille_minigame/braile_croatian.png" type="Texture" id=3]
+
+[node name="BrailleMinigame" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+id = "braille_minigame"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" index="0"]
+margin_right = 448.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 0, 166 )
+texture = ExtResource( 3 )
+stretch_mode = 4

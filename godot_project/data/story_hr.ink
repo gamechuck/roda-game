@@ -1438,6 +1438,14 @@ Hej! Hoćeš se opet mijenjati za jakne?
 Hvala, ali sve što trebam od tebe je tvoja ljubav!
 -> DONE
 
+=== conv_dog ===
+//-- STATUS: 
+
+Woof!
+The dog looks like it wants to go to some water?
+I should go to the lake next to Wheelie's appartment!
+-> DONE
+
 === conv_copper ===
 //-- STATUS: 
 // The copper blocks you from entering the smoggy part of town until you are wearing something colorful.
@@ -1487,6 +1495,7 @@ Ne treba mi to, hvala! Ja samo pazim na sigurnost u prometu.
 -> DONE
 
 === conv_happy_tree ===
+//-- STATUS: 
 
 {conv_type:
 	- 0: -> interact
@@ -1506,6 +1515,7 @@ Zahvaljujem na poklonu!
 -> DONE
 
 === conv_mr_smog ===
+//-- STATUS: 
 
 {get_state_property("mr_smog", "is_defeated"):
 	- 0: -> angry_mr_smog

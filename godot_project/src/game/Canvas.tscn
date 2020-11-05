@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/tilesets/water_tileset.tres" type="TileSet" id=12]
 [ext_resource path="res://assets/tilesets/lines_tileset.tres" type="TileSet" id=13]
 [ext_resource path="res://src/game/characters/SolidSnejk.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/game/characters/FakeMrSmog.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/game/characters/MrSmog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/game/characters/SolidSlug.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/game/traffic/TrafficLoop.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/game/enemies/SkaterLoop.tscn" type="PackedScene" id=19]
@@ -29,7 +29,7 @@
 [ext_resource path="res://src/game/pickups/Fence.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/game/props/BallDynamic.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/game/characters/Lizzy.tscn" type="PackedScene" id=30]
-[ext_resource path="res://src/game/enemies/MrSmog.tscn" type="PackedScene" id=32]
+[ext_resource path="res://src/game/characters/MrSmogBoss.tscn" type="PackedScene" id=32]
 [ext_resource path="res://src/game/SafeZone.tscn" type="PackedScene" id=33]
 [ext_resource path="res://src/game/characters/HelterSkelter.tscn" type="PackedScene" id=34]
 [ext_resource path="res://src/game/characters/ReturnedBike.tscn" type="PackedScene" id=35]
@@ -257,6 +257,7 @@ position = Vector2( 4576, 5008 )
 [node name="Intro" type="YSort" parent="YSort"]
 
 [node name="Smog" type="Sprite" parent="YSort/Intro"]
+visible = false
 material = ExtResource( 7 )
 position = Vector2( 928, 5280 )
 scale = Vector2( 22.8517, 13.1522 )
@@ -285,7 +286,6 @@ id = "intro_player"
 
 [node name="IntroMrSmog" parent="YSort/Intro" instance=ExtResource( 15 )]
 position = Vector2( 832, 4720 )
-z_index = 1
 id = "intro_mr_smog"
 
 [node name="Ball" parent="YSort/Intro" instance=ExtResource( 29 )]
@@ -567,18 +567,22 @@ curve = SubResource( 6 )
 [node name="ParkToTrash" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2656, 2400 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="SmogToBoss" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1152, 1760 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="CopperToSmog" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1728, 2336 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="ParkingToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3296, 3040 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/ParkingToBike/InteractArea" index="0"]
 shape = SubResource( 11 )
@@ -602,18 +606,22 @@ direction = "right"
 [node name="BikeToEmpty" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3840, 3104 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="TrashToCansters" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3296, 2400 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="CansterToLake" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3616, 2016 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="LoveToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2656, 3040 )
 extents = Vector2( 160, 64 )
+light_color = 0
 
 [node name="CollisionShape2D" parent="YSort/ZebraCrossings/LoveToParking/InteractArea" index="0"]
 shape = SubResource( 12 )
@@ -640,6 +648,7 @@ direction = "front"
 [node name="Mountain" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1136, 832 )
 extents = Vector2( 80, 128 )
+light_color = 0
 
 [node name="ParkToLove" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2143.62, 2526.97 )
@@ -673,30 +682,37 @@ direction = "right"
 [node name="CopperToSkater" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 1888, 2880 )
 extents = Vector2( 64, 128 )
+light_color = 0
 
 [node name="TrashToParking" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2976, 2528 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="CansterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3424, 2848 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="InterToBike" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3744, 2848 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="LakeToInter" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 3744, 2560 )
 extents = Vector2( 64, 128 )
+light_color = 0
 
 [node name="ParkToSquare" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2336, 1888 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="TrashToSquare" parent="YSort/ZebraCrossings" instance=ExtResource( 20 )]
 position = Vector2( 2976, 1888 )
 extents = Vector2( 64, 160 )
+light_color = 0
 
 [node name="SafeZones" type="Node2D" parent="YSort"]
 visible = false
