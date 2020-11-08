@@ -12,6 +12,6 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "is_open",
+"name": "wheelie_appartment_opened",
 "speed": 5.0
 } ]

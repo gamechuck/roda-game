@@ -1,16 +1,26 @@
 VAR number_of_fences_fixed = 0
 
-VAR turbine_fence_received = 0
-VAR smog_fence_received = 0
-VAR helter_skelter_fence_received = 0
-VAR wheelie_fence_received = 0
-
-// Additional variable added here to trigger an update of the smog blockade.
+// Player
 VAR player_wearing_color = 0
+VAR player_on_bike = 1
+
+VAR player_noted_gummy = 0
+VAR player_solved_traffic_lights_question = 0
+VAR player_solved_bike_question = 0
+VAR player_solved_zebra_question = 0
+
+VAR player_inside_appartment = 0
+
+VAR player_received_turbine_fence = 0
+VAR player_received_smog_fence = 0
+VAR player_received_helter_skelter_fence = 0
+VAR player_received_wheelie_fence = 0
 
 // SolidSnejk
 VAR solid_snejk_intro_completed = 0
 VAR operation_better_park_started = 0
+
+VAR solid_snejk_outro_completed = 0
 
 // Lizzy
 VAR lizzy_intro_completed = 0
@@ -19,17 +29,18 @@ VAR lizzy_intro_completed = 0
 VAR watto_question_solved = 0
 
 // SolidSlug
-VAR bike_quest_completed = 0
-VAR checkup_quest_completed = 0
-VAR permission_quest_completed = 0
+VAR bike_fixed = 0
+VAR bike_issue_found = 0
+VAR permission_granted = 0
 
-// BrokenBike
+// ReturnedBike
+VAR bike_returned = 0
+VAR bike_taken = 0
 VAR fix_quest_completed = 0
-VAR found_issue_with_bike = 0
 LIST checked_components = tyres, pedals, horn_and_brakes, saddle, lights
 
 // Taxi
-VAR belt_quest_completed = 0
+VAR taxi_received_belt = 0
 
 // HelterSkelter
 VAR helter_skelter_intro_completed = 0
@@ -39,7 +50,7 @@ VAR helter_skelter_gone_protesting = 0
 VAR car_quest_completed = 0
 
 // WindTurbine
-VAR battery_quest_completed = 0
+VAR wind_turbine_powered = 0
 
 // MrSmog
 VAR mr_smog_defeated = 0
@@ -47,48 +58,87 @@ VAR mr_smog_defeated = 0
 // FlowerBox
 VAR rose_seeds_planted = 0
 
+// FlowerCopper
+VAR flower_copper_swayed = 0
+
 // Loveinterest
 VAR love_interest_gone_protesting = 0
 
-// Old Man
-VAR grocery_quest_completed = 0
+// ParkLovers
+VAR poster_designed = 0
+VAR park_lovers_gone_protesting = 0
+
+// RodaShop
+VAR roda_shop_gone_protesting = 0
+VAR roda_shop_gave_groceries = 0
+VAR roda_shop_gave_seeds = 0
+
+// OldMan
+VAR old_man_requested_groceries = 0
+VAR old_man_received_groceries = 0
 VAR old_man_gone_protesting = 0
 
+// BlindGuy
+VAR blind_guy_accepted_aid = 0
+VAR blind_guy_helped = 0
+VAR blind_guy_gone_protesting = 0
+
 // Student
-VAR homework_quest_completed = 0
+VAR student_homework_done = 0
 VAR student_gone_protesting = 0
 
 // Animal Protection Services
-VAR feeding_quest_started = 0
-VAR feeding_quest_completed = 0
+VAR lunja_gave_nuts = 0
+VAR squirrels_all_satiated = 0
 VAR lunja_gone_protesting = 0
+
+// Squirrel Tree
+VAR squirrels_at_mountains_satiated = 0
+VAR squirrels_at_square_satiated = 0
+VAR squirrels_at_lake_satiated = 0
 
 // Canster
 VAR pump_received = 0
+VAR canster_left_appeased = 0
+VAR canster_middle_appeased = 1
+VAR canster_right_appeased = 0
+
+// Dog
+VAR dog_visited_lake = 0
+VAR dog_visited_park = 0
 
 // Rosalina
-VAR flower_quest_started = 0
-VAR flower_quest_completed = 0
+VAR rosalina_requested_seeds = 0
 VAR rosalina_gone_protesting = 0
 
 // Dog Trainer Club
-VAR test_quest_started = 0
-VAR test_quest_completed = 0
-VAR dog_quest_started = 0
-VAR dog_quest_completed = 0
+VAR dog_test_started = 0
+VAR dog_test_passed = 0
+VAR dog_walking_started = 0
+VAR dog_walking_completed = 0
 VAR dog_trainer_club_gone_protesting = 0
 
+// Wheelie Appartment
+VAR wheelie_appartment_opened = 0
+
 // Monsters Without Borders
+VAR monsters_without_borders_joined = 0
 VAR monsters_without_borders_quest_completed = 0
+VAR monsters_without_borders_gone_protesting = 0
 
 // Wheelie
-VAR wheelie_escorted_to_house = 0
-VAR wheelie_escorted_back_to_park = 0
-
 VAR wheelie_intro_at_park_completed = 0
 VAR wheelie_intro_before_park_fixed_completed = 0
 VAR wheelie_intro_after_park_fixed_completed = 0
 VAR wheelie_intro_back_at_park_completed = 0
+
+VAR wheelie_arrived_at_house = 0
+VAR wheelie_arrived_at_park = 0
+
+VAR wheelie_going_to_park = 0
+VAR wheelie_going_to_house = 0
+
+VAR wheelie_got_scared = 0
 
 VAR used_item = "bush"
 VAR interact_id = "player"
@@ -99,13 +149,56 @@ EXTERNAL has_item(item_id)
 === function has_item(item_id) ===
 ~ return true
 
-EXTERNAL get_state_property(entity_id, property)
-=== function get_state_property(entity_id, property) ===
+EXTERNAL get_level_state()
+=== function get_level_state() ===
+~ return 0
+
+=== function set_squirrels_satiated(squirrels_id, satiated) ===
+{squirrels_id:
+	- "squirrels_at_lake":
+		~ squirrels_at_lake_satiated = satiated
+	- "squirrels_at_mountains":
+		~ squirrels_at_mountains_satiated = satiated
+	- "squirrels_at_square":
+		~ squirrels_at_square_satiated = satiated
+}
+
+=== function get_squirrels_satiated(squirrels_id) ===
+{squirrels_id:
+	- "squirrels_at_lake":
+		~ return squirrels_at_lake_satiated
+	- "squirrels_at_mountains":
+		~ return squirrels_at_mountains_satiated
+	- "squirrels_at_square":
+		~ return squirrels_at_square_satiated
+}
+~ return 0
+
+=== function set_canster_appeased(canster_id, appeased) ===
+{canster_id:
+	- "canster_left":
+		~ canster_left_appeased = appeased
+	- "canster_middle":
+		~ canster_middle_appeased = appeased
+	- "canster_right":
+		~ canster_right_appeased = appeased
+}
+
+=== function get_canster_appeased(canster_id) ===
+{canster_id:
+	- "canster_left":
+		~ return canster_left_appeased
+	- "canster_middle":
+		~ return canster_middle_appeased
+	- "canster_right":
+		~ return canster_right_appeased
+}
 ~ return 0
 
 //--
 // CUTSCENES
 //--
+// INTRO CUTSCENE
 === conv_intro ===
 >>> UPDATE_UI: solid_snejk
 Ekipo, idemo igrati nogomet!
@@ -143,11 +236,15 @@ AHAHAHAHA!!!
 ...
 -> DONE
 
-// Outro cutscene?
+// OUTRO CUTSCENE
+// Will be cut into pieces later...
 === conv_outro ===
 What is going on here?
 WE WANT A BETTER PARK!!!
-You people all want to have a bigger and better park?
+What? Aren't you happy with the park you got?
+Is it too small?
+YES!!!
+So you all want a much bigger park?
 WE DO!
 A park with swings, slides and seesaws?
 YEEEEEEAAHHHHH!!!
@@ -156,7 +253,6 @@ YEEEEEEAAHHHHH!!!
 Okay!
 It shall be done!
 Simsalabimbom!
->>> PLAY_CUTSCENE: outro
 There you go!
 Hope you enjoy your new park!
 -> DONE
@@ -175,7 +271,13 @@ Hope you enjoy your new park!
 // - Old Man
 // - Rosalina
 // - Helter Skelter
-// - ...
+// - Love Interest
+// - Blind Guy
+// - Dog Trainer Club
+// - Park Lovers
+// - Animal Protection Services
+// - Monsters Without Borders
+// - Roda Shop
 
 {conv_type:
 	- 0: -> interact
@@ -183,29 +285,44 @@ Hope you enjoy your new park!
 }
 
 = interact
-
-{mr_smog_defeated:
-    - 1: -> second_ending
-}
-
-{number_of_fences_fixed:
-    - 4: -> first_ending
-}
-
-{has_item("fence"):
-	- true: -> fix_fence
-}
-
-{solid_snejk_intro_completed:
-	- 0: -> intro
+{get_level_state():
+	- 2: -> outro
 	- else: -> main
 }
 
-= intro
-Oh ne! Otpuhane su ograde u našem parku... #solid_snejk_intro_1
-Idemo naći dijelove ograde i popraviti je da se možemo opet loptati! #solid_snejk_intro_2
+= main
+{operation_better_park_started:
+	- 0: 
+	{mr_smog_defeated:
+		- 0:
+		{number_of_fences_fixed:
+			- 4: -> after_all_fences_fixed
+			- else: 
+			{has_item("fence"):
+				- 0:
+				{solid_snejk_intro_completed:
+					- 0: -> before_solid_snejk_intro_completed
+					- 1: -> after_solid_snejk_intro_completed
+				}
+				- 1: -> fix_fence
+			}
+		}
+		- 1: -> after_mr_smog_defeated
+	}
+	- 1: -> after_operation_better_park_started
+}
+
+= before_solid_snejk_intro_completed
 ~ solid_snejk_intro_completed = 1
--> main
+Oh ne! Otpuhane su ograde u našem parku...
+Idemo naći dijelove ograde i popraviti je da se možemo opet loptati!
+-> after_solid_snejk_intro_completed
+
+= after_solid_snejk_intro_completed
+Hej, popravimo ogradu zajedno!
+Ti mi donesi dijelove ograde, a ja ću ih postaviti.
+Mister Smog ih je otpuhao na sve strane svijeta...
+-> DONE
 
 = fix_fence
 Super! Našao si komad ograde!
@@ -213,17 +330,11 @@ Idem ga postaviti!
 ~ number_of_fences_fixed += 1
 >>> REMOVE_ITEM: fence
 {number_of_fences_fixed:
-    - 4: -> first_ending
+    - 4: -> after_all_fences_fixed
 	- else: -> DONE
 }
 
-= second_ending
-Ne mogu vjerovati da je Mister Smog zapravo bio naše izgubljeno drvo!
-Sada se napokon možemo igrati u miru!
-Vrijeme je za nogomet!
--> DONE
-
-= first_ending
+= after_all_fences_fixed
 Vau! Ovo mjesto sad izgleda mnogo ljepše, zar ne?
 Iako, čini mi se da je tu nekada bilo jedno drvo...
 Pitam se što mu se dogodilo?
@@ -231,14 +342,159 @@ Možda možeš otkriti što se dogodilo s našim omiljenim drvetom?
 Nakon toga se možemo nastaviti loptati.
 -> DONE
 
-= main
-Hej, popravimo ogradu zajedno! #solid_snejk_main_1
-Ti mi donesi dijelove ograde, a ja ću ih postaviti. #solid_snejk_main_2
-Mister Smog ih je otpuhao na sve strane svijeta... #solid_snejk_main_3
+= after_mr_smog_defeated
+Ne mogu vjerovati da je Mister Smog zapravo bio naše izgubljeno drvo!
+Say, Plavko, don't you think this park is waaaay to small to play football?
+We should organize a protest for a bigger park!
+-> before_poster_designed
+
+= before_poster_designed
+~ operation_better_park_started = 1
+I heard the Park Crowd guys are having a poster design contest?
+>>> PAN_CAMERA_TO_POSITION: 3120 1216
+Maybe you can go and see if you can design a poster?
+>>> RESET_CAMERA
+Also we should totally tell people to come and protest for us!
+Could you go around and ask people if they want to join our protests?
+A bigger and more beautiful park is for the good of everyone!
+-> DONE
+
+= after_operation_better_park_started
+// First check if the poster has been designed!
+{poster_designed:
+	- 0: -> before_poster_designed
+}
+Let's see who we are still missing...
+// Figure out if everyone is protesting...
+{rosalina_gone_protesting:
+	- 0: -> show_rosalina 
+}
+{old_man_gone_protesting:
+	- 0: -> show_old_man 
+}
+{student_gone_protesting:
+	- 0: -> show_student 
+}
+{blind_guy_gone_protesting:
+	- 0: -> show_blind_guy 
+}
+{helter_skelter_gone_protesting:
+	- 0: -> show_helter_skelter 
+}
+{love_interest_gone_protesting:
+	- 0: -> show_love_interest 
+}
+{dog_trainer_club_gone_protesting:
+	- 0: -> show_dog_trainer_club 
+}
+{lunja_gone_protesting:
+	- 0: -> show_animal_protection_services 
+}
+{roda_shop_gone_protesting:
+	- 0: -> show_roda_shop 
+}
+{monsters_without_borders_gone_protesting:
+	- 0: -> show_monsters_without_borders 
+}
+// If we arrived here, everyone has gone protesting and it is time to start the ending cutscene!
+Seems like enough people are here for the protest!
+Let's see if we can make a change together!
+>>> PLAY_CUTSCENE: outro
+-> DONE
+
+= show_rosalina
+>>> PAN_CAMERA_TO_POSITION: 4048 1728
+How about this flower obsessed girl that lives in Vilko's appartment?
+Maybe you can go and ask her?
+I think her name was Rosalina or something?
+>>> RESET_CAMERA
+-> DONE
+
+= show_old_man
+>>> PAN_CAMERA_TO_POSITION: 4048 1728
+There's this old man living in Vilko's appartment that might be able to help.
+He's a bit grumpy though, so he won't be easily swayed!
+But we do need all the help we can get!
+>>> RESET_CAMERA
+-> DONE
+
+= show_student
+>>> PAN_CAMERA_TO_POSITION: 4048 1728
+I remember there being a student living in Vilko's appartment!
+I don't know his name though because he never goes outside to play.
+Try asking him to come and protest with us?
+>>> RESET_CAMERA
+-> DONE
+
+= show_blind_guy
+>>> PAN_CAMERA_TO_POSITION: 2192 1216
+The blind man who visits the park every day will be pleased to get a better park.
+He's next on my list of recruitment!
+>>> RESET_CAMERA
+-> DONE
+
+= show_helter_skelter
+>>> PAN_CAMERA_TO_POSITION: 2464 3744
+I know this Helter Skelter guy is a bit of a hooligan, but...
+I think he secretly also wants a better park!
+Go and ask him!
+>>> RESET_CAMERA
+-> DONE
+
+= show_love_interest
+>>> PAN_CAMERA_TO_POSITION: 4048 1728
+How about your sweetheart? I think you won't have any troubly swooning here for our cause!
+Go and get her, tiger!
+>>> RESET_CAMERA
+-> DONE
+
+= show_dog_trainer_club
+>>> PAN_CAMERA_TO_POSITION: 3380 1728
+The members of the dog trainer club are always nagging about there being not enough nature in the city.
+Get them to join the protests!
+>>> RESET_CAMERA
+-> DONE
+
+= show_animal_protection_services
+>>> PAN_CAMERA_TO_POSITION: 2736 1216
+Lunja cares for animals and I bet they would really like some more nature around here!
+You might need to do some job for them though?
+Can you go and check it out?
+>>> RESET_CAMERA
+-> DONE
+
+= show_roda_shop
+>>> PAN_CAMERA_TO_POSITION: 2576 1216
+The people at the SUPER RODA will also see the benefit of getting a better park!
+Go and recruit them for our park revolution!
+>>> RESET_CAMERA
+-> DONE
+
+= show_monsters_without_borders
+>>> PAN_CAMERA_TO_POSITION: 2192 1216
+The guys running the Monster Rights organization are always looking for opportunities to help.
+We are almost there! We just need those people to join us!
+>>> RESET_CAMERA
+-> DONE
+
+= outro
+{solid_snejk_outro_completed:
+	- 0: -> before_solid_snejk_outro_completed
+	- 1: -> after_solid_snejk_outro_completed
+}
+
+= before_solid_snejk_outro_completed
+~ solid_snejk_outro_completed = 1
+Wow, I can't believe how much bigger the park is now!
+You should and explore! Everyone is here!
+-> DONE
+
+= after_solid_snejk_outro_completed
+I'm still too amazed by this new park! 
+I'm gonna stay here, but you can go and explore!
 -> DONE
 
 = use_item
-
 {used_item:
 	- "bike": -> bike
 	- "pump": -> pump
@@ -264,6 +520,11 @@ Ne želim to uzeti...
 // Solid slug is missing his bike... Mr. Smog blew it away.
 // He asks you to find his bike somewhere and bring it back to him.
 // Afterwards, when you fixed his bike, he tells you that you can use his bike.
+//-- RELEVANT VARIABLES:
+// operation_better_park_started
+// bike_fixed
+// bike_issue_found
+// bike_returned
 
 {conv_type:
 	- 0: -> interact
@@ -271,31 +532,37 @@ Ne želim to uzeti...
 }
 
 = interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
 {operation_better_park_started:
 	- 0: 
-	{fix_quest_completed:
+	{bike_fixed:
 		- 0:
-		{checkup_quest_completed:
+		{bike_issue_found:
 			- 0: 
-			{bike_quest_completed:
+			{bike_returned:
 				- 0: 
 				{has_item("broken_bike"):
-					- 0: -> intro
+					- 0: -> main_intro
 					- 1: -> has_broken_bike
 				}
-				- 1: -> after_bike_quest_completed
+				- 1: -> after_bike_returned
 			}
 			{has_item("pump"):
-				- 0: -> after_checkup_quest_completed
+				- 0: -> after_bike_issue_found
 				- 1: -> has_pump
 			}
 		}
-		- 1: -> after_fix_quest_completed
+		- 1: -> after_bike_fixed
 	}
 	- 1: -> after_operation_better_park_started
 }
 
-= intro
+= main_intro
 Vjetar ti je otpuhao ogradu daleko od parka?
 A ja sam zagubio svoj bicikl...
 Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
@@ -303,17 +570,16 @@ Ako mi pomogneš naći bicikl, ja ću ti pomoći naći jedan dio ograde!
 
 = has_broken_bike
 Hvala što si mi našao bicikl!
-~ bike_quest_completed = 1
 >>> REMOVE_ITEM: broken_bike
->>> SHOW: ReturnedBike
--> after_bike_quest_completed
+~ bike_returned = 1
+-> after_bike_returned
 
-= after_bike_quest_completed
+= after_bike_returned
 Čini se da nešto ne valja s mojim biciklom...
 Šteta... Možeš li mi pomoći otkriti što?
 -> DONE
 
-= after_checkup_quest_completed
+= after_bike_issue_found
 Znači guma je ispuhana?
 Šteta...
 Možeš li negdje od nekoga nabaviti pumpu za bicikle?
@@ -323,20 +589,24 @@ Možeš li negdje od nekoga nabaviti pumpu za bicikle?
 Super, našao si pumpu za bicikle! Možeš li mi napumpati gumu, molim te?
 -> DONE
 
-= after_fix_quest_completed
+= after_bike_fixed
 Hvala što si popravio moj bicikl!
 Možeš voziti moj bicikl ako želiš!
 Samo ga uzmi i klikni na mene kad god se poželiš voziti.
-~ permission_quest_completed = 1
+~ permission_granted = 1
 -> DONE
 
 = after_operation_better_park_started
 We want a better park!
-Better park now!
+Give us an actual football field so we can play in peace!
+-> DONE
+
+= outro
+There are so many footballs around me!
+I don't even know which one to kick first!
 -> DONE
 
 = use_item
-
 {used_item:
 	- "pump": -> pump
 	- "broken_bike": -> has_broken_bike
@@ -346,8 +616,8 @@ Better park now!
 }
 
 = pump
-{checkup_quest_completed:
-	- 1: -> pump
+{bike_issue_found:
+	- 1: -> has_pump
 	- 0: -> default
 }
 -> DONE
@@ -369,6 +639,9 @@ Ne treba mi to, hvala...
 // A broken bike which has to be fixed using the pump.
 // This bike first has to be found and carried to solid slug.
 // After the bike is fixed and you talked to sold slug, you can pick it up.
+//-- RELEVANT VARIABLES:
+// bike_issue_found
+// bike_fixed
 
 {conv_type:
 	- 0: -> interact
@@ -376,37 +649,32 @@ Ne treba mi to, hvala...
 }
 
 = interact
-{fix_quest_completed:
+{bike_fixed:
 	- 0:
-	{checkup_quest_completed:
-		- 0: -> before_checkup_quest_completed
-		- 1: -> before_fix_quest_completed
+	{bike_issue_found:
+		- 0: -> before_bike_issue_found
+		- 1:
+		{has_item("pump"):
+			0: -> before_bike_fixed
+			1: -> pump_after_checkup
+		}
 	}
-	- 1: 
-	{has_item("pump"):
-		0: -> after_fix_quest_completed
-		1: -> pump_after_checkup
-	}
+	- 1: -> after_bike_fixed
 }
 
-= before_fix_quest_completed
-Trebao bih naokolo potražiti pumpu za bicikl...
-Tko bi mi mogao pomoći?
--> DONE
-
-= before_checkup_quest_completed
+= before_bike_issue_found
 >>> BEGIN_MINIGAME: bike_minigame
 - (bike_minigame)
 {checked_components == LIST_ALL(checked_components):
-	- 1: -> after_checkup_quest_completed
+	- 1: -> after_bike_issue_found
 }
-{found_issue_with_bike:
+{bike_issue_found:
 	- 1: Trebao bih provjeriti jesu li drugi dijelovi bicikla dobri...
 	- 0: Trebao bih provjeriti je li sve kako treba na biciklu...
 }
 + Guma?
 	Oh, ne! Jedna guma je ispuhana!
-	~ found_issue_with_bike = 1
+	~ bike_issue_found = 1
 	~ checked_components += tyres
 	-> bike_minigame
 + Pedale?
@@ -432,26 +700,31 @@ Tko bi mi mogao pomoći?
 	Sjedalo je dobro učvršćeno! Super!
 	~ checked_components += saddle
 	-> bike_minigame
-= after_checkup_quest_completed
+= after_bike_issue_found
 Čini se da je problem samo u ispuhanoj gumi...
 Trebamo to popraviti!
 >>> END_MINIGAME
 -> DONE
 
-= after_fix_quest_completed
+= before_bike_fixed
+Trebao bih naokolo potražiti pumpu za bicikl...
+Tko bi mi mogao pomoći?
+-> DONE
+
+= after_bike_fixed
 Mogao bi uzeti bicikl!
-{permission_quest_completed:
-	- 0: -> before_permission_quest_completed
-	- 1: -> after_permission_quest_completed
+{permission_granted:
+	- 0: -> before_permission_granted
+	- 1: -> after_permission_granted
 }
 
-= before_permission_quest_completed
+= before_permission_granted
 Bolje da pitam Solid Slug-a prije nego što ga uzmem...
 -> DONE
 
-= after_permission_quest_completed
+= after_permission_granted
 Solid Slug je rekao da to mogu podnijeti!
->>> HIDE: ReturnedBike
+~ bike_taken = 1
 >>> ADD_ITEM: bike
 -> DONE
 
@@ -462,7 +735,7 @@ Solid Slug je rekao da to mogu podnijeti!
 }
 
 = pump
-{checkup_quest_completed:
+{bike_issue_found:
 	- 0: -> pump_before_checkup
 	- 1: -> pump_after_checkup
 }
@@ -479,7 +752,7 @@ Vrijeme za napumpati praznu gumu!
 ...
 ...?
 Eto, kao nova!
-~ fix_quest_completed = 1
+~ bike_fixed = 1
 -> DONE
 
 = default
@@ -487,7 +760,7 @@ Ne treba to biciklu...
 -> DONE
 
 === conv_watto ===
-//-- STATUS : 
+//-- STATUS : READY FOR TRANSLATION
 // Watto shows you where the bike is and is useless afterwards.
 
 {conv_type:
@@ -497,20 +770,22 @@ Ne treba to biciklu...
 
 = interact
 
-{bike_quest_completed:
-	- 0: -> no_bike
-	- 1: -> ending
+{operation_better_park_started:
+	- 0: 
+	{bike_returned || has_item("broken_bike"):
+		- 0: -> before_bike_found
+		- 1: -> after_bike_found
+	}
+	- 1: -> after_operation_better_park_started
 }
 
-= no_bike
-
+= before_bike_found
 {watto_question_solved:
 	- 0: -> pop_question
 	- 1: -> show_bike_location
 }
 
 = pop_question
-
 Tražiš bicikl?
 Pokazat ću ti gdje sam ga našao ako mi odgovoriš na ovo pitanje:
 - (start_question)
@@ -540,13 +815,18 @@ Hehe, šteta ,zar ne...
 >>> RESET_CAMERA
 -> DONE
 
-= ending
+= after_bike_found
 Vidim da si savladao šetanje po pločnicima i zebrama.
 Ali onamo kamo ja idem, ne trebaju mi ceste!
 -> DONE
 
-= use_item
+= after_operation_better_park_started
+You are recruiting people for your park revolution, eh?
+Well too bad I like living here in this trash heap!
+Good luck though, bye!
+-> DONE
 
+= use_item
 {used_item:
 	- "bike": -> bike
 	- "pump": -> pump
@@ -574,7 +854,8 @@ Ne treba mi ta stvar.
 === conv_lizzy ===
 //-- STATUS : COMPLETED!
 // A wizard who has the power to show you the location of the fences!
-// After you get all the fences, he shows you the love interest instead.
+// After you get all the fences, he shows you the location of the love interest instead.
+// 
 
 {conv_type:
 	- 0: -> interact
@@ -582,12 +863,22 @@ Ne treba mi ta stvar.
 }
 
 = interact
-{lizzy_intro_completed:
-	- 0: -> intro
-	- 1: -> after_lizzy_intro_completed
+{get_level_state():
+	- 2: -> outro
+	- else: 
+	{lizzy_intro_completed:
+		- 0: -> intro
+		- 1: -> after_lizzy_intro_completed
+	}
 }
 
+= outro
+I don't even want to go back to Prometije!
+This park you have here is amazing!
+-> DONE
+
 = intro
+{get_level_state()}
 Ja sam Veliki Lizijan! Čarobnjak iz daleke zemlje Prometije.
 Došao sam tu na odmor, ali čini se da tu imate neke probleme.
 Možda ti mogu pomoći? Imam moć s kojom ti mogu pokazati što tražiš!
@@ -707,7 +998,7 @@ Zašto se prometni znakovi moraju poštivati?
 
 = riddle_completed
 Dobro ti ide odgovaranje na moje zagonetke!
-{ smog_fence_received && turbine_fence_received && wheelie_fence_received && helter_skelter_fence_received:
+{ player_received_smog_fence && player_received_turbine_fence && player_received_wheelie_fence && player_received_helter_skelter_fence:
 	- 0: -> show_missing_fence_locations
 	- else: -> pan_to_love_interest
 }
@@ -720,19 +1011,19 @@ Hmmm, vidim sada... Ti tragaš za ogradom, koju želiš popraviti da bude kao ne
 Da vidimo...
 - (choice_shuffle)
 {shuffle:
-- {wheelie_fence_received: 
+- {player_received_wheelie_fence: 
 	- 0: -> pan_to_wheelie_fence
 	- else: -> choice_shuffle
 	}
-- {helter_skelter_fence_received: 
+- {player_received_helter_skelter_fence: 
 	- 0:-> pan_to_helter_skelter_fence
 	- else: -> choice_shuffle
 	}
-- {turbine_fence_received: 
+- {player_received_turbine_fence: 
 	- 0: -> pan_to_turbine_fence
 	- else: -> choice_shuffle
 	}
-- {smog_fence_received: 
+- {player_received_smog_fence: 
 	- 0: -> pan_to_smog_fence
 	- else: -> choice_shuffle
 	}
@@ -809,8 +1100,8 @@ Makni mi to s očiju!
 
 === conv_minigame_car ===
 //-- STATUS : COMPLETED!
-// This car has some problems with arranging it's passengers... when you correctly arrange everyone
-// the driver gives you a seat belt.
+// This car has some problems with arranging it's passengers... 
+// After correctly arranging everyone the driver gives you a seat belt.
 
 {car_quest_completed:
 	- 0: -> before_car_quest_completed
@@ -873,7 +1164,7 @@ Sad napokon možemo na more!
 === conv_helter_skelter ===
 //-- STATUS : READY FOR TRANSLATION
 // The boss of the skaters gives you some questions and if you answer correctly he gives you a piece of the fence.
-// After starting operation better park, you can recruit him to come and protest.
+// After starting up the park revolution, you can recruit him to come and protest.
 
 {conv_type:
 	- 0: -> interact
@@ -883,13 +1174,13 @@ Sad napokon možemo na more!
 = interact
 {helter_skelter_gone_protesting:
 	- 0:
-	{helter_skelter_fence_received:
+	{player_received_helter_skelter_fence:
 		- 0: 
 		{helter_skelter_intro_completed:
 			- 0: -> intro
 			- 1: -> after_helter_skelter_intro_completed
 		}
-		- 1: -> after_helter_skelter_fence_received
+		- 1: -> after_player_received_helter_skelter_fence
 	}
 	- 1: -> protesting
 }
@@ -901,10 +1192,10 @@ Ja sam im jasno i glasno rekao da nikoga ne puštaju!
 Sigurno si došao po komadić ograde koji sam našao?!
 E, pa neću ga nikada dati nikome! Taj komadić ograde je sada MOJ!
 Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak planine!
-~ helter_skelter_intro_completed = true
--> before_helter_skelter_fence_received
+~ helter_skelter_intro_completed = 1
+-> before_player_received_helter_skelter_fence
 
-= before_helter_skelter_fence_received
+= before_player_received_helter_skelter_fence
 + [Ne zafrkavaj ti mene, ja sam veliko i opasno Čudovište!]
 	Nisi ni blizu velik i opasan kao ja!
 	A sad briši dok te nisam ozlijedio!
@@ -927,7 +1218,7 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak planin
 	Zbogom, čudovište!
 	>>> ADD_ITEM: fence
 	A vi, skejteri, prestanite ga udarati!
-	~ helter_skelter_fence_received = true
+	~ player_received_helter_skelter_fence = true
 	>>> HIDE: SkaterLoop
 	>>> HIDE: SkaterLoop2
 	>>> HIDE: SkaterLoop3
@@ -935,9 +1226,9 @@ Jer ja sam HELTER SKEJTER, Strah i Trepet skejtera od Smogograda do Oblak planin
 
 = after_helter_skelter_intro_completed
 Opet ti, što hoćeš?
--> before_helter_skelter_fence_received
+-> before_player_received_helter_skelter_fence
 
-= after_helter_skelter_fence_received
+= after_player_received_helter_skelter_fence
 Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
 Tko bi rekao!
 + {operation_better_park_started}[Would you be willing to come and protest for a better park?]
@@ -974,12 +1265,12 @@ Zadrži si te gluposti!
 }
 
 = interact
-{belt_quest_completed:
-	- 0: -> before_belt_quest_completed
-	- 1: -> after_belt_quest_completed
+{taxi_received_belt:
+	- 0: -> before_taxi_received_belt
+	- 1: -> after_taxi_received_belt
 }
 
-= before_belt_quest_completed
+= before_taxi_received_belt
 Moj posao je voziti ljude do planine.
 Nažalost, nemam više pojaseva za putnike tako da...
 + {has_item("seat_belt") == 0}[Ma baš me briga!]
@@ -993,16 +1284,19 @@ Nažalost, nemam više pojaseva za putnike tako da...
 	Oh... okej!
 	Čekaj da ga uglavim u vozilo...
 	>>> REMOVE_ITEM: seat_belt
-	~ belt_quest_completed = 1
-	-> after_belt_quest_completed
+	~ taxi_received_belt = 1
+	-> after_taxi_received_belt
 + [To je preopasno! Neću!]
 	Mudar izbor.
 	Možda možeš naći pojas viška negdje...
 	-> DONE
 
-= after_belt_quest_completed
+= after_taxi_received_belt
 Mogu te odvesti do planine!
 + [Odvedi me u planinu.]
+	{dog_walking_started && not dog_walking_completed:
+		- 1: -> with_dog 
+	}
 	>>> TELEPORT_TO_WAYPOINT: taxi_at_mountain
 	OK!
 	Zabavi se!
@@ -1010,6 +1304,11 @@ Mogu te odvesti do planine!
 + [Ništa sada, možda poslije...]
 	OK!
 	-> DONE
+
+= with_dog
+I'm sorry, I can't take the dog with me!
+Come back when you brought that beautiful dog back to the dog trainer's club!
+-> DONE
 
 = use_item
 {used_item:
@@ -1056,12 +1355,12 @@ Ne treba mi to.
 // This trashbin eats you if it isn't appeased with some trash tribute!
 // The first canster that you feed also gives you the pump.
 
-{get_state_property(interact_id, "has_trash"):
-	- 0: -> conv_canster_has_no_trash
-	- 1: -> conv_canster_has_trash
+{get_canster_appeased(interact_id):
+	- 0: -> conv_canster_not_appeased
+	- 1: -> conv_canster_appeased
 }
 
-=== conv_canster_has_no_trash ===
+=== conv_canster_not_appeased ===
 //-- STATUS: COMPLETED!
 // The canster is angry and eats you... unless your active item is trash.
 
@@ -1085,7 +1384,7 @@ Nisi smeće! Bljak!
 
 = trash
 >>> REMOVE_ITEM: {used_item}
->>> SET_STATE_PROPERTY: {interact_id} has_trash 1
+~ set_canster_appeased(interact_id, 1)
 {pump_received:
 	- 0: -> before_pump_received
 	- 1: -> after_pump_received
@@ -1104,7 +1403,7 @@ Njam njam!
 Ja volim smeće!
 -> DONE
 
-=== conv_canster_has_trash ===
+=== conv_canster_appeased ===
 //-- STATUS: COMPLETED!
 // The canster has previously been given some trash and is now happy!
 
@@ -1134,68 +1433,99 @@ Nisi smeće! Bah!
 -> DONE
 
 === conv_wheelie ===
-//-- STATUS: 
+//-- STATUS: READY FOR TRANSLATION
 // Wheelie is a kid in a wheelchair who wants to go home.
 // You have to escort him and make sure he doesn't get scared away by cansters.
 // You'll have to escort him twice... one time to his house and afterwards back to the park.
 // When arriving at his house, he goes and comes back out with a fence.
-// Afterwards, when getting back to the park he gives you the battery 
+// Afterwards, when getting back to the park he gives you the battery.
+//-- RELEVANT VARIABLES:
+// wheelie_intro_at_park_completed
+// wheelie_intro_before_park_fixed_completed
+// wheelie_intro_after_park_fixed_completed
+// wheelie_intro_back_at_park_completed
+
+// wheelie_arrived_at_house
+// wheelie_arrived_at_park
+
+// wheelie_going_to_park
+// wheelie_going_to_house
+
+// wheelie_got_scared
+
 {conv_type:
 	- 0: -> interact
 	- 1: -> use_item
 }
 
 = interact
-
-{get_state_property("wheelie", "arrived_safely"):
-	- 1: -> process_arrival
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
 }
 
-{wheelie_escorted_back_to_park:
-	- 1: -> back_at_park 
+= main
+{operation_better_park_started:
+	- 1: -> protesting
 }
 
-{wheelie_escorted_to_house:
-	- 1: -> at_house
+// Make wheelie 'unclickable' when he is moving!
+{wheelie_got_scared || wheelie_going_to_house || wheelie_going_to_park:
+	- 1: -> DONE
 }
 
-{wheelie_intro_at_park_completed:
-	- 0: -> intro_at_park
-	- 1: -> main_at_park
+{wheelie_arrived_at_park:
+	- 1: 
+	{mr_smog_defeated:
+		- 0: 
+		{wheelie_intro_back_at_park_completed:
+			- 0: -> before_wheelie_intro_back_at_park_completed
+			- 1: -> before_mr_smog_defeated
+		}
+		- 1: -> after_mr_smog_defeated
+	}
 }
 
-= intro_at_park
+{wheelie_arrived_at_house:
+	- 0: 
+	{wheelie_intro_at_park_completed:
+		- 0: -> before_wheelie_intro_at_park_completed
+		- 1: -> after_wheelie_intro_at_park_completed
+	} 
+	- 1: 
+	{number_of_fences_fixed:
+		- 4:
+		{wheelie_intro_after_park_fixed_completed:
+			- 0: -> before_wheelie_intro_after_park_fixed_completed
+			- 1: -> after_wheelie_intro_after_park_fixed_completed
+		}
+		- else:
+		{wheelie_intro_before_park_fixed_completed:
+			- 0: -> before_wheelie_intro_before_park_fixed_completed
+			- 1: -> after_wheelie_intro_before_park_fixed_completed
+		}
+	}
+}
+
+= before_wheelie_intro_at_park_completed
+~ wheelie_intro_at_park_completed = 1
 Sad kad nema ograde, ne možemo igrati nogomet...
 Dok se stvari ne riješe, idem ja doma.
 No na putu do moja kuće je hrpa gladnih kanti za smeće!
 Možeš li ih, molim te, nahraniti smećem? Inače krenu jesti nas čudovišta!
-~ wheelie_intro_at_park_completed = 1
--> main_at_park
+-> after_wheelie_intro_at_park_completed
 
-= main_at_park
+= after_wheelie_intro_at_park_completed
 Hej, jesi li nahranio sve kante za smeće?
 + [Da, sad je put siguran!]
 	Super, idemo!
-	>>> SET_STATE_PROPERTY: wheelie going_to_house 1
+	~ wheelie_going_to_house = 1
 	-> DONE
 + [Ne još, možda kasnije.]
 	Okej, samo mi javi kad pročistiš put do mene doma!
 	-> DONE
 
-= at_house
-// WHEELIE AT HOUSE!
-{number_of_fences_fixed:
-    - 4: -> after_park_fixed
-	- else: -> before_park_fixed
-}
-
-= before_park_fixed
-{wheelie_intro_before_park_fixed_completed:
-	- 0: -> intro_at_house_before_park_fixed
-	- 1: -> main_at_house_before_park_fixed
-}
-
-= intro_at_house_before_park_fixed
+= before_wheelie_intro_before_park_fixed_completed
 Hvala na praćenju do kuće!
 Idem vidjeti što mi rade mama i tata doma dok mene nema!
 // Goes in and checks with his mom.
@@ -1203,61 +1533,48 @@ Idem vidjeti što mi rade mama i tata doma dok mene nema!
 Hej, čini se da je na krovu ostao otpuhan dio ograde.
 Slobodno ga uzmi pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
-~ wheelie_fence_received = 1
+~ player_received_wheelie_fence = 1
 ~ wheelie_intro_before_park_fixed_completed = 1
--> main_at_house_before_park_fixed
+-> after_wheelie_intro_before_park_fixed_completed
 
-= main_at_house_before_park_fixed
+= after_wheelie_intro_before_park_fixed_completed
 Hvala što si me dopratio.
 Mislim da ću ostati ovdje dok se ne popravi ograda u parku.
 Dođi po mene kad je popravite! Bok, bok!
 -> DONE
 
-= after_park_fixed
-{wheelie_intro_after_park_fixed_completed:
-	- 0: -> intro_at_house_after_park_fixed
-	- 1: -> main_at_house_after_park_fixed
-}
-
-= intro_at_house_after_park_fixed
->>> SET_STATE_PROPERTY: canster_left is_appeased 0
->>> SET_STATE_PROPERTY: canster_middle is_appeased 0
->>> SET_STATE_PROPERTY: canster_right is_appeased 0
+= before_wheelie_intro_after_park_fixed_completed
+~ canster_left_appeased = 0
+~ canster_middle_appeased = 0
+~ canster_right_appeased = 0
 Vau, popravio si ograde!
 Želio bih opet ići igrati nogomet s vama, ali...
 Opet su kante za smeće postale gladne!
 Možeš li ih opet nahraniti smećem molim te?
 Jako ih se bojim!
 ~ wheelie_intro_after_park_fixed_completed = 1
--> main_at_house_after_park_fixed
+-> after_wheelie_intro_after_park_fixed_completed
 
-= main_at_house_after_park_fixed
+= after_wheelie_intro_after_park_fixed_completed
 Jesu li sve kante nahranjene?
 + [Da, sad je sigurno!]
 	Super! Idemo!
-	>>> SET_STATE_PROPERTY: wheelie going_to_park 1
+	~ wheelie_going_to_park = 1
 	// You escort wheelie back to the park! 
 	-> DONE
 + [Ne još, radim na tome!]
 	Okej, samo mi javi! Znaš kakve te kante znaju biti kad su gladne!
 	-> DONE
 
-= back_at_park
-// WHEELIE BACK AT PARK!
-{wheelie_intro_back_at_park_completed:
-	- 0: -> intro_back_at_park
-	- 1: -> main_back_at_park
-}
-
-= intro_back_at_park
+= before_wheelie_intro_back_at_park_completed
 Hvala što si me otpratio do našeg predivnog parka!
 Mislim da ću ostati ovdje i uživati u parku zauvijek!
 Evo, možeš uzeti moju bateriju. Ne treba mi više!
 >>> ADD_ITEM: battery
 ~ wheelie_intro_back_at_park_completed = 1
--> main_back_at_park
+-> before_mr_smog_defeated
 
-= main_back_at_park
+= before_mr_smog_defeated
 {mr_smog_defeated:
 	- 1: -> after_mr_smog_defeated
 }
@@ -1271,17 +1588,17 @@ Hvala ti što si nam vratio naše sretno drvo!
 Taj njegov glupavi osmijeh uvijek mi razveseli dan!
 -> DONE
 
-= process_arrival
+= protesting
+No more angry trash cans blocking my path!
+Give us a clean park! No more trash everywhere!
+-> DONE
 
-{wheelie_escorted_to_house:
-	- 0: ~ wheelie_escorted_to_house = 1
-	- 1: ~ wheelie_escorted_back_to_park = 1
-}
->>> SET_STATE_PROPERTY: wheelie arrived_safely 0
--> interact
+= outro
+This park is awesome!
+There's no more trash!
+-> DONE
 
 = use_item
-
 {used_item:
 	- "battery": -> battery
 	- else: -> default
@@ -1295,12 +1612,12 @@ Zadrži bateriju, ne trebam je više!
 Ne treba mi to!
 -> DONE
 
--> DONE
-
 === conv_wind_turbine ===
 //-- STATUS: COMPLETED!
-// The wind turbine can be powered by a battery you get from Wheelie and
-// removes the smog from the smoggy part of town.
+// The wind turbine can be powered by a battery you get from Vilko.
+// Turning it on removes the smog from the smoggy part of town.
+//-- RELEVANT VARIABLES:
+// wind_turbine_powered
 
 {conv_type:
 	- 0: -> interact
@@ -1308,36 +1625,34 @@ Ne treba mi to!
 }
 
 = interact
-{battery_quest_completed:
-	- 0: -> before_battery_quest_completed
-	- 1: -> after_battery_quest_completed
+{wind_turbine_powered:
+	- 0: -> before_wind_turbine_powered
+	- 1: -> after_wind_turbine_powered
 }
 
-= before_battery_quest_completed
+= before_wind_turbine_powered
 Obično vjetrenjače pretvaraju vjetar u energiju, ali ova je drugačija!
 Ova vjetrenjača pretvara energiju u vjetar!
 Tu je velika rupa, i ima simbol za bateriju.
 Možda bih, kad bih imao neku bateriju sa sobom, mogao pokrenuti tu vjetrenjaču.
 -> DONE
 
-= after_battery_quest_completed
+= after_wind_turbine_powered
 Vau, stvorilo se toliko vjetra da je sav smog u gradu otpuhan!
 Ljudi će napokon moći disati!
 -> DONE
 
 = use_item
-
 {used_item:
 	- "battery": -> battery
 	- else: -> default
 }
 
 = battery
-Vau, sad radi!
-~ battery_quest_completed = 1
->>> SET_STATE_PROPERTY: wind_turbine has_battery 1
+~ wind_turbine_powered = 1
 >>> REMOVE_ITEM: battery
--> after_battery_quest_completed
+Vau, sad radi!
+-> after_wind_turbine_powered
 
 = default
 To neće pomoći, ovdje trebam staviti neki izvor napajanja.
@@ -1380,7 +1695,11 @@ A sad me pusti na miru!
 //-- STATUS: READY FOR TRANSLATION
 // The love interest trades you her colorful jacket in exchange for your plain one.
 // You need this jacket to get into the smoggy part of town.
-// After 
+// Afterwards you can ask her to join the protests!
+
+//-- RELEVANT VARIABLES
+// love_interest_gone_protesting
+// player_wearing_color
 
 {conv_type:
 	- 0: -> interact
@@ -1388,14 +1707,19 @@ A sad me pusti na miru!
 }
 
 = interact
-
-{love_interest_gone_protesting:
-	- 1: Give us a better park now!
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
 }
 
-{get_state_property("player", "wearing_color"):
-	- 0: -> wearing_plain
-	- 1: -> wearing_color
+= main
+{love_interest_gone_protesting:
+	- 0: 
+	{player_wearing_color:
+		- 0: -> wearing_plain
+		- 1: -> wearing_color
+	}
+	- 1: -> protesting
 }
 
 = wearing_plain
@@ -1403,14 +1727,12 @@ Hej, ti! Kako ti se sviđa moja nova jakna? Baš je šarena, zar ne?
 Mislim da bi ti dobro stajala!
 Hoćeš da se mijenjamo za jakne?
 + {operation_better_park_started && love_interest_gone_protesting == 0}[Hey, would you join me in a protest to get a better park?]
+	~ love_interest_gone_protesting = 1
 	Anything for you!
 	I'll start protesting immediately!
-	~ love_interest_gone_protesting = 1
 	-> DONE
 + [Da, mijenjajmo se!]
 	~ player_wearing_color = 1
-	>>> SET_STATE_PROPERTY: player wearing_color 1
-	>>> SET_STATE_PROPERTY: love_interest wearing_color 0
 	Super! Samo mi javi kad se zaželiš svoje stare jakne!
 	-> DONE
 + [Ne, volim svoju jaknu.]
@@ -1420,36 +1742,42 @@ Hoćeš da se mijenjamo za jakne?
 = wearing_color
 Hej! Hoćeš se opet mijenjati za jakne?
 + {operation_better_park_started && love_interest_gone_protesting == 0}[Hey, would you join me in a protest to get a better park?]
+	~ love_interest_gone_protesting = 1
 	Anything for you!
 	I'll start protesting immediately!
 	-> DONE
-	~ love_interest_gone_protesting = 1
 + [Da, vrati mi moju jaknu!]
 	~ player_wearing_color = 0
-	>>> SET_STATE_PROPERTY: player wearing_color 0
-	>>> SET_STATE_PROPERTY: love_interest wearing_color 1
 	Naravno, izvoli!
 	-> DONE
 + [Ne, sviđa mi se tvoja jakna!]
 	Okej, nosi je koliko želiš!
 	-> DONE
 
+= protesting
+Give us a better park now!
+{player_wearing_color:
+	- 0: -> wearing_plain
+	- 1: -> wearing_color
+}
+
+= outro
+Now that you are done with all your protesting, maybe...
+We can enjoy some well-deserved time together?
+-> DONE
+
 = use_item
 Hvala, ali sve što trebam od tebe je tvoja ljubav!
 -> DONE
 
 === conv_dog ===
-//-- STATUS: 
-
-Woof!
-The dog looks like it wants to go to some water?
-I should go to the lake next to Wheelie's appartment!
--> DONE
-
-=== conv_copper ===
-//-- STATUS: 
-// The copper blocks you from entering the smoggy part of town until you are wearing something colorful.
-// He also tells you about the windmill as a tip.
+//-- STATUS: READY FOR TRANSLATION
+// A dog that you have to walk around the city. 
+// She will tell you were to go by using her pleading puppy eyes.
+// After a while the dog will become tired and wants to go back home.
+//-- RELEVANT VARIABLES:
+// dog_visited_lake
+// dog_visited_park
 
 {conv_type:
 	- 0: -> interact
@@ -1457,13 +1785,82 @@ I should go to the lake next to Wheelie's appartment!
 }
 
 = interact
-{battery_quest_completed:
+{dog_visited_lake && dog_visited_park:
+	- 0: 
+	{dog_visited_lake:
+		- 0: -> visit_lake
+		- 1: -> visit_park
+	}
+	- 1: -> go_back_home
+}
+
+= visit_lake
+Woof!
+The dog looks like it wants to go to some water?
+I should go to the lake next to Wheelie's appartment!
+-> DONE
+
+= visit_park
+Woof!
+The dog looks like it wants to go to the park!
+I should go and show solid snejk my new friend!
+-> DONE
+
+= go_back_home
+Woof!
+The dog looks a bit tired...
+I should go back to the dog trainer's club!
+-> DONE
+
+= use_item
+The dog curiously sniffs the object.
+But her strict discipline stops her from gnawing on it!
+-> DONE
+
+
+== conv_dog_at_lake ===
+// -- STATUS: READY FOR TRANSLATION
+// Conversation that pops up when you arrive at the lake with the dog.
+//-- RELEVANT VARIABLES:
+// dog_visited_lake
+
+The dog looks happy to be at the lake!
+I should walk around a bit and then see if she wants to go somewhere else.
+~ dog_visited_lake = 1
+-> DONE
+
+== conv_dog_at_park ===
+// -- STATUS: READY FOR TRANSLATION
+// Conversation that pops up when you arrive at the park with the dog.
+//-- RELEVANT VARIABLES:
+// dog_visited_park
+
+The dog looks delighted to see the park!
+I should walk around a bit and then see if she wants to go somewhere else.
+~ dog_visited_park = 1
+-> DONE
+
+=== conv_copper ===
+//-- STATUS: 
+// The copper blocks you from entering the smoggy part of town until you are wearing something colorful.
+// He also tells you about the windmill as a hint.
+//-- RELEVANT VARIABLES
+// wind_turbine_powered
+// player_wearing_color
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{wind_turbine_powered:
 	- 0:
-	{get_state_property("player", "wearing_color"):
+	{player_wearing_color:
 		- 0: -> wearing_plain
 		- 1: -> wearing_color
 	}
-	- 1: -> after_battery_quest_completed
+	- 1: -> after_wind_turbine_powered
 }
 
 = wearing_plain
@@ -1480,22 +1877,1058 @@ Smiješ ući u Smogograd dokle god nosiš nešto tako vidljivo!
 Zapamti: kad si u mračnim ulicama, moraš biti vidljiv autima!
 -> DONE
 
-= after_battery_quest_completed
+= after_wind_turbine_powered
 Opa! Čini se da je netko upalio vjetrenjaču na planini!
 Sav smog je nestao i sad možeš nositi što god želiš!
 -> DONE
 
 = use_item
-{used_item:
-	- else: -> default
-}
-
-= default
 Ne treba mi to, hvala! Ja samo pazim na sigurnost u prometu.
 -> DONE
 
 === conv_happy_tree ===
-//-- STATUS: 
+//-- STATUS: READY FOR TRANSLATION
+// This tree appears after defeating Mr. Smog and thanks you for freeing him.
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+Opsjeo me zli smog!
+Ali sad sam opet sretno drvo!
+Hvala vam na pomoći!
+-> DONE
+
+= outro
+The park is now beautiful!
+And I have so many new tree friends!
+Thank you for all your hard work!
+-> DONE
+
+= use_item
+I'm just a tree and have no need of such an item!
+-> DONE
+
+=== conv_mr_smog ===
+//-- STATUS: COMPLETED!
+// Mr. Smog is an angry boss who tries to murder you with his smog bullets.
+//-- RELEVANT VARIABLES:
+// mr_smog_defeated
+
+{mr_smog_defeated:
+	- 0: -> before_mr_smog_defeated
+	- 1: -> after_mr_smog_defeated
+}
+
+= before_mr_smog_defeated
+>>> PAN_CAMERA_TO_POSITION: 672 2720
+MUHUHAHAHA
+Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
+>>> RESET_CAMERA
+-> DONE
+
+= after_mr_smog_defeated
+>>> UPDATE_UI: happy_tree
+>>> PAN_CAMERA_TO_POSITION: 672 2720
+Ajme, sav me smog napustio!
+Sada sam ponovno sretno drvo!
+Idem natrag u svoj rodni park!
+>>> RESET_CAMERA
+-> DONE
+
+=== conv_flower_box ===
+//-- STATUS:
+// Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
+// The police officer will appear here and disagree with your actions, but won't interfere.
+//-- RELEVANT VARIABLES:
+// 
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> after_rose_seeds_planted
+	- else: -> main
+}
+
+= main
+{rose_seeds_planted:
+	- 0: -> before_rose_seeds_planted
+	- 1: -> after_rose_seeds_planted
+}
+
+= before_rose_seeds_planted
+The soil is fertile and ready to be used.
+Unfortunately nothing seems to be growing here?
+-> DONE
+
+= after_rose_seeds_planted
+The roses smell nice and look good!
+A fine addition to the building's facade!
+-> DONE
+
+= use_item
+
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+{flower_copper_swayed:
+	- 0: -> before_flower_copper_swayed
+	- 1: -> after_flower_copper_swayed
+}
+
+= before_flower_copper_swayed
+>>> UPDATE_UI: copper
+What are you doing? 
+Planting seeds in those flower boxes is not allowed!
+Flowers will be planted in those boxes when city hall comes around to it.
++ [Comes around to it? How long has that been?]
+	I think those boxes have been empty since before I became a cop.
+	++ [How long have you been a cop?]
+		...
+		More than ten years at least...
+		Look kid, If you really want to plant those rose seeds...
+		I'm not gonna stop you...
+		Maybe it's due time someone made those flower boxes actually useful?
+		-> DONE
+	++ [I guess they can stay empty a bit longer then?]
+		Indeed, the bureaucracy will catch up one day and they'll plant something beautiful here.
+		Just not this day...
+		-> DONE
++ [Apologies officer, I'll wait until the proper bureaucracy is approved by city hall...]
+	Good citizen! Bureaucracy was invented for a reason you know!
+	-> DONE
+
+= after_flower_copper_swayed
+The monster roses grow immediately in the fertile soil.
+Rosalina will be pleased!
+>>> REMOVE_ITEM: rose_seeds
+~ rose_seeds_planted = 1
+-> DONE
+
+= default
+I don't think I can plant this stuff?
+-> DONE
+
+=== conv_flower_copper ===
+//-- STATUS: READY FOR TRANSLATION
+// Copper who warns you not to plant the seeds in the flower box.
+// He only appears once you have the rose seeds.
+//-- RELEVANT VARIABLES:
+// rose_seeds_planted
+// roda_shop_gave_seeds
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{rose_seeds_planted:
+	- 0: -> before_rose_seeds_planted
+	- 1: -> after_rose_seeds_planted
+}
+
+= before_rose_seeds_planted
+I'm just hanging out here to make sure noone does anything illegal.
+I got my eyes on you!
+-> DONE
+
+= after_rose_seeds_planted
+Oh, great bureaucracy why have you forsaken me?
+-> DONE
+
+= use_item
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default 
+}
+
+= rose_seeds
+Nice seeds you got there buddy.
+Now now, don't get any big ideas and plant them.
+and certainly DO NOT plant them in this flower box.
+That box is city property and you can't plant anything in them!
+-> DONE
+
+= default
+Don't shove that stuff into my face!
+-> DONE
+
+=== conv_dog_trainer_club ===
+//-- STATUS: READY FOR TRANSLATION
+// These guys ask you questions about training dogs and then ask you to walk a dog for them.
+// Afterwards you can ask her to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// dog_trainer_club_gone_protesting
+// dog_test_started
+// dog_test_passed
+// dog_walking_started
+// dog_walking_completed
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+{dog_trainer_club_gone_protesting:
+	- 0:
+		{dog_test_started:
+			- 0: -> main_intro
+			- 1:
+				{dog_test_passed:
+					- 0: -> before_dog_test_passed
+					- 1:
+						{dog_walking_started:
+							- 0: -> after_dog_test_passed
+							- 1:
+								{dog_walking_completed:
+									- 0:
+									{dog_visited_lake && dog_visited_park:
+										- 0: -> before_dog_walking_completed
+										- 1: -> after_dog_tired
+									}
+									- 1: -> after_dog_walking_completed
+								}
+						}
+				}
+		}
+	- 1: -> protesting
+}
+
+= main_intro
+Hello! Welcome to the Dog Trainer's club!
+We train dogs for therapeutic purposes.
+These dogs are invaluable for blind people and other people with disabilities!
+You look like a thrustworthy kid, would you be willing to help us out?
++ [Actually I don't think I have time right now...]
+	That's too bad!
+	Please do come back whenever you change your mind!
+	-> DONE
++ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
+	Here's the deal: You help us out, and we help you out?
+	Sounds good to you? OK!
+	-> before_dog_test_started
++ [It would be my honor.]
+	-> before_dog_test_started
+
+= before_dog_test_started
+See these dogs need to be walked daily and you look like just the person to do it!
+But before that... we'll need to make sure you know what you are doing!
+We have a few questions that will test your dog knowledge to the limits.
+Are you ready to become a certified junior dog trainer?
+-> after_dog_test_started
+
+= before_dog_test_passed
+Welcome again! Would you like to try the test again?
+-> after_dog_test_started
+
+= after_dog_test_started
+++ [Bring it on!]
+	Okay, lets go through the test together.
+	~ dog_test_started = 1
+	-> start_dog_test
+++ [Maybe later?]
+	That's also okay for me!
+	Please do come back any time you wish!
+	-> DONE
+
+= start_dog_test
+The first question to become a certified junior dog trainer is the following:
+...
++ [A]
+	-> wrong_answer
++ [B]
+	-> second_question
++ [C]
+	-> wrong_answer
+
+= second_question
++ [A]
+	-> wrong_answer
++ [B]
+	-> third_question
++ [C]
+	-> wrong_answer
+
+= third_question
++ [A]
+	-> wrong_answer
++ [B]
+	That's the correct answer!
+	It seems that you truly have what it takes to become a dog trainer!
+	You are now a certified junior dog trainer! Congratulations!
+	~ dog_test_passed = 1
+	-> after_dog_test_passed
++ [C]
+	-> wrong_answer
+
+= wrong_answer
+That's completely wrong!
+I'm afraid I'll have to stop the test here.
+Don't worry though: you can try to take the test again anytime!
+-> DONE
+
+= after_dog_test_passed
+Okay! I'll allow you to walk the dog!
+~ dog_walking_started = 1
+This one is called Lepa! Have fun walking her!
+If you are unsure where to go, please ask her!
+She might not be able to talk, but dogs have other means of showing us where they want to go!
+Come back when she is tired!
+-> DONE
+
+= before_dog_walking_completed
+Lepa doesn't look tired of walking yet.
+Come back when she is tired!
+-> DONE
+
+= after_dog_tired
+~ dog_walking_completed = 1
+Wow, Lepa looks really tired from all that walking!
+Good job! The exercise is good for her!
+-> after_dog_walking_completed
+
+= after_dog_walking_completed
+Thanks a thousand times for walking Lepa for us!
+Was there anything we could help you with?
++ {operation_better_park_started}[Would it be possible to help me protest for better park?]
+	Gladly! We'll come and join your protests!
+	Having more nature around here is also good for our dogs!
+	~ dog_trainer_club_gone_protesting = 1
+	-> DONE
++ [Nah, I'm good!]
+	Okay! come back whenever you need a favor cause we owe you one!
+	-> DONE
+
+= protesting
+Hello? Ah it's you!
+Everyone has gone protesting!
+I'm just making sure the dogs are okay here.
+-> DONE
+
+= outro
+All the dogs are fine here if that is what you were wondering about.
+they are also delighted with the changes to the park!
+The huge selection of trees makes them extremely happy!
+-> DONE
+
+= use_item
+We don't have any need for that!
+-> DONE
+
+=== conv_park_lovers ===
+//-- STATUS: READY FOR TRANSLATION
+// The park crowd wants you to design a poster for them.
+// Afterwards you can recruit them for the park revolution protests.
+//-- RELEVANT VARIABLES:
+// operation_better_park_started
+// poster_designed
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	 - 2: -> outro
+	 - else: -> main
+}
+= main
+{operation_better_park_started:
+	- 0: -> before_operation_better_park_started
+	{poster_designed:
+		- 0: -> before_poster_designed
+		- 1: -> after_poster_designed
+	}
+}
+
+= before_operation_better_park_started
+We are the Park Crowd!
+We love the park and have big things planned for expanding the park soon.
+Maybe come back in the near future?
+-> DONE
+
+= before_poster_designed
+We are the Park Crowd!
+I see you have decided to fight the good fight and join us in our park campaign.
+We would like to make a poster to put on the town's billboards.
+Unfortunately everyone here is having some trouble designing a poster.
+Would you be interested in designing a poster for us?
++ [Yes! I'm an expert at making posters]
+	Perfect! Here's a blank canvas!
+	Tell me when you are done with the design!
+	-> start_poster_minigame
++ [No, I'll pass on this opportunity!]
+	Oh... well someone else will come along then!
+	-> DONE
+
+= after_poster_designed
+Would you like to redesign your poster?
++ [Yes, I have an idea for a better design.]
+	Okay! I can't wait to see how the new one will look!
+	-> start_poster_minigame
++ [No, the current is perfect as is.]
+	Well.. I'll always be here if you want to design a new one!
+	-> DONE
+
+= start_poster_minigame
+>>> BEGIN_MINIGAME: poster_minigame
++ That looks like awesome!
+	We'll distribute your design on all the city's billboards!
+	If you don't like the design, you can always come back and design a new one!
+	~ poster_designed = 1
+	>>> END_MINIGAME
+	-> DONE
+
+= outro
+Thanks for helping us in our park revolution!
+We have big plans for an even bigger park!
+However, at the moment we are taking a vacation to enjoy the current park!
+-> DONE
+
+= use_item
+We don't have any need for that!
+-> DONE
+
+=== conv_wheelie_appartment ===
+//-- STATUS: READY FOR TRANSLATION
+// The door to Wheelie's appartment is opened by Wheelie after you escort him here.
+//-- RELEVANT VARIABLES: 
+// wheelie_appartment_opened
+
+
+{wheelie_appartment_opened:
+	- 0: -> DONE
+	- 1: -> after_wheelie_appartment_opened
+}
+
+= after_wheelie_appartment_opened
+Vilko invited me into his appartment!
+Do I dare enter?
++ [Yess, I'll check it out!]
+	{player_on_bike:
+		- 1: -> on_bike
+	}
+	{dog_walking_started && not dog_walking_completed:
+		- 1: -> with_dog
+	}
+	~ player_inside_appartment = 1
+	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
+	-> DONE
++ [No, I don't like entering people's houses willy-nilly!]
+	Yeah, I better stay outside.
+	-> DONE
+
+= on_bike
+I'm not a savage.. I should hop off my bike when I enter other people's houses!
+-> DONE
+
+= with_dog
+I can't take Lepa into this appartment, that would be inappropriate.
+-> DONE
+
+=== conv_wheelie_elevator
+//-- STATUS: READY FOR TRANSLATION
+// The elevator necessary to leave Wheelie's appartment again...
+
+Do I take the elevator back down?
++ [Yes, It's time to go back outside!]
+	~ player_inside_appartment = 0
+	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
+	-> DONE
++ [No, I still have unfinished business here!]
+	-> DONE
+
+=== conv_roda_shop ===
+//-- STATUS: READY FOR TRANSLATION
+// RODA's shop is where you can get the old man's groceries and the rose seeds.
+//-- RELEVANT VARIABLES:
+// roda_shop_gone_protesting
+// roda_shop_gave_groceries
+// roda_shop_gave_seeds
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+Welcome to the SUPER RODA!
+We help people with... 
+//TODO for Aleks: Some more stuff explaining about what RODA is?
+Is there anything we might be able to help you with today?
++ {rosalina_requested_seeds}[I've been told I could get a free sample of flower seeds here?]
+	Yes! This is one of our actions to make the city more livable!
+	{roda_shop_gave_seeds:
+		- 0: -> before_roda_shop_gave_seeds
+		- 1: -> after_roda_shop_gave_seeds
+	}
++ {old_man_requested_groceries && not roda_shop_gave_groceries}[The old man told me to get his groceries here?]
+	That is correct! We were waiting for someone to come and pick it up.
+	Here you go! Please bring this to the old man ASAP!
+	>>> ADD_ITEM: grocery_bag
+	~ roda_shop_gave_groceries = 1
+	-> DONE
++ {operation_better_park_started && not roda_shop_gone_protesting}[Would you be willing to come and protest for a better park?]
+	That sounds like something that will greatly benefit the community!
+	We'll immediately send some of our people!
+	~ roda_shop_gone_protesting = 1
+	-> DONE
++ [Nothing! I'm just browsing!]
+	Okay! Don't be afraid to ask me if you need anything!
+	-> DONE
+
+= before_roda_shop_gave_seeds
+Here you go: one free sample of monster rose seeds for you!
+>>> ADD_ITEM: rose_seeds
+~ roda_shop_gave_seeds = 1
+-> DONE
+
+= after_roda_shop_gave_seeds
+I can see you already received your free seeds sample!
+My apologies, but I can only give one sample per person....
+-> DONE
+
+= use_item
+Thanks, but we don't need this!
+-> DONE
+
+=== conv_blind_guy ===
+//-- STATUS: READY FOR TRANSLATION
+// Blind guy who wants to cross the street but can't because he's scared of traffic.
+// You help him cross the street and he joins you in protests for a better park.
+//-- RELEVANT VARIABLES:
+// blind_guy_helped
+// blind_guy_gone_protesting
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+{blind_guy_accepted_aid:
+	-> DONE
+}
+
+{blind_guy_gone_protesting:
+	- 0:
+	{blind_guy_helped:
+		- 0: -> before_blind_guy_helped
+		- 1: -> after_blind_guy_helped
+	}
+	- 1: -> protesting
+}
+
+= before_blind_guy_helped
+Hello? Sir?
+Would you be willing to help me cross the street?
+As you can probably see, I'm blind...
+However, that doesn't stop me from wanting to go to the park!
+If only those stupid cars would stop for a second!
++ [Of course, I'll help you cross the street!]
+	Thank you kind, sir!
+	~ blind_guy_accepted_aid = 1
+	-> DONE
++ [Apologies, I'm far too busy right now...]
+	Oh well, I guess I'll have to keep waiting here!
+	-> DONE
+
+= success
+Thank you for helping me cross the street!
+I have no idea how long I would've been waiting for those cars to stop without you!
+And I am happy that I will never have ot find out!
+How can I ever thank you?
+Oh yes! Maybe I can show you how to write "Thank you" in Braille?
+~ blind_guy_helped = 1
+-> show_braille
+
+= failure
+Oh! I almost got run over by a car!
+I don't think I can trust you, Sir!
+I'll just stay at the safe side until someone trustworthy comes along and helps me!
+-> DONE
+
+= after_blind_guy_helped
+Oh, hello? Are you that young lad that helped me cross the street earlier?
+Would you like me to show you Braille again?
++ {operation_better_park_started}[I'm organizing a huge protest for a bigger park, would you care to join?]
+	A bigger park would mean that I wouldn't need to cross the street anymore to reach the park!
+	You wouldn't believe how much time I spent every day just waiting for those bloody cars to stop!
+	I will gladly join your little revolution!
+	~ blind_guy_gone_protesting = 1
+	-> DONE
++ [It would be my honor!]
+	-> show_braille
++ [Actually I have to go!]
+	Okay! Come back anytime! I enjoy talking to you!
+	-> DONE
+
+= show_braille
+>>> BEGIN_MINIGAME: braille_minigame
+Braille is a script that blind people like me can read with their fingers!
+Next time you are in an elevator you should definitely check out the buttons.
+If you look closely you will see some Braille written next to each floor number!
+That's so even blind people can take the elevator without any hassle.
+Pretty cool, eh?
+>>> END_MINIGAME
+-> DONE
+
+= protesting
+Stop the noise and air polution!
+Give us a bigger park!
+-> DONE
+
+= outro
+I might not be able to see the new park.
+But I can definetely say that the air quality has greatly improved around here!
+Also, there's no more sound polution by those blasted cars!
+Blessed be this day!
+-> DONE
+
+= use_item
+Let me feel that thing...
+{used_item == "trash_cup" || used_item == "trash_bottle" || used_item == "trash_bag":
+	- 1: -> trash
+	- 0: -> no_trash
+}
+
+= trash
+Are you trying to get rid of your trash through me!?
+The nerve! Take it back immediately!
+-> DONE
+
+= no_trash
+That's a neat little bauble you got here!
+Unfortunately, I can't do anything useful with it!
+-> DONE
+
+=== conv_monsters_without_borders ===
+//-- STATUS: READY FOR TRANSLATION
+// Monsters without Borders protects the civil rights of monsters big and small!
+// They ask you some questions about monster rights and then let you join their organization.
+//-- RELEVANT VARIABLES:
+// monsters_without_borders_joined
+// monsters_without_borders_gone_protesting
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+{monsters_without_borders_gone_protesting:
+	- 0: -> intro
+	- 1: -> protesting
+}
+
+= intro
+Welcome to Monsters Without Borders!
+We guard the rights of every monster big or small.
+How can we help you today?
++ {operation_better_park_started}[Could you guys join the protests for a better park?]
+	{monsters_without_borders_joined:
+		- 0: -> before_monsters_without_borders_joined
+		- 1: -> after_monsters_without_borders_joined
+	}
++ {not monsters_without_borders_joined}[Can I join your organization?]
+	We are rather strict in allowing new memberships.
+	You'll have to take a test to become a real Monster Without Borders
+	Are you sure you are ready to take this test?
+	++ [Da, bring it on!]
+		Let me see where I put those documents again.
+		-> start_monsters_without_borders_test
+	++ [Nope, maybe later!]
+		Okay! Come back anytime!
+		-> DONE
++ [Nothing! I was just exploring!]
+	Okay, I'll let you explore in peace then.
+	-> DONE
+
+= start_monsters_without_borders_test
+Let's see...
+First question for your application is...
+-> first_question
+
+// TODO: Add some actual questions here!
+= first_question
++ [A]
+	-> failure
++ [B]
+	-> second_question
++ [C]
+	-> failure
+
+= second_question
++ [A]
+	-> failure
++ [B]
+	-> success
++ [C]
+	-> failure
+
+= success
+You are an exemplary monster!
+We would be honored to let you join our organization.
+Congratulations, you are now a Monster Without Border!
+-> DONE
+
+= failure
+Oh! You clearly don't have what it takes to become on of us.
+Too bad! Bye!
+-> DONE
+
+= before_monsters_without_borders_joined
+Could I see your MWB membership card?
+You don't have one? You aren't a member of our organization?
+I'm afraid we can only respond to your request if you are a member of MWB.
+-> DONE
+
+= after_monsters_without_borders_joined
+~ monsters_without_borders_gone_protesting = 1
+For sure! This seems like this will help a lot of monsters!
+Well send some people immediately!
+-> DONE
+
+= protesting
+Oh? Sorry, everyone went protesting for a better park.
+I'm just here holding down the fort!
+-> DONE
+
+= outro
+The rights of every monster has been respected and given us a new park!
+This makes the Monster Without Borders very happy!
+-> DONE
+
+= use_item
+We don't need that!
+-> DONE
+
+=== conv_rosalina ===
+//-- STATUS : READY FOR TRANSLATION
+// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
+// Afterwards you can ask her to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// rosalina_gone_protesting
+// rosalina_requested_seeds
+// rose_seeds_planted
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+// Check the current stage!
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+// INTERACT - MAIN //
+= main
+{rosalina_gone_protesting:
+	- 0:
+		{rosalina_requested_seeds:
+			- 0: -> main_intro
+			- 1:
+			{rose_seeds_planted:
+				- 0: -> before_rose_seeds_planted
+				- 1: -> after_rose_seeds_planted
+			}
+		}
+	- 1: -> protesting
+}
+
+= main_intro
+Bokić! Ja sam Ružica i volim cvijeće!
+Vidiš ovu rahlu zemlju ispred zgrade?
+Ne mogu vjerovati da su zaboravili posaditi cvijeće u nju!
+Možeš mi učiniti uslugu?
+Možeš li nabaviti neke sjemenke iz cvjećarnice?
+Any type of flower is good!
++ {mr_smog_defeated == 0}[Žao mi je, trenutno pokušavam popraviti park kojeg je Mister Smog otpuhao!]
+	Ah...
+	Pa, kada to završiš, javi se, bit ću tu!
+	-> DONE
++ {operation_better_park_started}[Žao mi je, trenutno pokušavam prikupiti čudovišta da prosvjedujemo za uređenje parka!]
+	To zvuči baš fora! Parkovi su puni cvijeća!
+	Hej, imam ideju!
+	Ako mi pomogneš posaditi cvijeće ispred naše zgrade, doći ću ti na skup!
+	-> DONE
++ [Može, idem sada do cvjećarnice po sjemenke!]
+	Hvala ti!
+	Dućani i cvjećarne imaju sjemenke za razna cvijeća, ali ja najviše volim crvene ruže!
+	Ovaj kvart će izgledati puno bolje čim posadimo cvijeće.
+	~ rosalina_requested_seeds = 1
+	-> DONE
+
+= before_rose_seeds_planted
+Možeš naći sjemenke u dućanu Super Roda.
+Mislim čak da su ih dijelili besplatno.
+Molim te požuri dok ih još ima!
+-> DONE
+
+= after_rose_seeds_planted
+Puno hvala!
+Nemaš pojma koliko sam sada sretna!
++ {operation_better_park_started}[Hoćeš li sada doći podržati naš prosvjed za uređenje parka?]
+	Naravno, bilo bi mi jako drago.
+	Parkovi su pluća grada!
+	~ rosalina_gone_protesting = 1
+	-> DONE
++ [It was my pleasure!]
+	-> DONE
+
+= protesting
+Parkovi su pluća grada!
+Neka cvate tisuću cvijetova!
+-> DONE
+
+// INTERACT - OUTRO //
+= outro
+All these flowers are soo beautiful!
+I'm glad we got this new park!
+Everyone needs more flowers in their life!
+-> DONE
+
+// USE ITEM //
+= use_item
+{used_item:
+	- "rose_seeds": -> rose_seeds
+	- else: -> default
+}
+
+= rose_seeds
+Pa to su ružine sjemenke, moje omiljene!
+Možeš ih molim te posaditi u zemlju ispred zgrade?
+Ja bih ih posadila ali bojim se policije.
+-> DONE
+
+= default
+Hvala na poklonu ali mene zanima samo cvijeće!
+-> DONE
+
+=== conv_bell_old_man ===
+//-- STATUS : READY FOR TRANSLATION
+// The old man wants his groceries so you deliver them?
+// Afterwards you can ask him to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// old_man_gone_protesting
+// old_man_requested_groceries
+// old_man_received_groceries
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{old_man_gone_protesting:
+	- 0:
+		{old_man_received_groceries:
+			- 0: -> before_old_man_received_groceries
+			- 1: -> after_old_man_received_groceries
+		}
+	- 1: -> protesting
+}
+
+= before_old_man_received_groceries
+DAAA?
+Jeste li mi donijeli moje namirnice?
++ {has_item("grocery_bag")}[Kako da ne, izvolite gospodine!]
+	-> grocery_bag
++ [Ne, ja sam samo vaš čudovišni susjed.]
+	Balavac jedan!
+	Vrati se kad mi doneseš namirnice!
+	Trebali su mi ih dostaviti iz SuperRoda dućana još prije sat vremena!
+	~ old_man_requested_groceries = 1
+	-> DONE
++ [Kriva vrata, ispričavam se.]
+	Balavac jedan neotesani!
+	-> DONE
+
+= after_old_man_received_groceries
+Još si tu?
+Trebaš nešto od mene?
++ [Hoćete li doći na prosvjed za uređenje parka?]
+	A tako... Ja na prosvjed?
+	Pa, mislim da mladi danas zaslužuju puno bolji park od ovog rugla koje ste dobili.
+	Da, doći ću na prosvjed!
+	Vidimo se!
+	~ old_man_gone_protesting = 1
+	-> DONE
++ [Ne, vidimo se!]
+	Uživaj u mladosti dok je još imaš!
+	-> DONE
+
+= protesting
+Kuc kuc...
+Hm....
+Nema nikog doma!
+Možda je dedica već na prosvjedu!
+-> DONE
+
+// USE ITEM //
+= use_item
+{used_item:
+	- "grocery_bag": -> grocery_bag
+	- else: -> default
+}
+
+= grocery_bag
+Moje namirnice!
+>>> REMOVE_ITEM: grocery_bag
+~ old_man_received_groceries = 1
+Znači donio si mi ih skroz iz Super Roda dućana?
+Čini se da bon ton još nije zaboravljen!
+Ako ti ikad zatreba neka usluga, samo me pitaj!
+{operation_better_park_started:
+	0: -> DONE
+	1: -> after_old_man_received_groceries
+}
+
+= default
+To nisu moje namirnice.
+-> DONE
+
+=== conv_animal_protection_services ===
+//-- STATUS : READY FOR TRANSLATION
+// These guys ask you to go and feed  all of the squirrel houses scattered across the map.
+// Afterwards you can ask them to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// lunja_gone_protesting
+// lunja_gave_nuts
+// squirrels_at_lake_satiated
+// squirrels_at_square_satiated
+// squirrels_at_moujntains_satiated
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+{lunja_gone_protesting:
+	- 0:
+		{lunja_gave_nuts:
+			- 0: -> intro
+			- 1:
+			{squirrels_at_lake_satiated && squirrels_at_mountains_satiated && squirrels_at_square_satiated:
+				- 0: -> before_all_squirrels_satiated
+				- 1: -> after_all_squirrels_satiated
+			}
+		}
+	- 1: -> protesting
+}
+
+= intro
+Bok! Mi smo Lunja, udruga za zaštitu životinja.
+Gdje god životinje pate, mi smo tu da im pomognemo!
+Nažalost imamo previše posla, tako puno životinja treba našu pomoć...
++ {operation_better_park_started}[Hoćete li doći na prosvjed za uređenje parka?]
+	Uređenje parka, pa to je super ideja!
+	Veći park znači više zelenih površina za naše životinje!
+	Nažalost, imamo previše posla i ne stignemo...
+	-> DONE
++ [Mogu li vam pomoći?]
+	Ti bi volontirao za nas?
+	Pa puno ti hvala, udrugama uvijek treba pomoći!
+	Hmm, što bismo ti mogli dati kao zadatak...
+	Ah, pa naravno... Treba nahraniti naše gradske vjeverice!
+	Postavili smo kućice za vjeverice na razna drveća po gradu.
+	Možeš im ostaviti žireve i lješnjake!
+	>>> ADD_ITEM: squirrel_nuts
+	>>> ADD_ITEM: squirrel_nuts
+	>>> ADD_ITEM: squirrel_nuts
+	~ lunja_gave_nuts = 1
+	-> DONE
++ [Sretno!]
+	Zapamti: životinje i čudovišta su dio iste planete i mi smo odgovorni jedno za drugo.
+	-> DONE
+
+= before_all_squirrels_satiated
+Hvala što si nam pomogao nahraniti vjeverice!
+Čini se da još nisi nahranio sve vjeverice...
+Požuri, sigurno su jako gladne!
+-> DONE
+
+= after_all_squirrels_satiated
+Sve vjeverice su nahranjene.
+Hvala na pomoći!
++ {operation_better_park_started}[Hoćete li vi sada meni pomoći i doći na prosvjed za uređenje parka?]
+	Naravno da hoćemo!
+	Veći park znači više zelenih površina za naše životinje!
+	Idemo iz ovih stopa!
+	~ lunja_gone_protesting = 1
+	-> DONE
++ [Volontiranje je baš zabavno!]
+	Drago mi je da ti se sviđa!
+	-> DONE
+
+= protesting
+Dućan je prazan...
+Sigurno su svi volonteri iz Lunje otišli na prosvjed.
+-> DONE
+
+= outro
+Lots of animals can now live in our park!
+I don't think the squirrels will need us tomorrow
+Cause they have lots of other food options available!
+-> DONE
+
+= use_item
+Ne treba nam to, hvala!
+-> DONE
+
+=== conv_student ===
+//-- STATUS : READY FOR TRANSLATION
+// A student monster who has serious issues with his homework. 
+// Afterwards you can ask him to join you in the park protests.
+//-- RELEVANT VARIABLES:
+// student_gone_protesting
+// student_homework_done
 
 {conv_type:
 	- 0: -> interact
@@ -1504,51 +2937,180 @@ Ne treba mi to, hvala! Ja samo pazim na sigurnost u prometu.
 
 = interact
 
-Opsjeo me zli smog!
-Ali sad sam opet sretno drvo!
-Hvala vam na pomoći!
--> DONE
-
-= use_item
-Zahvaljujem na poklonu!
->>> REMOVE_ITEM: {used_item}
--> DONE
-
-=== conv_mr_smog ===
-//-- STATUS: 
-
-{get_state_property("mr_smog", "is_defeated"):
-	- 0: -> angry_mr_smog
-	- 1: -> happy_mr_smog
-}
-
-= angry_mr_smog
->>> PAN_CAMERA_TO_POSITION: 672 2720
-MUHUHAHAHA
-Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
->>> RESET_CAMERA
--> DONE
-
-= happy_mr_smog
-{mr_smog_defeated:
-	- 0: -> intro
+{get_level_state():
+	- 2 : -> outro
 	- else: -> main
 }
 
-= intro
-~ mr_smog_defeated = 1
->>> UPDATE_UI: happy_tree
->>> PAN_CAMERA_TO_POSITION: 672 2720
-Ajme, sav me smog napustio!
-Sada sam ponovno sretno drvo!
-Idem natrag u svoj rodni park!
->>> SHOW: HappyTree
->>> RESET_CAMERA
+= main
+{student_gone_protesting:
+	- 0:
+		{student_homework_done:
+			- 0: -> before_student_homework_done
+			- 1: -> after_student_homework_done
+		}
+	- 1: -> protesting
+}
+
+= before_student_homework_done
+Ne mogu van!
+Moram dovršiti zadaću ali ne mogu se koncentrirati...
+Vrti mi se u glavi od svih ovih ispušnih plinova iz letećih autiju...
++ [Hoćeš da ti pomognem?]
+	Joj, stvarno ti puno hvala!
+	Ova zadaća me muči već satima.
+	-> first_question
++ [Sretno ti...]
+	Hvala, trebat će mi puno sreće...
 -> DONE
 
+// TODO : Add some actual questions here!
+
+= first_question
+Prvo pitanje: RODA PITANJE 1 MORAM PITAT BRANKU XXX
++ [A]
+	Mislim da to nije točno...
+	-> first_question
++ [B]
+	Hvala ti puno, to je točno.
+	Baš si genije, pomozi mi još s par pitanja molim te!
+	-> second_question
++ [C]
+	Mislim da to nije točno...
+	-> first_question
+
+= second_question
+Drugo pitanje: RODA PITANJE 1 MORAM PITAT BRANKU XXX
++ [A]
+	Mislim da to nije točno...
+	-> second_question
++ [B]
+	Hvala ti puno, to je točno.
+	Baš si genije, pomozi mi još samo s jednim pitanjem!
+	-> third_question
++ [C]
+	Mislim da to nije točno...
+	-> second_question
+
+= third_question
+Drugo pitanje: RODA PITANJE 1 MORAM PITAT BRANKU XXX
++ [A]
+	Mislim da to nije točno...
+	-> third_question
++ [B]
+	Hvala ti puno, to je točno.
+	Baš si genije, sve mi je sada jasno!
+	Hvala do neba!
+	~ student_homework_done = 1
+	-> after_student_homework_done
++ [C]
+	Mislim da to nije točno...
+	-> third_question
+
+= after_student_homework_done
+Još jednom puno hvala na pomoći s domaćom zadaćom!
+Ako ikad zatrebaš nešto od mene, tu sam!
++ [Nema frke, sretno u školi!]
+	Također!
+	-> DONE
++ {operation_better_park_started}[Bi li došao podržati naš prosvjed za uređenje parka?]
+	Naravno! Taj park je presitan čak i za naš mali grad.
+	Mi zaslužujemo puno veći i maestralniji park.
+	Vidimo se tamo!
+	~ student_gone_protesting = 1
+	-> DONE
+
+= protesting
+Hoćemo veći park!
+Nećemo aute!
+Od plinova iz autiju vam se zavrti u glavi i ne možete riješiti zadaću!
+-> DONE
+
+= outro
+No more dirty fumes from cars!
+Now I can do my homework outside in the park!
+I'm already done completing my homework for the remainder of this year!
+-> DONE
+
+= use_item
+Ne treba mi to...
+-> DONE
+
+=== conv_squirrel_tree ===
+//-- STATUS : READY FOR TRANSLATION
+// Squirrel trees scattered around the map with squirrels that can be fed with nuts.
+// Each tree can obviously only be fed once!
+//-- RELEVANT VARIABLES:
+// Depending on the actual squirrel tree:
+// squirrels_at_square_satiated
+// squirrels_at_lake_satiated
+// squirrels_at_mountains_satiated
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
 = main
->>> UPDATE_UI: happy_tree
-Sam ponovno sretno drvo!
+{get_squirrels_satiated(interact_id):
+	- 0: -> squirrel_not_satiated
+	- 1: -> squirrel_satiated
+}
+
+= squirrel_not_satiated
+Nasred drveta viri mala vjeveričja kućica!
+Kako slatko, unutra je mala obitelj vjeverica...
+Čini se kao da su jako gladne.
+{has_item("squirrel_nuts"):
+	- 0: -> has_no_nuts
+	- 1: -> has_nuts
+}
+
+= has_no_nuts
+Kad bih bar imao žireve za njih...
+-> DONE
+
+= has_nuts
+Srećom, volonteri iz Lunje su mi dali puno žireva.
+Evo maleni, nemojte više gladovati, uzmite malo žireva!
+>>> REMOVE_ITEM: squirrel_nuts
+~ set_squirrels_satiated(interact_id, 1)
+Opa, gladna vjeverica mi je iskočila van i uzela žir direktno iz ruke.
+Jedna gladna vjeverica manje na ovom okrutnom svijetu.
+-> DONE
+
+= squirrel_satiated
+Vjeverice se čine sretno i sito.
+Ako im dam previše žireva postat će debele i nesretne.
+Moj moto je: Svakome prema njegovim potrebama.
+{has_item("squirrel_nuts"):
+	- 1: -> find_other_squirrel_tree
+}
+-> DONE
+
+= find_other_squirrel_tree
+Sigurno uokolo ima još drveća s gladnim vjevericama.
+-> DONE
+
+= outro
+The squirrels inside of this little house look happy and healthy!
+I guess there's enough food now for these squirrels to survive without Lunja's aid!
+-> DONE
+
+= use_item
+{used_item:
+	- "squirrel_nuts": -> interact
+	- else: -> default
+}
+
+= default
+Mislim da to nije dobra hrana za vjeverice.
 -> DONE
 
 //--
@@ -1559,7 +3121,6 @@ Sam ponovno sretno drvo!
 Ovo je Slagačev bicikl!
 Vau, otpuhan je skroz do tu...
 Bolje da mu ga odnesem.
-~ bike_quest_completed = 1
 -> DONE
 
 === conv_trash_bag ===
@@ -1583,16 +3144,16 @@ Možda najbolje da je bacim u smeće.
 
 === conv_fence_at_turbine ===
 // A fence piece lying next to the wind farm.
+~ player_received_turbine_fence = true
 Vau, ovaj komad ograde otpuhan je skroz do tu...
 Bolje da ga odnesem nazad do parka.
-~ turbine_fence_received = true
 -> DONE
 
 === conv_fence_at_smog ===
 // A fence piece lying in the smoggy part of town.
+~ player_received_smog_fence = 1
 Komadić ograde! Gotovo da mi je izmaknuo u ovom smogu!
 Najbolje da ga odnesem Solid Snejku!
-~ smog_fence_received = true
 -> DONE
 
 //--
@@ -1610,7 +3171,6 @@ Greškica.
 -> DONE
 
 = use_item
-
 {used_item:
 	- "bike": -> bike
 	- "battery": -> battery
@@ -1627,26 +3187,40 @@ Greškica.
 }
 
 = bike
-{get_state_property("player", "entered_bike"):
-	- 0: -> first_time_bike
+{player_solved_bike_question:
+	- 0: -> bike_question
 	- 1: 
-	{get_state_property("player", "on_bike"):
+	{player_on_bike:
 		- 0: -> hop_on_bike
 		- 1: -> step_off_bike
 	}
 }
 
 = step_off_bike
->>> SET_STATE_PROPERTY: player on_bike 0
+~ player_on_bike = 0
 Dosta je bilo bicikla za sada.
 -> DONE
 
 = hop_on_bike
->>> SET_STATE_PROPERTY: player on_bike 1
+{dog_walking_started && not dog_walking_completed:
+	1: -> with_dog
+}
+{player_inside_appartment:
+	1: -> inside_appartment
+}
+~ player_on_bike = 1
 Vrijeme je za malo bicikliranja!
 -> DONE
 
-= first_time_bike
+= with_dog
+I can't drive my bike when I'm walking this dog!
+-> DONE
+
+= inside_appartment
+I can't drive my bike inside of people's houses!
+-> DONE
+
+= bike_question
 Drago mi je da mi je Slug dopustio da koristim njegov bicikl.
 Ali zbog sigurnosti u prometu mogu ga koristiti samo u određenim situacijama.
 - (multiple_choice)
@@ -1659,7 +3233,7 @@ Gdje sve smijem koristiti bicikl?
 + [Na biciklističkim stazama i po parkovima.] 
 	Da, tako je!
 	To je najtočnije.
-	>>> SET_STATE_PROPERTY: player entered_bike 1
+	~ player_solved_bike_question = 1
 	-> hop_on_bike
 + [Po biciklističkim stazama, parkovima i preko bilo koje zebre, ali ne po pločniku i kolniku.] 
 	Mislim da ne smijem ići preko bilo koje zebre...
@@ -1714,14 +3288,15 @@ I need to search for trees with squirrel houses!
 Pitam se što da radim s ovim?
 -> DONE
 
-=== conv_first_time_gummy ===
+=== conv_gummy ===
 Uhuhuh, što je ovo posvuda na podu?!
 Ljepljive žvakaće gume? Fuj!
 Morat ću usporiti dok se tu šetam...
 Možda bi bilo lakše biciklom.
+~ player_noted_gummy = 1
 -> DONE
 
-=== conv_first_time_zebra ===
+=== conv_zebra ===
 Kako prelazim zebru?
 Ovo je važno da me ne pregaze auti!
 - (multiple_choice)
@@ -1730,16 +3305,16 @@ Ako se točno sjećam, da sigurno prijeđem preko zebre, moram...
 	...
 	Ne, preko zebre se nikada ne trči! To je jako opasno.
 	-> multiple_choice
-+ [Pogledati lijevo, desno, pa opet lijevo i onda prijeći!] 
++ [Pogledati lijevo, desno, pa opet lijevo i onda prijeći!]
 	Da, tako je!
 	Lijevo-desno-lijevo! I onda opet na pola zebre!
+	~ player_solved_zebra_question = 1
 	-> DONE
 + [Pogledati desno, pa lijevo pa opet desno i onda prijeći!] 
 	Ne, nije dobro, mislim da sam pogriješio smjer...
 	-> multiple_choice
 
-=== conv_first_time_traffic_lights ===
-
+=== conv_traffic_lights ===
 Tu su sada neki semafori!
 Skroz sam zaboravio kako prelaziti preko zebre dok radi semafor...
 - (multiple_choice)
@@ -1748,718 +3323,12 @@ Kako se ono prelazi cesta koja ima semafore?
 	...
 	Ne, to nije točno.
 	-> multiple_choice
-+ [Čekati da na pješačkom semaforu bude zeleno i onda prijeći.] 
++ [Čekati da na pješačkom semaforu bude zeleno i onda prijeći.]
 	Da, tako je!
 	Točno to trebam napraviti.
+	~ player_solved_traffic_lights_question = 1
 	-> DONE
 + [Čekati da na semaforu za aute bude zeleno i onda prijeći.] 
 	Ne bi li to značilo da će me auti pregaziti jer je njima zeleno?
 	Moram bolje promisliti.
 	-> multiple_choice
-
-=== conv_flower_box ===
-//-- STATUS:
-// Here you can plant the rose seeds you get from the shop and this pleases Rosalina.
-// The police officer will appear here and disagree with your actions, but won't interfere.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{get_state_property(interact_id, "has_rose_seeds"):
-	- 0: -> has_no_rose_seeds
-	- 1: -> has_rose_seeds
-}
-
-= has_rose_seeds
-The roses smell nice and look good!
-A fine addition to the building's facade!
--> DONE
-
-= has_no_rose_seeds
-The fertile soil yearns to be used!
--> DONE
-
-= use_item
-
-{used_item:
-	- "rose_seeds": -> rose_seeds
-	- else: -> default
-}
-
-= rose_seeds
-The monster roses grow immediately in the fertile soil.
->>> SET_STATE_PROPERTY: flower_box has_rose_seeds 1
->>> REMOVE_ITEM: rose_seeds
-~ flower_quest_completed = 1
--> DONE
-
-= default
-I don't think this is plantable?
--> DONE
-
-=== conv_dog_trainer_club ===
-//-- STATUS:
-// These guys ask you questions about training dogs and then ask you to walk a dog for them.
-// Afterwards you can ask her to join you in the park protests.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{dog_trainer_club_gone_protesting:
-	- 0:
-		{test_quest_started:
-			- 0: -> intro
-			- 1:
-				{test_quest_completed:
-					- 0: -> before_test_quest_completed
-					- 1:
-						{dog_quest_started:
-							- 0: -> after_test_quest_completed
-							- 1:
-								{dog_quest_completed:
-									- 0: -> before_dog_quest_completed
-									- 1: -> after_dog_quest_completed
-								}
-						}
-				}
-		}
-	- 1: -> protesting
-}
-
-= intro
-Hello! Welcome to the Dog Trainer's club!
-We train dogs for therapeutic purposes.
-These dogs are invaluable for blind people and other people with disabilities!
-You look like a thrustworthy kid, would you be willing to help us out?
-+ [Actually I don't think I have time right now...]
-	That's too bad!
-	Please do come back whenever you change your mind!
-	-> DONE
-+ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
-	Here's the deal: You help us out, and we help you out?
-	Sounds good to you? OK!
-	-> before_test_quest_started
-+ [It would be my honor.]
-	-> before_test_quest_started
-
-= before_test_quest_started
-See these dogs need to be walked daily and you look like just the person to do it!
-But before that... we'll need to make sure you know what you are doing!
-We have a few questions that will test your dog knowledge to the limits.
-Are you ready to become a certified junior dog trainer?
--> after_test_quest_started
-
-= before_test_quest_completed
-Welcome again! Would you like to try the test again?
--> after_test_quest_started
-
-= after_test_quest_started
-++ [Bring it on!]
-	Okay, lets go through the test together.
-	~ test_quest_started = 1
-	-> start_dog_test
-++ [Maybe later?]
-	That's also okay for me!
-	Please do come back any time you wish!
-	-> DONE
-
-= start_dog_test
-The first question to become a certified junior dog trainer is the following:
-...
-+ [A]
-	-> wrong_answer
-+ [B]
-	-> second_question
-+ [C]
-	-> wrong_answer
-
-= second_question
-+ [A]
-	-> wrong_answer
-+ [B]
-	-> third_question
-+ [C]
-	-> wrong_answer
-
-= third_question
-+ [A]
-	-> wrong_answer
-+ [B]
-	That's the correct answer!
-	It seems that you truly have what it takes to become a dog trainer!
-	You are now a certified junior dog trainer! Congratulations!
-	~ test_quest_completed = 1
-	-> after_test_quest_completed
-+ [C]
-	-> wrong_answer
-
-= wrong_answer
-That's completely wrong!
-I'm afraid I'll have to stop the test here.
-Don't worry though: you can try to take the test again anytime!
--> DONE
-
-= after_test_quest_completed
--> DONE
-
-= before_dog_quest_completed
--> DONE
-
-= after_dog_quest_completed
--> DONE
-
-= protesting
-Hello? Ah it's you!
-Everyone has gone protesting!
-I'm just making sure the dogs are okay.
--> DONE
-
-= use_item
-We don't have any need for that!
--> DONE
-
-=== conv_park_lovers ===
-//-- STATUS:
-// The park crowd wants you to design a poster for them.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-We love the park!
-We are searching for aspiring designers to make a poster for our campaign!
-Would you be interested in designing a poster for us?
-+ [Yes! I'm an expert at making posters]
-	Perfect! Here's a blank canvas!
-	Tell me when you are done with the design!
-	-> start_poster_minigame
-+ [No, I'll pass on this opportunity!]
-	Oh... well someone else will come along then!
-	-> DONE
-
-= start_poster_minigame
-	>>> BEGIN_MINIGAME: poster_minigame
-	Tell me when you are done with the design!
-	+ That looks like awesome!
-		-> end_poster_minigame
-
-= end_poster_minigame
->>> END_MINIGAME
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_wheelie_appartment ===
-//-- STATUS:
-// ??
-
-{get_state_property(interact_id, "is_open"):
-	- 0: -> DONE
-	- 1: -> is_open
-}
-
-= is_open
-Vilko invited me into his appartment!
-Do I enter?
-+ [Da]
-	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
-	-> DONE
-+ [Ne]
-	Yeah, I better stay outside.
-	-> DONE
--> DONE
-
-=== conv_roda_shop ===
-//-- STATUS:
-// RODA's shop is where you can get the old man's groceries and the rose seeds.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-We are RODA, an amazing organisation that helps families with their domestic issues.
-// Some more stuff explaining about what RODA is?
-Is there anything we might be able to help you with today?
-+ [Yeah, the old man from the appartment building told me to get his groceries here?]
--> DONE
-
-= use_item
-Thanks, but we don't need this!
--> DONE
-
-=== conv_blind_guy ===
-//-- STATUS:
-// Blind guy who wants to cross the street but can't because see the traffic lights.
-// You help him cross the street and he joins you in protests for a better park.
-
-= interact
-interact
--> DONE
-
-= use_item
-use_item
--> DONE
-
-=== conv_monsters_without_borders ===
-//-- STATUS:
-// Monsters without Borders protects the civil rights of monsters big and small!
-// They ask you some questions about monster rights?
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{monsters_without_borders_quest_completed:
-	- 0: -> intro
-	- 1: -> intro
-}
-
-= intro
-Welcome to Monsters Without Borders!
-We guard the safety of every monster big or small.
--> DONE
-
-// Add some questions here!
-
-= use_item
-We don't need that!
--> DONE
-
-=== conv_rosalina ===
-//-- STATUS : READY FOR TRANSLATION
-// Rosalina wants to plant roses in front of the building, but she's afraid of authority.
-// Afterwards you can ask her to join you in the park protests.
-//-- RELEVANT VARIABLES:
-// rosalina_gone_protesting
-// flower_quest_started
-// flower_quest_completed
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{rosalina_gone_protesting:
-	- 0:
-		{flower_quest_started:
-			- 0: -> intro
-			- 1:
-			{flower_quest_completed:
-				- 0: -> before_flower_quest_completed
-				- 1: -> after_flower_quest_completed
-			}
-		}
-	- 1: -> protesting
-}
-
-= intro
-Hello! My name is Rosalina and I love flowers!
-Did you see that flower box in front of the building?
-I can't believe they forgot to plant any flowers in them!
-Could you do me a favor?
-Would it be possible to get some flower seeds from the flower store?
-Any type of flower is good!
-+ {mr_smog_defeated == 0}[Sorry, I'm on an epic quest to save my park from Mr. Smog]
-	Oh...
-	Well if you change your mind, I'll always be here...
-	-> DONE
-+ {operation_better_park_started}[Sorry, I'm trying to recruit people to protest for a better park!]
-	That sounds interesting! Parks have lots of flowers!
-	But first I would like to fix the problems with my own building.
-	Like that issue with the empty flower box...
-	-> DONE
-+ [Sure! I'll stop by the flower store and get some seeds!]
-	My hero!
-	I think you can get some rose seeds in the "Super Roda" store.
-	This building will look much more beautiful with some flowers in that box.
-	~ flower_quest_started = 1
-	-> DONE
-
-= before_flower_quest_completed
-You can find some rose seeds in the "Super Roda"!
-I think they were giving them away for free if I remember correctly?
-Please get them quickly before supply runs out!
--> DONE
-
-= after_flower_quest_completed
-A thousand times thanks!
-You can't believe how happy this makes me!
-+ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
-	Oh my! I would be delighted to!
-	I will explicitly demand that they add flowers to the park!
-	Becuase this is my only personality trait!
-	See you in the park!
-	~ rosalina_gone_protesting = 1
-	-> DONE
-+ [It was my pleasure!]
-	-> DONE
-
-= protesting
-Give us roses! Give us tulips!
-Give us all the flowers!
--> DONE
-
-= use_item
-{used_item:
-	- "rose_seeds": -> rose_seeds
-	- else: -> default
-}
-
-= rose_seeds
-Oh! Rose seeds! I love those!
-Could you go and plant them in the flower box?
-I would do it, but I'm scared of the policija...
--> DONE
-
-= default
-I'm flattered, but I can't accept that.
--> DONE
-
-=== conv_bell_old_man ===
-//-- STATUS : READY FOR TRANSLATION
-// The old man wants his groceries so you deliver them?
-// Afterwards you can ask him to join you in the park protests.
-//-- RELEVANT VARIABLES:
-// old_man_gone_protesting
-// grocery_quest_completed
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{old_man_gone_protesting:
-	- 0:
-		{grocery_quest_completed:
-			- 0: -> intro
-			- 1: -> after_grocery_quest_completed
-		}
-	- 1: -> protesting
-}
-
-= intro
-HELLO?
-Are you here to deliver my groceries?
-+ {has_item("grocery_bag")}[Here are your groceries, sir!]
-	~ grocery_quest_completed = 1
-	-> grocery_bag
-+ [No, I'm just your friendly neighborhood monster.]
-	Come back when you get me my groceries!
-	They were to be delivered almost an hour ago!
-	You can get them at the "Super Roda" in the shopping square!
-	'click'
-	-> DONE
-+ [Quietly walk away...]
-	HELLO? IS ANYONE THERE?
-	...
-	'click'
-	-> DONE
-
-= after_grocery_quest_completed
-Are you still standing here?
-Do you need something from me, young monster?
-+ [Actually, I'm searching for some protesters to demand for a better park.]
-	Ah... and you want me to come and protest with you?
-	I do think that we deserve a much better park than the tiny one we got!
-	I'll be there to protest with you!
-	See you there!
-	~ old_man_gone_protesting = 1
-	-> DONE
-+ [Nope, I'll be running along now!]
-	Okay! Have fun doing your kid stuff!
-	-> DONE
-
-= protesting
-...
-....
-'click'
-I don't think there's anyone home?
-Didn't he say he was going to join the protests?
--> DONE
-
-= use_item
-
-{used_item:
-	- "grocery_bag": -> grocery_bag
-	- else: -> default
-}
-
-= grocery_bag
-Hey! Those are my groceries!
->>> REMOVE_ITEM: grocery_bag
-Did you go all the way and bring them from the "Super Roda"?
-It seems chivalry isn't dead just yet! Thanks!
-If you ever need a favor in return, be sure to ask!
-{operation_better_park_started:
-	0: -> DONE
-	1: -> after_grocery_quest_completed
-}
-
-= default
-Those aren't my groceries!
--> DONE
-
-=== conv_animal_protection_services ===
-//-- STATUS : READY FOR TRANSLATION
-// These guys ask you to go and feed  all of the squirrel houses scattered across the map.
-// Afterwards you can ask them to join you in the park protests.
-//-- RELEVANT VARIABLES:
-// lunja_gone_protesting
-// feeding_quest_started
-// feeding_quest_completed
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{lunja_gone_protesting:
-	- 0:
-		{feeding_quest_started:
-			- 0: -> intro
-			- 1:
-			{feeding_quest_completed:
-				- 0: -> before_feeding_quest_completed
-				- 1: -> after_feeding_quest_completed
-			}
-		}
-	- 1: -> protesting
-}
-
-= intro
-Hello! We are Lunja, the animal protection services.
-Wherever there is an animal in need, we are there to help them!
-Currently we are swamped with work! Soo many animals to protect and so little time!
-+ {operation_better_park_started}[Would you be willing to help me protest for a better park?]
-	Oh! That sounds like an awesome idea!
-	A bigger park means more space for animals in our midst!
-	But... unfortunately we are drowning in work lately...
-	Maybe next time?
-	-> DONE
-+ [Can I help the animal cause?]
-	That would be amazing!
-	Yes, we are always looking for more people to help us protect the animals.
-	Let's see what kind of task I can give you...
-	Ah! The squirrels haven't been fed yet!
-	All around the city we placed squirrel houses onto trees.
-	Please go around and feed the squirrels some of deez nuts.
-	>>> ADD_ITEM: squirrel_nuts
-	>>> ADD_ITEM: squirrel_nuts
-	>>> ADD_ITEM: squirrel_nuts
-	~ feeding_quest_started = 1
-	-> DONE
-+ [I'll leave you to it then!]
-	Remember: Animals are our friends!
-	-> DONE
-
-= before_feeding_quest_completed
-Hello! Thanks again for helping us out with the squirrels!
-{has_item("squirrel_nuts"):
-	- 0: -> after_feeding_quest_completed
-	- 1: -> feeding_in_progress
-}
-
-= feeding_in_progress
-Seems like you still have some squirrels left to feed...
-Quickly now, before those poor creatures starve!
--> DONE
-
-= after_feeding_quest_completed
-All the squirrels have been fed!
-You have no idea how much this helps our cause!
-~ feeding_quest_completed = 1
-+ {operation_better_park_started}[Would you be willing to help me protest for a better park?]
-	Oh! That sounds like an awesome idea!
-	A bigger park means more space for animals in our very midst!
-	And I see here that we are done with today's tasks!
-	Let's do some protesting!
-	~ lunja_gone_protesting = 1
-	-> DONE
-+ [Glad to have been of service to cause]
-	Remember: animals are our friends!
-	-> DONE
-
-= protesting
-The store is empty...
-I guess the Lunja volunteers went protesting in the park?
--> DONE
-
-= use_item
-We don't need that!
--> DONE
-
-=== conv_student ===
-//-- STATUS : READY FOR TRANSLATION
-// A student monster who has serious issues with his homework. 
-// Afterwards you can ask him to join you in the park protests.
-//-- RELEVANT VARIABLES:
-// student_gone_protesting
-// homework_quest_completed
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-
-{student_gone_protesting:
-	- 0:
-		{homework_quest_completed:
-			- 0: -> intro
-			- 1: -> after_homework_quest_completed
-		}
-	- 1: -> protesting
-}
-
-= intro
-Sorry! I don't have time to come and play outside...
-I have to finish my homework, but I can't concentrate!
-And my head is woozy from all the fumes those cars make!
-+ [I can help you if you want?]
-	Really? Yeah, that would be awesome!
-	This homework has been tormenting me for hours now!
-	-> first_question
-+ [I'll leave you to it then...]
-	Yes, let me concentrate in peace!
--> DONE
-
-// TODO : Add some actual questions here!
-
-= first_question
-Ok, so the first question is ...
-+ [A]
-	-> first_question
-+ [B]
-	Let's see...
-	Yes! That checks out! You are a genius!
-	Onto the next question... this one is even harder!
-	-> second_question
-+ [C]
-	-> first_question
-
-= second_question
-Ok, so the second question is ...
-+ [A]
-	-> second_question
-+ [B]
-	Let's see...
-	Yes! That checks out! You are a genius!
-	Onto the next question... this one is even harder!
-	-> third_question
-+ [C]
-	-> second_question
-
-= third_question
-Ok, so the third question is ...
-+ [A]
-	-> third_question
-+ [B]
-	Let's see...
-	Yes! That checks out! You are a genius!
-	That's all of the questions!
-	I'm finally done!
-	~ homework_quest_completed = 1
-	-> after_homework_quest_completed
-+ [C]
-	-> third_question
-
-= after_homework_quest_completed
-Thanks so much for helping me with my homework!
-If you ever need a favor from me, just tell me!
-+ [Thank you!]
-	No problem!
-	-> DONE
-+ {operation_better_park_started}[Actually... would you be willing to protest together with me for a better park?]
-	Certainly! That park is way too small!
-	We, the people, deserve something much bigger and majestic!
-	I'll be there to demand a bigger park!
-	~ student_gone_protesting = 1
-	-> DONE
-
-= protesting
-We demand a better park now!
-Remove all the cars! 
-Their fumes make our heads all woozy and stop me from doing my homework! 
--> DONE
-
-= use_item
-I don't need this!
--> DONE
-
-=== conv_squirrel_tree ===
-//-- STATUS : READY FOR TRANSLATION
-// Squirrel trees scattered around the map with squirrels that can be fed with nuts.
-
-{conv_type:
-	- 0: -> interact
-	- 1: -> use_item
-}
-
-= interact
-{get_state_property(interact_id, "has_squirrel_nuts"):
-	- 0: -> squirrel_hungry
-	- 1: -> squirrel_satiated
-}
-
-= squirrel_hungry
-This tree has a squirrel's house!
-I can vaguely see some squirrels huddled inside, but I can't reach.
-These creatures look like they are starving.
-{has_item("squirrel_nuts"):
-	- 0: -> has_no_nuts
-	- 1: -> has_nuts
-}
-
-= has_no_nuts
-If only I had some food to give to these poor animals...
--> DONE
-
-= has_nuts
-Luckily, the Animal Protection Services gave me some nuts!
-Let's feed these poor animals.
->>> REMOVE_ITEM: squirrel_nuts
->>> SET_STATE_PROPERTY: {interact_id} has_squirrel_nuts 1
-A hungry squirrel came out and ate my nuts!
-That's one squirrel that won't go hungry today!
--> DONE
-
-= squirrel_satiated
-The squirrels in the squirrel's house look satiated and happy.
-Giving these animals any more nuts will just make them fat and lazy.
-{has_item("squirrel_nuts"):
-	- 1: -> find_other_squirrel_tree
-}
--> DONE
-
-= find_other_squirrel_tree
-I'll have to find another tree with squirrels that haven't been fed yet.
--> DONE
-
-= use_item
-
-{used_item:
-	- "squirrel_nuts": -> interact
-	- else: -> default
-}
-
-= default
-I don't think I can feed this to the squirrels!
--> DONE

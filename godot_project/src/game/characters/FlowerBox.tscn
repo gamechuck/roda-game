@@ -16,7 +16,7 @@ id = "flower_box"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
-animation = "has_rose_seeds"
+animation = "rose_seeds_planted"
 offset = Vector2( 0, -16 )
 
 [node name="InteractArea" parent="." index="1"]

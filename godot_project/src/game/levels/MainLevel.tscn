@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://src/game/base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/SolidSnejk.tscn" type="PackedScene" id=2]
@@ -40,8 +40,12 @@
 [ext_resource path="res://src/game/characters/Copper.tscn" type="PackedScene" id=38]
 [ext_resource path="res://src/game/levels/MainLevel.gd" type="Script" id=39]
 [ext_resource path="res://src/game/characters/MrSmogBoss.tscn" type="PackedScene" id=40]
-[ext_resource path="res://src/game/traffic/TrafficLoop2.tscn" type="PackedScene" id=41]
+[ext_resource path="res://src/game/traffic/TrafficLoop.tscn" type="PackedScene" id=41]
 [ext_resource path="res://src/game/characters/Dog.tscn" type="PackedScene" id=42]
+[ext_resource path="res://src/game/traffic/ZebraCrossing.tscn" type="PackedScene" id=43]
+[ext_resource path="res://src/game/characters/BlindGuy.tscn" type="PackedScene" id=44]
+[ext_resource path="res://src/game/traffic/PedestrianLight.tscn" type="PackedScene" id=45]
+[ext_resource path="res://src/game/traffic/TrafficLight.tscn" type="PackedScene" id=46]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1728, 3264, 3584, 2624, 3584, 4224, 1728, 4224, 3584, 2624, 3904, 2432, 3904, 1472, 2496, 2432, 3968, 2368, 3968, 2368, 4032, 1472, 4032, 704, 2304, 704, 1600, 1152, 2496, 1152, 3136, 256, 3136, 256, 2304, 1280, 192, 1280, 1408, 512, 1408, 512, 192, 3876, 5240, 3876, 5120, 4496, 5120, 4144, 5240, 4496, 5112, 4384, 5112, 4384, 4928, 4640, 4928, 4640, 5112, 4528, 5112, 4528, 5120, 4364, 5240, 4640, 5120, 4640, 5240, 4364, 5368, 4272, 5368, 4272, 5376, 4316, 5376, 4316, 5496, 4196, 5496, 4196, 5376, 4240, 5376, 4240, 5368, 4144, 5368 )
@@ -57,7 +61,82 @@ noise = SubResource( 2 )
 
 [sub_resource type="Curve2D" id=4]
 _data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 608, 800, 0, 0, 0, 0, 608, 288, 0, 0, 0, 0, 1184, 288, 0, 0, 0, 0, 1184, 800, 0, 0, 0, 0, 608, 800 )
+}
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1248, 1376, 0, 0, 0, 0, 1248, 224, 0, 0, 0, 0, 544, 224, 0, 0, 0, 0, 544, 1376, 0, 0, 0, 0, 1248, 1376 )
+}
+
+[sub_resource type="Curve2D" id=6]
+_data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2016, 2496, 0, 0, 0, 0, 2016, 1920, 0, 0, 0, 0, 2624, 1920, 0, 0, 0, 0, 2624, 2496, 0, 0, 0, 0, 2016, 2496 )
+}
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2688, 2496, 0, 0, 0, 0, 2688, 1920, 0, 0, 0, 0, 3264, 1920, 0, 0, 0, 0, 3264, 2496, 0, 0, 0, 0, 2688, 2496 )
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 3584, 2816, 0, 0, 0, 0, 3328, 2816, 0, 0, 0, 0, 3328, 1920, 0, 0, 0, 0, 3584, 1920, 0, 0, 0, 0, 3584, 2816 )
+}
+
+[sub_resource type="Curve2D" id=9]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 3808, 3296, 0, 0, 0, 0, 3328, 3296, 0, 0, 0, 0, 3328, 2880, 0, 0, 0, 0, 3808, 2880, 0, 0, 0, 0, 3808, 3296 )
+}
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 3648, 2592, 0, 0, 0, 0, 4192, 2592, 0, 0, 0, 0, 4192, 2784, 0, 0, 0, 0, 3648, 2784, 0, 0, 0, 0, 3648, 2592 )
+}
+
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 4192, 2528, 0, 0, 0, 0, 3648, 2528, 0, 0, 0, 0, 3648, 1280, 0, 0, 0, 0, 4192, 1280, 0, 0, 0, 0, 4192, 2528 )
+}
+
+[sub_resource type="Curve2D" id=12]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 3264, 3536, 0, 0, 0, 0, 2688, 3536, 0, 0, 0, 0, 2688, 2560, 0, 0, 0, 0, 3264, 2560, 0, 0, 0, 0, 3264, 3536 )
+}
+
+[sub_resource type="Curve2D" id=13]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2656, 4864, 0, 0, 0, 0, 2656, 3616, 0, 0, 0, 0, 3296, 3616, 0, 0, 0, 0, 3296, 4864, 0, 0, 0, 0, 2656, 4864 )
+}
+
+[sub_resource type="Curve2D" id=14]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1120, 3104, 0, 0, 0, 0, 288, 3104, 0, 0, 0, 0, 288, 2336, 0, 0, 0, 0, 736, 2336, 0, 0, 0, 0, 736, 1632, 0, 0, 0, 0, 1120, 1632, 0, 0, 0, 0, 1120, 3104 )
+}
+
+[sub_resource type="Curve2D" id=15]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1952, 2848, 0, 0, 0, 0, 1504, 2848, 0, 0, 0, 0, 1504, 2528, 0, 0, 0, 0, 1760, 2528, 0, 0, 0, 0, 1760, 1920, 0, 0, 0, 0, 1952, 1920, 0, 0, 0, 0, 1952, 2848 )
+}
+
+[sub_resource type="Curve2D" id=16]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1952, 2912, 0, 0, 0, 0, 1952, 3616, 0, 0, 0, 0, 2592, 3616, 0, 0, 0, 0, 2592, 3872, 0, 0, 0, 0, 2400, 3872, 0, 0, 0, 0, 2400, 3936, 0, 0, 0, 0, 2336, 3936, 0, 0, 0, 0, 2336, 4000, 0, 0, 0, 0, 1504, 4000, 0, 0, 0, 0, 1504, 2912, 0, 0, 0, 0, 1952, 2912 )
+}
+
+[sub_resource type="Curve2D" id=17]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1696, 2464, 0, 0, 0, 0, 1184, 2464, 0, 0, 0, 0, 1184, 1632, 0, 0, 0, 0, 1696, 1632, 0, 0, 0, 0, 1696, 2464 )
+}
+
+[sub_resource type="Curve2D" id=18]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2624, 3136, 0, 0, 0, 0, 2016, 3136, 0, 0, 0, 0, 2016, 2560, 0, 0, 0, 0, 2624, 2560, 0, 0, 0, 0, 2624, 3136 )
+}
+
+[sub_resource type="Curve2D" id=19]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 3584, 1856, 0, 0, 0, 0, 1760, 1856, 0, 0, 0, 0, 1760, 512, 0, 0, 0, 0, 3584, 512, 0, 0, 0, 0, 3584, 1856 )
 }
 
 [node name="MainLevel" instance=ExtResource( 1 )]
@@ -89,7 +168,7 @@ __meta__ = {
 tile_data = PoolIntArray( 131136, 12, 0, 131137, 12, 0, 131138, 12, 0, 131140, 12, 0, 131141, 12, 0, 131142, 12, 0, 131144, 12, 0, 131145, 12, 0, 131146, 12, 0, 327691, 6, 0, 327694, 6, 0, 393226, 4, 0, 393227, 5, 0, 393230, 5, 0, 393233, 3, 0, 393280, 12, 0, 393281, 13, 0, 393282, 12, 0, 393283, 12, 0, 393284, 12, 0, 393285, 13, 0, 393286, 12, 0, 393287, 12, 0, 393288, 12, 0, 393289, 13, 0, 393290, 12, 0, 458762, 4, 0, 458763, 5, 0, 458766, 5, 0, 458769, 3, 0, 524298, 4, 0, 524299, 5, 0, 524302, 5, 0, 524305, 3, 0, 589834, 4, 0, 589835, 5, 0, 589838, 5, 0, 589841, 3, 0, 655370, 4, 0, 655371, 5, 0, 655374, 5, 0, 655377, 3, 0, 720907, 7, 0, 720910, 7, 0, 786442, 8, 0, 786449, 8, 0, 1769489, 9, 0, 1835044, 11, 0, 1835054, 11, 0, 1966099, 8, 0, 2031646, 10, 0, 2031671, 10, 0, 2359317, 9, 0, 2359322, 9, 0, 2424872, 10, 0, 2424882, 10, 0, 2490401, 11, 0, 2490414, 11, 0, 2555962, 8, 0, 2818101, 11, 0, 2818106, 11, 0, 2883613, 8, 0, 3080232, 10, 0, 3080242, 10, 0, 3145787, 9, 0 )
 
 [node name="PropsTileMap" parent="Sorted" index="0"]
-tile_data = PoolIntArray( 786464, 0, 0, 851993, 5, 0, 917527, 5, 0, 917535, 0, 0, 1048598, 0, 0, 1179679, 5, 0, 1310743, 5, 0, 1310780, 0, 0, 1376314, 0, 0, 1376315, 5, 0, 2031680, 22, 0, 2031681, 19, 0, 2031682, 19, 0, 2031683, 19, 0, 2031684, 19, 0, 2031685, 19, 0, 2031686, 18, 0, 2031687, 18, 0, 2031688, 18, 0, 2031689, 18, 0, 2031690, 18, 0, 2031691, 18, 0, 2031692, 18, 0, 2031693, 19, 0, 2031694, 19, 0, 2031695, 19, 0, 2031696, 19, 0, 2031697, 19, 0, 2031698, 18, 0, 2031699, 18, 0, 2031700, 18, 0, 2031701, 18, 0, 2031702, 18, 0, 2031703, 19, 0, 2031704, 19, 0, 2031705, 19, 0, 2031706, 19, 0, 2031707, 19, 0, 2031708, 19, 0, 2031709, 19, 0, 2031710, 18, 0, 2031711, 18, 0, 2031712, 18, 0, 2031713, 18, 0, 2031714, 18, 0, 2031715, 21, 0, 2162756, 14, 0, 2162762, 7, 0, 2162768, 6, 0, 2162773, 11, 0, 2162779, 8, 0, 2162785, 13, 0, 2228330, 0, 0, 2359400, 5, 0, 2555969, 3, 0, 2556002, 3, 0, 2621507, 536870921, 0, 2621509, 9, 0, 2621535, 536870921, 0, 2621537, 9, 0, 2621546, 5, 0, 2687036, 5, 0, 2883646, 0, 0, 3080248, 22, 0, 3080249, 19, 0, 3080250, 19, 0, 3080251, 19, 0, 3080252, 19, 0, 3080253, 19, 0, 3080254, 18, 0, 3080255, 18, 0, 3080256, 18, 0, 3080257, 18, 0, 3080258, 18, 0, 3080259, 18, 0, 3080260, 18, 0, 3080261, 21, 0, 3080286, 22, 0, 3080287, 19, 0, 3080288, 19, 0, 3080289, 19, 0, 3080290, 19, 0, 3080291, 19, 0, 3080292, 19, 0, 3080293, 19, 0, 3080294, 18, 0, 3080295, 18, 0, 3080296, 18, 0, 3080297, 18, 0, 3080298, 18, 0, 3080299, 21, 0, 3145800, 536870921, 0, 3145819, 9, 0, 3211324, 10, 0, 3211330, 7, 0, 3211363, 8, 0, 3211369, 12, 0, 3211383, 8, 0, 3211390, 7, 0, 3276872, 536870921, 0, 3276891, 9, 0, 3407944, 536870921, 0, 3407963, 9, 0, 3866668, 3, 0, 3866749, 0, 0, 3932284, 5, 0, 3997821, 5, 0, 4259911, 5, 0, 4259914, 9, 0, 4259915, 0, 0, 4390987, 5, 0, 4391037, 5, 0, 4456522, 5, 0, 4587589, 0, 0, 4718667, 5, 0, 4915246, 3, 0, 4915249, 3, 0, 4915267, 3, 0, 4915276, 3, 0, 4915286, 3, 0, 4915297, 3, 0, 5046398, 3, 0, 5505096, 5, 0, 5570686, 3, 0, 5636166, 0, 0, 5898308, 5, 0, 5898314, 0, 0, 5963845, 9, 0, 5963851, 5, 0, 6029381, 5, 0, 6029383, 5, 0, 6160498, 5, 0, 6225931, 3, 0, 6225950, 3, 0, 6225987, 3, 0, 6225996, 3, 0, 6357105, 5, 0, 6619243, 3, 0, 6619250, 3, 0, 6881347, 0, 0, 6881351, 0, 0, 6881355, 0, 0, 7012439, 3, 0, 7012448, 3, 0, 7143489, 3, 0, 7143500, 3, 0, 7798860, 3, 0, 10158220, 24, 0 )
+tile_data = PoolIntArray( 786464, 0, 0, 851993, 5, 0, 917527, 5, 0, 917535, 0, 0, 1048598, 0, 0, 1179679, 5, 0, 1310743, 5, 0, 1310780, 0, 0, 1376314, 0, 0, 1376315, 5, 0, 2031680, 22, 0, 2031681, 19, 0, 2031682, 19, 0, 2031683, 19, 0, 2031684, 19, 0, 2031685, 19, 0, 2031686, 18, 0, 2031687, 18, 0, 2031688, 18, 0, 2031689, 18, 0, 2031690, 18, 0, 2031691, 18, 0, 2031692, 18, 0, 2031693, 19, 0, 2031694, 19, 0, 2031695, 19, 0, 2031696, 19, 0, 2031697, 19, 0, 2031698, 18, 0, 2031699, 18, 0, 2031700, 18, 0, 2031701, 18, 0, 2031702, 18, 0, 2031703, 19, 0, 2031704, 19, 0, 2031705, 19, 0, 2031706, 19, 0, 2031707, 19, 0, 2031708, 19, 0, 2031709, 19, 0, 2031710, 18, 0, 2031711, 18, 0, 2031712, 18, 0, 2031713, 18, 0, 2031714, 18, 0, 2031715, 21, 0, 2162756, 14, 0, 2162762, 7, 0, 2162768, 6, 0, 2162773, 11, 0, 2162779, 8, 0, 2162785, 13, 0, 2228330, 0, 0, 2359400, 5, 0, 2555969, 3, 0, 2556002, 3, 0, 2621507, 536870921, 0, 2621509, 9, 0, 2621535, 536870921, 0, 2621537, 9, 0, 2621546, 5, 0, 2687036, 5, 0, 2687095, 8, 0, 2687102, 7, 0, 2883646, 0, 0, 2949239, 8, 0, 2949246, 7, 0, 3080248, 22, 0, 3080249, 19, 0, 3080250, 19, 0, 3080251, 19, 0, 3080252, 19, 0, 3080253, 19, 0, 3080254, 18, 0, 3080255, 18, 0, 3080256, 18, 0, 3080257, 18, 0, 3080258, 18, 0, 3080259, 18, 0, 3080260, 18, 0, 3080261, 21, 0, 3080286, 22, 0, 3080287, 19, 0, 3080288, 19, 0, 3080289, 19, 0, 3080290, 19, 0, 3080291, 19, 0, 3080292, 19, 0, 3080293, 19, 0, 3080294, 18, 0, 3080295, 18, 0, 3080296, 18, 0, 3080297, 18, 0, 3080298, 18, 0, 3080299, 21, 0, 3145800, 536870921, 0, 3145819, 9, 0, 3211324, 10, 0, 3211330, 7, 0, 3211363, 8, 0, 3211369, 12, 0, 3211383, 8, 0, 3211390, 7, 0, 3276872, 536870921, 0, 3276891, 9, 0, 3407944, 536870921, 0, 3407963, 9, 0, 3866668, 3, 0, 3866749, 0, 0, 3932284, 5, 0, 3997821, 5, 0, 4259911, 5, 0, 4259914, 9, 0, 4259915, 0, 0, 4390987, 5, 0, 4391037, 5, 0, 4456522, 5, 0, 4587589, 0, 0, 4718667, 5, 0, 4915246, 3, 0, 4915249, 3, 0, 4915267, 3, 0, 4915276, 3, 0, 4915286, 3, 0, 4915297, 3, 0, 5046398, 3, 0, 5505096, 5, 0, 5570686, 3, 0, 5636166, 0, 0, 5898308, 5, 0, 5898314, 0, 0, 5963845, 9, 0, 5963851, 5, 0, 6029381, 5, 0, 6029383, 5, 0, 6160498, 5, 0, 6225931, 3, 0, 6225950, 3, 0, 6225987, 3, 0, 6225996, 3, 0, 6357105, 5, 0, 6619243, 3, 0, 6619250, 3, 0, 6881347, 0, 0, 6881351, 0, 0, 6881355, 0, 0, 7012439, 3, 0, 7012448, 3, 0, 7143489, 3, 0, 7143500, 3, 0, 7798860, 3, 0, 10158220, 24, 0 )
 
 [node name="WallsTileMap" type="TileMap" parent="Sorted" index="1"]
 tile_set = ExtResource( 12 )
@@ -112,7 +191,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Sorted" index="2"]
-position = Vector2( 2336, 2208 )
+position = Vector2( 3280, 1760 )
 
 [node name="SolidSlug" parent="Sorted/Characters" index="0" instance=ExtResource( 3 )]
 position = Vector2( 2424, 2248 )
@@ -142,7 +221,7 @@ position = Vector2( 4512, 4976 )
 position = Vector2( 4040, 5128 )
 
 [node name="Watto" parent="Sorted/Characters" index="9" instance=ExtResource( 13 )]
-position = Vector2( 3072, 2104 )
+position = Vector2( 3024, 2208 )
 
 [node name="FlowerBox" parent="Sorted/Characters" index="10" instance=ExtResource( 14 )]
 position = Vector2( 3936, 1768 )
@@ -164,17 +243,17 @@ position = Vector2( 2976, 2736 )
 [node name="WindTurbine" parent="Sorted/Characters" index="15" instance=ExtResource( 19 )]
 position = Vector2( 896, 552 )
 
-[node name="SquirrelTreeAtMountains" parent="Sorted/Characters" index="16" instance=ExtResource( 20 )]
+[node name="SquirrelsAtMountains" parent="Sorted/Characters" index="16" instance=ExtResource( 20 )]
 position = Vector2( 768, 448 )
-id = "squirrel_tree_at_mountains"
+id = "squirrels_at_mountains"
 
-[node name="SquirrelTreeAtLake" parent="Sorted/Characters" index="17" instance=ExtResource( 20 )]
+[node name="SquirrelsAtLake" parent="Sorted/Characters" index="17" instance=ExtResource( 20 )]
 position = Vector2( 4064, 2112 )
-id = "squirrel_tree_at_lake"
+id = "squirrels_at_lake"
 
-[node name="SquirrelTreeAtSquare" parent="Sorted/Characters" index="18" instance=ExtResource( 20 )]
+[node name="SquirrelsAtSquare" parent="Sorted/Characters" index="18" instance=ExtResource( 20 )]
 position = Vector2( 1952, 1248 )
-id = "squirrel_tree_at_square"
+id = "squirrels_at_square"
 
 [node name="WheelieAppartment" parent="Sorted/Characters" index="19" instance=ExtResource( 21 )]
 position = Vector2( 4048, 1728 )
@@ -215,8 +294,26 @@ id = "canster_right"
 [node name="MrSmogBoss" parent="Sorted/Characters" index="30" instance=ExtResource( 40 )]
 position = Vector2( 704, 2720 )
 
-[node name="Dog" parent="Sorted/Characters" index="31" instance=ExtResource( 42 )]
-position = Vector2( 2288.82, 2402.51 )
+[node name="BlindGuy" parent="Sorted/Characters" index="31" instance=ExtResource( 44 )]
+position = Vector2( 2976, 1760 )
+
+[node name="RosalinaProtesting" parent="Sorted/Characters" index="32" instance=ExtResource( 7 )]
+position = Vector2( 2512, 2176 )
+protesting = true
+
+[node name="StudentProtesting" parent="Sorted/Characters" index="33" instance=ExtResource( 9 )]
+position = Vector2( 2256, 2352 )
+protesting = true
+
+[node name="HelterSkelterProtesting" parent="Sorted/Characters" index="34" instance=ExtResource( 8 )]
+position = Vector2( 2336, 2208 )
+protesting = true
+
+[node name="Copper2" parent="Sorted/Characters" index="35" instance=ExtResource( 38 )]
+position = Vector2( 3856, 1760 )
+
+[node name="Dog" parent="Sorted/Characters" index="36" instance=ExtResource( 42 )]
+position = Vector2( 3376, 1760 )
 
 [node name="Billboard" parent="Sorted/Props" index="0" instance=ExtResource( 18 )]
 position = Vector2( 2656, 1712 )
@@ -261,6 +358,69 @@ id = "trash_cup_one"
 [node name="TrashCupTwo" parent="Sorted/Pickups" index="8" instance=ExtResource( 22 )]
 position = Vector2( 4080, 1920 )
 id = "trash_cup_two"
+
+[node name="ParkToCopper" type="YSort" parent="Sorted/Lights" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PedestrianLight" parent="Sorted/Lights/ParkToCopper" index="0" instance=ExtResource( 45 )]
+position = Vector2( 2128, 2000 )
+direction = "left"
+
+[node name="PedestrianLight2" parent="Sorted/Lights/ParkToCopper" index="1" instance=ExtResource( 45 )]
+position = Vector2( 1904, 2064 )
+direction = "right"
+
+[node name="TrafficLight" parent="Sorted/Lights/ParkToCopper" index="2" instance=ExtResource( 46 )]
+position = Vector2( 1904, 2000 )
+direction = "back"
+
+[node name="TrafficLight2" parent="Sorted/Lights/ParkToCopper" index="3" instance=ExtResource( 46 )]
+position = Vector2( 2128, 2064 )
+direction = "front"
+
+[node name="LoveToParking" type="YSort" parent="Sorted/Lights" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PedestrianLight" parent="Sorted/Lights/LoveToParking" index="0" instance=ExtResource( 45 )]
+position = Vector2( 2768, 2992 )
+direction = "left"
+
+[node name="PedestrianLight2" parent="Sorted/Lights/LoveToParking" index="1" instance=ExtResource( 45 )]
+position = Vector2( 2544, 3056 )
+direction = "right"
+
+[node name="TrafficLight" parent="Sorted/Lights/LoveToParking" index="2" instance=ExtResource( 46 )]
+position = Vector2( 2544, 2992 )
+direction = "back"
+
+[node name="TrafficLight2" parent="Sorted/Lights/LoveToParking" index="3" instance=ExtResource( 46 )]
+position = Vector2( 2768, 3088 )
+direction = "front"
+
+[node name="ParkingToBike" type="YSort" parent="Sorted/Lights" index="2"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PedestrianLight" parent="Sorted/Lights/ParkingToBike" index="0" instance=ExtResource( 45 )]
+position = Vector2( 3408, 2992 )
+direction = "left"
+
+[node name="PedestrianLight2" parent="Sorted/Lights/ParkingToBike" index="1" instance=ExtResource( 45 )]
+position = Vector2( 3184, 3088 )
+direction = "right"
+
+[node name="TrafficLight" parent="Sorted/Lights/ParkingToBike" index="2" instance=ExtResource( 46 )]
+position = Vector2( 3184, 2992 )
+direction = "back"
+
+[node name="TrafficLight2" parent="Sorted/Lights/ParkingToBike" index="3" instance=ExtResource( 46 )]
+position = Vector2( 3408, 3088 )
+direction = "front"
 
 [node name="Navigation2D" parent="." index="2"]
 visible = false
@@ -311,6 +471,14 @@ id = "wheelie6"
 [node name="Wheelie7" parent="Waypoints" index="10" instance=ExtResource( 11 )]
 position = Vector2( 4016, 1796 )
 id = "wheelie7"
+
+[node name="BlindGuyBegin" parent="Waypoints" index="11" instance=ExtResource( 11 )]
+position = Vector2( 2976, 1760 )
+id = "blind_guy_begin"
+
+[node name="BlindGuyEnd" parent="Waypoints" index="12" instance=ExtResource( 11 )]
+position = Vector2( 2976, 2016 )
+id = "blind_guy_end"
 
 [node name="SafeZones" parent="." index="4"]
 visible = false
@@ -378,11 +546,148 @@ polygon = PoolVector2Array( 1696, 2624, 1696, 2688, 1664, 2688, 1664, 2720, 1632
 polygon = PoolVector2Array( 1760, 2784, 1760, 2720, 1792, 2720, 1792, 2688, 1824, 2688, 1824, 2656, 1920, 2656, 1920, 2688, 1952, 2688, 1952, 2752, 1920, 2752, 1920, 2816, 1824, 2816, 1824, 2848, 1760, 2848, 1760, 2816, 1728, 2816, 1728, 2784 )
 
 [node name="Vortex" type="Sprite" parent="." index="6"]
+visible = false
 material = ExtResource( 37 )
 position = Vector2( 904, 2440 )
 scale = Vector2( 4, 4 )
 texture = SubResource( 3 )
 
-[node name="TrafficLoop2" parent="TrafficLoops" index="0" instance=ExtResource( 41 )]
+[node name="TrafficLoops" parent="." index="7"]
+visible = false
+
+[node name="MountainLoop1" parent="TrafficLoops" index="0" instance=ExtResource( 41 )]
 curve = SubResource( 4 )
+amount_of_cars = 10
+
+[node name="MountainLoop2" parent="TrafficLoops" index="1" instance=ExtResource( 41 )]
+curve = SubResource( 5 )
+amount_of_cars = 20
+
+[node name="ParkLoop" parent="TrafficLoops" index="2" instance=ExtResource( 41 )]
+curve = SubResource( 6 )
 amount_of_cars = 8
+
+[node name="TrashLoop" parent="TrafficLoops" index="3" instance=ExtResource( 41 )]
+curve = SubResource( 7 )
+amount_of_cars = 8
+
+[node name="CansterLoop" parent="TrafficLoops" index="4" instance=ExtResource( 41 )]
+curve = SubResource( 8 )
+amount_of_cars = 8
+
+[node name="BikeLoop" parent="TrafficLoops" index="5" instance=ExtResource( 41 )]
+curve = SubResource( 9 )
+amount_of_cars = 8
+
+[node name="InterLoop" parent="TrafficLoops" index="6" instance=ExtResource( 41 )]
+curve = SubResource( 10 )
+amount_of_cars = 4
+
+[node name="LakeLoop" parent="TrafficLoops" index="7" instance=ExtResource( 41 )]
+curve = SubResource( 11 )
+amount_of_cars = 12
+
+[node name="ParkingLoop" parent="TrafficLoops" index="8" instance=ExtResource( 41 )]
+curve = SubResource( 12 )
+amount_of_cars = 10
+
+[node name="BridgeLoop" parent="TrafficLoops" index="9" instance=ExtResource( 41 )]
+curve = SubResource( 13 )
+amount_of_cars = 10
+
+[node name="BossLoop" parent="TrafficLoops" index="10" instance=ExtResource( 41 )]
+curve = SubResource( 14 )
+amount_of_cars = 20
+
+[node name="CopperLoop" parent="TrafficLoops" index="11" instance=ExtResource( 41 )]
+curve = SubResource( 15 )
+amount_of_cars = 6
+
+[node name="HelterSkelterLoop" parent="TrafficLoops" index="12" instance=ExtResource( 41 )]
+curve = SubResource( 16 )
+amount_of_cars = 8
+
+[node name="SmogLoop" parent="TrafficLoops" index="13" instance=ExtResource( 41 )]
+curve = SubResource( 17 )
+amount_of_cars = 8
+
+[node name="LoveLoop" parent="TrafficLoops" index="14" instance=ExtResource( 41 )]
+curve = SubResource( 18 )
+amount_of_cars = 8
+
+[node name="SquareLoop" parent="TrafficLoops" index="15" instance=ExtResource( 41 )]
+curve = SubResource( 19 )
+amount_of_cars = 8
+
+[node name="ParkToSquare" parent="ZebraCrossings" index="0" instance=ExtResource( 43 )]
+position = Vector2( 2336, 1888 )
+extents = Vector2( 64, 160 )
+
+[node name="ParkToLove" parent="ZebraCrossings" index="1" instance=ExtResource( 43 )]
+position = Vector2( 2144, 2528 )
+extents = Vector2( 64, 160 )
+
+[node name="ParkToTrash" parent="ZebraCrossings" index="2" instance=ExtResource( 43 )]
+position = Vector2( 2656, 2400 )
+extents = Vector2( 160, 64 )
+
+[node name="SmogToBoss" parent="ZebraCrossings" index="3" instance=ExtResource( 43 )]
+position = Vector2( 1152, 1760 )
+extents = Vector2( 128, 64 )
+
+[node name="CopperToSmog" parent="ZebraCrossings" index="4" instance=ExtResource( 43 )]
+position = Vector2( 1728, 2336 )
+extents = Vector2( 128, 64 )
+
+[node name="ParkingToBike" parent="ZebraCrossings" index="5" instance=ExtResource( 43 )]
+position = Vector2( 3296, 3040 )
+extents = Vector2( 160, 64 )
+
+[node name="BikeToEmpty" parent="ZebraCrossings" index="6" instance=ExtResource( 43 )]
+position = Vector2( 3840, 3104 )
+extents = Vector2( 128, 64 )
+
+[node name="TrashToCansters" parent="ZebraCrossings" index="7" instance=ExtResource( 43 )]
+position = Vector2( 3296, 2400 )
+extents = Vector2( 160, 64 )
+
+[node name="CansterToLake" parent="ZebraCrossings" index="8" instance=ExtResource( 43 )]
+position = Vector2( 3616, 2016 )
+extents = Vector2( 160, 64 )
+
+[node name="LoveToParking" parent="ZebraCrossings" index="9" instance=ExtResource( 43 )]
+position = Vector2( 2656, 3040 )
+extents = Vector2( 160, 64 )
+
+[node name="Mountain" parent="ZebraCrossings" index="10" instance=ExtResource( 43 )]
+position = Vector2( 1136, 832 )
+extents = Vector2( 80, 128 )
+
+[node name="ParkToCopper" parent="ZebraCrossings" index="11" instance=ExtResource( 43 )]
+position = Vector2( 2016, 2016 )
+extents = Vector2( 160, 64 )
+light_color = 3
+
+[node name="CopperToSkater" parent="ZebraCrossings" index="12" instance=ExtResource( 43 )]
+position = Vector2( 1888, 2880 )
+extents = Vector2( 64, 128 )
+
+[node name="TrashToParking" parent="ZebraCrossings" index="13" instance=ExtResource( 43 )]
+position = Vector2( 2976, 2528 )
+extents = Vector2( 64, 160 )
+
+[node name="CansterToBike" parent="ZebraCrossings" index="14" instance=ExtResource( 43 )]
+position = Vector2( 3424, 2848 )
+extents = Vector2( 64, 160 )
+
+[node name="InterToBike" parent="ZebraCrossings" index="15" instance=ExtResource( 43 )]
+position = Vector2( 3744, 2848 )
+extents = Vector2( 64, 160 )
+
+[node name="LakeToInter" parent="ZebraCrossings" index="16" instance=ExtResource( 43 )]
+position = Vector2( 3744, 2560 )
+extents = Vector2( 64, 128 )
+
+[node name="TrashToSquare" parent="ZebraCrossings" index="17" instance=ExtResource( 43 )]
+position = Vector2( 2976, 1888 )
+extents = Vector2( 64, 160 )

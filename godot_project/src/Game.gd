@@ -1,22 +1,20 @@
 extends Control
 
-enum STATE {INTRO = 0, MAIN = 1, OUTRO = 2}
-
 var _level_flow := {
 	"intro": {
 		"packed_scene": preload("res://src/game/levels/IntroLevel.tscn"),
-		"state": STATE.INTRO
+		"state": State.LEVEL.INTRO
 		},
 	"main": {
 		"packed_scene": preload("res://src/game/levels/MainLevel.tscn"),
-		"state": STATE.MAIN
+		"state": State.LEVEL.MAIN
 		},
 	"outro": {
 		"packed_scene": preload("res://src/game/levels/OutroLevel.tscn"),
-		"state": STATE.OUTRO
+		"state": State.LEVEL.OUTRO
 		}
 	}
-var _level_state : int = STATE.INTRO
+var smog_material := preload("res://assets/materials/smog_fog_material.tres")
 
 func _ready():
 	AudioEngine.play_music("game_default")
@@ -44,7 +42,10 @@ func change_level(key : String) -> void:
 	if _level_flow.has(key):
 		var state_settings : Dictionary = _level_flow[key]
 		var packed_scene : PackedScene = state_settings.packed_scene
-		_level_state = state_settings.state
+		State.level_state = state_settings.state
+
+		# Properly reset the smog material's parameters!
+		smog_material.set_shader_param("amount", 0)
 
 		for child in $ViewportContainer.get_children():
 			if child is classLevel:

@@ -8,4 +8,4 @@ var locale_dict := {
 func _ready():
 	var texture : Texture = locale_dict.get(ConfigData.locale, "hr")
 
-	$TextureRect.texture = texture
+	$VBoxContainer/TextureRect.texture = texture

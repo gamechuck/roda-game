@@ -56,11 +56,11 @@ func process_next_point():
 	elif target_index < index:
 		index -= 1
 	else:
-		if get_state_property("got_scared"):
-			set_state_property("arrived_safely", 0)
+		if local_variables.get("got_scared", 0):
+			local_variables["arrived_safely"] = 0
 		else:
-			set_state_property("arrived_safely", 1)
-		set_state_property("got_scared", 0)
+			local_variables["arrived_safely"] = 1
+		local_variables["got_scared"] = 0
 		set_physics_process(false)
 		$InteractArea.set_monitorable(true)
 		return
@@ -69,7 +69,7 @@ func process_next_point():
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.WHEELIE_MOVE_SPEED
-	if get_state_property("got_scared"):
+	if local_variables.get("got_scared", 0):
 		move_speed *= ConfigData.SCARED_MODIFIER
 	return move_speed
 
@@ -79,16 +79,16 @@ func _on_area_entered(area):
 
 	if area.get_parent() is classCanster:
 		var canster = area.get_parent()
-		if canster.get_state_property("has_trash") == 0:
+		if canster.local_variables("has_trash") == 0:
 			nav_path = PoolVector2Array()
-			set_state_property("got_scared", 1)
-			if get_state_property("going_to_house"):
-				set_state_property("going_to_house", 0)
-				set_state_property("going_to_park", 1)
+			local_variables["got_scared"] = 1
+			if local_variables.get("going_to_house", 0):
+				local_variables["going_to_house"] = 0
+				local_variables["going_to_park"] = 1
 				target_index = 0
-			elif get_state_property("going_to_park"):
-				set_state_property("going_to_house", 1)
-				set_state_property("going_to_park", 0)
+			elif local_variables.get("going_to_park", 0):
+				local_variables["going_to_house"] = 1
+				local_variables["going_to_park"] = 0
 				target_index = target_points.size() - 1
 
 func update_state(move_direction : Vector2):
@@ -122,11 +122,11 @@ func update_state(move_direction : Vector2):
 		_update_animation()
 
 func update_animation():
-	if get_state_property("going_to_house") == 1:
+	if local_variables.get("going_to_house", 0) == 1:
 		index = 0
 		target_index = target_points.size() - 1
 		set_physics_process(true)
-	elif get_state_property("going_to_park") == 1:
+	elif local_variables.get("going_to_park", 0) == 1:
 		index = target_points.size() - 1
 		target_index = 0
 		set_physics_process(true)

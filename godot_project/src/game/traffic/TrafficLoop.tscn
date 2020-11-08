@@ -1,17 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/game/traffic/TrafficLoop.gd" type="Script" id=1]
 
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 3584, 544, 0, 0, 0, 0, 3584, 1856, 0, 0, 0, 0, 1760, 1856, 0, 0, 0, 0, 1760, 544, 0, 0, 0, 0, 3584, 544 )
-}
-
-[node name="TrafficLoop" type="YSort"]
+[node name="TrafficLoop2" type="Path2D"]
+curve = null
 script = ExtResource( 1 )
-is_clockwise = false
-
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource( 1 )
-
-[node name="Cars" type="YSort" parent="."]

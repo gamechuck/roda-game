@@ -13,6 +13,7 @@ id = "wheelie_appartment"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
+animation = "wheelie_appartment_opened"
 offset = Vector2( 0, -72 )
 
 [node name="InteractArea" parent="." index="1"]

@@ -134,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Waypoint.gd"
 }, {
-"base": "YSort",
+"base": "Area2D",
 "class": "classZebraCrossing",
 "language": "GDScript",
 "path": "res://src/game/traffic/ZebraCrossing.gd"

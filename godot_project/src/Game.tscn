@@ -7,25 +7,10 @@
 [ext_resource path="res://src/UI/minigames/PosterMinigame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/DialogueUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/minigames/BrailleMinigame.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/minigames/BikeMinigame.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/TransitionsUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/UI/minigames/CarMinigame.tscn" type="PackedScene" id=21]
-
-[sub_resource type="Animation" id=1]
-resource_name = "test"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("UICanvas/GameOverlay:smog_amount")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -35,9 +20,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/test = SubResource( 1 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
@@ -69,12 +51,14 @@ visible = false
 [node name="PosterMinigame" parent="UICanvas" instance=ExtResource( 5 )]
 visible = false
 
+[node name="BrailleMinigame" parent="UICanvas" instance=ExtResource( 8 )]
+visible = false
+
 [node name="SeatSortingUI" parent="UICanvas" instance=ExtResource( 21 )]
 visible = false
 
 [node name="TransitionsUI" parent="UICanvas" instance=ExtResource( 15 )]
 visible = false
-mouse_filter = 2
 
 [node name="PauseUI" parent="UICanvas" instance=ExtResource( 7 )]
 visible = false

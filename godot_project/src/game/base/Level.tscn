@@ -109,6 +109,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Lights" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Navigation2D" type="Navigation2D" parent="."]
 __meta__ = {
 "_edit_group_": true,
@@ -131,6 +136,11 @@ __meta__ = {
 }
 
 [node name="TrafficLoops" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ZebraCrossings" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }

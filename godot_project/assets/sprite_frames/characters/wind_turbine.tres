@@ -32,6 +32,6 @@ animations = [ {
 }, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
-"name": "has_battery",
+"name": "battery_inserted",
 "speed": 60.0
 } ]

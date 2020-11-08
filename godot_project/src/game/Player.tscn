@@ -18,9 +18,10 @@ script = ExtResource( 2 )
 id = "player"
 
 [node name="AnimatedSprite" parent="." index="0"]
+position = Vector2( 0, 2 )
 frames = ExtResource( 3 )
 animation = "idle_down"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 2, -27 )
 

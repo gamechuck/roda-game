@@ -30,6 +30,12 @@ func save_stateJSON(path : String = Flow.USER_SAVE_PATH) -> int:
 
 ## STATE ######################################################################
 
+enum LEVEL {INTRO = 0, MAIN = 1, OUTRO = 2}
+
+var level_state : int = LEVEL.INTRO setget , get_level_state
+func get_level_state() -> int:
+	return level_state
+
 # Poster properties
 var foreground_image := Image.new()
 var background_color : Color
@@ -126,9 +132,6 @@ func init_characters() -> void:
 	for key in Flow.characters_data.keys():
 		var character := SCENE_CHARACTER_STATE.new()
 		character.id = key
-		character.properties = Flow.characters_data[key].get("properties", {})
-
-		character.visible = Flow.characters_data[key].get("visible", true)
 
 		if ConfigData.verbose_mode: print("Adding registered character with id '{0}' to State!".format([key]))
 		characters.append(character)

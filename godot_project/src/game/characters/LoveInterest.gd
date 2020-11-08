@@ -4,8 +4,8 @@ func _ready():
 	update_animation()
 
 func update_animation():
-	var wearing_color : int = get_state_property("wearing_color")
-	if wearing_color:
+	var player_wearing_color : int = local_variables.get("player_wearing_color", 0)
+	if not player_wearing_color:
 		_animated_sprite.play("wearing_color")
 	else:
 		_animated_sprite.play("default")

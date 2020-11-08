@@ -177,27 +177,6 @@ func _stop_dialogue() -> void:
 	if not cutscene_in_progress:
 		emit_signal("grant_player_autonomy")
 
-func get_state_property(character_id : String, property : String) -> int:
-	var character : classCharacterState = State.get_character_by_id(character_id)
-	if character:
-		var properties : Dictionary = character.properties
-		return properties.get(property, 0)
-	return 0
-
-func set_state_property(argument_values : Array) -> void:
-	var character_id : String = argument_values[0]
-	var key : String = argument_values[1]
-	var value : int = argument_values[2]
-
-	var character : classCharacterState = State.get_character_by_id(character_id)
-	if character:
-		var properties : Dictionary = character.properties
-		if properties.has(key):
-			properties[key] = value
-			character.object.update_animation()
-		else:
-			push_error("State property '{0}' is not registered in the character's state!".format([key]))
-
 func translate(original_text : String):
 	var tags : Array = story.current_tags
 	if tags.empty():
@@ -313,6 +292,7 @@ func end_minigame(_argument_values):
 	minigame = null
 
 func update_dialogue_UI(argument_values):
+# WEIRD function....
 	var character_id : String = argument_values[0]
 
 	var character : classCharacterState = State.get_character_by_id(character_id)
@@ -326,6 +306,9 @@ func start_cutscene(argument_values : Array) -> void:
 
 func respawn_player(_argument_values : Array) -> void:
 	_on_cutscene_requested("respawn")
+
+func teleport_to_waypoint(argument_values : Array):
+	_on_cutscene_requested("teleport_to_waypoint", argument_values)
 
 var external_setters : Dictionary = {
 	"TELEPORT_TO_WAYPOINT" : {
@@ -364,10 +347,6 @@ var external_setters : Dictionary = {
 	"END_MINIGAME" : {
 		"callback": funcref(self, "end_minigame"),
 		"argument_types": []
-	},
-	"SET_STATE_PROPERTY" : {
-		"callback": funcref(self, "set_state_property"),
-		"argument_types": [TYPE_STRING, TYPE_STRING, TYPE_INT]
 	},
 	"UPDATE_UI" : {
 		"callback": funcref(self, "update_dialogue_UI"),
@@ -560,8 +539,7 @@ func play_intro():
 	player._direction = player.DIRECTION.UP
 	player.update_animation()
 
-	#var smog : Sprite = Flow.game_canvas.get_node("YSort/Intro/Smog")
-
+	var smog_material := preload("res://assets/materials/smog_fog_material.tres")
 	var game_camera : Camera2D = Flow.game_camera
 
 	game_camera.track_player = false
@@ -592,7 +570,7 @@ func play_intro():
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	#_tween.interpolate_property(smog.material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	_tween.interpolate_property(smog_material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
 	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)

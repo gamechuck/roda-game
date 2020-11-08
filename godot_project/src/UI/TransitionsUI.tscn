@@ -3,13 +3,15 @@
 [ext_resource path="res://src/UI/TransitionsUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/materials/transition_material.tres" type="Material" id=2]
 
-
 [node name="TransitionsUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_horizontal_guides_": [ 106.836 ],
+"_edit_lock_": true,
 "_edit_use_anchors_": false,
 "_edit_vertical_guides_": [ 239.563 ]
 }

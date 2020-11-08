@@ -95,18 +95,10 @@ func load_story():
 	# Bind the getter functions so the story can access the game's state.
 	# Check if the player has an item in its inventory...
 	story.bind_external_function_general("has_item", State, "has_item")
-	# Get the state of the node that is participating in the dialogue.
-	story.bind_external_function_general("get_state_property", Director, "get_state_property")
 
-	# Bind an observer to some variables
-	var variable_names := ["number_of_fences_fixed", "battery_quest_completed", "player_wearing_color"]
-	story.observe_variables(variable_names, self, "_on_property_changed")
+	story.bind_external_function_general("get_level_state", State, "get_level_state")
 
 	Director.story = story
-
-func _on_property_changed(property : String, value) -> void:
-	level.set(property, value)
-	print(str("Variable '", property, "' changed to: ", value))
 
 func get_item_value(id : String, key : String, default):
 	if items_data.has(id):

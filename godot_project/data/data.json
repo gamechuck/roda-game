@@ -68,7 +68,10 @@
         "returned_bike": {
             "name": "Bike",
             "knot": "conv_returned_bike",
-            "visible": false
+            "variable_keys": [
+                "bike_returned",
+                "bike_taken"
+            ]
         },
         "taxi_at_park": {
             "name": "Taxi",
@@ -118,9 +121,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "properties": {
-                "has_trash": 0
-            }
+            "variable_keys": [
+                "canster_left_appeased"
+            ]
         },
         "canster_middle": {
             "name": "Mr. Canster",
@@ -136,9 +139,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "properties": {
-                "has_trash": 0
-            }
+            "variable_keys": [
+                "canster_middle_appeased"
+            ]
         },
         "canster_right": {
             "name": "Cansterino",
@@ -154,9 +157,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "properties": {
-                "has_trash": 0
-            }
+            "variable_keys": [
+                "canster_right_appeased"
+            ]
         },
         "copper": {
             "name": "Copper",
@@ -173,6 +176,24 @@
                 "texture": "res://roda-assets/portraits/copper.png"
             }
         },
+        "flower_copper": {
+            "name": "Lt. Copper",
+            "knot": "conv_flower_copper",
+            "portrait": {
+                "size": [
+                    256,
+                    256
+                ],
+                "position": [
+                    286,
+                    42
+                ],
+                "texture": "res://roda-assets/portraits/copper.png"
+            },
+            "variable_keys": [
+                "roda_shop_gave_seeds"
+            ]
+        },
         "happy_tree": {
             "name": "Happy Tree",
             "knot": "conv_happy_tree",
@@ -187,7 +208,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/happy_tree.png"
             },
-            "visible": true
+            "variable_keys": [
+                "mr_smog_defeated"
+            ]
         },
         "love_interest": {
             "name": "Mia",
@@ -203,9 +226,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/love_interest.png"
             },
-            "properties": {
-                "wearing_color": 1
-            }
+            "variable_keys": [
+                "player_wearing_color"
+            ]
         },
         "wheelie": {
             "name": "Vilko",
@@ -221,12 +244,11 @@
                 ],
                 "texture": "res://roda-assets/portraits/wheelie.png"
             },
-            "properties": {
-                "going_to_house": 0,
-                "going_to_park": 0,
-                "got_scared": 0,
-                "arrived_safely": 0
-            }
+            "variable_keys": [
+                "wheelie_going_to_house",
+                "wheelie_going_to_park",
+                "wheelie_got_scared"
+            ]
         },
         "mr_smog": {
             "name": "Mr. Smog",
@@ -242,39 +264,49 @@
                 ],
                 "texture": "res://roda-assets/portraits/mr_smog.png"
             },
-            "properties": {
-                "is_defeated" : 0
-            }
+            "variable_keys": [
+                "mr_smog_defeated"
+            ]
         },
         "wind_turbine": {
             "name": "Wind Turbine",
             "knot": "conv_wind_turbine",
-            "properties" : {
-                "has_battery" : 0
-            }
+            "variable_keys": [
+                "wind_turbine_powered"
+            ]
         },
         "flower_box": {
             "name": "Flower Box",
             "knot": "conv_flower_box",
-            "properties" : {
-                "has_rose_seeds" : 0
-            }
+            "variable_keys": [
+                "rose_seeds_planted"
+            ]
         },
         "rosalina": {
             "name": "Rosalina",
-            "knot": "conv_rosalina"
+            "knot": "conv_rosalina",
+            "variable_keys": [
+                "rosalina_gone_protesting"
+            ]
         },
         "bell_old_man": {
             "name": "Stari Musk",
             "knot": "conv_bell_old_man"
         },
         "dog": {
-            "name": "Dog",
-            "knot": "conv_dog"
+            "name": "Lepa",
+            "knot": "conv_dog",
+            "variable_keys": [
+                "dog_walking_started",
+                "dog_walking_completed"
+            ]
         },
         "student": {
             "name": "Student",
-            "knot": "conv_student"
+            "knot": "conv_student",
+            "variable_keys": [
+                "student_gone_protesting"
+            ]
         },
         "dog_trainer_club": {
             "name": "Dog Trainer Club",
@@ -319,30 +351,21 @@
         "wheelie_appartment": {
             "name": "Roda",
             "knot": "conv_wheelie_appartment",
-            "properties": {
-                "is_open": 1
-            }
+            "variable_keys": [
+                "wheelie_appartment_opened"
+            ]
         },
-        "squirrel_tree_at_square": {
+        "squirrels_at_square": {
             "name": "Urban tree",
-            "knot": "conv_squirrel_tree",
-            "properties": {
-                "has_squirrel_nuts": 0
-            }
+            "knot": "conv_squirrel_tree"
         },
-        "squirrel_tree_at_mountains": {
+        "squirrels_at_mountains": {
             "name": "Mountain tree",
-            "knot": "conv_squirrel_tree",
-            "properties": {
-                "has_squirrel_nuts": 0
-            }
+            "knot": "conv_squirrel_tree"
         },
-        "squirrel_tree_at_lake": {
+        "squirrels_at_lake": {
             "name": "Lake tree",
-            "knot": "conv_squirrel_tree",
-            "properties": {
-                "has_squirrel_nuts": 0
-            }
+            "knot": "conv_squirrel_tree"
         },
         "player": {
             "name": "Plavko",
@@ -358,14 +381,14 @@
                 ],
                 "texture": "res://roda-assets/portraits/player.png"
             },
-            "properties" : {
-                "on_bike" : 0,
-                "wearing_color": 0,
-                "entered_gummy": 0,
-                "entered_zebra": 0,
-                "entered_traffic_lights": 0,
-                "entered_bike": 0
-            }
+            "variable_keys": [
+                "player_wearing_color",
+                "player_on_bike",
+                "player_noted_gummy",
+                "player_solved_traffic_lights_question",
+                "player_solved_bike_question",
+                "player_solved_zebra_question"
+            ]
         },
         "helter_skelter": {
             "name": "Helter Skejter",
@@ -380,15 +403,10 @@
                     79
                 ],
                 "texture": "res://roda-assets/portraits/skater.png"
-            }
-        },
-        "intro_mr_smog": {
-            "name": "Helter Skelter",
-            "knot": "conv_helter_skelter",
-        },
-        "intro_happy_tree": {
-            "name": "Helter Skelter",
-            "knot": "conv_helter_skelter"
+            },
+            "variable_keys": [
+                "helter_skelter_gone_protesting"
+            ]
         }
     },
     "items": {

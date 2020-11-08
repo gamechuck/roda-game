@@ -4,8 +4,8 @@ func _ready():
 	update_animation()
 
 func update_animation():
-	var has_battery : int = get_state_property("has_battery")
-	if has_battery:
-		_animated_sprite.play("has_battery")
+	var battery_inserted : int = local_variables.get("battery_inserted", 0)
+	if battery_inserted:
+		_animated_sprite.play("battery_inserted")
 	else:
 		_animated_sprite.play("default")

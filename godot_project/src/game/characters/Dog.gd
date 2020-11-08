@@ -14,12 +14,29 @@ func _ready():
 	$Line2D.add_point(Vector2.ZERO)
 	$Line2D.add_point(Vector2.ZERO)
 
+	update_animation()
+
 func _physics_process(delta):
 	$Line2D.set_point_position(1, Flow.player.position - global_position)
-	emit_signal("nav_path_requested", Flow.player.position)
+
+	var player : classPlayer = Flow.player
+	var player_position : Vector2 = Flow.player.position
+
+	var player_direction : int = player._direction
+	match player_direction:
+		DIRECTION.LEFT:
+			player_position += Vector2(0, 20)
+		DIRECTION.RIGHT:
+			player_position += Vector2(0, 20)
+		DIRECTION.UP:
+			player_position += Vector2(-20, 0)
+		DIRECTION.DOWN:
+			player_position += Vector2(20, 0)
+
+	emit_signal("nav_path_requested", player_position)
 
 	var move_direction := Vector2.ZERO
-	var move_speed := 120.0
+	var move_speed := ConfigData.DOG_MOVE_SPEED
 
 	if nav_path.size() > 0:
 		var distance := position.distance_to(nav_path[0])
@@ -66,12 +83,18 @@ func update_state(move_direction : Vector2 = Vector2.ZERO):
 		update_animation()
 
 func update_animation():
-	var animations : Dictionary = default_animations.get(_direction, {})
-	animations = animations.get(_moving, {})
+	var dog_walking_started : int = local_variables.get("dog_walking_started", 0)
+	var dog_walking_completed : int = local_variables.get("dog_walking_completed", 0)
+	if dog_walking_started and not dog_walking_completed:
+		set_visible(true)
+		var animations : Dictionary = default_animations.get(_direction, {})
+		animations = animations.get(_moving, {})
 
-	_animated_sprite.play(animations.get("animation_name", "idle_down"))
-	_animated_sprite.flip_h = animations.get("flip_h", false)
-	_animated_sprite.flip_v = animations.get("flip_v", false)
+		_animated_sprite.play(animations.get("animation_name", "idle_down"))
+		_animated_sprite.flip_h = animations.get("flip_h", false)
+		_animated_sprite.flip_v = animations.get("flip_v", false)
+	else:
+		set_visible(false)
 
 var default_animations := {
 	DIRECTION.LEFT:{

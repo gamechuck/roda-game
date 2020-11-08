@@ -9,20 +9,8 @@ onready var _animated_sprite := $AnimatedSprite
 export(String) var id : String
 var state : classCharacterState
 
-func get_state_property(property : String) -> int:
-	if state:
-		if state.properties.has(property):
-			return state.properties[property]
-		else:
-			push_error("Property with name '{0}' was not defined in the character state!".format([property]))
-	return 0
-
-func set_state_property(property : String, value : int):
-	if state:
-		if state.properties.has(property):
-			state.properties[property] = value
-		else:
-			push_error("Property with name '{0}' was not defined in the character state!".format([property]))
+# Local copy of the story variables.
+var local_variables := {}
 
 func _ready():
 	add_to_group("characters")
@@ -31,7 +19,13 @@ func _ready():
 	state = State.get_character_by_id(id)
 	if state:
 		state.object = self
-		set_visible(state.visible)
+		var story : Reference = Director.story
+		var variable_keys : Array = state.variable_keys
+
+		for key in variable_keys:
+			local_variables[key] = story.variables_state.get(key)
+
+		story.observe_variables(variable_keys, self, "_on_variable_changed")
 	else:
 		push_error("Character with id '{0}' does not have a valid registered state in the context!".format([id]))
 
@@ -52,6 +46,16 @@ func set_visible(value : bool = visible):
 
 func play_sound_byte():
 	_audio_stream_player.play()
+
+func _on_variable_changed(property : String, value : int):
+	local_variables[property] = value
+	print("updating local variable '{0}' to value '{1}'".format([property, value]))
+
+	update_animation()
+
+func set_story_variable(property : String, value : int):
+	var story : Reference = Director.story
+	story.variables_state.set(property, value)
 
 func update_animation():
 	pass

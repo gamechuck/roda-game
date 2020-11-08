@@ -8,7 +8,7 @@ func _ready():
 	_interact_collision_shape_2D.shape = shape.duplicate(true)
 
 func update_animation():
-	var has_trash : int = get_state_property("has_trash")
+	var has_trash : int = local_variables.get("has_trash", 0)
 	if has_trash:
 		_animated_sprite.play("has_trash")
 		var shape = _interact_collision_shape_2D.shape

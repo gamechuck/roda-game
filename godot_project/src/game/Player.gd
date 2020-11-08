@@ -30,7 +30,6 @@ func _ready():
 
 	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
-
 	_error = _bump_area.connect("area_entered", self, "_on_bump_area_entered")
 
 	_error = connect("dialogue_requested", Director, "_on_dialogue_requested")
@@ -147,8 +146,7 @@ func _on_interact_area_entered(area):
 			nav_path = PoolVector2Array()
 	elif area is classGummy:
 		_overlapping_with_gummy = true
-		if get_state_property("entered_gummy") == 0:
-			set_state_property("entered_gummy", 1)
+		if local_variables.get("player_entered_gummy", 0) == 0:
 			update_state()
 			Director.start_knot_dialogue(self, "conv_first_time_gummy")
 		print("Player entered gummy!")
@@ -192,7 +190,7 @@ func _on_bump_area_entered(area):
 		print("Player got hit by a projectile!")
 	elif area.get_parent() is classCanster:
 		var canster = area.get_parent()
-		if canster.get_state_property("is_appeased") == 0:
+		if canster.local_variables.get("has_trash", 0) == 0:
 			# The canster is angry!!!
 			process_interaction(canster)
 			_target_entity = null
@@ -201,7 +199,7 @@ func _on_bump_area_entered(area):
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.PLAYER_MOVE_SPEED
-	if get_state_property("on_bike") == 1:
+	if local_variables.get("player_on_bike", 0) == 1:
 		move_speed *= ConfigData.BIKE_MODIFIER
 	elif _overlapping_with_gummy:
 		move_speed *= ConfigData.GUMMY_MODIFIER
@@ -238,8 +236,8 @@ func update_state(move_direction : Vector2 = Vector2.ZERO):
 		update_animation()
 
 func update_animation():
-	var wearing_color : int = get_state_property("wearing_color")
-	var on_bike : int = get_state_property("on_bike")
+	var wearing_color : int = local_variables.get("player_wearing_color", 0)
+	var on_bike : int = local_variables.get("player_on_bike", 0)
 
 	var animations := {}
 	if wearing_color:
@@ -260,44 +258,44 @@ func update_animation():
 	_animated_sprite.flip_h = animations.get("flip_h", false)
 	_animated_sprite.flip_v = animations.get("flip_v", false)
 
-var colorful_on_bike_animations := {
+var colorful_on_foot_animations := {
 	DIRECTION.LEFT:{
 		MOVING.IDLE: {
-			"animation_name": "idle_right",
+			"animation_name": "idle_right_color",
 			"flip_h": true
 		},
 		MOVING.WALK: {
-			"animation_name": "walk_right",
+			"animation_name": "walk_right_color",
 			"flip_h": true
 		}
 	},
 	DIRECTION.RIGHT:{
 		MOVING.IDLE: {
-			"animation_name": "idle_right",
+			"animation_name": "idle_right_color",
 		},
 		MOVING.WALK: {
-			"animation_name": "walk_right",
+			"animation_name": "walk_right_color",
 		}
 	},
 	DIRECTION.UP:{
 		MOVING.IDLE: {
-			"animation_name": "idle_up"
+			"animation_name": "idle_up_color"
 		},
 		MOVING.WALK: {
-			"animation_name": "walk_up"
+			"animation_name": "walk_up_color"
 		}
 	},
 	DIRECTION.DOWN:{
 		MOVING.IDLE: {
-			"animation_name": "idle_down"
+			"animation_name": "idle_down_color"
 		},
 		MOVING.WALK: {
-			"animation_name": "walk_down"
+			"animation_name": "walk_down_color"
 		}
 	}
 }
 
-var colorful_on_foot_animations := {
+var colorful_on_bike_animations := {
 	DIRECTION.LEFT:{
 		MOVING.IDLE: {
 			"animation_name": "cycle_right_idle_color",
