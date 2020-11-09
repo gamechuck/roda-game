@@ -20,11 +20,7 @@ func _ready():
 		var curve : Curve2D = parent.curve
 		if curve != null:
 			var duration : float = curve.get_baked_length()
-			if not Engine.editor_hint:
-				duration /= ConfigData.SKATER_MOVE_SPEED
-			else:
-				duration /= 1.0
-			duration /= ProjectSettings.get("physics/common/physics_fps")
+			duration /= ConfigData.SKATER_MOVE_SPEED
 
 			_tween.interpolate_method(self, "set_unit_offset", 0, 1, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			_tween.repeat = true

@@ -8,8 +8,8 @@ func update_animation():
 
 	match State.level_state:
 		State.LEVEL.MAIN:
-			var student_gone_protesting : int = local_variables.get("student_gone_protesting", 0)
-			if student_gone_protesting:
+			var old_man_gone_protesting : int = local_variables.get("old_man_gone_protesting", 0)
+			if old_man_gone_protesting:
 				animations = animations_dict.get("protesting", {})
 			else:
 				animations = animations_dict.get("default", {})
@@ -19,20 +19,21 @@ func update_animation():
 	_animated_sprite.play(animations.get("animation_name", "default"))
 	_animated_sprite.offset = animations.get("offset", Vector2.ZERO)
 
-	if animations.has("waypoint_id"):
-		var waypoint_id : String = animations.waypoint_id
-		position = Flow.get_waypoint_position(waypoint_id)
+	_animated_sprite.flip_h = animations.get("flip_h", false)
+	_animated_sprite.flip_v = animations.get("flip_v", false)
+
+	set_visible(animations.get("visible", true))
 
 var animations_dict := {
 	"default":
 		{
-			"animation_name": "default",
-			"offset": Vector2(1, -20)
+			"visible": false
 		},
 	"protesting":
 		{
-			"animation_name": "protesting",
-			"offset": Vector2(6, -34),
-			"waypoint_id": "protesting_student"
+			"animation_name": "default",
+			"offset": Vector2(-1, -36),
+			"visible": true
 		}
 }
+

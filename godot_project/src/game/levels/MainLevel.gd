@@ -33,7 +33,7 @@ func _on_variable_changed(property : String, value : int):
 func update_level():
 	for key in local_variables:
 		match key:
-			"battery_inserted":
+			"wind_turbine_powered":
 				if local_variables[key]:
 					$Vortex.visible = false
 				else:
@@ -48,8 +48,6 @@ func update_level():
 					index += 1
 			"player_wearing_color":
 				if local_variables[key]:
-					pass
-					#_copper_blockade_shape.disabled = true
+					$CopperBlockade/CollisionShape2D.disabled = true
 				else:
-					pass
-					#_copper_blockade_shape.disabled = false
+					$CopperBlockade/CollisionShape2D.disabled = false

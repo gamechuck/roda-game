@@ -18,7 +18,7 @@ func _ready():
 		remove_child(child)
 		child.queue_free()
 
-	if amount_of_cars > 0:
+	if amount_of_cars > 0 and ConfigData.DEBUG_SPAWN_CARS:
 		var offset_increment : float = 1.0/amount_of_cars
 		var next_car : classCar = null
 		var first_car : classCar = null

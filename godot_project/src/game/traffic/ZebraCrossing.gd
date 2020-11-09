@@ -62,10 +62,10 @@ func _on_timer_timeout():
 func _on_body_entered(body : PhysicsBody2D):
 	# Use the body's name instead of the class due to circular referencing!
 	if body.name == "Player":
-		if not has_traffic_lights and body.local_variables.get("player_entered_zebra", 0) == 0:
-			Director.start_knot_dialogue(body, "conv_first_time_zebra")
-		elif has_traffic_lights and body.local_variables.get("player_entered_traffic_lights", 0) == 0:
-			Director.start_knot_dialogue(body, "conv_first_time_traffic_lights")
+		if not has_traffic_lights and body.local_variables.get("player_solved_zebra_question", 0) == 0:
+			Director.start_knot_dialogue(body, "conv_zebra")
+		elif has_traffic_lights and body.local_variables.get("player_solved_traffic_lights_question", 0) == 0:
+			Director.start_knot_dialogue(body, "conv_traffic_lights")
 		player_is_inside = true
 
 func _on_body_exited(body : PhysicsBody2D):

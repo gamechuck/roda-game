@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://src/game/enemies/Skater.gd" type="Script" id=1]
+[ext_resource path="res://src/game/traffic/Skater.gd" type="Script" id=1]
 [ext_resource path="res://roda-assets/characters/skater/skater_red_ne.png" type="Texture" id=2]
 [ext_resource path="res://roda-assets/characters/skater/skater_red_nw.png" type="Texture" id=3]
 [ext_resource path="res://roda-assets/characters/skater/skater_red_sw.png" type="Texture" id=4]
@@ -19,39 +19,39 @@ atlas = ExtResource( 5 )
 region = Rect2( 100, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 50, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 100, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 50, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 100, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 50, 0, 50, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 100, 0, 50, 64 )
 
 [sub_resource type="SpriteFrames" id=13]
@@ -63,17 +63,17 @@ animations = [ {
 }, {
 "frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
-"name": "down_right",
+"name": "up_right",
 "speed": 9.0
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
-"name": "up_right",
+"name": "up_left",
 "speed": 9.0
 }, {
 "frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "up_left",
+"name": "down_right",
 "speed": 9.0
 } ]
 

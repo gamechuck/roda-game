@@ -100,6 +100,13 @@ func load_story():
 
 	Director.story = story
 
+func get_waypoint_position(waypoint_id) -> Vector2:
+	for waypoint in get_tree().get_nodes_in_group("waypoints"):
+		if waypoint.id == waypoint_id:
+			return waypoint.position
+	push_error("Waypoint with id '{0}' is invalid!".format([waypoint_id]))
+	return Vector2.ZERO
+
 func get_item_value(id : String, key : String, default):
 	if items_data.has(id):
 		var data : Dictionary = items_data[id]

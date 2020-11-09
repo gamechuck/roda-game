@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprite_frames/characters/solid_snejk.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/game/characters/SolidSnejk.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -10,13 +11,15 @@ extents = Vector2( 24, 24 )
 extents = Vector2( 16, 6 )
 
 [node name="SolidSnejk" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
 id = "solid_snejk"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 1 )
-frame = 2
+animation = "protesting"
+frame = 1
 playing = true
-offset = Vector2( 6, -21 )
+offset = Vector2( 6, -37 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 position = Vector2( 0, -10 )

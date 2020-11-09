@@ -14,7 +14,19 @@ func _ready():
 	$Line2D.add_point(Vector2.ZERO)
 	$Line2D.add_point(Vector2.ZERO)
 
+	var _error := $InteractArea.connect("area_entered", self, "_on_area_entered")
+
 	update_animation()
+
+func _on_area_entered(area : Area2D):
+	if area is classSafeZone:
+		match area.name:
+			"Lake":
+				if not local_variables.get("dog_visited_lake", 1):
+					Director.start_knot_dialogue(self, "conv_dog_at_lake")
+			"Park":
+				if not local_variables.get("dog_visited_park", 1):
+					Director.start_knot_dialogue(self, "conv_dog_at_park")
 
 func _physics_process(delta):
 	$Line2D.set_point_position(1, Flow.player.position - global_position)

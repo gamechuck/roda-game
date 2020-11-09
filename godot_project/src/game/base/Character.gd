@@ -20,12 +20,12 @@ func _ready():
 	if state:
 		state.object = self
 		var story : Reference = Director.story
-		var variable_keys : Array = state.variable_keys
+		var story_bindings : Array = state.story_bindings
 
-		for key in variable_keys:
+		for key in story_bindings:
 			local_variables[key] = story.variables_state.get(key)
 
-		story.observe_variables(variable_keys, self, "_on_variable_changed")
+		story.observe_variables(story_bindings, self, "_on_variable_changed")
 	else:
 		push_error("Character with id '{0}' does not have a valid registered state in the context!".format([id]))
 

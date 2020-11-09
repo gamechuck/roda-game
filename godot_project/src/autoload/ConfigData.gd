@@ -160,3 +160,4 @@ var PANIC_MODIFIER := 2.0
 ## DEBUG CONFIG #################################################################
 
 var DEBUG_SHOW_WAYPOINTS := true
+var DEBUG_SPAWN_CARS := true

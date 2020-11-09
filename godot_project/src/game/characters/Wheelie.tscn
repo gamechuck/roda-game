@@ -15,12 +15,11 @@ script = ExtResource( 4 )
 id = "wheelie"
 
 [node name="AnimatedSprite" parent="." index="0"]
-position = Vector2( -2.22725, -13.8089 )
 frames = ExtResource( 2 )
-animation = "walk_left"
-frame = 2
+animation = "protesting"
+frame = 3
 playing = true
-offset = Vector2( 2, -28 )
+offset = Vector2( 0, -62 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 position = Vector2( 0, -32 )

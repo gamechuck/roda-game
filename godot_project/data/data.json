@@ -14,7 +14,10 @@
                 ],
                 "texture": "res://roda-assets/portraits/solid_snejk.png",
                 "flip_h": true
-            }
+            },
+            "story_bindings": [
+                "operation_better_park_started"
+            ]
         },
         "lizzy": {
             "name": "Lizijan",
@@ -63,12 +66,15 @@
                     115
                 ],
                 "texture": "res://roda-assets/portraits/solid_slug.png"
-            }
+            },
+            "story_bindings": [
+                "operation_better_park_started"
+            ]
         },
         "returned_bike": {
             "name": "Bike",
             "knot": "conv_returned_bike",
-            "variable_keys": [
+            "story_bindings": [
                 "bike_returned",
                 "bike_taken"
             ]
@@ -121,7 +127,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "canster_left_appeased"
             ]
         },
@@ -139,7 +145,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "canster_middle_appeased"
             ]
         },
@@ -157,7 +163,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/canster.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "canster_right_appeased"
             ]
         },
@@ -190,7 +196,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/copper.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "roda_shop_gave_seeds"
             ]
         },
@@ -208,7 +214,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/happy_tree.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "mr_smog_defeated"
             ]
         },
@@ -226,8 +232,9 @@
                 ],
                 "texture": "res://roda-assets/portraits/love_interest.png"
             },
-            "variable_keys": [
-                "player_wearing_color"
+            "story_bindings": [
+                "player_wearing_color",
+                "love_interest_gone_protesting"
             ]
         },
         "wheelie": {
@@ -244,10 +251,12 @@
                 ],
                 "texture": "res://roda-assets/portraits/wheelie.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "wheelie_going_to_house",
                 "wheelie_going_to_park",
-                "wheelie_got_scared"
+                "wheelie_got_scared",
+                "wheelie_arrived_at_house",
+                "wheelie_arrived_at_park"
             ]
         },
         "mr_smog": {
@@ -264,28 +273,28 @@
                 ],
                 "texture": "res://roda-assets/portraits/mr_smog.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "mr_smog_defeated"
             ]
         },
         "wind_turbine": {
             "name": "Wind Turbine",
             "knot": "conv_wind_turbine",
-            "variable_keys": [
+            "story_bindings": [
                 "wind_turbine_powered"
             ]
         },
         "flower_box": {
             "name": "Flower Box",
             "knot": "conv_flower_box",
-            "variable_keys": [
+            "story_bindings": [
                 "rose_seeds_planted"
             ]
         },
         "rosalina": {
             "name": "Rosalina",
             "knot": "conv_rosalina",
-            "variable_keys": [
+            "story_bindings": [
                 "rosalina_gone_protesting"
             ]
         },
@@ -293,18 +302,39 @@
             "name": "Stari Musk",
             "knot": "conv_bell_old_man"
         },
+        "old_man": {
+            "name": "Stari Musk",
+            "knot": "conv_old_man",
+            "story_bindings": [
+                "old_man_gone_protesting"
+            ],
+            "portrait": {
+                "size": [
+                    256,
+                    256
+                ],
+                "position": [
+                    272,
+                    20
+                ],
+                "texture": "res://roda-assets/portraits/old_guy.png",
+                "flip_h": true
+            }
+        },
         "dog": {
             "name": "Lepa",
             "knot": "conv_dog",
-            "variable_keys": [
+            "story_bindings": [
                 "dog_walking_started",
-                "dog_walking_completed"
+                "dog_walking_completed",
+                "dog_visited_lake",
+                "dog_visited_park"
             ]
         },
         "student": {
             "name": "Student",
             "knot": "conv_student",
-            "variable_keys": [
+            "story_bindings": [
                 "student_gone_protesting"
             ]
         },
@@ -330,7 +360,19 @@
         },
         "mayor": {
             "name": "Mayor Billy",
-            "knot": "conv_outro"
+            "knot": "conv_outro",
+            "portrait": {
+                "size": [
+                    200,
+                    200
+                ],
+                "position": [
+                    308,
+                    69
+                ],
+                "texture": "res://roda-assets/portraits/mayor.png",
+                "flip_h": true
+            }
         },
         "blind_guy": {
             "name": "Blind man",
@@ -349,11 +391,15 @@
             }
         },
         "wheelie_appartment": {
-            "name": "Roda",
+            "name": "Vilko Stan",
             "knot": "conv_wheelie_appartment",
-            "variable_keys": [
+            "story_bindings": [
                 "wheelie_appartment_opened"
             ]
+        },
+        "wheelie_elevator": {
+            "name": "Vilko Lift",
+            "knot": "conv_wheelie_elevator"
         },
         "squirrels_at_square": {
             "name": "Urban tree",
@@ -381,7 +427,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/player.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "player_wearing_color",
                 "player_on_bike",
                 "player_noted_gummy",
@@ -404,7 +450,7 @@
                 ],
                 "texture": "res://roda-assets/portraits/skater.png"
             },
-            "variable_keys": [
+            "story_bindings": [
                 "helter_skelter_gone_protesting"
             ]
         }

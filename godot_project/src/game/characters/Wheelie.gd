@@ -9,15 +9,14 @@ var _moving : int = MOVING.IDLE
 var _direction : int = DIRECTION.DOWN
 
 var nav_path : PoolVector2Array = []
-
-var target_points : PoolVector2Array = [
-	Vector2(2480, 2360),
-	Vector2(3474, 2360),
-	Vector2(3424, 2248),
-	Vector2(3497, 2021),
-	Vector2(3818, 2018),
-	Vector2(4020, 1742),
-	Vector2(4020, 1767)
+var waypoint_ids : PoolStringArray = [
+	"wheelie1",
+	"wheelie2",
+	"wheelie3",
+	"wheelie4",
+	"wheelie5",
+	"wheelie6",
+	"wheelie7"
 	]
 
 var index := 0
@@ -26,19 +25,19 @@ var target_index := 0
 signal nav_path_requested
 
 func _ready():
-	var _error := _interact_area.connect("area_entered", self, "_on_area_entered")
+	var _error := _interact_area.connect("body_entered", self, "_on_body_entered")
 
 	set_physics_process(false)
 
 	_update_animation()
 
-func _physics_process(_delta):
+func _physics_process(delta : float) -> void:
 	var move_direction := Vector2.ZERO
 	var move_speed := get_move_speed()
 
 	if nav_path.size() > 0:
 		var distance := position.distance_to(nav_path[0])
-		if distance > move_speed:
+		if distance > ConfigData.WHEELIE_MOVE_SPEED * delta:
 			var new_position := position.linear_interpolate(nav_path[0], move_speed/distance)
 			move_direction = new_position - position
 		else:
@@ -48,48 +47,49 @@ func _physics_process(_delta):
 
 	update_state(move_direction)
 	var normalized_direction := move_direction.normalized()
-	var _linear_velocity := move_and_slide(normalized_direction*move_speed/_delta)
+	var _linear_velocity := move_and_slide(normalized_direction*move_speed)
 
-func process_next_point():
+func process_next_point() -> void:
 	if target_index > index:
 		index += 1
 	elif target_index < index:
 		index -= 1
 	else:
-		if local_variables.get("got_scared", 0):
-			local_variables["arrived_safely"] = 0
-		else:
-			local_variables["arrived_safely"] = 1
-		local_variables["got_scared"] = 0
+		if not local_variables.get("wheelie_got_scared", 0):
+			if local_variables.get("wheelie_going_to_house", 0):
+				set_story_variable("wheelie_arrived_at_house", 1)
+			elif local_variables.get("wheelie_going_to_park", 0):
+				set_story_variable("wheelie_arrived_at_park", 1)
+		# Reset Wheelie!
+		set_story_variable("wheelie_going_to_house", 0)
+		set_story_variable("wheelie_going_to_park", 0)
+		set_story_variable("wheelie_got_scared", 0)
+
 		set_physics_process(false)
-		$InteractArea.set_monitorable(true)
 		return
 
-	emit_signal("nav_path_requested", target_points[index])
+	var target_position : Vector2 = Flow.get_waypoint_position(waypoint_ids[index])
+	emit_signal("nav_path_requested", target_position)
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.WHEELIE_MOVE_SPEED
-	if local_variables.get("got_scared", 0):
+	if local_variables.get("wheelie_got_scared", 0):
 		move_speed *= ConfigData.SCARED_MODIFIER
 	return move_speed
 
-func _on_area_entered(area):
-	if not area:
-		return
-
-	if area.get_parent() is classCanster:
-		var canster = area.get_parent()
-		if canster.local_variables("has_trash") == 0:
+func _on_body_entered(body : CollisionObject2D):
+	if body is classCanster:
+		if not body.is_appeased():
 			nav_path = PoolVector2Array()
-			local_variables["got_scared"] = 1
-			if local_variables.get("going_to_house", 0):
-				local_variables["going_to_house"] = 0
-				local_variables["going_to_park"] = 1
+			set_story_variable("wheelie_got_scared", 1)
+			if local_variables.get("wheelie_going_to_house", 0):
+				set_story_variable("wheelie_going_to_house", 0)
+				set_story_variable("wheelie_going_to_park", 1)
 				target_index = 0
-			elif local_variables.get("going_to_park", 0):
-				local_variables["going_to_house"] = 1
-				local_variables["going_to_park"] = 0
-				target_index = target_points.size() - 1
+			elif local_variables.get("wheelie_going_to_park", 0):
+				set_story_variable("wheelie_going_to_house", 1)
+				set_story_variable("wheelie_going_to_park", 0)
+				target_index = waypoint_ids.size() - 1
 
 func update_state(move_direction : Vector2):
 	var normalized_direction := move_direction.normalized()
@@ -122,12 +122,12 @@ func update_state(move_direction : Vector2):
 		_update_animation()
 
 func update_animation():
-	if local_variables.get("going_to_house", 0) == 1:
+	if local_variables.get("wheelie_going_to_house", 0) == 1:
 		index = 0
-		target_index = target_points.size() - 1
+		target_index = waypoint_ids.size() - 1
 		set_physics_process(true)
-	elif local_variables.get("going_to_park", 0) == 1:
-		index = target_points.size() - 1
+	elif local_variables.get("wheelie_going_to_park", 0) == 1:
+		index = waypoint_ids.size() - 1
 		target_index = 0
 		set_physics_process(true)
 
@@ -141,40 +141,52 @@ func _update_animation():
 	_animated_sprite.flip_h = animations.get("flip_h", false)
 	_animated_sprite.flip_v = animations.get("flip_v", false)
 
+var protesting_animtions := {
+	"animation_name": "protesting",
+	"offset": Vector2(0, -62)
+}
+
 var default_animations := {
 	DIRECTION.LEFT:{
 		MOVING.IDLE:{
 			"animation_name": "idle_left",
-			"flip_h": true
+			"offset": Vector2(0, -42)
 		},
 		MOVING.WALK:{
-			"animation_name": "walk_left"
+			"animation_name": "walk_left",
+			"offset": Vector2(0, -42)
 		}
 	},
 	DIRECTION.RIGHT:{
 		MOVING.IDLE:{
 			"animation_name": "idle_left",
-			"flip_h": true
+			"flip_h": true,
+			"offset": Vector2(0, -42)
 		},
 		MOVING.WALK:{
 			"animation_name": "walk_left",
-			"flip_h": true
+			"flip_h": true,
+			"offset": Vector2(0, -42)
 		}
 	},
 	DIRECTION.UP:{
 		MOVING.IDLE:{
-			"animation_name": "idle_up"
+			"animation_name": "idle_up",
+			"offset": Vector2(0, -42)
 		},
 		MOVING.WALK:{
-			"animation_name": "walk_up"
+			"animation_name": "walk_up",
+			"offset": Vector2(0, -42)
 		}
 	},
 	DIRECTION.DOWN:{
 		MOVING.IDLE:{
-			"animation_name": "idle_down"
+			"animation_name": "idle_down",
+			"offset": Vector2(0, -42)
 		},
 		MOVING.WALK:{
-			"animation_name": "walk_down"
+			"animation_name": "walk_down",
+			"offset": Vector2(0, -42)
 		}
 	}
 }

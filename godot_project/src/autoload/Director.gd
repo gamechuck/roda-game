@@ -89,6 +89,9 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 			"outro":
 				play_outro()
 				yield(self, "cutscene_completed")
+			"escort_blind_guy":
+				escort_blind_guy()
+				yield(self, "cutscene_completed")
 			_:
 				push_error("Cutscene with id '{0}' was not recognized!".format([cutscene_id]))
 				pass
@@ -149,7 +152,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 		if not text.empty():
 			# Attempt a translation!
-			text = translate(text.strip_edges())
+			text = text.strip_edges()
 			Flow.dialogue_UI.update_dialogue(text)
 			Flow.dialogue_UI.show()
 			return true
@@ -161,8 +164,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 		if Director.minigame == null:
 			var choices := []
 			for choice in story.current_choices:
-				var text : String = translate(choice.text)
-				choices.append(text)
+				choices.append(choice.text)
 			Flow.dialogue_UI.update_multiple_choice(choices)
 
 		#story.choose_choice_index(0)
@@ -176,18 +178,6 @@ func _stop_dialogue() -> void:
 	emit_signal("dialogue_completed")
 	if not cutscene_in_progress:
 		emit_signal("grant_player_autonomy")
-
-func translate(original_text : String):
-	var tags : Array = story.current_tags
-	if tags.empty():
-		return original_text
-	else:
-		var msg_id : String = tags[0]
-		var translated_text : String = TranslationServer.translate(msg_id)
-		if translated_text != msg_id:
-			return translated_text
-		else:
-			return original_text
 
 ### PARSING COMMANDS
 func _parse_command(raw_text : String) -> Dictionary:
@@ -461,6 +451,71 @@ func drop_player(taxi : classCharacter):
 
 	emit_signal("cutscene_completed")
 
+func escort_blind_guy():
+	var level : classLevel = Flow.level
+
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+
+	# Gather up all the cutscene's actors!
+	var player := level.get_node("Sorted/Player")
+
+	var blind_guy := level.get_node("Sorted/Characters/BlindGuy")
+
+	var waypoint := level.get_node("Waypoints/BlindGuyBegin")
+	var position_start = waypoint.position
+
+	waypoint = level.get_node("Waypoints/BlindGuyEnd")
+	var position_stop = waypoint.position
+
+	var game_camera : Camera2D = Flow.game_camera
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	# Make sure the player isn't riding his bike!
+	story.variables_state.set("player_on_bike", 0)
+
+	game_camera.track_player = false
+	game_camera.zoom = Vector2(1.5, 1.5)
+	game_camera.position = Vector2(2336, 1888)
+
+	player.position = position_start
+	player.position.x -= 32
+
+	var duration : float = position_start.distance_to(position_stop)
+	duration /= ConfigData.PLAYER_MOVE_SPEED
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	blind_guy.update_state(Vector2.DOWN)
+	player.update_state(Vector2.DOWN)
+
+	_tween.interpolate_property(player, "position:y", position_start.y, position_stop.y, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(blind_guy, "position:y", position_start.y, position_stop.y, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	blind_guy.update_state()
+	player.update_state()
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	game_camera.track_player = true
+	game_camera.zoom = Vector2(1, 1)
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	dialogue_in_progress = update_dialogue()
+	Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
 func eat_player(canster : classCanster):
 	var player : Node2D = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
@@ -479,7 +534,7 @@ func eat_player(canster : classCanster):
 	canster_anim_sprite.play("devour_2")
 	yield(canster_anim_sprite, "animation_finished")
 
-	canster_anim_sprite.play("aggressive")
+	canster_anim_sprite.play("default")
 
 	dialogue_in_progress = update_dialogue()
 	Flow.dialogue_UI.show()
@@ -506,7 +561,7 @@ func spit_out_player(canster : classCanster):
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	canster_anim_sprite.play("aggressive")
+	canster_anim_sprite.play("default")
 
 	_tween.interpolate_property(player,"position", player.position, player.respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(anim_sprite, "position", anim_sprite.position + Vector2(0, -200), Vector2(0, -200), 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -624,6 +679,9 @@ func play_intro():
 
 func play_outro():
 	var level : classLevel = Flow.level
+
+	# Gather up all the cutscene's actors!
+	var player := level.get_node("Sorted/Player")
 
 	change_level("outro")
 

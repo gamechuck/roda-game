@@ -30,6 +30,7 @@ func _ready():
 
 	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")
 	_error = _interact_area.connect("area_exited", self, "_on_interact_area_exited")
+
 	_error = _bump_area.connect("area_entered", self, "_on_bump_area_entered")
 
 	_error = connect("dialogue_requested", Director, "_on_dialogue_requested")
@@ -146,9 +147,9 @@ func _on_interact_area_entered(area):
 			nav_path = PoolVector2Array()
 	elif area is classGummy:
 		_overlapping_with_gummy = true
-		if local_variables.get("player_entered_gummy", 0) == 0:
+		if local_variables.get("player_noted_gummy", 0) == 0:
 			update_state()
-			Director.start_knot_dialogue(self, "conv_first_time_gummy")
+			Director.start_knot_dialogue(self, "conv_gummy")
 		print("Player entered gummy!")
 	elif area is classSafeZone:
 		respawn_position = area.position
@@ -171,10 +172,20 @@ func _on_interact_area_exited(area):
 		_overlapping_with_gummy = false
 		print("Player exited gummy!")
 
-func _on_bump_area_entered(area):
+func _on_bump_area_entered(area : Area2D):
 # Stuff that should really be precise should be added here!
 	if not area:
 		return
+
+	if area.get_parent() is classCanster:
+		var canster : classCanster = area.get_parent()
+		if not canster.is_appeased():
+			# The canster is angry!!!
+			process_interaction(canster)
+			_target_entity = null
+			nav_path = PoolVector2Array()
+			print("Player got eaten by a canster!")
+
 
 	if area is classCar:
 		emit_signal("cutscene_requested", "respawn")
@@ -199,7 +210,7 @@ func _on_bump_area_entered(area):
 
 func get_move_speed() -> float:
 	var move_speed := ConfigData.PLAYER_MOVE_SPEED
-	if local_variables.get("player_on_bike", 0) == 1:
+	if local_variables.get("player_on_bike", 0):
 		move_speed *= ConfigData.BIKE_MODIFIER
 	elif _overlapping_with_gummy:
 		move_speed *= ConfigData.GUMMY_MODIFIER
@@ -405,3 +416,6 @@ var plain_on_foot_animations := {
 		}
 	}
 }
+
+
+

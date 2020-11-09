@@ -2,12 +2,12 @@ VAR number_of_fences_fixed = 0
 
 // Player
 VAR player_wearing_color = 0
-VAR player_on_bike = 1
+VAR player_on_bike = 0
 
 VAR player_noted_gummy = 0
 VAR player_solved_traffic_lights_question = 0
 VAR player_solved_bike_question = 0
-VAR player_solved_zebra_question = 0
+VAR player_solved_zebra_question = 1
 
 VAR player_inside_appartment = 0
 
@@ -44,7 +44,7 @@ VAR taxi_received_belt = 0
 
 // HelterSkelter
 VAR helter_skelter_intro_completed = 0
-VAR helter_skelter_gone_protesting = 0
+VAR helter_skelter_gone_protesting = 1
 
 // SeatSortingCar
 VAR car_quest_completed = 0
@@ -62,10 +62,10 @@ VAR rose_seeds_planted = 0
 VAR flower_copper_swayed = 0
 
 // Loveinterest
-VAR love_interest_gone_protesting = 0
+VAR love_interest_gone_protesting = 1
 
 // ParkLovers
-VAR poster_designed = 0
+VAR poster_designed = 1
 VAR park_lovers_gone_protesting = 0
 
 // RodaShop
@@ -76,7 +76,7 @@ VAR roda_shop_gave_seeds = 0
 // OldMan
 VAR old_man_requested_groceries = 0
 VAR old_man_received_groceries = 0
-VAR old_man_gone_protesting = 0
+VAR old_man_gone_protesting = 1
 
 // BlindGuy
 VAR blind_guy_accepted_aid = 0
@@ -109,7 +109,7 @@ VAR dog_visited_park = 0
 
 // Rosalina
 VAR rosalina_requested_seeds = 0
-VAR rosalina_gone_protesting = 0
+VAR rosalina_gone_protesting = 1
 
 // Dog Trainer Club
 VAR dog_test_started = 0
@@ -119,7 +119,7 @@ VAR dog_walking_completed = 0
 VAR dog_trainer_club_gone_protesting = 0
 
 // Wheelie Appartment
-VAR wheelie_appartment_opened = 0
+VAR wheelie_appartment_opened = 1
 
 // Monsters Without Borders
 VAR monsters_without_borders_joined = 0
@@ -1535,6 +1535,8 @@ Slobodno ga uzmi pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
 ~ player_received_wheelie_fence = 1
 ~ wheelie_intro_before_park_fixed_completed = 1
+Also, if you want to go inside my appartment, you are welcome to enter!
+~ wheelie_appartment_opened = 1
 -> after_wheelie_intro_before_park_fixed_completed
 
 = after_wheelie_intro_before_park_fixed_completed
@@ -1817,7 +1819,6 @@ The dog curiously sniffs the object.
 But her strict discipline stops her from gnawing on it!
 -> DONE
 
-
 == conv_dog_at_lake ===
 // -- STATUS: READY FOR TRANSLATION
 // Conversation that pops up when you arrive at the lake with the dog.
@@ -2004,6 +2005,7 @@ Flowers will be planted in those boxes when city hall comes around to it.
 		Look kid, If you really want to plant those rose seeds...
 		I'm not gonna stop you...
 		Maybe it's due time someone made those flower boxes actually useful?
+		~ flower_copper_swayed = 1
 		-> DONE
 	++ [I guess they can stay empty a bit longer then?]
 		Indeed, the bureaucracy will catch up one day and they'll plant something beautiful here.
@@ -2193,6 +2195,7 @@ Don't worry though: you can try to take the test again anytime!
 = after_dog_test_passed
 Okay! I'll allow you to walk the dog!
 ~ dog_walking_started = 1
+~ player_on_bike = 0
 This one is called Lepa! Have fun walking her!
 If you are unsure where to go, please ask her!
 She might not be able to talk, but dogs have other means of showing us where they want to go!
@@ -2253,12 +2256,13 @@ We don't have any need for that!
 
 = interact
 {get_level_state():
-	 - 2: -> outro
-	 - else: -> main
+	- 2: -> outro
+	- else: -> main
 }
 = main
 {operation_better_park_started:
 	- 0: -> before_operation_better_park_started
+	- 1:
 	{poster_designed:
 		- 0: -> before_poster_designed
 		- 1: -> after_poster_designed
@@ -2336,7 +2340,7 @@ Do I dare enter?
 		- 1: -> with_dog
 	}
 	~ player_inside_appartment = 1
-	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
+	>>> TELEPORT_TO_WAYPOINT: wheelie_elevator
 	-> DONE
 + [No, I don't like entering people's houses willy-nilly!]
 	Yeah, I better stay outside.
@@ -2457,8 +2461,8 @@ However, that doesn't stop me from wanting to go to the park!
 If only those stupid cars would stop for a second!
 + [Of course, I'll help you cross the street!]
 	Thank you kind, sir!
-	~ blind_guy_accepted_aid = 1
-	-> DONE
+	>>> PLAY_CUTSCENE: escort_blind_guy
+	-> success
 + [Apologies, I'm far too busy right now...]
 	Oh well, I guess I'll have to keep waiting here!
 	-> DONE
@@ -2471,12 +2475,6 @@ How can I ever thank you?
 Oh yes! Maybe I can show you how to write "Thank you" in Braille?
 ~ blind_guy_helped = 1
 -> show_braille
-
-= failure
-Oh! I almost got run over by a car!
-I don't think I can trust you, Sir!
-I'll just stay at the safe side until someone trustworthy comes along and helps me!
--> DONE
 
 = after_blind_guy_helped
 Oh, hello? Are you that young lad that helped me cross the street earlier?
@@ -2825,6 +2823,34 @@ Ako ti ikad zatreba neka usluga, samo me pitaj!
 
 = default
 To nisu moje namirnice.
+-> DONE
+
+=== conv_old_man ===
+//-- STATUS : READY FOR TRANSLATION
+// The old man that appears in the park to protest together with you!
+
+{conv_type:
+	- 0: -> interact
+	- 1: -> use_item
+}
+
+= interact
+{get_level_state():
+	- 2: -> outro
+	- else: -> main
+}
+
+= main
+In my days this was just a bunch of fields!
+Back to better days! Back to the fields!
+-> DONE
+
+= outro
+I reckon this park looks even better than the fields of my youth!
+-> DONE
+
+= use_item
+Bah, the junk they make these days!
 -> DONE
 
 === conv_animal_protection_services ===
@@ -3203,10 +3229,10 @@ Dosta je bilo bicikla za sada.
 
 = hop_on_bike
 {dog_walking_started && not dog_walking_completed:
-	1: -> with_dog
+	- 1: -> with_dog
 }
 {player_inside_appartment:
-	1: -> inside_appartment
+	- 1: -> inside_appartment
 }
 ~ player_on_bike = 1
 Vrijeme je za malo bicikliranja!

@@ -122,7 +122,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "classSkater",
 "language": "GDScript",
-"path": "res://src/game/enemies/Skater.gd"
+"path": "res://src/game/traffic/Skater.gd"
 }, {
 "base": "StaticBody2D",
 "class": "classTrafficLight",
@@ -221,7 +221,7 @@ texture={
 [locale]
 
 fallback="hr"
-translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po", "res://locale/story_translation.en.translation" )
+translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po" )
 translation_remaps={
 
 }

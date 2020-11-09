@@ -109,6 +109,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Skaters" type="YSort" parent="Sorted"]
+
 [node name="Lights" type="YSort" parent="Sorted"]
 __meta__ = {
 "_edit_lock_": true
@@ -136,6 +138,11 @@ __meta__ = {
 }
 
 [node name="TrafficLoops" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SkaterLoops" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }

@@ -70,6 +70,6 @@ func get_flip_v() -> bool:
 	var portrait_settings : Dictionary = Flow.get_character_value(id, "portrait", {})
 	return portrait_settings.get("flip_v", false)
 
-var variable_keys : Array setget , get_variable_keys
-func get_variable_keys() -> Array:
-	return Flow.get_character_value(id, "variable_keys", [])
+var story_bindings : Array setget , get_story_bindings
+func get_story_bindings() -> Array:
+	return Flow.get_character_value(id, "story_bindings", [])
