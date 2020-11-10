@@ -40,6 +40,7 @@ id = "old_man"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 5 )
+frame = 2
 playing = true
 offset = Vector2( -1, -36 )
 

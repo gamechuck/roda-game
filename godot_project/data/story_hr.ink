@@ -1,4 +1,4 @@
-VAR number_of_fences_fixed = 0
+VAR number_of_fences_fixed = 4
 
 // Player
 VAR player_wearing_color = 0
@@ -18,7 +18,7 @@ VAR player_received_wheelie_fence = 0
 
 // SolidSnejk
 VAR solid_snejk_intro_completed = 0
-VAR operation_better_park_started = 0
+VAR operation_better_park_started = 1
 
 VAR solid_snejk_outro_completed = 0
 
@@ -53,7 +53,7 @@ VAR car_quest_completed = 0
 VAR wind_turbine_powered = 0
 
 // MrSmog
-VAR mr_smog_defeated = 0
+VAR mr_smog_defeated = 1
 
 // FlowerBox
 VAR rose_seeds_planted = 0
@@ -66,12 +66,11 @@ VAR love_interest_gone_protesting = 1
 
 // ParkLovers
 VAR poster_designed = 1
-VAR park_lovers_gone_protesting = 0
 
 // RodaShop
-VAR roda_shop_gone_protesting = 0
 VAR roda_shop_gave_groceries = 0
 VAR roda_shop_gave_seeds = 0
+VAR roda_shop_gone_protesting = 1
 
 // OldMan
 VAR old_man_requested_groceries = 0
@@ -79,18 +78,17 @@ VAR old_man_received_groceries = 0
 VAR old_man_gone_protesting = 1
 
 // BlindGuy
-VAR blind_guy_accepted_aid = 0
 VAR blind_guy_helped = 0
-VAR blind_guy_gone_protesting = 0
+VAR blind_guy_gone_protesting = 1
 
 // Student
 VAR student_homework_done = 0
-VAR student_gone_protesting = 0
+VAR student_gone_protesting = 1
 
 // Animal Protection Services
 VAR lunja_gave_nuts = 0
 VAR squirrels_all_satiated = 0
-VAR lunja_gone_protesting = 0
+VAR lunja_gone_protesting = 1
 
 // Squirrel Tree
 VAR squirrels_at_mountains_satiated = 0
@@ -116,7 +114,7 @@ VAR dog_test_started = 0
 VAR dog_test_passed = 0
 VAR dog_walking_started = 0
 VAR dog_walking_completed = 0
-VAR dog_trainer_club_gone_protesting = 0
+VAR dog_trainer_club_gone_protesting = 1
 
 // Wheelie Appartment
 VAR wheelie_appartment_opened = 1
@@ -124,7 +122,7 @@ VAR wheelie_appartment_opened = 1
 // Monsters Without Borders
 VAR monsters_without_borders_joined = 0
 VAR monsters_without_borders_quest_completed = 0
-VAR monsters_without_borders_gone_protesting = 0
+VAR monsters_without_borders_gone_protesting = 1
 
 // Wheelie
 VAR wheelie_intro_at_park_completed = 0
@@ -237,24 +235,37 @@ AHAHAHAHA!!!
 -> DONE
 
 // OUTRO CUTSCENE
-// Will be cut into pieces later...
+=== conv_outro_intro ===
+>>> UPDATE_UI: solid_snejk
+Tko je izgasio svijetla?
+-> DONE
+
 === conv_outro ===
-What is going on here?
-WE WANT A BETTER PARK!!!
-What? Aren't you happy with the park you got?
-Is it too small?
-YES!!!
-So you all want a much bigger park?
-WE DO!
-A park with swings, slides and seesaws?
-YEEEEEEAAHHHHH!!!
-No more dirty cars everywhere?
-YEEEEEEAAHHHHH!!!
-Okay!
-It shall be done!
-Simsalabimbom!
-There you go!
-Hope you enjoy your new park!
+>>> UPDATE_UI: mayor
+Što se ovdje događa?
+>>> UPDATE_UI: solid_snejk
+MI ŽELIMO UREĐENJE PARKA!!!
+>>> UPDATE_UI: mayor
+Što? Niste sretni s parkom kojeg imate?
+Je li premali?
+>>> UPDATE_UI: love_interest
+DA!!!
+>>> UPDATE_UI: mayor
+Svi želite puno veći park?
+>>> UPDATE_UI: solid_slug
+ŽELMO!
+>>> UPDATE_UI: mayor
+Park s ljuljačkama, klackalicama i toboganima?
+>>> UPDATE_UI: wheelie
+DAAAAAAAAAAAAAA!!!
+>>> UPDATE_UI: mayor
+Bez prljavih autiju posvuda?
+>>> UPDATE_UI: happy_tree
+TAKO JEEEE!!!
+>>> UPDATE_UI: mayor
+U redu! Tako će i biti!
+Nadam se da uživaš u svom novom parku!
+Ćiribu ćiriba!
 -> DONE
 
 //--
@@ -350,13 +361,13 @@ We should organize a protest for a bigger park!
 
 = before_poster_designed
 ~ operation_better_park_started = 1
-I heard the Park Crowd guys are having a poster design contest?
+Čujem da Parkoljupci imaju natjecanje u izradi postera za park.
 >>> PAN_CAMERA_TO_POSITION: 3120 1216
-Maybe you can go and see if you can design a poster?
+Možda im možeš pomoći osmisliti poster?
 >>> RESET_CAMERA
-Also we should totally tell people to come and protest for us!
-Could you go around and ask people if they want to join our protests?
-A bigger and more beautiful park is for the good of everyone!
+Također, trebali bismo reći svima da organiziramo prosvjed!
+Možeš li prošetati gradom i svima reći da nam se pridruže?
+U većem i ljepšem parku uživat ćemo svi!
 -> DONE
 
 = after_operation_better_park_started
@@ -364,7 +375,7 @@ A bigger and more beautiful park is for the good of everyone!
 {poster_designed:
 	- 0: -> before_poster_designed
 }
-Let's see who we are still missing...
+Idemo vidjeti tko nam sve fali na prosvjedu...
 // Figure out if everyone is protesting...
 {rosalina_gone_protesting:
 	- 0: -> show_rosalina 
@@ -397,83 +408,81 @@ Let's see who we are still missing...
 	- 0: -> show_monsters_without_borders 
 }
 // If we arrived here, everyone has gone protesting and it is time to start the ending cutscene!
-Seems like enough people are here for the protest!
-Let's see if we can make a change together!
+Čini se da ima dovoljno ljudi za prosvjed!
+Idemo promijeniti svijet na bolje!
 >>> PLAY_CUTSCENE: outro
 -> DONE
 
 = show_rosalina
 >>> PAN_CAMERA_TO_POSITION: 4048 1728
-How about this flower obsessed girl that lives in Vilko's appartment?
-Maybe you can go and ask her?
-I think her name was Rosalina or something?
+Što kažeš na djevojku iz Vilkove zgrade, onu koja obožava cvijeće?
+Možda bi nam ona došla na prosvjed.
+Mislim da se zove Ružica, odi ju pitaj bi li nam pomogla.
 >>> RESET_CAMERA
 -> DONE
 
 = show_old_man
 >>> PAN_CAMERA_TO_POSITION: 4048 1728
-There's this old man living in Vilko's appartment that might be able to help.
-He's a bit grumpy though, so he won't be easily swayed!
-But we do need all the help we can get!
+Ima onaj jedan stari gospodin u Vilkovok zgradi koji bi nam mogao pomoći.
+Malo je mrgud ali je dobar u duši, odi ga pitaj bi li nam pomogao.
 >>> RESET_CAMERA
 -> DONE
 
 = show_student
 >>> PAN_CAMERA_TO_POSITION: 4048 1728
-I remember there being a student living in Vilko's appartment!
-I don't know his name though because he never goes outside to play.
-Try asking him to come and protest with us?
+Mislim da u Vilkovoj zgradi živi i neki učenik.
+Ne znam kako se zove jer je stalno doma i pokušava dovršiti domaću zadaću.
+Pitaj ga bi li nam se pridružio!
 >>> RESET_CAMERA
 -> DONE
 
 = show_blind_guy
->>> PAN_CAMERA_TO_POSITION: 2192 1216
-The blind man who visits the park every day will be pleased to get a better park.
-He's next on my list of recruitment!
+>>> PAN_CAMERA_TO_POSITION: 2336 1888
+Jedan slijepac prolazi parkom svaki dan. Sigurno bi mu bilo drago da uredimo park.
+Pozovi i njega!
 >>> RESET_CAMERA
 -> DONE
 
 = show_helter_skelter
 >>> PAN_CAMERA_TO_POSITION: 2464 3744
-I know this Helter Skelter guy is a bit of a hooligan, but...
-I think he secretly also wants a better park!
-Go and ask him!
+Znam da je Helter Skejter često huligan, ali...
+Mislim da potajno i on želi ljepši park!
+Odi ga pitaj!
 >>> RESET_CAMERA
 -> DONE
 
 = show_love_interest
 >>> PAN_CAMERA_TO_POSITION: 4048 1728
-How about your sweetheart? I think you won't have any troubly swooning here for our cause!
-Go and get her, tiger!
+A tvoja simpatija? 
+Mislim da će se ona rado odazvati na tvoj poziv!
 >>> RESET_CAMERA
 -> DONE
 
 = show_dog_trainer_club
 >>> PAN_CAMERA_TO_POSITION: 3380 1728
-The members of the dog trainer club are always nagging about there being not enough nature in the city.
-Get them to join the protests!
+Volonteri za školovanje terapijskih pasa su uvijek za više prirode u gradu.
+Pitaj ih bi li nam i oni pomogli?
 >>> RESET_CAMERA
 -> DONE
 
 = show_animal_protection_services
 >>> PAN_CAMERA_TO_POSITION: 2736 1216
-Lunja cares for animals and I bet they would really like some more nature around here!
-You might need to do some job for them though?
-Can you go and check it out?
+Lunja je udruga koja brine za životinje, oni bi sigurno rado da je park veći.
+Možda ih možeš zamoliti da dođu, ali vjerojatno su jako zaposleni.
+Možda ako im pomogneš u njihovom poslu će imati više vremena za nas.
 >>> RESET_CAMERA
 -> DONE
 
 = show_roda_shop
 >>> PAN_CAMERA_TO_POSITION: 2576 1216
-The people at the SUPER RODA will also see the benefit of getting a better park!
-Go and recruit them for our park revolution!
+Radnici iz dućana također žele bolji park! Zamoli i njih da se pojave na našoj park-revoluciji!
 >>> RESET_CAMERA
 -> DONE
 
 = show_monsters_without_borders
 >>> PAN_CAMERA_TO_POSITION: 2192 1216
-The guys running the Monster Rights organization are always looking for opportunities to help.
-We are almost there! We just need those people to join us!
+Momci iz udruge za prava čudovišta uvijek traže prilike za pomoći našem kvartu.
+Kad bi još i oni došli, imali bismo stvarno dovoljno ljudi!
 >>> RESET_CAMERA
 -> DONE
 
@@ -485,13 +494,14 @@ We are almost there! We just need those people to join us!
 
 = before_solid_snejk_outro_completed
 ~ solid_snejk_outro_completed = 1
-Wow, I can't believe how much bigger the park is now!
-You should and explore! Everyone is here!
+Nevjerojatno koliko je park sad lijep.
+I ti si u tome puno pomogao!
+Prošetaj se i istraži! Svi su tu!
 -> DONE
 
 = after_solid_snejk_outro_completed
-I'm still too amazed by this new park! 
-I'm gonna stay here, but you can go and explore!
+Još uvijek sam oduševljen s parkom!
+Ostajem ovdje ali ti možeš ići i istraživati!
 -> DONE
 
 = use_item
@@ -597,13 +607,13 @@ Samo ga uzmi i klikni na mene kad god se poželiš voziti.
 -> DONE
 
 = after_operation_better_park_started
-We want a better park!
-Give us an actual football field so we can play in peace!
+Želimo bolji park!
+Dajte nam pravi nogometni teren da se možemo igrati u miru!
 -> DONE
 
 = outro
-There are so many footballs around me!
-I don't even know which one to kick first!
+Toliko nogometnih lopti oko mene!
+Ne znam koju prvu da šutnem...
 -> DONE
 
 = use_item
@@ -821,9 +831,9 @@ Ali onamo kamo ja idem, ne trebaju mi ceste!
 -> DONE
 
 = after_operation_better_park_started
-You are recruiting people for your park revolution, eh?
-Well too bad I like living here in this trash heap!
-Good luck though, bye!
+Prikupljaš ljude za svoj prosvjed, je li?
+Eh pa meni je baš lijepo živjeti u smeću!
+Ali sretno ti bilo.
 -> DONE
 
 = use_item
@@ -873,12 +883,11 @@ Ne treba mi ta stvar.
 }
 
 = outro
-I don't even want to go back to Prometije!
-This park you have here is amazing!
+Ovaj park koji ste si izgradili je baš jedinstven!
+Uopće se ne želim vratiti u svoju rodnu zemlju Prometiju!
 -> DONE
 
 = intro
-{get_level_state()}
 Ja sam Veliki Lizijan! Čarobnjak iz daleke zemlje Prometije.
 Došao sam tu na odmor, ali čini se da tu imate neke probleme.
 Možda ti mogu pomoći? Imam moć s kojom ti mogu pokazati što tražiš!
@@ -1231,17 +1240,16 @@ Opet ti, što hoćeš?
 = after_player_received_helter_skelter_fence
 Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
 Tko bi rekao!
-+ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
-	Protesting for a better park?
-	How about I come and protest for a better skater park instead?
-	I'm getting tired of skating in these trashy suburbs.
-	I'll be there together with my minions!
++ {operation_better_park_started}[Hoćeš li nam se pridružiti u prosvjedu za uređenje parka?]
+	Prosvjed za uređenje vašeg parka?
+	A zašto ja ne bih došao prosvjedovati za uređenje svog skejterskog parka?
+	Doći ćemo i ja i moji skejter minioni!
 	~ helter_skelter_gone_protesting = 1
 -> DONE
 
 = protesting
-We want a better skate park!
-No more skating in the trash!
+Želimo bolji skejterski park!
+Dosta je bilo skejtanja po smeću!
 -> DONE
 
 = use_item
@@ -1306,8 +1314,7 @@ Mogu te odvesti do planine!
 	-> DONE
 
 = with_dog
-I'm sorry, I can't take the dog with me!
-Come back when you brought that beautiful dog back to the dog trainer's club!
+Žalim, ne možeš povesti psa taksijem. Vrati se kad prošetaš tog predivnog psa.
 -> DONE
 
 = use_item
@@ -1591,13 +1598,13 @@ Taj njegov glupavi osmijeh uvijek mi razveseli dan!
 -> DONE
 
 = protesting
-No more angry trash cans blocking my path!
-Give us a clean park! No more trash everywhere!
+Dosta je bilo gladnih kanti za smeće po putu do doma!
+Dajte nam čisti park bez smeća posvuda!
 -> DONE
 
 = outro
-This park is awesome!
-There's no more trash!
+Ovaj park je ludilo.
+Uopće više nema smeća po putu.
 -> DONE
 
 = use_item
@@ -1728,10 +1735,10 @@ A sad me pusti na miru!
 Hej, ti! Kako ti se sviđa moja nova jakna? Baš je šarena, zar ne?
 Mislim da bi ti dobro stajala!
 Hoćeš da se mijenjamo za jakne?
-+ {operation_better_park_started && love_interest_gone_protesting == 0}[Hey, would you join me in a protest to get a better park?]
++ {operation_better_park_started && love_interest_gone_protesting == 0}[Zapravo, htio sam te pozvati na prosvjed za uređenje parka.]
 	~ love_interest_gone_protesting = 1
-	Anything for you!
-	I'll start protesting immediately!
+	Ti znaš da bih ja učinila baš sve za tebe!
+	Odmah idem na prosvjed!
 	-> DONE
 + [Da, mijenjajmo se!]
 	~ player_wearing_color = 1
@@ -1743,10 +1750,10 @@ Hoćeš da se mijenjamo za jakne?
 
 = wearing_color
 Hej! Hoćeš se opet mijenjati za jakne?
-+ {operation_better_park_started && love_interest_gone_protesting == 0}[Hey, would you join me in a protest to get a better park?]
++ {operation_better_park_started && love_interest_gone_protesting == 0}[Zapravo, htio sam te pozvati na prosvjed za uređenje parka.]
 	~ love_interest_gone_protesting = 1
-	Anything for you!
-	I'll start protesting immediately!
+	Ti znaš da bih ja učinila baš sve za tebe!
+	Odmah idem na prosvjed!
 	-> DONE
 + [Da, vrati mi moju jaknu!]
 	~ player_wearing_color = 0
@@ -1757,15 +1764,16 @@ Hej! Hoćeš se opet mijenjati za jakne?
 	-> DONE
 
 = protesting
-Give us a better park now!
+Uredite nam park! 
+Park park park!
 {player_wearing_color:
 	- 0: -> wearing_plain
 	- 1: -> wearing_color
 }
 
 = outro
-Now that you are done with all your protesting, maybe...
-We can enjoy some well-deserved time together?
+Sad kad smo gotovi s cijelom ovom pričom oko prosvjeda, možda...
+Možda možemo uživati u parku skupa!
 -> DONE
 
 = use_item
@@ -1797,26 +1805,26 @@ Hvala, ali sve što trebam od tebe je tvoja ljubav!
 }
 
 = visit_lake
-Woof!
-The dog looks like it wants to go to some water?
-I should go to the lake next to Wheelie's appartment!
+Vau vau!
+Peso izgleda kao da želi vode?
+Odvest ću ga do jezera pored Vilkove zgrade!
 -> DONE
 
 = visit_park
-Woof!
-The dog looks like it wants to go to the park!
-I should go and show solid snejk my new friend!
+Vau vau!
+Peso želi u park!
+Idem ga odvesti u park kod crva zvanog Solid Snejk.
 -> DONE
 
 = go_back_home
-Woof!
-The dog looks a bit tired...
-I should go back to the dog trainer's club!
+Vau vau!
+Peso izgleda umoran...
+Vratit ću ga nazad u udrugu za školovanje terapijskih pasa.
 -> DONE
 
 = use_item
-The dog curiously sniffs the object.
-But her strict discipline stops her from gnawing on it!
+Peso pronjuška stvar iz inventara.
+Ali tako je dobro školovan da ju uopće neće sažvakati!
 -> DONE
 
 == conv_dog_at_lake ===
@@ -1825,8 +1833,8 @@ But her strict discipline stops her from gnawing on it!
 //-- RELEVANT VARIABLES:
 // dog_visited_lake
 
-The dog looks happy to be at the lake!
-I should walk around a bit and then see if she wants to go somewhere else.
+Peso izgleda sretan što je na jezeru.
+Malo ću ga prošetati pa vidjeti gdje želi dalje.
 ~ dog_visited_lake = 1
 -> DONE
 
@@ -1836,8 +1844,8 @@ I should walk around a bit and then see if she wants to go somewhere else.
 //-- RELEVANT VARIABLES:
 // dog_visited_park
 
-The dog looks delighted to see the park!
-I should walk around a bit and then see if she wants to go somewhere else.
+Peso je presretan što vidi park!
+Malo ću ga prošetati pa vidjeti gdje želi dalje.
 ~ dog_visited_park = 1
 -> DONE
 
@@ -1909,13 +1917,13 @@ Hvala vam na pomoći!
 -> DONE
 
 = outro
-The park is now beautiful!
-And I have so many new tree friends!
-Thank you for all your hard work!
+Park je predivan!
+I sada imam tako puno drveća za prijatelje!
+Hvala ti na trudu!
 -> DONE
 
 = use_item
-I'm just a tree and have no need of such an item!
+Ja sam samo drvo i meni takve stvari ne trebaju!
 -> DONE
 
 === conv_mr_smog ===
@@ -1970,13 +1978,13 @@ Idem natrag u svoj rodni park!
 }
 
 = before_rose_seeds_planted
-The soil is fertile and ready to be used.
-Unfortunately nothing seems to be growing here?
+Zemlja je rahla i savršena za biljke!
+Nažalost, ništa tu ne raste?
 -> DONE
 
 = after_rose_seeds_planted
-The roses smell nice and look good!
-A fine addition to the building's facade!
+Ruže baš lijepo mirišu.
+Pašu uz boju zgrade.
 -> DONE
 
 = use_item
@@ -1994,36 +2002,35 @@ A fine addition to the building's facade!
 
 = before_flower_copper_swayed
 >>> UPDATE_UI: copper
-What are you doing? 
-Planting seeds in those flower boxes is not allowed!
-Flowers will be planted in those boxes when city hall comes around to it.
-+ [Comes around to it? How long has that been?]
-	I think those boxes have been empty since before I became a cop.
-	++ [How long have you been a cop?]
+Hej, što ti to radiš!?
+Sadnja cvijeća u tezge nije dozvoljena!
+Cvijeće će biti posađeno kada to dođe na dnevni red u gradu!
++ [Dođe na dnevni red? Koliko dugo je ovako bez cvijeća?]
+	Hmm... Mislim da su te tezge tu još od prije nego sam posao policajac.
+	++ [Kad si postao policajac?]
 		...
-		More than ten years at least...
-		Look kid, If you really want to plant those rose seeds...
-		I'm not gonna stop you...
-		Maybe it's due time someone made those flower boxes actually useful?
-		~ flower_copper_swayed = 1
+		Prije više od 10 godina...
+		Dobro, moj čudovišni prijatelju, ako baš moraš posaditi ruže...
+		Neću te spriječiti u tome.
+		Možda je i vrijeme da netko napokon posadi nešto u te tezge.
 		-> DONE
-	++ [I guess they can stay empty a bit longer then?]
-		Indeed, the bureaucracy will catch up one day and they'll plant something beautiful here.
-		Just not this day...
+	++ [Pa ako su tako dugo tezge prazne, neka budu prazne još malo...]
+		Tako je, tezge će kad tad doći na red.
+		Ali ne danas.
 		-> DONE
-+ [Apologies officer, I'll wait until the proper bureaucracy is approved by city hall...]
-	Good citizen! Bureaucracy was invented for a reason you know!
++ [Oprosti, pričekat ću dok to ne dođe na red u gradskoj birokraciji...]
+	Tako je, poslušni građane! Birokracija je izmišljena s dobrim razlogom!
 	-> DONE
 
 = after_flower_copper_swayed
-The monster roses grow immediately in the fertile soil.
-Rosalina will be pleased!
+Čudovišne ruže iznimno brzo rastu u rahloj zemljici!
+Ružica će biti presretna!
 >>> REMOVE_ITEM: rose_seeds
 ~ rose_seeds_planted = 1
 -> DONE
 
 = default
-I don't think I can plant this stuff?
+Mislim da ne mogu to posaditi...
 -> DONE
 
 === conv_flower_copper ===
@@ -2046,12 +2053,13 @@ I don't think I can plant this stuff?
 }
 
 = before_rose_seeds_planted
-I'm just hanging out here to make sure noone does anything illegal.
-I got my eyes on you!
+Ja samo pratim situaciju da ne bi netko napravio nešto ilegalno.
+Imam te na oku!
 -> DONE
 
 = after_rose_seeds_planted
-Oh, great bureaucracy why have you forsaken me?
+Kad vidim ovo divno cvijeće, pomislim kako je ponekad korisno zaobići birokraciju.
+Možda kad bismo manje slušali pravila, a više slušali srce, svijet bi bio pun mirisnih ruža.
 -> DONE
 
 = use_item
@@ -2061,14 +2069,14 @@ Oh, great bureaucracy why have you forsaken me?
 }
 
 = rose_seeds
-Nice seeds you got there buddy.
-Now now, don't get any big ideas and plant them.
-and certainly DO NOT plant them in this flower box.
-That box is city property and you can't plant anything in them!
+Simpatične sjemenke.
+Nemoj ih saditi bez dozvole od komunalne birokracije!
+POGOTOVO ih nemoj saditi ovdje u ovu tezgu.
+Ta tezga je gradsko vlasništvo i ništa ne smiješ saditi u njoj!
 -> DONE
 
 = default
-Don't shove that stuff into my face!
+Hvala, građane, ali meni ne treba ništa osim poštivanja zakona.
 -> DONE
 
 === conv_dog_trainer_club ===
@@ -2120,44 +2128,43 @@ Don't shove that stuff into my face!
 }
 
 = main_intro
-Hello! Welcome to the Dog Trainer's club!
-We train dogs for therapeutic purposes.
-These dogs are invaluable for blind people and other people with disabilities!
-You look like a thrustworthy kid, would you be willing to help us out?
-+ [Actually I don't think I have time right now...]
-	That's too bad!
-	Please do come back whenever you change your mind!
+Pozdrav i dobrodošli u Školu pasa!
+Mi školujemo terapijske pse.
+Oni su iznimno važni za slijepce i osobe s invaliditetom!
+Ti si dobri čudovišni lik, hoćeš nam pomoći u obuci jednog psa?
++ [Zapravo, mislim da nemam vremena...]
+	Šteta.
+	Dođi ako ti se raspored raščisti!
 	-> DONE
-+ {operation_better_park_started}[Would you be willing to come and protest for a better park?]
-	Here's the deal: You help us out, and we help you out?
-	Sounds good to you? OK!
++ {operation_better_park_started}[Hoćete doći na prosvjed za uređenje parka?]
+	Mogli bismo ali prvo moramo prošetati ovog terapijskog psa.
+	Ako nam pomogneš, doći ćemo na prosvjed!
 	-> before_dog_test_started
-+ [It would be my honor.]
++ [Bila bi mi čast.]
 	-> before_dog_test_started
 
 = before_dog_test_started
-See these dogs need to be walked daily and you look like just the person to do it!
-But before that... we'll need to make sure you know what you are doing!
-We have a few questions that will test your dog knowledge to the limits.
-Are you ready to become a certified junior dog trainer?
+Vidiš, pse se mora svakodnevno šetati po gradu da ga bolje zapamte.
+No, prije toga, moramo provjeriti tvoje znanje o terapijskim psima!
+Jesi li spreman položiti naš ispit za Školovatelja Terapijskih Pasa?
 -> after_dog_test_started
 
 = before_dog_test_passed
-Welcome again! Would you like to try the test again?
+Bok, hoćeš opet probati položiti naš ispit za Školovatelja Terapijskih Pasa?
 -> after_dog_test_started
 
 = after_dog_test_started
-++ [Bring it on!]
-	Okay, lets go through the test together.
+++ [Da!!!]
+	Pa krenimo!
 	~ dog_test_started = 1
 	-> start_dog_test
-++ [Maybe later?]
-	That's also okay for me!
-	Please do come back any time you wish!
+++ [Malo kasnije.]
+	Može i kasnije.
+	Dođi kad god poželiš!
 	-> DONE
 
 = start_dog_test
-The first question to become a certified junior dog trainer is the following:
+Prvo pitanje:
 ...
 + [A]
 	-> wrong_answer
@@ -2167,6 +2174,7 @@ The first question to become a certified junior dog trainer is the following:
 	-> wrong_answer
 
 = second_question
+Drugo pitanje:
 + [A]
 	-> wrong_answer
 + [B]
@@ -2175,70 +2183,71 @@ The first question to become a certified junior dog trainer is the following:
 	-> wrong_answer
 
 = third_question
+Treće pitanje:
 + [A]
 	-> wrong_answer
 + [B]
-	That's the correct answer!
-	It seems that you truly have what it takes to become a dog trainer!
-	You are now a certified junior dog trainer! Congratulations!
+	Tako je!
+	Odgovorio si na sva pitanja točno što znači da si sada službeno...
+	Školovatelj Terapijskih Pasa!!! Čestitam!
 	~ dog_test_passed = 1
 	-> after_dog_test_passed
 + [C]
 	-> wrong_answer
 
 = wrong_answer
-That's completely wrong!
-I'm afraid I'll have to stop the test here.
-Don't worry though: you can try to take the test again anytime!
+Ne, to je krivo!
+Morat ćemo zaustaviti ispitivanje odmah sada.
+No, ne očajavaj - uvijek možeš probati ponovno položiti ispit.
 -> DONE
 
 = after_dog_test_passed
-Okay! I'll allow you to walk the dog!
+Sada nam možeš pomoći šetati ovog divnog psa.
 ~ dog_walking_started = 1
-~ player_on_bike = 0
-This one is called Lepa! Have fun walking her!
-If you are unsure where to go, please ask her!
-She might not be able to talk, but dogs have other means of showing us where they want to go!
-Come back when she is tired!
+Zove se Lepa. Uživajte!
+Ako ne znaš gdje ići, samo ju pitaj.
+Možda ne može pričati ali psi imaju svoj način da nam pokažu gdje žele ići!
+Vratite se ovdje kad se ona umori.
 -> DONE
 
 = before_dog_walking_completed
-Lepa doesn't look tired of walking yet.
-Come back when she is tired!
+Lepa još nije umorna, šetajte još malo!
+Pitaj ju gdje bi željela ako ne znaš kamo.
 -> DONE
 
 = after_dog_tired
 ~ dog_walking_completed = 1
-Wow, Lepa looks really tired from all that walking!
-Good job! The exercise is good for her!
+Lepa se baš lijepo umorila od ove šetnjice.
+Svaka čast! Malo treninga uvijek dobro dođe!
 -> after_dog_walking_completed
 
 = after_dog_walking_completed
-Thanks a thousand times for walking Lepa for us!
-Was there anything we could help you with?
-+ {operation_better_park_started}[Would it be possible to help me protest for better park?]
-	Gladly! We'll come and join your protests!
-	Having more nature around here is also good for our dogs!
+Hvala što si nam prošetao Lepu!
+Možda mi možemo tebi nekako pomoći?
++ {operation_better_park_started}[Možete li doći na prosvijed za uređenje parka?]
+	Naravno da ćemo doći!
+	Ljepši park znači više prirode u gradu za naše terapijske pse.
 	~ dog_trainer_club_gone_protesting = 1
 	-> DONE
-+ [Nah, I'm good!]
-	Okay! come back whenever you need a favor cause we owe you one!
++ [Ništa za sad.]
+	Samo pitaj ako ti nešto zatreba.
+	Ipak ti mi sada dugujemo uslugu!
 	-> DONE
 
 = protesting
-Hello? Ah it's you!
-Everyone has gone protesting!
-I'm just making sure the dogs are okay here.
+O, bok.
+Svi drugi su već otišli na prosvjed.
+Ja sam samo tu da pazim na pse.
 -> DONE
 
 = outro
-All the dogs are fine here if that is what you were wondering about.
-they are also delighted with the changes to the park!
-The huge selection of trees makes them extremely happy!
+Svi psi su na mjestu ako te to zanima.
+I jako su oduševljeni uređenjem parka!
+Raznolikost drveća ih jako uveseljava!
 -> DONE
 
 = use_item
-We don't have any need for that!
+Ne treba nam to, hvala.
 -> DONE
 
 === conv_park_lovers ===
@@ -2270,51 +2279,51 @@ We don't have any need for that!
 }
 
 = before_operation_better_park_started
-We are the Park Crowd!
-We love the park and have big things planned for expanding the park soon.
-Maybe come back in the near future?
+Mi smo Parkoljupci!
+Mi volimo naš park i jedva čekamo pokrenuti svoj parkoljubivi plan.
+Ali još nije vrijeme. Ispričat ćemo ti sve o tome jednog dana.
 -> DONE
 
 = before_poster_designed
-We are the Park Crowd!
-I see you have decided to fight the good fight and join us in our park campaign.
-We would like to make a poster to put on the town's billboards.
-Unfortunately everyone here is having some trouble designing a poster.
-Would you be interested in designing a poster for us?
-+ [Yes! I'm an expert at making posters]
-	Perfect! Here's a blank canvas!
-	Tell me when you are done with the design!
+Mi smo Parkoljupci!
+Čujemo da si i ti parkoljubac.
+Želimo osmisliti plakat koji bismo postavili posvuda po gradu.
+Nažalost, treba nam dobar dizajner.
+Bi li nam ti pomogao?
++ [Da! Ja sam stručnjak u izradi plakata.]
+	Savršeno, evo ti prazan plakat!
+	Javi kad si gotov s dizajnom!
 	-> start_poster_minigame
-+ [No, I'll pass on this opportunity!]
-	Oh... well someone else will come along then!
++ [Mislim da ništa od moje pomoći ovaj put.]
+	Ne brini, naći ćemo mi već nekoga.
 	-> DONE
 
 = after_poster_designed
-Would you like to redesign your poster?
-+ [Yes, I have an idea for a better design.]
-	Okay! I can't wait to see how the new one will look!
+Želiš li redizajnirati plakat?
++ [Da, imam ideju za bolji dizajn!]
+	Super, jedva čekamo vidjeti i to.
 	-> start_poster_minigame
-+ [No, the current is perfect as is.]
-	Well.. I'll always be here if you want to design a new one!
++ [Ne treba mijenjati savršenstvo.]
+	U redu, mi smo tu kao poželiš nešto mijenjati.
 	-> DONE
 
 = start_poster_minigame
 >>> BEGIN_MINIGAME: poster_minigame
-+ That looks like awesome!
-	We'll distribute your design on all the city's billboards!
-	If you don't like the design, you can always come back and design a new one!
++ Izgleda ZAKON!
+	Ovaj plakat ćemo kopirati i polijepiti po čitavom gradu!
+	Ako ti se ne sviđa dizajn, uvijek ga možemo promijeniti - samo nas pitaj!
 	~ poster_designed = 1
 	>>> END_MINIGAME
 	-> DONE
 
 = outro
-Thanks for helping us in our park revolution!
-We have big plans for an even bigger park!
-However, at the moment we are taking a vacation to enjoy the current park!
+Hvala što si pomogao u obnovi parka.
+No, park-revolucija nikad ne spava - sada imamo još veće planove za naš park!
+Ne smijemo ti previše reći ali naš prijatelj Vladimir iz Rusije ima neke stvarno dobre ideje.
 -> DONE
 
 = use_item
-We don't have any need for that!
+Ne treba nam to!
 -> DONE
 
 === conv_wheelie_appartment ===
@@ -2323,16 +2332,15 @@ We don't have any need for that!
 //-- RELEVANT VARIABLES: 
 // wheelie_appartment_opened
 
-
 {wheelie_appartment_opened:
 	- 0: -> DONE
 	- 1: -> after_wheelie_appartment_opened
 }
 
 = after_wheelie_appartment_opened
-Vilko invited me into his appartment!
-Do I dare enter?
-+ [Yess, I'll check it out!]
+Vilko me pozvao u svoju zgradu!
+Da uđem?
++ [Da, idem unutra!]
 	{player_on_bike:
 		- 1: -> on_bike
 	}
@@ -2340,30 +2348,30 @@ Do I dare enter?
 		- 1: -> with_dog
 	}
 	~ player_inside_appartment = 1
-	>>> TELEPORT_TO_WAYPOINT: wheelie_elevator
+	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
 	-> DONE
-+ [No, I don't like entering people's houses willy-nilly!]
-	Yeah, I better stay outside.
++ [Ne još.]
+	Možda drugi put.
 	-> DONE
 
 = on_bike
-I'm not a savage.. I should hop off my bike when I enter other people's houses!
+Pa nisam ja divljak... Trebao bih prvo sići s bicikla prije nego uđem u tuđu kuću!
 -> DONE
 
 = with_dog
-I can't take Lepa into this appartment, that would be inappropriate.
+Neću s Lepom u kuću, ne bi bilo okej.
 -> DONE
 
 === conv_wheelie_elevator
 //-- STATUS: READY FOR TRANSLATION
 // The elevator necessary to leave Wheelie's appartment again...
 
-Do I take the elevator back down?
-+ [Yes, It's time to go back outside!]
+Da se spustim dizalom do dolje?
++ [Da, vrijeme je za izaći van.]
 	~ player_inside_appartment = 0
 	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
 	-> DONE
-+ [No, I still have unfinished business here!]
++ [Ne, još ću malo ostati ovdje.]
 	-> DONE
 
 === conv_roda_shop ===
@@ -2380,44 +2388,43 @@ Do I take the elevator back down?
 }
 
 = interact
-Welcome to the SUPER RODA!
-We help people with... 
-//TODO for Aleks: Some more stuff explaining about what RODA is?
-Is there anything we might be able to help you with today?
-+ {rosalina_requested_seeds}[I've been told I could get a free sample of flower seeds here?]
-	Yes! This is one of our actions to make the city more livable!
+Dobro došli u SUPER RODA dućan!
+Sanjamo jednog dana otvoriti udrugu Roda za pomoć roditeljima i djeci!
+Kako vam možemo pomoći?
++ {rosalina_requested_seeds}[Mogu li dobiti besplatne ružine sjemenke?]
+	Naravno da možeš! Jedva čekamo pomoći napraviti grad življim i zelenijim.
 	{roda_shop_gave_seeds:
 		- 0: -> before_roda_shop_gave_seeds
 		- 1: -> after_roda_shop_gave_seeds
 	}
-+ {old_man_requested_groceries && not roda_shop_gave_groceries}[The old man told me to get his groceries here?]
-	That is correct! We were waiting for someone to come and pick it up.
-	Here you go! Please bring this to the old man ASAP!
++ {old_man_requested_groceries && not roda_shop_gave_groceries}[Stariji gospodin iz Vilkove zgrade je rekao da imate namirnice za njega?]
+	Tako je, sve je spremno i čeka na njega.
+	Izvoli vrećicu s namirnicama i slobodno mu ih odnesi!
 	>>> ADD_ITEM: grocery_bag
 	~ roda_shop_gave_groceries = 1
 	-> DONE
-+ {operation_better_park_started && not roda_shop_gone_protesting}[Would you be willing to come and protest for a better park?]
-	That sounds like something that will greatly benefit the community!
-	We'll immediately send some of our people!
++ {operation_better_park_started && not roda_shop_gone_protesting}[Hoćete li doći na prosvjed za uređenje parka]
+	To zvuči kao nešto od čega bi čitava zajednica mogla imati koristi.
+	Odmah ćemo otići tamo!
 	~ roda_shop_gone_protesting = 1
 	-> DONE
-+ [Nothing! I'm just browsing!]
-	Okay! Don't be afraid to ask me if you need anything!
++ [Ništa, samo se šetam...]
+	Nemoj se ustručavati pitati nas bilo što!
 	-> DONE
 
 = before_roda_shop_gave_seeds
-Here you go: one free sample of monster rose seeds for you!
+Izvoli: besplatne sjemenke za uzgajanje čudovišnih ruža!
 >>> ADD_ITEM: rose_seeds
 ~ roda_shop_gave_seeds = 1
 -> DONE
 
 = after_roda_shop_gave_seeds
-I can see you already received your free seeds sample!
-My apologies, but I can only give one sample per person....
+Zapravo, već smo ti dali sjemenke za uzgajanje čudovišnih ruža.
+Ne možemo ti dati više od jedne, moramo misliti i na druge.
 -> DONE
 
 = use_item
-Thanks, but we don't need this!
+Hvala ali nama to ne treba!
 -> DONE
 
 === conv_blind_guy ===
@@ -2440,10 +2447,6 @@ Thanks, but we don't need this!
 }
 
 = main
-{blind_guy_accepted_aid:
-	-> DONE
-}
-
 {blind_guy_gone_protesting:
 	- 0:
 	{blind_guy_helped:
@@ -2454,80 +2457,81 @@ Thanks, but we don't need this!
 }
 
 = before_blind_guy_helped
-Hello? Sir?
-Would you be willing to help me cross the street?
-As you can probably see, I'm blind...
-However, that doesn't stop me from wanting to go to the park!
-If only those stupid cars would stop for a second!
-+ [Of course, I'll help you cross the street!]
-	Thank you kind, sir!
+Poštovano čudovište!
+Hoćete li mi pomoći prijeći cestu?
+Kao što možete vidjeti, ja sam slijep kao miš!
+No, to me ne spriječava u mojoj želji da uživam u mirisima i zvukovima našeg divnog parka.
+Kad bi samo ti prokleti auti bili malo sporiji, ne bih se bojao prijeći cestu...
++ [Ja ću ti pomoći prijeći cestu!]
+	Hvala vam najljepša!
 	>>> PLAY_CUTSCENE: escort_blind_guy
 	-> success
-+ [Apologies, I'm far too busy right now...]
-	Oh well, I guess I'll have to keep waiting here!
++ [Ne stignem sada, možda drugi put.]
+	Dobro, ja ću pričekati još malo, možda promet prestane.
 	-> DONE
 
 = success
-Thank you for helping me cross the street!
-I have no idea how long I would've been waiting for those cars to stop without you!
-And I am happy that I will never have ot find out!
-How can I ever thank you?
-Oh yes! Maybe I can show you how to write "Thank you" in Braille?
+Hvala što ste mi pomogli preko ceste!
+Ne znam ni sam koliko dugo bih tamo čekao da niste vi naišli!
+I drago mi je što nikada neću saznati.
+Kako bih vam se mogao zahvaliti?
+Ah, znam! Mogao bih ti pokazati kako se kaže "hvala" na Braillovom pismu!
 ~ blind_guy_helped = 1
 -> show_braille
 
 = after_blind_guy_helped
-Oh, hello? Are you that young lad that helped me cross the street earlier?
-Would you like me to show you Braille again?
-+ {operation_better_park_started}[I'm organizing a huge protest for a bigger park, would you care to join?]
-	A bigger park would mean that I wouldn't need to cross the street anymore to reach the park!
-	You wouldn't believe how much time I spent every day just waiting for those bloody cars to stop!
-	I will gladly join your little revolution!
+Njušim li ja to ono isto čudovišno biće koje mi je pomoglo prijeći preko ceste?
+Želiš li da ti opet pokažem Brailleovo pismo?
++ {operation_better_park_started}[Organiziramo prosvjed za uređenje parka, bi li došao?]
+	Veći park bi značilo da ne moram više prelaziti cestu da dođem do njega!
+	Ne biste mi vjerovali koliko vremena dnevno mi odlazi na to čekanje na zebri...
+	Rado ću pomoći!
 	~ blind_guy_gone_protesting = 1
 	-> DONE
-+ [It would be my honor!]
++ [Može!]
 	-> show_braille
-+ [Actually I have to go!]
-	Okay! Come back anytime! I enjoy talking to you!
++ [Moram ići!]
+	U redu, vrati se kad god poželiš!
 	-> DONE
 
 = show_braille
 >>> BEGIN_MINIGAME: braille_minigame
-Braille is a script that blind people like me can read with their fingers!
-Next time you are in an elevator you should definitely check out the buttons.
-If you look closely you will see some Braille written next to each floor number!
-That's so even blind people can take the elevator without any hassle.
-Pretty cool, eh?
+Braille je pismo kojeg slijepci poput mene koriste i čitaju.
+Čita se tako da prolaziš preko slova prstima i osjetiš znakove.
+Recimo, idući puta kad budeš u dizalu, pogledaj na tipke na dizalu!
+Tipke u dizalu često imaju napisan broj i na brailleovom pismu.
+Tako da i slijepci mogu bez problema pogoditi tipku za kat na koji žele ići!
+Baš fora, zar ne?
 >>> END_MINIGAME
 -> DONE
 
 = protesting
-Stop the noise and air polution!
-Give us a bigger park!
+Dosta zvučnog zagađenja! Dosta smoga od autiju!
+Izgradite nam veći park!
 -> DONE
 
 = outro
-I might not be able to see the new park.
-But I can definetely say that the air quality has greatly improved around here!
-Also, there's no more sound polution by those blasted cars!
-Blessed be this day!
+Možda ne mogu vidjeti novi park.
+Ali definitivno mogu reći da se kvaliteta zrak jako popravili.
+Također, nema više zvučnog zagađenja od silnih autiju kao nekad!
+Svaka vam čast na inicijativi!
 -> DONE
 
 = use_item
-Let me feel that thing...
+Čekaj da napipam što mi to daješ...
 {used_item == "trash_cup" || used_item == "trash_bottle" || used_item == "trash_bag":
 	- 1: -> trash
 	- 0: -> no_trash
 }
 
 = trash
-Are you trying to get rid of your trash through me!?
-The nerve! Take it back immediately!
+Želiš se riješiti svojeg smeća tako da ga meni uvališ?
+E pa neće ići!
 -> DONE
 
 = no_trash
-That's a neat little bauble you got here!
-Unfortunately, I can't do anything useful with it!
+To je simpatična stvarčica ali meni ne treba.
+Ipak, hvala!
 -> DONE
 
 === conv_monsters_without_borders ===
@@ -2556,31 +2560,30 @@ Unfortunately, I can't do anything useful with it!
 }
 
 = intro
-Welcome to Monsters Without Borders!
-We guard the rights of every monster big or small.
-How can we help you today?
-+ {operation_better_park_started}[Could you guys join the protests for a better park?]
+Dobrodošli u udrugu Čudovišta Bez Granica!
+Mi se borimo za prava svih čudovišta bila ona mala ili velika.
+Kako vam možemo pomoći?
++ {operation_better_park_started}[Možete li nam doći na prosvjed za veći park?]
 	{monsters_without_borders_joined:
 		- 0: -> before_monsters_without_borders_joined
 		- 1: -> after_monsters_without_borders_joined
 	}
-+ {not monsters_without_borders_joined}[Can I join your organization?]
-	We are rather strict in allowing new memberships.
-	You'll have to take a test to become a real Monster Without Borders
-	Are you sure you are ready to take this test?
-	++ [Da, bring it on!]
-		Let me see where I put those documents again.
++ {not monsters_without_borders_joined}[Mogu li i ja biti vaš član?]
+	Ne može svatko postati našim članom.
+	Morat ćeš položiti ispit da postaneš naš član.
+	Jesi li spreman?
+	++ [Da, idemo!]
+		Ok, samo da nađem formular...
 		-> start_monsters_without_borders_test
-	++ [Nope, maybe later!]
-		Okay! Come back anytime!
+	++ [Ne još.]
+		Nema frke, dođi kad hoćeš.
 		-> DONE
-+ [Nothing! I was just exploring!]
-	Okay, I'll let you explore in peace then.
++ [Samo se šetam.]
+	U redu, samo se vi šetajte!
 	-> DONE
 
 = start_monsters_without_borders_test
-Let's see...
-First question for your application is...
+Prvo pitanje...
 -> first_question
 
 // TODO: Add some actual questions here!
@@ -2601,40 +2604,41 @@ First question for your application is...
 	-> failure
 
 = success
-You are an exemplary monster!
-We would be honored to let you join our organization.
-Congratulations, you are now a Monster Without Border!
+Čudovišno dobro!
+Bila bi nam čast da postaneš naš član!
+Čestitamo, sada si i ti Čudovište Bez Granica!
 -> DONE
 
 = failure
-Oh! You clearly don't have what it takes to become on of us.
-Too bad! Bye!
+Ajme, ipak nisi baš materijal za naše članstvo...
+Možda drugi put!
 -> DONE
 
 = before_monsters_without_borders_joined
-Could I see your MWB membership card?
-You don't have one? You aren't a member of our organization?
-I'm afraid we can only respond to your request if you are a member of MWB.
+Jeste li član Čudovišta Bez Granica?
+Niste?
+Onda vam još ne možemo pomoći.
+Srećom, lako je postati naš član.
 -> DONE
 
 = after_monsters_without_borders_joined
+Naravno da ćemo ti pomoći! To je prava stvar za čudovišta u ovom kvartu!
+Odmah šaljemo svoje članove tamo!
 ~ monsters_without_borders_gone_protesting = 1
-For sure! This seems like this will help a lot of monsters!
-Well send some people immediately!
 -> DONE
 
 = protesting
-Oh? Sorry, everyone went protesting for a better park.
-I'm just here holding down the fort!
+Svi su na prosvjedu za park.
+Ja sam ostao jer nisam još platio članarinu.
 -> DONE
 
 = outro
-The rights of every monster has been respected and given us a new park!
-This makes the Monster Without Borders very happy!
+Prava svakog čudovišta se moraju poštivati, pa i pravo na uređen park!
+To nas veseli!
 -> DONE
 
 = use_item
-We don't need that!
+Ne trebamo to.
 -> DONE
 
 === conv_rosalina ===
@@ -2679,7 +2683,7 @@ Vidiš ovu rahlu zemlju ispred zgrade?
 Ne mogu vjerovati da su zaboravili posaditi cvijeće u nju!
 Možeš mi učiniti uslugu?
 Možeš li nabaviti neke sjemenke iz cvjećarnice?
-Any type of flower is good!
+Bilo koji cvijet je dobar!
 + {mr_smog_defeated == 0}[Žao mi je, trenutno pokušavam popraviti park kojeg je Mister Smog otpuhao!]
 	Ah...
 	Pa, kada to završiš, javi se, bit ću tu!
@@ -2710,7 +2714,7 @@ Nemaš pojma koliko sam sada sretna!
 	Parkovi su pluća grada!
 	~ rosalina_gone_protesting = 1
 	-> DONE
-+ [It was my pleasure!]
++ [Bilo mi je zadovoljstvo!]
 	-> DONE
 
 = protesting
@@ -2720,9 +2724,9 @@ Neka cvate tisuću cvijetova!
 
 // INTERACT - OUTRO //
 = outro
-All these flowers are soo beautiful!
-I'm glad we got this new park!
-Everyone needs more flowers in their life!
+Ovo cvijeće je prelijepo!
+Drago mi je da imamo novi park.
+Svatko treba više cvijeća u svojem životu!
 -> DONE
 
 // USE ITEM //
@@ -2841,16 +2845,16 @@ To nisu moje namirnice.
 }
 
 = main
-In my days this was just a bunch of fields!
-Back to better days! Back to the fields!
+Kad sam ja bio mlad, ovo je sve bila samo zelena poljana.
+Idemo nazad u bolje dane! Nazad u poljane!
 -> DONE
 
 = outro
-I reckon this park looks even better than the fields of my youth!
+Ovaj park sad izgleda još ljepše nego poljane mojeg djetinjstva!
 -> DONE
 
 = use_item
-Bah, the junk they make these days!
+Pih, što li sve neće danas izmisliti...
 -> DONE
 
 === conv_animal_protection_services ===
@@ -2939,9 +2943,9 @@ Sigurno su svi volonteri iz Lunje otišli na prosvjed.
 -> DONE
 
 = outro
-Lots of animals can now live in our park!
-I don't think the squirrels will need us tomorrow
-Cause they have lots of other food options available!
+Mnogo životinja sada živi u ovom parku.
+Mislim da nas vjeverice od sutra više neće trebati našu pomoć!
+Tu je sve puno hrane!
 -> DONE
 
 = use_item
@@ -3053,9 +3057,9 @@ Od plinova iz autiju vam se zavrti u glavi i ne možete riješiti zadaću!
 -> DONE
 
 = outro
-No more dirty fumes from cars!
-Now I can do my homework outside in the park!
-I'm already done completing my homework for the remainder of this year!
+Nema više groznih ispušnih plinova!
+Sada svoju domaću zadaću mogu raditi vani u parku!
+Već sam dovršio svu domaću zadaću do kraja godine!
 -> DONE
 
 = use_item
@@ -3125,8 +3129,8 @@ Sigurno uokolo ima još drveća s gladnim vjevericama.
 -> DONE
 
 = outro
-The squirrels inside of this little house look happy and healthy!
-I guess there's enough food now for these squirrels to survive without Lunja's aid!
+Vjeverice u ovoj maloj kućici izgledaju sretno i zdravo!
+Mislim da sada ima dovoljno hrane da vjeverice mogu preživjeti i bez pomoći udruge Lunja!
 -> DONE
 
 = use_item
@@ -3137,6 +3141,32 @@ I guess there's enough food now for these squirrels to survive without Lunja's a
 
 = default
 Mislim da to nije dobra hrana za vjeverice.
+-> DONE
+
+=== conv_dog_people ===
+// People from the Dog Trainer Club that are protesting...
+
+We want more nature for our dogs!
+-> DONE
+
+=== conv_roda_people ===
+// People from the RODA shop that are protesting...
+
+More nature for our children!
+We want playground toys! 
+-> DONE
+
+=== conv_rights_people ===
+// People from the Monsters Without Borders that are protesting...
+
+The people want a bigger park!
+City hall has to listen to our demands!
+-> DONE
+
+=== conv_animal_people ===
+// People from Lunja, the Animal Protection Services, that are protesting...
+
+Gone with the dirty cars! More space for animals big and small!
 -> DONE
 
 //--
@@ -3239,11 +3269,11 @@ Vrijeme je za malo bicikliranja!
 -> DONE
 
 = with_dog
-I can't drive my bike when I'm walking this dog!
+Ne mogu voziti bicikl dok šetam psa!
 -> DONE
 
 = inside_appartment
-I can't drive my bike inside of people's houses!
+Ne mogu voziti bicikl u kući!
 -> DONE
 
 = bike_question
@@ -3297,16 +3327,16 @@ Trebao bih naći kantu za smeće u koju ću ovo baciti!
 -> DONE
 
 = grocery_bag
-I have to deliver this bag of groceries to the old man living in Vilko's appartment!
+Moram odnijeti ovu vreću s namirnicama starijem gospodinu iz Vilkove zgrade!
 -> DONE
 
 = rose_seeds
-I bet Rosalina will love it when I plant those seeds in the flower box in front of her appartment.
+Sigurno će se Ružici jako svidjeti kad posadim sjemenke u tezgu pred njenom zgradom!
 -> DONE
 
 = squirrel_nuts
-These nuts need to be fed to squirrels.
-I need to search for trees with squirrel houses!
+Ovi žirevi služe za hranjenje vjeverica.
+Moram naći drveća u kojima su vjeveričje kućice.
 -> DONE
 
 = default

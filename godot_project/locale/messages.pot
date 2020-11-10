@@ -50,9 +50,18 @@ msgstr ""
 msgid "DRIVE_MESSAGE"
 msgstr ""
 
+msgid "CLEAR"
+msgstr ""
+
+msgid "DONE"
+msgstr ""
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr ""
 
 msgid "Solid Slug"
+msgstr ""
+
+msgid "Rosalina"
 msgstr ""

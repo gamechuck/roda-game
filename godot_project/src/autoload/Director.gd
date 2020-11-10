@@ -463,10 +463,10 @@ func escort_blind_guy():
 
 	var blind_guy := level.get_node("Sorted/Characters/BlindGuy")
 
-	var waypoint := level.get_node("Waypoints/BlindGuyBegin")
+	var waypoint := level.get_node("Waypoints/BlindGuyStart")
 	var position_start = waypoint.position
 
-	waypoint = level.get_node("Waypoints/BlindGuyEnd")
+	waypoint = level.get_node("Waypoints/BlindGuyStop")
 	var position_stop = waypoint.position
 
 	var game_camera : Camera2D = Flow.game_camera
@@ -682,6 +682,29 @@ func play_outro():
 
 	# Gather up all the cutscene's actors!
 	var player := level.get_node("Sorted/Player")
+	var mayor := level.get_node("Sorted/Characters/Mayor")
+	var game_camera : Camera2D = Flow.game_camera
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	player.position = Flow.get_waypoint_position("protesting_player")
+	player.update_state(Vector2.DOWN)
+
+	game_camera.track_player = false
+	game_camera.zoom = Vector2(2, 2)
+	game_camera.position = Vector2(2336, 2308)
+
+	mayor.set_visible(true)
+
+	start_knot_dialogue(player, "conv_outro_intro")
+	yield(self, "dialogue_completed")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	start_knot_dialogue(player, "conv_outro")
+	yield(self, "dialogue_completed")
 
 	change_level("outro")
 

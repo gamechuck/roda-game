@@ -6,15 +6,15 @@ func _ready():
 func update_animation():
 	var animations := {}
 
-	match State.level_state:
-		State.LEVEL.MAIN:
-			var old_man_gone_protesting : int = local_variables.get("old_man_gone_protesting", 0)
-			if old_man_gone_protesting:
-				animations = animations_dict.get("protesting", {})
-			else:
-				animations = animations_dict.get("default", {})
-		State.LEVEL.OUTRO:
-			animations = animations_dict.get("protesting", {})
+	var gone_protesting := 0
+	for key in local_variables.keys():
+		if key.ends_with("gone_protesting"):
+			gone_protesting = local_variables[key]
+
+	if gone_protesting:
+		animations = animations_dict.get("protesting", {})
+	else:
+		animations = animations_dict.get("default", {})
 
 	_animated_sprite.play(animations.get("animation_name", "default"))
 	_animated_sprite.offset = animations.get("offset", Vector2.ZERO)
@@ -32,8 +32,7 @@ var animations_dict := {
 	"protesting":
 		{
 			"animation_name": "default",
-			"offset": Vector2(-1, -36),
+			"offset": Vector2(11, -42),
 			"visible": true
 		}
 }
-

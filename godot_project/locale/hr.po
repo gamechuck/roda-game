@@ -59,9 +59,18 @@ msgstr "Kretanje"
 msgid "DRIVE_MESSAGE"
 msgstr "Raspored sjedenja..."
 
+msgid "CLEAR"
+msgstr "Očisti"
+
+msgid "DONE"
+msgstr "Gotovo!"
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr ""
 
 msgid "Solid Slug"
-msgstr ""
+msgstr "Slagač"
+
+msgid "Rosalina"
+msgstr "Ružica"

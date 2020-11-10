@@ -33,51 +33,51 @@ region = Rect2( 195, 0, 39, 56 )
 atlas = ExtResource( 2 )
 region = Rect2( 234, 0, 39, 56 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 4 )
 region = Rect2( 256, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 4 )
 region = Rect2( 320, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
 region = Rect2( 384, 0, 64, 96 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "protesting",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 24, 32 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 12, 8 )
 
 [node name="Rosalina" instance=ExtResource( 1 )]
@@ -85,9 +85,9 @@ script = ExtResource( 3 )
 id = "rosalina"
 
 [node name="AnimatedSprite" parent="." index="0"]
-frames = SubResource( 8 )
+frames = SubResource( 15 )
 animation = "protesting"
-frame = 4
+frame = 5
 playing = true
 offset = Vector2( -1, -42 )
 
@@ -95,7 +95,7 @@ offset = Vector2( -1, -42 )
 position = Vector2( 0, -16 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-shape = SubResource( 9 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 10 )
+shape = SubResource( 17 )

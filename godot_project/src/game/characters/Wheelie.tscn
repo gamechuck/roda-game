@@ -16,8 +16,8 @@ id = "wheelie"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
-animation = "protesting"
-frame = 3
+animation = "idle_up"
+frame = 2
 playing = true
 offset = Vector2( 0, -62 )
 

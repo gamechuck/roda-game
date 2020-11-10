@@ -21,7 +21,7 @@ id = "player"
 position = Vector2( 0, 2 )
 frames = ExtResource( 3 )
 animation = "idle_down"
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( 2, -27 )
 

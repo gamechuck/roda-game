@@ -38,7 +38,7 @@ var animations_dict := {
 	"protesting":
 		{
 			"animation_name": "protesting",
-			"offset": Vector2(-4, -18),
+			"offset": Vector2(5, -34),
 			"waypoint_id": "protesting_helter_skelter"
 		}
 }

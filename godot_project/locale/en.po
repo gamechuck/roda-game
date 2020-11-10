@@ -58,9 +58,18 @@ msgstr "Movement"
 msgid "DRIVE_MESSAGE"
 msgstr "Check arrangement..."
 
+msgid "CLEAR"
+msgstr "Clear"
+
+msgid "DONE"
+msgstr "Done!"
+
 # CHARACTER NAMES
 msgid "Solid Snejk"
 msgstr "Solid Snake"
 
 msgid "Solid Slug"
 msgstr "Solid Slug"
+
+msgid "Rosalina"
+msgstr "Rosalina"

@@ -163,7 +163,7 @@ margin_right = 98.0
 margin_bottom = 179.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 6
-text = "Clear"
+text = "CLEAR"
 
 [node name="SubmitButton" type="Button" parent="VBoxContainer" index="1"]
 margin_left = 176.0
@@ -172,4 +172,4 @@ margin_right = 272.0
 margin_bottom = 186.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 4
-text = "Done!"
+text = "DONE"

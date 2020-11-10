@@ -134,14 +134,19 @@ func update_animation():
 	_update_animation()
 
 func _update_animation():
-	var animations : Dictionary = default_animations.get(_direction, {})
-	animations = animations.get(_moving, {})
+	var animations := {}
+
+	if local_variables.get("operation_better_park_started", 0):
+		animations = protesting_animations
+	else:
+		animations = default_animations.get(_direction, {})
+		animations = animations.get(_moving, {})
 
 	_animated_sprite.play(animations.get("animation_name", "idle_down"))
 	_animated_sprite.flip_h = animations.get("flip_h", false)
 	_animated_sprite.flip_v = animations.get("flip_v", false)
 
-var protesting_animtions := {
+var protesting_animations := {
 	"animation_name": "protesting",
 	"offset": Vector2(0, -62)
 }
