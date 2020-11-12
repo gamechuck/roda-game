@@ -388,7 +388,7 @@
             ]
         },
         "mayor": {
-            "name": "Mayor Milan",
+            "name": "Gradonačelnik",
             "knot": "conv_outro",
             "portrait": {
                 "size": [

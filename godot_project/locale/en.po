@@ -14,7 +14,7 @@ msgid "Hello world!"
 msgstr "Hello world!"
 
 msgid "GAME_TITLE"
-msgstr "Family Monster Adventure"
+msgstr "Monster Adventure"
 
 msgid "PAUSE_MESSAGE"
 msgstr "GAME IS PAUSED"

@@ -5,12 +5,12 @@
             "amount": 3
         },
         {
-            "id": "grocery_bag",
-            "amount": 3
+            "id": "battery",
+            "amount": 1
         },
         {
             "id": "bike",
-            "amount": 3
+            "amount": 1
         }
     ],
     "characters": [

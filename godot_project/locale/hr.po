@@ -15,7 +15,7 @@ msgid "Hello world!"
 msgstr ""
 
 msgid "GAME_TITLE"
-msgstr "Rodina Čudovišna Avantura"
+msgstr "Čudovišna Avantura"
 
 msgid "PAUSE_MESSAGE"
 msgstr "IGRA JE PAUZIRANA"
