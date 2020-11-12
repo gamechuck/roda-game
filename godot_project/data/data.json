@@ -1,7 +1,7 @@
 {
     "characters": {
         "solid_snejk": {
-            "name": "Solid Snejk",
+            "name": "SOLID_SNEJK",
             "knot": "conv_solid_snejk",
             "portrait": {
                 "size": [
@@ -20,7 +20,7 @@
             ]
         },
         "lizzy": {
-            "name": "Lizijan",
+            "name": "LIZZY",
             "knot": "conv_lizzy",
             "portrait": {
                 "size": [
@@ -35,7 +35,7 @@
             }
         },
         "watto": {
-            "name": "Watto",
+            "name": "WATTO",
             "knot": "conv_watto",
             "portrait": {
                 "size": [
@@ -50,11 +50,11 @@
             }
         },
         "minigame_car": {
-            "name": "Car",
+            "name": "MINIGAME_CAR",
             "knot": "conv_minigame_car"
         },
         "solid_slug": {
-            "name": "Solid Slug",
+            "name": "SOLID_SLUG",
             "knot": "conv_solid_slug",
             "portrait": {
                 "size": [
@@ -72,7 +72,7 @@
             ]
         },
         "returned_bike": {
-            "name": "Bike",
+            "name": "BIKE",
             "knot": "conv_returned_bike",
             "story_bindings": [
                 "bike_returned",
@@ -80,7 +80,7 @@
             ]
         },
         "taxi_at_park": {
-            "name": "Taxi",
+            "name": "TAXI",
             "knot": "conv_taxi_at_park",
             "portrait": {
                 "size": [
@@ -95,7 +95,7 @@
             }
         },
         "taxi_at_mountain": {
-            "name": "Taxi",
+            "name": "TAXI",
             "knot": "conv_taxi_at_mountain",
             "portrait": {
                 "size": [
@@ -110,11 +110,11 @@
             }
         },
         "bus": {
-            "name": "Bus",
+            "name": "BUS",
             "knot": "conv_bus"
         },
         "canster_left": {
-            "name": "Canster",
+            "name": "CANSTER_LEFT",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -132,7 +132,7 @@
             ]
         },
         "canster_middle": {
-            "name": "Mr. Canster",
+            "name": "CANSTER_MIDDLE",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -150,7 +150,7 @@
             ]
         },
         "canster_right": {
-            "name": "Cansterino",
+            "name": "CANSTER_RIGHT",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -168,7 +168,7 @@
             ]
         },
         "copper": {
-            "name": "Copper",
+            "name": "COPPER",
             "knot": "conv_copper",
             "portrait": {
                 "size": [
@@ -183,7 +183,7 @@
             }
         },
         "flower_copper": {
-            "name": "Lt. Copper",
+            "name": "LT_COPPER",
             "knot": "conv_flower_copper",
             "portrait": {
                 "size": [
@@ -201,7 +201,7 @@
             ]
         },
         "happy_tree": {
-            "name": "Happy Tree",
+            "name": "HAPPY_TREE",
             "knot": "conv_happy_tree",
             "portrait": {
                 "size": [
@@ -219,7 +219,7 @@
             ]
         },
         "love_interest": {
-            "name": "Mia",
+            "name": "LOVE_INTEREST",
             "knot": "conv_love_interest",
             "portrait": {
                 "size": [
@@ -238,7 +238,7 @@
             ]
         },
         "wheelie": {
-            "name": "Vilko",
+            "name": "WHEELIE",
             "knot": "conv_wheelie",
             "portrait": {
                 "size": [
@@ -261,7 +261,7 @@
             ]
         },
         "mr_smog": {
-            "name": "Mr. Smog",
+            "name": "MR_SMOG",
             "knot": "conv_mr_smog",
             "portrait": {
                 "size": [
@@ -279,32 +279,32 @@
             ]
         },
         "wind_turbine": {
-            "name": "Wind Turbine",
+            "name": "WIND_TURBINE",
             "knot": "conv_wind_turbine",
             "story_bindings": [
                 "wind_turbine_powered"
             ]
         },
         "flower_box": {
-            "name": "Flower Box",
+            "name": "FLOWER_BOX",
             "knot": "conv_flower_box",
             "story_bindings": [
                 "rose_seeds_planted"
             ]
         },
         "rosalina": {
-            "name": "Rosalina",
+            "name": "ROSALINA",
             "knot": "conv_rosalina",
             "story_bindings": [
                 "rosalina_gone_protesting"
             ]
         },
         "bell_old_man": {
-            "name": "Stari Musk",
+            "name": "OLD_MAN",
             "knot": "conv_bell_old_man"
         },
         "old_man": {
-            "name": "Stari Musk",
+            "name": "OLD_MAN",
             "knot": "conv_old_man",
             "story_bindings": [
                 "old_man_gone_protesting"
@@ -323,7 +323,7 @@
             }
         },
         "dog": {
-            "name": "Lepa",
+            "name": "DOG",
             "knot": "conv_dog",
             "story_bindings": [
                 "dog_walking_started",
@@ -333,62 +333,62 @@
             ]
         },
         "student": {
-            "name": "Student",
+            "name": "STUDENT",
             "knot": "conv_student",
             "story_bindings": [
                 "student_gone_protesting"
             ]
         },
         "dog_trainer_club": {
-            "name": "Dog Trainer Club",
+            "name": "DOG_TRAINER_CLUB",
             "knot": "conv_dog_trainer_club"
         },
         "park_lovers": {
-            "name": "Park Crowd",
+            "name": "PARK_LOVERS",
             "knot": "conv_park_lovers"
         },
         "monsters_without_borders": {
-            "name": "Monster Without Borders",
+            "name": "MONSTERS_WITHOUT_BORDERS",
             "knot": "conv_monsters_without_borders"
         },
         "animal_protection_services": {
-            "name": "Lunja",
+            "name": "ANIMAL_PROTECTION_SERVICES",
             "knot": "conv_animal_protection_services"
         },
         "roda_shop": {
-            "name": "Roda",
+            "name": "RODA_SHOP",
             "knot": "conv_roda_shop"
         },
         "dog_people": {
-            "name": "Dog Trainer",
+            "name": "DOG_PEOPLE",
             "knot": "conv_dog_people",
             "story_bindings": [
                 "dog_trainer_club_gone_protesting"
             ]
         },
         "roda_people": {
-            "name": "RODA employee",
+            "name": "RODA_PEOPLE",
             "knot": "conv_roda_people",
             "story_bindings": [
                 "roda_shop_gone_protesting"
             ]
         },
         "rights_people": {
-            "name": "MWB member",
+            "name": "RIGHTS_PEOPLE",
             "knot": "conv_rights_people",
             "story_bindings": [
                 "monsters_without_borders_gone_protesting"
             ]
         },
         "animal_people": {
-            "name": "Lunja Activist",
+            "name": "ANIMAL_PEOPLE",
             "knot": "conv_animal_people",
             "story_bindings": [
                 "lunja_gone_protesting"
             ]
         },
         "mayor": {
-            "name": "Gradonačelnik",
+            "name": "MAYOR",
             "knot": "conv_outro",
             "portrait": {
                 "size": [
@@ -404,7 +404,7 @@
             }
         },
         "blind_guy": {
-            "name": "Blind man",
+            "name": "BLIND_GUY",
             "knot": "conv_blind_guy",
             "portrait": {
                 "size": [
@@ -420,30 +420,30 @@
             }
         },
         "wheelie_appartment": {
-            "name": "Vilko Stan",
+            "name": "WHEELIE_APPARTMENT",
             "knot": "conv_wheelie_appartment",
             "story_bindings": [
                 "wheelie_appartment_opened"
             ]
         },
         "wheelie_elevator": {
-            "name": "Vilko Lift",
+            "name": "WHEELIE_ELEVATOR",
             "knot": "conv_wheelie_elevator"
         },
         "squirrels_at_square": {
-            "name": "Urban tree",
+            "name": "SQUIRRELS_AT_SQUARE",
             "knot": "conv_squirrel_tree"
         },
         "squirrels_at_mountains": {
-            "name": "Mountain tree",
+            "name": "SQUIRRELS_AT_MOUNTAINS",
             "knot": "conv_squirrel_tree"
         },
         "squirrels_at_lake": {
-            "name": "Lake tree",
+            "name": "SQUIRRELS_AT_LAKE",
             "knot": "conv_squirrel_tree"
         },
         "player": {
-            "name": "Plavko",
+            "name": "PLAYER",
             "knot": "conv_player",
             "portrait": {
                 "size": [
@@ -466,7 +466,7 @@
             ]
         },
         "helter_skelter": {
-            "name": "Helter Skejter",
+            "name": "HELTER_SKELTER",
             "knot": "conv_helter_skelter",
             "portrait": {
                 "size": [

@@ -170,7 +170,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Čudovišna Avantura"
+config/name="ČUDOvišna Avantura"
 run/main_scene="res://src/Menu.tscn"
 config/icon="res://icon.png"
 

@@ -3146,27 +3146,27 @@ Mislim da to nije dobra hrana za vjeverice.
 === conv_dog_people ===
 // People from the Dog Trainer Club that are protesting...
 
-We want more nature for our dogs!
+Želimo veći park da i peseki mogu uživati u prirodi!
 -> DONE
 
 === conv_roda_people ===
 // People from the RODA shop that are protesting...
 
-More nature for our children!
-We want playground toys! 
+Želimo više prirode za našu djecu!
+Više igračaka u parku!
 -> DONE
 
 === conv_rights_people ===
 // People from the Monsters Without Borders that are protesting...
 
-The people want a bigger park!
-City hall has to listen to our demands!
+Ljudi žele veći park!
+Grad mora poslušati naše želje!
 -> DONE
 
 === conv_animal_people ===
 // People from Lunja, the Animal Protection Services, that are protesting...
 
-Gone with the dirty cars! More space for animals big and small!
+Dosta smoga i autiju! Više prostora za životinjice i prirodu!
 -> DONE
 
 //--

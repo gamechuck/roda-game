@@ -18,13 +18,13 @@ func set_direction(value : String):
 	direction = value
 	var state = animation_state.get(value, "front")
 
-	$Node2D/AnimatedUI.visible = state.get("visible_UI", false) 
-	$AnimatedFront.visible = state.get("visible_front", true) 
+	$Node2D/AnimatedUI.visible = state.get("visible_UI", false)
+	$AnimatedFront.visible = state.get("visible_front", true)
 	$AnimatedSide.visible = state.get("visible_side", false)
-	$AnimatedBack.visible = state.get("visible_back", false) 
+	$AnimatedBack.visible = state.get("visible_back", false)
 
-	$AnimatedSide.scale.x = state.get("scale", 1) 
-	$Node2D.scale.x = state.get("scale", 1) 
+	$AnimatedSide.scale.x = state.get("scale", 1)
+	$Node2D.scale.x = state.get("scale", 1)
 
 func set_light_color(value : int):
 	light_color = value
