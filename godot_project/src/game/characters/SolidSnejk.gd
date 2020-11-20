@@ -13,7 +13,7 @@ func update_animation():
 				animations = animations_dict.get("protesting", {})
 			else:
 				animations = animations_dict.get("default", {})
-		State.LEVEL.OUTRO:
+		_:
 			animations = animations_dict.get("default", {})
 
 	_animated_sprite.play(animations.get("animation_name", "default"))

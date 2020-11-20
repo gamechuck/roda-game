@@ -12,7 +12,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 36, 48 )
+extents = Vector2( 36, 36 )
 
 [node name="AnimalProtectionServices" instance=ExtResource( 1 )]
 id = "animal_protection_services"
@@ -22,7 +22,7 @@ position = Vector2( 0, -72 )
 frames = SubResource( 1 )
 
 [node name="InteractArea" parent="." index="1"]
-position = Vector2( 0, -26 )
+position = Vector2( 0, -32 )
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 2 )

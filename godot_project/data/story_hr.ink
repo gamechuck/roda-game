@@ -1,4 +1,4 @@
-VAR number_of_fences_fixed = 4
+VAR number_of_fences_fixed = 0
 
 // Player
 VAR player_wearing_color = 0
@@ -7,7 +7,7 @@ VAR player_on_bike = 0
 VAR player_noted_gummy = 0
 VAR player_solved_traffic_lights_question = 0
 VAR player_solved_bike_question = 0
-VAR player_solved_zebra_question = 1
+VAR player_solved_zebra_question = 0
 
 VAR player_inside_appartment = 0
 
@@ -18,7 +18,7 @@ VAR player_received_wheelie_fence = 0
 
 // SolidSnejk
 VAR solid_snejk_intro_completed = 0
-VAR operation_better_park_started = 1
+VAR operation_better_park_started = 0
 
 VAR solid_snejk_outro_completed = 0
 
@@ -44,7 +44,7 @@ VAR taxi_received_belt = 0
 
 // HelterSkelter
 VAR helter_skelter_intro_completed = 0
-VAR helter_skelter_gone_protesting = 1
+VAR helter_skelter_gone_protesting = 0
 
 // SeatSortingCar
 VAR car_quest_completed = 0
@@ -53,7 +53,7 @@ VAR car_quest_completed = 0
 VAR wind_turbine_powered = 0
 
 // MrSmog
-VAR mr_smog_defeated = 1
+VAR mr_smog_defeated = 0
 
 // FlowerBox
 VAR rose_seeds_planted = 0
@@ -62,33 +62,33 @@ VAR rose_seeds_planted = 0
 VAR flower_copper_swayed = 0
 
 // Loveinterest
-VAR love_interest_gone_protesting = 1
+VAR love_interest_gone_protesting = 0
 
 // ParkLovers
-VAR poster_designed = 1
+VAR poster_designed = 0
 
 // RodaShop
 VAR roda_shop_gave_groceries = 0
 VAR roda_shop_gave_seeds = 0
-VAR roda_shop_gone_protesting = 1
+VAR roda_shop_gone_protesting = 0
 
 // OldMan
 VAR old_man_requested_groceries = 0
 VAR old_man_received_groceries = 0
-VAR old_man_gone_protesting = 1
+VAR old_man_gone_protesting = 0
 
 // BlindGuy
 VAR blind_guy_helped = 0
-VAR blind_guy_gone_protesting = 1
+VAR blind_guy_gone_protesting = 0
 
 // Student
 VAR student_homework_done = 0
-VAR student_gone_protesting = 1
+VAR student_gone_protesting = 0
 
 // Animal Protection Services
 VAR lunja_gave_nuts = 0
 VAR squirrels_all_satiated = 0
-VAR lunja_gone_protesting = 1
+VAR lunja_gone_protesting = 0
 
 // Squirrel Tree
 VAR squirrels_at_mountains_satiated = 0
@@ -98,7 +98,7 @@ VAR squirrels_at_lake_satiated = 0
 // Canster
 VAR pump_received = 0
 VAR canster_left_appeased = 0
-VAR canster_middle_appeased = 1
+VAR canster_middle_appeased = 0
 VAR canster_right_appeased = 0
 
 // Dog
@@ -107,22 +107,22 @@ VAR dog_visited_park = 0
 
 // Rosalina
 VAR rosalina_requested_seeds = 0
-VAR rosalina_gone_protesting = 1
+VAR rosalina_gone_protesting = 0
 
 // Dog Trainer Club
 VAR dog_test_started = 0
 VAR dog_test_passed = 0
 VAR dog_walking_started = 0
 VAR dog_walking_completed = 0
-VAR dog_trainer_club_gone_protesting = 1
+VAR dog_trainer_club_gone_protesting = 0
 
 // Wheelie Appartment
-VAR wheelie_appartment_opened = 1
+VAR wheelie_appartment_opened = 0
 
 // Monsters Without Borders
 VAR monsters_without_borders_joined = 0
 VAR monsters_without_borders_quest_completed = 0
-VAR monsters_without_borders_gone_protesting = 1
+VAR monsters_without_borders_gone_protesting = 0
 
 // Wheelie
 VAR wheelie_intro_at_park_completed = 0
@@ -324,6 +324,7 @@ Nadam se da uživaš u svom novom parku!
 }
 
 = before_solid_snejk_intro_completed
+>>> UPDATE_UI: solid_snejk
 ~ solid_snejk_intro_completed = 1
 Oh ne! Otpuhane su ograde u našem parku...
 Idemo naći dijelove ograde i popraviti je da se možemo opet loptati!
@@ -562,6 +563,7 @@ Ne želim to uzeti...
 				}
 				- 1: -> after_bike_returned
 			}
+			- 1:
 			{has_item("pump"):
 				- 0: -> after_bike_issue_found
 				- 1: -> has_pump
@@ -1542,7 +1544,7 @@ Slobodno ga uzmi pa možda popraviš ogradu!
 >>> ADD_ITEM: fence
 ~ player_received_wheelie_fence = 1
 ~ wheelie_intro_before_park_fixed_completed = 1
-Also, if you want to go inside my appartment, you are welcome to enter!
+Kad god poželiš u moju zgradu, slobodno!
 ~ wheelie_appartment_opened = 1
 -> after_wheelie_intro_before_park_fixed_completed
 
@@ -2348,7 +2350,7 @@ Da uđem?
 		- 1: -> with_dog
 	}
 	~ player_inside_appartment = 1
-	>>> TELEPORT_TO_WAYPOINT: wheelie_appartment
+	>>> TELEPORT_TO_WAYPOINT: wheelie_elevator
 	-> DONE
 + [Ne još.]
 	Možda drugi put.
@@ -2607,6 +2609,7 @@ Prvo pitanje...
 Čudovišno dobro!
 Bila bi nam čast da postaneš naš član!
 Čestitamo, sada si i ti Čudovište Bez Granica!
+~ monsters_without_borders_joined = 1
 -> DONE
 
 = failure
@@ -3231,6 +3234,7 @@ Greškica.
 	- "bike": -> bike
 	- "battery": -> battery
 	- "fence": -> fence
+	- "seat_belt": -> seat_belt
 	- "broken_bike": -> broken_bike
 	- "trash_bag": -> trash
 	- "trash_cup": -> trash

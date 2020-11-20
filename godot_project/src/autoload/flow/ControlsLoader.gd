@@ -5,18 +5,24 @@ func load_controlsJSON() -> int:
 	## Load all the controls from the default JSON.
 	var file : File = File.new()
 	var error : int = OK
+	var default_controls : Dictionary = Flow.load_JSON(Flow.DEFAULT_CONTROLS_PATH)
+	var default_version : int = default_controls.get("version", -1)
 	# First check if there are user-specific controls available that can be loaded...
 	if file.file_exists(Flow.USER_CONTROLS_PATH):
 		if ConfigData.verbose_mode: print("Attempting to load user-modified controls from '{0}'.".format([Flow.USER_CONTROLS_PATH]))
-		var controls_dictionary = Flow.load_JSON(Flow.USER_CONTROLS_PATH)
+		var controls_dictionary : Dictionary = Flow.load_JSON(Flow.USER_CONTROLS_PATH)
+		var user_version : int = controls_dictionary.get("version", -1)
 		if controls_dictionary.empty():
 			push_error("Failed to process the user-modified controls, falling back to default controls.")
-			controls_dictionary = Flow.load_JSON(Flow.DEFAULT_CONTROLS_PATH)
+			controls_dictionary = default_controls
+		# Check if the saved 'user_controls.json' is still valid!
+		elif user_version < default_version:
+			push_warning("Version of user-modified controls (= {0}) is lower than default version (= {1}), falling back to default controls.".format([user_version, default_version]))
+			controls_dictionary = default_controls
 		error += _create_controls(controls_dictionary)
 	else:
 		if ConfigData.verbose_mode: print("No user-modified are defined, loading default controls from '{0}' instead.".format([Flow.DEFAULT_CONTROLS_PATH]))
-		var controls_dictionary = Flow.load_JSON(Flow.DEFAULT_CONTROLS_PATH)
-		error += _create_controls(controls_dictionary)
+		error += _create_controls(default_controls)
 	return error
 
 func save_controlsJSON() -> int:

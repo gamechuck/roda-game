@@ -47,7 +47,7 @@ func update_level():
 						child.set_visible(false)
 					index += 1
 			"player_wearing_color":
-				if local_variables[key]:
+				if local_variables[key] or local_variables["wind_turbine_powered"]:
 					$CopperBlockade/CollisionShape2D.disabled = true
 				else:
 					$CopperBlockade/CollisionShape2D.disabled = false

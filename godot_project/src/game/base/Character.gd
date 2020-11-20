@@ -12,8 +12,13 @@ var state : classCharacterState
 # Local copy of the story variables.
 var local_variables := {}
 
+var mouse_inside := false
+
 func _ready():
 	add_to_group("characters")
+
+	var _error := $InteractArea.connect("mouse_entered", self, "_on_mouse_entered")
+	_error = $InteractArea.connect("mouse_exited", self, "_on_mouse_exited")
 
 	# Initiate the character's state!
 	state = State.get_character_by_id(id)
@@ -45,7 +50,7 @@ func set_visible(value : bool = visible):
 		set_physics_process(false)
 
 func play_sound_byte():
-	_audio_stream_player.play()
+	$AudioStreamPlayer.play()
 
 func _on_variable_changed(property : String, value : int):
 	local_variables[property] = value
@@ -60,20 +65,14 @@ func set_story_variable(property : String, value : int):
 func update_animation():
 	pass
 
+func _on_mouse_entered():
+	mouse_inside = true
+
+func _on_mouse_exited():
+	mouse_inside = false
+
 func _input(event):
-	if event.is_action_pressed("left_mouse_button"):
-		var extents : Vector2 = _interact_collision_shape_2D.shape.extents
-		var rect : Rect2 = Rect2(position - extents, 2*extents)
-		if name == "Player":
-			if rect.has_point(get_global_mouse_position()):
-				Flow.player_is_active = true
-			else:
-				Flow.player_is_active = false
-		else:
-			if rect.has_point(get_global_mouse_position()):
-				Flow.active_character = self
-			# This is a bit filthy, but it does the job!
-			# Otherwise new mouse clicks might still contain the
-			# now obsolete active_character!
-			elif Flow.active_character == self:
-				Flow.active_character = null
+	if event.is_action_released("left_mouse_button") and mouse_inside:
+		Flow.active_character = self
+	elif Flow.active_character == self:
+		Flow.active_character = null

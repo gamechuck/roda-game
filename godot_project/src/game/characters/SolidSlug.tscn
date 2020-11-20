@@ -17,7 +17,7 @@ id = "solid_slug"
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
 animation = "protesting"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( 1, -30 )
 

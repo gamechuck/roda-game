@@ -673,7 +673,16 @@ func play_intro():
 	start_knot_dialogue(player, "conv_intro_outro")
 	yield(self, "dialogue_completed")
 
-	change_level("main")
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	emit_signal("change_level_requested", "main")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	start_knot_dialogue(Flow.player, "conv_solid_snejk")
+	yield(self, "dialogue_completed")
 
 	emit_signal("cutscene_completed")
 
@@ -706,10 +715,20 @@ func play_outro():
 	start_knot_dialogue(player, "conv_outro")
 	yield(self, "dialogue_completed")
 
-	change_level("outro")
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	emit_signal("change_level_requested", "outro")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	start_knot_dialogue(Flow.player, "conv_solid_snejk")
+	yield(self, "dialogue_completed")
 
 	emit_signal("cutscene_completed")
 
+# This function is now obsolete?
 func change_level(key : String) -> void:
 	# Block the dialogue from updating
 	dialogue_can_be_updated = false
@@ -723,7 +742,7 @@ func change_level(key : String) -> void:
 	Flow.transitions_UI.fade_to_transparent()
 	yield(Flow.transitions_UI, "transition_completed")
 
-	dialogue_in_progress = update_dialogue()
+#	dialogue_in_progress = update_dialogue()
 	dialogue_can_be_updated = true
-
-	emit_signal("cutscene_completed")
+#
+#	emit_signal("cutscene_completed")

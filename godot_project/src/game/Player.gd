@@ -39,6 +39,9 @@ func _ready():
 	_error = Director.connect("revoke_player_autonomy", self, "_on_autonomy_revoked")
 	_error = Director.connect("grant_player_autonomy", self, "_on_autonomy_granted")
 
+	# Block the player autonomy if a cutscene is still in progress!
+	if Director.cutscene_in_progress:
+		_on_autonomy_revoked()
 	update_animation()
 
 func _on_autonomy_revoked():
@@ -121,7 +124,7 @@ func process_interaction(active_entity : CollisionObject2D):
 		var item_id = item.id
 		emit_signal("dialogue_requested", active_entity, item_id)
 		Flow.inventory.reset_slots()
-	else:
+	elif Flow.active_character != self:
 		emit_signal("dialogue_requested", active_entity)
 		if active_entity is classPickup:
 			Flow.inventory.add_item(active_entity)

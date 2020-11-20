@@ -25,7 +25,7 @@ var target_index := 0
 signal nav_path_requested
 
 func _ready():
-	var _error := _interact_area.connect("body_entered", self, "_on_body_entered")
+	var _error := _interact_area.connect("area_entered", self, "_on_area_entered")
 
 	set_physics_process(false)
 
@@ -77,9 +77,14 @@ func get_move_speed() -> float:
 		move_speed *= ConfigData.SCARED_MODIFIER
 	return move_speed
 
-func _on_body_entered(body : CollisionObject2D):
-	if body is classCanster:
-		if not body.is_appeased():
+func _on_area_entered(area : Area2D):
+	if not area:
+		return
+
+	if area.get_parent() is classCanster:
+		var canster : classCanster = area.get_parent()
+		if not canster.is_appeased():
+			# The canster is angry!!!
 			nav_path = PoolVector2Array()
 			set_story_variable("wheelie_got_scared", 1)
 			if local_variables.get("wheelie_going_to_house", 0):
@@ -123,11 +128,11 @@ func update_state(move_direction : Vector2):
 
 func update_animation():
 	if local_variables.get("wheelie_going_to_house", 0) == 1:
-		index = 0
+		#index = 0
 		target_index = waypoint_ids.size() - 1
 		set_physics_process(true)
 	elif local_variables.get("wheelie_going_to_park", 0) == 1:
-		index = waypoint_ids.size() - 1
+		#index = waypoint_ids.size() - 1
 		target_index = 0
 		set_physics_process(true)
 

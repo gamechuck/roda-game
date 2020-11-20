@@ -1,17 +1,5 @@
 {
     "items": [
-        {
-            "id": "squirrel_nuts",
-            "amount": 3
-        },
-        {
-            "id": "battery",
-            "amount": 1
-        },
-        {
-            "id": "bike",
-            "amount": 1
-        }
     ],
     "characters": [
         {

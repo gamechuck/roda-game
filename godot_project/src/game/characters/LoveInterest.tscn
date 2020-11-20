@@ -17,7 +17,6 @@ id = "love_interest"
 [node name="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 3 )
 animation = "protesting"
-frame = 2
 playing = true
 offset = Vector2( 11, -42 )
 
