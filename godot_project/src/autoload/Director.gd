@@ -4,7 +4,8 @@ onready var _tween := $Tween
 
 var story : Object
 var interact_node : Node2D = null
-var active_minigame : Control = null
+
+var minigame : classMinigame = null
 
 var is_waiting_for_choice := false
 var dialogue_in_progress := false
@@ -12,11 +13,13 @@ var cutscene_in_progress := false
 
 var dialogue_can_be_updated := true
 
-signal revoke_player_autonomy()
-signal grant_player_autonomy()
+signal revoke_player_autonomy
+signal grant_player_autonomy
 
-signal dialogue_completed()
-signal cutscene_completed()
+signal dialogue_completed
+signal cutscene_completed
+
+signal change_level_requested
 
 func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	# First stop the player autonomy!
@@ -32,7 +35,7 @@ func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	interact_node = node
 	dialogue_in_progress = _start_dialogue()
 
-func _start_knot_dialogue(node: Node2D, knot : String) -> void:
+func start_knot_dialogue(node: Node2D, knot : String) -> void:
 	# First stop the player autonomy!
 	emit_signal("revoke_player_autonomy")
 
@@ -57,34 +60,37 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 			"respawn":
 				respawn()
 				yield(self, "cutscene_completed")
-			"teleport":
-				var character_id : String = argument_values[0]
-
-				var character = State.get_character_by_id(character_id)
-				if character:
-					var object : class_character = character.object
-					var target_position : Vector2 = object.position
-					target_position += Vector2(0, -50)
-
-					teleport(target_position)
-					yield(self, "cutscene_completed")
+			"teleport_to_waypoint":
+				var waypoint_id : String = argument_values[0]
+				for waypoint in get_tree().get_nodes_in_group("waypoints"):
+					if waypoint.id == waypoint_id:
+						var position : Vector2 = waypoint.position
+						teleport_to_position(position)
+						yield(self, "cutscene_completed")
+						break
 			"drop_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					drop_player(interact_node)
 					yield(self, "cutscene_completed")
 			"eat_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					eat_player(interact_node)
 					yield(self, "cutscene_completed")
 			"spit_out_player":
-				if interact_node is class_character:
+				if interact_node is classCharacter:
 					spit_out_player(interact_node)
 					yield(self, "cutscene_completed")
 			"fade_to_black_and_back":
 				fade_to_black_and_back()
 				yield(self, "cutscene_completed")
 			"intro":
-				intro_cutscene()
+				play_intro()
+				yield(self, "cutscene_completed")
+			"outro":
+				play_outro()
+				yield(self, "cutscene_completed")
+			"escort_blind_guy":
+				escort_blind_guy()
 				yield(self, "cutscene_completed")
 			_:
 				push_error("Cutscene with id '{0}' was not recognized!".format([cutscene_id]))
@@ -97,11 +103,11 @@ func _on_cutscene_requested(cutscene_id : String, argument_values : Array = []) 
 func _start_dialogue() -> bool:
 	var state : Reference
 	var knot := ""
-	if interact_node is class_character:
+	if interact_node is classCharacter:
 		interact_node.play_sound_byte()
 		state = interact_node.state
 
-	elif interact_node is class_pickup:
+	elif interact_node is classPickup:
 		state = interact_node.state
 
 	if state:
@@ -146,7 +152,7 @@ func update_dialogue(choice_index : int = -1) -> bool:
 
 		if not text.empty():
 			# Attempt a translation!
-			text = translate(text.strip_edges())
+			text = text.strip_edges()
 			Flow.dialogue_UI.update_dialogue(text)
 			Flow.dialogue_UI.show()
 			return true
@@ -155,11 +161,10 @@ func update_dialogue(choice_index : int = -1) -> bool:
 	elif story.current_choices.size() > 0:
 		is_waiting_for_choice = true
 
-		if Director.active_minigame == null:
+		if Director.minigame == null:
 			var choices := []
 			for choice in story.current_choices:
-				var text : String = translate(choice.text)
-				choices.append(text)
+				choices.append(choice.text)
 			Flow.dialogue_UI.update_multiple_choice(choices)
 
 		#story.choose_choice_index(0)
@@ -173,39 +178,6 @@ func _stop_dialogue() -> void:
 	emit_signal("dialogue_completed")
 	if not cutscene_in_progress:
 		emit_signal("grant_player_autonomy")
-
-func get_state_property(character_id : String, property : String) -> int:
-	var character : class_character_state = State.get_character_by_id(character_id)
-	if character:
-		var properties : Dictionary = character.properties
-		return properties.get(property, 0)
-	return 0
-
-func set_state_property(argument_values : Array) -> void:
-	var character_id : String = argument_values[0]
-	var key : String = argument_values[1]
-	var value : int = argument_values[2]
-
-	var character : class_character_state = State.get_character_by_id(character_id)
-	if character:
-		var properties : Dictionary = character.properties
-		if properties.has(key):
-			properties[key] = value
-			character.object.update_animation()
-		else:
-			push_error("State property '{0}' is not registered in the character's state!".format([key]))
-
-func translate(original_text : String):
-	var tags : Array = story.current_tags
-	if tags.empty():
-		return original_text
-	else:
-		var msg_id : String = tags[0]
-		var translated_text : String = TranslationServer.translate(msg_id)
-		if translated_text != msg_id:
-			return translated_text
-		else:
-			return original_text
 
 ### PARSING COMMANDS
 func _parse_command(raw_text : String) -> Dictionary:
@@ -254,31 +226,26 @@ func execute_command(raw_text : String) -> bool:
 		var callback : FuncRef = external_dict.callback
 		callback.call_func(argument_values)
 
-	if command_dict.name == "PLAY_CUTSCENE":
-		return false
-	else:
-		return true
+	return external_dict.get("can_continue", true)
 
 func pan_camera_to_position(argument_values : Array):
 	var x_pos : int = argument_values[0]
 	var y_pos : int = argument_values[1]
-	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
+	var game_camera : Camera2D = Flow.game_camera
 
-	var target_position : Vector2 = Vector2(x_pos, y_pos)
-	target_position -= Flow.player.position
+	var offset : Vector2 = Vector2(x_pos, y_pos)
+	offset -= Flow.player.position
 
-	_tween.interpolate_property(game_camera, "position", game_camera.position, target_position, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(game_camera, "offset", game_camera.offset, offset, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	_tween.start()
 
 func reset_camera(_argument_values : Array):
-	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-
-	_tween.interpolate_property(game_camera, "position", game_camera.position, Vector2.ZERO, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	var game_camera : Camera2D = Flow.game_camera
+	_tween.interpolate_property(game_camera, "offset", game_camera.offset, Vector2.ZERO, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	_tween.start()
 
 func zoom_camera(target_zoom : Vector2):
-	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
-
+	var game_camera : Camera2D = Flow.game_camera
 	_tween.interpolate_property(game_camera, "zoom", game_camera.zoom, target_zoom, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	_tween.start()
 
@@ -304,37 +271,41 @@ func hide(argument_values):
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
-	match minigame_id:
-		"bike_repair":
-			active_minigame = Flow.bike_repair_UI
-		"seat_sorting":
-			active_minigame = Flow.seat_sorting_UI
-	if active_minigame != null:
-		active_minigame.show()
+
+	for node in get_tree().get_nodes_in_group("minigames"):
+		if node.id == minigame_id:
+			minigame = node
+			minigame.show()
 
 func end_minigame(_argument_values):
-	active_minigame.hide()
-	active_minigame = null
+	minigame.hide()
+	minigame = null
 
 func update_dialogue_UI(argument_values):
+# WEIRD function....
 	var character_id : String = argument_values[0]
 
-	var character : class_character_state = State.get_character_by_id(character_id)
+	var character : classCharacterState = State.get_character_by_id(character_id)
 	if character:
 		var object = character.object
 		Director.interact_node = object
 
-func _start_cutscene(argument_values : Array) -> void:
+func start_cutscene(argument_values : Array) -> void:
 	var cutscene_id : String = argument_values[0]
 	_on_cutscene_requested(cutscene_id)
 
 func respawn_player(_argument_values : Array) -> void:
 	_on_cutscene_requested("respawn")
 
-func teleport_player(argument_values : Array) -> void:
-	_on_cutscene_requested("teleport", argument_values)
+func teleport_to_waypoint(argument_values : Array):
+	_on_cutscene_requested("teleport_to_waypoint", argument_values)
 
 var external_setters : Dictionary = {
+	"TELEPORT_TO_WAYPOINT" : {
+		"callback": funcref(self, "teleport_to_waypoint"),
+		"argument_types": [TYPE_STRING],
+		"can_continue": false
+	},
 	"PAN_CAMERA_TO_POSITION" : {
 		"callback": funcref(self, "pan_camera_to_position"),
 		"argument_types": [TYPE_INT, TYPE_INT]
@@ -367,31 +338,25 @@ var external_setters : Dictionary = {
 		"callback": funcref(self, "end_minigame"),
 		"argument_types": []
 	},
-	"SET_STATE_PROPERTY" : {
-		"callback": funcref(self, "set_state_property"),
-		"argument_types": [TYPE_STRING, TYPE_STRING, TYPE_INT]
-	},
 	"UPDATE_UI" : {
 		"callback": funcref(self, "update_dialogue_UI"),
 		"argument_types": [TYPE_STRING]
 	},
 	"PLAY_CUTSCENE" : {
-		"callback": funcref(self, "_start_cutscene"),
-		"argument_types": [TYPE_STRING]
+		"callback": funcref(self, "start_cutscene"),
+		"argument_types": [TYPE_STRING],
+		"can_continue": false
 	},
 	"RESPAWN_PLAYER" : {
 		"callback": funcref(self, "respawn_player"),
-		"argument_types": []
-	},
-	"TELEPORT_PLAYER" : {
-		"callback": funcref(self, "teleport_player"),
-		"argument_types": [TYPE_STRING]
+		"argument_types": [],
+		"can_continue": false
 	}
 }
 
 ### CUTSCENES ###
 func respawn() -> void:
-	var player : class_player = Flow.player
+	var player : Node2D = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 
 	# Position is taken here to acount for previous cutscenes!!!
@@ -408,8 +373,8 @@ func respawn() -> void:
 
 	emit_signal("cutscene_completed")
 
-func teleport(target_position : Vector2) -> void:
-	var player : class_player = Flow.player
+func teleport_to_position(to : Vector2) -> void:
+	var player : Node2D = Flow.player
 
 	# Block the dialogue from updating
 	dialogue_can_be_updated = false
@@ -418,7 +383,7 @@ func teleport(target_position : Vector2) -> void:
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
 
-	_tween.interpolate_property(player, "position", player.position, target_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(player, "position", player.position, to, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
@@ -426,7 +391,6 @@ func teleport(target_position : Vector2) -> void:
 	yield(Flow.transitions_UI, "transition_completed")
 
 	dialogue_in_progress = update_dialogue()
-	Flow.dialogue_UI.show()
 	dialogue_can_be_updated = true
 
 	emit_signal("cutscene_completed")
@@ -448,8 +412,8 @@ func fade_to_black_and_back() -> void:
 
 	emit_signal("cutscene_completed")
 
-func drop_player(taxi : class_character):
-	var player : class_player = Flow.player
+func drop_player(taxi : classCharacter):
+	var player : Node2D = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var taxi_anim_sprite := taxi.get_node("AnimatedSprite")
 
@@ -487,8 +451,73 @@ func drop_player(taxi : class_character):
 
 	emit_signal("cutscene_completed")
 
-func eat_player(canster : class_canster):
-	var player : class_player = Flow.player
+func escort_blind_guy():
+	var level : classLevel = Flow.level
+
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+
+	# Gather up all the cutscene's actors!
+	var player := level.get_node("Sorted/Player")
+
+	var blind_guy := level.get_node("Sorted/Characters/BlindGuy")
+
+	var waypoint := level.get_node("Waypoints/BlindGuyStart")
+	var position_start = waypoint.position
+
+	waypoint = level.get_node("Waypoints/BlindGuyStop")
+	var position_stop = waypoint.position
+
+	var game_camera : Camera2D = Flow.game_camera
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	# Make sure the player isn't riding his bike!
+	story.variables_state.set("player_on_bike", 0)
+
+	game_camera.track_player = false
+	game_camera.zoom = Vector2(1.5, 1.5)
+	game_camera.position = Vector2(2336, 1888)
+
+	player.position = position_start
+	player.position.x -= 32
+
+	var duration : float = position_start.distance_to(position_stop)
+	duration /= ConfigData.PLAYER_MOVE_SPEED
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	blind_guy.update_state(Vector2.DOWN)
+	player.update_state(Vector2.DOWN)
+
+	_tween.interpolate_property(player, "position:y", position_start.y, position_stop.y, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(blind_guy, "position:y", position_start.y, position_stop.y, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+
+	blind_guy.update_state()
+	player.update_state()
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	game_camera.track_player = true
+	game_camera.zoom = Vector2(1, 1)
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	dialogue_in_progress = update_dialogue()
+	Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
+func eat_player(canster : classCanster):
+	var player : Node2D = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
@@ -505,7 +534,7 @@ func eat_player(canster : class_canster):
 	canster_anim_sprite.play("devour_2")
 	yield(canster_anim_sprite, "animation_finished")
 
-	canster_anim_sprite.play("aggressive")
+	canster_anim_sprite.play("default")
 
 	dialogue_in_progress = update_dialogue()
 	Flow.dialogue_UI.show()
@@ -513,8 +542,8 @@ func eat_player(canster : class_canster):
 
 	emit_signal("cutscene_completed")
 
-func spit_out_player(canster : class_canster):
-	var player : class_player = Flow.player
+func spit_out_player(canster : classCanster):
+	var player : classPlayer = Flow.player
 	var anim_sprite := player.get_node("AnimatedSprite")
 	var canster_anim_sprite := canster.get_node("AnimatedSprite")
 
@@ -532,7 +561,7 @@ func spit_out_player(canster : class_canster):
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	canster_anim_sprite.play("aggressive")
+	canster_anim_sprite.play("default")
 
 	_tween.interpolate_property(player,"position", player.position, player.respawn_position, 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(anim_sprite, "position", anim_sprite.position + Vector2(0, -200), Vector2(0, -200), 0.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -544,69 +573,75 @@ func spit_out_player(canster : class_canster):
 
 	emit_signal("cutscene_completed")
 
-func intro_cutscene():
-	var mr_smog := State.get_character_by_id("intro_mr_smog").object
-	var player := State.get_character_by_id("intro_player").object
-	var solid_snejk := State.get_character_by_id("intro_solid_snejk").object
-	var happy_tree := State.get_character_by_id("intro_happy_tree").object
+func play_intro():
+	var level : classLevel = Flow.level
 
-	var ball = Flow.game_canvas.get_node("YSort/Intro/Ball")
-	var bike = Flow.game_canvas.get_node("YSort/Intro/Bike")
+	# Gather up all the cutscene's actors!
+	var player := level.get_node("Sorted/Player")
 
-	var fence_front = Flow.game_canvas.get_node("YSort/FakeFences/FenceFront")
-	var fence_back = Flow.game_canvas.get_node("YSort/FakeFences/FenceBack")
-	var fence_left = Flow.game_canvas.get_node("YSort/FakeFences/FenceLeft")
-	var fence_right = Flow.game_canvas.get_node("YSort/FakeFences/FenceRight")
+	var solid_snejk := level.get_node("Sorted/Characters/SolidSnejk")
+	var happy_tree := level.get_node("Sorted/Characters/HappyTree")
+	var returned_bike := level.get_node("Sorted/Characters/ReturnedBike")
+	var mr_smog := level.get_node("Sorted/Characters/MrSmog")
 
-	var smog : Sprite = Flow.game_canvas.get_node("YSort/Intro/Smog")
+	var ball := level.get_node("Sorted/Props/Ball")
 
-	var game_camera : Camera2D = Flow.player.get_node("GameCamera")
+	var fence_top := level.get_node("Sorted/Fences/Top")
+	var fence_bottom := level.get_node("Sorted/Fences/Bottom")
+	var fence_left := level.get_node("Sorted/Fences/Left")
+	var fence_right := level.get_node("Sorted/Fences/Right")
 
-	# ideal camera position = 2717.95 621.74
+	player._direction = player.DIRECTION.UP
+	player.update_animation()
+
+	var smog_material := preload("res://assets/materials/smog_fog_material.tres")
+	var game_camera : Camera2D = Flow.game_camera
+
+	game_camera.track_player = false
 	game_camera.zoom = Vector2(1.5, 1.5)
-	game_camera.position = Vector2(2718, 622) - Flow.player.position
+	game_camera.position = Vector2(2336, 2208)
 
-	_start_knot_dialogue(Flow.player, "conv_intro")
+	start_knot_dialogue(player, "conv_intro")
 	yield(self, "dialogue_completed")
 
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
 	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	_start_knot_dialogue(Flow.player, "conv_intro_slug_no_ball")
+	start_knot_dialogue(player, "conv_intro_slug_no_ball")
 	yield(self, "dialogue_completed")
 
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y, solid_snejk.position.y - 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(solid_snejk,"position:y", solid_snejk.position.y - 20, solid_snejk.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y + 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	_tween.interpolate_property(smog.material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	_tween.interpolate_property(smog_material, "shader_param/amount", 0, 0.5, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y, player.position.y + 20, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(player,"position:y", player.position.y + 20, player.position.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, 1.0)
-	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 80, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
+	_tween.interpolate_property(ball,"position:y", ball.position.y, ball.position.y - 120, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, 1.5)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
 	AudioEngine.play_music("game_smog")
 
-	_start_knot_dialogue(Flow.player, "conv_intro_smog_appears")
+	start_knot_dialogue(player, "conv_intro_smog_appears")
 	yield(self, "dialogue_completed")
 
-	_tween.interpolate_property(mr_smog,"position", mr_smog.position, Vector2(2628, 478), 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.interpolate_property(mr_smog,"position:y", mr_smog.position.y, happy_tree.position.y - 72, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	_start_knot_dialogue(Flow.player, "conv_intro_mr_smog_taunts")
+	start_knot_dialogue(player, "conv_intro_mr_smog_taunts")
 	yield(self, "dialogue_completed")
 
 	# SMOG SMASH
@@ -618,16 +653,16 @@ func intro_cutscene():
 	yield(_tween, "tween_all_completed")
 
 	# Everything flies away!
-	_tween.interpolate_property(fence_front,"position:y", fence_front.position.y, fence_front.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(fence_back,"position:y", fence_back.position.y, fence_back.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_bottom,"position:y", fence_bottom.position.y, fence_bottom.position.y +200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(fence_top,"position:y", fence_top.position.y, fence_top.position.y - 200, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(fence_left,"position:x", fence_left.position.x, fence_left.position.x - 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(fence_right,"position:x", fence_right.position.x, fence_right.position.x + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.interpolate_property(ball,"position:x", ball.position.x, ball.position.x + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	_tween.interpolate_property(bike,"position:y", bike.position.y, bike.position.y + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.interpolate_property(returned_bike,"position:y", returned_bike.position.y, returned_bike.position.y + 400, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	_start_knot_dialogue(Flow.player, "conv_intro_mr_smog_exits")
+	start_knot_dialogue(player, "conv_intro_mr_smog_exits")
 	yield(self, "dialogue_completed")
 
 	_tween.interpolate_property(happy_tree,"position:x", happy_tree.position.x, happy_tree.position.x - 600, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -635,22 +670,79 @@ func intro_cutscene():
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
-	_start_knot_dialogue(Flow.player, "conv_intro_outro")
+	start_knot_dialogue(player, "conv_intro_outro")
 	yield(self, "dialogue_completed")
 
 	Flow.transitions_UI.fade_to_opaque()
 	yield(Flow.transitions_UI, "transition_completed")
 
-	AudioEngine.play_music("game_default")
-
-	game_camera.zoom = Vector2(1, 1)
-	game_camera.position = Vector2.ZERO
+	emit_signal("change_level_requested", "main")
 
 	Flow.transitions_UI.fade_to_transparent()
 	yield(Flow.transitions_UI, "transition_completed")
 
-	solid_snejk = State.get_character_by_id("solid_snejk").object
-	_on_dialogue_requested(solid_snejk)
+	start_knot_dialogue(Flow.player, "conv_solid_snejk")
 	yield(self, "dialogue_completed")
 
 	emit_signal("cutscene_completed")
+
+func play_outro():
+	var level : classLevel = Flow.level
+
+	# Gather up all the cutscene's actors!
+	var player := level.get_node("Sorted/Player")
+	var mayor := level.get_node("Sorted/Characters/Mayor")
+	var game_camera : Camera2D = Flow.game_camera
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	player.position = Flow.get_waypoint_position("protesting_player")
+	player.update_state(Vector2.DOWN)
+
+	game_camera.track_player = false
+	game_camera.zoom = Vector2(2, 2)
+	game_camera.position = Vector2(2336, 2308)
+
+	mayor.set_visible(true)
+
+	start_knot_dialogue(player, "conv_outro_intro")
+	yield(self, "dialogue_completed")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	start_knot_dialogue(player, "conv_outro")
+	yield(self, "dialogue_completed")
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	emit_signal("change_level_requested", "outro")
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	start_knot_dialogue(Flow.player, "conv_solid_snejk")
+	yield(self, "dialogue_completed")
+
+	emit_signal("cutscene_completed")
+
+# This function is now obsolete?
+func change_level(key : String) -> void:
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	emit_signal("change_level_requested", key)
+
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+#	dialogue_in_progress = update_dialogue()
+	dialogue_can_be_updated = true
+#
+#	emit_signal("cutscene_completed")

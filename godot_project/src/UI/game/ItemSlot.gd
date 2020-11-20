@@ -1,8 +1,8 @@
+class_name classItemSlot
 extends TextureRect
-class_name class_item_slot
 
-var item : class_item_state setget set_item, get_item
-func set_item(value : class_item_state) -> void:
+var item : classItemState setget set_item, get_item
+func set_item(value : classItemState) -> void:
 	_item = weakref(value)
 	if value:
 		self.pressed = value.pressed
@@ -16,7 +16,7 @@ func set_item(value : class_item_state) -> void:
 		_texture_button.texture_pressed = null
 
 	_update_amount_label()
-func get_item() -> class_item_state:
+func get_item() -> classItemState:
 	return _item.get_ref()
 
 var pressed := false setget set_pressed, get_pressed

@@ -2,10 +2,14 @@
 
 [ext_resource path="res://assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/menu/HowToPlayMenuTab.gd" type="Script" id=2]
-[ext_resource path="res://roda-assets/UI/how_to_play/e.png" type="Texture" id=3]
-[ext_resource path="res://roda-assets/UI/how_to_play/mouse.png" type="Texture" id=4]
-[ext_resource path="res://roda-assets/UI/how_to_play/wasd.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/UI/menu/how_to_play/e.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/UI/menu/how_to_play/mouse.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/UI/menu/how_to_play/wasd.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/dynamic/luckiest_guy_size24.tres" type="DynamicFont" id=6]
+
+
+
+
 
 
 [sub_resource type="StyleBoxLine" id=1]

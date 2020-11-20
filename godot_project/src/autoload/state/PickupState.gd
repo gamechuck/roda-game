@@ -1,5 +1,5 @@
+class_name classPickupState
 extends Reference
-class_name class_pickup_state
 
 var id := ""
 var visible := true

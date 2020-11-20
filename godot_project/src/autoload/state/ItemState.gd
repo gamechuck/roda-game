@@ -1,7 +1,7 @@
+class_name classItemState
 extends Reference
-class_name class_item_state
 
-const FALLBACK_ITEM_TEXTURE := "res://resources/fallback/item_texture.png"
+const FALLBACK_ITEM_TEXTURE := "res://assets/fallback/item_texture.png"
 
 var id := ""
 var amount := 1

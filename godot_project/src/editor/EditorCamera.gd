@@ -3,6 +3,16 @@ extends Camera2D
 const CAMERA_MOVE_SPEED := 10
 const CAMERA_ZOOM_SPEED := 0.01
 
+var is_active : bool setget set_is_active, get_is_active
+func set_is_active(value : bool)-> void:
+	current = value
+	set_physics_process(value)
+func get_is_active() -> bool:
+	return current
+
+func _ready():
+	set_physics_process(false)
+
 func _physics_process(_delta : float) -> void:
 	if Flow.is_in_editor_mode:
 		# move

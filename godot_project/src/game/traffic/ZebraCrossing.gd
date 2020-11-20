@@ -1,53 +1,52 @@
 tool
-extends YSort
-class_name class_zebra_crossing
+extends Area2D
+class_name classZebraCrossing
 
-onready var _timer := $Timer
-onready var _traffic_lights_container := $Lights
-onready var _interact_area := $InteractArea
+export(Vector2) var extents := Vector2.ZERO setget set_extents
+func set_extents(value : Vector2):
+	extents = value
+	var shape : RectangleShape2D = $CollisionShape2D.shape
+	shape.extents = extents
 
-export var extents := Vector2.ZERO setget set_extents
-export var light_color : int = ConfigData.LIGHT_COLOR.RED setget set_light_color
+export var light_color : int = ConfigData.LIGHT_COLOR.RED
 
 var player_is_inside := false
 var has_traffic_lights := false
 
+var lights : YSort
+
 signal movement_is_allowed
-
-func set_extents(value : Vector2):
-	extents = value
-	var shape : RectangleShape2D = $InteractArea/CollisionShape2D.shape
-	shape.extents = extents
-
-func set_light_color(value : int):
-	light_color = value
-	update_lights()
 
 func _ready():
 	var shape := RectangleShape2D.new()
 	shape.extents = extents
-	$InteractArea/CollisionShape2D.shape = shape
-
-	update_lights()
+	$CollisionShape2D.shape = shape
 
 	if not Engine.editor_hint:
-		var _success := _interact_area.connect("body_entered", self, "_on_body_entered")
-		_success = _interact_area.connect("body_exited", self, "_on_body_exited")
+		var _success := connect("body_entered", self, "_on_body_entered")
+		_success = connect("body_exited", self, "_on_body_exited")
 
-		if has_traffic_lights:
-			var _error := _timer.connect("timeout", self, "_on_timer_timeout")
-			_timer.wait_time = get_wait_time()
-			_timer.one_shot = true
-			_timer.start()
-	
+		if has_node("../../Sorted/Lights/" + name):
+			lights = get_node("../../Sorted/Lights/" + name)
+			has_traffic_lights = true
+
+			var _error := $Timer.connect("timeout", self, "_on_timer_timeout")
+			$Timer.wait_time = get_wait_time()
+			$Timer.one_shot = true
+			$Timer.start()
+
+			update_lights()
+		else:
+			has_traffic_lights = false
+
 	update()
 
 func update_lights():
-	for light in $Lights.get_children():
+	for light in lights.get_children():
 		has_traffic_lights = true
-		if light is class_traffic_light:
+		if light is classTrafficLight:
 			light.light_color = get_opposite_color()
-		if light is class_pedestrian_light:
+		if light is classPedestrianLight:
 			light.light_color = light_color
 
 func _on_timer_timeout():
@@ -56,21 +55,21 @@ func _on_timer_timeout():
 	if light_color == ConfigData.LIGHT_COLOR.RED:
 		emit_signal("movement_is_allowed")
 
-	_timer.wait_time = get_wait_time()
-	_timer.start()
+	$Timer.wait_time = get_wait_time()
+	$Timer.start()
 	update_lights()
 
 func _on_body_entered(body : PhysicsBody2D):
+	# Use the body's name instead of the class due to circular referencing!
 	if body.name == "Player":
-		if not has_traffic_lights and body.get_state_property("entered_zebra") == 0:
-			body.set_state_property("entered_zebra", 1)
-			Director._start_knot_dialogue(body, "conv_first_time_zebra")
-		elif has_traffic_lights and body.get_state_property("entered_traffic_lights") == 0 :
-			body.set_state_property("entered_traffic_lights", 1)
-			Director._start_knot_dialogue(body, "conv_first_time_traffic_lights")
+		if not has_traffic_lights and body.local_variables.get("player_solved_zebra_question", 0) == 0:
+			Director.start_knot_dialogue(body, "conv_zebra")
+		elif has_traffic_lights and body.local_variables.get("player_solved_traffic_lights_question", 0) == 0:
+			Director.start_knot_dialogue(body, "conv_traffic_lights")
 		player_is_inside = true
 
 func _on_body_exited(body : PhysicsBody2D):
+	# Use the body's name instead of the class due to circular referencing!
 	if body.name == "Player":
 		player_is_inside = false
 		if not has_traffic_lights:
@@ -79,13 +78,13 @@ func _on_body_exited(body : PhysicsBody2D):
 func get_wait_time() -> float:
 	match light_color:
 		ConfigData.LIGHT_COLOR.RED:
-			return ConfigData.traffic_red_time
+			return ConfigData.TRAFFIC_RED_TIME
 		ConfigData.LIGHT_COLOR.YELLOW_AFTER_RED:
-			return ConfigData.traffic_yellow_after_red_time
+			return ConfigData.TRAFFIC_YELLOW_AFTER_RED_TIME
 		ConfigData.LIGHT_COLOR.GREEN:
-			return ConfigData.traffic_green_time
+			return ConfigData.TRAFFIC_GREEN_TIME
 		ConfigData.LIGHT_COLOR.YELLOW_AFTER_GREEN:
-			return ConfigData.traffic_yellow_after_green_time
+			return ConfigData.TRAFFIC_YELLOW_AFTER_GREEN_TIME
 		_:
 			return 0.0
 

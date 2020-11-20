@@ -1,0 +1,98 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/game/traffic/Skater.gd" type="Script" id=1]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_ne.png" type="Texture" id=2]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_nw.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_sw.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/characters/skater/skater_red_se.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 50, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 100, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 50, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 100, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 50, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 100, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 50, 0, 50, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 100, 0, 50, 64 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "down_left",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "up_right",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "up_left",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "down_right",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 12, 12 )
+
+[node name="Skater" type="Area2D"]
+input_pickable = false
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 13 )
+animation = "down_right"
+playing = true
+offset = Vector2( 0, -20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 14 )
+
+[node name="Tween" type="Tween" parent="."]

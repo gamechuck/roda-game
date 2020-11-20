@@ -19,12 +19,11 @@ const STORY_PATH := "res://data/story_hr.ink"
 
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
-var	pause_UI : Control = null
 var transitions_UI : Control = null
-var bike_repair_UI : Control = null
-var seat_sorting_UI : Control = null
+
 var inventory : Control = null
-var game_canvas : Node2D = null
+var level : classLevel = null
+var game_camera : Camera2D = null
 var boss_overlay : Control = null
 
 var player : KinematicBody2D = null
@@ -50,12 +49,14 @@ var _game_state : int = STATE.STARTUP
 var _story_resource := preload("res://addons/inkgd/runtime/story.gd")
 
 var player_is_active := false
-var active_character : class_character = null
-var active_pickup : class_pickup = null
-var active_item : class_item_state = null
+var active_character : classCharacter
+var active_pickup : classPickup
+var active_item : classItemState
 
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
+
+signal pause_toggled
 
 func _ready():
 	var _error := load_settings()
@@ -95,23 +96,17 @@ func load_story():
 	# Bind the getter functions so the story can access the game's state.
 	# Check if the player has an item in its inventory...
 	story.bind_external_function_general("has_item", State, "has_item")
-	# Get the state of the node that is participating in the dialogue.
-	story.bind_external_function_general("get_state_property", Director, "get_state_property")
 
-	# Bind an observer to some variables
-	story.observe_variables(["number_of_fences_fixed", "turbine_fixed", "player_wearing_color"], self, "_observe_variables")
+	story.bind_external_function_general("get_level_state", State, "get_level_state")
 
 	Director.story = story
 
-func _observe_variables(variable_name, new_value):
-	match variable_name:
-		"number_of_fences_fixed":
-			game_canvas._on_number_of_fences_fixed(new_value)
-		"turbine_fixed":
-			game_canvas._on_turbine_fixed(new_value)
-		"player_wearing_color":
-			game_canvas._on_player_wearing_color(new_value)
-	print(str("Variable '", variable_name, "' changed to: ", new_value))
+func get_waypoint_position(waypoint_id) -> Vector2:
+	for waypoint in get_tree().get_nodes_in_group("waypoints"):
+		if waypoint.id == waypoint_id:
+			return waypoint.position
+	push_error("Waypoint with id '{0}' is invalid!".format([waypoint_id]))
+	return Vector2.ZERO
 
 func get_item_value(id : String, key : String, default):
 	if items_data.has(id):
@@ -145,14 +140,7 @@ func _unhandled_input(event : InputEvent):
 	match _game_state:
 		STATE.GAME:
 			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
-				toggle_paused()
-
-func toggle_paused():
-	get_tree().paused = not get_tree().paused
-	if get_tree().paused:
-		pause_UI.show()
-	else:
-		pause_UI.hide()
+				emit_signal("pause_toggled")
 
 func toggle_inventory():
 	inventory.pressed = not inventory.pressed

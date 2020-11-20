@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://roda-assets/UI/inventory/items/fence_normal.png" type="Texture" id=1]
+[ext_resource path="res://roda-assets/UI/game/items/fence_normal.png" type="Texture" id=1]
 [ext_resource path="res://src/game/base/Pickup.tscn" type="PackedScene" id=2]
 
-[node name="FenceAtTurbine" instance=ExtResource( 2 )]
-id = "fence_at_turbine"
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Fence" instance=ExtResource( 2 )]
+id = "fence"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
 offset = Vector2( -1, 0 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

@@ -1,32 +1,24 @@
+class_name classPickup
 extends Area2D
-class_name class_pickup
 
 onready var _collision_shape_2D := $CollisionShape2D
 
 export(String) var id : String
-
-var state : class_pickup_state setget set_state, get_state
-func set_state(value : class_pickup_state) -> void:
-	if value:
-		_state = weakref(value)
-		value.object = self
-		set_visible(value.visible)
-func get_state() -> class_pickup_state:
-	return _state.get_ref()
-
-var _state = WeakRef.new()
+var state : classPickupState
 
 func _ready():
 	add_to_group("pickups")
 
-	# Initiate the pickup!
-	self.state = State.get_pickup_by_id(id)
+	# Initiate the pickup's state!
+	state = State.get_pickup_by_id(id)
+	if state:
+		state.object = self
+		if visible != state.visible:
+			set_visible(state.visible)
+	else:
+		push_error("Character with id '{0}' does not have a valid registered state in the context!".format([id]))
 
 	set_visible()
-
-func _exit_tree():
-	if is_inside_tree() and get_tree().has_group("pickups"):
-		remove_from_group("pickups")
 
 func set_visible(value : bool = visible):
 	visible = value
@@ -46,7 +38,7 @@ func _input(event):
 		if rect.has_point(get_global_mouse_position()):
 			Flow.active_pickup = self
 		# This is a bit filthy, but it does the job!
-		# Otherwise new mouse clicks might still contain the 
+		# Otherwise new mouse clicks might still contain the
 		# now obsolete active_pickup!
 		elif Flow.active_pickup == self:
 			Flow.active_pickup = null

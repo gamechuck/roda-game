@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://roda-assets/characters/old_guy/old_guy.png" type="Texture" id=2]
+[ext_resource path="res://src/game/characters/OldMan.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 80 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 48, 80 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 48, 80 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 0, 48, 80 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 12, 36 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 4 )
+
+[node name="OldMan" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+id = "old_man"
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 5 )
+frame = 2
+playing = true
+offset = Vector2( -1, -36 )
+
+[node name="InteractArea" parent="." index="1"]
+position = Vector2( 0, -30 )
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 7 )

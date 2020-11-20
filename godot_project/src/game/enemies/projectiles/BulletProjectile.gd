@@ -1,4 +1,4 @@
-extends class_projectile
+extends classProjectile
 
 var _direction := Vector2.ZERO
 

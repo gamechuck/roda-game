@@ -1,9 +1,9 @@
 # State is an autoload script that contains all global state variables.
 extends Node
 
-var _item_resource := preload("res://src/autoload/state/ItemState.gd")
-var _character_resource := preload("res://src/autoload/state/CharacterState.gd")
-var _pickup_resource := preload("res://src/autoload/state/PickupState.gd")
+var SCENE_ITEM_STATE := preload("res://src/autoload/state/ItemState.gd")
+var SCENE_CHARACTER_STATE := preload("res://src/autoload/state/CharacterState.gd")
+var SCENE_PICKUP_STATE := preload("res://src/autoload/state/PickupState.gd")
 
 func _ready():
 	## If it doesn't exist, create the saves-folder in user://
@@ -29,6 +29,16 @@ func save_stateJSON(path : String = Flow.USER_SAVE_PATH) -> int:
 	return Flow.save_JSON(path, context)
 
 ## STATE ######################################################################
+
+enum LEVEL {INTRO = 0, MAIN = 1, OUTRO = 2}
+
+var level_state : int = LEVEL.INTRO setget , get_level_state
+func get_level_state() -> int:
+	return level_state
+
+# Poster properties
+var foreground_image := Image.new()
+var background_color : Color
 
 func load_state_from_context(context : Dictionary) -> void:
 	if ConfigData.verbose_mode : print("Loading state from the context...")
@@ -73,9 +83,10 @@ func add_item_from_context(item_context : Dictionary) -> void:
 	var item_id : String = item_context.get("id", "MISSING ID")
 	var item_to_be_added := get_item_by_id(item_id)
 	if item_to_be_added:
-		item_to_be_added.amount += 1
+		var amount : int = item_context.get("amount", 1)
+		item_to_be_added.amount += amount
 	else:
-		var item := _item_resource.new()
+		var item := SCENE_ITEM_STATE.new()
 		item.context = item_context
 
 		items.append(item)
@@ -85,7 +96,7 @@ func add_item_by_id(item_id : String) -> void:
 	if item_to_be_added:
 		item_to_be_added.amount += 1
 	else:
-		var item = _item_resource.new()
+		var item = SCENE_ITEM_STATE.new()
 		item.id = item_id
 		item.amount = 1
 
@@ -101,7 +112,7 @@ func remove_item_by_id(item_id : String) -> void:
 	else:
 		push_error("Item with id '{0}' was not found in inventory!".format([item_id]))
 
-func get_item_by_id(item_id : String) -> class_item_state:
+func get_item_by_id(item_id : String) -> classItemState:
 	for item in items:
 		if item.id == item_id:
 			return item
@@ -119,9 +130,8 @@ var characters := []
 
 func init_characters() -> void:
 	for key in Flow.characters_data.keys():
-		var character := _character_resource.new()
+		var character := SCENE_CHARACTER_STATE.new()
 		character.id = key
-		character.visible = Flow.characters_data[key].get("visible", true)
 
 		if ConfigData.verbose_mode: print("Adding registered character with id '{0}' to State!".format([key]))
 		characters.append(character)
@@ -134,7 +144,7 @@ func set_character_from_context(character_context : Dictionary) -> void:
 				character.context = character_context
 				break
 
-func get_character_by_id(character_id : String) -> class_character_state:
+func get_character_by_id(character_id : String) -> classCharacterState:
 	for character in characters:
 		if character.id == character_id:
 			return character
@@ -146,7 +156,7 @@ var pickups := []
 
 func init_pickups() -> void:
 	for key in Flow.pickups_data.keys():
-		var pickup := _pickup_resource.new()
+		var pickup := SCENE_PICKUP_STATE.new()
 		pickup.id = key
 
 		if ConfigData.verbose_mode: print("Adding registered pickup with id '{0}' to State!".format([key]))
@@ -160,7 +170,7 @@ func set_pickup_from_context(pickup_context : Dictionary) -> void:
 				pickup.context = pickup_context
 				break
 
-func get_pickup_by_id(pickup_id : String) -> class_pickup_state:
+func get_pickup_by_id(pickup_id : String) -> classPickupState:
 	for pickup in pickups:
 		if pickup.id == pickup_id:
 			return pickup

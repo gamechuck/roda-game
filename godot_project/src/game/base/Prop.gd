@@ -1,2 +1,2 @@
+class_name classProp
 extends StaticBody2D
-class_name class_prop

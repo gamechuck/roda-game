@@ -1,0 +1,175 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/UI/base/Minigame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/minigames/poster_minigame/ColorButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/minigames/PosterMinigame.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/minigames/poster_minigame/CanvasRect.gd" type="Script" id=4]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/blank_canvas.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/sunflower.png" type="Texture" id=6]
+[ext_resource path="res://src/UI/minigames/poster_minigame/TextureButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/heart.png" type="Texture" id=8]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/peace_symbol.png" type="Texture" id=9]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan1.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan2.png" type="Texture" id=11]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/cool_tree.png" type="Texture" id=12]
+
+[node name="PosterMinigame" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+id = "poster_minigame"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -8.0
+mouse_filter = 2
+custom_constants/separation = -16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
+margin_right = 448.0
+margin_bottom = 179.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftVBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="0"]
+margin_right = 144.0
+margin_bottom = 179.0
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="SymbolGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/LeftVBox" index="0"]
+margin_left = 22.0
+margin_right = 122.0
+margin_bottom = 100.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+columns = 2
+
+[node name="TextureButton" parent="VBoxContainer/HBoxContainer/LeftVBox/SymbolGrid" index="0" instance=ExtResource( 7 )]
+texture = ExtResource( 12 )
+
+[node name="TextureButton2" parent="VBoxContainer/HBoxContainer/LeftVBox/SymbolGrid" index="1" instance=ExtResource( 7 )]
+margin_left = 52.0
+margin_right = 100.0
+texture = ExtResource( 8 )
+
+[node name="TextureButton3" parent="VBoxContainer/HBoxContainer/LeftVBox/SymbolGrid" index="2" instance=ExtResource( 7 )]
+margin_top = 52.0
+margin_bottom = 100.0
+texture = ExtResource( 9 )
+
+[node name="TextureButton4" parent="VBoxContainer/HBoxContainer/LeftVBox/SymbolGrid" index="3" instance=ExtResource( 7 )]
+margin_left = 52.0
+margin_top = 52.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 6 )
+
+[node name="SloganGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/LeftVBox" index="1"]
+margin_top = 111.0
+margin_right = 144.0
+margin_bottom = 179.0
+size_flags_horizontal = 6
+size_flags_vertical = 10
+
+[node name="TextureButton" parent="VBoxContainer/HBoxContainer/LeftVBox/SloganGrid" index="0" instance=ExtResource( 7 )]
+margin_right = 144.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 144, 32 )
+texture = ExtResource( 10 )
+
+[node name="TextureButton2" parent="VBoxContainer/HBoxContainer/LeftVBox/SloganGrid" index="1" instance=ExtResource( 7 )]
+margin_top = 36.0
+margin_right = 144.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 144, 32 )
+texture = ExtResource( 11 )
+
+[node name="CanvasRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" index="1"]
+margin_left = 148.0
+margin_top = 9.0
+margin_right = 308.0
+margin_bottom = 169.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource( 5 )
+stretch_mode = 6
+script = ExtResource( 4 )
+
+[node name="RightVBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="2"]
+margin_left = 330.0
+margin_right = 430.0
+margin_bottom = 179.0
+size_flags_horizontal = 6
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/RightVBox" index="0"]
+margin_right = 100.0
+margin_bottom = 152.0
+size_flags_horizontal = 6
+columns = 2
+
+[node name="ColorButton" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="0" instance=ExtResource( 2 )]
+margin_right = 48.0
+margin_bottom = 48.0
+color = Color( 1, 0.588235, 0.588235, 1 )
+
+[node name="ColorButton2" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="1" instance=ExtResource( 2 )]
+margin_left = 52.0
+margin_right = 100.0
+margin_bottom = 48.0
+color = Color( 0, 1, 0.929412, 1 )
+
+[node name="ColorButton3" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="2" instance=ExtResource( 2 )]
+margin_top = 52.0
+margin_right = 48.0
+margin_bottom = 100.0
+color = Color( 1, 0.54902, 0.866667, 1 )
+
+[node name="ColorButton4" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="3" instance=ExtResource( 2 )]
+margin_left = 52.0
+margin_top = 52.0
+margin_right = 100.0
+margin_bottom = 100.0
+color = Color( 0.392157, 0.427451, 1, 1 )
+
+[node name="ColorButton5" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="4" instance=ExtResource( 2 )]
+margin_top = 104.0
+margin_right = 48.0
+margin_bottom = 152.0
+color = Color( 0.498039, 1, 0.458824, 1 )
+
+[node name="ColorButton6" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="5" instance=ExtResource( 2 )]
+margin_left = 52.0
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 152.0
+color = Color( 1, 0.92549, 0.635294, 1 )
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer/RightVBox" index="1"]
+margin_left = 2.0
+margin_top = 156.0
+margin_right = 98.0
+margin_bottom = 179.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_horizontal = 6
+text = "CLEAR"
+
+[node name="SubmitButton" type="Button" parent="VBoxContainer" index="1"]
+margin_left = 176.0
+margin_top = 163.0
+margin_right = 272.0
+margin_bottom = 186.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_horizontal = 4
+text = "DONE"

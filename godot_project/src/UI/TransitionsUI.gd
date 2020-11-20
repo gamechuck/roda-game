@@ -20,12 +20,12 @@ func _ready():
 func fade_to_opaque(duration : float = 2.0):
 	visible = true
 	_tween.interpolate_method(
-		self, 
-		"_set_shader_param", 
-		1.0, 
-		0.0, 
+		self,
+		"_set_shader_param",
+		1.0,
+		0.0,
 		duration,
-		Tween.TRANS_CUBIC, 
+		Tween.TRANS_CUBIC,
 		Tween.EASE_IN_OUT)
 	_tween.start()
 
@@ -33,11 +33,11 @@ func fade_to_transparent(duration : float = 2.0):
 	visible = true
 	_tween.interpolate_method(
 		self,
-		"_set_shader_param", 
+		"_set_shader_param",
 		0.0,
 		1.0,
 		duration,
-		Tween.TRANS_CUBIC, 
+		Tween.TRANS_CUBIC,
 		Tween.EASE_IN_OUT)
 	_tween.start()
 

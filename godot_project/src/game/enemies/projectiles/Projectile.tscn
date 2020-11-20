@@ -4,7 +4,6 @@
 [ext_resource path="res://roda-assets/characters/mr_smog/smog_particle.png" type="Texture" id=2]
 [ext_resource path="res://assets/materials/smog_distortion_material.tres" type="Material" id=3]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],

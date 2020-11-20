@@ -1,2 +1,2 @@
+class_name classGummy
 extends Area2D
-class_name class_gummy

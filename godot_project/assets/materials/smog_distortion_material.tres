@@ -25,6 +25,6 @@ noise = SubResource( 2 )
 
 [resource]
 shader = SubResource( 1 )
-shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/color = Color( 0.937255, 0.0941176, 0.0941176, 1 )
 shader_param/speed = 0.1
 shader_param/noise_texture = SubResource( 3 )

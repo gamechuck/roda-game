@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/game/base/Prop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://roda-assets/props/billboard.png" type="Texture" id=2]
+[ext_resource path="res://src/game/props/Billboard.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 92, 10 )
+
+[node name="Billboard" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+offset = Vector2( 32, -120 )
+
+[node name="Poster" type="Sprite" parent="Sprite" index="0"]
+offset = Vector2( 2, -120 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

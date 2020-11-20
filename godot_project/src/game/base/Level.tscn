@@ -1,0 +1,153 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/game/base/Level.gd" type="Script" id=1]
+[ext_resource path="res://assets/tilesets/props_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/tilesets/ground_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/tilesets/water_tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://assets/tilesets/street_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/tilesets/cover_tileset.tres" type="TileSet" id=7]
+[ext_resource path="res://src/game/fences/Fences.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/tilesets/lines_tileset.tres" type="TileSet" id=9]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Terrain" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundTileMap" type="TileMap" parent="Terrain"]
+z_index = -5
+tile_set = ExtResource( 3 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WaterTileMap" type="TileMap" parent="Terrain"]
+z_index = -4
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StreetTileMap" type="TileMap" parent="Terrain"]
+z_index = -3
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LinesTileMap" type="TileMap" parent="Terrain"]
+z_index = -1
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CoverTileMap" type="TileMap" parent="Terrain"]
+z_index = -1
+tile_set = ExtResource( 7 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sorted" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PropsTileMap" type="TileMap" parent="Sorted"]
+position = Vector2( 16, 16 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="Sorted" instance=ExtResource( 4 )]
+
+[node name="Fences" parent="Sorted" instance=ExtResource( 8 )]
+position = Vector2( 2336, 2208 )
+
+[node name="Characters" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Props" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pickups" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cars" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Skaters" type="YSort" parent="Sorted"]
+
+[node name="Lights" type="YSort" parent="Sorted"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Waypoints" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SafeZones" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TrafficLoops" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SkaterLoops" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ZebraCrossings" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}

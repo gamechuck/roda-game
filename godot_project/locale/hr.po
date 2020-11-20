@@ -15,7 +15,7 @@ msgid "Hello world!"
 msgstr ""
 
 msgid "GAME_TITLE"
-msgstr "Rodina Čudovišna Avantura"
+msgstr "Čudovišna Avantura"
 
 msgid "PAUSE_MESSAGE"
 msgstr "IGRA JE PAUZIRANA"
@@ -59,9 +59,134 @@ msgstr "Kretanje"
 msgid "DRIVE_MESSAGE"
 msgstr "Raspored sjedenja..."
 
-# CHARACTER NAMES
-msgid "Solid Snejk"
-msgstr ""
+msgid "CLEAR"
+msgstr "Očisti"
 
-msgid "Solid Slug"
-msgstr ""
+msgid "DONE"
+msgstr "Gotovo!"
+
+##
+## CHARACTER NAMES
+##
+msgid "SOLID_SNEJK"
+msgstr "Solid Snejk"
+
+msgid "LIZZY"
+msgstr "Lizijan"
+
+msgid "WATTO"
+msgstr "Vatko"
+
+msgid "MINIGAME_CAR"
+msgstr "Auto"
+
+msgid "SOLID_SLUG"
+msgstr "Slagač"
+
+msgid "BIKE"
+msgstr "Bicikl"
+
+msgid "TAXI"
+msgstr "Taksi"
+
+msgid "BUS"
+msgstr "Autobus"
+
+msgid "CANSTER_LEFT"
+msgstr "Smećeko"
+
+msgid "CANSTER_MIDDLE"
+msgstr "Mister Smeće"
+
+msgid "CANSTER_RIGHT"
+msgstr "El Smećo"
+
+msgid "COPPER"
+msgstr "Cajac"
+
+msgid "LT_COPPER"
+msgstr "Poručnik Cajac"
+
+msgid "HAPPY_TREE"
+msgstr "Drvence"
+
+msgid "LOVE_INTEREST"
+msgstr "Milica"
+
+msgid "WHEELIE"
+msgstr "Vilko"
+
+msgid "MR_SMOG"
+msgstr "Mister Smog"
+
+msgid "WIND_TURBINE"
+msgstr "Vjetrenjača"
+
+msgid "FLOWER_BOX"
+msgstr "Tezga za cvijeće"
+
+msgid "ROSALINA"
+msgstr "Ružica"
+
+msgid "OLD_MAN"
+msgstr "Stari Musk"
+
+msgid "DOG"
+msgstr "Lepa"
+
+msgid "STUDENT"
+msgstr "Učenik"
+
+msgid "DOG_TRAINER_CLUB"
+msgstr "Klub trenera pasa"
+
+msgid "PARK_LOVERS"
+msgstr "Parkoljupci"
+
+msgid "MONSTERS_WITHOUT_BORDERS"
+msgstr "Čudovišta bez granica"
+
+msgid "ANIMAL_PROTECTION_SERVICES"
+msgstr "Lunja"
+
+msgid "RODA_SHOP"
+msgstr "SUPER RODA dućan"
+
+msgid "DOG_PEOPLE"
+msgstr "Trener pasa"
+
+msgid "RODA_PEOPLE"
+msgstr "Rodasto čudovište"
+
+msgid "RIGHTS_PEOPLE"
+msgstr "Čudovište bez granica"
+
+msgid "ANIMAL_PEOPLE"
+msgstr "Lunja volonter"
+
+msgid "MAYOR"
+msgstr "Gradonačelnik"
+
+msgid "BLIND_GUY"
+msgstr "Slijepac"
+
+msgid "WHEELIE_APPARTMENT"
+msgstr "Vilkova zgrada"
+
+msgid "WHEELIE_ELEVATOR"
+msgstr "Dizalo"
+
+msgid "SQUIRRELS_AT_SQUARE"
+msgstr "Smreka"
+
+msgid "SQUIRRELS_AT_MOUNTAINS"
+msgstr "Lipa"
+
+msgid "SQUIRRELS_AT_LAKE"
+msgstr "Hrast"
+
+msgid "PLAYER"
+msgstr "Plavko"
+
+msgid "HELTER_SKELTER"
+msgstr "Helter Skejter"

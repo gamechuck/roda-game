@@ -1,9 +1,8 @@
 tool
+class_name classSafeZone
 extends Area2D
-class_name class_safe_zone
 
-export var extents := Vector2.ZERO setget set_extents
-
+export(Vector2) var extents := Vector2.ZERO setget set_extents
 func set_extents(value : Vector2):
 	extents = value
 	var shape : RectangleShape2D = $CollisionShape2D.shape

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/game/base/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprite_frames/characters/mayor.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/game/characters/Mayor.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28, 42 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 12 )
+
+[node name="Mayor" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+id = "mayor"
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = ExtResource( 2 )
+offset = Vector2( 0, -28 )
+
+[node name="InteractArea" parent="." index="1"]
+position = Vector2( 0, -20 )
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 2 )

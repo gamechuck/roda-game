@@ -14,7 +14,7 @@ msgid "Hello world!"
 msgstr "Hello world!"
 
 msgid "GAME_TITLE"
-msgstr "Family Monster Adventure"
+msgstr "Monster Adventure"
 
 msgid "PAUSE_MESSAGE"
 msgstr "GAME IS PAUSED"
@@ -58,9 +58,134 @@ msgstr "Movement"
 msgid "DRIVE_MESSAGE"
 msgstr "Check arrangement..."
 
-# CHARACTER NAMES
-msgid "Solid Snejk"
-msgstr "Solid Snake"
+msgid "CLEAR"
+msgstr "Clear"
 
-msgid "Solid Slug"
+msgid "DONE"
+msgstr "Done!"
+
+##
+## CHARACTER NAMES
+##
+msgid "SOLID_SNEJK"
+msgstr "Solid Snejk"
+
+msgid "LIZZY"
+msgstr "Lizzianus"
+
+msgid "WATTO"
+msgstr "Watto"
+
+msgid "MINIGAME_CAR"
+msgstr "Car"
+
+msgid "SOLID_SLUG"
 msgstr "Solid Slug"
+
+msgid "BIKE"
+msgstr "Bike"
+
+msgid "TAXI"
+msgstr "Taxi"
+
+msgid "BUS"
+msgstr "Bus"
+
+msgid "CANSTER_LEFT"
+msgstr "Canster"
+
+msgid "CANSTER_MIDDLE"
+msgstr "Mister Canster"
+
+msgid "CANSTER_RIGHT"
+msgstr "El Canster"
+
+msgid "COPPER"
+msgstr "Copper"
+
+msgid "LT_COPPER"
+msgstr "Lt. Copper"
+
+msgid "HAPPY_TREE"
+msgstr "Drvence"
+
+msgid "LOVE_INTEREST"
+msgstr "Milica"
+
+msgid "WHEELIE"
+msgstr "Vilko"
+
+msgid "MR_SMOG"
+msgstr "Mister Smog"
+
+msgid "WIND_TURBINE"
+msgstr "Wind turbine"
+
+msgid "FLOWER_BOX"
+msgstr "Flower box"
+
+msgid "ROSALINA"
+msgstr "Rosalina"
+
+msgid "OLD_MAN"
+msgstr "Old Man"
+
+msgid "DOG"
+msgstr "Lepa"
+
+msgid "STUDENT"
+msgstr "Student"
+
+msgid "DOG_TRAINER_CLUB"
+msgstr "Dog Trainer Club"
+
+msgid "PARK_LOVERS"
+msgstr "Park Crowd"
+
+msgid "MONSTERS_WITHOUT_BORDERS"
+msgstr "Monsters Without Borders"
+
+msgid "ANIMAL_PROTECTION_SERVICES"
+msgstr "Lunja"
+
+msgid "RODA_SHOP"
+msgstr "SUPER RODA shop"
+
+msgid "DOG_PEOPLE"
+msgstr "Dog trainer"
+
+msgid "RODA_PEOPLE"
+msgstr "RODA monster"
+
+msgid "RIGHTS_PEOPLE"
+msgstr "Monster without border"
+
+msgid "ANIMAL_PEOPLE"
+msgstr "Lunja volunteer"
+
+msgid "MAYOR"
+msgstr "Mayor"
+
+msgid "BLIND_GUY"
+msgstr "Blind person"
+
+msgid "WHEELIE_APPARTMENT"
+msgstr "Vilko's building"
+
+msgid "WHEELIE_ELEVATOR"
+msgstr "Elevator"
+
+msgid "SQUIRRELS_AT_SQUARE"
+msgstr "Spruce"
+
+msgid "SQUIRRELS_AT_MOUNTAINS"
+msgstr "Linden"
+
+msgid "SQUIRRELS_AT_LAKE"
+msgstr "Oak"
+
+msgid "PLAYER"
+msgstr "Plavko"
+
+msgid "HELTER_SKELTER"
+msgstr "Skater from HELL"

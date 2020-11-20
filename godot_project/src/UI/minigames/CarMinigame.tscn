@@ -1,0 +1,278 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/baby_normal.png" type="Texture" id=3]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/baby_pressed.png" type="Texture" id=4]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/baby_disabled.png" type="Texture" id=5]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/adult_disabled.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/interior.png" type="Texture" id=7]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/chasis.png" type="Texture" id=8]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/child_belted.png" type="Texture" id=9]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/teenager_normal.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/UI/minigames/bike_minigame/central_frame.png" type="Texture" id=11]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/windshield.png" type="Texture" id=12]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/adult_normal.png" type="Texture" id=13]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/adult_belted.png" type="Texture" id=14]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/child_normal.png" type="Texture" id=15]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/teenager_pressed.png" type="Texture" id=16]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/driver_belted.png" type="Texture" id=17]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/child_disabled.png" type="Texture" id=18]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/adult_pressed.png" type="Texture" id=19]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/baby_belted.png" type="Texture" id=20]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/teenager_disabled.png" type="Texture" id=21]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/teenager_belted.png" type="Texture" id=22]
+[ext_resource path="res://roda-assets/UI/minigames/car_minigame/child_pressed.png" type="Texture" id=23]
+[ext_resource path="res://src/UI/minigames/car_minigame/CharacterSlot.tscn" type="PackedScene" id=24]
+[ext_resource path="res://src/UI/minigames/CarMinigame.gd" type="Script" id=25]
+[ext_resource path="res://src/UI/minigames/car_minigame/SeatRect.gd" type="Script" id=26]
+[ext_resource path="res://src/UI/base/Minigame.tscn" type="PackedScene" id=27]
+
+[node name="CarMinigame" instance=ExtResource( 27 )]
+script = ExtResource( 25 )
+id = "car_minigame"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -8.0
+mouse_filter = 2
+custom_constants/separation = -10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
+margin_right = 448.0
+margin_bottom = 166.0
+mouse_filter = 2
+alignment = 1
+
+[node name="VBoxLeft" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="0"]
+margin_right = 79.0
+margin_bottom = 166.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Teenager" parent="VBoxContainer/HBoxContainer/VBoxLeft" index="0" instance=ExtResource( 24 )]
+type = 2
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 16 )
+texture_disabled = ExtResource( 21 )
+texture_belted = ExtResource( 22 )
+
+[node name="Adult" parent="VBoxContainer/HBoxContainer/VBoxLeft" index="1" instance=ExtResource( 24 )]
+margin_top = 85.0
+margin_bottom = 166.0
+type = 3
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 19 )
+texture_disabled = ExtResource( 6 )
+texture_belted = ExtResource( 14 )
+
+[node name="BackgroundRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" index="1"]
+margin_left = 83.0
+margin_right = 365.0
+margin_bottom = 166.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+stretch_mode = 4
+
+[node name="Interior" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlights" type="Control" parent="VBoxContainer/HBoxContainer/BackgroundRect" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SeatChild" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch_mode = 4
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+type = 1
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatChild" index="0"]
+position = Vector2( 171, 53 )
+rotation = 1.5708
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatChild" index="1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatChild/Area2D" index="0"]
+polygon = PoolVector2Array( 171.153, 41.1942, 159.625, 42.25, 159.375, 62.75, 170.965, 63.107, 185.012, 65.5417, 197.935, 60.8595, 197.373, 43.0671, 184.263, 36.8866 )
+
+[node name="SeatBaby" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch_mode = 4
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+type = 0
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatBaby" index="0"]
+position = Vector2( 175, 83 )
+rotation = -1.5708
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatBaby" index="1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatBaby/Area2D" index="0"]
+polygon = PoolVector2Array( 166.988, 72.5047, 157.188, 77.2723, 157.717, 89.4561, 167.782, 93.9588, 188.707, 94.2237, 204.863, 90.7804, 205.128, 74.3587, 189.501, 71.9749 )
+
+[node name="SeatTeenager" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights" index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch_mode = 4
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+type = 2
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatTeenager" index="0"]
+position = Vector2( 176, 116 )
+rotation = 1.5708
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatTeenager" index="1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatTeenager/Area2D" index="0"]
+polygon = PoolVector2Array( 182.131, 104.184, 165.142, 104.42, 165.142, 124.241, 182.263, 124.711, 191.543, 127.009, 205.492, 122.353, 205.256, 106.071, 190.483, 101.377 )
+
+[node name="SeatAdult" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights" index="3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch_mode = 4
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatAdult" index="0"]
+position = Vector2( 129, 59 )
+rotation = 1.5708
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatAdult" index="1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatAdult/Area2D" index="0"]
+polygon = PoolVector2Array( 127.706, 43.8518, 104.517, 45.041, 103.625, 72.6901, 127.112, 75.0685, 148.22, 73.582, 154.761, 67.9333, 155.058, 49.5005, 147.328, 45.3383 )
+
+[node name="SeatDriver" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights" index="4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/HBoxContainer/BackgroundRect/Highlights/SeatDriver" index="0"]
+position = Vector2( 117, 110 )
+rotation = 1.5708
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Chasis" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect" index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Windshield" type="TextureRect" parent="VBoxContainer/HBoxContainer/BackgroundRect" index="3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+stretch_mode = 4
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxRight" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="2"]
+margin_left = 369.0
+margin_right = 448.0
+margin_bottom = 166.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Child" parent="VBoxContainer/HBoxContainer/VBoxRight" index="0" instance=ExtResource( 24 )]
+type = 1
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 23 )
+texture_disabled = ExtResource( 18 )
+texture_belted = ExtResource( 9 )
+
+[node name="Baby" parent="VBoxContainer/HBoxContainer/VBoxRight" index="1" instance=ExtResource( 24 )]
+margin_top = 85.0
+margin_bottom = 166.0
+type = 0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_disabled = ExtResource( 5 )
+texture_belted = ExtResource( 20 )
+
+[node name="DriveButton" type="Button" parent="VBoxContainer" index="1"]
+margin_left = 161.0
+margin_top = 156.0
+margin_right = 286.0
+margin_bottom = 179.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_horizontal = 4
+text = "DRIVE_MESSAGE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
