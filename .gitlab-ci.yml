@@ -12,7 +12,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  EXPORT_NAME: rodina-cudovisna-avantura
+  EXPORT_NAME: cudovisna-avantura
 
 windows_dev:
   stage: export
