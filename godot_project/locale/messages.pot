@@ -50,9 +50,134 @@ msgstr ""
 msgid "DRIVE_MESSAGE"
 msgstr ""
 
-# CHARACTER NAMES
-msgid "Solid Snejk"
+msgid "CLEAR"
 msgstr ""
 
-msgid "Solid Slug"
+msgid "DONE"
+msgstr ""
+
+##
+## CHARACTER NAMES
+##
+msgid "SOLID_SNEJK"
+msgstr ""
+
+msgid "LIZZY"
+msgstr ""
+
+msgid "WATTO"
+msgstr ""
+
+msgid "MINIGAME_CAR"
+msgstr ""
+
+msgid "SOLID_SLUG"
+msgstr ""
+
+msgid "BIKE"
+msgstr ""
+
+msgid "TAXI"
+msgstr ""
+
+msgid "BUS"
+msgstr ""
+
+msgid "CANSTER_LEFT"
+msgstr ""
+
+msgid "CANSTER_MIDDLE"
+msgstr ""
+
+msgid "CANSTER_RIGHT"
+msgstr ""
+
+msgid "COPPER"
+msgstr ""
+
+msgid "LT_COPPER"
+msgstr ""
+
+msgid "HAPPY_TREE"
+msgstr ""
+
+msgid "LOVE_INTEREST"
+msgstr ""
+
+msgid "WHEELIE"
+msgstr ""
+
+msgid "MR_SMOG"
+msgstr ""
+
+msgid "WIND_TURBINE"
+msgstr ""
+
+msgid "FLOWER_BOX"
+msgstr ""
+
+msgid "ROSALINA"
+msgstr ""
+
+msgid "OLD_MAN"
+msgstr ""
+
+msgid "DOG"
+msgstr ""
+
+msgid "STUDENT"
+msgstr ""
+
+msgid "DOG_TRAINER_CLUB"
+msgstr ""
+
+msgid "PARK_LOVERS"
+msgstr ""
+
+msgid "MONSTERS_WITHOUT_BORDERS"
+msgstr ""
+
+msgid "ANIMAL_PROTECTION_SERVICES"
+msgstr ""
+
+msgid "RODA_SHOP"
+msgstr ""
+
+msgid "DOG_PEOPLE"
+msgstr ""
+
+msgid "RODA_PEOPLE"
+msgstr ""
+
+msgid "RIGHTS_PEOPLE"
+msgstr ""
+
+msgid "ANIMAL_PEOPLE"
+msgstr ""
+
+msgid "MAYOR"
+msgstr ""
+
+msgid "BLIND_GUY"
+msgstr ""
+
+msgid "WHEELIE_APPARTMENT"
+msgstr ""
+
+msgid "WHEELIE_ELEVATOR"
+msgstr ""
+
+msgid "SQUIRRELS_AT_SQUARE"
+msgstr ""
+
+msgid "SQUIRRELS_AT_MOUNTAINS"
+msgstr ""
+
+msgid "SQUIRRELS_AT_LAKE"
+msgstr ""
+
+msgid "PLAYER"
+msgstr ""
+
+msgid "HELTER_SKELTER"
 msgstr ""

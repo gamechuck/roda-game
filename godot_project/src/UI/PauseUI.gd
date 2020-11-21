@@ -3,7 +3,14 @@ extends Control
 onready var _pause_tab_container := $PauseTabContainer
 
 func _ready():
-	Flow.pause_UI = self
+	var _error : int = Flow.connect("pause_toggled", self, "_on_pause_toggled")
+
+func _on_pause_toggled():
+	get_tree().paused = not get_tree().paused
+	if get_tree().paused:
+		show()
+	else:
+		hide()
 
 func show():
 	_pause_tab_container.set_current_tab(classPauseTab.TABS.MAIN)

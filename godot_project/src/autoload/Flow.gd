@@ -19,7 +19,6 @@ const STORY_PATH := "res://data/story_hr.ink"
 
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
-var	pause_UI : Control = null
 var transitions_UI : Control = null
 var bike_repair_UI : Control = null
 var seat_sorting_UI : Control = null
@@ -56,6 +55,8 @@ var active_item : class_item_state = null
 
 onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
+
+signal pause_toggled
 
 func _ready():
 	var _error := load_settings()
@@ -145,14 +146,7 @@ func _unhandled_input(event : InputEvent):
 	match _game_state:
 		STATE.GAME:
 			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
-				toggle_paused()
-
-func toggle_paused():
-	get_tree().paused = not get_tree().paused
-	if get_tree().paused:
-		pause_UI.show()
-	else:
-		pause_UI.hide()
+				emit_signal("pause_toggled")
 
 func toggle_inventory():
 	inventory.pressed = not inventory.pressed

@@ -1,7 +1,7 @@
 {
     "characters": {
         "solid_snejk": {
-            "name": "Solid Snejk",
+            "name": "SOLID_SNEJK",
             "knot": "conv_solid_snejk",
             "portrait": {
                 "size": [
@@ -17,7 +17,7 @@
             }
         },
         "lizzy": {
-            "name": "Lizijan",
+            "name": "LIZZY",
             "knot": "conv_lizzy",
             "portrait": {
                 "size": [
@@ -32,7 +32,7 @@
             }
         },
         "watto": {
-            "name": "Watto",
+            "name": "WATTO",
             "knot": "conv_watto",
             "portrait": {
                 "size": [
@@ -47,11 +47,11 @@
             }
         },
         "seat_sorting_car": {
-            "name": "Car",
+            "name": "MINIGAME_CAR",
             "knot": "conv_seat_sorting_car"
         },
         "solid_slug": {
-            "name": "Slagač",
+            "name": "SOLID_SLUG",
             "knot": "conv_solid_slug",
             "portrait": {
                 "size": [
@@ -66,12 +66,12 @@
             }
         },
         "returned_bike": {
-            "name": "Bike",
+            "name": "BIKE",
             "knot": "conv_returned_bike",
             "visible": false
         },
         "taxi_at_park": {
-            "name": "Taxi",
+            "name": "TAXI",
             "knot": "conv_taxi_at_park",
             "portrait": {
                 "size": [
@@ -86,7 +86,7 @@
             }
         },
         "taxi_at_mountain": {
-            "name": "Taxi",
+            "name": "TAXI",
             "knot": "conv_taxi_at_mountain",
             "portrait": {
                 "size": [
@@ -101,11 +101,11 @@
             }
         },
         "bus": {
-            "name": "Bus",
+            "name": "BUS",
             "knot": "conv_bus"
         },
         "canster_left": {
-            "name": "Canster",
+            "name": "CANSTER_LEFT",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -120,7 +120,7 @@
             }
         },
         "canster_middle": {
-            "name": "Canster",
+            "name": "CANSTER_MIDDLE",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -135,7 +135,7 @@
             }
         },
         "canster_right": {
-            "name": "Cansterino",
+            "name": "CANSTER_RIGHT",
             "knot": "conv_canster",
             "portrait": {
                 "size": [
@@ -150,7 +150,7 @@
             }
         },
         "copper": {
-            "name": "Copper",
+            "name": "COPPER",
             "knot": "conv_copper",
             "portrait": {
                 "size": [
@@ -165,7 +165,7 @@
             }
         },
         "happy_tree": {
-            "name": "Happy Tree",
+            "name": "HAPPY_TREE",
             "knot": "conv_happy_tree",
             "portrait": {
                 "size": [
@@ -181,7 +181,7 @@
             "visible": false
         },
         "love_interest": {
-            "name": "Mia",
+            "name": "LOVE_INTEREST",
             "knot": "conv_love_interest",
             "portrait": {
                 "size": [
@@ -196,7 +196,7 @@
             }
         },
         "wheelie": {
-            "name": "Vilko",
+            "name": "WHEELIE",
             "knot": "conv_wheelie",
             "portrait": {
                 "size": [
@@ -211,7 +211,7 @@
             }
         },
         "mr_smog": {
-            "name": "Mr. Smog",
+            "name": "MR_SMOG",
             "knot": "conv_mr_smog",
             "portrait": {
                 "size": [
@@ -226,11 +226,11 @@
             }
         },
         "wind_turbine": {
-            "name": "Wind Turbine",
+            "name": "WIND_TURBINE",
             "knot": "conv_wind_turbine"
         },
         "player": {
-            "name": "Plavko",
+            "name": "PLAYER",
             "knot": "conv_player",
             "portrait": {
                 "size": [
@@ -245,7 +245,7 @@
             }
         },
         "helter_skelter": {
-            "name": "Helter Skejter",
+            "name": "HELTER_SKELTER",
             "knot": "conv_helter_skelter",
             "portrait": {
                 "size": [

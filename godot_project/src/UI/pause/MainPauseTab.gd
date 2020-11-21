@@ -20,7 +20,7 @@ func update_tab():
 	_resume_button.grab_focus()
 
 func _on_resume_button_pressed():
-	Flow.toggle_paused()
+	Flow.emit_signal("pause_toggled")
 
 func _on_restart_button_pressed():
 	Flow.deferred_reload_current_scene()

@@ -43,20 +43,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SettingsOverlay"]
+[node name="HB" type="HBoxContainer" parent="SettingsOverlay"]
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 464.0
 margin_bottom = 246.0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsOverlay/HBoxContainer"]
+[node name="VB" type="VBoxContainer" parent="SettingsOverlay/HB"]
 margin_right = 32.0
 margin_bottom = 222.0
 mouse_filter = 2
 alignment = 2
 
-[node name="SettingsButton" type="TextureButton" parent="SettingsOverlay/HBoxContainer/VBoxContainer"]
+[node name="SettingsButton" type="TextureButton" parent="SettingsOverlay/HB/VB"]
 margin_top = 190.0
 margin_right = 32.0
 margin_bottom = 222.0
