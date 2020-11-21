@@ -9,8 +9,8 @@
 [ext_resource path="res://src/UI/minigames/poster_minigame/TextureButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://roda-assets/UI/minigames/poster_minigame/heart.png" type="Texture" id=8]
 [ext_resource path="res://roda-assets/UI/minigames/poster_minigame/peace_symbol.png" type="Texture" id=9]
-[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan1.png" type="Texture" id=10]
-[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan2.png" type="Texture" id=11]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan1_hr.png" type="Texture" id=10]
+[ext_resource path="res://roda-assets/UI/minigames/poster_minigame/slogan2_hr.png" type="Texture" id=11]
 [ext_resource path="res://roda-assets/UI/minigames/poster_minigame/cool_tree.png" type="Texture" id=12]
 
 [node name="PosterMinigame" instance=ExtResource( 1 )]
