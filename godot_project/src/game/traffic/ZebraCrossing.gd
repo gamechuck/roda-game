@@ -39,7 +39,7 @@ func _ready():
 			_timer.wait_time = get_wait_time()
 			_timer.one_shot = true
 			_timer.start()
-	
+
 	update()
 
 func update_lights():

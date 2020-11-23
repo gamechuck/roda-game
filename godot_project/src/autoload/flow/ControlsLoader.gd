@@ -35,7 +35,7 @@ func _create_controls(controls_dictionary : Dictionary) -> int:
 	#var actions : Array = InputMap.get_actions()
 	#for action in actions:
 	#	InputMap.erase_action(action)
-	
+
 	for key in controls_dictionary.keys():
 		for control in controls_dictionary[key]:
 			if control.has("action"):
@@ -43,7 +43,7 @@ func _create_controls(controls_dictionary : Dictionary) -> int:
 					# Erase the action if it already exists!
 					InputMap.erase_action(control.action)
 				InputMap.add_action(control.action)
-				if ConfigData.verbose_mode: 
+				if ConfigData.verbose_mode:
 					print("	> Added action '{0}' to InputMap.".format([control.action]))
 				if control.has("events"):
 					for event in control.events:
@@ -54,7 +54,7 @@ func _create_controls(controls_dictionary : Dictionary) -> int:
 						elif event.has("axis"):
 							_create_inputEventJoypadMotion(control.action, event)
 	return OK
-	
+
 func _create_inputEventKey(action : String, event : Dictionary) -> void:
 	## Add a keyboard event to an action.
 	var event_key : InputEventKey = InputEventKey.new()
@@ -64,7 +64,7 @@ func _create_inputEventKey(action : String, event : Dictionary) -> void:
 	InputMap.action_add_event(action, event_key)
 	if ConfigData.verbose_mode:
 		print("		> Added event with keyboard with scancode '{0}' ('{1}').".format([
-			event_key.scancode, 
+			event_key.scancode,
 			OS.get_scancode_string(event_key.scancode)
 		]))
 
@@ -87,7 +87,7 @@ func _create_inputEventJoypadMotion(action : String, event : Dictionary) -> void
 	InputMap.action_add_event(action, event_joypad_motion)
 	if ConfigData.verbose_mode:
 		print("		> Added event for joypad with axis '{0}' ('{1}') and value '{2}'.".format([
-			event_joypad_motion.axis, 
+			event_joypad_motion.axis,
 			Input.get_joy_axis_string(event_joypad_motion.axis),
 			event_joypad_motion.axis_value
 		]))
