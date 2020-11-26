@@ -8,6 +8,8 @@ var background_color : Color
 func _gui_input(event : InputEvent):
 	if event.is_action_released("left_mouse_button") and pressed_texture:
 		var pressed_data = pressed_texture.get_data()
+		#var _error : int = pressed_data.decompress()
+
 		foreground_image.lock()
 		pressed_data.lock()
 
@@ -27,7 +29,7 @@ func _gui_input(event : InputEvent):
 		update_texture()
 
 func reset_texture():
-	foreground_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_BPTC_RGBA)
+	foreground_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_RGBA8)
 	var _error : int = foreground_image.decompress()
 	foreground_image.fill(Color.transparent)
 

@@ -361,6 +361,7 @@ We should organize a protest for a bigger park!
 -> before_poster_designed
 
 = before_poster_designed
+>>> UPDATE_UI: solid_snejk
 ~ operation_better_park_started = 1
 Čujem da Parkoljupci imaju natjecanje u izradi postera za park.
 >>> PAN_CAMERA_TO_POSITION: 3120 1216
