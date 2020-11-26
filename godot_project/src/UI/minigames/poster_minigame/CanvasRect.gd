@@ -27,7 +27,7 @@ func _gui_input(event : InputEvent):
 		update_texture()
 
 func reset_texture():
-	foreground_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_BPTC_RGBA)
+	foreground_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_RGBA8)
 	var _error : int = foreground_image.decompress()
 	foreground_image.fill(Color.transparent)
 
