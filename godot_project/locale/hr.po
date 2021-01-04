@@ -60,7 +60,7 @@ msgid "DRIVE_MESSAGE"
 msgstr "Raspored sjedenja..."
 
 msgid "CLEAR"
-msgstr "Poništi"
+msgstr "Ispočetka"
 
 msgid "DONE"
 msgstr "Gotovo!"

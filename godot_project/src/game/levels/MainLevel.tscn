@@ -352,7 +352,7 @@ position = Vector2( 2392, 2352 )
 position = Vector2( 2168, 2384 )
 
 [node name="RightsPeople" parent="Sorted/Characters" index="40" instance=ExtResource( 55 )]
-position = Vector2( 2240, 2296 )
+position = Vector2( 2528, 2016 )
 
 [node name="ReturnedBike" parent="Sorted/Characters" index="41" instance=ExtResource( 56 )]
 position = Vector2( 2240, 2280 )
