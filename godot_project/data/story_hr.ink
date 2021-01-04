@@ -996,7 +996,7 @@ Zašto se prometni znakovi moraju poštivati?
 + [Dio ceste kojim se kreću vozila.] 
 	TOČNO!
 	-> riddle_completed
-+ [Osoba koja voli Coca-colu.] 
++ [Osoba koja voli plastičnu bocu.] 
 	Pogrešno!!!
 	Bolje da ti ne pomažem ako si tako neodgovorno biće!
 	-> riddle_started
@@ -1247,7 +1247,11 @@ Tko bi rekao!
 	A zašto ja ne bih došao prosvjedovati za uređenje svog skejterskog parka?
 	Doći ćemo i ja i moji skejter minioni!
 	~ helter_skelter_gone_protesting = 1
--> DONE
+	-> DONE
++ Hvala na pomoći!
+    Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
+    Tko bi rekao!
+    -> DONE
 
 = protesting
 Želimo bolji skejterski park!
@@ -1738,9 +1742,11 @@ Hej, ti! Kako ti se sviđa moja nova jakna? Baš je šarena, zar ne?
 Mislim da bi ti dobro stajala!
 Hoćeš da se mijenjamo za jakne?
 + {operation_better_park_started && love_interest_gone_protesting == 0}[Zapravo, htio sam te pozvati na prosvjed za uređenje parka.]
-	~ love_interest_gone_protesting = 1
 	Ti znaš da bih ja učinila baš sve za tebe!
 	Odmah idem na prosvjed!
+	>>> FADE_TO_OPAQUE
+	~ love_interest_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 + [Da, mijenjajmo se!]
 	~ player_wearing_color = 1
@@ -1753,9 +1759,11 @@ Hoćeš da se mijenjamo za jakne?
 = wearing_color
 Hej! Hoćeš se opet mijenjati za jakne?
 + {operation_better_park_started && love_interest_gone_protesting == 0}[Zapravo, htio sam te pozvati na prosvjed za uređenje parka.]
-	~ love_interest_gone_protesting = 1
 	Ti znaš da bih ja učinila baš sve za tebe!
 	Odmah idem na prosvjed!
+	>>> FADE_TO_OPAQUE
+	~ love_interest_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 + [Da, vrati mi moju jaknu!]
 	~ player_wearing_color = 0
@@ -2715,7 +2723,9 @@ Nemaš pojma koliko sam sada sretna!
 + {operation_better_park_started}[Hoćeš li sada doći podržati naš prosvjed za uređenje parka?]
 	Naravno, bilo bi mi jako drago.
 	Parkovi su pluća grada!
+	>>> FADE_TO_OPAQUE
 	~ rosalina_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 + [Bilo mi je zadovoljstvo!]
 	-> DONE
@@ -3050,7 +3060,9 @@ Ako ikad zatrebaš nešto od mene, tu sam!
 	Naravno! Taj park je presitan čak i za naš mali grad.
 	Mi zaslužujemo puno veći i maestralniji park.
 	Vidimo se tamo!
+	>>> FADE_TO_OPAQUE
 	~ student_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 
 = protesting
@@ -3197,7 +3209,7 @@ U svakom slučaju, trebao bih je baciti u kantu za smeće!
 
 === conv_trash_bottle ===
 // Trash necessary to feed the cansters...
-Ova boca ima nešto malo Coca-cole, ali uopće više nije gazirana!
+Ova boca ima nešto malo tekućine, ali uopće više nije gazirana!
 Možda najbolje da je bacim u smeće.
 -> DONE
 
