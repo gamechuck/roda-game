@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://roda-assets/UI/menu/background2.png" type="Texture" id=6]
 [ext_resource path="res://src/UI/menu/HowToPlayMenuTab.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/menu/AboutMenuTab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/menu/SelectMenuTab.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 6 )
@@ -47,3 +48,6 @@ tab_type = 2
 [node name="SettingsMenuTab" parent="MenuTabContainer" instance=ExtResource( 5 )]
 visible = false
 tab_type = 3
+
+[node name="SelectMenuTab" parent="MenuTabContainer" instance=ExtResource( 9 )]
+visible = false

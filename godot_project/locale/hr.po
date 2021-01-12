@@ -62,6 +62,9 @@ msgstr "Raspored sjedenja..."
 msgid "CLEAR"
 msgstr "Očisti"
 
+msgid "UNDO"
+msgstr "Nazad"
+
 msgid "DONE"
 msgstr "Gotovo!"
 

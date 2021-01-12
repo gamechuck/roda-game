@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name classMenuTab
 
-enum TABS {MAIN = 0, HOW_TO_PLAY = 1, ABOUT = 2, SETTINGS = 3}
+enum TABS {MAIN = 0, HOW_TO_PLAY = 1, ABOUT = 2, SETTINGS = 3, SELECT_LEVEL = 4}
 export(TABS) var tab_type := TABS.MAIN setget set_tab_type
 func set_tab_type(value : int):
 	tab_type = value

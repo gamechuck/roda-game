@@ -25,7 +25,7 @@ func update_tab():
 	_start_button.grab_focus()
 
 func _on_start_button_pressed():
-	Flow.change_scene_to("game")
+	emit_signal("button_pressed", TABS.SELECT_LEVEL)
 
 func _on_how_to_play_button_pressed():
 	emit_signal("button_pressed", TABS.HOW_TO_PLAY)
