@@ -35,7 +35,7 @@ var animations_dict := {
 	"default":
 		{
 			"animation_name": "default",
-			"extents": Vector2(60, 60),
+			"extents": Vector2(36, 36),
 			"audio_playing": true
 		},
 	"appeased":

@@ -351,6 +351,16 @@ var external_setters : Dictionary = {
 		"callback": funcref(self, "respawn_player"),
 		"argument_types": [],
 		"can_continue": false
+	},
+	"FADE_TO_OPAQUE": {
+		"callback": funcref(self, "fade_to_opaque"),
+		"argument_types": [],
+		"can_continue": false
+	},
+	"FADE_TO_TRANSPARENT": {
+		"callback": funcref(self, "fade_to_transparent"),
+		"argument_types": [],
+		"can_continue": false
 	}
 }
 
@@ -408,6 +418,32 @@ func fade_to_black_and_back() -> void:
 
 	dialogue_in_progress = update_dialogue()
 	Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
+func fade_to_opaque(_argument_values : Array):
+	# Block the dialogue from updating
+	dialogue_can_be_updated = false
+	Flow.dialogue_UI.hide()
+
+	Flow.transitions_UI.fade_to_opaque()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	dialogue_in_progress = update_dialogue()
+	if story.can_continue:
+		Flow.dialogue_UI.show()
+	dialogue_can_be_updated = true
+
+	emit_signal("cutscene_completed")
+
+func fade_to_transparent(_argument_values : Array):
+	Flow.transitions_UI.fade_to_transparent()
+	yield(Flow.transitions_UI, "transition_completed")
+
+	dialogue_in_progress = update_dialogue()
+	if story.can_continue:
+		Flow.dialogue_UI.show()
 	dialogue_can_be_updated = true
 
 	emit_signal("cutscene_completed")
