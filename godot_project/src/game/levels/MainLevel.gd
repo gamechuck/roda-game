@@ -23,8 +23,6 @@ func _ready():
 
 	var solid_snejk := $Sorted/Characters/SolidSnejk
 
-	#emit_signal("dialogue_requested", solid_snejk)
-
 	#What mission was selected by player?
 	if Flow.level_number == 2:
 		story.variables_state.set("operation_better_park_started", 1)
@@ -41,6 +39,8 @@ func _ready():
 			var pickup_state : classPickupState = State.get_pickup_by_id(pickup_id)
 			if pickup_state:
 				pickup_state.visible = false
+
+		emit_signal("dialogue_requested", solid_snejk)
 
 func _on_variable_changed(property : String, value : int):
 	local_variables[property] = value

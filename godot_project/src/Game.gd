@@ -23,7 +23,7 @@ func _ready():
 
 	Flow.load_story()
 
-	if ConfigData.skip_intro:
+	if ConfigData.skip_intro or Flow.level_number == 2:
 		if ConfigData.skip_main:
 			change_level("outro")
 		else:
