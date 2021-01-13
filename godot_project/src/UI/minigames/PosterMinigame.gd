@@ -1,6 +1,7 @@
 extends classMinigame
 
 onready var _clear_button := $VBoxContainer/HBoxContainer/RightVBox/ClearButton
+onready var _undo_button := $VBoxContainer/HBoxContainer/RightVBox/UndoButton
 onready var _canvas_rect := $VBoxContainer/HBoxContainer/CanvasRect
 
 onready var _submit_button :=  $VBoxContainer/SubmitButton
@@ -11,10 +12,15 @@ var default_background_color : Color
 signal submit_button_pressed
 
 func _ready() -> void:
+	$VBoxContainer/HBoxContainer/RightVBox/UndoButton.disabled = true
+
 	var _error := _submit_button.connect("pressed", self, "_on_submit_button_pressed")
 	_error = connect("submit_button_pressed", Director, "_on_choice_button_pressed")
 
 	_error = _clear_button.connect("pressed", self, "_on_clear_button_pressed")
+	_error = _undo_button.connect("pressed", self, "_on_undo_button_pressed")
+
+	_error = _canvas_rect.connect("stack_updated", self, "_on_stack_updated")
 
 	_children = $VBoxContainer/HBoxContainer/LeftVBox/SymbolGrid.get_children()
 	_children += $VBoxContainer/HBoxContainer/LeftVBox/SloganGrid.get_children()
@@ -54,6 +60,9 @@ func _on_clear_button_pressed() -> void:
 	_canvas_rect.background_color = default_background_color
 	_canvas_rect.reset_texture()
 
+func _on_undo_button_pressed() -> void:
+	_canvas_rect.undo_texture()
+
 func _on_submit_button_pressed() -> void:
 	if ConfigData.verbose_mode : print("POSTER MINIGAME - done!")
 
@@ -64,3 +73,9 @@ func _on_submit_button_pressed() -> void:
 		billboard.update_poster()
 
 	emit_signal("submit_button_pressed", 0)
+
+func _on_stack_updated():
+	if _canvas_rect.previous_foreground_images.empty():
+		$VBoxContainer/HBoxContainer/RightVBox/UndoButton.disabled = true
+	else:
+		$VBoxContainer/HBoxContainer/RightVBox/UndoButton.disabled = false

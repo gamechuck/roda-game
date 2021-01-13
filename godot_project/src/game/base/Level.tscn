@@ -117,6 +117,7 @@ __meta__ = {
 }
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -124,6 +125,13 @@ __meta__ = {
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 __meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OuterRim" type="StaticBody2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 

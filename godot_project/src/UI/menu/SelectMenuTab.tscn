@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/menu/SelectVBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/menu/SelectMenuTab.gd" type="Script" id=3]
+[ext_resource path="res://roda-assets/UI/menu/select_level/Level2.png" type="Texture" id=4]
+
+[node name="SelectMenuTab" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+tab_type = 4
+
+[node name="SelectHBox" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 464.0
+margin_bottom = 254.0
+custom_constants/separation = 24
+
+[node name="SelectVBox" parent="SelectHBox" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 212.0
+margin_bottom = 238.0
+description = "Prometna avantura!"
+
+[node name="SelectVBox2" parent="SelectHBox" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 236.0
+margin_right = 448.0
+margin_bottom = 238.0
+number = 2
+texture = ExtResource( 4 )
+
+[node name="BackHBox" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 464.0
+margin_bottom = 254.0
+mouse_filter = 2
+
+[node name="BackButton" type="Button" parent="BackHBox"]
+margin_left = 192.0
+margin_right = 256.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 64, 0 )
+size_flags_horizontal = 4
+text = "BACK"

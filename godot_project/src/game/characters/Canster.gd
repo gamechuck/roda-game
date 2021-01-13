@@ -31,11 +31,16 @@ func update_animation():
 
 	_audio_stream_player_2D.playing = animations.get("audio_playing", true)
 
+	if local_variables.get("operation_better_park_started", true):
+		set_visible(false)
+	else:
+		set_visible(true)
+
 var animations_dict := {
 	"default":
 		{
 			"animation_name": "default",
-			"extents": Vector2(60, 60),
+			"extents": Vector2(36, 36),
 			"audio_playing": true
 		},
 	"appeased":

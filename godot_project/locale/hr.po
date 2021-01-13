@@ -60,7 +60,10 @@ msgid "DRIVE_MESSAGE"
 msgstr "Raspored sjedenja..."
 
 msgid "CLEAR"
-msgstr "Očisti"
+msgstr "Ispočetka"
+
+msgid "UNDO"
+msgstr "Nazad"
 
 msgid "DONE"
 msgstr "Gotovo!"
@@ -168,7 +171,7 @@ msgid "MAYOR"
 msgstr "Gradonačelnik"
 
 msgid "BLIND_GUY"
-msgstr "Slijepac"
+msgstr "Mirkec"
 
 msgid "WHEELIE_APPARTMENT"
 msgstr "Vilkova zgrada"
@@ -190,3 +193,12 @@ msgstr "Plavko"
 
 msgid "HELTER_SKELTER"
 msgstr "Helter Skejter"
+
+msgid "CONTAINER_PAPER"
+msgstr "Kontejner za smeće"
+
+msgid "CONTAINER_PLASTIC"
+msgstr "Kontejner za smeće"
+
+msgid "CONTAINER_MIXED"
+msgstr "Kontejner za smeće"

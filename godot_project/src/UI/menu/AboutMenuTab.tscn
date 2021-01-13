@@ -8,7 +8,6 @@
 [ext_resource path="res://roda-assets/logo/NPSCP_logo.png" type="Texture" id=6]
 [ext_resource path="res://roda-assets/logo/policija_logo.png" type="Texture" id=7]
 
-
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.937255, 0.815686, 0, 1 )
 

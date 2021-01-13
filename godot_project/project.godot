@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/SafeZone.gd"
 }, {
+"base": "VBoxContainer",
+"class": "classSelectVBox",
+"language": "GDScript",
+"path": "res://src/UI/menu/SelectVBox.gd"
+}, {
 "base": "Area2D",
 "class": "classSkater",
 "language": "GDScript",
@@ -162,6 +167,7 @@ _global_script_class_icons={
 "classProjectile": "",
 "classProp": "",
 "classSafeZone": "",
+"classSelectVBox": "",
 "classSkater": "",
 "classTrafficLight": "",
 "classWaypoint": "",

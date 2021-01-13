@@ -48,6 +48,9 @@ var _game_flow := {
 var _game_state : int = STATE.STARTUP
 var _story_resource := preload("res://addons/inkgd/runtime/story.gd")
 
+# Number of the level chosen at startup!
+var level_number := 0
+
 var player_is_active := false
 var active_character : classCharacter
 var active_pickup : classPickup

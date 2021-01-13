@@ -183,13 +183,14 @@ position = Vector2( 3264, 3424 )
 [node name="AdditionalFences" parent="Sorted" index="8" instance=ExtResource( 24 )]
 tile_data = PoolIntArray( 6815823, 4, 0, 6815824, 3, 0, 6815825, 3, 0, 6815826, 3, 0, 6815827, 3, 0, 6815830, 3, 0, 6815831, 3, 0, 6815832, 3, 0, 6815833, 3, 0, 6815834, 3, 0, 6815835, 3, 0, 6815836, 3, 0, 6815837, 3, 0, 6815838, 3, 0, 6815839, 3, 0, 6815840, 3, 0, 6815841, 3, 0, 6815842, 3, 0, 6815843, 3, 0, 6815846, 3, 0, 6815847, 3, 0, 6815848, 3, 0, 6815849, 3, 0, 6815850, 3, 0, 6815851, 2, 0, 6881359, 5, 0, 6881387, 1, 0, 6946895, 5, 0, 6946923, 1, 0, 7012431, 5, 0, 7012459, 1, 0, 7077967, 5, 0, 7077968, 3, 0, 7077994, 3, 0, 7077995, 1, 0, 7143503, 5, 0, 7143531, 1, 0, 7209039, 5, 0, 7209067, 1, 0, 7274575, 5, 0, 7274603, 1, 0, 7340111, 5, 0, 7340112, 7, 0, 7340139, 1, 0, 7405647, 5, 0, 7405674, 7, 0, 7405675, 1, 0, 7471183, 5, 0, 7471211, 1, 0, 7536719, 5, 0, 7536747, 1, 0, 7602255, 6, 0, 7602256, 7, 0, 7602257, 7, 0, 7602258, 7, 0, 7602259, 7, 0, 7602260, 7, 0, 7602261, 7, 0, 7602262, 7, 0, 7602263, 7, 0, 7602264, 7, 0, 7602265, 7, 0, 7602266, 7, 0, 7602267, 7, 0, 7602268, 7, 0, 7602269, 7, 0, 7602270, 7, 0, 7602271, 7, 0, 7602272, 7, 0, 7602273, 7, 0, 7602274, 7, 0, 7602275, 7, 0, 7602276, 7, 0, 7602277, 7, 0, 7602278, 7, 0, 7602279, 7, 0, 7602280, 7, 0, 7602281, 7, 0, 7602282, 7, 0, 7602283, 0, 0 )
 
-[node name="Navigation2D" parent="." index="2"]
-visible = false
-
 [node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
 navpoly = SubResource( 1 )
 
-[node name="SafeZones" parent="." index="4"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OuterRim" index="0"]
+build_mode = 1
+polygon = PoolVector2Array( 256, 3136, 256, 2304, 704, 2304, 704, 1600, 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1536, 3712, 1536, 3712, 1728, 4224, 1728, 4224, 2304, 4032, 2304, 4032, 4032, 3392, 4032, 3392, 3840, 2560, 3840, 2560, 4032, 1472, 4032, 1472, 3136, 1472, 3136 )
+
+[node name="SafeZones" parent="." index="5"]
 visible = false
 
 [node name="Park" parent="SafeZones" index="0" instance=ExtResource( 17 )]
@@ -215,7 +216,9 @@ amount_of_cars = 20
 [node name="SmogToBoss" parent="ZebraCrossings" index="0" instance=ExtResource( 22 )]
 position = Vector2( 1152, 1760 )
 extents = Vector2( 128, 64 )
+light_color = 0
 
 [node name="CopperToSmog" parent="ZebraCrossings" index="1" instance=ExtResource( 22 )]
 position = Vector2( 1728, 2336 )
 extents = Vector2( 128, 64 )
+light_color = 0

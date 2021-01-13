@@ -61,6 +61,9 @@ msgstr "Check arrangement..."
 msgid "CLEAR"
 msgstr "Clear"
 
+msgid "UNDO"
+msgstr "Undo"
+
 msgid "DONE"
 msgstr "Done!"
 
@@ -189,3 +192,12 @@ msgstr "Plavko"
 
 msgid "HELTER_SKELTER"
 msgstr "Skater from HELL"
+
+msgid "CONTAINER_PAPER"
+msgstr "Waste container"
+
+msgid "CONTAINER_PLASTIC"
+msgstr "Waste container"
+
+msgid "CONTAINER_MIXED"
+msgstr "Waste container"
