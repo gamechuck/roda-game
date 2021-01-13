@@ -82,7 +82,7 @@ func update_multiple_choice(choices : Array) -> void:
 	var index := 0
 	for child in _choice_vbox.get_children():
 		if index < choices.size():
-			child.text = choices[index]
+			child.set_text(choices[index])
 			child.visible = true
 		else:
 			child.visible = false

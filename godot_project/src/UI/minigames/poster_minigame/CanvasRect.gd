@@ -1,12 +1,21 @@
 extends TextureRect
 
+const UNDO_STACK_SIZE := 5
+
 var pressed_texture : Texture
 
 var foreground_image := Image.new()
+var previous_foreground_images := []
+
 var background_color : Color
+
+signal stack_updated
 
 func _gui_input(event : InputEvent):
 	if event.is_action_released("left_mouse_button") and pressed_texture:
+		# Push the previous foreground image to the stack!
+		_push_to_stack(foreground_image.duplicate())
+
 		var pressed_data = pressed_texture.get_data()
 		foreground_image.lock()
 		pressed_data.lock()
@@ -26,7 +35,26 @@ func _gui_input(event : InputEvent):
 
 		update_texture()
 
+func _push_to_stack(image : Image):
+	previous_foreground_images.push_front(image)
+	if previous_foreground_images.size() > UNDO_STACK_SIZE:
+		previous_foreground_images.pop_back()
+
+	emit_signal("stack_updated")
+
+func undo_texture() -> void:
+	var previous_image = previous_foreground_images.pop_front()
+	if previous_image != null:
+		foreground_image = previous_image
+		update_texture()
+
+	emit_signal("stack_updated")
+
 func reset_texture():
+	# Push the previous foreground image to the stack... if it exists!
+	if not foreground_image.is_empty():
+		_push_to_stack(foreground_image.duplicate())
+
 	foreground_image.create(texture.get_width(), texture.get_height(), false, Image.FORMAT_RGBA8)
 	var _error : int = foreground_image.decompress()
 	foreground_image.fill(Color.transparent)

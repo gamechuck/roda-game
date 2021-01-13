@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://src/game/base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/characters/SolidSnejk.tscn" type="PackedScene" id=2]
@@ -56,6 +56,8 @@
 [ext_resource path="res://src/game/characters/RodaPeople.tscn" type="PackedScene" id=54]
 [ext_resource path="res://src/game/characters/RightsPeople.tscn" type="PackedScene" id=55]
 [ext_resource path="res://src/game/characters/ReturnedBike.tscn" type="PackedScene" id=56]
+[ext_resource path="res://src/game/characters/Container.tscn" type="PackedScene" id=57]
+[ext_resource path="res://src/game/pickups/TrashPaper.tscn" type="PackedScene" id=58]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1728, 3264, 3584, 2624, 3584, 4224, 1728, 4224, 3584, 2624, 3904, 2432, 3904, 1472, 2496, 2432, 3968, 2368, 3968, 2368, 4032, 1472, 4032, 704, 2304, 704, 1600, 1152, 2496, 1152, 3136, 256, 3136, 256, 2304, 1280, 192, 1280, 1408, 512, 1408, 512, 192, 3876, 5240, 3876, 5120, 4496, 5120, 4144, 5240, 4496, 5112, 4384, 5112, 4384, 4928, 4640, 4928, 4640, 5112, 4528, 5112, 4528, 5120, 4364, 5240, 4640, 5120, 4640, 5240, 4364, 5368, 4272, 5368, 4272, 5376, 4316, 5376, 4316, 5496, 4196, 5496, 4196, 5376, 4240, 5376, 4240, 5368, 4144, 5368 )
@@ -357,6 +359,23 @@ position = Vector2( 2528, 2016 )
 [node name="ReturnedBike" parent="Sorted/Characters" index="41" instance=ExtResource( 56 )]
 position = Vector2( 2240, 2280 )
 
+[node name="ContainerPaper" parent="Sorted/Characters" index="42" instance=ExtResource( 57 )]
+visible = true
+position = Vector2( 3136, 2240 )
+id = "container_paper"
+type = 2
+
+[node name="ContainerMixed" parent="Sorted/Characters" index="43" instance=ExtResource( 57 )]
+visible = true
+position = Vector2( 3136, 2144 )
+id = "container_mixed"
+
+[node name="ContainerPlastic" parent="Sorted/Characters" index="44" instance=ExtResource( 57 )]
+visible = true
+position = Vector2( 3136, 2048 )
+id = "container_plastic"
+type = 1
+
 [node name="Billboard" parent="Sorted/Props" index="0" instance=ExtResource( 18 )]
 position = Vector2( 2656, 1712 )
 
@@ -385,21 +404,45 @@ id = "trash_bag_one"
 position = Vector2( 2272, 2992 )
 id = "trash_bag_two"
 
-[node name="TrashBottleOne" parent="Sorted/Pickups" index="5" instance=ExtResource( 23 )]
-position = Vector2( 3072, 2272 )
+[node name="TrashBagThree" parent="Sorted/Pickups" index="5" instance=ExtResource( 24 )]
+position = Vector2( 2944, 2304 )
+id = "trash_bag_three"
+
+[node name="TrashBottleOne" parent="Sorted/Pickups" index="6" instance=ExtResource( 23 )]
+position = Vector2( 3096, 2320 )
 id = "trash_bottle_one"
 
-[node name="TrashBottleTwo" parent="Sorted/Pickups" index="6" instance=ExtResource( 23 )]
+[node name="TrashBottleTwo" parent="Sorted/Pickups" index="7" instance=ExtResource( 23 )]
 position = Vector2( 3168, 3184 )
 id = "trash_bottle_two"
 
-[node name="TrashCupOne" parent="Sorted/Pickups" index="7" instance=ExtResource( 22 )]
+[node name="TrashBottleThree" parent="Sorted/Pickups" index="8" instance=ExtResource( 23 )]
+position = Vector2( 3720, 3208 )
+id = "trash_bottle_three"
+
+[node name="TrashCupOne" parent="Sorted/Pickups" index="9" instance=ExtResource( 22 )]
 position = Vector2( 2864, 2320 )
 id = "trash_cup_one"
 
-[node name="TrashCupTwo" parent="Sorted/Pickups" index="8" instance=ExtResource( 22 )]
+[node name="TrashCupTwo" parent="Sorted/Pickups" index="10" instance=ExtResource( 22 )]
 position = Vector2( 4080, 1920 )
 id = "trash_cup_two"
+
+[node name="TrashCupThree" parent="Sorted/Pickups" index="11" instance=ExtResource( 22 )]
+position = Vector2( 4096, 2432 )
+id = "trash_cup_three"
+
+[node name="TrashPaperOne" parent="Sorted/Pickups" index="12" instance=ExtResource( 58 )]
+position = Vector2( 2848, 2720 )
+id = "trash_paper_one"
+
+[node name="TrashPaperTwo" parent="Sorted/Pickups" index="13" instance=ExtResource( 58 )]
+position = Vector2( 2848, 2080 )
+id = "trash_paper_two"
+
+[node name="TrashPaperThree" parent="Sorted/Pickups" index="14" instance=ExtResource( 58 )]
+position = Vector2( 2464, 2912 )
+id = "trash_paper_three"
 
 [node name="ParkToCopper" type="YSort" parent="Sorted/Lights" index="0"]
 __meta__ = {
@@ -420,7 +463,6 @@ direction = "back"
 
 [node name="TrafficLight2" parent="Sorted/Lights/ParkToCopper" index="3" instance=ExtResource( 46 )]
 position = Vector2( 2128, 2064 )
-direction = "front"
 
 [node name="LoveToParking" type="YSort" parent="Sorted/Lights" index="1"]
 __meta__ = {
@@ -441,7 +483,6 @@ direction = "back"
 
 [node name="TrafficLight2" parent="Sorted/Lights/LoveToParking" index="3" instance=ExtResource( 46 )]
 position = Vector2( 2768, 3088 )
-direction = "front"
 
 [node name="ParkingToBike" type="YSort" parent="Sorted/Lights" index="2"]
 __meta__ = {
@@ -462,18 +503,9 @@ direction = "back"
 
 [node name="TrafficLight2" parent="Sorted/Lights/ParkingToBike" index="3" instance=ExtResource( 46 )]
 position = Vector2( 3408, 3088 )
-direction = "front"
 
 [node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
 navpoly = SubResource( 1 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OuterRim" index="0"]
-build_mode = 1
-polygon = PoolVector2Array( 256, 3136, 256, 2304, 704, 2304, 704, 1600, 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1728, 4224, 1728, 4224, 3584, 2624, 3584, 2624, 3904, 2432, 3904, 2432, 3968, 2368, 3968, 2368, 4032, 1472, 4032, 1472, 2496, 1152, 2496, 1152, 3136, 1152, 3136 )
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OuterRim" index="1"]
-build_mode = 1
-polygon = PoolVector2Array( 512, 1408, 512, 192, 1280, 192, 1280, 1408, 1280, 1408 )
 
 [node name="WheelieElevator" parent="Waypoints" index="0" instance=ExtResource( 11 )]
 position = Vector2( 4256, 5260 )
@@ -708,57 +740,46 @@ curve = SubResource( 23 )
 [node name="ParkToSquare" parent="ZebraCrossings" index="0" instance=ExtResource( 43 )]
 position = Vector2( 2336, 1888 )
 extents = Vector2( 64, 160 )
-light_color = 0
 
 [node name="ParkToLove" parent="ZebraCrossings" index="1" instance=ExtResource( 43 )]
 position = Vector2( 2144, 2528 )
 extents = Vector2( 64, 160 )
-light_color = 0
 
 [node name="ParkToTrash" parent="ZebraCrossings" index="2" instance=ExtResource( 43 )]
 position = Vector2( 2656, 2400 )
 extents = Vector2( 160, 64 )
-light_color = 0
 
 [node name="SmogToBoss" parent="ZebraCrossings" index="3" instance=ExtResource( 43 )]
 position = Vector2( 1152, 1760 )
 extents = Vector2( 128, 64 )
-light_color = 0
 
 [node name="CopperToSmog" parent="ZebraCrossings" index="4" instance=ExtResource( 43 )]
 position = Vector2( 1728, 2336 )
 extents = Vector2( 128, 64 )
-light_color = 0
 
 [node name="ParkingToBike" parent="ZebraCrossings" index="5" instance=ExtResource( 43 )]
 position = Vector2( 3296, 3040 )
 extents = Vector2( 160, 64 )
-light_color = 0
 
 [node name="BikeToEmpty" parent="ZebraCrossings" index="6" instance=ExtResource( 43 )]
 position = Vector2( 3840, 3104 )
 extents = Vector2( 128, 64 )
-light_color = 0
 
 [node name="TrashToCansters" parent="ZebraCrossings" index="7" instance=ExtResource( 43 )]
 position = Vector2( 3296, 2400 )
 extents = Vector2( 160, 64 )
-light_color = 0
 
 [node name="CansterToLake" parent="ZebraCrossings" index="8" instance=ExtResource( 43 )]
 position = Vector2( 3616, 2016 )
 extents = Vector2( 160, 64 )
-light_color = 0
 
 [node name="LoveToParking" parent="ZebraCrossings" index="9" instance=ExtResource( 43 )]
 position = Vector2( 2656, 3040 )
 extents = Vector2( 160, 64 )
-light_color = 0
 
 [node name="Mountain" parent="ZebraCrossings" index="10" instance=ExtResource( 43 )]
 position = Vector2( 1136, 832 )
 extents = Vector2( 80, 128 )
-light_color = 0
 
 [node name="ParkToCopper" parent="ZebraCrossings" index="11" instance=ExtResource( 43 )]
 position = Vector2( 2016, 2016 )
@@ -768,29 +789,23 @@ light_color = 3
 [node name="CopperToSkater" parent="ZebraCrossings" index="12" instance=ExtResource( 43 )]
 position = Vector2( 1888, 2880 )
 extents = Vector2( 64, 128 )
-light_color = 0
 
 [node name="TrashToParking" parent="ZebraCrossings" index="13" instance=ExtResource( 43 )]
 position = Vector2( 2976, 2528 )
 extents = Vector2( 64, 160 )
-light_color = 0
 
 [node name="CansterToBike" parent="ZebraCrossings" index="14" instance=ExtResource( 43 )]
 position = Vector2( 3424, 2848 )
 extents = Vector2( 64, 160 )
-light_color = 0
 
 [node name="InterToBike" parent="ZebraCrossings" index="15" instance=ExtResource( 43 )]
 position = Vector2( 3744, 2848 )
 extents = Vector2( 64, 160 )
-light_color = 0
 
 [node name="LakeToInter" parent="ZebraCrossings" index="16" instance=ExtResource( 43 )]
 position = Vector2( 3744, 2560 )
 extents = Vector2( 64, 128 )
-light_color = 0
 
 [node name="TrashToSquare" parent="ZebraCrossings" index="17" instance=ExtResource( 43 )]
 position = Vector2( 2976, 1888 )
 extents = Vector2( 64, 160 )
-light_color = 0

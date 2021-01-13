@@ -15,6 +15,9 @@ var local_variables := {}
 var mouse_inside := false
 
 func _ready():
+	if Engine.editor_hint:
+		return
+
 	add_to_group("characters")
 
 	var _error := $InteractArea.connect("mouse_entered", self, "_on_mouse_entered")

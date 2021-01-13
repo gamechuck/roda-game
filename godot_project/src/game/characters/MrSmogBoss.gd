@@ -48,7 +48,7 @@ func set_monitorable(value : bool = $InteractArea.monitorable):
 
 func _on_body_entered(body : PhysicsBody2D):
 	if body is classPlayer:
-		if local_variables.get("is_defeated", 0) == 0:
+		if local_variables.get("mr_smog_defeated", 0) == 0:
 			Director._on_dialogue_requested(self)
 			Director.zoom_camera(Vector2(1.5, 1.5))
 			reset()
@@ -60,7 +60,7 @@ func _on_body_entered(body : PhysicsBody2D):
 
 func _on_body_exited(body : PhysicsBody2D):
 	if body is classPlayer:
-		if local_variables.get("is_defeated", 0) == 0:
+		if local_variables.get("mr_smog_defeated", 0) == 0:
 			reset()
 			Flow.boss_overlay.hide()
 			Director.zoom_camera(Vector2(1, 1))
@@ -94,14 +94,14 @@ func _on_projectile_timeout(projectile : classProjectile):
 	self.health -= 1
 
 	if health <= 0:
-		local_variables["is_defeated"] = 1
+		local_variables["mr_smog_defeated"] = 1
 		Director._on_dialogue_requested(self)
 		Director.zoom_camera(Vector2(1, 1))
 		Flow.boss_overlay.hide()
 		update_animation()
 
 func update_animation():
-	var is_defeated : int = local_variables.get("is_defeated", 0)
+	var is_defeated : int = local_variables.get("mr_smog_defeated", 0)
 	if is_defeated:
 		_animated_sprite.play("is_defeated")
 
@@ -118,3 +118,8 @@ func update_animation():
 
 		set_monitorable(false)
 		_animated_sprite.material = preload("res://assets/materials/smog_distortion_material.tres")
+
+	if local_variables.get("mr_smog_outro_completed", 0):
+		set_visible(false)
+	else:
+		set_visible(true)

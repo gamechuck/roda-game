@@ -25,6 +25,23 @@ func _ready():
 
 	#emit_signal("dialogue_requested", solid_snejk)
 
+	#What mission was selected by player?
+	if Flow.level_number == 2:
+		story.variables_state.set("operation_better_park_started", 1)
+		story.variables_state.set("number_of_fences_fixed", 4)
+		story.variables_state.set("wind_turbine_powered", 1)
+		story.variables_state.set("wheelie_appartment_opened", 1)
+
+		story.variables_state.set("mr_smog_defeated", 1)
+		story.variables_state.set("mr_smog_outro_completed", 1)
+
+		State.add_item_by_id("bike")
+
+		for pickup_id in ["broken_bike", "fence_at_turbine", "fence_at_smog"]:
+			var pickup_state : classPickupState = State.get_pickup_by_id(pickup_id)
+			if pickup_state:
+				pickup_state.visible = false
+
 func _on_variable_changed(property : String, value : int):
 	local_variables[property] = value
 

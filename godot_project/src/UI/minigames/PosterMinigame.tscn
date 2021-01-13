@@ -32,7 +32,7 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
 margin_right = 448.0
-margin_bottom = 179.0
+margin_bottom = 172.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,7 +40,7 @@ __meta__ = {
 
 [node name="LeftVBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="0"]
 margin_right = 144.0
-margin_bottom = 179.0
+margin_bottom = 172.0
 size_flags_horizontal = 6
 alignment = 1
 
@@ -73,9 +73,9 @@ margin_bottom = 100.0
 texture = ExtResource( 6 )
 
 [node name="SloganGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/LeftVBox" index="1"]
-margin_top = 111.0
+margin_top = 104.0
 margin_right = 144.0
-margin_bottom = 179.0
+margin_bottom = 172.0
 size_flags_horizontal = 6
 size_flags_vertical = 10
 
@@ -94,9 +94,9 @@ texture = ExtResource( 11 )
 
 [node name="CanvasRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" index="1"]
 margin_left = 148.0
-margin_top = 9.0
+margin_top = 6.0
 margin_right = 308.0
-margin_bottom = 169.0
+margin_bottom = 166.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource( 5 )
@@ -106,7 +106,7 @@ script = ExtResource( 4 )
 [node name="RightVBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" index="2"]
 margin_left = 330.0
 margin_right = 430.0
-margin_bottom = 179.0
+margin_bottom = 172.0
 size_flags_horizontal = 6
 alignment = 1
 __meta__ = {
@@ -114,8 +114,9 @@ __meta__ = {
 }
 
 [node name="ColorGrid" type="GridContainer" parent="VBoxContainer/HBoxContainer/RightVBox" index="0"]
+margin_top = 7.0
 margin_right = 100.0
-margin_bottom = 152.0
+margin_bottom = 111.0
 size_flags_horizontal = 6
 columns = 2
 
@@ -141,35 +142,36 @@ margin_left = 52.0
 margin_top = 52.0
 margin_right = 100.0
 margin_bottom = 100.0
-color = Color( 0.392157, 0.427451, 1, 1 )
-
-[node name="ColorButton5" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="4" instance=ExtResource( 2 )]
-margin_top = 104.0
-margin_right = 48.0
-margin_bottom = 152.0
 color = Color( 0.498039, 1, 0.458824, 1 )
 
-[node name="ColorButton6" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="5" instance=ExtResource( 2 )]
-margin_left = 52.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/RightVBox/ColorGrid" index="4"]
 margin_top = 104.0
-margin_right = 100.0
-margin_bottom = 152.0
-color = Color( 1, 0.92549, 0.635294, 1 )
+margin_right = 48.0
+margin_bottom = 104.0
 
-[node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer/RightVBox" index="1"]
+[node name="UndoButton" type="Button" parent="VBoxContainer/HBoxContainer/RightVBox" index="1"]
 margin_left = 2.0
-margin_top = 156.0
+margin_top = 115.0
 margin_right = 98.0
-margin_bottom = 179.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_horizontal = 6
+text = "UNDO"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer/RightVBox" index="2"]
+margin_left = 2.0
+margin_top = 142.0
+margin_right = 98.0
+margin_bottom = 165.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 6
 text = "CLEAR"
 
 [node name="SubmitButton" type="Button" parent="VBoxContainer" index="1"]
 margin_left = 176.0
-margin_top = 163.0
+margin_top = 156.0
 margin_right = 272.0
-margin_bottom = 186.0
+margin_bottom = 179.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 4
 text = "DONE"

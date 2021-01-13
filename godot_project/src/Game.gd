@@ -22,6 +22,7 @@ func _ready():
 	var _error := Director.connect("change_level_requested", self, "change_level")
 
 	Flow.load_story()
+
 	if ConfigData.skip_intro:
 		if ConfigData.skip_main:
 			change_level("outro")

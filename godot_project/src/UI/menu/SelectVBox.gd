@@ -1,4 +1,5 @@
 tool
+class_name classSelectVBox
 extends VBoxContainer
 
 signal start_button_pressed

@@ -193,3 +193,12 @@ msgstr "Plavko"
 
 msgid "HELTER_SKELTER"
 msgstr "Helter Skejter"
+
+msgid "CONTAINER_PAPER"
+msgstr "Kontejner za smeće"
+
+msgid "CONTAINER_PLASTIC"
+msgstr "Kontejner za smeće"
+
+msgid "CONTAINER_MIXED"
+msgstr "Kontejner za smeće"

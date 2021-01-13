@@ -52,7 +52,6 @@ id = "animal_people"
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 8 )
-frame = 5
 playing = true
 offset = Vector2( 11, -42 )
 

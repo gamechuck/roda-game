@@ -128,7 +128,8 @@
                 "texture": "res://roda-assets/portraits/canster.png"
             },
             "story_bindings": [
-                "canster_left_appeased"
+                "canster_left_appeased",
+                "operation_better_park_started"
             ]
         },
         "canster_middle": {
@@ -146,7 +147,8 @@
                 "texture": "res://roda-assets/portraits/canster.png"
             },
             "story_bindings": [
-                "canster_middle_appeased"
+                "canster_middle_appeased",
+                "operation_better_park_started"
             ]
         },
         "canster_right": {
@@ -164,7 +166,8 @@
                 "texture": "res://roda-assets/portraits/canster.png"
             },
             "story_bindings": [
-                "canster_right_appeased"
+                "canster_right_appeased",
+                "operation_better_park_started"
             ]
         },
         "copper": {
@@ -275,7 +278,8 @@
                 "texture": "res://roda-assets/portraits/mr_smog.png"
             },
             "story_bindings": [
-                "mr_smog_defeated"
+                "mr_smog_defeated",
+                "mr_smog_outro_completed"
             ]
         },
         "wind_turbine": {
@@ -385,6 +389,27 @@
             "knot": "conv_animal_people",
             "story_bindings": [
                 "lunja_gone_protesting"
+            ]
+        },
+        "container_paper": {
+            "name": "CONTAINER_PAPER",
+            "knot": "conv_container",
+            "story_bindings": [
+                "operation_better_park_started"
+            ]
+        },
+        "container_plastic": {
+            "name": "CONTAINER_PLASTIC",
+            "knot": "conv_container",
+            "story_bindings": [
+                "operation_better_park_started"
+            ]
+        },
+        "container_mixed": {
+            "name": "CONTAINER_MIXED",
+            "knot": "conv_container",
+            "story_bindings": [
+                "operation_better_park_started"
             ]
         },
         "mayor": {
@@ -527,6 +552,12 @@
                 "texture_pressed": "res://roda-assets/UI/game/items/trash_bottle_pressed.png"
             }
         },
+        "trash_paper": {
+            "textures": {
+                "texture_normal": "res://roda-assets/UI/game/items/trash_paper_normal.png",
+                "texture_pressed": "res://roda-assets/UI/game/items/trash_paper_pressed.png"
+            }
+        },
         "seat_belt": {
             "textures": {
                 "texture_normal": "res://roda-assets/UI/game/items/seat_belt_normal.png",
@@ -567,6 +598,22 @@
             "knot": "conv_trash_bag",
             "item_id": "trash_bag"
         },
+        "trash_bag_three": {
+            "knot": "conv_trash_bag",
+            "item_id": "trash_bag"
+        },
+        "trash_paper_one": {
+            "knot": "conv_trash_paper",
+            "item_id": "trash_paper"
+        },
+        "trash_paper_two": {
+            "knot": "conv_trash_paper",
+            "item_id": "trash_paper"
+        },
+        "trash_paper_three": {
+            "knot": "conv_trash_paper",
+            "item_id": "trash_paper"
+        },
         "trash_bottle_one": {
             "knot": "conv_trash_bottle",
             "item_id": "trash_bottle"
@@ -575,11 +622,19 @@
             "knot": "conv_trash_bottle",
             "item_id": "trash_bottle"
         },
+        "trash_bottle_three": {
+            "knot": "conv_trash_bottle",
+            "item_id": "trash_bottle"
+        },
         "trash_cup_one": {
             "knot": "conv_trash_cup",
             "item_id": "trash_cup"
         },
         "trash_cup_two": {
+            "knot": "conv_trash_cup",
+            "item_id": "trash_cup"
+        },
+        "trash_cup_three": {
             "knot": "conv_trash_cup",
             "item_id": "trash_cup"
         },
