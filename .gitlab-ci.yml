@@ -4,7 +4,7 @@ image: barichello/godot-ci:latest
 cache:
   key: import-assets
   paths:
-    - .import/
+    - godot_project/.import/
 
 stages:
   - export
