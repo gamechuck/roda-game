@@ -1261,7 +1261,7 @@ Tko bi rekao!
 	Doći ćemo i ja i moji skejter minioni!
 	~ helter_skelter_gone_protesting = 1
 	-> DONE
-+ Hvala na pomoći!
++ [Hvala na pomoći!]
     Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
     Tko bi rekao!
     -> DONE
@@ -2514,7 +2514,9 @@ Njušim li ja to ono isto čudovišno biće koje mi je pomoglo prijeći cestu?
 	Veći park bi značilo da ne moram više prelaziti cestu da dođem do njega!
 	Ne biste vjerovali koliko vremena dnevno odlazi na to čekanje na zebri...
 	Rado ću pomoći!
+	>>> FADE_TO_OPAQUE
 	~ blind_guy_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 + [Može!]
 	-> show_braille

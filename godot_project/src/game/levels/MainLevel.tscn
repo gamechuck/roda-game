@@ -507,6 +507,15 @@ position = Vector2( 3408, 3088 )
 [node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
 navpoly = SubResource( 1 )
 
+[node name="OuterRim" parent="." index="3"]
+visible = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OuterRim" index="0"]
+polygon = PoolVector2Array( 1408, 4096, 1472, 4032, 2624, 4032, 2624, 3584, 4224, 3584, 4224, 1728, 3712, 1728, 3712, 1536, 3264, 1536, 3264, 1216, 1792, 1216, 1792, 1600, 704, 1600, 704, 2304, 256, 2304, 256, 3136, 1472, 3136, 1472, 4032, 1408, 4096, 1408, 3200, 192, 3200, 192, 2240, 640, 2240, 640, 1536, 1728, 1536, 1728, 1152, 3328, 1152, 3328, 1472, 3776, 1472, 3776, 1664, 4288, 1664, 4288, 3648, 2688, 3648, 2688, 4096 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OuterRim" index="1"]
+polygon = PoolVector2Array( 576, 1344, 576, 256, 1216, 256, 1216, 1344, 576, 1344, 512, 1408, 1280, 1408, 1280, 192, 512, 192, 512, 1408 )
+
 [node name="WheelieElevator" parent="Waypoints" index="0" instance=ExtResource( 11 )]
 position = Vector2( 4256, 5260 )
 id = "wheelie_elevator"
@@ -548,7 +557,7 @@ position = Vector2( 4016, 1740 )
 id = "wheelie6"
 
 [node name="Wheelie7" parent="Waypoints" index="10" instance=ExtResource( 11 )]
-position = Vector2( 4016, 1796 )
+position = Vector2( 4016, 1824 )
 id = "wheelie7"
 
 [node name="BlindGuyStart" parent="Waypoints" index="11" instance=ExtResource( 11 )]
@@ -578,6 +587,10 @@ id = "protesting_rosalina"
 [node name="ProtestingPlayer" parent="Waypoints" index="17" instance=ExtResource( 11 )]
 position = Vector2( 2336, 2304 )
 id = "protesting_player"
+
+[node name="ProtestingBlindGuy" parent="Waypoints" index="18" instance=ExtResource( 11 )]
+position = Vector2( 2304, 2104 )
+id = "protesting_blind_guy"
 
 [node name="Gummy" type="Area2D" parent="." index="5"]
 visible = false

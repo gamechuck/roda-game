@@ -46,6 +46,9 @@ msgstr "Start"
 msgid "QUIT"
 msgstr "Quit"
 
+msgid "BACK_TO_MENU"
+msgstr "Back to Menu"
+
 msgid "BACK"
 msgstr "Back"
 

@@ -442,7 +442,10 @@
                 ],
                 "texture": "res://roda-assets/portraits/blindie.png",
                 "flip_h": true
-            }
+            },
+            "story_bindings": [
+                "blind_guy_gone_protesting"
+            ]
         },
         "wheelie_appartment": {
             "name": "WHEELIE_APPARTMENT",

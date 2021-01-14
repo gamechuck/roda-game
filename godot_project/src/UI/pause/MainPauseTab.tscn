@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/pause/MainPauseTab.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=2]
 
-
 [node name="MainPauseTab" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,15 +86,15 @@ focus_next = NodePath("../../QuitButton")
 focus_previous = NodePath("../RestartButton")
 text = "SETTINGS"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_left = 176.0
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+margin_left = 160.0
 margin_top = 215.0
-margin_right = 272.0
+margin_right = 288.0
 margin_bottom = 238.0
-rect_min_size = Vector2( 96, 0 )
+rect_min_size = Vector2( 128, 0 )
 focus_neighbour_top = NodePath("../VBoxContainer/SettingsButton")
 focus_neighbour_bottom = NodePath("../VBoxContainer/ResumeButton")
 focus_next = NodePath("../VBoxContainer/ResumeButton")
 focus_previous = NodePath("../VBoxContainer/SettingsButton")
 size_flags_horizontal = 4
-text = "QUIT"
+text = "BACK_TO_MENU"

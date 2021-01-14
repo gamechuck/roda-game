@@ -30,10 +30,19 @@ func _ready():
 		story.variables_state.set("wind_turbine_powered", 1)
 		story.variables_state.set("wheelie_appartment_opened", 1)
 
+		story.variables_state.set("player_received_turbine_fence", 1)
+		story.variables_state.set("player_received_smog_fence", 1)
+		story.variables_state.set("player_received_helter_skelter_fence", 1)
+		story.variables_state.set("player_received_wheelie_fence", 1)
+
 		story.variables_state.set("mr_smog_defeated", 1)
 		story.variables_state.set("mr_smog_outro_completed", 1)
 
 		State.add_item_by_id("bike")
+
+		Director.hide(["SkaterLoop"])
+		Director.hide(["SkaterLoop2"])
+		Director.hide(["SkaterLoop3"])
 
 		emit_signal("dialogue_requested", solid_snejk)
 

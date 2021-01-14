@@ -186,9 +186,11 @@ tile_data = PoolIntArray( 6815823, 4, 0, 6815824, 3, 0, 6815825, 3, 0, 6815826, 
 [node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
 navpoly = SubResource( 1 )
 
+[node name="OuterRim" parent="." index="3"]
+visible = true
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OuterRim" index="0"]
-build_mode = 1
-polygon = PoolVector2Array( 256, 3136, 256, 2304, 704, 2304, 704, 1600, 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1536, 3712, 1536, 3712, 1728, 4224, 1728, 4224, 2304, 4032, 2304, 4032, 4032, 3392, 4032, 3392, 3840, 2560, 3840, 2560, 4032, 1472, 4032, 1472, 3136, 1472, 3136 )
+polygon = PoolVector2Array( 256, 3136, 256, 2304, 704, 2304, 704, 1600, 1792, 1600, 1792, 1216, 3520, 1216, 3520, 1536, 3712, 1536, 3712, 1728, 4224, 1728, 4224, 2304, 4032, 2304, 4032, 4032, 3392, 4032, 3392, 3840, 3328, 3904, 3328, 4096, 4096, 4096, 4096, 2368, 4288, 2368, 4288, 1664, 3776, 1664, 3776, 1472, 3584, 1472, 3584, 1152, 1728, 1152, 1728, 1536, 640, 1536, 640, 2240, 192, 2240, 192, 3200, 1408, 3200, 1408, 4096, 2624, 4096, 2624, 3904, 3328, 3904, 3392, 3840, 2560, 3840, 2560, 4032, 1472, 4032, 1472, 3136, 1472, 3136 )
 
 [node name="SafeZones" parent="." index="5"]
 visible = false
@@ -216,9 +218,7 @@ amount_of_cars = 20
 [node name="SmogToBoss" parent="ZebraCrossings" index="0" instance=ExtResource( 22 )]
 position = Vector2( 1152, 1760 )
 extents = Vector2( 128, 64 )
-light_color = 0
 
 [node name="CopperToSmog" parent="ZebraCrossings" index="1" instance=ExtResource( 22 )]
 position = Vector2( 1728, 2336 )
 extents = Vector2( 128, 64 )
-light_color = 0

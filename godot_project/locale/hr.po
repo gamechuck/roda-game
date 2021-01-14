@@ -47,6 +47,9 @@ msgstr "Pokreni"
 msgid "QUIT"
 msgstr "Izlaz"
 
+msgid "BACK_TO_MENU"
+msgstr "Nazad na Menu"
+
 msgid "BACK"
 msgstr "Nazad"
 

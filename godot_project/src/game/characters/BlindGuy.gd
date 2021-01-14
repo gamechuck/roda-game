@@ -37,6 +37,9 @@ func update_animation():
 
 	_animated_sprite.play(animations.get("animation_name", "idle_down"))
 
+	if local_variables.get("blind_guy_gone_protesting", 0):
+		position = Flow.get_waypoint_position("protesting_blind_guy")
+
 var default_animations := {
 		MOVING.IDLE:{
 			"animation_name": "idle_down"
