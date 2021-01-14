@@ -26,6 +26,7 @@ signal cutscene_requested
 
 func _ready():
 	Flow.player = self
+	is_player = true
 	respawn_position = position
 
 	var _error := _interact_area.connect("area_entered", self, "_on_interact_area_entered")

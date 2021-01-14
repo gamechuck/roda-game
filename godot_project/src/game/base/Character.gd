@@ -13,6 +13,7 @@ var state : classCharacterState
 var local_variables := {}
 
 var mouse_inside := false
+var is_player := false
 
 func _ready():
 	if Engine.editor_hint:
@@ -75,7 +76,14 @@ func _on_mouse_exited():
 	mouse_inside = false
 
 func _input(event):
-	if event.is_action_released("left_mouse_button") and mouse_inside:
-		Flow.active_character = self
-	elif Flow.active_character == self:
-		Flow.active_character = null
+	if event.is_action_released("left_mouse_button"):
+		if is_player:
+			if mouse_inside:
+				Flow.player_is_active = true
+			else:
+				Flow.player_is_active = false
+		else:
+			if mouse_inside:
+				Flow.active_character = self
+			elif Flow.active_character == self:
+				Flow.active_character = null
