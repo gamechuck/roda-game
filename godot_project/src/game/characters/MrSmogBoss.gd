@@ -94,7 +94,7 @@ func _on_projectile_timeout(projectile : classProjectile):
 	self.health -= 1
 
 	if health <= 0:
-		local_variables["mr_smog_defeated"] = 1
+		set_story_variable("mr_smog_defeated", 1)
 		Director._on_dialogue_requested(self)
 		Director.zoom_camera(Vector2(1, 1))
 		Flow.boss_overlay.hide()

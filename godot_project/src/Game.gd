@@ -27,6 +27,14 @@ func _ready():
 		if ConfigData.skip_main:
 			change_level("outro")
 		else:
+			if Flow.level_number == 2:
+				for pickup_id in ["broken_bike", "fence_at_turbine", "fence_at_smog"]:
+					var pickup_state : classPickupState = State.get_pickup_by_id(pickup_id)
+					if pickup_state:
+						pickup_state.visible = false
+					else:
+						push_warning("no pickup state for id '{0}'!".format([pickup_id]))
+
 			change_level("main")
 	else:
 		change_level("intro")

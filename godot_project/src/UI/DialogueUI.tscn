@@ -64,8 +64,8 @@ custom_constants/separation = 0
 [node name="ChoiceButton" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 39.0
-margin_right = 439.0
+margin_left = 40.0
+margin_right = 440.0
 margin_bottom = 36.0
 custom_fonts/font = ExtResource( 7 )
 _text = "Choice 0"
@@ -73,9 +73,9 @@ _text = "Choice 0"
 [node name="ChoiceButton2" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 39.0
+margin_left = 40.0
 margin_top = 36.0
-margin_right = 439.0
+margin_right = 440.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 7 )
 _text = "Choice 1"
@@ -83,9 +83,9 @@ _text = "Choice 1"
 [node name="ChoiceButton3" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 39.0
+margin_left = 40.0
 margin_top = 72.0
-margin_right = 439.0
+margin_right = 440.0
 margin_bottom = 108.0
 custom_fonts/font = ExtResource( 7 )
 _text = "Choice 2"
@@ -93,9 +93,9 @@ _text = "Choice 2"
 [node name="ChoiceButton4" parent="VBoxContainer/ChoiceVBox" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 39.0
+margin_left = 40.0
 margin_top = 108.0
-margin_right = 439.0
+margin_right = 440.0
 margin_bottom = 144.0
 custom_fonts/font = ExtResource( 7 )
 _text = "Choice 3"

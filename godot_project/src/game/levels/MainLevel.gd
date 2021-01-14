@@ -35,11 +35,6 @@ func _ready():
 
 		State.add_item_by_id("bike")
 
-		for pickup_id in ["broken_bike", "fence_at_turbine", "fence_at_smog"]:
-			var pickup_state : classPickupState = State.get_pickup_by_id(pickup_id)
-			if pickup_state:
-				pickup_state.visible = false
-
 		emit_signal("dialogue_requested", solid_snejk)
 
 func _on_variable_changed(property : String, value : int):

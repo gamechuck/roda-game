@@ -1961,7 +1961,7 @@ Ja sam samo drvo i meni takve stvari ne trebaju!
 }
 
 = before_mr_smog_defeated
->>> PAN_CAMERA_TO_POSITION: 672 2720
+>>> PAN_CAMERA_TO_POSITION: 704 2720
 MUHUHAHAHA
 Sto mu smogova, nikad nećeš pobijediti moju smogastu smogovitost!
 >>> RESET_CAMERA
@@ -2039,6 +2039,7 @@ Cvijeće će biti posađeno kada sadnja cvijeća dođe na dnevni red u gradu!
 		Dobro, moj čudovišni prijatelju, ako baš moraš posaditi ruže...
 		Neću te spriječiti u tome.
 		Možda je i vrijeme da netko napokon posadi nešto u te tegle.
+		~ flower_copper_swayed = 1
 		-> DONE
 	++ [Pa ako su tako dugo tegle prazne, neka budu prazne još malo...]
 		Tako je, tegle će kad tad doći na red.
