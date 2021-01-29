@@ -764,22 +764,3 @@ func play_outro():
 	yield(self, "dialogue_completed")
 
 	emit_signal("cutscene_completed")
-
-# This function is now obsolete?
-func change_level(key : String) -> void:
-	# Block the dialogue from updating
-	dialogue_can_be_updated = false
-	Flow.dialogue_UI.hide()
-
-	Flow.transitions_UI.fade_to_opaque()
-	yield(Flow.transitions_UI, "transition_completed")
-
-	emit_signal("change_level_requested", key)
-
-	Flow.transitions_UI.fade_to_transparent()
-	yield(Flow.transitions_UI, "transition_completed")
-
-#	dialogue_in_progress = update_dialogue()
-	dialogue_can_be_updated = true
-#
-#	emit_signal("cutscene_completed")

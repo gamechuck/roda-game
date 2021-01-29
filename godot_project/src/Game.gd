@@ -64,12 +64,7 @@ func change_level(key : String) -> void:
 		var level : classLevel = packed_scene.instance()
 		$ViewportContainer.add_child(level)
 
-		var error := OK
-		#var error := get_tree().change_scene_to(packed_scene)
-		if error != OK:
-			push_error("Failed to change level to '{0}'.".format([key]))
-		else:
-			print("Succesfully changed level to '{0}'.".format([key]))
+		print("Succesfully changed level to '{0}'.".format([key]))
 	else:
 		push_error("Requested level '{0}' was not recognized... ignoring call for changing scene.".format([key]))
 
