@@ -1,12 +1,10 @@
 extends classCharacter
 
-var animations := {}
-
 func _ready():
-	call_deferred("update_state")
+	call_deferred("update_animation")
 
-func update_state():
-	var old_animations := animations
+func update_animation():
+	var animations := {}
 
 	match State.level_state:
 		State.LEVEL.MAIN:
@@ -18,10 +16,6 @@ func update_state():
 		State.LEVEL.OUTRO:
 			animations = animations_dict.get("default", {})
 
-	if animations != old_animations:
-		update_animation()
-
-func update_animation():
 	_animated_sprite.play(animations.get("animation_name", "default"))
 	_animated_sprite.offset = animations.get("offset", Vector2.ZERO)
 

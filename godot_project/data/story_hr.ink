@@ -368,8 +368,8 @@ Nakon toga se možemo nastaviti loptati.
 
 = after_mr_smog_defeated
 Ne mogu vjerovati da je Mister Smog zapravo bio naše izgubljeno drvo!
-Say, Plavko, don't you think this park is waaaay to small to play football?
-We should organize a protest for a bigger park!
+Plavko, misliš li da je ovaj park preeemali za igranje nogometa?
+Trebamo organizirati prosvjed za veći park!
 -> before_poster_designed
 
 = before_poster_designed
@@ -1259,7 +1259,9 @@ Tko bi rekao!
 	Prosvjed za uređenje vašeg parka?
 	A zašto ja ne bih došao prosvjedovati za uređenje svog skejterskog parka?
 	Doći ćemo i ja i moji skejter minioni!
+	>>> FADE_TO_OPAQUE
 	~ helter_skelter_gone_protesting = 1
+	>>> FADE_TO_TRANSPARENT
 	-> DONE
 + [Hvala na pomoći!]
     Ispada da lijepe riječi otvaraju mnoga neobična vrata, pa čak i vrata do mojeg crnog skejterskog srca. 
@@ -2863,8 +2865,8 @@ Znači donio si mi ih skroz iz Super Roda dućana?
 Čini se da bon ton još nije zaboravljen!
 Ako ti ikad zatreba neka usluga, samo me pitaj!
 {operation_better_park_started:
-	0: -> DONE
-	1: -> after_old_man_received_groceries
+	- 0: -> DONE
+	- 1: -> after_old_man_received_groceries
 }
 
 = default

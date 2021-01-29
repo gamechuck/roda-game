@@ -265,9 +265,10 @@ func show(argument_values):
 
 func hide(argument_values):
 	var mask : String = argument_values[0]
-	var target_object = get_tree().root.find_node(mask, true, false)
-	if target_object != null:
-		target_object.set_visible(false)
+	var skater_loops : Node2D = get_tree().root.get_node("Game/ViewportContainer/MainLevel/SkaterLoops")
+	if skater_loops:
+		for child in skater_loops.get_children():
+			child.set_visible(false)
 
 func begin_minigame(argument_values):
 	var minigame_id : String = argument_values[0]
