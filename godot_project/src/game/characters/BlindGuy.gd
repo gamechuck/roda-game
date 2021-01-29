@@ -5,7 +5,7 @@ enum MOVING {IDLE, WALK}
 var _moving : int = MOVING.IDLE
 
 func _ready():
-	update_animation()
+	call_deferred("update_animation")
 
 func update_state(move_direction : Vector2 = Vector2.ZERO):
 	var normalized_direction := move_direction.normalized()

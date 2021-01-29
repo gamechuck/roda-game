@@ -18,7 +18,7 @@ VAR player_received_wheelie_fence = 0
 
 // SolidSnejk
 VAR solid_snejk_intro_completed = 0
-VAR operation_better_park_started = 0
+VAR operation_better_park_started = 1
 
 VAR solid_snejk_outro_completed = 0
 
@@ -44,7 +44,7 @@ VAR taxi_received_belt = 0
 
 // HelterSkelter
 VAR helter_skelter_intro_completed = 0
-VAR helter_skelter_gone_protesting = 0
+VAR helter_skelter_gone_protesting = 1
 
 // SeatSortingCar
 VAR car_quest_completed = 0
@@ -63,33 +63,33 @@ VAR rose_seeds_planted = 0
 VAR flower_copper_swayed = 0
 
 // Loveinterest
-VAR love_interest_gone_protesting = 0
+VAR love_interest_gone_protesting = 1
 
 // ParkLovers
-VAR poster_designed = 0
+VAR poster_designed = 1
 
 // RodaShop
 VAR roda_shop_gave_groceries = 0
 VAR roda_shop_gave_seeds = 0
-VAR roda_shop_gone_protesting = 0
+VAR roda_shop_gone_protesting = 1
 
 // OldMan
 VAR old_man_requested_groceries = 0
 VAR old_man_received_groceries = 0
-VAR old_man_gone_protesting = 0
+VAR old_man_gone_protesting = 1
 
 // BlindGuy
 VAR blind_guy_helped = 0
-VAR blind_guy_gone_protesting = 0
+VAR blind_guy_gone_protesting = 1
 
 // Student
 VAR student_homework_done = 0
-VAR student_gone_protesting = 0
+VAR student_gone_protesting = 1
 
 // Animal Protection Services
 VAR lunja_gave_nuts = 0
 VAR squirrels_all_satiated = 0
-VAR lunja_gone_protesting = 0
+VAR lunja_gone_protesting = 1
 
 // Squirrel Tree
 VAR squirrels_at_mountains_satiated = 0
@@ -108,14 +108,14 @@ VAR dog_visited_park = 0
 
 // Rosalina
 VAR rosalina_requested_seeds = 0
-VAR rosalina_gone_protesting = 0
+VAR rosalina_gone_protesting = 1
 
 // Dog Trainer Club
 VAR dog_test_started = 0
 VAR dog_test_passed = 0
 VAR dog_walking_started = 0
 VAR dog_walking_completed = 0
-VAR dog_trainer_club_gone_protesting = 0
+VAR dog_trainer_club_gone_protesting = 1
 
 // Wheelie Appartment
 VAR wheelie_appartment_opened = 0
@@ -123,7 +123,7 @@ VAR wheelie_appartment_opened = 0
 // Monsters Without Borders
 VAR monsters_without_borders_joined = 0
 VAR monsters_without_borders_quest_completed = 0
-VAR monsters_without_borders_gone_protesting = 0
+VAR monsters_without_borders_gone_protesting = 1
 
 // Wheelie
 VAR wheelie_intro_at_park_completed = 0
