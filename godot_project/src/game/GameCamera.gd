@@ -26,7 +26,6 @@ func update_camera():
 		set_physics_process(false)
 
 func _physics_process(_delta : float) -> void:
-	if not player:
-		player = Flow.player
-
-	position = player.position
+	player = Flow.player
+	if player:
+		position = player.position

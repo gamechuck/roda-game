@@ -507,6 +507,7 @@ Kad bi još i oni došli, imali bismo stvarno dovoljno ljudi!
 }
 
 = before_solid_snejk_outro_completed
+>>> UPDATE_UI: solid_snejk
 ~ solid_snejk_outro_completed = 1
 Nevjerojatno koliko je park sad lijep.
 I ti si u tome puno pomogao!
