@@ -70,6 +70,12 @@ msgstr "Undo"
 msgid "DONE"
 msgstr "Done!"
 
+msgid "LEVEL1_DESCRIPTION"
+msgstr "Traffic adventure!"
+
+msgid "LEVEL2_DESCRIPTION"
+msgstr "Park lovers want a bigger park!"
+
 ##
 ## CHARACTER NAMES
 ##

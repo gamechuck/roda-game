@@ -242,4 +242,5 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
+vram_compression/import_pvrtc=true
 environment/default_environment="res://default_env.tres"

@@ -10,12 +10,6 @@ func set_number(value : int) -> void:
 	if is_inside_tree():
 		update_select_vbox()
 
-export var description := "" setget set_description
-func set_description(value : String) -> void:
-	description = value
-	if is_inside_tree():
-		update_select_vbox()
-
 export var texture : Texture setget set_texture
 func set_texture(value : Texture) -> void:
 	texture = value
@@ -30,7 +24,11 @@ func _ready():
 
 func update_select_vbox():
 	$HB/Label.text = "Level {0}".format([number])
-	$PC/MC/VB/DescriptionLabel.text = description
+	match number:
+		1:
+			$PC/MC/VB/DescriptionLabel.text = "LEVEL1_DESCRIPTION"
+		2,_:
+			$PC/MC/VB/DescriptionLabel.text = "LEVEL2_DESCRIPTION"
 
 	$PC/MC/VB/TextureRect.texture = texture
 

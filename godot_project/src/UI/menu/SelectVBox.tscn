@@ -15,7 +15,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-description = "Parkoljupci žele veći park!"
 texture = ExtResource( 3 )
 
 [node name="HB" type="HBoxContainer" parent="."]
@@ -69,7 +68,7 @@ margin_top = 32.0
 margin_right = 468.0
 margin_bottom = 55.0
 size_flags_vertical = 6
-text = "Parkoljupci žele veći park!"
+text = "LEVEL1_DESCRIPTION"
 align = 1
 valign = 1
 autowrap = true

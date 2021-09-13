@@ -32,7 +32,6 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 212.0
 margin_bottom = 238.0
-description = "Prometna avantura!"
 
 [node name="SelectVBox2" parent="SelectHBox" instance=ExtResource( 2 )]
 anchor_right = 0.0

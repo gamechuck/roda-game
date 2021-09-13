@@ -71,6 +71,12 @@ msgstr "Nazad"
 msgid "DONE"
 msgstr "Gotovo!"
 
+msgid "LEVEL1_DESCRIPTION"
+msgstr "Prometna avantura!"
+
+msgid "LEVEL2_DESCRIPTION"
+msgstr "Parkoljupci žele veći park!"
+
 ##
 ## CHARACTER NAMES
 ##

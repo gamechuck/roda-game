@@ -38,7 +38,7 @@ var characters_data := {}
 var items_data := {}
 var pickups_data := {}
 
-var _game_flow := {
+var _state_dict := {
 	"game": {
 		"packed_scene": preload("res://src/Game.tscn"),
 		"state": STATE.GAME
@@ -48,7 +48,7 @@ var _game_flow := {
 		"state": STATE.MENU
 		}
 	}
-var _game_state : int = STATE.STARTUP
+var _flow_state : int = STATE.STARTUP
 var _story_resource := preload("res://addons/inkgd/runtime/story.gd")
 
 # Number of the level chosen at startup!
@@ -144,7 +144,7 @@ func _unhandled_input(event : InputEvent):
 	if InputMap.has_action("reload_all") and event.is_action_pressed("reload_all"):
 		call_deferred("deferred_reload_current_scene")
 
-	match _game_state:
+	match _flow_state:
 		STATE.GAME:
 			if InputMap.has_action("toggle_paused") and event.is_action_pressed("toggle_paused"):
 				emit_signal("pause_toggled")
@@ -163,17 +163,18 @@ func deferred_reload_current_scene() -> void:
 	get_tree().paused = false
 
 func change_scene_to(key : String) -> void:
-	if _game_flow.has(key):
-		var state_settings : Dictionary = _game_flow[key]
+	if _state_dict.has(key):
+		var state_settings : Dictionary = _state_dict[key]
 		var packed_scene : PackedScene = state_settings.packed_scene
-		_game_state = state_settings.state
+		_flow_state = state_settings.state
 
 		var error := get_tree().change_scene_to(packed_scene)
 		get_tree().paused = false
 		if error != OK:
 			push_error("Failed to change scene to '{0}'.".format([key]))
 		else:
-			print("Succesfully changed scene to '{0}'.".format([key]))
+			if ConfigData.verbose_mode:
+				print("Succesfully changed scene to '{0}'.".format([key]))
 	else:
 		push_error("Requested scene '{0}' was not recognized... ignoring call for changing scene.".format([key]))
 
