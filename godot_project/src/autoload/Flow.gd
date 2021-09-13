@@ -15,7 +15,10 @@ const DEFAULT_CONTEXT_PATH := "res://default_context.json"
 const USER_SAVE_PATH := SAVE_FOLDER + "/user_save.json"
 
 const DATA_PATH := "res://data/data.json"
-const STORY_PATH := "res://data/story_hr.ink"
+var localized_stories := {
+	"hr": "res://data/story_hr.ink",
+	"en": "res://data/story_en.ink"
+}
 
 ### PUBLIC VARIABLES ###
 var dialogue_UI : Control = null
@@ -91,9 +94,10 @@ func load_settings() -> int:
 	return _error
 
 func load_story():
+	var story_path : String = localized_stories.get(TranslationServer.get_locale(), "hr")
 	if OS.get_name() == "Windows":
-		var _error = build_INK(STORY_PATH)
-	var content = load_INK(STORY_PATH)
+		var _error = build_INK(story_path)
+	var content = load_INK(story_path)
 	var story : Object = _story_resource.new(content)
 
 	# Bind the getter functions so the story can access the game's state.

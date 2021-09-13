@@ -179,6 +179,7 @@ _global_script_class_icons={
 config/name="ČUDOvišna Avantura"
 run/main_scene="res://src/Menu.tscn"
 config/icon="res://icon.png"
+config/name_en="Monster Adventure"
 
 [autoload]
 
@@ -188,6 +189,10 @@ Director="*res://src/autoload/Director.tscn"
 Flow="*res://src/autoload/Flow.tscn"
 AudioEngine="*res://src/autoload/AudioEngine.tscn"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
 
 [display]
 
@@ -229,16 +234,12 @@ texture={
 fallback="hr"
 translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po" )
 translation_remaps={
-
 }
+locale_filter=[ 0, [  ] ]
 
 [rendering]
 
 quality/driver/driver_name="GLES2"
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"
-
-[tiled_importer]
-
-enable_json_format=false

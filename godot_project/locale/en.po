@@ -152,7 +152,7 @@ msgid "MONSTERS_WITHOUT_BORDERS"
 msgstr "Monsters Without Borders"
 
 msgid "ANIMAL_PROTECTION_SERVICES"
-msgstr "Lunja"
+msgstr "Laika"
 
 msgid "RODA_SHOP"
 msgstr "SUPER RODA shop"
@@ -191,7 +191,7 @@ msgid "SQUIRRELS_AT_LAKE"
 msgstr "Oak"
 
 msgid "PLAYER"
-msgstr "Plavko"
+msgstr "Bluey"
 
 msgid "HELTER_SKELTER"
 msgstr "Skater from HELL"

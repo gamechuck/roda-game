@@ -77,7 +77,6 @@ custom_constants/separation = 16
 alignment = 1
 
 [node name="LanguageHBox" parent="VBoxContainer/SettingsVBox" instance=ExtResource( 4 )]
-visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 41.0
@@ -87,9 +86,9 @@ margin_bottom = 64.0
 [node name="VolumeVBox" parent="VBoxContainer/SettingsVBox" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 60.0
+margin_top = 80.0
 margin_right = 448.0
-margin_bottom = 83.0
+margin_bottom = 103.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
 margin_left = 160.0
