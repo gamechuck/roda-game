@@ -2985,7 +2985,7 @@ Thanks for your help!
 
 = protesting
 It's empty...
-Probably all the volonteers from Laika left for the protest.
+Probably all the volunteers from Laika left for the protest.
 -> DONE
 
 = outro
@@ -3045,7 +3045,7 @@ My head is so dizzy from all the smog coming out of the flying cars vents...
 = first_question
 First question: What is solidarity?
 + [When some members of our community worry about everything, and others do nothing.]
-	I don't that's correct...
+	I don't think that's correct...
 	-> first_question
 + [When we do good and are ready to help those who need it the most, such as students with difficulty learning or the elderly.]
 	Thanks a lot, that's correct.
@@ -3229,11 +3229,11 @@ This is a trash container.
 }
 
 = wrong_trash
-I don't think that's the right trash for this container.
+I don't think that's the correct trash for this container.
 -> DONE
 
 = correct_trash
-That's it, the right trash should go in the right container.
+That's it, the correct trash should go in the correct container.
 >>> REMOVE_ITEM: {used_item}
 -> DONE
 
@@ -3242,8 +3242,8 @@ That's it, the right trash should go in the right container.
 //--
 === conv_broken_bike ===
 // The broken bike of Solid Slug
-This is the bike of Slug!
-Wow, it's been blown away all the way here...
+This is the bike of Solid Slug!
+Wow, it has been blown all the way over here...
 I better bring it to him.
 -> DONE
 
@@ -3268,7 +3268,7 @@ It'll be best if I throw it in the trash.
 
 === conv_trash_paper ===
 // Trash necessary to feed the cansters... or throw in the bin somewhere?
-Somebody threw paper on the floow instead of in the trash.
+Somebody threw paper on the floor instead of in the trash.
 -> DONE
 
 === conv_fence_at_turbine ===
@@ -3376,7 +3376,7 @@ This could be used to pump a flat tire!
 -> DONE
 
 = seat_belt
-I should war this seatbelt when I'm driving in a car.
+I should wear this seatbelt when I'm driving in a car.
 Or even... in a taxi!
 -> DONE
 
