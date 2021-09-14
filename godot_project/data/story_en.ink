@@ -2506,12 +2506,12 @@ If only these fast cars were a bit slower, I'd be less afraid of crossing the ro
 Thanks for helping me across the road!
 I don't know how long I would have been staying there if you hadn't come across!
 How could I thank you?
-Ah, I know! Ah, znam! I could show you how to spell "thanks" in Braille!
+Ah, I know! I could show you how to spell "Thank you" in Braille!
 ~ blind_guy_helped = 1
 -> show_braille
 
 = after_blind_guy_helped
-Do I smell the same monstery being who helped me cross the road?
+Do I smell the same monster who helped me cross the road?
 Would you like me to show you Braille again?
 + {operation_better_park_started}[We're organising a protest to help renovate the park. Would you join?]
 	A larger park would mean I no longer have to cross the road to get to it!
@@ -2529,7 +2529,7 @@ Would you like me to show you Braille again?
 
 = show_braille
 >>> BEGIN_MINIGAME: braille_minigame
-Braille is a writing system that blind people like me use for reading and writing.
+Braille is a system that blind people like me use for reading and writing.
 It is read by moving your fingers over the letters and feeling the symbols.
 Next time you are in an elevator, take a look at the buttons.
 They often have the floor numbers written in Braille as well.

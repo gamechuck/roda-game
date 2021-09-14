@@ -234,6 +234,9 @@ texture={
 fallback="hr"
 translations=PoolStringArray( "res://locale/hr.po", "res://locale/en.po" )
 translation_remaps={
+"res://roda-assets/UI/minigames/braille_minigame/braile_croatian.png": PoolStringArray( "res://roda-assets/UI/minigames/braille_minigame/braile_english.png:en" ),
+"res://roda-assets/UI/minigames/poster_minigame/slogan1_hr.png": PoolStringArray( "res://roda-assets/UI/minigames/poster_minigame/slogan1.png:en" ),
+"res://roda-assets/UI/minigames/poster_minigame/slogan2_hr.png": PoolStringArray( "res://roda-assets/UI/minigames/poster_minigame/slogan2.png:en" )
 }
 locale_filter=[ 0, [  ] ]
 
