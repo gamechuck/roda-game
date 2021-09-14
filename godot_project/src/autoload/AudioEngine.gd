@@ -9,9 +9,6 @@ const MUSIC_TRACKS = {
 
 onready var _music_player:= $MusicPlayer
 
-func convert_scale_to_db(scale: float):
-	return 20 * log(scale) / log(10)
-
 var background_audio = null
 
 func reset():
@@ -27,3 +24,9 @@ func stop_music() -> void:
 	if _music_player.playing:
 		_music_player.stop()
 		_music_player.stream = null
+
+func set_bus_volume(bus_name : String, volume : float):
+	# The `volume`-parameter is a value between 0.0 and 100.0
+	match bus_name:
+		"master":
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(volume/100.0))

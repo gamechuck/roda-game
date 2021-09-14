@@ -96,9 +96,7 @@ var minor_version := 0
 var master_volume := 100.0 setget set_master_volume
 func set_master_volume(value : float):
 	master_volume = value
-	var volume_db : float = 20*log(float(value)/100.0)/log(10.0)
-	# -INF (when new_value = 0) doesn't seem to pose any issues!
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume_db)
+	AudioEngine.set_bus_volume("master", master_volume)
 
 ## GRAPHICS SETTINGS ###########################################################
 var show_version := true setget set_show_version
