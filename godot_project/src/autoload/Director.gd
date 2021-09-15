@@ -21,6 +21,13 @@ signal cutscene_completed
 
 signal change_level_requested
 
+func reset() -> void:
+	is_waiting_for_choice = false
+	dialogue_in_progress = false
+	cutscene_in_progress = false
+
+	dialogue_can_be_updated = true
+
 func _on_dialogue_requested(node : Node2D, item_id : String = ""):
 	# First stop the player autonomy!
 	emit_signal("revoke_player_autonomy")

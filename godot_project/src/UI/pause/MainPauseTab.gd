@@ -13,6 +13,10 @@ func _ready():
 
 func update_tab():
 	_resume_button.grab_focus()
+	# Due to the way the Director currently works (too many yields!!) the game cannot be restarted
+	# while a cutscene is active or the game gets hard-locked...
+	_restart_button.disabled = Director.cutscene_in_progress
+	_menu_button.disabled = Director.cutscene_in_progress
 
 func _on_resume_button_pressed():
 	Flow.emit_signal("pause_toggled")

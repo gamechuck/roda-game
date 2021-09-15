@@ -61,6 +61,8 @@ func change_level(key : String) -> void:
 				$ViewportContainer.remove_child(child)
 				child.queue_free()
 
+		Director.reset()
+
 		var level : classLevel = packed_scene.instance()
 		$ViewportContainer.add_child(level)
 
