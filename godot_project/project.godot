@@ -178,7 +178,7 @@ _global_script_class_icons={
 
 config/name="ČUDOvišna Avantura"
 run/main_scene="res://src/Menu.tscn"
-boot_splash/image="res://roda-assets/UI/menu/background.png"
+boot_splash/image="res://roda-assets/UI/menu/background_cropped.png"
 boot_splash/use_filter=false
 config/icon="res://icon/roda_logo_x196.png"
 config/windows_native_icon="res://icon/icon.ico"

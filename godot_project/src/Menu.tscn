@@ -5,14 +5,14 @@
 [ext_resource path="res://src/UI/menu/MenuTabContainer.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/menu/MainMenuTab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/menu/SettingsMenuTab.tscn" type="PackedScene" id=5]
-[ext_resource path="res://roda-assets/UI/menu/background.png" type="Texture" id=6]
+[ext_resource path="res://roda-assets/UI/menu/background_cropped.png" type="Texture" id=6]
 [ext_resource path="res://src/UI/menu/HowToPlayMenuTab.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/menu/AboutMenuTab.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/menu/SelectMenuTab.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 480, 270 )
+region_rect = Rect2( 0, 0, 782, 440 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
