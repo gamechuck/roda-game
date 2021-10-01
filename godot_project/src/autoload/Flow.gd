@@ -63,6 +63,8 @@ onready var _controls_loader := $ControlsLoader
 onready var _data_loader := $DataLoader
 
 signal pause_toggled
+# warning-ignore:unused_signal
+signal setting_changed
 
 func _ready():
 	var _error := load_settings()

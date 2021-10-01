@@ -22,6 +22,9 @@ msgstr "GAME IS PAUSED"
 msgid "LANGUAGE"
 msgstr "English"
 
+msgid "FULLSCREEN"
+msgstr "Fullscreen"
+
 msgid "VOLUME"
 msgstr "Volume"
 

@@ -14,6 +14,9 @@ msgstr ""
 msgid "LANGUAGE"
 msgstr ""
 
+msgid "FULLSCREEN"
+msgstr ""
+
 msgid "VOLUME"
 msgstr ""
 
