@@ -624,7 +624,7 @@ Just take it and click on yourself any time you wish to drive.
 
 = after_operation_better_park_started
 We want a better park!
-Give us a proper football terrain so we can play in piece!
+Give us a proper football terrain so we can play in peace!
 -> DONE
 
 = outro
@@ -813,7 +813,7 @@ The bike doesn't need that...
 
 = pop_question
 Looking for the bicycle?
-I'll show you where I found ti if you answer my question:
+I'll show you where I found it if you answer my question:
 - (start_question)
 If there is no pedestrian pedestrian crossing, where do pedestrians walk?
 + [Right side of the street.] 
@@ -2622,10 +2622,10 @@ First question...
 // TODO: Add some actual questions here!
 = first_question
 What is participation?
-+ [When citizens don't participate in deicisions important for the community they live in, such as renovating a park or equiping a playground.]
++ [When citizens don't participate in decisions important for the community they live in, such as renovating a park or equiping a playground.]
 	Wrong.
 	-> failure
-+ [When citizens actively participate in deicisions important for the community they live in, such as renovating a park or equiping a playground.]
++ [When citizens actively participate in decisions important for the community they live in, such as renovating a park or equiping a playground.]
 	Correct.
 	-> second_question
 + [When citizens participate in protests.]
@@ -3153,7 +3153,7 @@ Here, little ones, go hungry no more, take these nuts!
 >>> REMOVE_ITEM: squirrel_nuts
 ~ set_squirrels_satiated(interact_id, 1)
 Wow, a hungry squirrel jumped out and took one acorn straight from my hand.
-That's one less hungry squirrel in this curel world.
+That's one less hungry squirrel in this cruel world.
 -> DONE
 
 = squirrel_satiated
