@@ -29,11 +29,12 @@ func update_animation():
 	var shape = _interact_collision_shape_2D.shape
 	shape.extents = animations.get("extents", Vector2(24, 24))
 
-	_audio_stream_player_2D.playing = animations.get("audio_playing", true)
-
 	if local_variables.get("operation_better_park_started", true):
+		_audio_stream_player_2D.playing = animations.get("audio_playing", true)
 		set_visible(false)
 	else:
+		# Don't play any sound when the Canster is invisible!
+		_audio_stream_player_2D.playing = false
 		set_visible(true)
 
 var animations_dict := {

@@ -696,7 +696,7 @@ I don't need it, thanks...
 }
 {bike_issue_found:
 	- 1: I should check if the other bike parts are working...
-	- 0: I should check if the bike works.
+	- 0: I should check if the bike works...
 }
 + Tyre?
 	Oh, no! One of the tyres is flat!
@@ -2760,7 +2760,7 @@ You have no idea how happy I am now!
 	~ rosalina_gone_protesting = 1
 	>>> FADE_TO_TRANSPARENT
 	-> DONE
-+ [Bilo mi je zadovoljstvo!]
++ [It was my pleasure!]
 	-> DONE
 
 = protesting
