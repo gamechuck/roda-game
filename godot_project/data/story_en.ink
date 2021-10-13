@@ -363,25 +363,25 @@ Wow! This place looks much nicer, doesn't it?
 Although, I seem to recall there was a tree here once...
 I wonder what happened to it?
 Maybe you can find out what happened to our favourite tree?
-After that we can continue playing ball.
+After that, we can continue playing ball.
 -> DONE
 
 = after_mr_smog_defeated
 I can't believe Mister Smog was in fact our lost tree!
-Bluey, don't you think this park is too small play football?
+Bluey, don't you think this park is too small to play football?
 We should organise a protest for a bigger park!
 -> before_poster_designed
 
 = before_poster_designed
 >>> UPDATE_UI: solid_snejk
 ~ operation_better_park_started = 1
-I hear the parklovers are having a contest in making park posters.
+I hear the park lovers are having a contest in making park posters.
 >>> PAN_CAMERA_TO_POSITION: 3120 1216
 Maybe you can help them make a poster?
 >>> RESET_CAMERA
 Also, we should tell everyone that we are organising a protest!
 Would you walk around town and tell everyone to join us?
-A larger and more beautiful park is somthing everyone can enjoy!
+A larger and more beautiful park is something everyone can enjoy!
 -> DONE
 
 = after_operation_better_park_started
@@ -422,7 +422,7 @@ Let's see who is missing on the protest...
 	- 0: -> show_monsters_without_borders 
 }
 // If we arrived here, everyone has gone protesting and it is time to start the ending cutscene!
-It seems there is enough people for the protest!
+It seems there are enough people for the protest!
 Let's make the world a better place!
 >>> PLAY_CUTSCENE: outro
 -> DONE
@@ -474,7 +474,7 @@ I think your crush would love to answer your call!
 
 = show_dog_trainer_club
 >>> PAN_CAMERA_TO_POSITION: 3380 1728
-Volonteers that train therapy dogs want more nature in the city.
+Volunteers that train therapy dogs want more nature in the city.
 Ask them if they'd join us?
 >>> RESET_CAMERA
 -> DONE
@@ -483,13 +483,13 @@ Ask them if they'd join us?
 >>> PAN_CAMERA_TO_POSITION: 2736 1216
 Laika is an organisation that takes care of animals, they would definitely want a bigger park.
 Maybe you can ask them to come, although they are probably very busy...
-Perhaps they will have more time for us if you help them in their work.
+Perhaps they will have more time for us if you help them with their work.
 >>> RESET_CAMERA
 -> DONE
 
 = show_roda_shop
 >>> PAN_CAMERA_TO_POSITION: 2576 1216
-The shop workers also want a better park! Ask them too to show up for our park-revolution!
+The shop workers also want a better park! Ask them too to show up for our park revolution!
 >>> RESET_CAMERA
 -> DONE
 
@@ -515,7 +515,7 @@ Walk around and explore! Everyone is here!
 -> DONE
 
 = after_solid_snejk_outro_completed
-I am still amazed with the park!
+I am still amazed by the park!
 I will stay here but you can go around and explore!
 -> DONE
 
@@ -542,7 +542,7 @@ I don't want to take that...
 
 === conv_solid_slug ===
 //-- STATUS : READY FOR TRANSLATION
-// Solid slug is missing his bike... Mr. Smog blew it away.
+// Solid Slug is missing his bike... Mr. Smog blew it away.
 // He asks you to find his bike somewhere and bring it back to him.
 // Afterwards, when you fixed his bike, he tells you that you can use his bike.
 //-- RELEVANT VARIABLES:
@@ -612,7 +612,7 @@ Can you get a bike pump from someone?
 -> DONE
 
 = has_pump
-Great, you found a bike pump! Can you pump up the bike tyre, please?
+Great, you found a bike pump! Can you pump up the bike tire, please?
 -> DONE
 
 = after_bike_fixed
@@ -698,20 +698,20 @@ I don't need it, thanks...
 	- 1: I should check if the other bike parts are working...
 	- 0: I should check if the bike works...
 }
-+ Tyre?
-	Oh, no! One of the tyres is flat!
++ Tire?
+	Oh, no! One of the tires is flat!
 	~ bike_issue_found = 1
 	~ checked_components += tyres
 	-> bike_minigame
 + Pedals?
 	The pedals seem to be set up fine...
-	And there is a cats eye on the front and on the back of them.
+	And there is a cat eye on the front and the back of them.
 	Super!
 	~ checked_components += pedals
 	-> bike_minigame
 + Lights?
 	The front light is white, to light the road.
-	The back light is red, with a cats eye.
+	The backlight is red, with a cat eye.
 	Super!
 	~ checked_components += lights
 	-> bike_minigame
@@ -723,11 +723,11 @@ I don't need it, thanks...
 	~ checked_components += horn_and_brakes
 	-> bike_minigame
 + Seat?
-	The seat is set-up properly! Super!
+	The seat is set up properly! Super!
 	~ checked_components += saddle
 	-> bike_minigame
 = after_bike_issue_found
-It seems the problem is only in the flat tyre...
+It seems the problem is only in the flat tire...
 We need to fix it!
 >>> END_MINIGAME
 -> DONE
@@ -771,7 +771,7 @@ I should first figure out what's wrong with the bike.
 -> DONE
 
 = pump_after_checkup
-Time to pump up the flat tyre!
+Time to pump up the flat tire!
 \*PUMP*
 \*PUMP PUMP*
 \*PUMP PUMP PUMP*
@@ -812,10 +812,10 @@ The bike doesn't need that...
 }
 
 = pop_question
-Looking for the bicycle?
+Looking for a bicycle?
 I'll show you where I found it if you answer my question:
 - (start_question)
-If there is no pedestrian pedestrian crossing, where do pedestrians walk?
+If there is no pedestrian crossing, where do pedestrians walk?
 + [Right side of the street.] 
 	Ha! Wrong!
 	That way you don't see the cars that are coming and you are in greater danger.
@@ -827,7 +827,7 @@ If there is no pedestrian pedestrian crossing, where do pedestrians walk?
 	~ watto_question_solved = 1
 	-> show_bike_location
 + [The middle of the street.]
-	Ha! Wrong! Walking on the middle of the street is the most dangerous of all!
+	Ha! Wrong! Walking in the middle of the street is the most dangerous of all!
 	-> start_question
 + [Jumping from one side of the street to the other.]
 	WRONG! WRONG!
@@ -848,7 +848,7 @@ But where I'm going, I don't need roads!
 
 = after_operation_better_park_started
 You're gathering people for your protest, right?
-Well I love living in garbage.
+Well, I love living in garbage.
 But best of luck.
 -> DONE
 
@@ -866,7 +866,7 @@ Well done!
 -> DONE
 
 = pump
-Pump your bike tyre with that, my rocket doesn't need it.
+Pump your bike tire with that, my rocket doesn't need it.
 -> DONE
 
 = fence
@@ -904,17 +904,17 @@ I don't even want to return to my homeland of Trafficia.
 -> DONE
 
 = intro
-I am the Grat Lizian! A wizard from the far away land of Trafficia.
+I am the Great Lizian! A wizard from the faraway land of Trafficia.
 I came for vacation, but it seems you have some problems here.
 Perhaps I can help? I have the power to show you what you seek!
-But... First you must answer one of my riddles!
+But... First, you must answer one of my riddles!
 I'm sorry about that but it's just how my powers work...
 ~ lizzy_intro_completed = 1
 -> after_lizzy_intro_completed
 
 = after_lizzy_intro_completed
 Would you like to solve a riddle?
-If you do, I'll show you your hearts desire!
+If you do, I'll show you your heart's desire!
 + [I wish to solve the riddle!]
 	-> shuffle_riddle
 + [I don't need your help!]
@@ -964,7 +964,7 @@ Why should traffic signs be respected?
 	-> riddle_started
 + [For safety in traffic.] 
 	RIGHT!
-	Otherwise we would all be in grave danger!
+	Otherwise, we would all be in grave danger!
 	-> riddle_completed
 + [Because we are bored.] 
 	Wrong!!!
@@ -987,7 +987,7 @@ What can increase the alertness of pedestrians in traffic?
 	-> riddle_started
 + [Focusing and expecting danger.] 
 	Correct!
-	Think and try to anticipate possible danagers!
+	Think and try to anticipate possible dangers!
 	-> riddle_completed
 + [Talking on the phone.] 
 	Wrong!!!
@@ -1003,7 +1003,7 @@ What can increase the alertness of pedestrians in traffic?
 = fourth_riddle
 - (start_riddle)
 What is the driveway?
-+ [Part of the road for pedestirans.]
++ [Part of the road for pedestrians.]
 	Wrong!
 	That's the sidewalk, not the driveway!
 	-> riddle_started
@@ -1014,7 +1014,7 @@ What is the driveway?
 	Wrong!!!
 	I better not help you if you are so irresponsible!
 	-> riddle_started
-+ [A Slovene athletician who participted in the Olympics in 1960.]
++ [A Slovene athlete who participated in the Olympics in 1960.]
 	This joke doesn't even make sense in English.
 	The correct answer is: "The driveway is the part of the road for cars."
 	But you shall receive a correct answer to this, so that localisation may run more smoothly.
@@ -1084,7 +1084,7 @@ The region is full of ghosts!!!
 = pan_to_turbine_fence
 // Pan the fence lying at the turbine:
 >>> PAN_CAMERA_TO_POSITION: 1056 672
-Hmm... a piece of the fence fell near the old wind turbine at the top of the mountain...
+Hmm... A piece of the fence fell near the old wind turbine at the top of the mountain...
 That is quite far... But I believe a motor vehicle will help you get there.
 You are young and resourceful, I'm sure you will find a way to get there!
 >>> RESET_CAMERA
@@ -1138,7 +1138,7 @@ Hey, you simpatico monster! I am sorry, but I'm a bit busy right now...
 But hold on, you might be able to help me!
 I'm trying to put all the monsters in their proper places, but I don't know which seatbelt is for which monster.
 Help me, please!
-+ [Of course, I have a natural talent at sorting monsters by seatbelt types!]
++ [Of course, I have a natural talent for sorting monsters by seatbelt types!]
 	-> after_car_quest_started
 + [Sorry, I have no time - I have my own quest as well!]
 	Oh my! I won't be able to lift off till I resolve this.
@@ -1214,8 +1214,8 @@ We can finally visit the seaside now!
 ?
 How did you get past all my skater minions???
 I told them loud and clear - they should let nobody near!
-You must have come for the piece of fence I found?!
-Well I will never part with it! That part is now MINE!
+You must have come for the piece of the fence I found?!
+Well, I will never part with it! That part is now MINE!
 For I am HELTER SKATER, The Fear of skaters from Smogtown to Cloud Mountain!
 ~ helter_skelter_intro_completed = 1
 -> before_player_received_helter_skelter_fence
@@ -1226,13 +1226,13 @@ For I am HELTER SKATER, The Fear of skaters from Smogtown to Cloud Mountain!
 	Now scram before I hurt you!
 	-> DONE
 + [Hah. If you are The Fear, I am the Traffic Light.]
-	That's how you look, lik a little blue traffic light!
+	That's how you look, like a little blue traffic light!
 	But hmm, traffic lights aren't blue...
 	Either way, get off my sight!
 	-> DONE
 + [Please, mister Helter Skater, could you give us the fence part, it is very important to us?]
 	What?!
-	Is that... decency!?
+	Is that... Decency!?
 	In my park?!?!
 	I haven't heard this since...
 	Since...
@@ -1250,7 +1250,7 @@ For I am HELTER SKATER, The Fear of skaters from Smogtown to Cloud Mountain!
 	-> DONE
 
 = after_helter_skelter_intro_completed
-You again,what do you want?
+You again, what do you want?
 -> before_player_received_helter_skelter_fence
 
 = after_player_received_helter_skelter_fence
@@ -1280,7 +1280,7 @@ We've had enough skating on garbage!
 }
 
 = default
-Keep these trinckets to yourself!
+Keep these trinkets to yourself!
 -> DONE
 
 === conv_taxi_at_park ===
@@ -1302,7 +1302,7 @@ Keep these trinckets to yourself!
 
 = before_taxi_received_belt
 My job is to ferry people to the mountain.
-Alas, I have no seat belt for passangers so...
+Alas, I have no seatbelt for passengers so...
 + {has_item("seat_belt") == 0}[I don't care for seatbelts!]
 	Ok, but that's very dangerous...
 	Let's go!
@@ -1579,7 +1579,7 @@ Come get me when it's fixed! Bye bye!
 ~ canster_middle_appeased = 0
 ~ canster_right_appeased = 0
 Wow, you've fixed the fences!
-I'd love to come play football with you, but...
+I'd love to come to play football with you, but...
 The cans are hungry again!
 Can you please feed them with trash again?
 I'm so scared of them...
@@ -1600,7 +1600,7 @@ Are all the cans fed now?
 = before_wheelie_intro_back_at_park_completed
 Thanks for following me back to our wonderful park!
 I think I'll stay here and enjoy the park forever!
-Here, you can take my battery. I don't need it any more!
+Here, you can take my battery. I don't need it anymore!
 >>> ADD_ITEM: battery
 ~ wheelie_intro_back_at_park_completed = 1
 -> DONE
@@ -1609,7 +1609,7 @@ Here, you can take my battery. I don't need it any more!
 {mr_smog_defeated:
 	- 1: -> after_mr_smog_defeated
 }
-It really is a wonerful day.
+It really is a wonderful day.
 The only thing missing is the big tree that was once planted here.
 I wonder what happened to it...
 -> DONE
@@ -1663,7 +1663,7 @@ I don't need it!
 
 = before_wind_turbine_powered
 Usually, wind turbines convert wind into energy, but this one is different!
-This turbine converts energy into wind!
+This turbine converts energy into the wind!
 This big hole has a battery symbol.
 Perhaps, if I had a battery to put here, I could start up the turbine.
 -> DONE
@@ -1701,10 +1701,10 @@ That won't help, I need to put a power source in the hole.
 = interact
 Hey, monster! Sorry for being in your way.
 But I'm 23 hours behind schedule!
-Nevermind though - if I wait one more hour here, I'll be right on time!
+Never mind though - if I wait one more hour here, I'll be right on time!
 Oh, also - look out for cars!
 They can't see you when you're crossing the road because my bus is parked here!
-Try to cross the road behind the bus where they can see you.
+Try to cross the road in front of the bus where they can see you.
 -> DONE
 
 = use_item
@@ -1754,7 +1754,7 @@ Now leave me alone.
 }
 
 = wearing_plain
-Hey, you! How do you like my new jacket? It's colorful isn't it?
+Hey, you! How do you like my new jacket? It's colorful, isn't it?
 I think it would fit you too!
 Do you want to trade jackets?
 + {operation_better_park_started && love_interest_gone_protesting == 0}[Actually, I wanted to ask you to join our park protest.]
@@ -1766,7 +1766,7 @@ Do you want to trade jackets?
 	-> DONE
 + [Yes, let's swap!]
 	~ player_wearing_color = 1
-	Great! Just let me know when you want my old jacket back!
+	Great! Just let me know when you want your old jacket back!
 	-> DONE
 + [No, I love my own jacket.]
 	Ok!
@@ -1832,7 +1832,7 @@ Thanks, but all I need from you is your love!
 
 = visit_lake
 Woof woof!
-The doggie looks like it wants water?
+The doggie looks like it wants water!
 I'll take it to the lake near Vilko's place!
 -> DONE
 
@@ -1901,7 +1901,7 @@ I'll walk him around a bit more and see where he wants to go next.
 = wearing_plain
 STOP!
 You can't enter Smog City dressed like that!
-Can't you see the smog inside? Nobody will see you with clothes like that!
+Can't you see the smog inside? Nobody will see you in clothes like that!
 Come back when you have something shinier on you!
 Remember: when you are in dark places, you must be visible to cars!
 -> DONE
@@ -1937,7 +1937,7 @@ I don't need that, thanks! I'm only looking after your safety in traffic.
 }
 
 = main
-I was possesed by evil smog.
+I was possessed by evil smog.
 But I'm a happy tree again!
 Thanks for your help!
 -> DONE
@@ -2033,19 +2033,19 @@ They fit the color of the building.
 >>> UPDATE_UI: copper
 Hey, what are you doing!?
 Planting flowers is not forbidden!
-Flowers will be planted when pots are discussed on the cities daily schedule!
+Flowers will be planted when pots are discussed on the city's daily schedule!
 + [Daily schedule? How long has it been without flowers?]
 	Hmm... I think the pots are here since before I was a cop.
 	++ [When did you become a cop?]
 		...
 		Over 10 years ago...
 		Well alright, my monstery friend, if you must plant the roses...
-		I won't stop you in that.
+		I won't stop you from that.
 		Perhaps it is time somebody planted something in those pots.
 		~ flower_copper_swayed = 1
 		-> DONE
 	++ [If the pots have been empty for so long, it doesn't hurt for them to stay empty a little bit longer...]
-		Exactly. Pots will make their way to the cities daily schedule eventually.
+		Exactly. Pots will make their way on the city's daily schedule eventually.
 		But not today.
 		-> DONE
 + [Sorry, I'll wait until it becomes an issue for city bureaucracy...]
@@ -2089,7 +2089,7 @@ I am watching you!
 
 = after_rose_seeds_planted
 When I see these wonderful flowers, I find that it is sometimes useful to avoid bureaucracy.
-If we listened to the rules a bit less, and more to our heart, the world would be full of fragrant roses.
+If we listened to the rules a bit less, and our hearts more, the world would be full of fragrant roses.
 -> DONE
 
 = use_item
@@ -2100,13 +2100,13 @@ If we listened to the rules a bit less, and more to our heart, the world would b
 
 = rose_seeds
 Simpatico seeds.
-But don't plant them without the approval by the communal bureaucracy!
+But don't plant them without the approval of the communal bureaucracy!
 ESPECIALLY not in that pot over there.
 That pot is city property and you may plant nothing inside it!
 -> DONE
 
 = default
-Thank you citizen, but I require nothing except honoring the law.
+Thank you, citizen, but I require nothing except honoring the law.
 -> DONE
 
 === conv_dog_trainer_club ===
@@ -2195,17 +2195,17 @@ Hi, will you try taking our therapy dog trainer exam again?
 
 = start_dog_test
 First question:
-What is volonteering?
+What is volunteering?
 + [Well paid overtime.]
 	Wrong!
 	-> wrong_answer
-+ [Willing investment of time, effort, knowledge or skills for the benefit of others or the community, such as volonteering in organisations, dog shelters, socialising therapy dogs etc.]
++ [Willing investment of time, effort, knowledge or skills for the benefit of others or the community, such as volunteering in organisations, dog shelters, socialising therapy dogs, etc.]
 	That's right!
 	-> second_question
 + [Unpaid overtime.]
 	Wrong!
 	-> wrong_answer
-+ [Investment of time, effort, knoweldge or skills for the benefit of others or the community, against your will]
++ [Investment of time, effort, knowledge or skills for the benefit of others or the community, against your will.]
 	Wrong!
 	-> wrong_answer
 
@@ -2235,7 +2235,7 @@ But do not despair - you can always retake the exam.
 -> DONE
 
 = after_dog_test_passed
-Now you can help us walk this wonderful dog
+Now you can help us walk this wonderful dog.
 ~ dog_walking_started = 1
 Her name is Lepa. Enjoy!
 If you don't know where to go, just ask her.
@@ -2258,7 +2258,7 @@ Well done! A bit of training is always good for you!
 Thanks for walking Lepa!
 Is there something we can do for you?
 + {operation_better_park_started}[Can you come to the protest for a better park?]
-	Of course we will come!
+	Of course, we will come!
 	A nicer park means more nature in the city for our therapy dogs to enjoy.
 	~ dog_trainer_club_gone_protesting = 1
 	-> DONE
@@ -2312,14 +2312,14 @@ We don't need that, thank you.
 }
 
 = before_operation_better_park_started
-We are parklovers!
-We love our park and can't wait to start our parkloving plan.
+We are park lovers!
+We love our park and can't wait to start our park-loving plan.
 But the time is not right. We will tell you all about it one day.
 -> DONE
 
 = before_poster_designed
-We are parklvoers!
-We hear you are a parklover too.
+We are park lovers!
+We hear you are a park lover too.
 We want to create a poster that we would hang all over town.
 Alas, we need a good designer!
 Would you help us?
@@ -2351,7 +2351,7 @@ Would you like to re-design the poster?
 
 = outro
 Thanks for helping renovate the park.
-But - the park-revolution never sleeps - we now have even greater plans for our park!
+But - the park revolution never sleeps - we now have even greater plans for our park!
 -> DONE
 
 = use_item
@@ -2370,7 +2370,7 @@ We don't need that!
 }
 
 = after_wheelie_appartment_opened
-Vilko invited me in his building!
+Vilko invited me into his building!
 Should I enter?
 + [Yes, I'll go in!]
 	{player_on_bike:
@@ -2545,7 +2545,7 @@ Build us a bigger park!
 
 = outro
 Perhaps I can't see the new park.
-But I can definitely feel the quality of air has improved.
+But I can definitely feel that the quality of the air has improved.
 Also, the noise pollution from all those cars is gone!
 Well done, great initiative!
 -> DONE
@@ -2601,9 +2601,9 @@ How can we help you?
 		- 0: -> before_monsters_without_borders_joined
 		- 1: -> after_monsters_without_borders_joined
 	}
-+ {not monsters_without_borders_joined}[Can I be your member?]
-	Not everyone can become our member.
-	First you must pass an entrance exam.
++ {not monsters_without_borders_joined}[Can I become a member?]
+	Noone can just become a member!
+	First, you must pass an entrance exam.
 	Are you ready?
 	++ [Yes, let's go!]
 		Ok, let me find the form...
@@ -2622,10 +2622,10 @@ First question...
 // TODO: Add some actual questions here!
 = first_question
 What is participation?
-+ [When citizens don't participate in decisions important for the community they live in, such as renovating a park or equiping a playground.]
++ [When citizens don't participate in decisions important for the community they live in, such as renovating a park or equipping a playground.]
 	Wrong.
 	-> failure
-+ [When citizens actively participate in decisions important for the community they live in, such as renovating a park or equiping a playground.]
++ [When citizens actively participate in decisions important for the community they live in, such as renovating a park or equipping a playground.]
 	Correct.
 	-> second_question
 + [When citizens participate in protests.]
@@ -2666,7 +2666,7 @@ Luckily, it's easy to become our member.
 -> DONE
 
 = after_monsters_without_borders_joined
-Of course we will help you! It's just the thing for all the monsters in this neighbourhood!
+Of course, we will help you! It's just the thing for all the monsters in this neighbourhood!
 We'll be sending our members there immediately!
 ~ monsters_without_borders_gone_protesting = 1
 -> DONE
@@ -2739,7 +2739,7 @@ Any flower will do!
 	-> DONE
 + [Okay, I'll go get the seeds from the shop right away!]
 	Thanks!
-	Stores and flower-shops have seeds of various flowers, but I prefer red roses!
+	Stores and flower shops have seeds of various flowers, but I prefer red roses!
 	This neighbourhood will look much better once we plant them.
 	~ rosalina_requested_seeds = 1
 	-> DONE
@@ -2785,7 +2785,7 @@ Everybody needs more flowers in their life!
 
 = rose_seeds
 These are rose seeds, my favourite!
-Can you plant them in the earth in front of the building?
+Can you plant them in the pots in front of the building?
 I would do it, but I'm afraid of the police.
 -> DONE
 
@@ -2833,7 +2833,7 @@ Have you brought me my groceries?
 
 = after_old_man_received_groceries
 Are you still there?
-Do you need something from me?
+Do you need anything from me?
 + [Will you come to the protest for a better park?]
 	Ah, I see... Me, to a protest?
 	Well, I do believe young ones today deserve a much better park than the one they have now.
@@ -2864,7 +2864,7 @@ My groceries!
 >>> REMOVE_ITEM: grocery_bag
 ~ old_man_received_groceries = 1
 So you brought them all the way from the Super Roda store?
-It seems good manners are not alltogether forgotten yet!
+It seems good manners are not altogether forgotten yet!
 If you ever need a favour, just ask me!
 {operation_better_park_started:
 	- 0: -> DONE
@@ -2950,7 +2950,7 @@ Unfortunately, we have too much work, so many animals need our help...
 	-> DONE
 + [Can I help you?]
 	You would volunteer for us?
-	Well thanks a lot, volonteers always need help!
+	Well thanks a lot, volunteers always need help!
 	Hmm, how could you help us...
 	Ah, but of course... The city squirrels need feeding!
 	We've set up squirrel houses to some city trees.
@@ -2974,9 +2974,9 @@ Hurry up, they must be very hungry!
 All the squirrels have been fed.
 Thanks for your help!
 + {operation_better_park_started}[Will you now help me and come to the protest for a better park?]
-	Of course we will!
+	Of course, we will!
 	A bigger park means more greenery for our animals!
-	We shall leave post haste!
+	We shall leave post-haste!
 	~ lunja_gone_protesting = 1
 	-> DONE
 + [Volonteering is really fun!]
@@ -2990,7 +2990,7 @@ Probably all the volunteers from Laika left for the protest.
 
 = outro
 Many animals now live in this park.
-I think squirrels won't need our help any more!
+I think squirrels won't need our help anymore!
 There is so much food here!
 -> DONE
 
@@ -3031,7 +3031,7 @@ We don't need that, thanks!
 = before_student_homework_done
 I can't go out!
 I must finish my homework but I can't concentrate...
-My head is so dizzy from all the smog coming out of the flying cars vents...
+My head is so dizzy from all the smog coming out of the flying cars' vents...
 + [Can I help you?]
 	Oh, would you?
 	This homework has been bugging me for hours.
@@ -3054,7 +3054,7 @@ First question: What is solidarity?
 + [When we worry only about ourselves because our responsibilities don't give us time to worry about those who need our help.]
 	I don't think that's correct.
 	-> first_question
-+ [When we worry about others to much so we don't have time to worry about ourselves.]
++ [When we worry about others too much so we don't have time to worry about ourselves.]
 	I don't think that's correct...
 	-> first_question
 
@@ -3063,17 +3063,17 @@ Second question: What is inclusion?
 + [When all citizens are the same.]
 	I don't think that's correct...
 	-> second_question
-+ [When all citizens, regardless of race, color, creed, gender, faith, political or other belief, national or social herritage, social standing, invalidity, sexual orientation or age are included in social activities - such as people with disabilities, Roma, LGBTIQ persons and other vulnerable groups in society.]
++ [When all citizens, regardless of race, color, creed, gender, faith, political or other belief, national or social origin, social standing, disability, sexual orientation or age are included in social activities - such as people with disabilities, Roma, LGBTIQ persons and other vulnerable groups in society.]
 	Thanks a lot, that's true.
 	You are a genius, it's all clear to me now!
 	Thanks so much!
 	~ student_homework_done = 1
 	-> after_student_homework_done
-+ [When citizens are not included in social activities due to their race, color, creed, gender, faith, political or other belief, national or social herritage, social standing, invalidity sexual orientation or age.]
++ [When citizens are not included in social activities due to their race, color, creed, gender, faith, political or other belief, national or social origin, social standing, disability, sexual orientation or age.]
 	I don't think that's correct.
 	-> second_question
 + [When all citizens are different.]
-	I don't think that's correct
+	I don't think that's correct.
 	-> second_question
 
 = after_student_homework_done
@@ -3148,7 +3148,7 @@ If I only had some nuts for them...
 -> DONE
 
 = has_nuts
-Luckily, volonteers from Laika gave me plenty of nuts.
+Luckily, volunteers from Laika gave me plenty of nuts.
 Here, little ones, go hungry no more, take these nuts!
 >>> REMOVE_ITEM: squirrel_nuts
 ~ set_squirrels_satiated(interact_id, 1)
@@ -3171,7 +3171,7 @@ There must surely be other trees around with hungry squirrels.
 
 = outro
 Squirrels in this little house look happy and healthy!
-I think now there is enough food around for squirrels to survive without the help of the Lunja organisation!
+I think now there is enough food around for squirrels to survive without the help of the Laika organisation!
 -> DONE
 
 = use_item
@@ -3391,7 +3391,7 @@ It's best if I brought it to Solid Slug immediately to fix it.
 -> DONE
 
 = broken_bike
-This is Slugs bike.
+This is Slug's bike.
 It's best if I bring it to him as soon as possible, it looks a bit broken...
 -> DONE
 
