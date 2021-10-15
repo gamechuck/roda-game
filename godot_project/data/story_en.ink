@@ -1126,7 +1126,7 @@ Get that out of my sight!
 === conv_minigame_car ===
 //-- STATUS : COMPLETED!
 // This car has some problems with arranging it's passengers... 
-// After correctly arranging everyone the driver gives you a seat belt.
+// After correctly arranging everyone the driver gives you a seatbelt.
 
 {car_quest_completed:
 	- 0: -> before_car_quest_completed
@@ -1169,7 +1169,7 @@ Remind all monsters to buckle their seatbelts!
     -> belting_completed
 = belting_completed
 >>> END_MINIGAME
-Take this seat belt as a reward for your generous help!
+Take this seatbelt as a reward for your generous help!
 >>> ADD_ITEM: seat_belt
 ~ car_quest_completed = 1
 -> DONE
@@ -2602,7 +2602,7 @@ How can we help you?
 		- 1: -> after_monsters_without_borders_joined
 	}
 + {not monsters_without_borders_joined}[Can I become a member?]
-	Noone can just become a member!
+	Not anyone can become a member.
 	First, you must pass an entrance exam.
 	Are you ready?
 	++ [Yes, let's go!]
