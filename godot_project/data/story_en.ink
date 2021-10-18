@@ -653,7 +653,7 @@ You can keep my bike for now!
 -> DONE
 
 = fence
-I bet the slug named Solid Slug would know what to do with that fence...
+I bet the snake named Solid Snejk would know what to do with that fence...
 -> DONE
 
 = default
@@ -1832,25 +1832,25 @@ Thanks, but all I need from you is your love!
 
 = visit_lake
 Woof woof!
-The doggie looks like it wants water!
-I'll take it to the lake near Vilko's place!
+The doggie looks like she wants water!
+I'll take her to the lake near Vilko's place!
 -> DONE
 
 = visit_park
 Woof woof!
 The doggie wants to go to the park!
-I'll walk him over to the worm called Solid Slug.
+I'll walk her over to the worm called Solid Slug.
 -> DONE
 
 = go_back_home
 Woof woof!
 The doggie looks tired...
-I'll return him to the organisation for training therapy dogs.
+I'll return her to the organisation for training therapy dogs.
 -> DONE
 
 = use_item
 The doggie is sniffing your inventory item.
-But he is too well trained to chew it!
+But she is too well trained to chew it!
 -> DONE
 
 == conv_dog_at_lake ===
@@ -1860,7 +1860,7 @@ But he is too well trained to chew it!
 // dog_visited_lake
 
 The doggie looks happy on the lake.
-I'll walk him around a bit more and see where he wants to go next.
+I'll walk her around a bit more and see where she wants to go next.
 ~ dog_visited_lake = 1
 -> DONE
 
@@ -1871,7 +1871,7 @@ I'll walk him around a bit more and see where he wants to go next.
 // dog_visited_park
 
 The doggie is so happy in the park!
-I'll walk him around a bit more and see where he wants to go next.
+I'll walk her around a bit more and see where she wants to go next.
 ~ dog_visited_park = 1
 -> DONE
 
@@ -2979,7 +2979,7 @@ Thanks for your help!
 	We shall leave post-haste!
 	~ lunja_gone_protesting = 1
 	-> DONE
-+ [Volonteering is really fun!]
++ [Volunteering is really fun!]
 	I'm glad you like it!
 	-> DONE
 
@@ -3282,7 +3282,7 @@ I better bring it back to the park.
 // A fence piece lying in the smoggy part of town.
 ~ player_received_smog_fence = 1
 A piece of the fence! I almost missed it in all this smog!
-I better bring it to Solid Slug!
+I better bring it to Solid Snejk!
 -> DONE
 
 //--
@@ -3387,7 +3387,7 @@ I wonder why it would need so much energy?
 
 = fence
 A part of the fence that got blown away from our park...
-It's best if I brought it to Solid Slug immediately to fix it.
+It's best if I brought it to Solid Snejk immediately to fix it.
 -> DONE
 
 = broken_bike
